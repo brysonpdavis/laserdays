@@ -35,6 +35,9 @@ public class flipScript : MonoBehaviour {
 				newX = pos.x - envSize;
 			}
 			transform.position = new Vector3(newX, pos.y, pos.z);
-			space = !space;		
+			space = !space;	
+        if (this.tag == "Clickable"){
+            this.GetComponent<flipScript>().enabled = false;
+        }
 	}
 }
