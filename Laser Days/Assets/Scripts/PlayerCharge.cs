@@ -8,6 +8,7 @@ public class PlayerCharge : MonoBehaviour {
 
 
     public Slider chargeSlider;
+    public Text chargeValue;
     public int maxCharge;
 
 
@@ -16,6 +17,10 @@ public class PlayerCharge : MonoBehaviour {
     {
         chargeSlider.maxValue = maxCharge;
         chargeSlider.value = maxCharge;
+
+        chargeValue.text = maxCharge.ToString();
+
+
     }
 
 

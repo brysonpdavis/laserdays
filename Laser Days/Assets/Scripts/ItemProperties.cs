@@ -16,12 +16,18 @@ public class ItemProperties : MonoBehaviour
     public void Interaction()
     {
         if(objectCharge){
-
+            
             //Check to see if it can be activated
             if (value <= playerCharge.chargeSlider.value)
             {
-                //subtract charge value
+                //subtract charge value:
+                //for slider
                 playerCharge.chargeSlider.value -= value;
+
+              
+                playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();
+
+
 
                 //want something here to change the object's shader, showing that it can shift to either world
 

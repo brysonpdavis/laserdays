@@ -51,6 +51,8 @@ public class RaycastManager : MonoBehaviour {
         }
 	}
 
+
+    //changing color of crosshair based on raycast
     void CrosshairActive()
     {
         crossHair.color = Color.red;
