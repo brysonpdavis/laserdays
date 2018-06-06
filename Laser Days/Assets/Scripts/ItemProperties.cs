@@ -26,9 +26,8 @@ public class ItemProperties : MonoBehaviour
                 //for slider
                 playerCharge.chargeSlider.value -= value;
 
-              
+                // for text
                 playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();
-
 
 
                 //want something here to change the object's shader, showing that it can shift to either world
@@ -44,14 +43,11 @@ public class ItemProperties : MonoBehaviour
         if (boost)
         {
 
-            //Check to see if it can be activated
-            if (value <= playerCharge.chargeSlider.value)
-            {
-                //subtract charge value:
+                //adds charge value:
                 //for slider
                 playerCharge.chargeSlider.value += value;
 
-
+                //for text
                 playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();
 
 
@@ -59,10 +55,7 @@ public class ItemProperties : MonoBehaviour
                 //want something here to change the object's shader, showing that it can shift to either world
 
 
-                //turn on the switching script
-                this.GetComponent<flipScript>().enabled = true;
-
-            }
+            
         }
 
 
