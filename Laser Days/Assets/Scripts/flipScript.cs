@@ -20,7 +20,7 @@ public class flipScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("Fire1") && inputEnabled) {
+        if (Input.GetKeyDown("enter") && inputEnabled) {
 			Flip();
 		}
 	}
@@ -36,6 +36,8 @@ public class flipScript : MonoBehaviour {
 			}
 			transform.position = new Vector3(newX, pos.y, pos.z);
 			space = !space;	
+
+        //so that objects only flip once
         if (this.tag == "Clickable"){
             this.GetComponent<flipScript>().enabled = false;
         }
