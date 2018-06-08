@@ -10,6 +10,7 @@ public class PlayerCharge : MonoBehaviour {
     public Slider chargeSlider;
     public Text chargeValue;
     public int maxCharge;
+    public int flipCost = 10;
 
 
 
@@ -19,10 +20,16 @@ public class PlayerCharge : MonoBehaviour {
         chargeSlider.value = maxCharge;
 
         chargeValue.text = maxCharge.ToString();
-
-
     }
 
+    public void PlayerInteraction() {
+        chargeSlider.value -= flipCost;
+        chargeValue.text = chargeSlider.value.ToString();
+    }
+
+    public bool CheckPlayerCharge() {
+        return (flipCost <= chargeSlider.value);
+    }
 
 }
 

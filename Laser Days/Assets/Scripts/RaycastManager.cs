@@ -10,7 +10,7 @@ public class RaycastManager : MonoBehaviour {
 
     [Header("Raycast Settings")]
 
-    [SerializeField] private float rayLength = 10;
+    [SerializeField] private float rayLength = 2.5f;
     [SerializeField] private LayerMask newLayerMask;
 
 
@@ -19,6 +19,7 @@ public class RaycastManager : MonoBehaviour {
     [SerializeField] private PlayerCharge playerCharge;
     [SerializeField] private Image crossHair;
     [SerializeField] private Text itemNameText;
+    public GameObject heldObject;
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,11 +35,16 @@ public class RaycastManager : MonoBehaviour {
                 raycastedObj = hit.collider.gameObject;
                 itemNameText.text = raycastedObj.GetComponent<ItemProperties>().itemName + " [" + raycastedObj.GetComponent<ItemProperties>().value + "]";
 
-                if(Input.GetMouseButtonDown(1))
+                // pick item up on left click
+                if(Input.GetMouseButtonDown(0))
                 {
-
+                    raycastedObj.GetComponent<ThrowObject>().PickUp();
+                }
+                
+                // if item boosts charge, add value to boost on right click
+                if(Input.GetMouseButtonDown(1) && raycastedObj.GetComponent<ItemProperties>().boost)
+                {
                     raycastedObj.GetComponent<ItemProperties>().Interaction();
-                    //Object properties
                 }
             }
         }
@@ -46,7 +52,6 @@ public class RaycastManager : MonoBehaviour {
         else{
             CrosshairNormal();
             itemNameText.text = null;
-
             //set text to normal
         }
 	}
@@ -56,7 +61,6 @@ public class RaycastManager : MonoBehaviour {
     void CrosshairActive()
     {
         crossHair.color = Color.red;
-
     }
 
     void CrosshairNormal()

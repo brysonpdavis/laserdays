@@ -3,43 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class flipScript : MonoBehaviour {
-
-	private bool space;
 	private Vector3 pos;
 	private float newX;
 	public int envSize;
-	public bool inputEnabled;
 	
 
 
 	// Use this for initialization
 	void Start () {
-		space = true;
-		inputEnabled = true;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-        if (Input.GetKeyDown("enter") && inputEnabled) {
-			Flip();
-		}
-	}
-
-	void Flip () {
-			pos = transform.position;
-
-			if (space) {
-				newX = pos.x + envSize;
+		if (Input.GetKeyDown("return"))
+		{
+			GameObject heldObj = GetComponent<RaycastManager>().heldObject;
+			if (heldObj) {
+				ItemProperties props = heldObj.GetComponent<ItemProperties>();
+				if (props.Check()) {
+					Flip(gameObject);
+					props.Interaction();
+				}
+				else {
+					// make a sound effect letting player 
+					// know that they don't have enough charge
+				}
 			}
 			else {
-				newX = pos.x - envSize;
+				PlayerCharge playerCharge = GetComponent<PlayerCharge>();
+				if (playerCharge.CheckPlayerCharge())
+				{
+					Flip(gameObject);
+					playerCharge.PlayerInteraction();
+				}
 			}
-			transform.position = new Vector3(newX, pos.y, pos.z);
-			space = !space;	
+		}
+	}
+	
+	public void Flip (GameObject obj) 
+	{
+		// position of gameobject attached to script
+		pos = transform.position;
 
-        //so that objects only flip once
-        if (this.tag == "Clickable"){
-            this.GetComponent<flipScript>().enabled = false;
-        }
+		// if object is in positive space, space = true, else false
+		bool space = pos.x > 0 ? true : false;
+
+		// if in the positive space, add envSize to the new X coordinate
+		if (space) {
+			newX = pos.x - envSize;
+		}
+		// otherwise subtract it
+		else {
+			newX = pos.x + envSize;
+		}
+		transform.position = new Vector3(newX, pos.y, pos.z);
+		space = !space;	
 	}
 }
