@@ -97,13 +97,11 @@ public class RaycastManager : MonoBehaviour {
     void AddToList(GameObject obj) 
     {
         selectedObjs.Add(obj);
-        Debug.Log("added");
     }
 
     void RemoveFromList(GameObject obj)
     {
         selectedObjs.Remove(obj);
-        Debug.Log("removed");
     } 
 
     public int SumList(IList<GameObject> objs)
@@ -112,7 +110,6 @@ public class RaycastManager : MonoBehaviour {
         foreach (GameObject obj in objs) {
             i += obj.GetComponent<ItemProperties>().value;
         }
-        Debug.Log("done: total is " + i);
         return i;
     }
 }
