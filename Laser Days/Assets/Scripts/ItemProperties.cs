@@ -8,7 +8,7 @@ public class ItemProperties : MonoBehaviour
 
     public string itemName;
 
-    [SerializeField] private bool objectCharge = true;
+    [SerializeField] public bool objectCharge = true;
     [SerializeField] public bool boost = false;
 
     [SerializeField] public int value;
@@ -18,7 +18,8 @@ public class ItemProperties : MonoBehaviour
     // Checks whether the object can be flipped
     public bool Check()
     {
-        return (boost)?false:(value + playerCharge.flipCost <= playerCharge.chargeSlider.value);
+        RaycastManager rm = GetComponentInParent<RaycastManager>();
+        return (boost)?false:(value + playerCharge.flipCost + rm.SumList(rm.selectedObjs) <= playerCharge.chargeSlider.value);
     }
 
     // Handles charge point management
@@ -27,11 +28,12 @@ public class ItemProperties : MonoBehaviour
         if(objectCharge){
             
             //Check to see if it can be activated
-            if (value + playerCharge.flipCost <= playerCharge.chargeSlider.value)
+            RaycastManager rm = GetComponentInParent<RaycastManager>();
+            if (value + playerCharge.flipCost + rm.SumList(rm.selectedObjs) <= playerCharge.chargeSlider.value)
             {
                 //subtract charge value:
                 //for slider
-                playerCharge.chargeSlider.value -= value + playerCharge.flipCost;
+                playerCharge.chargeSlider.value -= value + playerCharge.flipCost + rm.SumList(rm.selectedObjs);
 
                 // for text
                 playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();

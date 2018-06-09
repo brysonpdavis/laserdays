@@ -7,6 +7,7 @@ public class ThrowObject : MonoBehaviour
     public Transform playerCam;
     public float throwForce = 10;
     bool beingCarried = false;
+    public bool selected = false;
     public AudioClip[] soundToPlay;
     private AudioSource audio;
     public int dmg;
@@ -27,15 +28,15 @@ public class ThrowObject : MonoBehaviour
                 touched = false;
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(2))
             {
                 Drop();
                 GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
                 
-                // RandomAudio();
+                RandomAudio();
                 // uncomment RandomAudio() when we have sounds implemented
             }
-            else if (Input.GetMouseButtonDown(2))
+            else if (Input.GetMouseButtonDown(1))
             {
                 Drop();
             }

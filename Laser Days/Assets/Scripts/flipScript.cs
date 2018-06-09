@@ -7,8 +7,6 @@ public class flipScript : MonoBehaviour {
 	private float newX;
 	public int envSize;
 	
-
-
 	// Use this for initialization
 	void Start () {
 	}
@@ -16,12 +14,16 @@ public class flipScript : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown("return"))
 		{
-			GameObject heldObj = GetComponent<RaycastManager>().heldObject;
+			RaycastManager rm = GetComponent<RaycastManager>();
+			GameObject heldObj = rm.heldObject;
+
+
 			if (heldObj) {
 				ItemProperties props = heldObj.GetComponent<ItemProperties>();
 				if (props.Check()) {
-					Flip(gameObject);
 					props.Interaction();
+					Flip(gameObject);
+					FlipList(rm.selectedObjs);
 				}
 				else {
 					// make a sound effect letting player 
@@ -32,8 +34,9 @@ public class flipScript : MonoBehaviour {
 				PlayerCharge playerCharge = GetComponent<PlayerCharge>();
 				if (playerCharge.CheckPlayerCharge())
 				{
-					Flip(gameObject);
 					playerCharge.PlayerInteraction();
+					Flip(gameObject);
+					FlipList(rm.selectedObjs);
 				}
 			}
 		}
@@ -42,7 +45,7 @@ public class flipScript : MonoBehaviour {
 	public void Flip (GameObject obj) 
 	{
 		// position of gameobject attached to script
-		pos = transform.position;
+		pos = obj.transform.position;
 
 		// if object is in positive space, space = true, else false
 		bool space = pos.x > 0 ? true : false;
@@ -55,7 +58,17 @@ public class flipScript : MonoBehaviour {
 		else {
 			newX = pos.x + envSize;
 		}
-		transform.position = new Vector3(newX, pos.y, pos.z);
+		obj.transform.position = new Vector3(newX, pos.y, pos.z);
 		space = !space;	
+	}
+
+	void FlipList (IList<GameObject> objs)
+	{
+		foreach (GameObject obj in objs)
+		{
+			Flip(obj);
+			obj.GetComponent<ThrowObject>().selected = false;
+		}
+		objs.Clear();
 	}
 }

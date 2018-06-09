@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class RaycastManager : MonoBehaviour {
 
     private GameObject raycastedObj;
+    public IList<GameObject> selectedObjs;
 
 
     [Header("Raycast Settings")]
@@ -20,6 +21,10 @@ public class RaycastManager : MonoBehaviour {
     [SerializeField] private Image crossHair;
     [SerializeField] private Text itemNameText;
     public GameObject heldObject;
+
+    void Start () {
+        selectedObjs = new List<GameObject>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,7 +38,8 @@ public class RaycastManager : MonoBehaviour {
             {
                 CrosshairActive();
                 raycastedObj = hit.collider.gameObject;
-                itemNameText.text = raycastedObj.GetComponent<ItemProperties>().itemName + " [" + raycastedObj.GetComponent<ItemProperties>().value + "]";
+                ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
+                itemNameText.text = ip.itemName + " [" + ip.value + "]";
 
                 // pick item up on left click
                 if(Input.GetMouseButtonDown(0))
@@ -42,9 +48,29 @@ public class RaycastManager : MonoBehaviour {
                 }
                 
                 // if item boosts charge, add value to boost on right click
-                if(Input.GetMouseButtonDown(1) && raycastedObj.GetComponent<ItemProperties>().boost)
+                if(Input.GetMouseButtonDown(1))
                 {
-                    raycastedObj.GetComponent<ItemProperties>().Interaction();
+                    if (ip.boost)
+                        ip.Interaction();
+                    
+                    ThrowObject throwObj = raycastedObj.GetComponent<ThrowObject>();
+                    if (ip.objectCharge)
+                    {
+                        if (throwObj.selected)
+                        {
+                            RemoveFromList(raycastedObj);
+                            throwObj.selected = false;
+                        
+                            // change shader
+                        }
+                        else 
+                        {
+                            AddToList(raycastedObj);
+                            throwObj.selected = true;
+
+                            // change shader back
+                        }
+                    }
                 }
             }
         }
@@ -66,5 +92,27 @@ public class RaycastManager : MonoBehaviour {
     void CrosshairNormal()
     {
         crossHair.color = Color.white;
+    }
+
+    void AddToList(GameObject obj) 
+    {
+        selectedObjs.Add(obj);
+        Debug.Log("added");
+    }
+
+    void RemoveFromList(GameObject obj)
+    {
+        selectedObjs.Remove(obj);
+        Debug.Log("removed");
+    } 
+
+    public int SumList(IList<GameObject> objs)
+    {
+        int i = 0;
+        foreach (GameObject obj in objs) {
+            i += obj.GetComponent<ItemProperties>().value;
+        }
+        Debug.Log("done: total is " + i);
+        return i;
     }
 }

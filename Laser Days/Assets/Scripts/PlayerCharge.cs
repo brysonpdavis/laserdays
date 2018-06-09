@@ -12,8 +12,6 @@ public class PlayerCharge : MonoBehaviour {
     public int maxCharge;
     public int flipCost = 10;
 
-
-
     private void Start()
     {
         chargeSlider.maxValue = maxCharge;
@@ -23,13 +21,14 @@ public class PlayerCharge : MonoBehaviour {
     }
 
     public void PlayerInteraction() {
-        chargeSlider.value -= flipCost;
+        RaycastManager rm = GetComponent<RaycastManager>();
+        chargeSlider.value -= flipCost + rm.SumList(rm.selectedObjs);
         chargeValue.text = chargeSlider.value.ToString();
     }
 
     public bool CheckPlayerCharge() {
-        return (flipCost <= chargeSlider.value);
+        RaycastManager rm = GetComponent<RaycastManager>();
+        return (flipCost + rm.SumList(rm.selectedObjs) <= chargeSlider.value);
     }
-
 }
 
