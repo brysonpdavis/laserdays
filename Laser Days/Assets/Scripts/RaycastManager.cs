@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class RaycastManager : MonoBehaviour {
 
-    private GameObject raycastedObj;
+    public GameObject raycastedObj;
     public IList<GameObject> selectedObjs;
     public Shader shaderselected;
     public Shader shaderoriginal;
@@ -42,9 +42,10 @@ public class RaycastManager : MonoBehaviour {
                 raycastedObj = hit.collider.gameObject;
                 ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
+                itemNameText.transform.position = Camera.main.WorldToScreenPoint(raycastedObj.transform.position);
 
                 // pick item up on left click
-                if(Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     raycastedObj.GetComponent<ThrowObject>().PickUp();
                 }
