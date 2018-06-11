@@ -24,6 +24,7 @@ public class ThrowObject : MonoBehaviour
         {
             if (touched)
             {
+
                 Drop();
                 touched = false;
             }
@@ -66,15 +67,18 @@ public class ThrowObject : MonoBehaviour
     {
         GetComponent<Rigidbody>().isKinematic = true;
         transform.parent = playerCam;
+
         RaycastManager rm = GetComponentInParent<RaycastManager>();
         rm.heldObject = this.gameObject;
         beingCarried = true;
+       
         if (selected) 
         {
             rm.RemoveFromList(this.gameObject);
             rm.selectedObjs.Remove(this.gameObject);
 
         }
+
     }
 
     public void Drop()
