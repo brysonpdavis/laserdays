@@ -7,6 +7,8 @@ public class RaycastManager : MonoBehaviour {
 
     private GameObject raycastedObj;
     public IList<GameObject> selectedObjs;
+    public Shader shaderselected;
+    public Shader shaderoriginal;
 
 
     [Header("Raycast Settings")]
@@ -40,6 +42,7 @@ public class RaycastManager : MonoBehaviour {
                 raycastedObj = hit.collider.gameObject;
                 ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
+                Renderer rend = raycastedObj.GetComponent<Renderer>();
 
                 // pick item up on left click
                 if(Input.GetMouseButtonDown(0))
@@ -60,14 +63,14 @@ public class RaycastManager : MonoBehaviour {
                         {
                             RemoveFromList(raycastedObj);
                             throwObj.selected = false;
-                        
-                            // change shader
+
+                            rend.material.shader = shaderoriginal; //change shader
                         }
                         else 
                         {
                             AddToList(raycastedObj);
                             throwObj.selected = true;
-
+                            rend.material.shader = shaderselected;
                             // change shader back
                         }
                     }
