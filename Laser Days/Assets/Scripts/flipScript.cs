@@ -67,7 +67,7 @@ public class flipScript : MonoBehaviour {
 		foreach (GameObject obj in objs)
 		{
 			Flip(obj);
-			obj.GetComponent<ThrowObject>().selected = false;
+			GetComponent<RaycastManager>().RemoveFromList(obj);
 		}
 		objs.Clear();
 	}

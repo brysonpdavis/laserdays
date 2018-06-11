@@ -42,7 +42,6 @@ public class RaycastManager : MonoBehaviour {
                 raycastedObj = hit.collider.gameObject;
                 ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
-                Renderer rend = raycastedObj.GetComponent<Renderer>();
 
                 // pick item up on left click
                 if(Input.GetMouseButtonDown(0))
@@ -56,22 +55,17 @@ public class RaycastManager : MonoBehaviour {
                     if (ip.boost)
                         ip.Interaction();
                     
-                    ThrowObject throwObj = raycastedObj.GetComponent<ThrowObject>();
                     if (ip.objectCharge)
                     {
-                        if (throwObj.selected)
+                        if (raycastedObj.GetComponent<ThrowObject>().selected)
                         {
+                            selectedObjs.Remove(raycastedObj);
                             RemoveFromList(raycastedObj);
-                            throwObj.selected = false;
-
-                            rend.material.shader = shaderoriginal; //change shader
                         }
                         else 
                         {
+                            selectedObjs.Add(raycastedObj);
                             AddToList(raycastedObj);
-                            throwObj.selected = true;
-                            rend.material.shader = shaderselected;
-                            // change shader back
                         }
                     }
                 }
@@ -97,14 +91,20 @@ public class RaycastManager : MonoBehaviour {
         crossHair.color = Color.white;
     }
 
-    void AddToList(GameObject obj) 
+    public void AddToList(GameObject obj) 
     {
-        selectedObjs.Add(obj);
+        obj.GetComponent<ThrowObject>().selected = true;
+        obj.GetComponent<Renderer>().material.shader = shaderselected;
+        // change shader back
+
     }
 
-    void RemoveFromList(GameObject obj)
+    public void RemoveFromList(GameObject obj)
     {
-        selectedObjs.Remove(obj);
+        obj.GetComponent<ThrowObject>().selected = false;
+        obj.GetComponent<Renderer>().material.shader = shaderoriginal; 
+        //change shader
+
     } 
 
     public int SumList(IList<GameObject> objs)
