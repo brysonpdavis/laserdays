@@ -55,7 +55,12 @@ namespace MFPP.Modules
 
 
                     RaycastManager rm = GetComponent<RaycastManager>();
-                    rm.heldObject = target.gameObject;
+                    if (target) {
+                        rm.heldObject = target.gameObject;
+                    }
+                    else {
+                        rm.heldObject = null;
+                    }
 
                     //check if the object is already selected, remove it from list otherwise
                     if (GetComponentInParent<RaycastManager>().heldObject.gameObject.GetComponent<ThrowObject>().selected)
