@@ -45,13 +45,17 @@ public class RaycastManager : MonoBehaviour {
                 itemNameText.transform.position = Camera.main.WorldToScreenPoint(raycastedObj.transform.position);
 
                 // pick item up on left click [CURRENTLY COVERED BY NEW SCRIPT, CAN UN-COMMENT THIS IF NEEDED]
+               /*
                 if (Input.GetMouseButtonDown(0))
                 {
                    // raycastedObj.GetComponent<ThrowObject>().PickUp();
                 }
-                
-                // if item boosts charge, add value to boost on right click
-                if(Input.GetMouseButtonDown(1))
+                */
+
+
+                // SELECT ITEM: 
+                //if item boosts charge, add value to boost on right click
+                if(Input.GetMouseButtonDown(0))
                 {
                     if (ip.boost)
                         ip.Interaction();

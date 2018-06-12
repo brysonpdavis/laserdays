@@ -12,7 +12,7 @@ public class flipScript : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown("return"))
+        if (Input.GetMouseButtonDown(1))
 		{
 			RaycastManager rm = GetComponent<RaycastManager>();
 			GameObject heldObj = rm.heldObject;
