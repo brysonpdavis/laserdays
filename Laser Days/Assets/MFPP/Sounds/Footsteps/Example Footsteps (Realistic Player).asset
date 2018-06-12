@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9612023f025abd45bb2f887793f0bc4, type: 3}
+  m_Name: Example Footsteps (Realistic Player)
+  m_EditorClassIdentifier: 
+  defaultFootstepsName: Concrete
+  footsteps:
+  - name: Metal
+    linkedMaterials:
+    - {fileID: 2100000, guid: ff3c9f3bed664a2448bae26fe4c5d18a, type: 2}
+    - {fileID: 2100000, guid: eeaa0665ecc46804490d951028af3e0f, type: 2}
+    - {fileID: 2100000, guid: d69153a52a908a444818abc1b9a61ac1, type: 2}
+    - {fileID: 2100000, guid: 68f3060aa01c9354e97e1c1b1ff4e420, type: 2}
+    - {fileID: 2100000, guid: 00c12e3f53645024bacae149a1561129, type: 2}
+    linkedTextures: []
+    footstepClips:
+    - {fileID: 8300000, guid: 44117dcf6f52088438abd42e007e18c8, type: 3}
+    - {fileID: 8300000, guid: 3bfd8764c9e253b409f5a2253c55f47d, type: 3}
+    - {fileID: 8300000, guid: 5318443e2cb32d74d9f5d294f3c21aa8, type: 3}
+    - {fileID: 8300000, guid: bbace36e2d12d8f44a90cdb638f2b429, type: 3}
+    jumpingClips:
+    - {fileID: 8300000, guid: 757cce035ca65fe489da47183fa76849, type: 3}
+    landingClips:
+    - {fileID: 8300000, guid: 44117dcf6f52088438abd42e007e18c8, type: 3}
+    - {fileID: 8300000, guid: 3bfd8764c9e253b409f5a2253c55f47d, type: 3}
+    - {fileID: 8300000, guid: 5318443e2cb32d74d9f5d294f3c21aa8, type: 3}
+    - {fileID: 8300000, guid: bbace36e2d12d8f44a90cdb638f2b429, type: 3}
+    minPitch: 0.95
+    maxPitch: 1.05
+  - name: Wood
+    linkedMaterials:
+    - {fileID: 2100000, guid: 74c4fa67a667b1f4aac23ec0066234f8, type: 2}
+    linkedTextures: []
+    footstepClips:
+    - {fileID: 8300000, guid: 444491ff15d576f4ca96820f411534d5, type: 3}
+    - {fileID: 8300000, guid: 49377005601023d4ea1d5c4db02c5a28, type: 3}
+    - {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
+    - {fileID: 8300000, guid: c1c075a27a0f5e74b9fa429702217ea9, type: 3}
+    jumpingClips:
+    - {fileID: 8300000, guid: 757cce035ca65fe489da47183fa76849, type: 3}
+    landingClips:
+    - {fileID: 8300000, guid: 444491ff15d576f4ca96820f411534d5, type: 3}
+    - {fileID: 8300000, guid: 49377005601023d4ea1d5c4db02c5a28, type: 3}
+    - {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
+    - {fileID: 8300000, guid: c1c075a27a0f5e74b9fa429702217ea9, type: 3}
+    minPitch: 0.95
+    maxPitch: 1.05
+  - name: Dirt
+    linkedMaterials:
+    - {fileID: 2100000, guid: 19cff3e0c63e7284c825e6f0ec4c4df8, type: 2}
+    linkedTextures:
+    - {fileID: 2800000, guid: e83b5a4d57ba53249b2bfb6aba5adc25, type: 3}
+    footstepClips:
+    - {fileID: 8300000, guid: 779bb7354fb6f684ca679acb20602ee0, type: 3}
+    - {fileID: 8300000, guid: 29c4e476a8294b247bfcc6c2c51385de, type: 3}
+    - {fileID: 8300000, guid: 01864ec6da4d79740b837072fb921ebc, type: 3}
+    - {fileID: 8300000, guid: fe787def67c2d3e4ea0ea4bf511144ed, type: 3}
+    jumpingClips:
+    - {fileID: 8300000, guid: 757cce035ca65fe489da47183fa76849, type: 3}
+    landingClips:
+    - {fileID: 8300000, guid: 779bb7354fb6f684ca679acb20602ee0, type: 3}
+    - {fileID: 8300000, guid: 29c4e476a8294b247bfcc6c2c51385de, type: 3}
+    - {fileID: 8300000, guid: 01864ec6da4d79740b837072fb921ebc, type: 3}
+    - {fileID: 8300000, guid: fe787def67c2d3e4ea0ea4bf511144ed, type: 3}
+    minPitch: 0.95
+    maxPitch: 1.05
+  - name: Gravel
+    linkedMaterials:
+    - {fileID: 2100000, guid: b9cf0e3f4e6b43e4fa43a490e78b31d0, type: 2}
+    linkedTextures:
+    - {fileID: 2800000, guid: b9b2da01850d63a4293741f5e575130c, type: 3}
+    footstepClips:
+    - {fileID: 8300000, guid: 779bb7354fb6f684ca679acb20602ee0, type: 3}
+    - {fileID: 8300000, guid: 29c4e476a8294b247bfcc6c2c51385de, type: 3}
+    - {fileID: 8300000, guid: 01864ec6da4d79740b837072fb921ebc, type: 3}
+    - {fileID: 8300000, guid: fe787def67c2d3e4ea0ea4bf511144ed, type: 3}
+    jumpingClips:
+    - {fileID: 8300000, guid: 757cce035ca65fe489da47183fa76849, type: 3}
+    landingClips:
+    - {fileID: 8300000, guid: 779bb7354fb6f684ca679acb20602ee0, type: 3}
+    - {fileID: 8300000, guid: 29c4e476a8294b247bfcc6c2c51385de, type: 3}
+    - {fileID: 8300000, guid: 01864ec6da4d79740b837072fb921ebc, type: 3}
+    - {fileID: 8300000, guid: fe787def67c2d3e4ea0ea4bf511144ed, type: 3}
+    minPitch: 1.95
+    maxPitch: 2.05
+  - name: Concrete
+    linkedMaterials:
+    - {fileID: 2100000, guid: 4a3ee3d5b18bccd4cbed127d5a236b44, type: 2}
+    linkedTextures: []
+    footstepClips:
+    - {fileID: 8300000, guid: 38a6f7d433e17f34c9ac5948ee1ffbcd, type: 3}
+    - {fileID: 8300000, guid: 522e83284794c9442842f87a6b482428, type: 3}
+    - {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+    - {fileID: 8300000, guid: 4c96d4c817efaa044a5aa60fd03f7cca, type: 3}
+    jumpingClips:
+    - {fileID: 8300000, guid: 757cce035ca65fe489da47183fa76849, type: 3}
+    landingClips:
+    - {fileID: 8300000, guid: 38a6f7d433e17f34c9ac5948ee1ffbcd, type: 3}
+    - {fileID: 8300000, guid: 522e83284794c9442842f87a6b482428, type: 3}
+    - {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+    - {fileID: 8300000, guid: 4c96d4c817efaa044a5aa60fd03f7cca, type: 3}
+    minPitch: 0.95
+    maxPitch: 1.05
+  walkTimer: 0.6
+  crouchTimerMultiplier: 1.4
+  sprintTimerMultiplier: 0.625
+  crouchVolume: 0.25
+  walkVolume: 0.5
+  sprintVolume: 1
+  landingMinimumVelocity: 1
+  landingMaximumVelocity: 10
+  landingVolumeMultiplier: 1
