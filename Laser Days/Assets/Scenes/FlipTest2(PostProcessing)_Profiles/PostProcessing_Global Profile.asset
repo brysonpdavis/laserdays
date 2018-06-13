@@ -15,6 +15,7 @@ MonoBehaviour:
   - {fileID: 114406083695424176}
   - {fileID: 114241042071768084}
   - {fileID: 114012981564137204}
+  - {fileID: 114114511357721784}
 --- !u!114 &114012981564137204
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -67,6 +68,54 @@ MonoBehaviour:
   angle:
     overrideState: 1
     value: 0
+--- !u!114 &114114511357721784
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1cb7e9e120078f43bce4f0b1be547a7, type: 3}
+  m_Name: AmbientOcclusion
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  mode:
+    overrideState: 0
+    value: 1
+  intensity:
+    overrideState: 0
+    value: 0
+  color:
+    overrideState: 0
+    value: {r: 0, g: 0, b: 0, a: 1}
+  ambientOnly:
+    overrideState: 0
+    value: 1
+  noiseFilterTolerance:
+    overrideState: 0
+    value: 0
+  blurTolerance:
+    overrideState: 0
+    value: -4.6
+  upsampleTolerance:
+    overrideState: 0
+    value: -12
+  thicknessModifier:
+    overrideState: 0
+    value: 1
+  directLightingStrength:
+    overrideState: 0
+    value: 0
+  radius:
+    overrideState: 0
+    value: 0.25
+  quality:
+    overrideState: 0
+    value: 2
 --- !u!114 &114241042071768084
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -145,25 +194,25 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0
+    value: 0.09
   threshold:
     overrideState: 1
-    value: 0
+    value: 3.1
   softKnee:
     overrideState: 1
-    value: 0.5
+    value: 0.254
   clamp:
     overrideState: 1
-    value: 65473.11
+    value: 65473.97
   diffusion:
     overrideState: 1
-    value: 7
+    value: 7.22
   anamorphicRatio:
     overrideState: 1
-    value: 0
+    value: -0.6
   color:
     overrideState: 1
-    value: {r: 1, g: 1, b: 1, a: 1}
+    value: {r: 0.16981131, g: 0.10332858, b: 0.10332858, a: 1}
   fastMode:
     overrideState: 1
     value: 0
