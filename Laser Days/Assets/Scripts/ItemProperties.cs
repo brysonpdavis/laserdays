@@ -15,6 +15,8 @@ public class ItemProperties : MonoBehaviour
 
     [SerializeField] private PlayerCharge playerCharge;
 
+    public bool selected = false;
+
     // Checks whether the object can be flipped
     public bool Check()
     {

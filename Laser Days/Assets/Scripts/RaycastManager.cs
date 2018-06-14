@@ -23,9 +23,11 @@ public class RaycastManager : MonoBehaviour {
     [SerializeField] private Image crossHair;
     [SerializeField] private Text itemNameText;
     public GameObject heldObject;
+    private Camera mainCam;
 
     void Start () {
         selectedObjs = new List<GameObject>();
+        mainCam = Camera.main;
     }
 	
 	// Update is called once per frame
@@ -34,7 +36,7 @@ public class RaycastManager : MonoBehaviour {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
        
-        if (Physics.Raycast(transform.position, fwd, out hit, rayLength, newLayerMask.value))
+        if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
             if (hit.collider.CompareTag("Clickable"))
             {
@@ -63,7 +65,7 @@ public class RaycastManager : MonoBehaviour {
                     if (ip.objectCharge)
                     {
 
-                        if (raycastedObj.GetComponent<ThrowObject>().selected)
+                        if (raycastedObj.GetComponent<ItemProperties>().selected)
                         {
                             selectedObjs.Remove(raycastedObj);
                             RemoveFromList(raycastedObj);
@@ -99,7 +101,7 @@ public class RaycastManager : MonoBehaviour {
 
     public void AddToList(GameObject obj) 
     {
-        obj.GetComponent<ThrowObject>().selected = true;
+        obj.GetComponent<ItemProperties>().selected = true;
         obj.GetComponent<Renderer>().material.shader = shaderselected;
         // change shader back
 
@@ -107,7 +109,7 @@ public class RaycastManager : MonoBehaviour {
 
     public void RemoveFromList(GameObject obj)
     {
-        obj.GetComponent<ThrowObject>().selected = false;
+        obj.GetComponent<ItemProperties>().selected = false;
         obj.GetComponent<Renderer>().material.shader = shaderoriginal; 
         //change shader
 

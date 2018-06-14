@@ -63,7 +63,7 @@ namespace MFPP.Modules
                     }
 
                     //check if the object is already selected, remove it from list otherwise
-                    if (rm.heldObject && rm.heldObject.gameObject.GetComponent<ThrowObject>() && rm.heldObject.gameObject.GetComponent<ThrowObject>().selected)
+                    if (rm.heldObject && rm.heldObject.gameObject.GetComponent<ItemProperties>() && rm.heldObject.gameObject.GetComponent<ItemProperties>().selected)
                     {
                         rm.RemoveFromList(target.gameObject);
                         rm.selectedObjs.Remove(target.gameObject);

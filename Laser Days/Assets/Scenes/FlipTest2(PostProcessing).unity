@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571343, b: 0.30692208, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1180,6 +1180,7 @@ MonoBehaviour:
   boost: 1
   value: 100
   playerCharge: {fileID: 1384622081}
+  selected: 0
 --- !u!54 &849905410
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1398,6 +1399,7 @@ MonoBehaviour:
   boost: 1
   value: 100
   playerCharge: {fileID: 1384622081}
+  selected: 0
 --- !u!54 &896374457
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2722,7 +2724,6 @@ GameObject:
   - component: {fileID: 1682407038}
   - component: {fileID: 1682407037}
   - component: {fileID: 1682407036}
-  - component: {fileID: 1682407035}
   m_Layer: 9
   m_Name: SPHERE
   m_TagString: Clickable
@@ -2730,24 +2731,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1682407035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1682407034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eda21c2cb7d94a018e6d83636679703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerCam: {fileID: 0}
-  throwForce: 10
-  selected: 0
-  soundToPlay:
-  - {fileID: 0}
-  dmg: 0
 --- !u!114 &1682407036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2764,6 +2747,7 @@ MonoBehaviour:
   boost: 0
   value: 10
   playerCharge: {fileID: 1384622081}
+  selected: 0
 --- !u!54 &1682407037
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3612,6 +3596,7 @@ MonoBehaviour:
   boost: 0
   value: 10
   playerCharge: {fileID: 1384622081}
+  selected: 0
 --- !u!54 &2098016998
 Rigidbody:
   m_ObjectHideFlags: 0
