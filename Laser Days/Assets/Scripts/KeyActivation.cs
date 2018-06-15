@@ -2,33 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyActivation : MonoBehaviour {
-    [Header("Raycast Settings")]
-    [SerializeField] private LayerMask newLayerMask;
-    [SerializeField] private float rayLength = 0.5f;
+public class KeyActivation : MonoBehaviour {   
 
     [Header("Key Settings")]
-    [SerializeField]public GameObject key ;
+    [SerializeField]public string key ;
     [SerializeField]public GameObject door;
-
-    
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-
+    public bool anyKey;
+  
     // Update is called once per frame
-    void Update()
+    void OnTriggerEnter(Collider col)
     {
-        RaycastHit hit;
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-        if (Physics.Raycast(transform.position, fwd, out hit, rayLength, newLayerMask.value))
+        if (col.gameObject.GetComponent<ItemProperties>().isKey)
         {
-            if (hit.collider == key)
-            { door.SetActive(false); }
-
+            if (anyKey)
+            {
+                door.SetActive(false);
+            }
+            else
+            {
+                if(key == col.gameObject.GetComponent<ItemProperties>().itemName)
+                { door.SetActive(false); }
+            }
         }
+        
     }
 }

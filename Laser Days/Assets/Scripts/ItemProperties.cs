@@ -7,6 +7,7 @@ public class ItemProperties : MonoBehaviour
     [Header("Your Clickables")]
 
     public string itemName;
+    public bool isKey;
 
     [SerializeField] public bool objectCharge = true;
     [SerializeField] public bool boost = false;
