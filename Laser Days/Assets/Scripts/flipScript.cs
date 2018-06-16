@@ -7,10 +7,6 @@ public class flipScript : MonoBehaviour {
 	private float newX;
 	public int envSize;
 	
-	// Use this for initialization
-	void Start () {
-	}
-
 	void Update () {
         if (Input.GetMouseButtonDown(1))
 		{

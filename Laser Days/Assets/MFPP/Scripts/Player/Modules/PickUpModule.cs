@@ -23,6 +23,11 @@ namespace MFPP.Modules
         public Transform player;
         public Transform playerCam;
         public bool selected = false;
+        private Camera mainCamera;
+
+        void Start () {
+            mainCamera = Camera.main;
+        }
 
 
         private Rigidbody target;
@@ -36,13 +41,11 @@ namespace MFPP.Modules
                     target.transform.parent = null;
                     GetComponentInParent<RaycastManager>().heldObject = null; //remove from the list
                     target = null;
-
-
                 }
                 else
                 {
                     
-                    Ray r = new Ray(Camera.transform.position, Camera.transform.forward);
+                    Ray r = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
                     RaycastHit hit;
                     if (Physics.Raycast(r, out hit, MaxPickupDistance)) // Otherwise, if target was null, shoot a ray where we are aiming.
                     {
@@ -63,7 +66,7 @@ namespace MFPP.Modules
                     }
 
                     //check if the object is already selected, remove it from list otherwise
-                    if (rm.heldObject && rm.heldObject.gameObject.GetComponent<ItemProperties>() && rm.heldObject.gameObject.GetComponent<ItemProperties>().selected)
+                    if (rm.heldObject && rm.heldObject.GetComponent<ItemProperties>().selected)
                     {
                         rm.RemoveFromList(target.gameObject);
                         rm.selectedObjs.Remove(target.gameObject);
@@ -75,7 +78,7 @@ namespace MFPP.Modules
             if (target != null) // If target is not null, move the target in front of the camera at max pickup distance.
             {
                 target.transform.parent = playerCam;
-                Vector3 floatingPosition = Camera.transform.position + Camera.transform.forward * MaxPickupDistance;
+                Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * MaxPickupDistance;
                 target.angularVelocity *= 0.5f;
                 target.velocity = Vector3.zero;
                 target.AddForce((floatingPosition - target.transform.position) * 20f, ForceMode.VelocityChange);

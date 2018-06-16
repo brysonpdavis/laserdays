@@ -40,11 +40,7 @@ public class ItemProperties : MonoBehaviour
                 playerCharge.chargeSlider.value -= value + playerCharge.flipCost + rm.SumList(rm.selectedObjs);
 
                 // for text
-                playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();
-
-                //want something here to change the object's shader, showing that it can shift to either world
-
-            }
+                playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();            }
         }
 
 
@@ -56,9 +52,6 @@ public class ItemProperties : MonoBehaviour
 
                 //for text
                 playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();
-
-                //want something here to change the object's shader, showing that it can shift to either world
-
         }
     }
 }

@@ -5,6 +5,11 @@ using UnityEngine;
 public class KeyActivation : MonoBehaviour
 {
 
+    // use this script to create keys for doors. place this script on a trigger collider
+    // where you want the key to be placed to open the door(s). drag any GameObjects into
+    // the field "doors" to tell the editor which doors to unlock when the key is placed
+    // into position.
+
     [Header("Key Settings")]
     [SerializeField] public string key;
     [SerializeField] public GameObject[] doors;
@@ -14,7 +19,7 @@ public class KeyActivation : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.GetComponent<ItemProperties>().isKey)
+        if (col.GetComponent<ItemProperties>().isKey)
         {
             if (anyKey)
             {
@@ -22,7 +27,7 @@ public class KeyActivation : MonoBehaviour
             }
             else
             {
-                if (key == col.gameObject.GetComponent<ItemProperties>().key)
+                if (key == col.GetComponent<ItemProperties>().key)
                 {
                     Unlock();
                 }
@@ -40,7 +45,7 @@ public class KeyActivation : MonoBehaviour
             }
             else
             {
-                if (key == col.gameObject.GetComponent<ItemProperties>().key)
+                if (key == col.GetComponent<ItemProperties>().key)
                 {
                     Lock();
                 }
