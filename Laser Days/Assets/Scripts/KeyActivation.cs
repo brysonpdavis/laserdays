@@ -7,49 +7,56 @@ public class KeyActivation : MonoBehaviour
 
     [Header("Key Settings")]
     [SerializeField] public string key;
-    [SerializeField] public GameObject[] door;
+    [SerializeField] public GameObject[] doors;
 
+    // set to true if any key will unlock the door, false if only a specific key will unlock it
     public bool anyKey;
 
-    // Update is called once per frame
     void OnTriggerEnter(Collider col)
     {
-
-
         if (col.gameObject.GetComponent<ItemProperties>().isKey)
         {
             if (anyKey)
             {
-                for (int i = 0; i < door.Length; i++)
-                {
-
-
-                    door[i].SetActive(false);
-                }
+                Unlock();
             }
             else
             {
-                if (key == col.gameObject.GetComponent<ItemProperties>().itemName)
-
-                    for (int i = 0; i < door.Length; i++)
-                    {
-                        door[i].SetActive(false);
-                    }
+                if (key == col.gameObject.GetComponent<ItemProperties>().key)
+                {
+                    Unlock();
+                }
             }
-
         }
-        }
+    }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider col)
     {
-
-
-        for (int i = 0; i < door.Length; i++)
+        if (col.gameObject.GetComponent<ItemProperties>().isKey)
         {
-
+            if (anyKey)
             {
-                door[i].SetActive(true);
+                Lock();
             }
+            else
+            {
+                if (key == col.gameObject.GetComponent<ItemProperties>().key)
+                {
+                    Lock();
+                }
+            }
+        }
+    }
+
+    void Lock () {
+        foreach (GameObject door in doors) {
+            door.SetActive(true);
+        }
+    }
+
+    void Unlock () {
+        foreach (GameObject door in doors) {
+            door.SetActive(false);
         }
     }
 }

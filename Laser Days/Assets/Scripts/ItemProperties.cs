@@ -8,6 +8,7 @@ public class ItemProperties : MonoBehaviour
 
     public string itemName;
     public bool isKey;
+    public string key = null;
 
     [SerializeField] public bool objectCharge = true;
     [SerializeField] public bool boost = false;

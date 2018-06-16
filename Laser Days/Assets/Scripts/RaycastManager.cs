@@ -34,7 +34,7 @@ public class RaycastManager : MonoBehaviour {
 	void Update () {
 
         RaycastHit hit;
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        Vector3 fwd = mainCam.transform.TransformDirection(Vector3.forward);
        
         if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
@@ -44,7 +44,7 @@ public class RaycastManager : MonoBehaviour {
                 raycastedObj = hit.collider.gameObject;
                 ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
-                itemNameText.transform.position = Camera.main.WorldToScreenPoint(raycastedObj.transform.position);
+                itemNameText.transform.position = mainCam.WorldToScreenPoint(raycastedObj.transform.position);
 
                 // pick item up on left click [CURRENTLY COVERED BY NEW SCRIPT, CAN UN-COMMENT THIS IF NEEDED]
                /*
