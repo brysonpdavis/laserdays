@@ -21,7 +21,7 @@ namespace MFPP.Modules
 
         //OUR VARIABLES [will]
         public Transform player;
-        public Transform playerCam;
+       public Transform playerCam;
         public bool selected = false;
         private Camera mainCamera;
 
@@ -39,6 +39,7 @@ namespace MFPP.Modules
                 if (target != null) // If we already have a target rigidbody, set it to null, thus dropping/throwing it.
                 {
                     target.transform.parent = null;
+                    target.GetComponent<Rigidbody>().useGravity = true;
                     GetComponentInParent<RaycastManager>().heldObject = null; //remove from the list
                     target = null;
                 }
@@ -62,6 +63,7 @@ namespace MFPP.Modules
                         rm.heldObject = target.gameObject;
                     }
                     else {
+                        rm.GetComponent<Rigidbody>().useGravity = true;
                         rm.heldObject = null;
                     }
 
@@ -77,7 +79,8 @@ namespace MFPP.Modules
 
             if (target != null) // If target is not null, move the target in front of the camera at max pickup distance.
             {
-                target.transform.parent = playerCam;
+               target.transform.parent = playerCam;
+                target.GetComponent<Rigidbody>().useGravity = false;
                 Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * MaxPickupDistance;
                 target.angularVelocity *= 0.5f;
                 target.velocity = Vector3.zero;
