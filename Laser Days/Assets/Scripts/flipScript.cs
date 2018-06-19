@@ -23,8 +23,7 @@ public class flipScript : MonoBehaviour {
 				ItemProperties props = heldObj.GetComponent<ItemProperties>();
 				if (props.Check()) { // if the player and any held object can be flipped:
 					props.Interaction(); // subtract any charge required
-					FlipList(rm.selectedObjs); // flip any selected objects
-					Flip(gameObject); // flip the player (and consequently any held object)
+					FlipPlayerAndThings(gameObject, rm.selectedObjs);
 				}
 				else {
 					// make a sound effect letting player 
@@ -36,14 +35,20 @@ public class flipScript : MonoBehaviour {
 				if (playerCharge.CheckPlayerCharge())
 				{
 					playerCharge.PlayerInteraction();
-					Flip(gameObject);
-					FlipList(rm.selectedObjs);
-				}
+					FlipPlayerAndThings(gameObject, rm.selectedObjs);
+				}				
 			}
 		}
 	}
+
+	void FlipPlayerAndThings (GameObject player, IList<GameObject> things) {
+		FlipList(things);
+		Flip(player);
+		space = !space;
+		// Make sure that the list of objects is flipped before the player
+	}
 	
-	public void Flip (GameObject obj) 
+	void Flip (GameObject obj) 
 	{
 		// position of gameobject attached to script
 		pos = obj.transform.position;
@@ -57,7 +62,6 @@ public class flipScript : MonoBehaviour {
 			newX = pos.x + envSize;
 		}
 		obj.transform.position = new Vector3(newX, pos.y, pos.z);
-		space = !space;	
 	}
 
 	void FlipList (IList<GameObject> objs)
