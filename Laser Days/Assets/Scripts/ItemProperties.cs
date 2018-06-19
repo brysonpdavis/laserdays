@@ -19,10 +19,17 @@ public class ItemProperties : MonoBehaviour
 
     public bool selected = false;
 
+    private Camera mainCamera;
+
+    void Start () {
+        mainCamera = Camera.main;
+    }
+
     // Checks whether the object can be flipped
     public bool Check()
     {
-        RaycastManager rm = GetComponentInParent<RaycastManager>();
+
+        RaycastManager rm = mainCamera.GetComponentInParent<RaycastManager>();
         return (boost)?false:(value + playerCharge.flipCost + rm.SumList(rm.selectedObjs) <= playerCharge.chargeSlider.value);
     }
 
@@ -32,7 +39,7 @@ public class ItemProperties : MonoBehaviour
         if(objectCharge){
             
             //Check to see if it can be activated
-            RaycastManager rm = GetComponentInParent<RaycastManager>();
+            RaycastManager rm = mainCamera.GetComponentInParent<RaycastManager>();
             if (value + playerCharge.flipCost + rm.SumList(rm.selectedObjs) <= playerCharge.chargeSlider.value)
             {
                 //subtract charge value:

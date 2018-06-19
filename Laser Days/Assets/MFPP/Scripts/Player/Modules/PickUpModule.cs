@@ -66,8 +66,9 @@ namespace MFPP.Modules
             {
                 Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * MaxPickupDistance;
                 target.angularVelocity *= 0.5f;
-                target.velocity = Vector3.zero;
-                target.AddForce((floatingPosition - target.transform.position) * 20f, ForceMode.VelocityChange);
+                target.velocity = ((floatingPosition - target.transform.position) * 10f);
+                // target.velocity = Vector3.zero;
+                // target.AddForce((floatingPosition - target.transform.position) * 20f, ForceMode.VelocityChange);
             }
         }
 
@@ -75,11 +76,13 @@ namespace MFPP.Modules
             target = body; // Set the target
             heldObject = target.gameObject;
             target.GetComponent<Rigidbody>().useGravity = false;
-            target.transform.parent = playerCam;
+            // target.transform.parent = playerCam;
+            target.freezeRotation = true;
         }
 
         void PutDown () {
-            target.transform.parent = null;
+            target.freezeRotation = false;
+            // target.transform.parent = null;
             target.GetComponent<Rigidbody>().useGravity = true;
             heldObject = null; //remove from the list
             target = null;

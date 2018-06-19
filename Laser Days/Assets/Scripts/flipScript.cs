@@ -8,13 +8,13 @@ public class flipScript : MonoBehaviour {
 	[SerializeField] private int envSize = 100;
 	[SerializeField] public bool beginningSpace;
 	private bool space;
-	
+
 	void Start () {
 		space = beginningSpace;
 	}
 
 	void Update () {
-        if (Input.GetMouseButtonDown(1))
+    if (Input.GetMouseButtonDown(1))
 		{
 			GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
 			RaycastManager rm = GetComponent<RaycastManager>();
@@ -23,10 +23,10 @@ public class flipScript : MonoBehaviour {
 				ItemProperties props = heldObj.GetComponent<ItemProperties>();
 				if (props.Check()) { // if the player and any held object can be flipped:
 					props.Interaction(); // subtract any charge required
-					FlipPlayerAndThings(gameObject, rm.selectedObjs);
+					FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
 				}
 				else {
-					// make a sound effect letting player 
+					// make a sound effect letting player
 					// know that they don't have enough charge
 				}
 			}
@@ -35,22 +35,25 @@ public class flipScript : MonoBehaviour {
 				if (playerCharge.CheckPlayerCharge())
 				{
 					playerCharge.PlayerInteraction();
-					FlipPlayerAndThings(gameObject, rm.selectedObjs);
-				}				
+					FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
+				}
 			}
 		}
 	}
 
-	void FlipPlayerAndThings (GameObject player, IList<GameObject> things) {
+	void FlipPlayerAndThings (GameObject player, GameObject held, IList<GameObject> things) {
+		if (held)
+			Flip(held);
 		FlipList(things);
 		Flip(player);
+
 		space = !space;
 		// Make sure that the list of objects is flipped before the player
 	}
-	
-	void Flip (GameObject obj) 
+
+	void Flip (GameObject obj)
 	{
-		// position of gameobject attached to script
+		// position of gameobject being flipped
 		pos = obj.transform.position;
 
 		// if in the positive space, add envSize to the new X coordinate
