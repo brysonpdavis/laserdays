@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571343, b: 0.30692208, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1627,6 +1627,11 @@ Prefab:
       propertyPath: m_RenderingPath
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: movementSettings.smartStrafing
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
   m_IsPrefabParent: 0
@@ -2215,6 +2220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   envSize: 100
+  beginningSpace: 0
 --- !u!114 &1384622083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2236,7 +2242,6 @@ MonoBehaviour:
   playerCharge: {fileID: 1384622081}
   crossHair: {fileID: 1096984603}
   itemNameText: {fileID: 1892406662}
-  heldObject: {fileID: 0}
 --- !u!1 &1615186163
 GameObject:
   m_ObjectHideFlags: 0
