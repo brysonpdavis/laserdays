@@ -22,7 +22,6 @@ public class RaycastManager : MonoBehaviour {
     [SerializeField] private PlayerCharge playerCharge;
     [SerializeField] private Image crossHair;
     [SerializeField] private Text itemNameText;
-    public GameObject heldObject;
     private Camera mainCam;
 
     void Start () {
@@ -56,7 +55,7 @@ public class RaycastManager : MonoBehaviour {
 
 
                 // SELECT ITEM: 
-                //if item boosts charge, add value to boost on right click
+                // if item boosts charge, add value to boost on right click
                 if(Input.GetMouseButtonDown(0))
                 {
                     if (ip.boost)
@@ -72,8 +71,10 @@ public class RaycastManager : MonoBehaviour {
                         }
                         else 
                         {
-                            selectedObjs.Add(raycastedObj);
-                            AddToList(raycastedObj);
+                            if (!(GetComponent<MFPP.Modules.PickUpModule>().heldObject)) {
+                                selectedObjs.Add(raycastedObj);
+                                AddToList(raycastedObj);
+                            }
                         }
                     }
                 }

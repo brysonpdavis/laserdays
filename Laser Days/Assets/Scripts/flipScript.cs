@@ -5,21 +5,26 @@ using UnityEngine;
 public class flipScript : MonoBehaviour {
 	private Vector3 pos;
 	private float newX;
-	public int envSize;
+	[SerializeField] private int envSize = 100;
+	[SerializeField] public bool beginningSpace;
+	private bool space;
 	
+	void Start () {
+		space = beginningSpace;
+	}
+
 	void Update () {
         if (Input.GetMouseButtonDown(1))
 		{
+			GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
 			RaycastManager rm = GetComponent<RaycastManager>();
-			GameObject heldObj = rm.heldObject;
-
 
 			if (heldObj) {
 				ItemProperties props = heldObj.GetComponent<ItemProperties>();
-				if (props.Check()) {
-					props.Interaction();
-					Flip(gameObject);
-					FlipList(rm.selectedObjs);
+				if (props.Check()) { // if the player and any held object can be flipped:
+					props.Interaction(); // subtract any charge required
+					FlipList(rm.selectedObjs); // flip any selected objects
+					Flip(gameObject); // flip the player (and consequently any held object)
 				}
 				else {
 					// make a sound effect letting player 
@@ -42,9 +47,6 @@ public class flipScript : MonoBehaviour {
 	{
 		// position of gameobject attached to script
 		pos = obj.transform.position;
-
-		// if object is in positive space, space = true, else false
-		bool space = pos.x > 0 ? true : false;
 
 		// if in the positive space, add envSize to the new X coordinate
 		if (space) {
