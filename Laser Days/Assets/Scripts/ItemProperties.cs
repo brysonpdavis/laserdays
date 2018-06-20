@@ -14,6 +14,7 @@ public class ItemProperties : MonoBehaviour
     [SerializeField] public bool boost = false;
 
     [SerializeField] public int value;
+    [SerializeField] public bool touchingPlayer;
 
     [SerializeField] private PlayerCharge playerCharge;
 
@@ -61,6 +62,8 @@ public class ItemProperties : MonoBehaviour
                 playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();
         }
     }
+
+   
 }
 
 

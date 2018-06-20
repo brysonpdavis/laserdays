@@ -67,6 +67,14 @@ namespace MFPP.Modules
                 Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * MaxPickupDistance;
                 target.angularVelocity *= 0.5f;
                 target.velocity = ((floatingPosition - target.transform.position) * 10f);
+
+                //AVOIDING FLYING ON TOP OF HELD OBJECT GLITCH:
+                //checks rotation of player so that it's down (the between the 67 and 91f)
+                //checks that the player is actually looking at OBJECT, (red crosshair), rather than looking at ground while object is distant
+                if ((playerCam.transform.localEulerAngles.x > 65f) && (playerCam.transform.localEulerAngles.x < 91f) && GetComponent<RaycastManager>().crossHair.color == Color.red)
+                {
+                    PutDown();
+                }
                 // target.velocity = Vector3.zero;
                 // target.AddForce((floatingPosition - target.transform.position) * 20f, ForceMode.VelocityChange);
             }
@@ -77,6 +85,7 @@ namespace MFPP.Modules
             heldObject = target.gameObject;
             target.GetComponent<Rigidbody>().useGravity = false;
             // target.transform.parent = playerCam;
+
             target.freezeRotation = true;
         }
 

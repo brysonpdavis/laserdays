@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571343, b: 0.30692208, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1068,6 +1068,7 @@ MonoBehaviour:
   objectCharge: 0
   boost: 1
   value: 100
+  touchingPlayer: 0
   playerCharge: {fileID: 1384622081}
   selected: 0
 --- !u!54 &849905410
@@ -1266,7 +1267,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 896374453}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -15, y: -1, z: -7.81}
+  m_LocalPosition: {x: -13.857, y: -0.499, z: -7.81}
   m_LocalScale: {x: 0.37, y: 2.07, z: 1.26}
   m_Children: []
   m_Father: {fileID: 73481599}
@@ -1289,6 +1290,7 @@ MonoBehaviour:
   objectCharge: 0
   boost: 1
   value: 100
+  touchingPlayer: 0
   playerCharge: {fileID: 1384622081}
   selected: 0
 --- !u!54 &896374457
@@ -1631,6 +1633,11 @@ Prefab:
         type: 2}
       propertyPath: movementSettings.smartStrafing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: movementSettings.sprintSettings.allowSprint
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
@@ -2279,6 +2286,7 @@ MonoBehaviour:
   objectCharge: 1
   boost: 0
   value: 10
+  touchingPlayer: 0
   playerCharge: {fileID: 1384622081}
   selected: 0
 --- !u!54 &1615186165
@@ -2357,7 +2365,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1615186163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.762, y: 2.6947033, z: -15.43}
+  m_LocalPosition: {x: -31.39, y: 2.6947033, z: -15.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2587,6 +2595,7 @@ MonoBehaviour:
   objectCharge: 1
   boost: 0
   value: 10
+  touchingPlayer: 0
   playerCharge: {fileID: 1384622081}
   selected: 0
 --- !u!54 &1682407037
@@ -3179,6 +3188,7 @@ MonoBehaviour:
   objectCharge: 1
   boost: 0
   value: 10
+  touchingPlayer: 0
   playerCharge: {fileID: 1384622081}
   selected: 0
 --- !u!54 &2098016998
