@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 114114511357721784}
   - {fileID: 114023032542386994}
   - {fileID: 114548316469665016}
+  - {fileID: 114961248531712440}
 --- !u!114 &114012981564137204
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -66,10 +67,10 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
   opacity:
     overrideState: 1
-    value: 0.242
+    value: 0.089
   angle:
     overrideState: 1
-    value: 0
+    value: 180
 --- !u!114 &114023032542386994
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -127,8 +128,8 @@ MonoBehaviour:
     overrideState: 1
     value: 0
   colorFilter:
-    overrideState: 1
-    value: {r: 1, g: 1, b: 1, a: 1}
+    overrideState: 0
+    value: {r: 0, g: 1.5372549, b: 4, a: 1}
   hueShift:
     overrideState: 1
     value: 0
@@ -173,10 +174,10 @@ MonoBehaviour:
     value: 100
   lift:
     overrideState: 1
-    value: {x: 1, y: 0.987897, z: 0.8032061, w: 0}
+    value: {x: 1, y: 0.9891904, z: 0.9251098, w: 0.000000001706741}
   gamma:
     overrideState: 1
-    value: {x: 0.7930778, y: 0.83690876, z: 1, w: 0}
+    value: {x: 0.88774943, y: 0.9619783, z: 1, w: -0.000000006236169}
   gain:
     overrideState: 1
     value: {x: 0.9630148, y: 0.9886364, z: 1, w: 0}
@@ -817,7 +818,7 @@ MonoBehaviour:
       - 0.984375
       - 0.9921875
   hueVsHueCurve:
-    overrideState: 1
+    overrideState: 0
     value:
       curve:
         serializedVersion: 2
@@ -1400,10 +1401,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.69
+    value: 0.5
   color:
     overrideState: 1
-    value: {r: 0.31984887, g: 0.3013083, b: 0.3490566, a: 1}
+    value: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
   ambientOnly:
     overrideState: 1
     value: 1
@@ -1439,24 +1440,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9746f408d6f1e994fa5e88f4f770670f, type: 3}
   m_Name: Recolor
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   edgeColor:
-    overrideState: 1
+    overrideState: 0
     value: {r: 0, g: 0, b: 0, a: 0}
   edgeSource:
     overrideState: 1
-    value: 0
+    value: 1
   edgeThreshold:
     overrideState: 1
-    value: 1
+    value: 0
   edgeContrast:
     overrideState: 1
-    value: 0.495
+    value: 0
   fillGradient:
-    overrideState: 1
+    overrideState: 0
     value:
       serializedVersion: 2
       key0: {r: 0.3584906, g: 0.05242079, b: 0.28915045, a: 1}
@@ -1488,7 +1489,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
   fillOpacity:
     overrideState: 1
-    value: 0.53
+    value: 0
 --- !u!114 &114406083695424176
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1546,7 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
   m_Name: Grain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -1555,10 +1556,35 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.306
+    value: 0.112
   size:
     overrideState: 1
-    value: 0.3
+    value: 1
   lumContrib:
+    overrideState: 1
+    value: 1
+--- !u!114 &114961248531712440
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6050e2d5de785ce4d931e4dbdbf2d755, type: 3}
+  m_Name: ChromaticAberration
+  m_EditorClassIdentifier: 
+  active: 0
+  enabled:
+    overrideState: 1
+    value: 1
+  spectralLut:
+    overrideState: 1
+    value: {fileID: 0}
+    defaultState: 1
+  intensity:
+    overrideState: 1
+    value: 0.06
+  fastMode:
     overrideState: 1
     value: 1
