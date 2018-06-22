@@ -1632,6 +1632,11 @@ namespace MFPP
                     get { return speedMultiplier; }
                     set { speedMultiplier = value; }
                 }
+                public float MaxSpeed
+                {
+                    get { return MaxSpeed; }
+                    set { MaxSpeed = value; }
+                }
             }
 
             [Serializable]
