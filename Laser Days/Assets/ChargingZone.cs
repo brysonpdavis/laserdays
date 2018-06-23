@@ -5,17 +5,22 @@ using UnityEngine;
 public class ChargingZone : MonoBehaviour
 {
     public int chargeRate = 1;
-    [SerializeField]  private PlayerCharge playerCharge;
+    [SerializeField] private PlayerCharge playerCharge;
+    private int i = 1;
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (i % 30 == 0)
         {
-            if (playerCharge.chargeSlider.value < playerCharge.maxCharge)
+            if (col.gameObject.tag == "Player")
             {
-                playerCharge.chargeSlider.value += chargeRate;
-                playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();
-            }
+                if (playerCharge.chargeSlider.value < playerCharge.maxCharge)
+                {
+                    playerCharge.chargeSlider.value += chargeRate;
+                    playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();
 
+                }
+            }
         }
+        i++;
     }
 }
