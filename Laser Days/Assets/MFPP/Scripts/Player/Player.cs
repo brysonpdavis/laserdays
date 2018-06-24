@@ -788,6 +788,13 @@ namespace MFPP
             CollidingColliders.Clear();
             ColliderHits.Clear();
 
+            Vector3 planarFinalMovement = new Vector3(FinalMovement.x, 0, FinalMovement.z);
+            
+            if (planarFinalMovement.magnitude > Movement.MaxSpeed) { // Check to see if the player is moving too fast in the horizontal plane
+                planarFinalMovement = Vector3.ClampMagnitude(planarFinalMovement, Movement.MaxSpeed);
+                FinalMovement = new Vector3(planarFinalMovement.x, FinalMovement.y, planarFinalMovement.z); // Clamp the x and z values of FinalMovement to the maximum speed
+            }
+
             CharacterController.Move(FinalMovement * Time.deltaTime); // Move the player
 
             if (AfterFinalMovement != null) // After final movement event trigger
@@ -1463,7 +1470,16 @@ namespace MFPP
                 get { return slopeSpeedMultiplierCurve; }
                 set { slopeSpeedMultiplierCurve = value; }
             }
-
+            [SerializeField]
+            private float maximumSpeed = 10f;
+            /// <summary>
+            /// The maximum speed the player may travel in the horizontal plane
+            /// </summary>
+            public float MaxSpeed 
+            {
+                get { return maximumSpeed; }
+                set { maximumSpeed = value; }
+            }
             [Header("Air Control & Strafing")]
             [SerializeField]
             [Tooltip("Should we allow air control?")]
