@@ -154,7 +154,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4792768723605606, guid: 68f67e35b87bc442fbbc9eea505fa8f5, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114660220118265286, guid: 68f67e35b87bc442fbbc9eea505fa8f5,
         type: 2}
@@ -1138,68 +1138,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300016, guid: 06332a968024148729f6d62f72308e45, type: 3}
---- !u!1 &923986599
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 923986602}
-  - component: {fileID: 923986601}
-  - component: {fileID: 923986600}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &923986600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 923986599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &923986601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 923986599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &923986602
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 923986599}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &951024498 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: b5500d1b4b63b4acbbda6771875c2aac, type: 3}
@@ -1691,60 +1629,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _version: 1
   _crossSceneReferences:
-  - _sourceObject: {fileID: 2098016997}
-    _sourceField: playerCharge
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: 541c47936685e434f811f96cdaa7f3b4
-        name: Main_Player
-        _path: Assets/Scenes/Main_Player.unity
-      fullPath: /Player
-      componentName: PlayerCharge, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      componentIndex: 0
-      editorLocalId: 1384622081
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
-  - _sourceObject: {fileID: 1682407036}
-    _sourceField: playerCharge
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: 541c47936685e434f811f96cdaa7f3b4
-        name: Main_Player
-        _path: Assets/Scenes/Main_Player.unity
-      fullPath: /Player
-      componentName: PlayerCharge, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      componentIndex: 0
-      editorLocalId: 1384622081
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
   - _sourceObject: {fileID: 1615186164}
     _sourceField: playerCharge
     DEPRECATED_fromObject:
@@ -1826,6 +1710,60 @@ MonoBehaviour:
       version: 1
     _data:
       data: []
+  - _sourceObject: {fileID: 2098016997}
+    _sourceField: playerCharge
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: deb159c59a8ce4921950a8ba4b82d938
+        name: Main_Player Fliptest2
+        _path: Assets/Scenes/Main_Player Fliptest2.unity
+      fullPath: /Player
+      componentName: PlayerCharge, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      componentIndex: 0
+      editorLocalId: 1384622081
+      editorPrefabRelativePath: 
+      version: 1
+    _data:
+      data: []
+  - _sourceObject: {fileID: 1682407036}
+    _sourceField: playerCharge
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: deb159c59a8ce4921950a8ba4b82d938
+        name: Main_Player Fliptest2
+        _path: Assets/Scenes/Main_Player Fliptest2.unity
+      fullPath: /Player
+      componentName: PlayerCharge, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      componentIndex: 0
+      editorLocalId: 1384622081
+      editorPrefabRelativePath: 
+      version: 1
+    _data:
+      data: []
   - _sourceObject: {fileID: 131017939}
     _sourceField: playerCharge
     DEPRECATED_fromObject:
@@ -1841,9 +1779,9 @@ MonoBehaviour:
       version: 0
     _toObject:
       scene:
-        editorAssetGUID: 541c47936685e434f811f96cdaa7f3b4
-        name: Main_Player
-        _path: Assets/Scenes/Main_Player.unity
+        editorAssetGUID: deb159c59a8ce4921950a8ba4b82d938
+        name: Main_Player Fliptest2
+        _path: Assets/Scenes/Main_Player Fliptest2.unity
       fullPath: /Player
       componentName: PlayerCharge, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
@@ -2008,7 +1946,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1617553909 stripped
 GameObject:
@@ -2231,7 +2169,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1725686216 stripped
 GameObject:
@@ -2504,7 +2442,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2107237755 stripped
 GameObject:
