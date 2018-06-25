@@ -1,0 +1,224 @@
+Coding Jar Advanced Multi-Scene Plugin
+Copyright: Coding Jar Studios 2016-2017
+
+Support:  https://forum.unity3d.com/threads/advanced-multi-scene-now-available.383525/
+Version Info:  Scroll to the bottom of this documentation.
+
+What is Advanced Multi-Scene?
+-----------------------------
+
+Advanced Multi-Scene (AMS) is a plug-in used to deal with Unity 5.3's new Multi-Scene editing capabilities.  The new functionality is welcomed,
+but this plug-in addresses some of its shortcomings.
+
+Is There a Video?
+-----------------
+There is!  I recorded a 10min introduction video on how to break-up scenes and briefly described the features of the plug-in.  You can find it here:
+https://youtu.be/rj3pD9UBPZY
+
+How Should I Break-Up My Scene for Multi-Scenes?
+------------------------------------------------
+Let's assume you're working on a level for a game.  Here is a typical break-up I do:
+
+Level_01.unity is the main scene that you will load in your game.
+AI_01.unity contains all of the AI data (Navigation Mesh + other AI-related data) as it pertains to Level_01
+Dynamic_01.unity contains dynamic geometry for Level_01 (e.g. Doors and Switches)
+Static_01.unity contains all of the static geometry for Level_01 (e.g. Buildings, Terrain, etc.)
+Audio_01.unity contains ambient audio for Level_01
+Lighting_01.unity contains all lights that can be baked for Level_01
+Common_Player.unity contains all of the objects and setup a player would use (possibly including the player's Camera). This is not specific to Level_01.
+Common_UI.unity contains all of the UI for each level.  This is not specific to Level_01.
+
+This allows many different people to have their 'own' scene and work without disturbing other team members.
+For instance, an AI programmer can us AI_01 while an audio engineer can use Audio_01 and they're both guaranteed to never have scene merge conflicts.
+
+What Features Does Advanced Multi-Scene Provide?
+------------------------------------------------
+
+With this plug-in you'll be able to:
+
+- Automatically load all previously opened sub-scenes just by opening your main scene.
+	For instance, once setup, loading Level_01.unity will bring in AI_01, Dynamic_01, Static_01, etc.
+- Automaticaly load sub-scenes at runtime
+	At runtime, when Level_01 is loaded, it can load Dynamic_01, Static_01 synchronously and Common_UI asynchronously.
+- Merge scenes together when building your game to a target platform (baking)
+	Instead of loading Level_01, and once completed, loading Dynamic_01, Static_01, etc. You can configure Level_01 to CONTAIN Dynamic_01, Static_01 so Unity treats it as a single scene.
+- Change the behaviour of cross-scene referencing
+	Unity by default will not allow an Object in AI_01 to reference an Object in Dynamic_01. This plug-in can overcome those limitations.  This is the biggest feature of this plug-in.
+
+Getting Started
+---------------
+
+If you are upgrading for Advanced Additive Scenes (AAS), please refer to that section.
+
+After you import the plug-in from the Asset Store, you are ready to begin using Advanced Multi-Scene.  Simply use the built-in Unity functionality to continue
+working as normal:  To add an existing scene to your setup, drag and drop a Scene file from the Project window into the Hierarchy window.
+
+When saving your scenes, a new GameObject will appear named "! AmsMultiSceneSetup".  This indicates the scene is ready (and managed) by AMS.
+
+Using Advanced Multi-Scene
+--------------------------
+
+The plug-in is meant to work in the background, out of your way and require minimal interaction.  When you save your Active Scene (the bolded Scene in your Hierarchy Window),
+AMS will create a Multi-Scene Setup object for that scene.  The Is Main Scene toggle allows you to specify if AMS should automatically load the Scene Setup at Editor and Runtime.
+
+You may inspect the values of the Scene Setup in order to tweak how the scenes should load.  There are tooltips for every option, simply hover over the item.
+
+Advanced Multi-Scene Preferences
+--------------------------------
+
+You can change how AMS works by going into the "Edit/Preferences" menu in Unity.  There will be a section for Multi-Scene where you can toggle debug and other functionality.
+
+Cross-Scene Referencing
+-----------------------
+
+A cross-scene reference is an Object reference that spans across multiple scenes.  For example, a Character in AI_01 may have a hard reference to Goal in Dynamic_01.  This is
+undesirable, but a very common occurence.  Without AMS, Unity will make a copy of Goal and place it in AI_01, then switch the Character's reference to point to the newly created
+copy of Goal.  This is often undesirable as any modifications to the original Goal object will not be seen by Character.
+
+By default, AMS is configured to Save cross-scene references.  This is modifiable in the Preferences menu.
+
+When AMS saves a cross-scene reference, it stores some data in the "! AmsMultiSceneSetup" GameObject that allows it to hook-up the reference at export or runtime.
+It will only be able to do this if there is a unique path from the source Object and to the destination Object.
+
+For instance:
+
+Scene AI_01 contains a GameObject "/Path/To/Character" with a "ReachGoalsComponent" which contains a serialized List<GoalComponents> (let's name the variable ListOfGoals).
+Let's say the 5th entry in ListOfGoals points to Scene Dynamic_01's "/AnotherPath/To/Goal" which, of course, has a GoalComponent on it.
+This is a legal, AMS-serializable cross-scene reference because it fulfills the following criteria:
+
+1. Unique Path to Source Object.
+2. Unique Path to Destination Object.
+3. All objects along the path must be classes, not structs.
+
+This cross-scene reference would be described as: "AI_01/Path/To/Character",ReachGoalComponent.ListOfGoals,5 -> "Dynamic_01/Path/To/Goal",GoalComponent.
+
+Invalid cross-scene references:
+
+You can create an invalid cross-scene reference by violating one of the criterias.  For example, if Dynamic_01/Path/To contained 5 children all called Goal, that would make
+the target Object an ambiguous (non-unique) path.
+
+In the case of an invalid cross-scene reference, you will be given an error in the console during the serialization phase.  Simple solutions are to not violate the above
+criteria (e.g. rename your GameObject so that its path is unique) and then resave.
+
+Considerations:
+
+Since cross-scene references must be resolved (aka restored) at runtime, there may be order-of-operations issues about when you access the cross-scene variable.
+For instance, if you try to access Goal before Dynamic_01 is loaded, you will receive a null value.  For this reason, it's important to consider the order of level
+loads (hint: it follows the order in the Hierarchy), as well as deferring any accesses to the cross-scene variables until those levels are actually loaded (hint: try not
+to access them in Awake() or OnEnable()).
+
+Initialization order is especially problematic on mobile devices, where the first loaded scene has different initialization rules than other platforms.  To combat this issue,
+you should always have a dummy scene 0 whose job it is to load the subsequent scenes.  This first scene should not rely on any other scenes.  Unity recommends the first scene
+be a splash screen in order to hide issues with loading assets; in fact it is for this reason that the first scene does not follow the same initialization order as other scenes.
+
+Light Baking Process
+--------------------
+
+Light baking has been a bit of a gong show with Unity 5.x.  That being said, a viable solution for multi-scene light baking is now possible and indeed we have shipped a game with
+Advanced Multi-Scene using such a setup.  Here are some pointers:
+
+1.  Break-up your scenes so static lights and geometry live in as few scenes as possible.
+2.  If there is a Sunlight (i.e. the brightest light in your level, configurable in the Lighting Window), then put that Sunlight in the "main scene".
+3.  Before baking, Unload all scenes that do not contribute to lighting (this will save a huge amount of memory and prevent crashes).
+4.  Unload any scenes that are to be re-used between multiple main scenes (i.e. loaded Additively, e.g. the UI).
+	Doing this ensures the lightmap data isn't saved into those scenes, otherwise you will get errors at runtime when they're loaded.
+5.  When all of the relevant scenes are closed, and only the few that contribute to lighting are open, you can start the light bake process.
+6.  You can re-open the other scenes once the process is done.
+
+Protip:  If you're iterating quickly on lighting, drop the lightmap resolution down to 1 or 2 so you are able to see the results quickly and determine if you have overlapping UV2's as soon as possible.
+	When you're ready to do your real lighting bake, crank it back up.
+
+Differences from Advanced Additive Scenes (AAS)
+-----------------------------------------------
+
+Advanced Additive Scenes was a plug-in originally designed for Unity 4.x which allowed users the ability to use
+Multi-Scene editing prior to Unity 5.3.  With the advent of Unity 5.x, the plug-in began breaking due to changes made
+in Unity's internal code and upkeep quickly became impossible.  Advanced Multi-Scene is the result of rewriting major
+parts of AAS to be compatible with Unity going forward from 5.3 onwards.
+
+As a result of Unity's decision for how to implement their version of multi-scene editing, the following are not supported:
+
+- Nested SubScenes (where one scene could be inside another scene). Unity does not support this.
+- Multiply Loaded SubScenes (where one scene could be loaded multiple times). Unity now forbids this.
+- Scenes loaded as a child of a transform (where you could translate/rotate/scale an entire scene with a Transform). Unity highly discourages this.
+
+Upgrade from Advanced Additive Scenes
+-------------------------------------
+
+If you've previously purchased Advanced Additive Scenes (AAS), you can upgrade your existing project to
+Advanced Multi-Scene (AMS) by doing the following:
+
+1.  Import this plug-in into your existing project
+2.  Open the scene you want to convert
+
+To Import With Cross-Scene References Intact:
+3.  Unlock all of the SubScenes (this will restore cross-scene references in AAS)
+4.  Drag the SubScene's Scene file from the Project Window into the Hierarchy Window.
+5.  Delete all of the GameObjects in the newly dragged-in Scene.
+6.  Move all of the GameObjects from the AAS SubScene into the new (now empty) Scene.
+7.  Delete the SubScene Object.
+8.  Save the newly populated Scene.
+
+To Import WITHOUT Cross-Scene References:
+3.  Click on Every SubScene GameObject to locate its Scene file.
+4.  Drag the Scene file into the Hierarchy window (this will create a Unity-managed Multi-Scene Editing instance).
+5.  Delete the SubScene GameObject (this will make sure the Unity-managed one is the only instance).
+6.  Create a new GameObject and put a AmsMultiSceneSetup behaviour on that GameObject (this enables AMS).
+
+Note that this manual version is recommended for small projects.  For large projects with a highly competant tech team, I recommend writing an upgrade script.
+The steps for writing such a script are product-dependent, but an outline can be found here:  http://forum.unity3d.com/threads/advanced-multi-scene-now-available.383525/#post-2560974
+
+Known Issues
+------------
+
+1.  If you use Unity 5.3.2f1 you should do your builds from an Empty scene (having a scene open may cause duplicate objects in that scene).  This does not happen in 5.3.4p4 and newer (this is the next step up that I test).
+
+2.  Delay-loaded scenes cause issues:
+
+var asyncOp = SceneManager.LoadSceneAdditive();
+asyncOp.allowSceneActivation = false;
+
+then you will hit an issue in the Editor where Awake() and Start() are guaranteed to succeed each other on the same frame without any loads occurring inbetween (causing a break with Baked scenes).  To work-around this, choose one of the following:
+
+    - Don't use the delay loading of the scene when in the Editor (using the main load will work).
+    - Don't have any code that uses cross-scene references in your Main Scene.  Instead, keep that scene clean and used only to store the scene setup.  This will allow all of the other scenes to load in the correct time (they're one frame behind).
+
+3.  In AMS v0.56c and earlier, there would be issues when your scripts failed to compile.  This has been alleviated in 0.56d and later.  There are two solution paths:  In Unity 5.6 and later, Unity can keep the last loaded scripts in memory.  This means we can detect compilation failures.  Prior to Unity 5.6, we use a work-around of storing the plug-in in the Assets/Plugins folder.  This will allow AMS to load regardless of other scripts (since Plugins folder is compiled first).
+
+Support
+-------
+
+Support Forum (Preferred):	http://forum.unity3d.com/threads/advanced-multi-scene-now-available.383525/
+Support E-mail:			jodon@codingjar.com (I want to discourage this because others don't get to see the posts, but it's good for code dumps)
+
+Version Info
+------------
+
+The version information matches the latest Unity that the plug-in has been tested on.  For instance, 0.54p1 means it's been tested on Unity 5.4p1.
+
+0.61
+----
+Unity 2018 Support
+Fix for saving multiple scenes that have cross-scene references to each other
+Fix for New Cinemachine (in 2018)
+
+0.6
+---
+Plugin has been moved to the Plugins/ folder.  This will ensure it's compiled separately from your code and is therefore less likely to break.  This adheres to the new Asset Store Guidelines.
+AmsMultiSceneSetup is always added to a new scene, regardless of if there are changes to it or not.
+There is a new custom resolver system for cross-scene references.  This will allow you to write your own resolvers for very difficult to manage behaviours that use properties rather than variables to serialize.
+The new custom resolver system is still blooming, but AmsPlayableDirectorResolver and AmsPlayableDirectorCrossSceneData is the first implementation.
+As such PlayableDirector and its graph system (e.g. Cinemachine) now work in Unity 2017! (Get excited, this took forever)
+
+0.56c
+-----
+
+Cross-scene references can now be accessed in Awake().  You no longer have to wait until Start().
+Cross-scene references now properly handle renamed objects.
+Cross-scene reference resolves are now about 50% faster.
+
+0.54f1
+------
+
+Added the ability for cross-scene references to go from a Baked scene to an Additive scene or vice versa.
+Note that if you use this version on Unity 5.3.2f1 you should do your builds from an Empty scene (having a scene open may cause duplicate objects in that scene).
