@@ -9,6 +9,7 @@ public class RaycastManager : MonoBehaviour {
     public IList<GameObject> selectedObjs;
     public Shader shaderselected;
     public Shader shaderoriginal;
+    private Color32 reticleColor = new Color32(255,222,77,255); //new Vector4(255, 222, 77, 1);
 
 
     [Header("Raycast Settings")]
@@ -92,12 +93,14 @@ public class RaycastManager : MonoBehaviour {
     //changing color of crosshair based on raycast
     void CrosshairActive()
     {
-        crossHair.color = Color.red;
+        //crossHair.color = Color.red;
+        crossHair.color = reticleColor;
+
     }
 
     void CrosshairNormal()
     {
-        crossHair.color = Color.white;
+        crossHair.color = Color.clear;
     }
 
     public void AddToList(GameObject obj) 

@@ -70,8 +70,8 @@ namespace MFPP.Modules
 
                 //AVOIDING FLYING ON TOP OF HELD OBJECT GLITCH:
                 //checks rotation of player so that it's down (the between the 67 and 91f)
-                //checks that the player is actually looking at OBJECT, (red crosshair), rather than looking at ground while object is distant
-                if ((playerCam.transform.localEulerAngles.x > 65f) && (playerCam.transform.localEulerAngles.x < 91f) && GetComponent<RaycastManager>().crossHair.color == Color.red)
+                //checks that the player is actually looking at OBJECT, (colored crosshair), rather than looking at ground while object is distant
+                if ((playerCam.transform.localEulerAngles.x > 65f) && (playerCam.transform.localEulerAngles.x < 91f) && GetComponent<RaycastManager>().crossHair.color == new Color32(255, 222, 77, 255))
                 {
                     PutDown();
                 }
