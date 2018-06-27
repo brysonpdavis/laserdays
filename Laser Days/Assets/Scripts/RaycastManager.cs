@@ -46,7 +46,9 @@ public class RaycastManager : MonoBehaviour {
                 raycastedObj = hit.collider.gameObject;
                 ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
-                itemNameText.transform.position = mainCam.WorldToScreenPoint(raycastedObj.transform.position);
+               
+                //sets its position to square's
+                // itemNameText.transform.position = mainCam.WorldToScreenPoint(raycastedObj.transform.position);
 
                 // pick item up on left click [CURRENTLY COVERED BY NEW SCRIPT, CAN UN-COMMENT THIS IF NEEDED]
                /*
