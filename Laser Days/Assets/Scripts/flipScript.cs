@@ -8,9 +8,11 @@ public class flipScript : MonoBehaviour {
 	[SerializeField] private int envSize = 100;
 	[SerializeField] public bool beginningSpace;
 	private bool space;
+	private PlayerCharge pc;
 
 	void Start () {
 		space = beginningSpace;
+		pc = GetComponent<PlayerCharge>();
 	}
 
 	void Update () {
@@ -20,10 +22,10 @@ public class flipScript : MonoBehaviour {
 			RaycastManager rm = GetComponent<RaycastManager>();
 
 			if (heldObj) {
-				ItemProperties props = heldObj.GetComponent<ItemProperties>();
-				if (props.Check()) { // if the player and any held object can be flipped:
-					props.Interaction(); // subtract any charge required
+				if (pc.Check(heldObj)) { // if the player and any held object can be flipped:
+					pc.ItemInteraction(heldObj); // subtract any charge required
 					FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
+					pc.UpdatePredictingSlider();
 				}
 				else {
 					// make a sound effect letting player
@@ -31,11 +33,11 @@ public class flipScript : MonoBehaviour {
 				}
 			}
 			else {
-				PlayerCharge playerCharge = GetComponent<PlayerCharge>();
-				if (playerCharge.CheckPlayerCharge())
+				if (pc.CheckPlayerCharge())
 				{
-					playerCharge.PlayerInteraction();
+					pc.PlayerInteraction();
 					FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
+					pc.UpdatePredictingSlider();
 				}
 			}
 		}

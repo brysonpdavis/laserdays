@@ -24,9 +24,11 @@ namespace MFPP.Modules
         public Transform playerCam;
         private Camera mainCamera;
         public GameObject heldObject;
+        private PlayerCharge pc;
 
         void Start () {
             mainCamera = Camera.main;
+            pc = GetComponent<PlayerCharge>();
         }
 
         private Rigidbody target;
@@ -58,6 +60,7 @@ namespace MFPP.Modules
                         RaycastManager rm = GetComponent<RaycastManager>();
                         rm.RemoveFromList(target.gameObject);
                         rm.selectedObjs.Remove(target.gameObject);
+                        pc.UpdatePredictingSlider();
                     }
                 }
             }
@@ -83,18 +86,19 @@ namespace MFPP.Modules
         void PickUp (Rigidbody body) {
             target = body; // Set the target
             heldObject = target.gameObject;
-            target.GetComponent<Rigidbody>().useGravity = false;
-            // target.transform.parent = playerCam;
-
+            target.useGravity = false;
             target.freezeRotation = true;
+
+            pc.UpdatePredictingSlider();
         }
 
         void PutDown () {
             target.freezeRotation = false;
-            // target.transform.parent = null;
-            target.GetComponent<Rigidbody>().useGravity = true;
+            target.useGravity = true;
             heldObject = null; //remove from the list
             target = null;
+
+            pc.UpdatePredictingSlider();
         }
     }
 }

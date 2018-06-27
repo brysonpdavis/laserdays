@@ -24,10 +24,12 @@ public class RaycastManager : MonoBehaviour {
     [SerializeField] public Image crossHair;
     [SerializeField] private Text itemNameText;
     private Camera mainCam;
+    private PlayerCharge pc;
 
     void Start () {
         selectedObjs = new List<GameObject>();
         mainCam = Camera.main;
+        pc = GetComponent<PlayerCharge>();
     }
 	
 	// Update is called once per frame
@@ -60,8 +62,9 @@ public class RaycastManager : MonoBehaviour {
                 if(Input.GetMouseButtonDown(0))
                 {
                     if (ip.boost)
-                        ip.Interaction();
-                    
+                    {
+                        pc.ItemInteraction(raycastedObj);
+                    }
                     if (ip.objectCharge)
                     {
 
@@ -105,18 +108,20 @@ public class RaycastManager : MonoBehaviour {
 
     public void AddToList(GameObject obj) 
     {
-        obj.GetComponent<ItemProperties>().selected = true;
+        ItemProperties ip = obj.GetComponent<ItemProperties>();
+        ip.selected = true;
         obj.GetComponent<Renderer>().material.shader = shaderselected;
         // change shader back
-
+        pc.UpdatePredictingSlider();
     }
 
     public void RemoveFromList(GameObject obj)
     {
+        ItemProperties ip = obj.GetComponent<ItemProperties>();
         obj.GetComponent<ItemProperties>().selected = false;
         obj.GetComponent<Renderer>().material.shader = shaderoriginal; 
         //change shader
-
+        pc.UpdatePredictingSlider();
     } 
 
     public int SumList(IList<GameObject> objs)
