@@ -22,18 +22,16 @@ public class sceneTrigger : MonoBehaviour
                 SceneToLoad.active = true;
 
 
-                //can turn off object's renderer. right now it causes a flicker, so currently off.
-
                 //adds any held object to the scene that the player is entering
                 if (player.GetComponentInParent<MFPP.Modules.PickUpModule>().heldObject != null) {
 
                 GameObject held = player.GetComponentInParent<MFPP.Modules.PickUpModule>().heldObject;
                 held.transform.parent = SceneToLoad.transform;
                  }
-               //if (!held.GetComponent<PickUpModule>().heldObject==null)
 
-                MeshRenderer m = this.GetComponentInParent<MeshRenderer>();
-                m.enabled = false;
+                //can turn off object's renderer
+                //MeshRenderer m = this.GetComponentInParent<MeshRenderer>();
+                //m.enabled = false;
 
             }
         }
