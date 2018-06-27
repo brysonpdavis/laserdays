@@ -187,7 +187,7 @@ Transform:
   m_Children:
   - {fileID: 1285322408}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &701563439
 BoxCollider:
@@ -201,6 +201,112 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 45, y: 18, z: 45}
   m_Center: {x: -5, y: 7, z: -5}
+--- !u!1 &846183084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100010, guid: 83367703d6e7b46279460fa9b8b767dd, type: 3}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 846183085}
+  - component: {fileID: 846183089}
+  - component: {fileID: 846183088}
+  - component: {fileID: 846183087}
+  - component: {fileID: 846183086}
+  m_Layer: 0
+  m_Name: LightingTest_shell
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &846183085
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400010, guid: 83367703d6e7b46279460fa9b8b767dd, type: 3}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846183084}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1235126941}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &846183086
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846183084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300008, guid: 83367703d6e7b46279460fa9b8b767dd, type: 3}
+--- !u!54 &846183087
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846183084}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!23 &846183088
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300008, guid: 83367703d6e7b46279460fa9b8b767dd,
+    type: 3}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846183084}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 2100000, guid: 9fa86c62497a84433a2f5a75e4046a1e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &846183089
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300008, guid: 83367703d6e7b46279460fa9b8b767dd,
+    type: 3}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846183084}
+  m_Mesh: {fileID: 4300008, guid: 83367703d6e7b46279460fa9b8b767dd, type: 3}
 --- !u!1 &926184501
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,6 +365,32 @@ MonoBehaviour:
     _data:
       data: []
   - _sourceObject: {fileID: 1285322410}
+    _sourceField: backgroundScene
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: 7822f3a29728345b5a53853cfc1b09b2
+        name: Default_BackgroundGeometry
+        _path: Assets/Scenes/Default Scene/Default_BackgroundGeometry.unity
+      fullPath: /FullScene_BackgroundGeometry
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 677761807
+      editorPrefabRelativePath: 
+      version: 1
+    _data:
+      data: []
+  - _sourceObject: {fileID: 1285322410}
     _sourceField: SceneToLoad
     DEPRECATED_fromObject:
       scene:
@@ -313,6 +445,32 @@ MonoBehaviour:
     _data:
       data: []
   - _sourceObject: {fileID: 1227833047}
+    _sourceField: backgroundScene
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: 7822f3a29728345b5a53853cfc1b09b2
+        name: Default_BackgroundGeometry
+        _path: Assets/Scenes/Default Scene/Default_BackgroundGeometry.unity
+      fullPath: /FullScene_BackgroundGeometry
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 677761807
+      editorPrefabRelativePath: 
+      version: 1
+    _data:
+      data: []
+  - _sourceObject: {fileID: 1227833047}
     _sourceField: SceneToLoad
     DEPRECATED_fromObject:
       scene:
@@ -339,6 +497,85 @@ MonoBehaviour:
       version: 1
     _data:
       data: []
+  - _sourceObject: {fileID: 1235126943}
+    _sourceField: player
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: 1a4b3e87890eb46deb6394b11a5c0bc1
+        name: Default_Main_Player
+        _path: Assets/Scenes/Default Scene/Default_Main_Player.unity
+      fullPath: /Player
+      componentName: UnityEngine.CharacterController, UnityEngine.PhysicsModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      componentIndex: 0
+      editorLocalId: 1384622073
+      editorPrefabRelativePath: 
+      version: 1
+    _data:
+      data: []
+  - _sourceObject: {fileID: 1235126943}
+    _sourceField: backgroundScene
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: 7822f3a29728345b5a53853cfc1b09b2
+        name: Default_BackgroundGeometry
+        _path: Assets/Scenes/Default Scene/Default_BackgroundGeometry.unity
+      fullPath: /FullScene_BackgroundGeometry
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 677761807
+      editorPrefabRelativePath: 
+      version: 1
+    _data:
+      data: []
+  - _sourceObject: {fileID: 1235126943}
+    _sourceField: SceneToLoad
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: e8741015a559845eb8a739481ec1e139
+        name: Lighting Test
+        _path: Assets/Scenes/Lighting Test/Lighting Test.unity
+      fullPath: /FullScene_LightingTest
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 112833276
+      editorPrefabRelativePath: 
+      version: 1
+    _data:
+      data: []
   _realSceneRootsForPostBuild: []
   _mergedScenes: []
 --- !u!114 &926184503
@@ -354,7 +591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isMainScene: 0
   _sceneSetup: []
-  _thisScenePath: Assets/Scenes/Default Scene/Default_StaticGeometry.unity
+  _thisScenePath: Assets/Scenes/Default Scene/Default_SceneTriggers.unity
 --- !u!4 &926184504
 Transform:
   m_ObjectHideFlags: 0
@@ -366,7 +603,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1227833044
 GameObject:
@@ -426,6 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneToLoad: {fileID: 0}
+  backgroundScene: {fileID: 0}
   linkedCollider: {fileID: 1285322411}
   player: {fileID: 0}
 --- !u!65 &1227833048
@@ -440,6 +678,79 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 55, y: 18, z: 55}
   m_Center: {x: -5, y: 7, z: -5}
+--- !u!1 &1235126940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1235126941}
+  - component: {fileID: 1235126944}
+  - component: {fileID: 1235126943}
+  - component: {fileID: 1235126942}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1235126941
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1235126940}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -25.3, y: -0.9200003, z: 2.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 846183085}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1235126942
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1235126940}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
+--- !u!114 &1235126943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1235126940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 086485ea390bc44d2b21b9fae35a5b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneToLoad: {fileID: 0}
+  backgroundScene: {fileID: 0}
+  linkedCollider: {fileID: 1235126944}
+  player: {fileID: 0}
+--- !u!65 &1235126944
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1235126940}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 86.3, y: 18, z: 22.4}
+  m_Center: {x: 0, y: 7, z: 0}
 --- !u!1 &1285322407
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneToLoad: {fileID: 0}
+  backgroundScene: {fileID: 0}
   linkedCollider: {fileID: 1227833048}
   player: {fileID: 0}
 --- !u!65 &1285322411
@@ -586,7 +898,7 @@ Transform:
   m_Children:
   - {fileID: 1227833045}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1721936686
 BoxCollider:
