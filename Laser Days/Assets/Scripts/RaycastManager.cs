@@ -124,12 +124,16 @@ public class RaycastManager : MonoBehaviour {
         pc.UpdatePredictingSlider();
     } 
 
-    public int SumList(IList<GameObject> objs)
+    int SumList(IList<GameObject> objs)
     {
         int i = 0;
         foreach (GameObject obj in objs) {
             i += obj.GetComponent<ItemProperties>().value;
         }
         return i;
+    }
+
+    public int SumSelectedObjects() {
+        return SumList(selectedObjs);
     }
 }

@@ -28,12 +28,12 @@ public class PlayerCharge : MonoBehaviour {
     }
 
     public void PlayerInteraction() {
-        chargeSlider.value -= flipCost + rm.SumList(rm.selectedObjs);
+        chargeSlider.value -= flipCost + rm.SumSelectedObjects();
         chargeValue.text = chargeSlider.value.ToString();
     }
 
     public bool CheckPlayerCharge() {
-        return (flipCost + rm.SumList(rm.selectedObjs) <= chargeSlider.value);
+        return (flipCost + rm.SumSelectedObjects() <= chargeSlider.value);
     }
 
     public void ItemInteraction(GameObject item) {
@@ -41,11 +41,11 @@ public class PlayerCharge : MonoBehaviour {
         if(itemProps.objectCharge){
             
             //Check to see if it can be activated
-            if (itemProps.value + flipCost + rm.SumList(rm.selectedObjs) <= chargeSlider.value)
+            if (itemProps.value + flipCost + rm.SumSelectedObjects() <= chargeSlider.value)
             {
                 //subtract charge value:
                 //for slider
-                chargeSlider.value -= itemProps.value + flipCost + rm.SumList(rm.selectedObjs);
+                chargeSlider.value -= itemProps.value + flipCost + rm.SumSelectedObjects();
 
                 // for text
                 chargeValue.text = chargeSlider.value.ToString();      
@@ -68,7 +68,7 @@ public class PlayerCharge : MonoBehaviour {
     // Checks whether the object can be flipped
     public bool Check(GameObject item) {
         ItemProperties ip = item.GetComponent<ItemProperties>();
-        return (ip.boost)?false:(ip.value + flipCost + rm.SumList(rm.selectedObjs) <= chargeSlider.value);
+        return (ip.boost)?false:(ip.value + flipCost + rm.SumSelectedObjects() <= chargeSlider.value);
     }
 
     public void UpdatePredictingSlider() {
@@ -78,11 +78,7 @@ public class PlayerCharge : MonoBehaviour {
         else
             heldValue = 0;
         
-        int selectedTotal = 0;
-        foreach (GameObject obj in rm.selectedObjs) {
-            selectedTotal += obj.GetComponent<ItemProperties>().value;
-        }
-        predictingSlider.value = chargeSlider.value - (flipCost + heldValue + selectedTotal);
+        predictingSlider.value = chargeSlider.value - (flipCost + heldValue + rm.SumSelectedObjects());
     }
 }
 
