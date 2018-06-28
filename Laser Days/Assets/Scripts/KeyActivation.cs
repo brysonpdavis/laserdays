@@ -19,17 +19,20 @@ public class KeyActivation : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.GetComponent<ItemProperties>().isKey)
+        if (col.GetComponent<ItemProperties>() != null)
         {
-            if (anyKey)
+            if (col.GetComponent<ItemProperties>().isKey)
             {
-                Unlock();
-            }
-            else
-            {
-                if (key == col.GetComponent<ItemProperties>().key)
+                if (anyKey)
                 {
                     Unlock();
+                }
+                else
+                {
+                    if (key == col.GetComponent<ItemProperties>().key)
+                    {
+                        Unlock();
+                    }
                 }
             }
         }
@@ -37,17 +40,20 @@ public class KeyActivation : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.GetComponent<ItemProperties>().isKey)
+        if (col.GetComponent<ItemProperties>() != null)
         {
-            if (anyKey)
+            if (col.gameObject.GetComponent<ItemProperties>().isKey)
             {
-                Lock();
-            }
-            else
-            {
-                if (key == col.GetComponent<ItemProperties>().key)
+                if (anyKey)
                 {
                     Lock();
+                }
+                else
+                {
+                    if (key == col.GetComponent<ItemProperties>().key)
+                    {
+                        Lock();
+                    }
                 }
             }
         }
