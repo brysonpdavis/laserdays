@@ -16,5 +16,11 @@ public class PlayerBuilderEditor : Editor
             myScript.BuildPlayer(myScript.spawnSelect);
 
         }
+
+        if (GUILayout.Button("Reset Player Charge"))
+        {
+            myScript.ResetCharge();
+
+        }
     }
 }
