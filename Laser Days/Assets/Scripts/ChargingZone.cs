@@ -6,6 +6,7 @@ public class ChargingZone : MonoBehaviour
 {
     public int chargeRate = 1;
     private PlayerCharge playerCharge;
+    private ItemProperties itemprops;
     private int i = 1;
     void OnTriggerStay(Collider col)
     {
@@ -13,7 +14,7 @@ public class ChargingZone : MonoBehaviour
         {
             if (col.gameObject.tag == "Player")
             {
-                if (!playerCharge) 
+                if (!playerCharge)
                 {
                     playerCharge = col.GetComponent<PlayerCharge>();
                 }
@@ -26,7 +27,34 @@ public class ChargingZone : MonoBehaviour
 
                 }
             }
+            else if (col.gameObject.tag == "Clickable")
+            {
+                if(!itemprops)
+                {
+                  itemprops = col.GetComponent<ItemProperties>();
+                }
+                if (itemprops.reducible == true)
+                  {
+                  itemprops.touchingzone = true;
+                  if (itemprops.value> itemprops.minvalue)
+                  {
+                  itemprops.value = itemprops.value - 1;
+                }
+                }
+          }
         }
         i++;
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+      if (col.gameObject.tag == "Clickable")
+      {
+        if(!itemprops)
+        {
+          itemprops = col.GetComponent<ItemProperties>();
+        }
+        itemprops.touchingzone = false;
+      }
     }
 }
