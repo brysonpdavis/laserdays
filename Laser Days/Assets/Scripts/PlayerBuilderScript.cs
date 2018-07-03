@@ -15,11 +15,15 @@ public class PlayerBuilderScript : MonoBehaviour
 
 
     }
-    public void ResetCharge () {
+    public void ResetCharge()
+    {
 
-        int resetCharge = Player.GetComponentInParent<PlayerCharge>().maxCharge;
-        Player.GetComponent<PlayerCharge>().chargeSlider.value = resetCharge;
-        Player.GetComponent<PlayerCharge>().chargeValue.text = resetCharge.ToString();
-        Player.GetComponent<PlayerCharge>().predictingSlider.value = resetCharge;
+        if (Player.tag == "Player")
+        {
+            int resetCharge = Player.GetComponentInParent<PlayerCharge>().maxCharge;
+            Player.GetComponent<PlayerCharge>().chargeSlider.value = resetCharge;
+            Player.GetComponent<PlayerCharge>().chargeValue.text = resetCharge.ToString();
+            Player.GetComponent<PlayerCharge>().predictingSlider.value = resetCharge;
+        }
     }
 }
