@@ -10,9 +10,15 @@ public class flipScript : MonoBehaviour {
 	private bool space;
 	private PlayerCharge pc;
 
+    //sounds
+    private AudioSource audioSource;
+    public AudioClip[] flip;
+    private AudioClip flipClip;
+
 	void Start () {
 		space = beginningSpace;
 		pc = GetComponent<PlayerCharge>();
+        audioSource = gameObject.GetComponent<AudioSource>();
 	}
 
 	void Update () {
@@ -67,6 +73,14 @@ public class flipScript : MonoBehaviour {
 			newX = pos.x + envSize;
 		}
 		obj.transform.position = new Vector3(newX, pos.y, pos.z);
+
+
+        //play sound from range
+        int index = Random.Range(0, flip.Length);
+        flipClip = flip[index];
+        audioSource.clip = flipClip;
+        audioSource.Play();
+
 	}
 
 	void FlipList (IList<GameObject> objs)
