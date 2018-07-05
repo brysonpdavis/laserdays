@@ -74,13 +74,14 @@ public class flipScript : MonoBehaviour {
 		}
 		obj.transform.position = new Vector3(newX, pos.y, pos.z);
 
-
-        //play sound from range
-        int index = Random.Range(0, flip.Length);
-        flipClip = flip[index];
-        audioSource.clip = flipClip;
-        audioSource.Play();
-
+		if (flip.Length > 0)
+		{
+			//play sound from range
+			int index = Random.Range(0, flip.Length - 1);
+			flipClip = flip[index];
+			audioSource.clip = flipClip;
+			audioSource.Play();
+		}
 	}
 
 	void FlipList (IList<GameObject> objs)
@@ -88,8 +89,15 @@ public class flipScript : MonoBehaviour {
 		foreach (GameObject obj in objs)
 		{
 			Flip(obj);
-			GetComponent<RaycastManager>().RemoveFromList(obj);
 		}
-		objs.Clear();
+
+		if (!Input.GetMouseButton(0))
+		{
+			foreach (GameObject obj in objs)
+			{
+				GetComponent<RaycastManager>().RemoveFromList(obj);
+			}
+			objs.Clear();
+		}
 	}
 }
