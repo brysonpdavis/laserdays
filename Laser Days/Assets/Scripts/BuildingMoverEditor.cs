@@ -5,7 +5,7 @@ using UnityEditor;
 [CustomEditor(typeof(BuildingMoverScript))]
 public class BuildingMoverEditor : Editor
 {
-
+    
 
     public override void OnInspectorGUI()
     {
