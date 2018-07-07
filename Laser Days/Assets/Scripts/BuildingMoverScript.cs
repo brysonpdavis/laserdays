@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BuildingMoverScript : MonoBehaviour 
 {
-    public Vector3 move = new Vector3(9f, 4f, 5.196f);
+    public Vector3 move = new Vector3(7.5f, 4.4f, 4.33f);
 
     public void MoveForward()
     {
