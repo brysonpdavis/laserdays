@@ -19,7 +19,7 @@ public class sceneTrigger : MonoBehaviour
 
             if (SceneToLoad.active == false)
             {
-                SceneToLoad.active = true;
+                SceneToLoad.SetActive(true);
 
 
                 //adds any held object to the scene that the player is entering
@@ -54,7 +54,7 @@ public class sceneTrigger : MonoBehaviour
                     GameObject held = player.GetComponentInParent<MFPP.Modules.PickUpModule>().heldObject;
                     held.transform.parent = backgroundScene.transform;
                 }
-                SceneToLoad.active = false;
+                SceneToLoad.SetActive(false);
 
                 MeshRenderer m = this.GetComponentInParent<MeshRenderer>();
                 m.enabled = true;

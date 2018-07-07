@@ -87,7 +87,7 @@ namespace MFPP.Modules
             target = body; // Set the target
             heldObject = target.gameObject;
             target.useGravity = false;
-            target.freezeRotation = true;
+            //target.freezeRotation = true;
 
             pc.UpdatePredictingSlider();
         }
