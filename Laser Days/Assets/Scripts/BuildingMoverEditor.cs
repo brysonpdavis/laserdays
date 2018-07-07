@@ -2,10 +2,16 @@
 using System.Collections;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 [CustomEditor(typeof(BuildingMoverScript))]
+
+
 public class BuildingMoverEditor : Editor
 {
-    
+
+
+
 
     public override void OnInspectorGUI()
     {
@@ -50,6 +56,6 @@ public class BuildingMoverEditor : Editor
         { myScript.MoveDown(); }
     }
 
-
-
 }
+
+#endif

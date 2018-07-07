@@ -2,7 +2,12 @@
 using System.Collections;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 [CustomEditor(typeof(PlayerBuilderScript))]
+
+
+
 public class PlayerBuilderEditor : Editor
 {
 
@@ -24,3 +29,5 @@ public class PlayerBuilderEditor : Editor
         }
     }
 }
+
+#endif
