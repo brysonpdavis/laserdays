@@ -3,19 +3,21 @@ using System.Collections;
 
 public class BuildingMoverScript : MonoBehaviour 
 {
-    public Vector3 move = new Vector3(7.5f, 4.4f, 4.33f);
+
+    public Vector3[] move = new[] { new Vector3(7.5f, 4.4f, 4.33f), new Vector3(15f, 4.4f, 8.66f) };
+    public int option;
 
     public void MoveForward()
     {
         Vector3 p = this.transform.position;
-        p.z += move.z;
+        p.z += move[option].z;
         this.transform.position = p;
 
     }
     public void MoveBackward()
     {
         Vector3 p = this.transform.position;
-        p.z -= move.z;
+        p.z -= move[option].z;
         this.transform.position = p;
 
     }
@@ -23,7 +25,7 @@ public class BuildingMoverScript : MonoBehaviour
     public void MoveLeft()
     {
         Vector3 p = this.transform.position;
-        p.x -= move.x;
+        p.x -= move[option].x;
         this.transform.position = p;
 
     }
@@ -31,7 +33,7 @@ public class BuildingMoverScript : MonoBehaviour
     public void MoveRight()
     {
         Vector3 p = this.transform.position;
-        p.x += move.x;
+        p.x += move[option].x;
         this.transform.position = p;
     }
 
@@ -54,7 +56,7 @@ public class BuildingMoverScript : MonoBehaviour
     public void MoveUp()
     {
         Vector3 p = this.transform.position;
-        p.y += move.y;
+        p.y += move[option].y;
         this.transform.position = p;
 
     }
@@ -62,7 +64,7 @@ public class BuildingMoverScript : MonoBehaviour
     public void MoveDown()
     {
         Vector3 p = this.transform.position;
-        p.y -= move.y;
+        p.y -= move[option].y;
         this.transform.position = p;
 
     }
