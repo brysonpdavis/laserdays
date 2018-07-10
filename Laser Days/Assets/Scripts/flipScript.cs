@@ -22,7 +22,7 @@ public class flipScript : MonoBehaviour {
 	}
 
 	void Update () {
-    if (Input.GetMouseButtonDown(1))
+    if (Input.GetMouseButtonDown(0))
 		{
 			GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
 			RaycastManager rm = GetComponent<RaycastManager>();

@@ -61,7 +61,7 @@ public class RaycastManager : MonoBehaviour {
 
                 // SELECT ITEM: 
                 // if item boosts charge, add value to boost on right click
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButtonDown(1))
                 {
                     if (ip.boost)
                     {
