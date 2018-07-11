@@ -91,7 +91,7 @@ public class flipScript : MonoBehaviour {
 			Flip(obj);
 		}
 
-		if (!Input.GetMouseButton(0))
+		if (!Input.GetMouseButton(1))
 		{
 			foreach (GameObject obj in objs)
 			{
