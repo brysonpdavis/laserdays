@@ -18,10 +18,10 @@ public class ChargingZone : MonoBehaviour
                 {
                     playerCharge = col.GetComponent<PlayerCharge>();
                 }
-                if (playerCharge.chargeSlider.value < playerCharge.maxCharge)
+                if (playerCharge.currentCharge < playerCharge.maxCharge)
                 {
-                    playerCharge.chargeSlider.value += chargeRate;
-                    playerCharge.chargeValue.text = playerCharge.chargeSlider.value.ToString();
+                    playerCharge.currentCharge += chargeRate;
+                    playerCharge.chargeValue.text = playerCharge.currentCharge.ToString();
 
                     playerCharge.UpdatePredictingSlider();
 

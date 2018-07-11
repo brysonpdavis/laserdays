@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 		PlayerData data = new PlayerData();
-		data.charge = playercharge.chargeSlider.value ;
+        data.charge = playercharge.currentCharge;
 		bf.Serialize(file, data);
 		file.Close();
 	}
@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour {
 			FileStream file= File.Open(Application. persistentDataPath +"/playerInfo.dat", FileMode.Open);
 			PlayerData data =(PlayerData)bf.Deserialize(file);
 			file.Close();
-			playercharge.chargeSlider.value = data.charge;
+            playercharge.currentCharge = (int)data.charge;
 		}
 	}
 }

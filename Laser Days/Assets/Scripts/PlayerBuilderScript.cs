@@ -21,9 +21,9 @@ public class PlayerBuilderScript : MonoBehaviour
         if (Player.tag == "Player")
         {
             int resetCharge = Player.GetComponentInParent<PlayerCharge>().maxCharge;
-            Player.GetComponent<PlayerCharge>().chargeSlider.value = resetCharge;
+            Player.GetComponent<PlayerCharge>().currentCharge = resetCharge;
             Player.GetComponent<PlayerCharge>().chargeValue.text = resetCharge.ToString();
-            Player.GetComponent<PlayerCharge>().predictingSlider.value = resetCharge;
+            Player.GetComponent<PlayerCharge>().potentialCharge = resetCharge;
         }
     }
 }
