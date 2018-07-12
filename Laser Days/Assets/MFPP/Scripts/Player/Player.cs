@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -539,11 +540,16 @@ namespace MFPP
             BeforeUpdate(); // Call before update (along with its modules)
 
             DoMouse(); // Mouse related
-            DoMovement(); // Movement related
+            // DoMovement(); // Movement related
             UpdateHeight(); // Update the height
             DoFootsteps(); // Footsteps related
 
             AfterUpdate(); // Call after update (along with its modules)
+        }
+
+        private void FixedUpdate()
+        {
+            DoMovement();
         }
 
         /// <summary>
@@ -607,18 +613,18 @@ namespace MFPP
                 if (targetNormalizedDesiredMovement.magnitude > 1f) // If the magnitude of our raw axis input is bigger than 1, normalize it (This avoids extra speed when moving diagonally)
                     targetNormalizedDesiredMovement.Normalize();
 
-                NormalizedDesiredMovement = Vector3.Lerp(NormalizedDesiredMovement, targetNormalizedDesiredMovement, Time.deltaTime * speedRate); // Smooth the movement by the speed rate
+                NormalizedDesiredMovement = Vector3.Lerp(NormalizedDesiredMovement, targetNormalizedDesiredMovement, Time.fixedDeltaTime * speedRate); // Smooth the movement by the speed rate
                 NormalizedDesiredWorldMovement = transform.TransformVector(NormalizedDesiredMovement); // Convert from local space to world space
                 DesiredMovement = NormalizedDesiredMovement * Movement.Speed; // Multiply by the speed
 
                 if (IsCrouching) // If crouching, apply smooth crouch speed multiplier
                     CurrentSpeedMultiplier = Mathf.Lerp(CurrentSpeedMultiplier, Movement.Crouch.SpeedMultiplier,
-                        Time.deltaTime * Movement.Deceleration);
+                        Time.fixedDeltaTime * Movement.Deceleration);
                 else if (IsSprinting) // If crouching, apply smooth crouch speed multiplier
                     CurrentSpeedMultiplier = Mathf.Lerp(CurrentSpeedMultiplier, Movement.Sprint.SpeedMultiplier,
-                        Time.deltaTime * Movement.Acceleration);
+                        Time.fixedDeltaTime * Movement.Acceleration);
                 else // Otherwise, apply smooth base speed multiplier
-                    CurrentSpeedMultiplier = Mathf.Lerp(CurrentSpeedMultiplier, 1f, Time.deltaTime * Movement.Acceleration);
+                    CurrentSpeedMultiplier = Mathf.Lerp(CurrentSpeedMultiplier, 1f, Time.fixedDeltaTime * Movement.Acceleration);
 
                 Ray slopeRay = new Ray(transform.position + Vector3.up * Radius, Vector3.down);
                 RaycastHit slopeHit;
@@ -626,11 +632,11 @@ namespace MFPP
                 {
                     float angle = Mathf.Clamp(Vector3.Angle(Vector3.up, slopeHit.normal), 0f, 90f);
                     float lerp = Mathf.InverseLerp(0, SlopeLimit, angle);
-                    CurrentSlopeSpeedMultiplier = Mathf.Lerp(CurrentSlopeSpeedMultiplier, Movement.SlopeSpeedMultiplierCurve.Evaluate(lerp), Time.deltaTime * Movement.Acceleration); 
+                    CurrentSlopeSpeedMultiplier = Mathf.Lerp(CurrentSlopeSpeedMultiplier, Movement.SlopeSpeedMultiplierCurve.Evaluate(lerp), Time.fixedDeltaTime * Movement.Acceleration); 
                 }
                 else
                 {
-                    CurrentSlopeSpeedMultiplier = Mathf.Lerp(CurrentSlopeSpeedMultiplier, Movement.SlopeSpeedMultiplierCurve.Evaluate(0f), Time.deltaTime * Movement.Acceleration);
+                    CurrentSlopeSpeedMultiplier = Mathf.Lerp(CurrentSlopeSpeedMultiplier, Movement.SlopeSpeedMultiplierCurve.Evaluate(0f), Time.fixedDeltaTime * Movement.Acceleration);
                 }
 
                 DesiredMovement *= CurrentSpeedMultiplier * CurrentSlopeSpeedMultiplier; // Apply speed multiplier to desired movement
@@ -649,13 +655,15 @@ namespace MFPP
                     Ray r = new Ray(transform.position + Vector3.up * (Radius * SlopeRadiusMultiplier), Vector3.down);
                     if (Physics.SphereCast(r, Radius * SlopeRadiusMultiplier, StepOffset + SkinWidth, CollisionLayers))
                     {
-                        FinalMovement += Vector3.down * (StepOffset / Time.deltaTime);
+                        FinalMovement += Vector3.down * (StepOffset / Time.fixedDeltaTime);
                         IsStepOffsetting = true;
                     }
                 }
 
-                if (IsJumping) // Jump
+                if (IsJumping) { // Jump 
                     FinalMovement += Vector3.up * Movement.Jump.Power;
+                    StartCoroutine(PrintJumpHeight());
+                }
             }
             else // Not grounded, in the air
             {
@@ -664,7 +672,7 @@ namespace MFPP
 
                 if (JustAired && !IsJumping && KinematicMovement.sqrMagnitude <= 0 && OldKinematicMovement.sqrMagnitude <= 0)
                 {
-                    FinalMovement.Set(FinalMovement.x, Physics.gravity.y * Time.deltaTime, FinalMovement.z);
+                    FinalMovement.Set(FinalMovement.x, Physics.gravity.y * Time.fixedDeltaTime, FinalMovement.z);
                 }
 
                 if (Movement.AllowMovement && Movement.AirControl) // Air control
@@ -677,39 +685,39 @@ namespace MFPP
 
                         Vector3 finalStrafe = AirAccelerate(wishDir, PlanarVelocity, Movement.AirAccelerate);
 
-                        FinalMovement += finalStrafe * Time.deltaTime; // Apply smart strafe
+                        FinalMovement += finalStrafe * Time.fixedDeltaTime; // Apply smart strafe
                     }
 
                     if (Movement.VerticalStrafing) // Vertical strafing
                     {
                         Vector3 vertical = transform.TransformVector(0, 0, GetCurrentAxis("Vertical")) * Movement.StrafingSpeed;
-                        FinalMovement += vertical * Time.deltaTime;
+                        FinalMovement += vertical * Time.fixedDeltaTime;
                     }
 
                     if (Movement.HorizontalStrafing) // Horizontal strafing
                     {
                         Vector3 horizontal = transform.TransformVector(GetCurrentAxis("Horizontal"), 0, 0) * Movement.StrafingSpeed;
-                        FinalMovement += horizontal * Time.deltaTime;
+                        FinalMovement += horizontal * Time.fixedDeltaTime;
                     }
                 }
 
                 if (ForceBuffer.sqrMagnitude > 0 || ImpulseBuffer.sqrMagnitude > 0) // Apply forces and impulses in the air
                 {
-                    FinalMovement += ForceBuffer * Time.deltaTime;
+                    FinalMovement += ForceBuffer * Time.fixedDeltaTime;
                     FinalMovement += ImpulseBuffer;
                 }
 
                 if (OldIsGrounded && OldKinematicMovement.sqrMagnitude > 0 && OldIsStepOffsetting) // If we had negative kinematic step offset and we just aired, cancel it
                 {
-                    FinalMovement += -Vector3.down * (StepOffset / Time.deltaTime);
+                    FinalMovement += -Vector3.down * (StepOffset / Time.fixedDeltaTime);
                 }
 
-                FinalMovement += Physics.gravity * Time.deltaTime; // Apply gravity
+                FinalMovement += Physics.gravity * Time.fixedDeltaTime; // Apply gravity
             }
 
             float oldCameraHeight = CurrentCameraHeight; // Last frame camera height
-            CurrentHeight = Mathf.Lerp(CurrentHeight, IsCrouching ? Movement.Crouch.CrouchHeight : Main.Height, Time.deltaTime * Movement.Crouch.CrouchingSpeed); // Smooth current height updating.
-            CurrentCameraHeight = Mathf.Lerp(CurrentCameraHeight, IsCrouching ? Movement.Crouch.CrouchCameraHeight : Main.CameraHeight, Time.deltaTime * Movement.Crouch.CrouchingSpeed); // Smooth current camera height updating.
+            CurrentHeight = Mathf.Lerp(CurrentHeight, IsCrouching ? Movement.Crouch.CrouchHeight : Main.Height, Time.fixedDeltaTime * Movement.Crouch.CrouchingSpeed); // Smooth current height updating.
+            CurrentCameraHeight = Mathf.Lerp(CurrentCameraHeight, IsCrouching ? Movement.Crouch.CrouchCameraHeight : Main.CameraHeight, Time.fixedDeltaTime * Movement.Crouch.CrouchingSpeed); // Smooth current camera height updating.
 
             if (Movement.Crouch.AllowCrouchJump && IsFalling) // Apply crouch jump vertical position delta based on camera height delta (oldCameraHeight - CurrentCameraHeight)
             {
@@ -727,16 +735,16 @@ namespace MFPP
 
             if (KinematicMovement.sqrMagnitude > 0f && !IsJumping)
             {
-                transform.position += KinematicMovement * Time.deltaTime;
+                transform.position += KinematicMovement * Time.fixedDeltaTime;
 
                 Ray r = new Ray(transform.position + Vector3.up * (Radius * SlopeRadiusMultiplier), Vector3.down);
                 if (IsGrounded && Physics.SphereCast(r, Radius * SlopeRadiusMultiplier, StepOffset + SkinWidth, CollisionLayers)) // Negative step offset to stay properly on moving kinematic platforms
                 {
-                    FinalMovement += Vector3.down * (StepOffset / Time.deltaTime);
+                    FinalMovement += Vector3.down * (StepOffset / Time.fixedDeltaTime);
                     IsStepOffsetting = true;
                 }
 
-                TargetLookAngles += Vector2.right * (KinematicAngles.y * Mathf.Rad2Deg) * Time.deltaTime; // Apply look angles offset on rotating kinematic movement (So that camera rotates along)
+                TargetLookAngles += Vector2.right * (KinematicAngles.y * Mathf.Rad2Deg) * Time.fixedDeltaTime; // Apply look angles offset on rotating kinematic movement (So that camera rotates along)
             }
 
             TotalVelocity = Velocity + KinematicMovement; // Update total velocity property
@@ -760,8 +768,8 @@ namespace MFPP
             {
                 int passes = Collisions.ContinuousCollisionDetectionPasses; // Passes amount
 
-                float strength = Time.fixedDeltaTime / Time.deltaTime * (Collisions.ContinuousCollisionDetectionStrength); // Strength of detection (How far we will move for the detection)
-                float amountOfPhysicsUpdateRatio = Mathf.Clamp(Time.deltaTime / Time.fixedDeltaTime, 1f, float.MaxValue);
+                float strength = Time.fixedDeltaTime / Time.fixedDeltaTime * (Collisions.ContinuousCollisionDetectionStrength); // Strength of detection (How far we will move for the detection)
+                float amountOfPhysicsUpdateRatio = Mathf.Clamp(Time.fixedDeltaTime / Time.fixedDeltaTime, 1f, float.MaxValue);
 
                 for (int i = 0; i < passes; i++)
                 {
@@ -795,11 +803,26 @@ namespace MFPP
                 FinalMovement = new Vector3(planarFinalMovement.x, FinalMovement.y, planarFinalMovement.z); // Clamp the x and z values of FinalMovement to the maximum speed
             }
 
-            CharacterController.Move(FinalMovement * Time.deltaTime); // Move the player
+            CharacterController.Move(FinalMovement * Time.fixedDeltaTime); // Move the player
 
             if (AfterFinalMovement != null) // After final movement event trigger
                 AfterFinalMovement(FinalMovement);
         }
+
+        IEnumerator PrintJumpHeight() {
+            float startingHeight = transform.position.y;
+            float currentHeight = startingHeight;
+            float previousHeight = currentHeight - 1f;
+
+            while (previousHeight <= currentHeight) {
+                yield return null; // skip a frame
+                previousHeight = currentHeight;
+                currentHeight = transform.position.y;
+            }
+
+            Debug.Log("Jump Height: " + (previousHeight - startingHeight));
+        }
+
         /// <summary>
         /// Update the height of the <see cref="Player"/>.
         /// </summary>
