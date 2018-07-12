@@ -12,6 +12,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
         platform.GetComponent<PlatformMover>().MovePlatform(start.position, end.position, time);
     }
 }
