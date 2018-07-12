@@ -662,7 +662,7 @@ namespace MFPP
 
                 if (IsJumping) { // Jump 
                     FinalMovement += Vector3.up * Movement.Jump.Power;
-                    StartCoroutine(PrintJumpHeight());
+                   // StartCoroutine(PrintJumpHeight());
                 }
             }
             else // Not grounded, in the air

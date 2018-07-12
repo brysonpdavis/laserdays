@@ -40,7 +40,7 @@ public class RaycastManager : MonoBehaviour {
        
         if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
-            if (hit.collider.CompareTag("Clickable"))
+            if (hit.collider.CompareTag("Clickable") || hit.collider.CompareTag("Sokoban"))
             {
                 CrosshairActive();
                 raycastedObj = hit.collider.gameObject;
