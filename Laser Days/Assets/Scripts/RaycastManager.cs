@@ -73,7 +73,7 @@ public class RaycastManager : MonoBehaviour {
                         if (raycastedObj.GetComponent<ItemProperties>().selected)
                         {
                             selectedObjs.Remove(raycastedObj);
-                            RemoveFromList(raycastedObj);
+                            RemoveFromList(raycastedObj, false);
                         }
                         else 
                         {
@@ -117,13 +117,20 @@ public class RaycastManager : MonoBehaviour {
         pc.UpdatePredictingSlider();
     }
 
-    public void RemoveFromList(GameObject obj)
+    public void RemoveFromList(GameObject obj, bool asGroup) 
     {
+
+        //added asGroup bool to check if player is removing single objects or multiple
+        //removing multiple at once shouldn't update the predicting slider at all, it's done separately on the flip
+
         ItemProperties ip = obj.GetComponent<ItemProperties>();
         obj.GetComponent<ItemProperties>().selected = false;
-        obj.GetComponent<Renderer>().material.shader = shaderoriginal; 
+        obj.GetComponent<Renderer>().material.shader = shaderoriginal;
         //change shader
-        pc.UpdatePredictingSlider();
+        if (!asGroup)
+        {
+            pc.UpdatePredictingSlider();
+        }
     } 
 
     int SumList(IList<GameObject> objs)
