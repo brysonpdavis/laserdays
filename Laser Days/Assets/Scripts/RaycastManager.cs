@@ -71,9 +71,17 @@ public class RaycastManager : MonoBehaviour {
                     if (ip.objectCharge)
                     {
 
+                        //if the object is already a selected object:
                         if (raycastedObj.GetComponent<ItemProperties>().selected)
                         {
+                            //unselect it
                             selectedObjs.Remove(raycastedObj);
+
+                            //put the object back to its original shader
+                            if (this.gameObject.layer == 15) { raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; }
+                            else if (this.gameObject.layer == 16) { raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader; }
+
+                            //remove it from list
                             RemoveFromList(raycastedObj, false);
                         }
                         else 

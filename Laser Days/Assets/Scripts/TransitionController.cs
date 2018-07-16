@@ -44,7 +44,6 @@ public class TransitionController: MonoBehaviour
             GameObject heldObj = player.GetComponent<MFPP.Modules.PickUpModule>().heldObject;
             RaycastManager rm = player.GetComponent<RaycastManager>();
             bool direction = player.GetComponent<flipScript>().space;
-            Debug.Log("player's direction: " + direction);
 
             if (heldObj)
             {
@@ -74,7 +73,10 @@ public class TransitionController: MonoBehaviour
 
             foreach (Transition albo in components)
             {
-                albo.Flip(0f, .4f);
+                if (!albo.GetComponentInParent<ItemProperties>().selected)
+                {
+                    albo.Flip(0f, .4f);
+                }
 
             }
         }
@@ -82,8 +84,10 @@ public class TransitionController: MonoBehaviour
 
             foreach (Transition albo in components)
             {
-                albo.Flip(1f, .4f); //means player has switched to 'real world': material should transition from current value to zero
-
+                if (!albo.GetComponentInParent<ItemProperties>().selected)
+                {
+                    albo.Flip(1f, .4f); //means player has switched to 'laser world': material should transition from current value to 1
+                }
             }
 
         }

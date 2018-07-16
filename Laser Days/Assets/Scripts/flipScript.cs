@@ -75,30 +75,54 @@ public class flipScript : MonoBehaviour {
 
         RaycastManager rm = GetComponent<RaycastManager>();
 
-        //check which layer the player has moved to, and then change object's layer, shader, and value
+        //for objects not being currently held: 
+        if (!obj.Equals(GetComponent<MFPP.Modules.PickUpModule>().heldObject)){
+            //check which layer the player has moved to, and then change object's layer, shader, and value
 
-        GameObject player = this.gameObject;
-        if (player.layer == 15){ //if player is now in laser world
-            obj.layer = 10; //set object to laser layer
+            GameObject player = this.gameObject;
+                if (player.layer == 15)
+                { //if player is now in laser world
+                    obj.layer = 10; //set object to laser layer
 
-            //TODO: change its parent gameobject
+                    //TODO: change its parent gameobject
+
+                    obj.GetComponent<Renderer>().material.shader = rm.laserWorldShader;  //shader change is now happening in flip script
+                    obj.GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
+
+                }
+
+                else if (player.layer == 16)
+                { //if player is now in real world
+                    obj.layer = 11; //set object to laser layer
+
+                    //TODO: change its parent gameobject
+
+                    obj.GetComponent<Renderer>().material.shader = rm.realWorldShader;  //shader change is now happening in flip script
+                    obj.GetComponent<Transition>().SetStart(0f); //set it fully on for real world
+                }
+            }
+        //if the object IS being held, we do the same thing, just without switching the shader
+        else {
             
-            obj.GetComponent<Renderer>().material.shader = rm.laserWorldShader;  //shader change is now happening in flip script
-            obj.GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
+            GameObject player = this.gameObject;
+            if (player.layer == 15)
+            { //if player is now in laser world
+                obj.layer = 10; //set object to laser layer
+
+                //TODO: change its parent gameobject
+
+            }
+
+            else if (player.layer == 16)
+            { //if player is now in real world
+                obj.layer = 11; //set object to laser layer
+
+                //TODO: change its parent gameobject
+
+            }
 
         }
 
-
-        else if (player.layer == 16)
-        { //if player is now in real world
-            obj.layer = 11; //set object to laser layer
-
-            //TODO: change its parent gameobject
-
-            obj.GetComponent<Renderer>().material.shader = rm.realWorldShader;  //shader change is now happening in flip script
-            obj.GetComponent<Transition>().SetStart(0f); //set it fully on for real world
-
-        }
 
 	}
 

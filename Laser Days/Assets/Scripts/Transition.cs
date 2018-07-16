@@ -45,6 +45,7 @@ public class Transition : MonoBehaviour
 
 
     //use setstart to be sure that when gameobjects are initialized they start with dissolve amount that corresponds to the world that player is in
+    //useful when switching an object, immediately sets it without transition
     public void SetStart (float value){
         material.SetFloat("_DissolveAmount", value);
 
