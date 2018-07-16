@@ -101,7 +101,7 @@ public class flipScript : MonoBehaviour {
                     obj.GetComponent<Transition>().SetStart(0f); //set it fully on for real world
                 }
             }
-        //if the object IS being held, we do the same thing, just without switching the shader
+        //if the object IS being held, we do the same thing, just change layer without switching the shader (which will get switched on drop)
         else {
             
             GameObject player = this.gameObject;

@@ -132,7 +132,6 @@ public class RaycastManager : MonoBehaviour {
         //added asGroup bool to check if player is removing single objects or multiple
         //removing multiple at once shouldn't update the predicting slider at all, it's done separately on the flip
 
-        ItemProperties ip = obj.GetComponent<ItemProperties>();
         obj.GetComponent<ItemProperties>().selected = false;
 
         //obj.GetComponent<Renderer>().material.shader = shaderoriginal;  //shader change is now happening in flip script
