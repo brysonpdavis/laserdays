@@ -7,13 +7,14 @@ public class flipScript : MonoBehaviour {
 	private float newX;
 	[SerializeField] private int envSize = 100;
 	[SerializeField] public bool beginningSpace;
-	private bool space;
+	public bool space;
 	private PlayerCharge pc;
 
     //sounds
     private AudioSource audioSource;
     public AudioClip[] flip;
     private AudioClip flipClip;
+
 
 	void Start () {
 		space = beginningSpace;
@@ -50,38 +51,55 @@ public class flipScript : MonoBehaviour {
 	}
 
 	void FlipPlayerAndThings (GameObject player, GameObject held, IList<GameObject> things) {
-		if (held)
+	
+        space = !space;
+
+        //change the layer that the player is on, for changing its collision detection
+        if (space)
+        { player.layer = 16; } //set player to real world
+        else { player.layer = 15; } //set player to laser world
+
+
+        if (held)
 			Flip(held);
 		FlipList(things);
-		Flip(player);
+		//Flip(player); //switching layers flips player now.
 
-		space = !space;
+
+
 		// Make sure that the list of objects is flipped before the player
 	}
 
 	void Flip (GameObject obj)
 	{
-		// position of gameobject being flipped
-		pos = obj.transform.position;
 
-		// if in the positive space, add envSize to the new X coordinate
-		if (space) {
-			newX = pos.x - envSize;
-		}
-		// otherwise subtract it
-		else {
-			newX = pos.x + envSize;
-		}
-		obj.transform.position = new Vector3(newX, pos.y, pos.z);
+        RaycastManager rm = GetComponent<RaycastManager>();
 
-		if (flip.Length > 0)
-		{
-			//play sound from range
-			int index = Random.Range(0, flip.Length - 1);
-			flipClip = flip[index];
-			audioSource.clip = flipClip;
-			audioSource.Play();
-		}
+        //check which layer the player has moved to, and then change object's layer, shader, and value
+
+        GameObject player = this.gameObject;
+        if (player.layer == 15){ //if player is now in laser world
+            obj.layer = 10; //set object to laser layer
+
+            //TODO: change its parent gameobject
+            
+            obj.GetComponent<Renderer>().material.shader = rm.laserWorldShader;  //shader change is now happening in flip script
+            obj.GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
+
+        }
+
+
+        else if (player.layer == 16)
+        { //if player is now in real world
+            obj.layer = 11; //set object to laser layer
+
+            //TODO: change its parent gameobject
+
+            obj.GetComponent<Renderer>().material.shader = rm.realWorldShader;  //shader change is now happening in flip script
+            obj.GetComponent<Transition>().SetStart(0f); //set it fully on for real world
+
+        }
+
 	}
 
 	void FlipList (IList<GameObject> objs)

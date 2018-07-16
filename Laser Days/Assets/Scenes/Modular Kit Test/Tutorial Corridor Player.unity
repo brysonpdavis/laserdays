@@ -880,6 +880,10 @@ Prefab:
       propertyPath: orthographic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1648359132011738, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 81792671302470794, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
@@ -1366,11 +1370,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c9f99c3e9fa41acbe4b4a1e0491234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeSlider: {fileID: 816981525}
-  predictingSlider: {fileID: 1420221358}
   chargeValue: {fileID: 1718301292}
   maxCharge: 0
+  currentCharge: 0
+  potentialCharge: 0
   flipCost: 0
+  radialSlider: {fileID: 0}
+  predictiveRadial: {fileID: 0}
 --- !u!114 &1384622082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1384,6 +1390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   envSize: 100
   beginningSpace: 0
+  space: 0
   flip:
   - {fileID: 8300000, guid: 779bb7354fb6f684ca679acb20602ee0, type: 3}
   - {fileID: 8300000, guid: 29c4e476a8294b247bfcc6c2c51385de, type: 3}

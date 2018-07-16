@@ -7,8 +7,15 @@ public class RaycastManager : MonoBehaviour {
 
     public GameObject raycastedObj;
     public IList<GameObject> selectedObjs;
+
+    //public Shader shaderoriginal;
+
+    //shaders
     public Shader shaderselected;
-    public Shader shaderoriginal;
+    public Shader realWorldShader;
+    public Shader laserWorldShader;
+
+
     private Color32 reticleColor = new Color32(255,222,77,255); //new Vector4(255, 222, 77, 1);
 
 
@@ -35,28 +42,22 @@ public class RaycastManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (this.gameObject.layer == 15) { newLayerMask.value = 1024; } //layermask value of layer 10 is 1024
+        else if (this.gameObject.layer == 16) { newLayerMask.value = 2048; } //layermask value of layer 11 is 2048
+
         RaycastHit hit;
         Vector3 fwd = mainCam.transform.TransformDirection(Vector3.forward);
-       
-        if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
+
+
+       if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
+            
             if (hit.collider.CompareTag("Clickable") || hit.collider.CompareTag("Sokoban"))
             {
                 CrosshairActive();
                 raycastedObj = hit.collider.gameObject;
                 ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
-               
-                //sets its position to square's
-                // itemNameText.transform.position = mainCam.WorldToScreenPoint(raycastedObj.transform.position);
-
-                // pick item up on left click [CURRENTLY COVERED BY NEW SCRIPT, CAN UN-COMMENT THIS IF NEEDED]
-               /*
-                if (Input.GetMouseButtonDown(0))
-                {
-                   // raycastedObj.GetComponent<ThrowObject>().PickUp();
-                }
-                */
 
 
                 // SELECT ITEM: 
@@ -125,8 +126,9 @@ public class RaycastManager : MonoBehaviour {
 
         ItemProperties ip = obj.GetComponent<ItemProperties>();
         obj.GetComponent<ItemProperties>().selected = false;
-        obj.GetComponent<Renderer>().material.shader = shaderoriginal;
-        //change shader
+
+        //obj.GetComponent<Renderer>().material.shader = shaderoriginal;  //shader change is now happening in flip script
+
         if (!asGroup)
         {
             pc.UpdatePredictingSlider();
