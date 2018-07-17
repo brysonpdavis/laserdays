@@ -31,7 +31,7 @@ public class Transition : MonoBehaviour
         //objects that are selected will be flipped and shouldn't have any animation, but should change their parent gameobject
 
         
-        float start = material.GetFloat("_DissolveAmount");
+        float start = material.GetFloat("_TransitionState");
 
         if (start<0f|| start>1f){
             //means that there's a transition animation already going. we need to be sure to stop it before moving on
@@ -47,7 +47,7 @@ public class Transition : MonoBehaviour
     //use setstart to be sure that when gameobjects are initialized they start with dissolve amount that corresponds to the world that player is in
     //useful when switching an object, immediately sets it without transition
     public void SetStart (float value){
-        material.SetFloat("_DissolveAmount", value);
+        material.SetFloat("_TransitionState", value);
 
     }
 
@@ -67,7 +67,7 @@ public class Transition : MonoBehaviour
             ratio = elapsedTime / duration;
             float value = Mathf.Lerp(startpoint, endpoint, ratio);
 
-            material.SetFloat("_DissolveAmount", value);
+            material.SetFloat("_TransitionState", value);
             RendererExtensions.UpdateGIMaterials(mRenderer);
 
             yield return null;

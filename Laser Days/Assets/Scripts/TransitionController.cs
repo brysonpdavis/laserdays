@@ -7,7 +7,8 @@ public class TransitionController: MonoBehaviour
 
     public PlayerCharge pc;
     public GameObject player;
-    public Component[] components;
+    public float speed = 1f;
+    private Component[] components;
 
 
     // Use this for initialization
@@ -73,9 +74,9 @@ public class TransitionController: MonoBehaviour
 
             foreach (Transition albo in components)
             {
-                if (!albo.GetComponentInParent<ItemProperties>().selected)
+                if ((!albo.GetComponentInParent<ItemProperties>()) || !albo.GetComponentInParent<ItemProperties>().selected)
                 {
-                    albo.Flip(0f, .4f);
+                    albo.Flip(0f, speed);
                 }
 
             }
@@ -84,9 +85,9 @@ public class TransitionController: MonoBehaviour
 
             foreach (Transition albo in components)
             {
-                if (!albo.GetComponentInParent<ItemProperties>().selected)
+                if ((!albo.GetComponentInParent<ItemProperties>()) || !albo.GetComponentInParent<ItemProperties>().selected)
                 {
-                    albo.Flip(1f, .4f); //means player has switched to 'laser world': material should transition from current value to 1
+                    albo.Flip(1f, speed); //means player has switched to 'laser world': material should transition from current value to 1
                 }
             }
 
