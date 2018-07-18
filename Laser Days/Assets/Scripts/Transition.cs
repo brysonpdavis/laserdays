@@ -6,6 +6,7 @@ public class Transition : MonoBehaviour
 {
     Renderer mRenderer;
     Material material;
+    public float ScaleSpeed= 1f;
    
     private IEnumerator flipTransition;
 
@@ -39,7 +40,7 @@ public class Transition : MonoBehaviour
         }
 
         //start new direction from where we've left off but in the direction we've specified with "end"
-        flipTransition = flipTransitionRoutine(start, end, duration);
+        flipTransition = flipTransitionRoutine(start, end, duration/ScaleSpeed);
         StartCoroutine(flipTransition);
     }
 

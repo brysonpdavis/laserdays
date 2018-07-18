@@ -7,7 +7,7 @@ public class TransitionController: MonoBehaviour
 
     public PlayerCharge pc;
     public GameObject player;
-    public float speed = .1f;
+    public float speed = .4f;
     private Component[] components;
 
 
