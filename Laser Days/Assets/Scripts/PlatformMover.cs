@@ -17,6 +17,8 @@ public class PlatformMover : MonoBehaviour {
             transform.position = Vector3.Lerp(startPos, endPos, ratio);
             yield return null;
         }
+        transform.position = endPos;
+        yield return null;
     }
 
     public void MovePlatform(Vector3 startPos, Vector3 endPos, float duration)
