@@ -22,7 +22,7 @@ public class GlobalTransitionScript : MonoBehaviour {
         components = GetComponentsInChildren<Transition>();
             foreach (Transition albo in components)
             {
-            Material material = albo.GetComponent<Renderer>().material;
+            Material material = albo.GetComponent<Renderer>().sharedMaterial;
             material.SetFloat("_TransitionState", 0);
         
             }   
@@ -35,7 +35,7 @@ public class GlobalTransitionScript : MonoBehaviour {
         components = GetComponentsInChildren<Transition>();
         foreach (Transition albo in components)
         {
-            Material material = albo.GetComponent<Renderer>().material;
+            Material material = albo.GetComponent<Renderer>().sharedMaterial;
             material.SetFloat("_TransitionState", 1);
         }
 
@@ -46,7 +46,7 @@ public class GlobalTransitionScript : MonoBehaviour {
         components = GetComponentsInChildren<Transition>();
         foreach (Transition albo in components)
         {
-            Material material = albo.GetComponent<Renderer>().material;
+            Material material = albo.GetComponent<Renderer>().sharedMaterial;
 
             //set all real world objects to visible
             if (albo.gameObject.layer == 11) {
@@ -64,6 +64,22 @@ public class GlobalTransitionScript : MonoBehaviour {
             {
                 material.SetFloat("_TransitionState", .5f);
             }
+
+            //SETTING LADDERS
+
+
+            //realworld ladders
+            if (albo.gameObject.layer == 18)
+            {
+                material.SetFloat("_TransitionState", 0);
+            }
+
+            //laserworld ladders
+            if (albo.gameObject.layer == 19)
+            {
+                material.SetFloat("_TransitionState", 1);
+            }
+
 
         }
 
