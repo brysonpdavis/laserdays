@@ -42,7 +42,7 @@ public class RaycastManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (this.gameObject.layer == 15) { newLayerMask.value = 1024; } //layermask value of layer 10 is 1024
+        if (this.gameObject.layer == 15) { newLayerMask.value = 1024; } //layermask value of layer 10 is 1024 (2^10)
         else if (this.gameObject.layer == 16) { newLayerMask.value = 2048; } //layermask value of layer 11 is 2048
 
         RaycastHit hit;

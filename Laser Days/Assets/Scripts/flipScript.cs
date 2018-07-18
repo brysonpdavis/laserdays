@@ -18,6 +18,13 @@ public class flipScript : MonoBehaviour {
 
 	void Start () {
 		space = beginningSpace;
+
+        //make sure player is seeing ladders in correct world
+        if (space)
+        { GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; } //only see ladders in real world
+            else { GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; } //only see ladders in laser world
+
+
 		pc = GetComponent<PlayerCharge>();
         audioSource = gameObject.GetComponent<AudioSource>();
 	}
@@ -56,13 +63,20 @@ public class flipScript : MonoBehaviour {
 
         //change the layer that the player is on, for changing its collision detection
         if (space)
-        { player.layer = 16; } //set player to real world
-        else { player.layer = 15; } //set player to laser world
+        { player.layer = 16;  //set player to real world
+                GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
+        } 
+        else { player.layer = 15; //set player to laser world
+            GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
+        } 
 
 
         if (held)
 			Flip(held);
 		FlipList(things);
+
+
+        //flipping the ladder raycast
 		//Flip(player); //switching layers flips player now.
 
 
