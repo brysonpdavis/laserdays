@@ -245,7 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isMainScene: 0
   _sceneSetup: []
-  _thisScenePath: Assets/Scenes/Transition/Transition_Player.unity
+  _thisScenePath: Assets/Scenes/Default Scene/Default_Main_Player.unity
 --- !u!4 &918362978
 Transform:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.z
@@ -395,16 +395,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1681292830342284, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_Layer
-      value: 15
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
         type: 2}
       propertyPath: footstepSettings.is3D
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1648359132011738, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
-      propertyPath: m_Layer
-      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
@@ -460,9 +456,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38589a58dd1ad4468acfc4f0aa1bd8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  envSize: 0
+  envSize: 100
   beginningSpace: 0
-  space: 0
   flip:
   - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
@@ -481,8 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycastedObj: {fileID: 0}
   shaderselected: {fileID: 13, guid: 0000000000000000f000000000000000, type: 0}
-  realWorldShader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
-  laserWorldShader: {fileID: 4800000, guid: 3d6114122fee949428e0b37073b00463, type: 3}
+  shaderoriginal: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   rayLength: 10
   newLayerMask:
     serializedVersion: 2
