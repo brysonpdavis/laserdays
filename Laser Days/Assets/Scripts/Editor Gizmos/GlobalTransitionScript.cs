@@ -54,7 +54,7 @@ public class GlobalTransitionScript : MonoBehaviour {
             }
 
             //set all laser world objects to visible
-            else if (albo.gameObject.layer == 11)
+            else if (albo.gameObject.layer == 10)
             {
                 material.SetFloat("_TransitionState", 1);
             }
