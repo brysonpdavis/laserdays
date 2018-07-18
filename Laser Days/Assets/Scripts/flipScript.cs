@@ -6,7 +6,6 @@ public class flipScript : MonoBehaviour {
 	private Vector3 pos;
 	private float newX;
 	[SerializeField] private int envSize = 100;
-	[SerializeField] public bool beginningSpace;
 	public bool space;
 	private PlayerCharge pc;
 
@@ -16,8 +15,16 @@ public class flipScript : MonoBehaviour {
     private AudioClip flipClip;
 
 
-	void Start () {
-		space = beginningSpace;
+    private void Awake()
+    {
+        if (this.gameObject.layer == 16)
+        {space = true;}
+
+        if (this.gameObject.layer == 15)
+        { space = false; }
+    }
+
+    void Start () {
 
         //make sure player is seeing ladders in correct world
         if (space)
