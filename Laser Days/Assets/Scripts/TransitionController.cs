@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class TransitionController: MonoBehaviour
 {
-
-    public PlayerCharge pc;
-    public GameObject player;
-    public float speed = .1f;
+    
+    private PlayerCharge pc;
+    private GameObject player;
+    public float speed = .4f;
     private Component[] components;
 
 
     // Use this for initialization
     void Start()
     {
+        //automatically set up the player and charge that script will be checking
+
+        player = GameObject.FindWithTag("Player");
+        pc = player.GetComponent<PlayerCharge>();
+
         //make sure all materials are starting on correct transition material based on player
         if (player.layer == 16){ //if player is starting in RW
 
@@ -30,7 +35,6 @@ public class TransitionController: MonoBehaviour
             components = GetComponentsInChildren<Transition>();
             foreach (Transition albo in components)
             {
-                Debug.Log("hello");
                 albo.SetStart(1f);
 
             }   
