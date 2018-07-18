@@ -5,17 +5,6 @@ using UnityEngine;
 public class GlobalTransitionScript : MonoBehaviour {
     private Component[] components;
 
-	// Use this for initialization
-	void Start () {
-
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 
     public void GlobalReal()
     {

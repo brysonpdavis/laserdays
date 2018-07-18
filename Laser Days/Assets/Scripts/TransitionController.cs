@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TransitionController: MonoBehaviour
 {
-
-    public PlayerCharge pc;
-    public GameObject player;
+    
+    private PlayerCharge pc;
+    private GameObject player;
     public float speed = .4f;
     private Component[] components;
 
@@ -14,6 +14,11 @@ public class TransitionController: MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //automatically set up the player and charge that script will be checking
+
+        player = GameObject.FindWithTag("Player");
+        pc = player.GetComponent<PlayerCharge>();
+
         //make sure all materials are starting on correct transition material based on player
         if (player.layer == 16){ //if player is starting in RW
 
