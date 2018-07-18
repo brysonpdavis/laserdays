@@ -30,6 +30,7 @@ public class TransitionController: MonoBehaviour
             components = GetComponentsInChildren<Transition>();
             foreach (Transition albo in components)
             {
+                Debug.Log("hello");
                 albo.SetStart(1f);
 
             }   

@@ -12,7 +12,7 @@ public class Transition : MonoBehaviour
     float offset;
     float speed;
 
-    private void Start()
+    private void Awake()
     {
         mRenderer = GetComponent<Renderer>();
 
