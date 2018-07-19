@@ -296,7 +296,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
         type: 2}
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   envSize: 100
-  beginningSpace: 0
+  space: 0
   flip:
   - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
@@ -476,7 +476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycastedObj: {fileID: 0}
   shaderselected: {fileID: 13, guid: 0000000000000000f000000000000000, type: 0}
-  shaderoriginal: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  realWorldShader: {fileID: 0}
+  laserWorldShader: {fileID: 0}
   rayLength: 10
   newLayerMask:
     serializedVersion: 2
@@ -660,7 +661,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1631172439 stripped
 GameObject:
@@ -780,7 +781,7 @@ Prefab:
     - target: {fileID: 224891512050164634, guid: 165e90ffb1a364294b6d740d840d930e,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224891512050164634, guid: 165e90ffb1a364294b6d740d840d930e,
         type: 2}
@@ -973,7 +974,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1965297122
 GameObject:
@@ -1014,11 +1015,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1965297122}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.35, y: -0.45, z: -67.83}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2082795072 stripped
 MonoBehaviour:
