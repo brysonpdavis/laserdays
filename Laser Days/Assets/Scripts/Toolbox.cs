@@ -10,10 +10,7 @@ public class Toolbox : Singleton<Toolbox> {
  
 	void Awake () {
 		// Your initialization code here
-        realWorldParentObject = GameObject.FindWithTag("Real");
-        laserWorldParentObject = GameObject.FindWithTag("Laser");
-        player  = GameObject.FindWithTag("Player");
-
+        UpdateToolbox();
         DontDestroyOnLoad(this.gameObject);
 	}
  
@@ -35,5 +32,11 @@ public class Toolbox : Singleton<Toolbox> {
     public GameObject GetPlayer()
     {
         return player;
+    }
+    public void UpdateToolbox()
+    {
+        player  = GameObject.FindWithTag("Player");
+        realWorldParentObject = GameObject.FindWithTag("Real");
+        laserWorldParentObject = GameObject.FindWithTag("Laser");        
     }
 }
