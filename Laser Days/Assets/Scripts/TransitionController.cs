@@ -43,7 +43,7 @@ public class TransitionController: MonoBehaviour
 
     }
 
-    void LateUpdate() //doing this in lateUpdate so that we know which world player is in AFTER the switch
+    void Update() //check to make sure the switch is possible (just as player is doing at the same time)
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -55,7 +55,7 @@ public class TransitionController: MonoBehaviour
             {
                 if (pc.Check(heldObj))
                 {
-                    FlipSurrounding(direction);
+                    FlipSurrounding(!direction); //using !direction because we're using the opposite of where player currently is
                 }
 
             }
@@ -63,7 +63,7 @@ public class TransitionController: MonoBehaviour
             {
                 if (pc.CheckPlayerCharge())
                 {
-                    FlipSurrounding(direction);
+                    FlipSurrounding(!direction); //using !direction because we're using the opposite of where player currently is
                 }
             }
         }
