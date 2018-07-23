@@ -16,7 +16,7 @@ public class TransitionController: MonoBehaviour
     {
         //automatically set up the player and charge that script will be checking
 
-        player = GameObject.FindWithTag("Player");
+        player = Toolbox.Instance.GetPlayer();
         pc = player.GetComponent<PlayerCharge>();
 
         //make sure all materials are starting on correct transition material based on player
@@ -43,31 +43,23 @@ public class TransitionController: MonoBehaviour
 
     }
 
-    void Update() //check to make sure the switch is possible (just as player is doing at the same time)
+    void LateUpdate() //check to make sure the switch is possible (just as player is doing at the same time)
     {
+
+
+        bool isFlipped = player.GetComponent<flipScript>().flippedThisFrame;
+        bool direction = player.GetComponent<flipScript>().space;
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject heldObj = player.GetComponent<MFPP.Modules.PickUpModule>().heldObject;
-            RaycastManager rm = player.GetComponent<RaycastManager>();
-            bool direction = player.GetComponent<flipScript>().space;
 
-            if (heldObj)
+            if (isFlipped)
             {
-                if (pc.Check(heldObj))
-                {
-                    FlipSurrounding(!direction); //using !direction because we're using the opposite of where player currently is
-                }
+                FlipSurrounding(direction);
+            }
 
-            }
-            else
-            {
-                if (pc.CheckPlayerCharge())
-                {
-                    FlipSurrounding(!direction); //using !direction because we're using the opposite of where player currently is
-                }
-            }
         }
 
+        isFlipped = false;
     }
 
     void FlipSurrounding(bool direction)

@@ -13,6 +13,7 @@ public class flipScript : MonoBehaviour {
     private AudioSource audioSource;
     public AudioClip[] flip;
     private AudioClip flipClip;
+    public bool flippedThisFrame = false;
 
 	RaycastManager rm;
 
@@ -49,6 +50,7 @@ public class flipScript : MonoBehaviour {
 					pc.ItemInteraction(heldObj); // subtract any charge required
 					FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
 					pc.UpdatePredictingSlider();
+                    flippedThisFrame = true;
 				}
 				else {
 					// make a sound effect letting player
@@ -61,6 +63,7 @@ public class flipScript : MonoBehaviour {
 					pc.PlayerInteraction();
 					FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
 					pc.UpdatePredictingSlider();
+                    flippedThisFrame = true;
 				}
 			}
 		}
