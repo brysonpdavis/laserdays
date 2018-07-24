@@ -164,10 +164,22 @@ public class flipScript : MonoBehaviour {
 	{
 		obj.layer = 10;
 		obj.transform.parent = Toolbox.Instance.GetLaserWorldParent();
+
+        if (obj.CompareTag("Sokoban")){
+            GameObject child = obj.transform.GetChild(0).gameObject;
+            child.layer = 10;
+        }
 	}
 	void SetObjectToReal(GameObject obj)
 	{
 		obj.layer = 11;
 		obj.transform.parent = Toolbox.Instance.GetRealWorldParent();
+ 
+            if (obj.CompareTag("Sokoban")){
+            GameObject child = obj.transform.GetChild(0).gameObject;
+            child.layer = 11;
+        }
+
+
 	}
 }

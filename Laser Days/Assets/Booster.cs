@@ -27,7 +27,5 @@ public class Booster : MonoBehaviour {
         }
 
         other.GetComponent<Rigidbody>().AddForce(transform.up * boostAmount, ForceMode.Impulse);
-        Debug.Log(transform.up * boostAmount);
-
-    }
+}
 }
