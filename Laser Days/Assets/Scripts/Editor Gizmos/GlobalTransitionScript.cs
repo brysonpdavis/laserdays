@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalTransitionScript : MonoBehaviour {
-    private Component[] components;
+    public Component[] components;
 
 
     public void GlobalReal()
