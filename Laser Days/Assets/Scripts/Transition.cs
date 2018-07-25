@@ -6,8 +6,8 @@ public class Transition : MonoBehaviour
 {
     Renderer mRenderer;
     Material material;
-    public float ScaleSpeed= 1f;
-   
+    public float ScaleSpeed = 1f;
+
     private IEnumerator flipTransition;
 
     float offset;
@@ -26,30 +26,35 @@ public class Transition : MonoBehaviour
     }
 
 
-        public void Flip (float end, float duration){
+    public void Flip(float end, float duration)
+    {
 
         //first need to make sure the object isn't already selected before starting any transition
         //objects that are selected will be flipped and shouldn't have any animation, but should change their parent gameobject
 
-        
-        float start = material.GetFloat("_TransitionState");
+        if (material){
+            float start = material.GetFloat("_TransitionState");
 
-        if (start<0f|| start>1f){
+        if (start < 0f || start > 1f)
+        {
             //means that there's a transition animation already going. we need to be sure to stop it before moving on
-            StopCoroutine(flipTransition); 
+            StopCoroutine(flipTransition);
         }
 
         //start new direction from where we've left off but in the direction we've specified with "end"
-        flipTransition = flipTransitionRoutine(start, end, duration/ScaleSpeed);
+        flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);
         StartCoroutine(flipTransition);
     }
-
+}
 
     //use setstart to be sure that when gameobjects are initialized they start with dissolve amount that corresponds to the world that player is in
     //useful when switching an object, immediately sets it without transition
     public void SetStart (float value){
-        material.SetFloat("_TransitionState", value);
 
+        if (material)
+        {
+            material.SetFloat("_TransitionState", value);
+        }
     }
 
 
