@@ -25,8 +25,6 @@ public class PlatformMover : MonoBehaviour {
     {
         if (!(this.transform.position == startPos) && !(this.transform.position == endPos))
         {
-            print("hello!");
-            // StopCoroutine(MovePlatformCoroutine(startPos, endPos, 0));
             StopAllCoroutines();
         }
 
