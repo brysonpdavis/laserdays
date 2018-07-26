@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//keeps everybody moving with the platform so things don't fall off when it's moving quickly
+
 public class PlatformGuard : MonoBehaviour
 {
     private GameObject target = null;

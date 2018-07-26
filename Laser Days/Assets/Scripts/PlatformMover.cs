@@ -23,17 +23,17 @@ public class PlatformMover : MonoBehaviour {
 
     public void MovePlatform(Vector3 startPos, Vector3 endPos, float duration)
     {
-        if (this.transform.position == startPos)
+        if (!(this.transform.position == startPos) && !(this.transform.position == endPos))
         {
-            StartCoroutine(MovePlatformCoroutine(startPos, endPos, duration));
+            print("hello!");
+            // StopCoroutine(MovePlatformCoroutine(startPos, endPos, 0));
+            StopAllCoroutines();
         }
 
-        else if (this.transform.position == endPos){
-            StartCoroutine(MovePlatformCoroutine(endPos, startPos, duration));
+        float actualDuration = (duration * (Vector3.Distance(this.transform.position, endPos)/Vector3.Distance(startPos, endPos)));
+
+        print(actualDuration);
+        StartCoroutine(MovePlatformCoroutine(this.transform.position, endPos, actualDuration));
 
         }
     }
-
-
-
-}
