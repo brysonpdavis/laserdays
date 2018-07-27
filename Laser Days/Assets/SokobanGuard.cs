@@ -18,30 +18,32 @@ public class SokobanGuard : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
+
+        ItemProperties myItemProperties = this.GetComponentInParent<ItemProperties>();
+        ItemProperties otherItemProperties = col.GetComponent<ItemProperties>();
+
         string collisionTag = col.tag;
 
         if (string.Equals(collisionTag, "Sokoban"))
         {
-            if (!col.GetComponent<ItemProperties>().selected)
-            {
-                if (transform.parent.gameObject.Equals(player.GetComponent<MFPP.Modules.PickUpModule>().heldObject))
-                {
-                    player.GetComponent<MFPP.Player>().Movement.AllowMouseMove = false;
-                }
-                target = col.gameObject;
-                target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
-
-                offset = target.transform.position - GetComponentInParent<Transform>().position;
-            }
+            col.transform.SetParent(this.transform.parent);
+           // col.GetComponent<Rigidbody>().isKinematic = true;
+           // col.GetComponent<Rigidbody>().useGravity = false;
+        
         }
-
     }
-
     void OnTriggerExit(Collider col)
     {
-        target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        player.GetComponent<MFPP.Player>().Movement.AllowMouseMove = true;
-        target = null;
+        string collisionTag = col.tag;
+
+        if (string.Equals(collisionTag, "Sokoban"))
+        {
+
+            //col.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            player.GetComponent<MFPP.Player>().Movement.AllowMouseMove = true;
+            col.transform.SetParent(this.transform.parent.transform.parent);
+            target = null;
+        }
     }
     void LateUpdate()
     {

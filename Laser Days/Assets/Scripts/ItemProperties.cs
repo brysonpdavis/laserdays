@@ -17,6 +17,7 @@ public class ItemProperties : MonoBehaviour
     [SerializeField] public int value;
     [SerializeField] public bool touchingPlayer;
     [SerializeField] public bool reducible;
+    [SerializeField] public bool unflippable;
     [SerializeField] public int maxvalue;
     [SerializeField] public int minvalue;
     private bool isRegen;

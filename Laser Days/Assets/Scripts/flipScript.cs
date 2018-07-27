@@ -41,11 +41,21 @@ public class flipScript : MonoBehaviour {
 	}
 
 	void Update () {
-    if (Input.GetMouseButtonDown(0))
-		{
-			GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
+
+            if (heldObj) //first check to make sure the object that's held is flippable
+            {
+                if (heldObj.GetComponent<ItemProperties>().unflippable)
+                {
+                    GetComponent<MFPP.Modules.PickUpModule>().PutDown();
+                    heldObj = null;
+                }
+            }
 
 			if (heldObj) {
+                
 				if (pc.Check(heldObj)) { // if the player and any held object can be flipped:
 					pc.ItemInteraction(heldObj); // subtract any charge required
 					FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
