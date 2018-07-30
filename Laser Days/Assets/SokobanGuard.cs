@@ -19,6 +19,7 @@ public class SokobanGuard : MonoBehaviour
     void OnTriggerStay(Collider col)
     {
 
+
         ItemProperties myItemProperties = this.GetComponentInParent<ItemProperties>();
         ItemProperties otherItemProperties = col.GetComponent<ItemProperties>();
 
