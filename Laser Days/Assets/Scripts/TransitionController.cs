@@ -73,7 +73,17 @@ public class TransitionController: MonoBehaviour
             {
                 if ((!albo.GetComponentInParent<ItemProperties>()) || !albo.GetComponentInParent<ItemProperties>().selected)
                 {
-                    albo.Flip(0f, speed);
+                    //makes sure it doesn't transition the held object either!
+                    if (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject)
+                    {
+                        if (!albo.gameObject.Equals(player.GetComponent<MFPP.Modules.PickUpModule>().heldObject))
+                        {
+                            albo.Flip(0f, speed);
+
+                        }
+                    }
+
+                    else { albo.Flip(0f, speed); }
                 }
 
             }
@@ -83,9 +93,16 @@ public class TransitionController: MonoBehaviour
             foreach (Transition albo in components)
             {
                 if ((!albo.GetComponentInParent<ItemProperties>()) || !albo.GetComponentInParent<ItemProperties>().selected)
-                {
-                    albo.Flip(1f, speed); //means player has switched to 'laser world': material should transition from current value to 1
-                }
+                    //makes sure it doesn't transition the held object either!
+                if (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject)
+                    {
+                        if (!albo.gameObject.Equals(player.GetComponent<MFPP.Modules.PickUpModule>().heldObject))
+                        {
+                            albo.Flip(1f, speed);
+
+                        }
+                    }
+                    else { albo.Flip(1f, speed); }
             }
 
         }

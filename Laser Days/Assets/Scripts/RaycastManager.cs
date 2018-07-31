@@ -16,6 +16,11 @@ public class RaycastManager : MonoBehaviour {
     public Shader laserWorldShader;
 
 
+    public Shader morphShaderselected;
+    public Shader morphRealWorldShader;
+    public Shader morphLaserWorldShader;
+
+
     private Color32 reticleColor = new Color32(255,222,77,255); //new Vector4(255, 222, 77, 1);
 
 
@@ -52,7 +57,7 @@ public class RaycastManager : MonoBehaviour {
        if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
             
-            if (hit.collider.CompareTag("Clickable") || hit.collider.CompareTag("Sokoban"))
+            if (hit.collider.CompareTag("Clickable") || hit.collider.CompareTag("Sokoban") || hit.collider.CompareTag("MorphOn"))
             
             {
                 CrosshairActive();
@@ -64,7 +69,7 @@ public class RaycastManager : MonoBehaviour {
                 // SELECT ITEM: 
                 // if item boosts charge, add value to boost on right click
                 //only lets you select items that are flippable
-                if(Input.GetMouseButtonDown(1) && hit.collider.GetComponent<ItemProperties>().unflippable)
+                if(Input.GetMouseButtonDown(1) && !hit.collider.GetComponent<ItemProperties>().unflippable)
                 {
 
                     if (ip.boost)
@@ -80,18 +85,53 @@ public class RaycastManager : MonoBehaviour {
                             //unselect it
                             selectedObjs.Remove(raycastedObj);
 
+
+
                             //put the object back to its original shader
-                            if (this.gameObject.layer == 15) { raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; }
-                            else if (this.gameObject.layer == 16) { raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader; }
+                            if (this.gameObject.layer == 15) { 
+
+                                if (raycastedObj.CompareTag("MorphOn") || raycastedObj.CompareTag("MorphOff")){
+                                    raycastedObj.GetComponent<Renderer>().material.shader = morphLaserWorldShader; 
+                                    Debug.Log("help");
+                                }
+                                else {
+                                    raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
+                                } 
+                            }
+                            else if (this.gameObject.layer == 16) { 
+                                if (raycastedObj.CompareTag("MorphOn") || raycastedObj.CompareTag("MorphOff"))
+                                {
+                                    raycastedObj.GetComponent<Renderer>().material.shader = morphRealWorldShader;
+                                }
+
+                                else {
+                                    raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader; 
+                                }
+                            }
 
                             //remove it from list
                             RemoveFromList(raycastedObj, false);
+
+
+                            //if it's a morph, make it drop its associated morph
+                            if (hit.collider.CompareTag("MorphOn"))
+                            {
+                                hit.collider.GetComponent<Morph>().OnPutDown();
+                            }
+
                         }
                         else 
                         {
                             if (!(GetComponent<MFPP.Modules.PickUpModule>().heldObject)) {
                                 selectedObjs.Add(raycastedObj);
                                 AddToList(raycastedObj);
+
+                                //if it's a morph, make it add its associated morph
+                                if (hit.collider.CompareTag("MorphOn"))
+                                {
+                                    hit.collider.GetComponent<Morph>().OnPickup();
+                                }
+
                             }
                         }
                     }
@@ -124,7 +164,26 @@ public class RaycastManager : MonoBehaviour {
     {
         ItemProperties ip = obj.GetComponent<ItemProperties>();
         ip.selected = true;
-        obj.GetComponent<Renderer>().material.shader = shaderselected;
+
+        if (obj.CompareTag("Clickable"))
+        {
+            obj.GetComponent<Renderer>().material.shader = shaderselected;
+        }
+
+        else if (obj.CompareTag("Sokoban"))
+        {
+            //TODO: change this to sokobanselected when there is one!
+            obj.GetComponent<Renderer>().material.shader = shaderselected;
+        }
+
+        else if (obj.CompareTag("MorphOn") || obj.CompareTag("MorphOff") )
+        {
+            //change to morph shader when we have one!
+
+        }
+
+
+
         // change shader back
         pc.UpdatePredictingSlider();
     }
@@ -137,7 +196,7 @@ public class RaycastManager : MonoBehaviour {
 
         obj.GetComponent<ItemProperties>().selected = false;
 
-        //obj.GetComponent<Renderer>().material.shader = shaderoriginal;  //shader change is now happening in flip script
+        //shader change is now happening in flip script
 
         if (!asGroup)
         {

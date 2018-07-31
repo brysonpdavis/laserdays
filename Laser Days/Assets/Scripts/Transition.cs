@@ -9,6 +9,7 @@ public class Transition : MonoBehaviour
     public float ScaleSpeed = 1f;
 
     private IEnumerator flipTransition;
+    private IEnumerator morphTransition;
 
     float offset;
     float speed;
@@ -35,11 +36,6 @@ public class Transition : MonoBehaviour
         if (material){
             float start = material.GetFloat("_TransitionState");
 
-        if (start < 0f || start > 1f)
-        {
-            //means that there's a transition animation already going. we need to be sure to stop it before moving on
-            StopCoroutine(flipTransition);
-        }
 
         //start new direction from where we've left off but in the direction we've specified with "end"
         flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);
@@ -47,12 +43,40 @@ public class Transition : MonoBehaviour
     }
 }
 
+
+
+    public void Morph(float end, float duration)
+    {
+
+        //first need to make sure the object isn't already selected before starting any transition
+        //objects that are selected will be flipped and shouldn't have any animation, but should change their parent gameobject
+
+
+        if (material)
+        {
+            float start = material.GetFloat("_TransitionStateB");
+            Debug.Log(material.GetFloat("_TransitionStateB") + this.gameObject.name);
+
+            if (start > 0f && start < 1f)
+            {
+                //means that there's a transition animation already going. we need to be sure to stop it before moving on
+                StopAllCoroutines();
+            }
+
+            //start new direction from where we've left off but in the direction we've specified with "end"
+            morphTransition = morphTransitionRoutine(start, end, duration / ScaleSpeed);
+            StartCoroutine(morphTransition);
+        }
+    }
+
+
     //use setstart to be sure that when gameobjects are initialized they start with dissolve amount that corresponds to the world that player is in
     //useful when switching an object, immediately sets it without transition
     public void SetStart (float value){
 
         if (material)
         {
+            //Debug.Log(this.gameObject.name + ", " + value);
             material.SetFloat("_TransitionState", value);
         }
     }
@@ -66,7 +90,6 @@ public class Transition : MonoBehaviour
         float ratio = elapsedTime / duration;
         //int property = Shader.PropertyToID("_D7A8CF01");
       
-
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
@@ -77,11 +100,33 @@ public class Transition : MonoBehaviour
             RendererExtensions.UpdateGIMaterials(mRenderer);
 
             yield return null;
-
-
+        }
         }
 
 
 
+    private IEnumerator morphTransitionRoutine(float startpoint, float endpoint, float duration)
+    {
+
+        float elapsedTime = 0;
+        float ratio = elapsedTime / duration;
+
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / duration;
+            float value = Mathf.Lerp(startpoint, endpoint, ratio);
+
+            material.SetFloat("_TransitionStateB", value);
+            RendererExtensions.UpdateGIMaterials(mRenderer);
+
+            yield return null;
+        }
+
+        if (GetComponent<Morph>().turnOff){
+            this.gameObject.SetActive(false);
+            //COULD TRANSITION HERE INSTEAD! just turning off right now.
+            GetComponent<Morph>().turnOff = false;
+        }
     }
 }
