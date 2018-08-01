@@ -64,13 +64,30 @@ public class Morph : MonoBehaviour {
         if (direction == 1) {
             this.GetComponent<Renderer>().material.shader = rm.morphLaserWorldShader;
             transition.SetStart(1f);
-            transition.Morph(0, morphDuration);
+            if (this.gameObject.CompareTag("MorphOn"))
+            {
+                transition.Morph(0, morphDuration);
+            }
+
+            else {
+                transition.Morph(1, morphDuration);
+            }
+
         }
 
         else {
             this.GetComponent<Renderer>().material.shader = rm.morphRealWorldShader;
             transition.SetStart(0f);
-            transition.Morph(1, morphDuration);
+
+            if (this.gameObject.CompareTag("MorphOn"))
+            {
+                transition.Morph(0, morphDuration);
+            }
+
+            else
+            {
+                transition.Morph(1, morphDuration);
+            }
 
         }
 
@@ -84,13 +101,13 @@ public class Morph : MonoBehaviour {
                 //transition with turning game object off at the end
                 Debug.Log("should be transition me off!");
                 turnOff = true;
-                transition.Morph(direction, morphDuration);
+                //transition.Morph(direction, morphDuration);
 
             }
 
 
             //tramsition normally
-            transition.Morph(direction, morphDuration);
+           // transition.Morph(direction, morphDuration);
 
             Debug.Log("held " + held);
               //turn things off!
@@ -104,7 +121,7 @@ public class Morph : MonoBehaviour {
         else
         {
             //transition normally
-            transition.Morph(direction, morphDuration);
+           // transition.Morph(direction, morphDuration);
 
             //turn things on!
             GetComponent<Rigidbody>().useGravity = true;

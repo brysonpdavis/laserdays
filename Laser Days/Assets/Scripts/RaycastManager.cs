@@ -92,10 +92,11 @@ public class RaycastManager : MonoBehaviour {
 
                                 if (raycastedObj.CompareTag("MorphOn") || raycastedObj.CompareTag("MorphOff")){
                                     raycastedObj.GetComponent<Renderer>().material.shader = morphLaserWorldShader; 
-                                    Debug.Log("help");
+                                    //raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
                                 }
                                 else {
                                     raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
+                                    raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
                                 } 
                             }
                             else if (this.gameObject.layer == 16) { 
@@ -167,7 +168,9 @@ public class RaycastManager : MonoBehaviour {
 
         if (obj.CompareTag("Clickable"))
         {
-            obj.GetComponent<Renderer>().material.shader = shaderselected;
+            obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+
+
         }
 
         else if (obj.CompareTag("Sokoban"))

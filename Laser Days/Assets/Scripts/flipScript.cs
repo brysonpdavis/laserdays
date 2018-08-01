@@ -218,7 +218,11 @@ public class flipScript : MonoBehaviour {
         }
 
         if (obj.CompareTag("MorphOff")){
+            GameObject child = obj.transform.GetChild(0).gameObject;
+            child.layer = 10;
+
             Transform morph = obj.GetComponent<Morph>().associatedMorph.transform;
+            morph.GetChild(0).gameObject.layer = 10;
             morph.parent = obj.transform;
             //morph.gameObject.SetActive(false);
         }
@@ -236,7 +240,12 @@ public class flipScript : MonoBehaviour {
 
         if (obj.CompareTag("MorphOff"))
         {
+            GameObject child = obj.transform.GetChild(0).gameObject;
+            child.layer = 11;
+
+
             Transform morph = obj.GetComponent<Morph>().associatedMorph.transform;
+            morph.GetChild(0).gameObject.layer = 11;
             morph.parent = obj.transform;
             //morph.gameObject.SetActive(false);
 

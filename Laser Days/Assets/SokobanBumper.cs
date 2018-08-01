@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class SokobanBumper : MonoBehaviour {
 
-    public GameObject attachedBumper;
+    public GameObject attachedSecondary;
 
 
     private void OnTriggerEnter(Collider other)
     {
-        attachedBumper.active = false;
+        Debug.Log(this.name + ", " + other.gameObject.name);
+
+        if (!other.CompareTag("Player") && (!other.CompareTag("Trigger")) && (!other.gameObject.Equals(this.transform.parent.parent)))
+         {
+            Debug.Log(this.name + ", " + other.gameObject.name);
+            attachedSecondary.SetActive(false);
+        }
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        attachedBumper.active = true;
+
+        Debug.Log(this.name + ", " + other.gameObject.name + "EXIT");
+
+        if (!other.CompareTag("Player") && !other.CompareTag("Trigger") && (!other.gameObject.Equals(this.transform.parent.parent)))
+        {
+
+            attachedSecondary.SetActive(true);
+        }    
     }
 
 }
