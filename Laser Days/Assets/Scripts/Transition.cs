@@ -125,7 +125,7 @@ public class Transition : MonoBehaviour
 
         if (GetComponent<Morph>().turnOff){
             this.gameObject.SetActive(false);
-            //COULD TRANSITION HERE INSTEAD! just turning off right now.
+            //COULD TRANSITION HERE INSTEAD! [OTHER TURN OFF MOMENT THAT HAPPENS IS IN MORPH-PUTDOWN, FOR ASSOCIATED OBJ]
             GetComponent<Morph>().turnOff = false;
         }
     }
