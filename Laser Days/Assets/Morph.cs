@@ -34,7 +34,8 @@ public class Morph : MonoBehaviour {
         associatedMorph.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         //change shader back to whatever morph shader it's suppoed to be in based on player's layer
 
-        associatedMorph.active = false;
+        //COULD DO TRANSITION HERE! [OTHER PART FOR SELECTED OBJ FLIPPED IS IN TRANSITION]
+        associatedMorph.SetActive(false);
 
         if (rm.gameObject.layer == 15){
             //change shader and value to laser on drop
