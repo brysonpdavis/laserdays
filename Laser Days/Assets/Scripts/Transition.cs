@@ -55,7 +55,7 @@ public class Transition : MonoBehaviour
         if (material)
         {
             float start = material.GetFloat("_TransitionStateB");
-            Debug.Log(material.GetFloat("_TransitionStateB") + this.gameObject.name);
+           
 
             if (start > 0f && start < 1f)
             {

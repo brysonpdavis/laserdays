@@ -10,6 +10,9 @@ public class ItemProperties : MonoBehaviour
     public bool isKey;
     public string key = null;
 
+    Renderer mRenderer;
+    Material material;
+
     [SerializeField] public bool objectCharge = true;
     [SerializeField] public bool boost = false;
     [SerializeField] public bool touchingzone = false;
@@ -23,6 +26,19 @@ public class ItemProperties : MonoBehaviour
     private bool isRegen;
 
     public bool selected = false;
+
+    private void Awake()
+    {
+        //sets all of the shaders to correct flip state [toggle that affects how selection looks]
+        mRenderer = GetComponent<Renderer>();
+        material = mRenderer.material;
+
+        if (!unflippable){
+            material.SetInt("_IsFlippable", 1);
+        }
+
+        else {material.SetInt("_IsFlippable", 0);}
+    }
 
     void Update()
     {

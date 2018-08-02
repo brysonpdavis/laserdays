@@ -99,7 +99,7 @@ public class Morph : MonoBehaviour {
             if (!held)
             {
                 //transition with turning game object off at the end
-                Debug.Log("should be transition me off!");
+               // Debug.Log("should be transition me off!");
                 turnOff = true;
                 //transition.Morph(direction, morphDuration);
 
@@ -109,11 +109,12 @@ public class Morph : MonoBehaviour {
             //tramsition normally
            // transition.Morph(direction, morphDuration);
 
-            Debug.Log("held " + held);
+        //    Debug.Log("held " + held);
               //turn things off!
               GetComponent<Rigidbody>().useGravity = false;
               GetComponent<Rigidbody>().isKinematic = true;
-              GetComponent<BoxCollider>().enabled = false;
+              //GetComponent<BoxCollider>().enabled = false;
+            GetComponent<BoxCollider>().isTrigger= true;
               this.gameObject.tag = "MorphOff";
 
         }
@@ -126,7 +127,8 @@ public class Morph : MonoBehaviour {
             //turn things on!
             GetComponent<Rigidbody>().useGravity = true;
             GetComponent<Rigidbody>().isKinematic = false;
-            GetComponent<BoxCollider>().enabled = true;
+            //GetComponent<BoxCollider>().enabled = true;
+            GetComponent<BoxCollider>().isTrigger = false;
             this.gameObject.tag = "MorphOn";
         }
     }
