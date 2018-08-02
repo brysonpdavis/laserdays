@@ -61,8 +61,6 @@ public class SokobanSecondary : MonoBehaviour
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
 
-        Debug.Log(sokoban.transform.localPosition.x);
-        Debug.Log(sokoban.transform.localScale.x);
 
         if (sokoban.transform.localScale.x < 1f)
         {

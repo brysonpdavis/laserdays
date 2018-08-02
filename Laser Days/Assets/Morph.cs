@@ -6,9 +6,10 @@ public class Morph : MonoBehaviour {
 
     public bool parent;
     public bool turnOff = false;
-    public float morphDuration;
+    public float morphDuration = 0.4f;
     RaycastManager rm;
     public GameObject associatedMorph;
+    public Transition[] internalNonMorphs;
 
 
 	void Start () {
@@ -20,7 +21,7 @@ public class Morph : MonoBehaviour {
         //get ready for potential flip, with both objects
         //change other object's shader as well
 
-        associatedMorph.active = true;
+        associatedMorph.SetActive(true);
 
         rm.selectedObjs.Add(associatedMorph);
         rm.AddToList(associatedMorph);
@@ -35,8 +36,9 @@ public class Morph : MonoBehaviour {
         //change shader back to whatever morph shader it's suppoed to be in based on player's layer
 
         //COULD DO TRANSITION HERE! [OTHER PART FOR SELECTED OBJ FLIPPED IS IN TRANSITION]
-        associatedMorph.SetActive(false);
 
+            associatedMorph.SetActive(false);
+        
         if (rm.gameObject.layer == 15){
             //change shader and value to laser on drop
             associatedMorph.GetComponent<Renderer>().material.shader = rm.morphLaserWorldShader;
@@ -58,83 +60,102 @@ public class Morph : MonoBehaviour {
         // call visual transition transition controller given direction. ONLY on self! (this method will also get called on counterpart!)
         //float of 1 means we're going to laser, float 0 means we're going to real
 
-        Transition transition = GetComponent<Transition>();
+            Transition transition = GetComponent<Transition>();
 
-        // VISUAL TRANSITION
-        if (direction == 1) {
-            this.GetComponent<Renderer>().material.shader = rm.morphLaserWorldShader;
-            transition.SetStart(1f);
-            if (this.gameObject.CompareTag("MorphOn"))
+            // VISUAL TRANSITION
+            if (direction == 1)
             {
-                transition.Morph(0, morphDuration);
-            }
+                this.GetComponent<Renderer>().material.shader = rm.morphLaserWorldShader;
+                transition.SetStart(1f);
+                if (this.gameObject.CompareTag("MorphOn"))
+                {
+                    transition.Morph(0, morphDuration);
+                }
 
-            else {
-                transition.Morph(1, morphDuration);
-            }
-
-        }
-
-        else {
-            this.GetComponent<Renderer>().material.shader = rm.morphRealWorldShader;
-            transition.SetStart(0f);
-
-            if (this.gameObject.CompareTag("MorphOn"))
-            {
-                transition.Morph(0, morphDuration);
+                else
+                {
+                    transition.Morph(1, morphDuration);
+                }
             }
 
             else
             {
-                transition.Morph(1, morphDuration);
+                this.GetComponent<Renderer>().material.shader = rm.morphRealWorldShader;
+                transition.SetStart(0f);
+
+                if (this.gameObject.CompareTag("MorphOn"))
+                {
+                    transition.Morph(0, morphDuration);
+                }
+
+                else
+                {
+                    transition.Morph(1, morphDuration);
+                }
+
             }
 
-        }
 
 
-
-        if (this.gameObject.CompareTag("MorphOn"))
-        {
-            //transition properly
-            if (!held)
+            if (this.gameObject.CompareTag("MorphOn"))
             {
-                //transition with turning game object off at the end
-               // Debug.Log("should be transition me off!");
-                turnOff = true;
-                //transition.Morph(direction, morphDuration);
+                //transition properly
+                if (!held)
+                {
+                    //transition with turning game object off at the end
+                    turnOff = true;
+                }
+
+
+                //tramsition normally
+
+                GetComponent<Rigidbody>().useGravity = false;
+                GetComponent<Rigidbody>().isKinematic = true;
+                GetComponent<BoxCollider>().isTrigger = true;
+                this.gameObject.tag = "MorphOff";
 
             }
 
+            else
+            {
+                //transition normally
+                // transition.Morph(direction, morphDuration);
 
-            //tramsition normally
-           // transition.Morph(direction, morphDuration);
+                //turn things on!
+                GetComponent<Rigidbody>().useGravity = true;
+                GetComponent<Rigidbody>().isKinematic = false;
+                GetComponent<BoxCollider>().isTrigger = false;
+                this.gameObject.tag = "MorphOn";
+            }
 
-        //    Debug.Log("held " + held);
-              //turn things off!
-              GetComponent<Rigidbody>().useGravity = false;
-              GetComponent<Rigidbody>().isKinematic = true;
-              //GetComponent<BoxCollider>().enabled = false;
-            GetComponent<BoxCollider>().isTrigger= true;
-              this.gameObject.tag = "MorphOff";
+        //transition everybody that doesn't morph that's contained within the transition
+        TransitionInternals(direction);
 
-        }
-
-        else
-        {
-            //transition normally
-           // transition.Morph(direction, morphDuration);
-
-            //turn things on!
-            GetComponent<Rigidbody>().useGravity = true;
-            GetComponent<Rigidbody>().isKinematic = false;
-            //GetComponent<BoxCollider>().enabled = true;
-            GetComponent<BoxCollider>().isTrigger = false;
-            this.gameObject.tag = "MorphOn";
-        }
     }
 
     public void OnSelection () {
         //change shader
         rm.AddToList(associatedMorph);
     }
-}
+
+
+    private void TransitionInternals(int direction)
+    {
+        if (internalNonMorphs.Length > 0)
+        {
+            foreach (Transition albo in internalNonMorphs)
+            {
+                if (direction == 1)
+                {
+                    albo.Flip(1f, morphDuration);
+                }
+
+                else
+                {
+                    albo.Flip(0f, morphDuration);
+                }
+            }
+
+        }
+    }
+    }

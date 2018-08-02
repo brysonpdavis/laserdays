@@ -76,7 +76,6 @@ public class Transition : MonoBehaviour
 
         if (material)
         {
-            //Debug.Log(this.gameObject.name + ", " + value);
             material.SetFloat("_TransitionState", value);
         }
     }
@@ -107,7 +106,13 @@ public class Transition : MonoBehaviour
 
     private IEnumerator morphTransitionRoutine(float startpoint, float endpoint, float duration)
     {
-
+        bool stillSelected = false;
+        if (Input.GetMouseButton(1))
+        {
+            
+            //important for not turning this gameobject off, as it needs to act as preview since new parent object will still be selected now!
+            stillSelected = true;
+        }
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
 
@@ -124,7 +129,11 @@ public class Transition : MonoBehaviour
         }
 
         if (GetComponent<Morph>().turnOff){
-            this.gameObject.SetActive(false);
+
+            if (!stillSelected)
+            {
+                this.gameObject.SetActive(false); 
+            }
             //COULD TRANSITION HERE INSTEAD! [OTHER TURN OFF MOMENT THAT HAPPENS IS IN MORPH-PUTDOWN, FOR ASSOCIATED OBJ]
             GetComponent<Morph>().turnOff = false;
         }
