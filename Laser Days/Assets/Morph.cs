@@ -12,6 +12,7 @@ public class Morph : MonoBehaviour {
     public Transition[] internalNonMorphs;
 
 
+
 	void Start () {
         rm = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
 	}
@@ -61,7 +62,6 @@ public class Morph : MonoBehaviour {
         //float of 1 means we're going to laser, float 0 means we're going to real
 
             Transition transition = GetComponent<Transition>();
-
             // VISUAL TRANSITION
             if (direction == 1)
             {
@@ -69,12 +69,14 @@ public class Morph : MonoBehaviour {
                 transition.SetStart(1f);
                 if (this.gameObject.CompareTag("MorphOn"))
                 {
-                    transition.Morph(0, morphDuration);
+                SwitchActivations(direction, held);   
+                transition.Morph(0, morphDuration);
                 }
 
                 else
                 {
-                    transition.Morph(1, morphDuration);
+                SwitchActivations(direction, held);    
+                transition.Morph(1, morphDuration);
                 }
             }
 
@@ -85,51 +87,21 @@ public class Morph : MonoBehaviour {
 
                 if (this.gameObject.CompareTag("MorphOn"))
                 {
-                    transition.Morph(0, morphDuration);
+                SwitchActivations(direction, held);    
+                transition.Morph(0, morphDuration);
                 }
 
                 else
                 {
-                    transition.Morph(1, morphDuration);
+                SwitchActivations(direction, held);    
+                transition.Morph(1, morphDuration);
                 }
 
             }
 
+      //SwitchActivations(direction, held);
 
-
-            if (this.gameObject.CompareTag("MorphOn"))
-            {
-                //transition properly
-                if (!held)
-                {
-                    //transition with turning game object off at the end
-                    turnOff = true;
-                }
-
-
-                //tramsition normally
-
-                GetComponent<Rigidbody>().useGravity = false;
-                GetComponent<Rigidbody>().isKinematic = true;
-                GetComponent<BoxCollider>().isTrigger = true;
-                this.gameObject.tag = "MorphOff";
-
-            }
-
-            else
-            {
-                //transition normally
-                // transition.Morph(direction, morphDuration);
-
-                //turn things on!
-                GetComponent<Rigidbody>().useGravity = true;
-                GetComponent<Rigidbody>().isKinematic = false;
-                GetComponent<BoxCollider>().isTrigger = false;
-                this.gameObject.tag = "MorphOn";
-            }
-
-        //transition everybody that doesn't morph that's contained within the transition
-        TransitionInternals(direction);
+            
 
     }
 
@@ -158,4 +130,42 @@ public class Morph : MonoBehaviour {
 
         }
     }
+
+    public void SwitchActivations(int direction, bool held)
+    {
+        if (this.gameObject.CompareTag("MorphOn"))
+        {
+            //transition properly
+            if (!held)
+            {
+                //transition with turning game object off at the end
+                turnOff = true;
+            }
+
+
+            //tramsition normally
+
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<BoxCollider>().isTrigger = true;
+            this.gameObject.tag = "MorphOff";
+
+        }
+
+        else
+        {
+            //transition normally
+            // transition.Morph(direction, morphDuration);
+
+            //turn things on!
+            GetComponent<Rigidbody>().useGravity = true;
+            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<BoxCollider>().isTrigger = false;
+            this.gameObject.tag = "MorphOn";
+        }
+
+        //transition everybody that doesn't morph that's contained within the transition
+        TransitionInternals(direction);
+    }
+
     }

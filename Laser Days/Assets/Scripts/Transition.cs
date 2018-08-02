@@ -106,6 +106,16 @@ public class Transition : MonoBehaviour
 
     private IEnumerator morphTransitionRoutine(float startpoint, float endpoint, float duration)
     {
+        int layerValue = this.gameObject.layer;
+        Debug.Log("layervalue, " + this.gameObject.layer);
+
+        if (layerValue == 10){
+            this.gameObject.layer = 21;
+        }
+        if (layerValue == 11){
+            this.gameObject.layer = 22;
+        }
+
         bool stillSelected = false;
         if (Input.GetMouseButton(1))
         {
@@ -137,5 +147,8 @@ public class Transition : MonoBehaviour
             //COULD TRANSITION HERE INSTEAD! [OTHER TURN OFF MOMENT THAT HAPPENS IS IN MORPH-PUTDOWN, FOR ASSOCIATED OBJ]
             GetComponent<Morph>().turnOff = false;
         }
+
+        this.gameObject.layer = layerValue;
+
     }
 }
