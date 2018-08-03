@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
+
 public class Transition : MonoBehaviour
 {
     Renderer mRenderer;
@@ -39,7 +41,7 @@ public class Transition : MonoBehaviour
             if (start > 0f && start < 1f)
             {
                 //means that there's a transition animation already going. we need to be sure to stop it before moving on
-                Debug.Log("I'm stopping one that's running!" + start + this.gameObject.name);
+                //Debug.Log("I'm stopping one that's running!" + start + this.gameObject.name);
                 StopCoroutine(flipTransition);
             }
 

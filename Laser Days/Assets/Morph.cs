@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
+
 public class Morph : MonoBehaviour {
 
     public bool parent;
