@@ -30,7 +30,6 @@ public class PlatformMover : MonoBehaviour {
 
         float actualDuration = (duration * (Vector3.Distance(this.transform.position, endPos)/Vector3.Distance(startPos, endPos)));
 
-        print(actualDuration);
         StartCoroutine(MovePlatformCoroutine(this.transform.position, endPos, actualDuration));
 
         }

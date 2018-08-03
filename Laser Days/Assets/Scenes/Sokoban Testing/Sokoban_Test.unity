@@ -315,32 +315,6 @@ MonoBehaviour:
       version: 1
     _data:
       data: []
-  - _sourceObject: {fileID: 1633693857}
-    _sourceField: player
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: b1b13f984945c4a3baf41f7baf1a8f3c
-        name: Sokoban_Player
-        _path: Assets/Scenes/Sokoban Testing/Sokoban_Player.unity
-      fullPath: /Player
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 1384622073
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
   _realSceneRootsForPostBuild: []
   _mergedScenes: []
 --- !u!114 &122782199
@@ -665,7 +639,8 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: -1.2792859
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114307904739958270, guid: d41b406d4219a4864a334850c32516b0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d41b406d4219a4864a334850c32516b0, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &459607329 stripped
@@ -2388,6 +2363,30 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1785715460983018, guid: 3a8e9468b16434f8d8f99ad502189b78, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65471769924596740, guid: 3a8e9468b16434f8d8f99ad502189b78,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 65686201381294148, guid: 3a8e9468b16434f8d8f99ad502189b78,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 65098000150217030, guid: 3a8e9468b16434f8d8f99ad502189b78,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 65715324302342006, guid: 3a8e9468b16434f8d8f99ad502189b78,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.65
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a8e9468b16434f8d8f99ad502189b78, type: 2}
   m_IsPrefabParent: 0
@@ -2686,7 +2685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: 1
   turnOff: 0
-  morphDuration: 0.1
+  morphDuration: 0.4
   associatedMorph: {fileID: 1511619150}
   internalNonMorphs:
   - {fileID: 558532668}
@@ -2746,12 +2745,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 114648318966413878, guid: 8830c14fe58b84c509681b6d3b84903b,
     type: 2}
   m_PrefabInternal: {fileID: 1894285303}
-  m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
---- !u!114 &1373904346 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114307904739958270, guid: d41b406d4219a4864a334850c32516b0,
-    type: 2}
-  m_PrefabInternal: {fileID: 450172187}
   m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
 --- !u!114 &1373904347 stripped
 MonoBehaviour:
@@ -2998,7 +2991,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: 1
   turnOff: 0
-  morphDuration: 0.1
+  morphDuration: 0.4
   associatedMorph: {fileID: 1355942808}
   internalNonMorphs:
   - {fileID: 869819787}
@@ -3144,12 +3137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
---- !u!114 &1633693857 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114470948541947826, guid: 3a8e9468b16434f8d8f99ad502189b78,
-    type: 2}
-  m_PrefabInternal: {fileID: 1245682645}
-  m_Script: {fileID: 11500000, guid: 2e3364bcc1afe4d4bbdc17a3c3ee5296, type: 3}
 --- !u!1001 &1655113936
 Prefab:
   m_ObjectHideFlags: 0
@@ -4021,7 +4008,7 @@ MonoBehaviour:
   - {fileID: 1700093937}
   - {fileID: 977810406}
   - {fileID: 1373904347}
-  - {fileID: 1373904346}
+  - {fileID: 0}
   - {fileID: 1261696397}
   - {fileID: 1261696395}
   - {fileID: 1601191500}
