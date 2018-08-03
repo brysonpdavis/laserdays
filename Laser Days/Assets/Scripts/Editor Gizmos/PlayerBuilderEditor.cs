@@ -11,16 +11,23 @@ public class PlayerBuilderEditor : Editor
     {
         DrawDefaultInspector();
         PlayerBuilderScript myScript = (PlayerBuilderScript)target;
+
+        if (GUILayout.Button("See Spawnpoints"))
+        {
+            myScript.BuildList();
+
+        }
+
         if (GUILayout.Button("Build Player"))
         {
             myScript.BuildPlayer(myScript.spawnSelect);
 
         }
 
-        if (GUILayout.Button("Reset Player Charge"))
-        {
-            myScript.ResetCharge();
+        //if (GUILayout.Button("Reset Player Charge"))
+       // {
+        //    myScript.ResetCharge();
 
-        }
+       // }
     }
 }
