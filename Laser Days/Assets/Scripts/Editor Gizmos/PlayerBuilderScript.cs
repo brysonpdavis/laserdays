@@ -23,6 +23,7 @@ public class PlayerBuilderScript : MonoBehaviour
 
         Player.position = spawnPoint[chooser].transform.position;
 
+
     }
     public void ResetCharge()
     {

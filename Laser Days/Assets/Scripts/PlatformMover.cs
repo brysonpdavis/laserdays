@@ -52,7 +52,6 @@ public class PlatformMover : MonoBehaviour {
 
     void PlatformObjectSelectable()
     {
-        Debug.Log("here");
         foreach (GameObject obj in platformGuard.stuckObjects)
         {
             if (obj.GetComponent<ItemProperties>().unflippable){obj.tag = ("Sokoban");}
