@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlatformGuard : MonoBehaviour
 {
-    private GameObject target = null;
+    public GameObject target = null;
     private Vector3 offset;
     public IList<GameObject> stuckObjects;
 
@@ -23,8 +23,7 @@ public class PlatformGuard : MonoBehaviour
 
         if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "MorphOn"))
         {
-
-            stuckObjects.Add(col.gameObject);
+                    stuckObjects.Add(col.gameObject);
         }
 
 

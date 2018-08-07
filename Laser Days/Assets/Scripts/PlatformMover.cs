@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class PlatformMover : MonoBehaviour {
 
-    private PlatformGuard platformGuard;
+    public PlatformGuard platformGuard;
+    public GameObject mainGuard;
+    public PlatformObjectMover[] objectMovers;
 
     private void Start()
     {
-        platformGuard = GetComponentInChildren<PlatformGuard>();
+      // platformGuard = GetComponentInChildren<PlatformGuard>();
     }
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
     {
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
+        checkObjectsPlace();
         PlatformObjectsUnselectable();
+
+        yield return new WaitForSeconds(.2f);
+
 
         while (ratio < 1f)
         {
@@ -26,7 +32,12 @@ public class PlatformMover : MonoBehaviour {
         }
         transform.position = endPos;
         PlatformObjectSelectable();
+        mainGuard.SetActive(true);
+
         yield return null;
+
+
+
     }
 
     public void MovePlatform(Vector3 startPos, Vector3 endPos, float duration)
@@ -44,10 +55,14 @@ public class PlatformMover : MonoBehaviour {
 
     void PlatformObjectsUnselectable()
     {
-        foreach (GameObject obj in platformGuard.stuckObjects)
+        if (platformGuard.isActiveAndEnabled)
         {
-            obj.tag = ("NoTouch");
+            foreach (GameObject obj in platformGuard.stuckObjects)
+            {
+                obj.tag = ("NoTouch");
+            }
         }
+
     }
 
     void PlatformObjectSelectable()
@@ -59,6 +74,19 @@ public class PlatformMover : MonoBehaviour {
             else {obj.tag = ("MorphOn");}
 
         }
+    }
+
+    void checkObjectsPlace(){
+
+        foreach (PlatformObjectMover mover in objectMovers){
+
+            if (mover.incorrect)
+            {
+                mover.centerObject();
+            }
+
+        }
+
     }
 
     }
