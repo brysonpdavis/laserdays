@@ -21,7 +21,7 @@ public class SokobanShift : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Sokoban"))
+        if (other.CompareTag("Sokoban") && (!other.gameObject.Equals(parent)))
         {
             Debug.Log("test"+ (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)));
             if (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)<=1.53f){
