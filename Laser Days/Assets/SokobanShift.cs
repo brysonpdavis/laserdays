@@ -24,7 +24,7 @@ public class SokobanShift : MonoBehaviour {
         if (other.CompareTag("Sokoban"))
         {
             Debug.Log("test"+ (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)));
-            if (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)<=1.59f){
+            if (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)<=1.53f){
                 objectToMove = other.gameObject;
                 positionObject = (CenterObjectRoutine());
                 StartCoroutine(positionObject);

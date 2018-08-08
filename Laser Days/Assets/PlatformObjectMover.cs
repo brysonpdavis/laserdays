@@ -10,6 +10,7 @@ public class PlatformObjectMover : MonoBehaviour {
     public Transform position;
     public GameObject objectToMove;
     public GameObject mainGuard;
+    public bool motionCheck;
 
 
     public Vector3 objectsPosition;
@@ -21,6 +22,12 @@ public class PlatformObjectMover : MonoBehaviour {
         if (other.CompareTag("Sokoban") || other.CompareTag("MorphOn")){
             incorrect = true;
             objectToMove = other.gameObject;
+            if (motionCheck && mainGuard.GetComponent<PlatformGuard>().target && mainGuard.GetComponent<PlatformGuard>().target.Equals(objectToMove))
+            {
+                positionObject = (CenterObjectRoutine());
+                StartCoroutine(positionObject);
+                Debug.Log("GO!");
+            }
         }
     }
 
@@ -37,6 +44,7 @@ public class PlatformObjectMover : MonoBehaviour {
     public void centerObject () {
         positionObject = (CenterObjectRoutine());
         if (mainGuard.GetComponent<PlatformGuard>().target && mainGuard.GetComponent<PlatformGuard>().target.Equals(objectToMove)){
+            objectToMove.tag = ("NoTouch");
             StartCoroutine(positionObject);
         }
     }
