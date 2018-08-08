@@ -9,6 +9,7 @@ public class PlatformGuard : MonoBehaviour
     public GameObject target = null;
     private Vector3 offset;
     public IList<GameObject> stuckObjects;
+    public GameObject mainGuard;
 
     void Start()
     {
@@ -23,7 +24,9 @@ public class PlatformGuard : MonoBehaviour
 
         if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "MorphOn"))
         {
-                    stuckObjects.Add(col.gameObject);
+
+            //Debug.Log("got one!");
+            stuckObjects.Add(col.gameObject);
         }
 
 
@@ -33,7 +36,7 @@ public class PlatformGuard : MonoBehaviour
     {
         string collisionTag = col.tag;
 
-        if (string.Equals(collisionTag, "Player") || string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")  || string.Equals(collisionTag, "NoTouch")){
+        if (string.Equals(collisionTag, "Player") || string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")  || string.Equals(collisionTag, "NoTouch") || string.Equals(collisionTag, "MorphOn")){
             target = col.gameObject;
             offset = target.transform.position - GetComponentInParent<Transform>().position;
         }

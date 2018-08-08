@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlatformEdgeGuard : MonoBehaviour {
 
+    public bool active = false;
+    public PlatformEdgeGuard secondaryTrigger;
     public GameObject associatedCollider;
+    public Renderer associatedRenderer;
 
     private void Start()
     {
@@ -15,7 +18,13 @@ public class PlatformEdgeGuard : MonoBehaviour {
     {
         if (other.CompareTag("Guard"))
         {
-            associatedCollider.SetActive(false);
+            active = true;
+            if (active && secondaryTrigger.active ){
+                associatedCollider.SetActive(false);
+                associatedRenderer.enabled = false;
+
+            }
+
 
         }
     }
@@ -26,7 +35,10 @@ public class PlatformEdgeGuard : MonoBehaviour {
     {
         if (other.CompareTag("Guard")){
 
+            active = false;
             associatedCollider.SetActive(true);
+            associatedRenderer.enabled = true;
+
         }
     }
 

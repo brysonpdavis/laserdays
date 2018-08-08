@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class SokobanGuard : MonoBehaviour
 {
-    private GameObject target = null;
+    public GameObject target = null;
     private Vector3 offset;
     public GameObject player;
+
     void Start()
     {
         player = Toolbox.Instance.GetPlayer();

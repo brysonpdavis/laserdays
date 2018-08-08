@@ -115,7 +115,7 @@ public class Transition : MonoBehaviour
     private IEnumerator morphTransitionRoutine(float startpoint, float endpoint, float duration)
     {
         int layerValue = this.gameObject.layer;
-        Debug.Log("layervalue, " + this.gameObject.layer);
+        //Debug.Log("layervalue, " + this.gameObject.layer);
 
         if (layerValue == 10){
             this.gameObject.layer = 21;

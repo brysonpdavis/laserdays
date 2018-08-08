@@ -36,7 +36,9 @@ public class PlatformObjectMover : MonoBehaviour {
 
     public void centerObject () {
         positionObject = (CenterObjectRoutine());
-        StartCoroutine(positionObject);
+        if (mainGuard.GetComponent<PlatformGuard>().target && mainGuard.GetComponent<PlatformGuard>().target.Equals(objectToMove)){
+            StartCoroutine(positionObject);
+        }
     }
 
     private IEnumerator CenterObjectRoutine()
@@ -60,7 +62,7 @@ public class PlatformObjectMover : MonoBehaviour {
             //objectToMove.transform.position = value;
             objectToMove.transform.position = Vector3.Slerp(startpoint, moverPosition, ratio);
 
-            Debug.Log(objectToMove.transform.position);
+           // Debug.Log(objectToMove.transform.position);
 
             yield return null;
         }
