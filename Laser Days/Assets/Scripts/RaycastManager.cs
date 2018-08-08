@@ -106,7 +106,8 @@ public class RaycastManager : MonoBehaviour {
                                 }
 
                                 else {
-                                    raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader; 
+                                    raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader;
+                                    raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
                                 }
                             }
 

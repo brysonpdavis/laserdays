@@ -130,6 +130,8 @@ public class flipScript : MonoBehaviour {
                     //otherise set the object to approperiate shader automaticalh
                     obj.GetComponent<Renderer>().material.shader = rm.laserWorldShader;  //shader change is now happening in flip script
                     obj.GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
+                    obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+
                 }
 
             }
@@ -147,6 +149,9 @@ public class flipScript : MonoBehaviour {
                 else{
                     obj.GetComponent<Renderer>().material.shader = rm.realWorldShader;  //shader change is now happening in flip script
                     obj.GetComponent<Transition>().SetStart(0f); //set it fully on for real world
+                    obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+
+
                 }
                 }
             }
@@ -197,6 +202,14 @@ public class flipScript : MonoBehaviour {
 			}
 			objs.Clear();
 		}
+
+        else
+        {
+            foreach (GameObject obj in objs)
+            {
+                obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+            }
+        }
 	}
 
 	bool PlayerInLaser ()

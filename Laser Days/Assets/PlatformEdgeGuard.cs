@@ -26,10 +26,9 @@ public class PlatformEdgeGuard : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log(other.tag);
         if (other.CompareTag("Guard"))
         {
-            Debug.Log("touching a guard, ");
+            
             active = true;
             if (active && secondaryTrigger.active ){
                 associatedCollider.SetActive(false);
