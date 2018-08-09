@@ -4,7 +4,10 @@ using UnityEditor;
 
 
 [CustomEditor(typeof(GlobalTransitionScript))]
+#if UNITY_EDITOR
+
 public class GlobalTransitionEditor : Editor {
+
 
     public override void OnInspectorGUI()
     {
@@ -33,3 +36,5 @@ public class GlobalTransitionEditor : Editor {
     }
 
 }
+#endif
+

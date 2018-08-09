@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEditor;
 
 [CustomEditor(typeof(PlayerBuilderScript))]
+#if UNITY_EDITOR
+
 public class PlayerBuilderEditor : Editor
 {
 
@@ -30,4 +32,7 @@ public class PlayerBuilderEditor : Editor
 
        // }
     }
+
+
 }
+#endif
