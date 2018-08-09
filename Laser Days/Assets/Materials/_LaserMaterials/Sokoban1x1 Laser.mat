@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Default Transition Both
-  m_Shader: {fileID: 4800000, guid: fc42ef0c3a7724442baa9257b1f3b22a, type: 3}
+  m_Name: Sokoban1x1 Laser
+  m_Shader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,12 +18,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlbedoLaser:
-        m_Texture: {fileID: 2800000, guid: b88ad88c9fe2a45a2ae52d7f4bc9ada6, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _AlbedoReal:
-        m_Texture: {fileID: 2800000, guid: 9eb0c797d10a44d419d36c8f396f77ad, type: 3}
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: b8c7cb61fe07f487691f132b5f021c09, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -43,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveMap:
-        m_Texture: {fileID: 2800000, guid: 07790774372b74051bf1de269ee0443a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4213667ef65704f73b4663308f4e1b31, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -55,6 +51,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -75,9 +75,12 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EdgeThickness: 0.059
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _IsFlippable: 0
+    - _IsSelected: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -91,4 +94,7 @@ Material:
     - __dirty: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EdgeColor: {r: 1, g: 0.24056602, b: 0.24056602, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _TintA: {r: 0.3207547, g: 0.19517621, b: 0.19517621, a: 0}
+    - _TintB: {r: 1, g: 0.9561808, b: 0, a: 0}
