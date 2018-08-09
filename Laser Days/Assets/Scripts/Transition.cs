@@ -38,12 +38,12 @@ public class Transition : MonoBehaviour
         if (material){
             float start = material.GetFloat("_TransitionState");
 
-            if (start > 0f && start < 1f)
-            {
+           // if (start > 0f && start < 1f)
+           // {
                 //means that there's a transition animation already going. we need to be sure to stop it before moving on
                 //Debug.Log("I'm stopping one that's running!" + start + this.gameObject.name);
-                StopCoroutine(flipTransition);
-            }
+         //       StopCoroutine(flipTransition);
+        //    }
 
         //start new direction from where we've left off but in the direction we've specified with "end"
         flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);

@@ -4,8 +4,6 @@ using UnityEditor;
 
 
 [CustomEditor(typeof(GlobalTransitionScript))]
-#if UNITY_EDITOR
-
 public class GlobalTransitionEditor : Editor {
 
 
@@ -36,5 +34,3 @@ public class GlobalTransitionEditor : Editor {
     }
 
 }
-#endif
-

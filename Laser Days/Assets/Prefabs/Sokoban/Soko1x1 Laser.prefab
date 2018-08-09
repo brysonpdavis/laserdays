@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114595465851912496}
   - component: {fileID: 65969196064909258}
   - component: {fileID: 114613877817584356}
+  - component: {fileID: 114506727615155040}
   m_Layer: 10
   m_Name: Soko1x1 Laser
   m_TagString: Sokoban
@@ -57,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1678789563262494}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6, y: 0.5, z: 5.1}
+  m_LocalPosition: {x: 0.81, y: 0.5, z: 4.650794}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4719327880899074}
@@ -127,7 +128,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 5fc99b2eab5bf4a15b93f84a0eae5d38, type: 2}
+  - {fileID: 2100000, guid: 1a2da71a9eb4b43d2bd7987d1b2a5161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -200,6 +201,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114506727615155040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1678789563262494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b8a2115c534f08b89cfb9b4637979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers: []
 --- !u!114 &114595465851912496
 MonoBehaviour:
   m_ObjectHideFlags: 1

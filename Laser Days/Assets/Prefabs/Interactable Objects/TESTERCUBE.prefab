@@ -24,9 +24,11 @@ GameObject:
   - component: {fileID: 65883050263306030}
   - component: {fileID: 54999689909048320}
   - component: {fileID: 114850920278910964}
-  m_Layer: 9
+  - component: {fileID: 114082428988056788}
+  - component: {fileID: 114997230485797772}
+  m_Layer: 11
   m_Name: TESTERCUBE
-  m_TagString: Clickable
+  m_TagString: Sokoban
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1158508201989184}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 100.671455, y: -3.96, z: -169.69312}
+  m_LocalPosition: {x: 5, y: 0.51, z: 3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,7 +101,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &65883050263306030
 BoxCollider:
@@ -113,6 +115,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114082428988056788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1158508201989184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScaleSpeed: 1
 --- !u!114 &114850920278910964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,6 +147,19 @@ MonoBehaviour:
   value: 10
   touchingPlayer: 0
   reducible: 0
+  unflippable: 1
   maxvalue: 0
   minvalue: 0
   selected: 0
+--- !u!114 &114997230485797772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1158508201989184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b8a2115c534f08b89cfb9b4637979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers: []
