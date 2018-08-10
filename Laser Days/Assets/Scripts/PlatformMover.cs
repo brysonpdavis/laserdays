@@ -69,10 +69,13 @@ public class PlatformMover : MonoBehaviour {
     {
         foreach (GameObject obj in platformGuard.stuckObjects)
         {
-            if (obj.GetComponent<ItemProperties>().unflippable){obj.tag = ("Sokoban");}
+            if (obj.GetComponent<ItemProperties>())
+            {
+                if (obj.GetComponent<ItemProperties>().unflippable) { obj.tag = ("Sokoban"); }
 
-            else {obj.tag = ("MorphOn");}
+                else { obj.tag = ("MorphOn"); }
 
+            }
         }
     }
 
