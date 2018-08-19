@@ -163,6 +163,11 @@ Prefab:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1384622080}
+    - target: {fileID: 114076192113971896, guid: 2c153e2fda8e04bde8fbdee2485bbbb1,
+        type: 2}
+      propertyPath: spawnPoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c153e2fda8e04bde8fbdee2485bbbb1, type: 2}
   m_IsPrefabParent: 0
@@ -251,6 +256,32 @@ MonoBehaviour:
       version: 1
     _data:
       data: []
+  - _sourceObject: {fileID: 1334678298}
+    _sourceField: spawnPoint,0
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: 46ceb14088841400f9cde4dbc43dbaff
+        name: Sokoban Puzzle 1
+        _path: Assets/Scenes/Default Scene/August Puzzles/Sokoban Puzzle 1.unity
+      fullPath: /SPAWNPOINTS/SPAWN
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 312816773
+      editorPrefabRelativePath: 
+      version: 1
+    _data:
+      data: []
   _realSceneRootsForPostBuild: []
   _mergedScenes: []
 --- !u!114 &918362977
@@ -266,7 +297,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isMainScene: 0
   _sceneSetup: []
-  _thisScenePath: Assets/Scenes/Default Scene/Default_Main_Player.unity
+  _thisScenePath: Assets/Scenes/Default Scene/August Puzzles/Sokoban Puzzle Player
+    Updated.unity
 --- !u!4 &918362978
 Transform:
   m_ObjectHideFlags: 0
@@ -289,15 +321,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 2.45
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10.5
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalRotation.x
@@ -445,11 +477,6 @@ Prefab:
     - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
         type: 2}
       propertyPath: movementSettings.crouchSettings.allowCrouch
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
-        type: 2}
-      propertyPath: movementSettings.airControl
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -468,6 +495,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1643824046}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &1334678298 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114076192113971896, guid: 2c153e2fda8e04bde8fbdee2485bbbb1,
+    type: 2}
+  m_PrefabInternal: {fileID: 384277673}
+  m_Script: {fileID: 11500000, guid: 83fe318d1e67e483ea2df1ff3a651e97, type: 3}
 --- !u!1 &1384622073 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1648359132011738, guid: c4850768f41cd124c83f5785253d4aca,
@@ -558,7 +591,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.25
+  m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
