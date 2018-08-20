@@ -452,6 +452,16 @@ Prefab:
       propertyPath: movementSettings.airControl
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: collisionSettings.enableOverlapRecovery
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 143891312400047908, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: m_SkinWidth
+      value: 0.08
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 81792671302470794, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
@@ -659,6 +669,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!143 &1384622086 stripped
+CharacterController:
+  m_PrefabParentObject: {fileID: 143891312400047908, guid: c4850768f41cd124c83f5785253d4aca,
+    type: 2}
+  m_PrefabInternal: {fileID: 989824255}
+--- !u!114 &1384622087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1384622073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c5fb26d4be84b69a54cc96e4a34ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 1384622086}
+  off: 0
 --- !u!114 &1392056233 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114209077639024666, guid: 165e90ffb1a364294b6d740d840d930e,
@@ -792,6 +820,8 @@ MonoBehaviour:
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   - assemblyQualifiedName: Kino.PostProcessing.Streak, jp.keijiro.kino.post-processing.Runtime,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - assemblyQualifiedName: StylizedFog, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   m_AfterStackBundles:
   - assemblyQualifiedName: Kino.PostProcessing.Overlay, jp.keijiro.kino.post-processing.Runtime,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
