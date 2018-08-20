@@ -36,13 +36,9 @@ public class PlatformGuard : MonoBehaviour
 
         else if (string.Equals(collisionTag, "Sokoban"))
         {
-            stuckObjects.Add(col.transform.parent.gameObject);
+            stuckObjects.Add(col.transform.gameObject);
         }
 
-        else if (string.Equals(collisionTagParent,"Sokoban"))
-        {
-            stuckObjects.Add(col.transform.parent.gameObject);
-        }
 
 
     }

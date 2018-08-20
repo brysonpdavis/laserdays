@@ -37,6 +37,7 @@ public class Toolbox : Singleton<Toolbox> {
     {
         player  = GameObject.FindWithTag("Player");
         realWorldParentObject = GameObject.FindWithTag("Real");
-        laserWorldParentObject = GameObject.FindWithTag("Laser");        
+        laserWorldParentObject = GameObject.FindWithTag("Laser");
+
     }
 }

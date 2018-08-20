@@ -16,6 +16,8 @@ public class ItemProperties : MonoBehaviour
     [SerializeField] public bool objectCharge = true;
     [SerializeField] public bool boost = false;
     [SerializeField] public bool touchingzone = false;
+    [SerializeField] public bool inMotion = false;
+
 
     [SerializeField] public int value;
     [SerializeField] public bool touchingPlayer;
