@@ -23,25 +23,31 @@ public class SokobanShift : MonoBehaviour {
     {
         if (other.CompareTag("Sokoban") && (!other.gameObject.Equals(parent))&& !((other.gameObject.layer == (parent.layer+1)) || (other.gameObject.layer == (parent.layer - 1))))
         {
-            //(&& (other.gameObject.layer == parent.layer)) ((was using early, should likely delete))
-
-            Debug.Log("test"+ (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)));
+            //Debug.Log("test"+ (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)));
             if (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)<=1.52f){
-                objectToMove = other.gameObject;
-                positionObject = (CenterObjectRoutine());
-                StopAllCoroutines();
-                StartCoroutine(positionObject);
+                Debug.Log("trying");
+                if (!other.gameObject.GetComponent<ItemProperties>().inMotion)
+                {
+                    objectToMove = other.gameObject;
+                    positionObject = (CenterObjectRoutine());
+                    StartCoroutine(positionObject);
+                }
             }
         }
     }
 
     private IEnumerator CenterObjectRoutine()
     {
+        objectToMove.GetComponent<ItemProperties>().inMotion = true;
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
 
         if (parent.CompareTag("Sokoban")){
             Debug.Log("Sokoban");
+            objectToMove.transform.parent = parent.transform;
+            objectToMove.GetComponent<BoxCollider>().enabled = false;
+
+
             objectsPosition = objectToMove.transform.localPosition;
             moverPosition = snap.localPosition;
             moverPosition.y = objectsPosition.y;
@@ -54,6 +60,9 @@ public class SokobanShift : MonoBehaviour {
                 objectToMove.transform.localPosition = Vector3.Slerp(objectsPosition, moverPosition, ratio);
                 yield return null;
             }
+
+            objectToMove.GetComponent<ItemProperties>().inMotion = false;
+            objectToMove.GetComponent<BoxCollider>().enabled = true;
             Debug.Log("done!" + parent.name);
 
         }
@@ -62,9 +71,12 @@ public class SokobanShift : MonoBehaviour {
         else {
 
             Debug.Log("Static");
+            objectToMove.transform.parent = parent.transform;
+            objectToMove.GetComponent<BoxCollider>().enabled = false;
 
-            objectsPosition = objectToMove.transform.position;
-            moverPosition = snap.position;
+
+            objectsPosition = objectToMove.transform.localPosition;
+            moverPosition = snap.localPosition;
             moverPosition.y = objectsPosition.y;
 
 
@@ -72,9 +84,13 @@ public class SokobanShift : MonoBehaviour {
             {
                 elapsedTime += Time.deltaTime;
                 ratio = elapsedTime / duration;
-                objectToMove.transform.position = Vector3.Slerp(objectsPosition, moverPosition, ratio);
+                objectToMove.transform.localPosition = Vector3.Slerp(objectsPosition, moverPosition, ratio);
                 yield return null;
             }
+            objectToMove.GetComponent<ItemProperties>().inMotion = false;
+            objectToMove.GetComponent<BoxCollider>().enabled = true;
+
+
             Debug.Log("done!" + parent.name);
         }
 
