@@ -6,9 +6,9 @@ Shader "Transition/RealOnlyTransparent"
 	{
 		_Opacity("Opacity", Range( 0 , 1)) = 0
 		[Toggle]_IsFlippable("IsFlippable", Float) = 0
+        [Toggle]_IsSelected("IsSelected", Float) = 0
 		_Color("Color", Color) = (0,0,0,0)
-		_TransitionState("Transition State", Range( 0 , 1)) = 0
-		[Toggle]_IsSelected("IsSelected", Float) = 0
+		_TransitionState("Transition State", Range( 0 , 1)) = 0      
 		_Emission("Emission", Color) = (0,0,0,0)
 		_TintA("Tint A", Color) = (0,0,0,0)
 		_TintB("Tint B", Color) = (0,0,0,0)
@@ -43,7 +43,7 @@ Shader "Transition/RealOnlyTransparent"
 			float4 blendOpDest11 = _Color;
 			o.Albedo = lerp(_Color,2.0f*blendOpDest11*blendOpSrc11 + blendOpDest11*blendOpDest11*(1.0f - 2.0f*blendOpSrc11),_IsSelected).rgb;
 			o.Emission = _Emission.rgb;
-			o.Alpha = ( 1.0 - ( _Opacity * _TransitionState ) );
+			o.Alpha = _Opacity * (1.0 - _TransitionState);
 		}
 
 		ENDCG
