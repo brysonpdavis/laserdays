@@ -43,7 +43,7 @@ Shader "Transition/RealOnlyTransparent"
 			float4 blendOpDest11 = _Color;
 			o.Albedo = lerp(_Color,2.0f*blendOpDest11*blendOpSrc11 + blendOpDest11*blendOpDest11*(1.0f - 2.0f*blendOpSrc11),_IsSelected).rgb;
 			o.Emission = _Emission.rgb;
-			o.Alpha = ( 1.0 - ( _Opacity * _TransitionState ) );
+			o.Alpha = _Opacity * ( 1.0 - _TransitionState );
 		}
 
 		ENDCG
