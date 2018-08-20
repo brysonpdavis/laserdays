@@ -2202,7 +2202,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4211794797194118, guid: 712b2952ba57840a392f8e9c8422b007, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 4211794797194118, guid: 712b2952ba57840a392f8e9c8422b007, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2413,6 +2413,10 @@ Prefab:
     - target: {fileID: 1378064000073054, guid: 712b2952ba57840a392f8e9c8422b007, type: 2}
       propertyPath: m_Layer
       value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1533192734531546, guid: 712b2952ba57840a392f8e9c8422b007, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 712b2952ba57840a392f8e9c8422b007, type: 2}
@@ -6050,6 +6054,23 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02182b56f2b8b4653ad741075b7a475c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &431068940 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1048491043780162, guid: 712b2952ba57840a392f8e9c8422b007,
+    type: 2}
+  m_PrefabInternal: {fileID: 162778933}
+--- !u!114 &431068941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431068940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b8a2115c534f08b89cfb9b4637979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers: []
 --- !u!1 &437673972
 GameObject:
   m_ObjectHideFlags: 0
@@ -8597,7 +8618,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4495708416330708, guid: 6d34d337385e247c385b892c8d7fb912, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 4495708416330708, guid: 6d34d337385e247c385b892c8d7fb912, type: 2}
       propertyPath: m_LocalPosition.z
@@ -11260,7 +11281,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMainScene: 1
-  _sceneSetup: []
+  _sceneSetup:
+  - scene:
+      editorAssetGUID: df0f231b6bd9c4986935ffb3bb371956
+      name: Default_Main_Player
+      _path: Assets/Scenes/Default Scene/Default_Main_Player.unity
+    loadInEditor: 1
+    loadMethod: 1
   _thisScenePath: Assets/Scenes/Default Scene/August Puzzles/Sokoban Puzzle 0.unity
 --- !u!4 &741853348
 Transform:
@@ -29649,35 +29676,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 1, z: 4}
   m_Center: {x: -1, y: 0.5, z: 2}
---- !u!1 &2014141071 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1874308307125014, guid: 2e624b4692d214ee0bbde7ccbf21c376,
-    type: 2}
-  m_PrefabInternal: {fileID: 796698069}
---- !u!114 &2014141073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2014141071}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0d24b8f4ed254101b7817a1f1035509, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  isKey: 0
-  key: 
-  objectCharge: 1
-  boost: 0
-  touchingzone: 0
-  value: 0
-  touchingPlayer: 0
-  reducible: 0
-  unflippable: 0
-  maxvalue: 0
-  minvalue: 0
-  selected: 0
 --- !u!114 &2016459212 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114847757730091582, guid: deae5d03faa53444baa7548aa3e4cb7f,
@@ -31584,6 +31582,25 @@ Prefab:
     - target: {fileID: 1733300038991116, guid: 19796135ee5ea464492d7a2776a21833, type: 2}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737852700830268, guid: 19796135ee5ea464492d7a2776a21833, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65024096599581316, guid: 19796135ee5ea464492d7a2776a21833,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65024096599581316, guid: 19796135ee5ea464492d7a2776a21833,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 65024096599581316, guid: 19796135ee5ea464492d7a2776a21833,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114244580572583010, guid: 19796135ee5ea464492d7a2776a21833, type: 2}

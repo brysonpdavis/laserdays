@@ -16,6 +16,7 @@ public class PlatformEdgeGuard : MonoBehaviour {
     {
         player = Toolbox.Instance.GetPlayer();
         GameObject check = this.transform.parent.transform.parent.transform.parent.transform.gameObject;
+        //Debug.Log(check.name);
         if (check.CompareTag("Sokoban")){
             parent = check;
             isMoveable = true;
@@ -28,21 +29,21 @@ public class PlatformEdgeGuard : MonoBehaviour {
 
         if (other.CompareTag("Guard"))
         {
-            
-            active = true;
-            if (active && secondaryTrigger.active ){
-                associatedCollider.SetActive(false);
-                associatedRenderer.enabled = false;
 
-                if (isMoveable && (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject) && player.GetComponent<MFPP.Modules.PickUpModule>().heldObject.Equals(parent)){
-                    player.GetComponent<MFPP.Modules.PickUpModule>().PutDown();
-                    //PLAY SOUND HERE
-                }
-
+            if (!other.GetComponent<PlatformEdgeGuard>().parent)
+            {
+                ClickIn(other);
             }
 
+            else if (!parent){
+                ClickIn(other);
+            }
 
-        }
+            else if (other.GetComponent<PlatformEdgeGuard>().parent.layer == parent.layer)
+           {
+                ClickIn(other);
+            }
+       }
     }
 
 
@@ -57,5 +58,22 @@ public class PlatformEdgeGuard : MonoBehaviour {
         }
     }
 
+    private void ClickIn (Collider other)
+    {
+        active = true;
+        if (active && secondaryTrigger.active)
+        {
+            associatedCollider.SetActive(false);
+            associatedRenderer.enabled = false;
+
+            if (isMoveable && (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject) && player.GetComponent<MFPP.Modules.PickUpModule>().heldObject.Equals(parent))
+            {
+
+                player.GetComponent<MFPP.Modules.PickUpModule>().PutDown();
+                //PLAY SOUND HERE
+            }
+
+        }
+    }
 
 }
