@@ -6,10 +6,7 @@ using UnityEngine.SceneManagement;
 public class sceneTrigger : MonoBehaviour
 {
 
-    // public GameObject SceneToLoad;
-    public GameObject laserObjects;
-    public GameObject realObjects;
-    public GameObject sharedObjects;
+    public GameObject Interior;
 
     public GameObject backgroundScene;
     private Collider linkedCollider;
@@ -20,21 +17,17 @@ public class sceneTrigger : MonoBehaviour
         player = Toolbox.Instance.GetPlayer().GetComponent<CharacterController>();
         linkedCollider = GetComponent<BoxCollider>();
         backgroundScene = GameObject.FindWithTag("BackgroundLevel");
+        Interior = transform.Find("Interior").gameObject;
 
 
         if (!linkedCollider.bounds.Contains(player.transform.position))
         {
-            laserObjects.SetActive(false);
-            sharedObjects.SetActive(false);
-            realObjects.SetActive(false);
-
+            Interior.SetActive(false);
         }
 
         else
         {
-            laserObjects.SetActive(true);
-            sharedObjects.SetActive(true);
-            realObjects.SetActive(true);
+            Interior.SetActive(true);
         }
 
     }
@@ -45,18 +38,18 @@ public class sceneTrigger : MonoBehaviour
         if (collider.tag.Equals("Player"))
         {
             //if part of the scene isn't loaded upon enter, load all 3 parts
-            if (laserObjects.active == false)
+            if (Interior.active == false)
             {
-                laserObjects.SetActive(true);
-                sharedObjects.SetActive(true);
-                realObjects.SetActive(true);
+
+                Interior.SetActive(true);
+
 
                 //add held object to the scene that the player is entering
                 //  if (player.GetComponentInParent<MFPP.Modules.PickUpModule>().heldObject != null)
                 //  {
 
                 //     GameObject held = player.GetComponentInParent<MFPP.Modules.PickUpModule>().heldObject;
-                //     held.transform.parent = SceneToLoad.transform;
+                //     held.transform.parent = Interior.transform;
             }
 
         }
@@ -77,15 +70,14 @@ public class sceneTrigger : MonoBehaviour
                 // GameObject held = player.GetComponentInParent<MFPP.Modules.PickUpModule>().heldObject;
                 // held.transform.parent = backgroundScene.transform;
             }
-            laserObjects.SetActive(false);
-            sharedObjects.SetActive(false);
-            realObjects.SetActive(false);
+
+            Interior.SetActive(false);
 
             // MeshRenderer m = this.GetComponentInParent<MeshRenderer>();
             // m.enabled = true;
 
             //old scene method
-            //{SceneManager.UnloadSceneAsync(SceneToLoad);
+            //{SceneManager.UnloadSceneAsync(Interior);
 
         }
     }
