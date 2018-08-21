@@ -280,6 +280,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &944696931 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1238615254728040, guid: 165e90ffb1a364294b6d740d840d930e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1643824046}
+--- !u!114 &944696933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 944696931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bbf57ec543cee42a5aa0ec2dd9e457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &989824255
 Prefab:
   m_ObjectHideFlags: 0
@@ -297,7 +313,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.1
+      value: -14.6
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalRotation.x
@@ -387,7 +403,7 @@ Prefab:
     - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
         type: 2}
       propertyPath: movementSettings.smartStrafing
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
         type: 2}
@@ -462,6 +478,29 @@ Prefab:
       propertyPath: m_SkinWidth
       value: 0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: controlSettings.rawInput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400090705472168, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: normalFootstep
+      value: 
+      objectReference: {fileID: 11400000, guid: 4af1df16dda0cd748b3827653c6f8d67,
+        type: 2}
+    - target: {fileID: 114118330808558286, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: footstepSettings.footstepAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4af1df16dda0cd748b3827653c6f8d67,
+        type: 2}
+    - target: {fileID: 114400090705472168, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: draggingFootstep
+      value: 
+      objectReference: {fileID: 11400000, guid: 42cdf06d855b640339dc9e274cda3c85,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 81792671302470794, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
@@ -669,24 +708,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!143 &1384622086 stripped
-CharacterController:
-  m_PrefabParentObject: {fileID: 143891312400047908, guid: c4850768f41cd124c83f5785253d4aca,
-    type: 2}
-  m_PrefabInternal: {fileID: 989824255}
---- !u!114 &1384622087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1384622073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2c5fb26d4be84b69a54cc96e4a34ee2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 1384622086}
-  off: 0
 --- !u!114 &1392056233 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114209077639024666, guid: 165e90ffb1a364294b6d740d840d930e,
@@ -1017,9 +1038,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1119479109278806, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605718682039986, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1238615254728040, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114858102568890774, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1718301292 stripped
