@@ -16,6 +16,11 @@ public class sceneTrigger : MonoBehaviour
         player = Toolbox.Instance.GetPlayer().GetComponent<CharacterController>();
         linkedCollider = GetComponent<BoxCollider>();
         backgroundScene = GameObject.FindWithTag("BackgroundLevel");
+
+        if (!linkedCollider.bounds.Contains(player.transform.position)){
+            SceneToLoad.SetActive(false);
+        }
+
     }
 
     void OnTriggerEnter(Collider collider)

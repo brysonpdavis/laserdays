@@ -42,6 +42,12 @@ public class SokobanShift : MonoBehaviour {
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
 
+        MFPP.Modules.PickUpModule pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
+
+        if (pickUp.heldObject && pickUp.heldObject.Equals(objectToMove)){
+            pickUp.PutDown();
+        }
+
         if (parent.CompareTag("Sokoban")){
             Debug.Log("Sokoban");
             objectToMove.transform.parent = parent.transform;
