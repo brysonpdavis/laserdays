@@ -38,15 +38,6 @@ public class SokobanShift : MonoBehaviour {
 
     private IEnumerator CenterObjectRoutine()
     {
-        MFPP.Modules.PickUpModule playerPickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
-        if (playerPickUp.heldObject && playerPickUp.heldObject.Equals(objectToMove))
-        {
-            playerPickUp.PutDown();
-            duration = .01f;
-
-            //PLAY SOUND HERE! LITTLE NONO SOUND
-        }
-
         objectToMove.GetComponent<ItemProperties>().inMotion = true;
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
