@@ -300,7 +300,7 @@ Prefab:
     - target: {fileID: 114971471027877058, guid: c4850768f41cd124c83f5785253d4aca,
         type: 2}
       propertyPath: audioClips.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.x
@@ -512,6 +512,16 @@ Prefab:
       propertyPath: audioClips.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 5318443e2cb32d74d9f5d294f3c21aa8, type: 3}
+    - target: {fileID: 114971471027877058, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: flippedThisFrame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971471027877058, guid: c4850768f41cd124c83f5785253d4aca,
+        type: 2}
+      propertyPath: space
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 81792671302470794, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
     - {fileID: 114356539959354224, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
@@ -619,6 +629,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 925116528}
+--- !u!114 &1384622088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1384622073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099865a30110c42d8a644bd3f19512d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipClips:
+  - {fileID: 8300000, guid: 444491ff15d576f4ca96820f411534d5, type: 3}
+  - {fileID: 8300000, guid: 49377005601023d4ea1d5c4db02c5a28, type: 3}
+  - {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
+  flipFail: {fileID: 0}
+  sokobanClickOn: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+  sokobanClickOff: {fileID: 8300000, guid: 3bfd8764c9e253b409f5a2253c55f47d, type: 3}
+  sokobanShift: {fileID: 8300000, guid: 01864ec6da4d79740b837072fb921ebc, type: 3}
+  pickup: {fileID: 0}
+  selection: {fileID: 8300000, guid: c1c075a27a0f5e74b9fa429702217ea9, type: 3}
+  platformOn: {fileID: 8300000, guid: 49377005601023d4ea1d5c4db02c5a28, type: 3}
+  platformOff: {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
 --- !u!114 &1392056233 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114209077639024666, guid: 165e90ffb1a364294b6d740d840d930e,

@@ -101,7 +101,8 @@ public class SokobanShift : MonoBehaviour {
         }
 
 
-
+        AudioSource audioSource = GetComponentInParent<AudioSource>();
+        
         mainGuard.SetActive(true);
 
     }

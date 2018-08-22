@@ -15,7 +15,6 @@ public class flipScript : MonoBehaviour {
     private AudioSource audioSource;
     public AudioClip[] audioClips;
     public AudioClip flipFailClip;
-   // private AudioClip flipClip;
     public bool flippedThisFrame = false;
 
 	RaycastManager rm;
@@ -41,6 +40,9 @@ public class flipScript : MonoBehaviour {
 		pc = GetComponent<PlayerCharge>();
         audioSource = GetComponent<AudioSource>();
 		rm = GetComponent<RaycastManager>();
+        SoundBox box = GetComponent<SoundBox>();
+        audioClips = box.flipClips;
+        flipFailClip = box.flipFail;
 	}
 
 	void Update () {
@@ -114,7 +116,6 @@ public class flipScript : MonoBehaviour {
             }
         }
 
-        //audioSource.Play(flipClips[Random.Range(0, flipClips.Length - 1)]);
         audioSource.clip = audioClips[Random.Range(0, audioClips.Length - 1)];
         audioSource.Play();
 
