@@ -64,7 +64,7 @@ public class PlatformEdgeGuard : MonoBehaviour {
             associatedRenderer.enabled = true;
 
 
-            if (secondaryTrigger.active){
+            if (secondaryTrigger.active && clickOffClip){
                 audioSource.clip = clickOffClip;
                 audioSource.Play();
             }
@@ -84,8 +84,12 @@ public class PlatformEdgeGuard : MonoBehaviour {
             associatedRenderer.enabled = false;
 
             //playing sound effect
-           audioSource.clip = clickInClip;
-           audioSource.Play();
+
+            if (clickInClip){
+                audioSource.clip = clickInClip;
+                audioSource.Play();  
+            }
+
 
 
             if (isMoveable && (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject) && player.GetComponent<MFPP.Modules.PickUpModule>().heldObject.Equals(parent))
