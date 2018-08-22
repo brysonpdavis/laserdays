@@ -108,4 +108,32 @@ public class TransitionController: MonoBehaviour
         }
 
     }
+
+    public void PlayerCheck() {
+
+        if (player.layer == 16)
+        { //if player is starting in RW
+
+            components = GetComponentsInChildren<Transition>();
+            foreach (Transition albo in components)
+            {
+                albo.SetStart(0f);
+
+            }
+        }
+
+        else
+        {
+            //player is in LW
+            components = GetComponentsInChildren<Transition>();
+            foreach (Transition albo in components)
+            {
+                albo.SetStart(1f);
+
+            }
+
+        }
+
+    }
+
 }

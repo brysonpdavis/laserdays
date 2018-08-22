@@ -11,6 +11,8 @@ public class sceneTrigger : MonoBehaviour
     public GameObject backgroundScene;
     private Collider linkedCollider;
     private Collider player;
+    private TransitionController[] transitionControllers;
+
 
     private void Start()
     {
@@ -18,6 +20,7 @@ public class sceneTrigger : MonoBehaviour
         linkedCollider = GetComponent<BoxCollider>();
         backgroundScene = GameObject.FindWithTag("BackgroundLevel");
         Interior = transform.Find("Interior").gameObject;
+        transitionControllers = GetComponentsInChildren<TransitionController>();
 
 
         if (!linkedCollider.bounds.Contains(player.transform.position))
@@ -41,15 +44,14 @@ public class sceneTrigger : MonoBehaviour
             if (Interior.active == false)
             {
 
+                foreach (TransitionController transition in transitionControllers) {
+
+                    transition.PlayerCheck();
+
+                }
+
                 Interior.SetActive(true);
 
-
-                //add held object to the scene that the player is entering
-                //  if (player.GetComponentInParent<MFPP.Modules.PickUpModule>().heldObject != null)
-                //  {
-
-                //     GameObject held = player.GetComponentInParent<MFPP.Modules.PickUpModule>().heldObject;
-                //     held.transform.parent = Interior.transform;
             }
 
         }

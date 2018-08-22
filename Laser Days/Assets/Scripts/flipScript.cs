@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
+
 public class flipScript : MonoBehaviour {
 	private Vector3 pos;
 	private float newX;
