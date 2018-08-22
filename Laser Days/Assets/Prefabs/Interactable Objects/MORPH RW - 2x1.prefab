@@ -1348,7 +1348,7 @@ BoxCollider:
   m_GameObject: {fileID: 1966331383550152}
   m_Material: {fileID: 13400000, guid: 5fdb7305c9c9140cb9e9357a8c195a70, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1399,6 +1399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3364bcc1afe4d4bbdc17a3c3ee5296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &114422783627140156
 MonoBehaviour:
@@ -1412,8 +1413,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 0
+  turnOff: 0
   morphDuration: 0.4
   associatedMorph: {fileID: 1535533010487966}
+  internalNonMorphs: []
 --- !u!114 &114441022102688402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1437,7 +1440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1611638738922786}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114566387596188788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1449,7 +1452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1483122986567812}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114591313112245388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1479,6 +1482,7 @@ MonoBehaviour:
   objectCharge: 1
   boost: 0
   touchingzone: 0
+  inMotion: 0
   value: 0
   touchingPlayer: 0
   reducible: 0
@@ -1497,7 +1501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1757233679344932}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114712087466496762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1509,7 +1513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1464579560508282}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114746324295979044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1527,6 +1531,7 @@ MonoBehaviour:
   objectCharge: 1
   boost: 0
   touchingzone: 0
+  inMotion: 0
   value: 0
   touchingPlayer: 0
   reducible: 0
@@ -1546,8 +1551,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 1
+  turnOff: 0
   morphDuration: 0.4
   associatedMorph: {fileID: 1966331383550152}
+  internalNonMorphs: []
 --- !u!114 &114830867484576376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1559,7 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1353186332724378}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114833748763098972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1571,7 +1578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1931706727979268}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114840845254931968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1595,6 +1602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3364bcc1afe4d4bbdc17a3c3ee5296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &114877736347188536
 MonoBehaviour:
@@ -1607,7 +1615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1402183771470300}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114949696021039068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1631,7 +1639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1046149355643008}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114975043252628362
 MonoBehaviour:
   m_ObjectHideFlags: 1

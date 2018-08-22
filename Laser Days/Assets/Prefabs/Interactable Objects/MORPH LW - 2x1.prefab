@@ -553,7 +553,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212216790076318}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: -5}
+  m_LocalPosition: {x: -0.15359032, y: 0.85000026, z: -6.0514913}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 4838791392236166}
@@ -1096,7 +1096,7 @@ BoxCollider:
   m_GameObject: {fileID: 1519585814318066}
   m_Material: {fileID: 13400000, guid: 5fdb7305c9c9140cb9e9357a8c195a70, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1363,7 +1363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1432007471594988}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114053076289734026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1375,7 +1375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1508989139703636}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114087646758511854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1388,8 +1388,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 1
+  turnOff: 0
   morphDuration: 0.4
   associatedMorph: {fileID: 1519585814318066}
+  internalNonMorphs: []
 --- !u!114 &114098938266611064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1413,7 +1415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1122606742633708}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114144134593345006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1450,8 +1452,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: 0
+  turnOff: 0
   morphDuration: 0.4
   associatedMorph: {fileID: 1212216790076318}
+  internalNonMorphs: []
 --- !u!114 &114244688509193690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1463,7 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1807378763461060}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114395025161719676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1493,6 +1497,7 @@ MonoBehaviour:
   objectCharge: 1
   boost: 0
   touchingzone: 0
+  inMotion: 0
   value: 0
   touchingPlayer: 0
   reducible: 0
@@ -1511,7 +1516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1705803139857970}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114558400339371542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1523,6 +1528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3364bcc1afe4d4bbdc17a3c3ee5296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &114648318966413878
 MonoBehaviour:
@@ -1559,7 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1049123148202734}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114770104140895388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1583,7 +1589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1346632357022120}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114845484441503242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1607,7 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65970be67a5e46d094e31e442218e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedBumper: {fileID: 1652630086380612}
+  attachedSecondary: {fileID: 0}
 --- !u!114 &114940500677224156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1619,6 +1625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3364bcc1afe4d4bbdc17a3c3ee5296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &114984534067230086
 MonoBehaviour:
@@ -1637,6 +1644,7 @@ MonoBehaviour:
   objectCharge: 1
   boost: 0
   touchingzone: 0
+  inMotion: 0
   value: 0
   touchingPlayer: 0
   reducible: 0
