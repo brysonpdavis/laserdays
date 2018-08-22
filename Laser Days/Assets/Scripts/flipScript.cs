@@ -13,8 +13,9 @@ public class flipScript : MonoBehaviour {
 
     //sounds
     private AudioSource audioSource;
-    public AudioClip[] flip;
-    private AudioClip flipClip;
+    public AudioClip[] audioClips;
+    public AudioClip flipFailClip;
+   // private AudioClip flipClip;
     public bool flippedThisFrame = false;
 
 	RaycastManager rm;
@@ -65,8 +66,12 @@ public class flipScript : MonoBehaviour {
                     flippedThisFrame = true;
 				}
 				else {
-					// make a sound effect letting player
+					
+                    // make a sound effect letting player
 					// know that they don't have enough charge
+                    audioSource.clip = flipFailClip;
+                    audioSource.Play();
+
 				}
 			}
 			else {
@@ -108,6 +113,12 @@ public class flipScript : MonoBehaviour {
                 pickUp.PickUp(morph.GetComponent<Rigidbody>());
             }
         }
+
+        //audioSource.Play(flipClips[Random.Range(0, flipClips.Length - 1)]);
+        audioSource.clip = audioClips[Random.Range(0, audioClips.Length - 1)];
+        audioSource.Play();
+
+
 
 	}
 

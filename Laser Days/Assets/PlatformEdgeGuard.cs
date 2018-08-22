@@ -12,6 +12,12 @@ public class PlatformEdgeGuard : MonoBehaviour {
     public GameObject parent;
     public GameObject player;
 
+    public AudioSource audioSource;
+    public AudioClip clickInClip;
+    public AudioClip clickOffClip;
+
+
+
     private void Start()
     {
         player = Toolbox.Instance.GetPlayer();
@@ -21,6 +27,8 @@ public class PlatformEdgeGuard : MonoBehaviour {
             parent = check;
             isMoveable = true;
         }
+
+        audioSource = GetComponentInParent<AudioSource>();
         //associatedCollider = GetComponentInChildren<BoxCollider>().gameObject;
     }
 
@@ -55,22 +63,39 @@ public class PlatformEdgeGuard : MonoBehaviour {
             associatedCollider.SetActive(true);
             associatedRenderer.enabled = true;
 
+
+            if (secondaryTrigger.active){
+                audioSource.clip = clickOffClip;
+                audioSource.Play();
+            }
+
+
         }
     }
 
     private void ClickIn (Collider other)
     {
+
+
         active = true;
         if (active && secondaryTrigger.active)
         {
             associatedCollider.SetActive(false);
             associatedRenderer.enabled = false;
 
+            //playing sound effect
+           audioSource.clip = clickInClip;
+           audioSource.Play();
+
+
             if (isMoveable && (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject) && player.GetComponent<MFPP.Modules.PickUpModule>().heldObject.Equals(parent))
             {
 
                 player.GetComponent<MFPP.Modules.PickUpModule>().PutDown();
-                //PLAY SOUND HERE
+
+
+
+
             }
 
         }

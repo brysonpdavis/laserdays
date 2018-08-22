@@ -10,13 +10,13 @@ public class SokobanShift : MonoBehaviour {
     public GameObject mainGuard;
 
 
-
     private IEnumerator positionObject;
     private Vector3 objectsPosition;
     private Vector3 moverPosition;
     private void Start()
     {
-        
+
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -99,12 +99,6 @@ public class SokobanShift : MonoBehaviour {
 
             Debug.Log("done!" + parent.name);
         }
-
-       // Vector3 startpoint = objectToMove.transform.position;
-       // float elapsedTime = 0;
-       // float ratio = elapsedTime / duration;
-       // mainGuard.GetComponent<SokobanGuard>().target = null;
-       // mainGuard.SetActive(false);
 
 
 

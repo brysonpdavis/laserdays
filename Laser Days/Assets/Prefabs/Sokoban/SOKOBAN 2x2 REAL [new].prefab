@@ -42,6 +42,8 @@ GameObject:
   - component: {fileID: 54160543736492354}
   - component: {fileID: 114185343498251466}
   - component: {fileID: 114141378898948068}
+  - component: {fileID: 82602220282577372}
+  - component: {fileID: 114488427273644126}
   m_Layer: 11
   m_Name: SOKOBAN 2x2 REAL [new]
   m_TagString: Sokoban
@@ -957,8 +959,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1048491043780162}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.3, y: 0.5, z: -6}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.519928, y: 3.3999999, z: -9.458051}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 4247039306024682}
@@ -2436,6 +2438,101 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.49999997, z: 0.99999994}
   m_Center: {x: 0, y: -0.24999973, z: -0.0000019073486}
+--- !u!82 &82602220282577372
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048491043780162}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114043575051172302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2454,6 +2551,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+  clickOffClip: {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
 --- !u!114 &114137907956753482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2499,6 +2599,7 @@ MonoBehaviour:
   objectCharge: 0
   boost: 0
   touchingzone: 0
+  inMotion: 0
   value: 0
   touchingPlayer: 0
   reducible: 0
@@ -2552,6 +2653,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+  clickOffClip: {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
 --- !u!114 &114243508515554096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2570,6 +2674,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+  clickOffClip: {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
 --- !u!114 &114273027245292298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2616,6 +2723,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+  clickOffClip: {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
 --- !u!114 &114383062654571388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2634,6 +2744,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+  clickOffClip: {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
 --- !u!114 &114400778447683970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2670,6 +2783,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+--- !u!114 &114488427273644126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048491043780162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b8a2115c534f08b89cfb9b4637979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers: []
 --- !u!114 &114494273515845522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2725,6 +2850,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+  clickOffClip: {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
 --- !u!114 &114709258264449880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2743,6 +2871,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+  clickOffClip: {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
 --- !u!114 &114740896126796908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2813,6 +2944,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
+  clickOffClip: {fileID: 8300000, guid: cb023323ca071f244b8e70ac6757c181, type: 3}
 --- !u!114 &114987731832514828
 MonoBehaviour:
   m_ObjectHideFlags: 1
