@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -179,7 +179,7 @@ namespace MFPP
             get { return CharacterController.stepOffset; }
             set { CharacterController.stepOffset = value; }
         }
-        
+
 
         /// <summary>
         /// The look angles of the <see cref="Player"/>.
@@ -514,8 +514,17 @@ namespace MFPP
             }
         }
 
+        private int overlappingCollidersCount;
+        private Collider[] overlappingColliders;
+        private List<Collider> ignoredColliders;
+
+
         private void Start()
         {
+            overlappingCollidersCount = 0;
+            overlappingColliders = new Collider[256];
+            ignoredColliders = new List<Collider>(256);
+
             CharacterController = GetComponent<CharacterController>();
             CharacterController.enableOverlapRecovery = Collisions.EnableOverlapRecovery;
 
@@ -632,7 +641,7 @@ namespace MFPP
                 {
                     float angle = Mathf.Clamp(Vector3.Angle(Vector3.up, slopeHit.normal), 0f, 90f);
                     float lerp = Mathf.InverseLerp(0, SlopeLimit, angle);
-                    CurrentSlopeSpeedMultiplier = Mathf.Lerp(CurrentSlopeSpeedMultiplier, Movement.SlopeSpeedMultiplierCurve.Evaluate(lerp), Time.fixedDeltaTime * Movement.Acceleration); 
+                    CurrentSlopeSpeedMultiplier = Mathf.Lerp(CurrentSlopeSpeedMultiplier, Movement.SlopeSpeedMultiplierCurve.Evaluate(lerp), Time.fixedDeltaTime * Movement.Acceleration);
                 }
                 else
                 {
@@ -660,7 +669,7 @@ namespace MFPP
                     }
                 }
 
-                if (IsJumping) { // Jump 
+                if (IsJumping) { // Jump
                     FinalMovement += Vector3.up * Movement.Jump.Power;
                    // StartCoroutine(PrintJumpHeight());
                 }
@@ -792,21 +801,62 @@ namespace MFPP
                 }
             }
 
+            ClampFinalMovement();
+
             KinematicMovement = KinematicAngles = Vector3.zero; // Reset kinematic movement and angles as we have used them for this frame
             CollidingColliders.Clear();
             ColliderHits.Clear();
 
+            PreCharacterControllerUpdate ();
+
+            CharacterController.Move(FinalMovement * Time.fixedDeltaTime); // Move the player
+
+            PostCharacterControllerUpdate ();
+
+            if (AfterFinalMovement != null) // After final movement event trigger
+                AfterFinalMovement(FinalMovement);
+        }
+
+        private void PreCharacterControllerUpdate () {
+            Vector3 center = transform.TransformPoint(CharacterController.center);
+            Vector3 delta = (0.5f * CharacterController.height - CharacterController.radius) * Vector3.up;
+            Vector3 bottom = center - delta;
+            Vector3 top = bottom + delta;
+
+            overlappingCollidersCount = Physics.OverlapCapsuleNonAlloc(bottom, top, CharacterController.radius, overlappingColliders);
+
+            for (int i = 0; i < overlappingCollidersCount; i++) {
+                Collider overlappingCollider = overlappingColliders[i];
+
+                if (overlappingCollider.gameObject.isStatic) {
+                    continue;
+                }
+
+                ignoredColliders.Add(overlappingCollider);
+                Physics.IgnoreCollision(CharacterController, overlappingCollider, true);
+            }
+        }
+
+        private void PostCharacterControllerUpdate () {
+            for (int i = 0; i < ignoredColliders.Count; i++) {
+                Collider ignoredCollider = ignoredColliders[i];
+
+                Physics.IgnoreCollision(CharacterController, ignoredCollider, false);
+            }
+
+            ignoredColliders.Clear();
+        }
+
+         void ClampFinalMovement()
+        {
             Vector3 planarFinalMovement = new Vector3(FinalMovement.x, 0, FinalMovement.z);
-            
-            if (planarFinalMovement.magnitude > Movement.MaxSpeed) { // Check to see if the player is moving too fast in the horizontal plane
+
+            if (planarFinalMovement.magnitude > Movement.MaxSpeed) // Check to see if the player is moving too fast in the horizontal plane
+            {
                 planarFinalMovement = Vector3.ClampMagnitude(planarFinalMovement, Movement.MaxSpeed);
                 FinalMovement = new Vector3(planarFinalMovement.x, FinalMovement.y, planarFinalMovement.z); // Clamp the x and z values of FinalMovement to the maximum speed
             }
 
-            CharacterController.Move(FinalMovement * Time.fixedDeltaTime); // Move the player
-
-            if (AfterFinalMovement != null) // After final movement event trigger
-                AfterFinalMovement(FinalMovement);
         }
 
         IEnumerator PrintJumpHeight() {
@@ -1498,7 +1548,7 @@ namespace MFPP
             /// <summary>
             /// The maximum speed the player may travel in the horizontal plane
             /// </summary>
-            public float MaxSpeed 
+            public float MaxSpeed
             {
                 get { return maximumSpeed; }
                 set { maximumSpeed = value; }
