@@ -94,7 +94,11 @@ public class flipScript : MonoBehaviour {
 	}
 
 	void FlipPlayerAndThings (GameObject player, GameObject held, IList<GameObject> things) {
-	
+
+        bool selectedObjects = false;
+
+        if (things.Count > 0) { selectedObjects = true; }
+
         space = !space;
 
         //change the layer that the player is on, for changing its collision detection
@@ -105,6 +109,8 @@ public class flipScript : MonoBehaviour {
         else { player.layer = 15; //set player to laser world
             GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
         } 
+
+
 
 
         if (held)
@@ -123,11 +129,10 @@ public class flipScript : MonoBehaviour {
 
         audioSource.clip = audioClips[Random.Range(0, audioClips.Length - 1)];
         audioSource.Play();
-        
-        if (held || (things.Count>0) ){
 
-            Debug.Log("Ayo");
-            audioSourceSecondary.clip = audioClipsSecondary[Random.Range(0, audioClipsSecondary.Length - 1)];
+        //play secondary sound when there is a held object or are selected objects
+        if (held || (selectedObjects) ){
+                    audioSourceSecondary.clip = audioClipsSecondary[Random.Range(0, audioClipsSecondary.Length - 1)];
             audioSourceSecondary.Play();
         }
 
