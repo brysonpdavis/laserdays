@@ -47,6 +47,9 @@ public class PlatformTrigger : MonoBehaviour {
 
         int checkNumber = 0;
 
+        GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+
+
         foreach (PlatformTrigger trigger in platformTriggers) {
 
             if (trigger.on) {
@@ -68,6 +71,8 @@ public class PlatformTrigger : MonoBehaviour {
         counter -= 1;
         if (counter == 0)
         {
+            GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+
             on = false;
             //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
             platform.GetComponent<PlatformMover>().MovePlatform(end.position, start.position, time);
