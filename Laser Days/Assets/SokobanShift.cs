@@ -76,6 +76,8 @@ public class SokobanShift : MonoBehaviour {
         //for NOT sokoban: aka static obj, we want to use its global position
         else {
 
+            objectToMove.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+
             Debug.Log("Static");
             objectToMove.transform.parent = parent.transform;
             objectToMove.GetComponent<BoxCollider>().enabled = false;
