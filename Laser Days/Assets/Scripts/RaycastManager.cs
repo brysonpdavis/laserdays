@@ -40,11 +40,19 @@ public class RaycastManager : MonoBehaviour {
     [SerializeField] private Text itemNameText;
     private Camera mainCam;
     private PlayerCharge pc;
+    private AudioSource audioSource;
+    private AudioClip selectClip; 
+    private AudioClip deselectClip;
+
 
     void Start () {
         selectedObjs = new List<GameObject>();
         mainCam = Camera.main;
         pc = GetComponent<PlayerCharge>();
+        audioSource = GetComponent<AudioSource>();
+        selectClip = GetComponent<SoundBox>().selection;
+        deselectClip = GetComponent<SoundBox>().deselect;
+
     }
 	
 	// Update is called once per frame
@@ -124,6 +132,12 @@ public class RaycastManager : MonoBehaviour {
                                 hit.collider.GetComponent<Morph>().OnPutDown();
                             }
 
+
+                            //play deselect sound effect
+                            audioSource.clip = deselectClip;
+                            audioSource.Play();
+
+
                         }
                         else 
                         {
@@ -136,6 +150,11 @@ public class RaycastManager : MonoBehaviour {
                                 {
                                     hit.collider.GetComponent<Morph>().OnPickup();
                                 }
+
+                                //play the sound effect
+                                audioSource.clip = selectClip;
+                                audioSource.Play();
+
 
                             }
                         }

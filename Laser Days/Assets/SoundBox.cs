@@ -12,6 +12,8 @@ public class SoundBox : MonoBehaviour {
 
     public AudioClip pickup;
     public AudioClip selection;
+    public AudioClip deselect;
+
 
     public AudioClip platformOn;
     public AudioClip platformOff;
