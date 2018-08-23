@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour {
 
-    public GameObject alternatePlatformContainer;
+    public GameObject platformContainer;
     private PlatformMover[] platform;
 
     //public Transform start;
@@ -31,8 +31,8 @@ public class PlatformTrigger : MonoBehaviour {
         platformTriggers = transform.parent.GetComponentsInChildren<PlatformTrigger>();
         totalTriggers = platformTriggers.Length;
 
-        if (alternatePlatformContainer){
-            platform = alternatePlatformContainer.GetComponentsInChildren<PlatformMover>();
+        if (platformContainer){
+            platform = platformContainer.GetComponentsInChildren<PlatformMover>();
         }
         else {
             platform = transform.parent.GetComponentsInChildren<PlatformMover>();
