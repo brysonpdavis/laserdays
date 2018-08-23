@@ -55,7 +55,7 @@ public class PlatformGuard : MonoBehaviour
 
         if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player") || string.Equals(collisionTag, "Clickable")  || string.Equals(collisionTag, "NoTouch") || string.Equals(collisionTag, "MorphOn")){
 
-            if (!col.GetComponent<ItemProperties>()){
+            if (!col.GetComponent<ItemProperties>() && !string.Equals(collisionTag, "Player")){
                 target = col.transform.parent.gameObject;
             }
             else {
