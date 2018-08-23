@@ -72,12 +72,12 @@ public class PlatformTrigger : MonoBehaviour {
 
             foreach (PlatformMover platformSingle in platform)
             {
-
+                
                 Transform end = platformSingle.end;
-                Transform start = platformSingle.start;
+                Vector3 start = platformSingle.start;
 
                 //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
-                platformSingle.MovePlatform(start.position, end.position, time);
+                platformSingle.MovePlatform(start, end.position, time);
             }
 
         }
@@ -97,8 +97,8 @@ public class PlatformTrigger : MonoBehaviour {
             foreach (PlatformMover platformSingle in platform)
             {
                 Transform end = platformSingle.end;
-                Transform start = platformSingle.start;
-                platformSingle.MovePlatform(end.position, start.position, time);
+                Vector3 start = platformSingle.start;
+                platformSingle.MovePlatform(end.position, start, time);
             }
             audioSource.clip = platformOff;
             audioSource.Play();

@@ -7,12 +7,14 @@ public class PlatformMover : MonoBehaviour {
     public PlatformGuard platformGuard;
     public GameObject mainGuard;
     public PlatformObjectMover[] objectMovers;
-    public Transform start;
+    public  Vector3 start;
     public Transform end;                          
 
     private void Start()
     {
-      // platformGuard = GetComponentInChildren<PlatformGuard>();
+
+        start = this.transform.position;
+        // platformGuard = GetComponentInChildren<PlatformGuard>();
     }
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
