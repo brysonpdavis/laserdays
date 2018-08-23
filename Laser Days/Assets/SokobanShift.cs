@@ -25,7 +25,7 @@ public class SokobanShift : MonoBehaviour {
         {
             //Debug.Log("test"+ (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)));
             if (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)<=1.52f){
-                Debug.Log("trying");
+            //    Debug.Log("attempting to load ");
                 if (!other.gameObject.GetComponent<ItemProperties>().inMotion)
                 {
                     objectToMove = other.gameObject;
@@ -49,7 +49,7 @@ public class SokobanShift : MonoBehaviour {
         }
 
         if (parent.CompareTag("Sokoban")){
-            Debug.Log("Sokoban");
+         //   Debug.Log("Sokoban");
             objectToMove.transform.parent = parent.transform;
             objectToMove.GetComponent<BoxCollider>().enabled = false;
 
@@ -69,7 +69,7 @@ public class SokobanShift : MonoBehaviour {
 
             objectToMove.GetComponent<ItemProperties>().inMotion = false;
             objectToMove.GetComponent<BoxCollider>().enabled = true;
-            Debug.Log("done!" + parent.name);
+         //   Debug.Log("done!" + parent.name);
 
         }
 
@@ -78,7 +78,7 @@ public class SokobanShift : MonoBehaviour {
 
             objectToMove.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
 
-            Debug.Log("Static");
+           // Debug.Log("Static");
             objectToMove.transform.parent = parent.transform;
             objectToMove.GetComponent<BoxCollider>().enabled = false;
 
@@ -99,7 +99,7 @@ public class SokobanShift : MonoBehaviour {
             objectToMove.GetComponent<BoxCollider>().enabled = true;
 
 
-            Debug.Log("done!" + parent.name);
+           // Debug.Log("done!" + parent.name);
         }
 
 

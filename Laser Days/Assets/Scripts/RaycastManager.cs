@@ -68,7 +68,7 @@ public class RaycastManager : MonoBehaviour {
        if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
             
-            if (hit.collider.CompareTag("Clickable") || hit.collider.CompareTag("Sokoban") || hit.collider.CompareTag("MorphOn"))
+            if (hit.collider.CompareTag("Clickable") || hit.collider.CompareTag("Sokoban") || hit.collider.CompareTag("MorphOn") || hit.collider.CompareTag("Wall"))
             
             {
                 CrosshairActive();
@@ -192,8 +192,11 @@ public class RaycastManager : MonoBehaviour {
         if (obj.CompareTag("Clickable"))
         {
             obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+        }
 
-
+        else if (obj.CompareTag("Wall"))
+        {
+            obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
         }
 
         else if (obj.CompareTag("Sokoban"))
