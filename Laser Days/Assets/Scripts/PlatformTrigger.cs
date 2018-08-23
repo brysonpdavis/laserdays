@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour {
 
-    public GameObject platform;
-    public Transform start;
-    public Transform end;
+    public GameObject alternatePlatformContainer;
+    private PlatformMover[] platform;
+
+    //public Transform start;
+    //public Transform end;
     public float time = 3f;
     private int counter;
-    public PlatformTrigger[] platformTriggers;
+    private PlatformTrigger[] platformTriggers;
     public int totalTriggers;
     public bool on = false;
 
@@ -28,6 +30,14 @@ public class PlatformTrigger : MonoBehaviour {
 
         platformTriggers = transform.parent.GetComponentsInChildren<PlatformTrigger>();
         totalTriggers = platformTriggers.Length;
+
+        if (alternatePlatformContainer){
+            platform = alternatePlatformContainer.GetComponentsInChildren<PlatformMover>();
+        }
+        else {
+            platform = transform.parent.GetComponentsInChildren<PlatformMover>();
+
+        }
         
 
     }
@@ -59,8 +69,16 @@ public class PlatformTrigger : MonoBehaviour {
 
         if (checkNumber==totalTriggers)
         {
-            //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
-            platform.GetComponent<PlatformMover>().MovePlatform(start.position, end.position, time);
+
+            foreach (PlatformMover platformSingle in platform)
+            {
+
+                Transform end = platformSingle.end;
+                Transform start = platformSingle.start;
+
+                //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
+                platformSingle.MovePlatform(start.position, end.position, time);
+            }
 
         }
     }
@@ -75,7 +93,13 @@ public class PlatformTrigger : MonoBehaviour {
 
             on = false;
             //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
-            platform.GetComponent<PlatformMover>().MovePlatform(end.position, start.position, time);
+
+            foreach (PlatformMover platformSingle in platform)
+            {
+                Transform end = platformSingle.end;
+                Transform start = platformSingle.start;
+                platformSingle.MovePlatform(end.position, start.position, time);
+            }
             audioSource.clip = platformOff;
             audioSource.Play();
         }

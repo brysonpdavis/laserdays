@@ -7,6 +7,8 @@ public class PlatformMover : MonoBehaviour {
     public PlatformGuard platformGuard;
     public GameObject mainGuard;
     public PlatformObjectMover[] objectMovers;
+    public Transform start;
+    public Transform end;                          
 
     private void Start()
     {
