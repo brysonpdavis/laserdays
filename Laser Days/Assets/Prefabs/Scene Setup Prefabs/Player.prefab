@@ -25,12 +25,14 @@ GameObject:
   - component: {fileID: 114400090705472168}
   - component: {fileID: 114964463929440048}
   - component: {fileID: 114997546448328542}
-  - component: {fileID: 54257702695683254}
-  - component: {fileID: 81209266672467898}
   - component: {fileID: 82901438986702348}
-  - component: {fileID: 114848063517466030}
   - component: {fileID: 114971471027877058}
-  - component: {fileID: 114356539959354224}
+  - component: {fileID: 54314912246769632}
+  - component: {fileID: 81715242402267584}
+  - component: {fileID: 114999677089391130}
+  - component: {fileID: 114902568935276880}
+  - component: {fileID: 114263727132106314}
+  - component: {fileID: 114457519073616458}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -63,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1648359132011738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.6, y: 2.4, z: -11.5}
+  m_LocalPosition: {x: -7.1, y: 3.6, z: 3.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4824881598520282}
@@ -119,7 +121,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!54 &54257702695683254
+--- !u!54 &54314912246769632
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -128,13 +130,13 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.25
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!81 &81209266672467898
+--- !u!81 &81715242402267584
 AudioListener:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -165,8 +167,8 @@ AudioSource:
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassListenerEffects: 1
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -314,7 +316,7 @@ MonoBehaviour:
       allowSprint: 1
       speedMultiplier: 1.66
     crouchSettings:
-      allowCrouch: 1
+      allowCrouch: 0
       allowCrouchJump: 0
       crouchHeight: 0.5
       crouchCameraHeight: 0.5
@@ -325,6 +327,18 @@ MonoBehaviour:
     is3D: 0
     globalVolume: 1
     range: -1
+--- !u!114 &114263727132106314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648359132011738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a09a745bb6149f687b007c41fcd200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
 --- !u!114 &114271711972588286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,33 +404,6 @@ MonoBehaviour:
   m_AfterStackBundles:
   - assemblyQualifiedName: Kino.PostProcessing.Overlay, jp.keijiro.kino.post-processing.Runtime,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
---- !u!114 &114356539959354224
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1648359132011738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9d6fb7cfe2145e7a4ac1ddeb32175f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycastedObj: {fileID: 0}
-  shaderselected: {fileID: 13, guid: 0000000000000000f000000000000000, type: 0}
-  realWorldShader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
-  laserWorldShader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
-  morphShaderselected: {fileID: 0}
-  morphRealWorldShader: {fileID: 4800000, guid: 9b9ccdb909d8949e0b5b037ec83139b7,
-    type: 3}
-  morphLaserWorldShader: {fileID: 4800000, guid: af5d599070b1740ba8464e16fffbd7fb,
-    type: 3}
-  rayLength: 10
-  newLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  playerCharge: {fileID: 114848063517466030}
-  crossHair: {fileID: 0}
-  itemNameText: {fileID: 0}
 --- !u!114 &114400090705472168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -438,8 +425,36 @@ MonoBehaviour:
     m_Bits: 0
   playerCam: {fileID: 4824881598520282}
   heldObject: {fileID: 0}
-  originalFootstep: {fileID: 0}
-  dragFootstep: {fileID: 0}
+  originalFootstep: {fileID: 11400000, guid: 4af1df16dda0cd748b3827653c6f8d67, type: 2}
+  dragFootstep: {fileID: 11400000, guid: 4af1df16dda0cd748b3827653c6f8d67, type: 2}
+--- !u!114 &114457519073616458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648359132011738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099865a30110c42d8a644bd3f19512d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipClips:
+  - {fileID: 8300000, guid: 112f971d818b2417ab0622c88f4a8cd0, type: 3}
+  - {fileID: 8300000, guid: 2d64d7534c38b40c69a4703c3b378ada, type: 3}
+  - {fileID: 8300000, guid: 852edff113fd848bfb2a49850f21451d, type: 3}
+  - {fileID: 8300000, guid: 9ec27f0253a05491da861845d35be071, type: 3}
+  - {fileID: 8300000, guid: 610ef0987e20049729e656d8e4a9df25, type: 3}
+  - {fileID: 8300000, guid: 1b25e77a78cec4c6b8e9df942bf1a1a3, type: 3}
+  - {fileID: 8300000, guid: 5630de8d2cb1c48a1bdf4fa385530ee1, type: 3}
+  flipFail: {fileID: 0}
+  sokobanClickOn: {fileID: 8300000, guid: 59d2c2fc947174385a10ee241cf55e2a, type: 3}
+  sokobanClickOff: {fileID: 8300000, guid: 84f2f8f1564e34535882a03492e26246, type: 3}
+  sokobanShift: {fileID: 8300000, guid: 01864ec6da4d79740b837072fb921ebc, type: 3}
+  pickup: {fileID: 8300000, guid: b79d658ed773f46b69f56e3470dc0146, type: 3}
+  selection: {fileID: 8300000, guid: b79d658ed773f46b69f56e3470dc0146, type: 3}
+  deselect: {fileID: 8300000, guid: 1d13921266e964caa8d1e87978e52ff8, type: 3}
+  platformOn: {fileID: 8300000, guid: cded5697b5bff4ab2ade2ad4fa72cf42, type: 3}
+  platformOff: {fileID: 8300000, guid: 2ca7c441ed36d4f42bd045912050d464, type: 3}
 --- !u!114 &114650538669989582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -506,7 +521,7 @@ MonoBehaviour:
   LandingBobAmplitude: 5
   LandingBobSpeed: 2
   LandingBobLerpSpeed: 5
---- !u!114 &114848063517466030
+--- !u!114 &114902568935276880
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -514,16 +529,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1648359132011738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4c9f99c3e9fa41acbe4b4a1e0491234, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d9d6fb7cfe2145e7a4ac1ddeb32175f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeValue: {fileID: 0}
-  maxCharge: 100
-  currentCharge: 0
-  potentialCharge: 0
-  flipCost: 0
-  radialSlider: {fileID: 0}
-  predictiveRadial: {fileID: 0}
+  raycastedObj: {fileID: 0}
+  shaderselected: {fileID: 13, guid: 0000000000000000f000000000000000, type: 0}
+  realWorldShader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
+  laserWorldShader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
+  morphShaderselected: {fileID: 0}
+  morphRealWorldShader: {fileID: 4800000, guid: 9b9ccdb909d8949e0b5b037ec83139b7,
+    type: 3}
+  morphLaserWorldShader: {fileID: 4800000, guid: af5d599070b1740ba8464e16fffbd7fb,
+    type: 3}
+  rayLength: 10
+  newLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  playerCharge: {fileID: 114999677089391130}
+  crossHair: {fileID: 0}
+  itemNameText: {fileID: 0}
 --- !u!114 &114964463929440048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -550,10 +574,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   envSize: 0
-  space: 0
+  space: 1
   audioClips: []
   flipFailClip: {fileID: 0}
-  flippedThisFrame: 0
+  flippedThisFrame: 1
 --- !u!114 &114997546448328542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -569,9 +593,27 @@ MonoBehaviour:
   executionOrder: 0
   LadderLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 786688
   ClimbSpeed: 3
   ClimbStepTimer: 1
+--- !u!114 &114999677089391130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648359132011738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c9f99c3e9fa41acbe4b4a1e0491234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeValue: {fileID: 0}
+  maxCharge: 100
+  currentCharge: 0
+  potentialCharge: 0
+  flipCost: 0
+  radialSlider: {fileID: 0}
+  predictiveRadial: {fileID: 0}
 --- !u!124 &124896119652050298
 Behaviour:
   m_ObjectHideFlags: 1
