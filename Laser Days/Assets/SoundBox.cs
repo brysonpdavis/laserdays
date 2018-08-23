@@ -19,6 +19,8 @@ public class SoundBox : MonoBehaviour {
 
     public AudioClip platformOn;
     public AudioClip platformOff;
+
+    public AudioClip threshold;
     
 
 
