@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1648359132011738}
   m_IsPrefabParent: 1
+--- !u!1 &1645887260131976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4784090437724072}
+  - component: {fileID: 82026352638930898}
+  m_Layer: 15
+  m_Name: SecondaryAudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1648359132011738
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,8 +85,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4824881598520282}
+  - {fileID: 4784090437724072}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4784090437724072
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1645887260131976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4394295467406840}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4824881598520282
 Transform:
@@ -143,6 +173,101 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1648359132011738}
   m_Enabled: 1
+--- !u!82 &82026352638930898
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1645887260131976}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!82 &82901438986702348
 AudioSource:
   m_ObjectHideFlags: 1
@@ -446,6 +571,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 610ef0987e20049729e656d8e4a9df25, type: 3}
   - {fileID: 8300000, guid: 1b25e77a78cec4c6b8e9df942bf1a1a3, type: 3}
   - {fileID: 8300000, guid: 5630de8d2cb1c48a1bdf4fa385530ee1, type: 3}
+  flipClipsSecondary:
+  - {fileID: 8300000, guid: 112f971d818b2417ab0622c88f4a8cd0, type: 3}
+  - {fileID: 8300000, guid: 2d64d7534c38b40c69a4703c3b378ada, type: 3}
+  - {fileID: 8300000, guid: 852edff113fd848bfb2a49850f21451d, type: 3}
+  - {fileID: 8300000, guid: 9ec27f0253a05491da861845d35be071, type: 3}
+  - {fileID: 8300000, guid: 610ef0987e20049729e656d8e4a9df25, type: 3}
+  - {fileID: 8300000, guid: 1b25e77a78cec4c6b8e9df942bf1a1a3, type: 3}
+  - {fileID: 8300000, guid: 5630de8d2cb1c48a1bdf4fa385530ee1, type: 3}
   flipFail: {fileID: 0}
   sokobanClickOn: {fileID: 8300000, guid: 59d2c2fc947174385a10ee241cf55e2a, type: 3}
   sokobanClickOff: {fileID: 8300000, guid: 84f2f8f1564e34535882a03492e26246, type: 3}
@@ -575,7 +708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   envSize: 0
   space: 1
-  audioClips: []
+  audioSourceSecondary: {fileID: 82026352638930898}
   flipFailClip: {fileID: 0}
   flippedThisFrame: 1
 --- !u!114 &114997546448328542

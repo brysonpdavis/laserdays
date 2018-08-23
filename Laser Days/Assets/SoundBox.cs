@@ -5,6 +5,8 @@ using UnityEngine;
 public class SoundBox : MonoBehaviour {
 
     public AudioClip[] flipClips;
+    public AudioClip[] flipClipsSecondary;
+
     public AudioClip flipFail;
     public AudioClip sokobanClickOn;
     public AudioClip sokobanClickOff;
