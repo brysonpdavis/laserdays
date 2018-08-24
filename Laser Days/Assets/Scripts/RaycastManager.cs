@@ -189,31 +189,23 @@ public class RaycastManager : MonoBehaviour {
         ItemProperties ip = obj.GetComponent<ItemProperties>();
         ip.selected = true;
 
-        if (obj.CompareTag("Clickable"))
-        {
-            obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
-        }
-
-        else if (obj.CompareTag("Wall"))
-        {
-            obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
-        }
-
-        else if (obj.CompareTag("Sokoban"))
-        {
-            //TODO: change this to sokobanselected when there is one!
-            obj.GetComponent<Renderer>().material.shader = shaderselected;
-        }
-
-        else if (obj.CompareTag("MorphOn") || obj.CompareTag("MorphOff") )
-        {
-            //change to morph shader when we have one!
-
-        }
-
-
-
         // change shader back
+
+        switch (obj.tag)
+        {
+            case "Clickable":
+                obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+                break;
+
+            case "Wall":
+                obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+                break;
+
+            case "Sokoban":
+                obj.GetComponent<Renderer>().material.shader = shaderselected;
+                break;
+        }
+
         pc.UpdatePredictingSlider();
     }
 
