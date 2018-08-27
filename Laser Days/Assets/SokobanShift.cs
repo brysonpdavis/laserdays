@@ -13,6 +13,10 @@ public class SokobanShift : MonoBehaviour {
     private IEnumerator positionObject;
     private Vector3 objectsPosition;
     private Vector3 moverPosition;
+
+
+    //moves sokoban onto nearest guard if it's hanging off an edge - either to a sokoban or a 4way guard
+
     private void Start()
     {
 
@@ -21,7 +25,10 @@ public class SokobanShift : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Sokoban") && (!other.gameObject.Equals(parent))&& !((other.gameObject.layer == (parent.layer+1)) || (other.gameObject.layer == (parent.layer - 1))))
+        //checks to be sure the object triggering the movement is a soko, what's being triggered is not this trigger's parent sokoban obj
+        //and checking to be sure the object being moved in the correct world
+        if (other.CompareTag("Sokoban") && (!other.gameObject.Equals(parent))&& 
+            !((other.gameObject.layer == (parent.layer+1)) || (other.gameObject.layer == (parent.layer - 1))))
         {
             //Debug.Log("test"+ (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)));
             if (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)<=1.52f){
@@ -38,11 +45,13 @@ public class SokobanShift : MonoBehaviour {
 
     private IEnumerator CenterObjectRoutine()
     {
-        objectToMove.GetComponent<ItemProperties>().inMotion = true;
-        float elapsedTime = 0;
-        float ratio = elapsedTime / duration;
+        //moves the sokoban into place
 
-        MFPP.Modules.PickUpModule pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
+        //
+            objectToMove.GetComponent<ItemProperties>().inMotion = true;
+            float elapsedTime = 0;
+            float ratio = elapsedTime / duration;
+            MFPP.Modules.PickUpModule pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
 
         if (pickUp.heldObject && pickUp.heldObject.Equals(objectToMove)){
             pickUp.PutDown();

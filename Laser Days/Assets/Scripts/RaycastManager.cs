@@ -58,8 +58,8 @@ public class RaycastManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (this.gameObject.layer == 15) { newLayerMask.value = 1024; } //layermask value of layer 10 is 1024 (2^10)
-        else if (this.gameObject.layer == 16) { newLayerMask.value = 2048; } //layermask value of layer 11 is 2048
+        if (this.gameObject.layer == 15) { newLayerMask = 1 << 0 | 1 << 10 | 1 << 17; } // newLayerMask.value = 1024; } //layermask value of layer 10 is 1024 (2^10)  
+        else if (this.gameObject.layer == 16) { newLayerMask = 1 << 0 | 1 << 11 | 1 << 17; }  //newLayerMask.value = 2048; } //layermask value of layer 11 is 2048   
 
         RaycastHit hit;
         Vector3 fwd = mainCam.transform.TransformDirection(Vector3.forward);
@@ -67,8 +67,17 @@ public class RaycastManager : MonoBehaviour {
 
        if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
-            
-            if (hit.collider.CompareTag("Clickable") || hit.collider.CompareTag("Sokoban") || hit.collider.CompareTag("MorphOn") || hit.collider.CompareTag("Wall"))
+
+            if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 17)
+            {
+                CrosshairNormal();
+                itemNameText.text = null;
+                raycastedObj = null;
+            }
+
+            else if (hit.collider.CompareTag("Clickable") || 
+                hit.collider.CompareTag("Sokoban") || 
+                hit.collider.CompareTag("MorphOn") || hit.collider.CompareTag("Wall"))
             
             {
                 CrosshairActive();
@@ -166,6 +175,7 @@ public class RaycastManager : MonoBehaviour {
         else{
             CrosshairNormal();
             itemNameText.text = null;
+            raycastedObj = null;
             //set text to normal
         }
 	}

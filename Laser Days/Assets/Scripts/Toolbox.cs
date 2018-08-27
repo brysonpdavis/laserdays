@@ -6,6 +6,9 @@ public class Toolbox : Singleton<Toolbox> {
 	GameObject realWorldParentObject;
     GameObject laserWorldParentObject;
     GameObject player;
+    public Color UIColorA;
+    public Color UIColorB;
+    public Color UIColorC;
 
  
 	void Awake () {

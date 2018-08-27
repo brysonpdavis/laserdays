@@ -26,6 +26,8 @@ public class Booster : MonoBehaviour {
             }
         }
 
-        other.GetComponent<Rigidbody>().AddForce(transform.up * boostAmount, ForceMode.Impulse);
+        if (other.GetComponent<Rigidbody>()){
+            other.GetComponent<Rigidbody>().AddForce(transform.up * boostAmount, ForceMode.Impulse);
+        }
 }
 }
