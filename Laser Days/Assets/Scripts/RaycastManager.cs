@@ -68,8 +68,14 @@ public class RaycastManager : MonoBehaviour {
        if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
 
+            //makes sure no objects have the toggle indicating they're within range.
+            //if something was previously in range on the last frame it'll deselect it
+            //objects on the default/shared layers are included in the layermask to block raycasts, but they turn off indicator if that's what the raycast hits
             if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 17)
             {
+                if (raycastedObj) {
+                    raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+                }
                 CrosshairNormal();
                 itemNameText.text = null;
                 raycastedObj = null;
@@ -84,7 +90,7 @@ public class RaycastManager : MonoBehaviour {
                 raycastedObj = hit.collider.gameObject;
                 ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
-
+                hit.collider.gameObject.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
 
                 // SELECT ITEM: 
                 // if item boosts charge, add value to boost on right click
@@ -173,10 +179,16 @@ public class RaycastManager : MonoBehaviour {
         }
 
         else{
+            //if it hits nothing within the layermask it should also mke sure the raycasted obj from the last frame is set to off
+            if (raycastedObj)
+            {
+                raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+                Debug.Log("turning off");
+            }
+            //turns off the rest of the selection indicator
             CrosshairNormal();
             itemNameText.text = null;
             raycastedObj = null;
-            //set text to normal
         }
 	}
 

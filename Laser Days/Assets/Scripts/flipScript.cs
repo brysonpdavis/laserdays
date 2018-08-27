@@ -37,8 +37,15 @@ public class flipScript : MonoBehaviour {
 
         //make sure player is seeing ladders in correct world
         if (space)
-        { GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; } //only see ladders in real world
-            else { GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; } //only see ladders in laser world
+        {
+            GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
+
+         
+        } 
+        else { GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
+        }
+
+        Debug.Log(Camera.main.fieldOfView);
 
 
 		pc = GetComponent<PlayerCharge>();
@@ -105,9 +112,12 @@ public class flipScript : MonoBehaviour {
         if (space)
         { player.layer = 16;  //set player to real world
                 GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
+            Camera.main.GetComponent<CameraTransition>().Flip(true);
         } 
         else { player.layer = 15; //set player to laser world
             GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
+            Camera.main.GetComponent<CameraTransition>().Flip(false);
+
         } 
 
 
