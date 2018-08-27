@@ -15,7 +15,7 @@ public class SelectionRenderChange : MonoBehaviour {
         {
             foreach (Renderer renderChange in Renderers)
             {
-                renderChange.material.SetInt("_IsSelected", 1);
+                renderChange.material.SetInt("_onHover", 1);
             }
         }
     }
@@ -31,10 +31,38 @@ public class SelectionRenderChange : MonoBehaviour {
         {
             foreach (Renderer renderChange in Renderers)
             {
-                renderChange.material.SetInt("_IsSelected", 0);
+                renderChange.material.SetInt("_onHover", 0);
             }
         }
     }
 
+    public void OnHold()
+    {
+
+        Renderers = GetComponentsInChildren<Renderer>();
+        if (Renderers.Length > 0)
+        {
+            foreach (Renderer renderChange in Renderers)
+            {
+                renderChange.material.SetInt("_onHold", 1);
+            }
+        }
+    }
+
+
+
+    public void OnDrop()
+    {
+
+        Renderers = GetComponentsInChildren<Renderer>();
+
+        if (Renderers.Length > 0)
+        {
+            foreach (Renderer renderChange in Renderers)
+            {
+                renderChange.material.SetInt("_onHold", 0);
+            }
+        }
+    }
 
 }

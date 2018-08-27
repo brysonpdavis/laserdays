@@ -12,10 +12,12 @@ public class ItemProperties : MonoBehaviour
 
     Renderer mRenderer;
     Material material;
+    public Shader selectedShader;
+    private RaycastManager rm;
 
     [SerializeField] public bool objectCharge = true;
     [SerializeField] public bool boost = false;
-    [SerializeField] public bool touchingzone = false;
+    public bool touchingzone = false;
     [SerializeField] public bool inMotion = false;
 
 
@@ -25,6 +27,7 @@ public class ItemProperties : MonoBehaviour
     [SerializeField] public bool unflippable;
     [SerializeField] public int maxvalue;
     [SerializeField] public int minvalue;
+
     private bool isRegen;
 
     public bool selected = false;
@@ -40,6 +43,11 @@ public class ItemProperties : MonoBehaviour
         }
 
         else {material.SetInt("_IsFlippable", 0);}
+    }
+
+    private void Start()
+    {
+        rm = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
     }
 
     void Update()
@@ -59,6 +67,23 @@ public class ItemProperties : MonoBehaviour
         yield return new WaitForSeconds(1);
       }
       isRegen = false;
+    }
+
+    public void Select()
+    {
+        material.shader = selectedShader;
+
+    }
+
+    public void UnSelect()
+    {
+        if (this.gameObject.layer == 10)
+        {
+            material.shader = rm.laserWorldShader;
+        }
+
+        else { material.shader = rm.realWorldShader; }
+    
     }
 
 }

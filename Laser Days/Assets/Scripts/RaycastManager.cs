@@ -43,6 +43,7 @@ public class RaycastManager : MonoBehaviour {
     private AudioSource audioSource;
     private AudioClip selectClip; 
     private AudioClip deselectClip;
+    private MFPP.Modules.PickUpModule pickUp;
 
 
     void Start () {
@@ -52,6 +53,7 @@ public class RaycastManager : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         selectClip = GetComponent<SoundBox>().selection;
         deselectClip = GetComponent<SoundBox>().deselect;
+        pickUp = GetComponent<MFPP.Modules.PickUpModule>();
 
     }
 	
@@ -74,7 +76,11 @@ public class RaycastManager : MonoBehaviour {
             if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 17)
             {
                 if (raycastedObj) {
-                    raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+                    if (raycastedObj.GetComponent<SelectionRenderChange>()){
+                        raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
+
+                    }
                 }
                 CrosshairNormal();
                 itemNameText.text = null;
@@ -86,11 +92,31 @@ public class RaycastManager : MonoBehaviour {
                 hit.collider.CompareTag("MorphOn") || hit.collider.CompareTag("Wall"))
             
             {
+
+                if (raycastedObj)
+                {
+                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+                    if (raycastedObj.GetComponent<SelectionRenderChange>())
+                    {
+                        raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
+
+                    }
+                }
+
                 CrosshairActive();
                 raycastedObj = hit.collider.gameObject;
                 ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
-                hit.collider.gameObject.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+
+                if (!pickUp.heldObject || (pickUp.heldObject && !pickUp.heldObject.Equals(raycastedObj))){
+                    if (raycastedObj.GetComponent<SelectionRenderChange>()){
+                        raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
+                    }
+
+                    else hit.collider.gameObject.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                }
+
+
 
                 // SELECT ITEM: 
                 // if item boosts charge, add value to boost on right click
@@ -118,11 +144,11 @@ public class RaycastManager : MonoBehaviour {
 
                                 if (raycastedObj.CompareTag("MorphOn") || raycastedObj.CompareTag("MorphOff")){
                                     raycastedObj.GetComponent<Renderer>().material.shader = morphLaserWorldShader; 
-                                    //raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+                                    //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                                 }
                                 else {
                                     raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
-                                    raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+                                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                                 } 
                             }
                             else if (this.gameObject.layer == 16) { 
@@ -133,7 +159,7 @@ public class RaycastManager : MonoBehaviour {
 
                                 else {
                                     raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader;
-                                    raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+                                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                                 }
                             }
 
@@ -182,7 +208,7 @@ public class RaycastManager : MonoBehaviour {
             //if it hits nothing within the layermask it should also mke sure the raycasted obj from the last frame is set to off
             if (raycastedObj)
             {
-                raycastedObj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+                raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                 Debug.Log("turning off");
             }
             //turns off the rest of the selection indicator
@@ -213,12 +239,13 @@ public class RaycastManager : MonoBehaviour {
 
         if (obj.CompareTag("Clickable"))
         {
-            obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+            // obj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+            obj.GetComponent<ItemProperties>().Select();
         }
 
         else if (obj.CompareTag("Wall"))
         {
-            obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+            obj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
         }
 
         else if (obj.CompareTag("Sokoban"))
