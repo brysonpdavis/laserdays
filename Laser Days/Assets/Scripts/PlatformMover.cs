@@ -57,24 +57,25 @@ public class PlatformMover : MonoBehaviour {
 
         }
 
-    void PlatformObjectsUnselectable()
+    public void PlatformObjectsUnselectable()
     {
         if (platformGuard.isActiveAndEnabled)
         {
             foreach (GameObject obj in platformGuard.stuckObjects)
             {
+              Debug.Log("unSELECT " + obj.name);
                 obj.tag = ("NoTouch");
             }
         }
 
     }
 
-    void PlatformObjectSelectable()
+    public void PlatformObjectSelectable()
     {
 
         foreach (GameObject obj in platformGuard.stuckObjects)
         {
-            Debug.Log("SELECT");
+          //  Debug.Log("SELECT");
             if (obj.GetComponent<ItemProperties>())
             {
                 if (obj.GetComponent<ItemProperties>().unflippable) { obj.tag = ("Sokoban"); }

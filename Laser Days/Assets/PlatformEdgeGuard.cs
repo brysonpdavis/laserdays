@@ -43,15 +43,18 @@ public class PlatformEdgeGuard : MonoBehaviour {
         if (other.CompareTag("Guard"))
         {
 
+            //if the other object isn't the sokoban
             if (!other.GetComponent<PlatformEdgeGuard>().parent)
             {
                 ClickIn(other);
             }
 
+            //if this object isn't a sokoban
             else if (!parent){
                 ClickIn(other);
             }
 
+            //if the other object is on the same layer as this one
             else if (other.GetComponent<PlatformEdgeGuard>().parent.layer == parent.layer)
            {
                 ClickIn(other);
@@ -101,9 +104,6 @@ public class PlatformEdgeGuard : MonoBehaviour {
             {
 
                 player.GetComponent<MFPP.Modules.PickUpModule>().PutDown();
-
-
-
 
             }
 

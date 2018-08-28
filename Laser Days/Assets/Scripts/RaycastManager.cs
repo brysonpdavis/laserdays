@@ -209,7 +209,7 @@ public class RaycastManager : MonoBehaviour {
             if (raycastedObj)
             {
                 raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                Debug.Log("turning off");
+               // Debug.Log("turning off");
             }
             //turns off the rest of the selection indicator
             CrosshairNormal();

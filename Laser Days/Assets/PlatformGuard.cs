@@ -33,10 +33,17 @@ public class PlatformGuard : MonoBehaviour
            // stuckObjects.Add(col.gameObject);
         }
 
+        if (string.Equals(collisionTag, "Sokoban") && (col.transform.position.y >= this.transform.position.y))
+        {
+            stuckObjects.Add(col.gameObject);
+        }
+            
+
         if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")) && (col.transform.position.y <= this.transform.position.y))
         {
             Debug.Log("Go");
             GetComponentInParent<PlatformMover>().StopAllCoroutines();
+            GetComponentInParent<PlatformMover>().PlatformObjectSelectable();
             stuckSokoban.Add(col.transform.gameObject);
         }
 
@@ -53,18 +60,24 @@ public class PlatformGuard : MonoBehaviour
             collisionTagParent = col.transform.parent.tag;
         }
 
-
         if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player") || string.Equals(collisionTag, "Clickable")  || string.Equals(collisionTag, "NoTouch") || string.Equals(collisionTag, "MorphOn")){
 
-            if (!col.GetComponent<ItemProperties>() && !string.Equals(collisionTag, "Player")){
-                target = col.transform.parent.gameObject;
-            }
-            else if (col.transform.position.y > this.transform.position.y){
-                target = col.gameObject;
-            }
+            if (!(col.gameObject.layer == 23 || col.gameObject.layer == 24))
+            {
 
-            if (target){
-                offset = target.transform.position - GetComponentInParent<Transform>().position;
+                if (!col.GetComponent<ItemProperties>() && !string.Equals(collisionTag, "Player"))
+                {
+                    target = col.transform.parent.gameObject;
+                }
+                else if (col.transform.position.y > this.transform.position.y)
+                {
+                    target = col.gameObject;
+                }
+
+                if (target)
+                {
+                    offset = target.transform.position - GetComponentInParent<Transform>().position;
+                }
             }
         }
 
@@ -93,6 +106,7 @@ public class PlatformGuard : MonoBehaviour
                 if (!check.GetComponent<PlatformTrigger>().moving)
                 {
                     check.GetComponent<PlatformTrigger>().MovePlatformToStart();
+
                 }
 
                 else 

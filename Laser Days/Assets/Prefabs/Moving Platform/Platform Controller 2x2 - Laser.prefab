@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 33657395534800776}
   - component: {fileID: 114489882899512416}
   - component: {fileID: 65047105341261432}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CouplingTrigger2
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 33206998345652640}
   - component: {fileID: 114070181233578058}
   - component: {fileID: 65661095133835274}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CouplingTrigger2
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 33748118338400078}
   - component: {fileID: 114616384082859000}
   - component: {fileID: 65704681621978814}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CouplingTrigger2
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 33628942891390442}
   - component: {fileID: 114423161914998184}
   - component: {fileID: 65175178213674650}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CouplingTrigger1
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 33522376978089338}
   - component: {fileID: 114693048544734788}
   - component: {fileID: 65238800815733288}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CouplingTrigger1
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -207,6 +207,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4968679304352970}
+  - component: {fileID: 114438717909633962}
   m_Layer: 10
   m_Name: Platform Controller 2x2 - Laser
   m_TagString: Untagged
@@ -297,7 +298,7 @@ GameObject:
   - component: {fileID: 33314705664492594}
   - component: {fileID: 114596066875482642}
   - component: {fileID: 65395858712976700}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CouplingTrigger1
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -382,7 +383,7 @@ GameObject:
   - component: {fileID: 33263612457065570}
   - component: {fileID: 114811578488494600}
   - component: {fileID: 65389258212095806}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CouplingTrigger2
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -418,7 +419,7 @@ GameObject:
   - component: {fileID: 33890815512976078}
   - component: {fileID: 114742233166139440}
   - component: {fileID: 65964878528999938}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CouplingTrigger1
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -602,7 +603,6 @@ GameObject:
   - component: {fileID: 65617334450117830}
   - component: {fileID: 114208649789714508}
   - component: {fileID: 114351435644648198}
-  - component: {fileID: 114596789450367168}
   - component: {fileID: 82214398143560946}
   m_Layer: 10
   m_Name: Main Trigger
@@ -1060,7 +1060,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1750356610751638}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0.5, z: 5}
+  m_LocalPosition: {x: -0.19999981, y: 0.5, z: 5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4968679304352970}
@@ -1453,7 +1453,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1173017669772106}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 34.5}
+  m_LocalPosition: {x: 5.4, y: 0, z: -1.8000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4363270229764358}
@@ -2611,6 +2611,7 @@ MonoBehaviour:
   time: 5
   totalTriggers: 0
   on: 0
+  moving: 0
 --- !u!114 &114336040460557874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2663,6 +2664,18 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   clickInClip: {fileID: 0}
   clickOffClip: {fileID: 0}
+--- !u!114 &114438717909633962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173017669772106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c396e0186cf47e5930ff85840aca49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggers: []
 --- !u!114 &114472858870799554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2760,19 +2773,6 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   clickInClip: {fileID: 0}
   clickOffClip: {fileID: 0}
---- !u!114 &114596789450367168
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1750356610751638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b403e409c68da4d23a9893b0d9eb8d3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  mainGuard: {fileID: 0}
 --- !u!114 &114616384082859000
 MonoBehaviour:
   m_ObjectHideFlags: 1
