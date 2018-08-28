@@ -9,34 +9,35 @@ public class PlatformGuard : MonoBehaviour
     public GameObject target = null;
     private Vector3 offset;
     public IList<GameObject> stuckObjects;
+    public IList<GameObject> stuckSokoban;
     public GameObject mainGuard;
 
     void Start()
     {
         target = null;
         stuckObjects = new List<GameObject>();
+        stuckSokoban = new List<GameObject>();
+
     }
 
 
     void OnTriggerEnter(Collider col)
     {
         string collisionTag = col.tag;
-        string collisionTagParent = "";
+        //string collisionTagParent = "";
 
-        if (col.transform.parent){
-            collisionTagParent = col.transform.parent.tag;
-        }
 
         if (string.Equals(collisionTag, "MorphOn"))
         {
             //Debug.Log("got one!");
-            stuckObjects.Add(col.gameObject);
+           // stuckObjects.Add(col.gameObject);
         }
 
-
-        else if (string.Equals(collisionTag, "Sokoban"))
+        if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")) && (col.transform.position.y <= this.transform.position.y))
         {
-            stuckObjects.Add(col.transform.gameObject);
+            Debug.Log("Go");
+            GetComponentInParent<PlatformMover>().StopAllCoroutines();
+            stuckSokoban.Add(col.transform.gameObject);
         }
 
 
@@ -58,10 +59,13 @@ public class PlatformGuard : MonoBehaviour
             if (!col.GetComponent<ItemProperties>() && !string.Equals(collisionTag, "Player")){
                 target = col.transform.parent.gameObject;
             }
-            else {
+            else if (col.transform.position.y > this.transform.position.y){
                 target = col.gameObject;
             }
-            offset = target.transform.position - GetComponentInParent<Transform>().position;
+
+            if (target){
+                offset = target.transform.position - GetComponentInParent<Transform>().position;
+            }
         }
 
 
@@ -77,10 +81,27 @@ public class PlatformGuard : MonoBehaviour
             collisionTagParent = col.transform.parent.tag;
         }
 
-        //currently the case for 2x2x1 sokoban which aren't in a container
-        if (string.Equals(collisionTag, "Sokoban") )
+        if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")) && (col.transform.position.y <= this.transform.position.y))
         {
-            stuckObjects.Remove(col.gameObject);
+            //remove the sokoban that's below it from the list
+            stuckSokoban.Remove(col.gameObject);
+            //if there are no stuck objects beneath it and the platform is not being told to move, it should go to its original place
+            if (stuckObjects.Count == 0)
+            {
+                GameObject check = transform.parent.transform.parent.GetComponent<PlatformController>().triggers[0];
+
+                if (!check.GetComponent<PlatformTrigger>().moving)
+                {
+                    check.GetComponent<PlatformTrigger>().MovePlatformToStart();
+                }
+
+                else 
+                {
+                    check.GetComponent<PlatformTrigger>().MovePlatformToEnd();
+                }
+            }
+
+
         }
 
         //for 1x1 sokoban which are in a container, need to check parent

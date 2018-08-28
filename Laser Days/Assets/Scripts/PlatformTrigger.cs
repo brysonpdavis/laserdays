@@ -14,6 +14,7 @@ public class PlatformTrigger : MonoBehaviour {
     private PlatformTrigger[] platformTriggers;
     public int totalTriggers;
     public bool on = false;
+    public bool moving = false;
 
     private AudioClip platformOn;
     private AudioClip platformOff;
@@ -23,6 +24,8 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void Start()
     {
+        platformContainer.GetComponent<PlatformController>().triggers.Add(this.gameObject);
+
         audioSource = GetComponent<AudioSource>();
         SoundBox box = Toolbox.Instance.GetPlayer().GetComponent<SoundBox>();
         platformOn = box.platformOn;
@@ -69,16 +72,7 @@ public class PlatformTrigger : MonoBehaviour {
 
         if (checkNumber==totalTriggers)
         {
-
-            foreach (PlatformMover platformSingle in platform)
-            {
-                
-                Transform end = platformSingle.end;
-                Vector3 start = platformSingle.start;
-
-                //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
-                platformSingle.MovePlatform(start, end.position, time);
-            }
+            MovePlatformToEnd();
 
         }
     }
@@ -89,20 +83,55 @@ public class PlatformTrigger : MonoBehaviour {
         counter -= 1;
         if (counter == 0)
         {
-            GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
-
-            on = false;
-            //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
-
-            foreach (PlatformMover platformSingle in platform)
-            {
-                Transform end = platformSingle.end;
-                Vector3 start = platformSingle.start;
-                platformSingle.MovePlatform(end.position, start, time);
-            }
-            audioSource.clip = platformOff;
-            audioSource.Play();
+            MovePlatformToStart();
         }
     }
+
+
+    public void MovePlatformToEnd () 
+    {
+        foreach (PlatformMover platformSingle in platform)
+        {
+
+            Transform end = platformSingle.end;
+            Vector3 start = platformSingle.start;
+
+            //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
+            platformSingle.MovePlatform(start, end.position, time);
+
+        }
+
+        foreach (PlatformTrigger trigger in platformTriggers)
+        {
+            moving = true;
+
+        }
+    }
+
+    public void MovePlatformToStart () 
+    {
+        GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
+
+        on = false;
+        //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
+
+        foreach (PlatformMover platformSingle in platform)
+        {
+            Transform end = platformSingle.end;
+            Vector3 start = platformSingle.start;
+            platformSingle.MovePlatform(end.position, start, time);
+        }
+
+        foreach (PlatformTrigger trigger in platformTriggers)
+        {
+            moving = false;
+
+        }
+
+        audioSource.clip = platformOff;
+        audioSource.Play();
+    }
+
+
 
 }
