@@ -103,7 +103,7 @@ public class PlatformGuard : MonoBehaviour
 
     void LateUpdate()
     {
-        if (target != null)
+        if (target)
         {
             target.transform.position = GetComponentInParent<Transform>().position + offset;
         }

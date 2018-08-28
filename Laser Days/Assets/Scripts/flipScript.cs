@@ -45,7 +45,7 @@ public class flipScript : MonoBehaviour {
         else { GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
         }
 
-        Debug.Log(Camera.main.fieldOfView);
+        //Debug.Log(Camera.main.fieldOfView);
 
 
 		pc = GetComponent<PlayerCharge>();
