@@ -44,6 +44,7 @@ public class RaycastManager : MonoBehaviour {
     private AudioClip selectClip; 
     private AudioClip deselectClip;
     private MFPP.Modules.PickUpModule pickUp;
+    private IconContainer iconContainer;
 
 
     void Start () {
@@ -54,6 +55,7 @@ public class RaycastManager : MonoBehaviour {
         selectClip = GetComponent<SoundBox>().selection;
         deselectClip = GetComponent<SoundBox>().deselect;
         pickUp = GetComponent<MFPP.Modules.PickUpModule>();
+        iconContainer = Toolbox.Instance.GetIconContainer();
 
     }
 	
@@ -92,6 +94,9 @@ public class RaycastManager : MonoBehaviour {
                 hit.collider.CompareTag("MorphOn") || hit.collider.CompareTag("Wall"))
             
             {
+                //TODO: IconCheck() Here
+                IconCheck(hit.collider.gameObject);
+
 
                 if (raycastedObj)
                 {
@@ -202,6 +207,7 @@ public class RaycastManager : MonoBehaviour {
                     }
                 }
             }
+
         }
 
         else{
@@ -229,6 +235,9 @@ public class RaycastManager : MonoBehaviour {
 
     void CrosshairNormal()
     {
+        if (!pickUp.heldObject){
+            iconContainer.SetDefault();
+        }
         crossHair.color = Color.clear;
     }
 
@@ -294,4 +303,29 @@ public class RaycastManager : MonoBehaviour {
     public int SumSelectedObjects() {
         return SumList(selectedObjs);
     }
+
+    public void IconCheck(GameObject other)
+    {
+        if (!pickUp.heldObject)
+        {
+            if (Vector3.Distance(other.transform.position, this.transform.position)<= pickUp.MaxPickupDistance)
+            {
+                iconContainer.SetOpenHand();
+            }
+
+            else if (!other.GetComponent<ItemProperties>().unflippable) 
+            {
+                iconContainer.SetSelectHover();    
+            }
+
+            else {
+                
+                iconContainer.SetInteractHover();
+            }
+
+        }
+
+
+    }
+
 }

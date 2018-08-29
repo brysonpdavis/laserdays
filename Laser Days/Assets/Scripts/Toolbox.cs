@@ -6,6 +6,7 @@ public class Toolbox : Singleton<Toolbox> {
 	GameObject realWorldParentObject;
     GameObject laserWorldParentObject;
     GameObject player;
+    IconContainer iconContainer;
     public Color UIColorA;
     public Color UIColorB;
     public Color UIColorC;
@@ -36,11 +37,17 @@ public class Toolbox : Singleton<Toolbox> {
     {
         return player;
     }
+
+    public IconContainer GetIconContainer()
+    {
+        return iconContainer;
+    }
     public void UpdateToolbox()
     {
         player  = GameObject.FindWithTag("Player");
         realWorldParentObject = GameObject.FindWithTag("Real");
         laserWorldParentObject = GameObject.FindWithTag("Laser");
+        iconContainer = GameObject.FindWithTag("IconContainer").GetComponent<IconContainer>();
 
     }
 }
