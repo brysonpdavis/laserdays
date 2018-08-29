@@ -71,7 +71,6 @@ public class RaycastManager : MonoBehaviour {
 
        if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
-
             //makes sure no objects have the toggle indicating they're within range.
             //if something was previously in range on the last frame it'll deselect it
             //objects on the default/shared layers are included in the layermask to block raycasts, but they turn off indicator if that's what the raycast hits
@@ -95,7 +94,7 @@ public class RaycastManager : MonoBehaviour {
             
             {
                 //TODO: IconCheck() Here
-                IconCheck(hit.collider.gameObject);
+                IconCheck(hit.distance, hit.collider.gameObject);
 
 
                 if (raycastedObj)
@@ -304,16 +303,16 @@ public class RaycastManager : MonoBehaviour {
         return SumList(selectedObjs);
     }
 
-    public void IconCheck(GameObject other)
+    public void IconCheck(float distance, GameObject raycastedObj)
     {
         if (!pickUp.heldObject)
         {
-            if (Vector3.Distance(other.transform.position, this.transform.position)<= pickUp.MaxPickupDistance)
+            if (distance <= pickUp.MaxPickupDistance)
             {
                 iconContainer.SetOpenHand();
             }
 
-            else if (!other.GetComponent<ItemProperties>().unflippable) 
+            else if (!raycastedObj.GetComponent<ItemProperties>().unflippable) 
             {
                 iconContainer.SetSelectHover();    
             }
