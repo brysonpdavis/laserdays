@@ -45,6 +45,7 @@ public class RaycastManager : MonoBehaviour {
     private AudioClip deselectClip;
     private MFPP.Modules.PickUpModule pickUp;
     private IconContainer iconContainer;
+    private Transform playerCam;
 
 
     void Start () {
@@ -56,6 +57,7 @@ public class RaycastManager : MonoBehaviour {
         deselectClip = GetComponent<SoundBox>().deselect;
         pickUp = GetComponent<MFPP.Modules.PickUpModule>();
         iconContainer = Toolbox.Instance.GetIconContainer();
+        playerCam = GetComponentInChildren<Camera>().transform;
 
     }
 	
@@ -305,11 +307,30 @@ public class RaycastManager : MonoBehaviour {
 
     public void IconCheck(float distance, GameObject raycastedObj)
     {
+        
+
+
+
         if (!pickUp.heldObject)
         {
             if (distance <= pickUp.MaxPickupDistance)
             {
-                iconContainer.SetOpenHand();
+                if ((playerCam.transform.localEulerAngles.x > 65f) && (playerCam.transform.localEulerAngles.x < 91f) && crossHair.color == new Color32(255, 222, 77, 255))
+                {
+                    if (!raycastedObj.GetComponent<ItemProperties>().unflippable)
+                    {
+                        iconContainer.SetSelectHover();  
+                    }
+
+                    else {
+                        iconContainer.SetInteractHover();
+                    }
+
+                }
+
+                else {
+                    iconContainer.SetOpenHand(); 
+                }
             }
 
             else if (!raycastedObj.GetComponent<ItemProperties>().unflippable) 

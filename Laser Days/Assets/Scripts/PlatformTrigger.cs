@@ -10,7 +10,7 @@ public class PlatformTrigger : MonoBehaviour {
     //public Transform start;
     //public Transform end;
     public float time = 3f;
-    private int counter;
+    public int counter;
     private PlatformTrigger[] platformTriggers;
     public int totalTriggers;
     public bool on = false;
@@ -90,6 +90,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     public void MovePlatformToEnd () 
     {
+
         foreach (PlatformMover platformSingle in platform)
         {
 
@@ -119,6 +120,7 @@ public class PlatformTrigger : MonoBehaviour {
         {
             Transform end = platformSingle.end;
             Vector3 start = platformSingle.start;
+            platformSingle.StopAllCoroutines();
             platformSingle.MovePlatform(end.position, start, time);
         }
 

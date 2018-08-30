@@ -41,7 +41,7 @@ public class PlatformGuard : MonoBehaviour
 
         if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")) && (col.transform.position.y <= this.transform.position.y))
         {
-            Debug.Log("Go");
+           // Debug.Log("Go");
             GetComponentInParent<PlatformMover>().StopAllCoroutines();
             GetComponentInParent<PlatformMover>().PlatformObjectSelectable();
             stuckSokoban.Add(col.transform.gameObject);
