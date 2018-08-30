@@ -63,8 +63,10 @@ public class PlatformMover : MonoBehaviour {
         {
             foreach (GameObject obj in platformGuard.stuckObjects)
             {
-              Debug.Log("unSELECT " + obj.name);
-                obj.tag = ("NoTouch");
+                if (!obj.CompareTag("Player"))
+                {
+                    obj.tag = ("NoTouch");
+                }
             }
         }
 

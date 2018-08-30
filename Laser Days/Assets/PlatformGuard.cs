@@ -9,15 +9,20 @@ public class PlatformGuard : MonoBehaviour
     public GameObject target = null;
     private Vector3 offset;
     public IList<GameObject> stuckObjects;
+    public IList<Vector3> stuckObjectsOffset;
     public IList<GameObject> stuckSokoban;
     public GameObject mainGuard;
+    private PlatformController platformController;
 
     void Start()
     {
         target = null;
         stuckObjects = new List<GameObject>();
+        stuckObjectsOffset = new List<Vector3>();
         stuckSokoban = new List<GameObject>();
 
+        //main controller is always in guard's parents parent
+        platformController = transform.parent.transform.parent.GetComponent<PlatformController>();
     }
 
 
@@ -30,21 +35,32 @@ public class PlatformGuard : MonoBehaviour
         if (string.Equals(collisionTag, "MorphOn"))
         {
             //Debug.Log("got one!");
-           // stuckObjects.Add(col.gameObject);
+            // stuckObjects.Add(col.gameObject);
         }
 
-        if (string.Equals(collisionTag, "Sokoban") && (col.transform.position.y >= this.transform.position.y))
+        if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player")) && (col.transform.position.y >= this.transform.position.y))
         {
             stuckObjects.Add(col.gameObject);
+            Debug.Log("adding " + col.name);
         }
-            
+
 
         if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")) && (col.transform.position.y <= this.transform.position.y))
         {
-           // Debug.Log("Go");
-            GetComponentInParent<PlatformMover>().StopAllCoroutines();
-            GetComponentInParent<PlatformMover>().PlatformObjectSelectable();
-            stuckSokoban.Add(col.transform.gameObject);
+            if (platformController.isGroup)
+            {
+                foreach (PlatformMover platform in platformController.platformMovers)
+                {
+                    platform.StopAllCoroutines();
+                    platform.PlatformObjectSelectable();
+                }
+            }
+
+            else {
+                GetComponentInParent<PlatformMover>().StopAllCoroutines();
+                GetComponentInParent<PlatformMover>().PlatformObjectSelectable();
+                stuckSokoban.Add(col.transform.gameObject);
+            }
         }
 
 
@@ -60,29 +76,43 @@ public class PlatformGuard : MonoBehaviour
             collisionTagParent = col.transform.parent.tag;
         }
 
-        if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player") || string.Equals(collisionTag, "Clickable")  || string.Equals(collisionTag, "NoTouch") || string.Equals(collisionTag, "MorphOn")){
+        if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player") || string.Equals(collisionTag, "Clickable") || string.Equals(collisionTag, "NoTouch") || string.Equals(collisionTag, "MorphOn"))
+        {
 
             if (!(col.gameObject.layer == 23 || col.gameObject.layer == 24))
             {
 
                 if (!col.GetComponent<ItemProperties>() && !string.Equals(collisionTag, "Player"))
                 {
-                    target = col.transform.parent.gameObject;
+                   // target = col.transform.parent.gameObject;
                 }
                 else if (col.transform.position.y > this.transform.position.y)
                 {
                     target = col.gameObject;
                 }
 
+
+                /*
                 if (target)
                 {
                     offset = target.transform.position - GetComponentInParent<Transform>().position;
                 }
+                */
+
+                //run through all stuck objects, get offset value for each of them
+                stuckObjectsOffset.Clear();
+                for (int i = 0; i < stuckObjects.Count; i++)
+                {
+                    stuckObjectsOffset.Add(stuckObjects[i].transform.position - GetComponentInParent<Transform>().position);
+
+                    // target.transform.position = GetComponentInParent<Transform>().position + offset;
+                }
+
             }
         }
 
 
-            }
+    }
 
     void OnTriggerExit(Collider col)
     {
@@ -96,9 +126,20 @@ public class PlatformGuard : MonoBehaviour
 
         if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")) && (col.transform.position.y <= this.transform.position.y))
         {
-            //remove the sokoban that's below it from the list
-            stuckSokoban.Remove(col.gameObject);
-            //if there are no stuck objects beneath it and the platform is not being told to move, it should go to its original place
+
+            if (platformController.isGroup)
+            {
+                foreach (PlatformMover platform in platformController.platformMovers)
+                {
+                    platform.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Remove(col.gameObject);
+                }
+            }
+            else 
+                {
+                    stuckSokoban.Remove(col.gameObject);
+                }
+
+
             if (stuckObjects.Count == 0)
             {
                 GameObject check = transform.parent.transform.parent.GetComponent<PlatformController>().triggers[0];
@@ -109,19 +150,18 @@ public class PlatformGuard : MonoBehaviour
 
                 }
 
-                else 
+                else
                 {
                     check.GetComponent<PlatformTrigger>().MovePlatformToEnd();
                 }
             }
 
-
         }
 
         //for 1x1 sokoban which are in a container, need to check parent
-        else if (string.Equals(collisionTagParent, "Sokoban"))
+        else if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player"))
         {
-            stuckObjects.Remove(col.transform.parent.gameObject);
+            stuckObjects.Remove(col.gameObject);
         }
 
         else if (string.Equals(collisionTag, "MorphOn"))
@@ -138,9 +178,17 @@ public class PlatformGuard : MonoBehaviour
 
     void LateUpdate()
     {
-        if (target)
+
+        for (int i = 0; i < stuckObjects.Count; i++)
         {
-            target.transform.position = GetComponentInParent<Transform>().position + offset;
+            //set the offset for each obj
+            stuckObjects[i].transform.position = GetComponentInParent<Transform>().position + stuckObjectsOffset[i];
+            Debug.Log("Stuck " + stuckObjects[i].name);
+
+
+            // target.transform.position = GetComponentInParent<Transform>().position + offset;
         }
+        // target.transform.position = GetComponentInParent<Transform>().position + offset;
     }
+
 }

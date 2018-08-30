@@ -19,8 +19,12 @@ public class PlatformObjectMover : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Sokoban") || other.CompareTag("MorphOn")){
-            incorrect = true;
+
+
+        if ((other.CompareTag("Sokoban") || other.CompareTag("MorphOn")) && (other.gameObject.layer == mainGuard.layer)){
+                Debug.Log("here we go");
+                incorrect = true;
+
             objectToMove = other.gameObject;
             if (motionCheck && mainGuard.GetComponent<PlatformGuard>().target && mainGuard.GetComponent<PlatformGuard>().target.Equals(objectToMove))
             {
@@ -58,7 +62,18 @@ public class PlatformObjectMover : MonoBehaviour {
         Vector3 startpoint = objectToMove.transform.position;
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
-        mainGuard.GetComponent<PlatformGuard>().target = null;
+
+        PlatformGuard platformGuard = mainGuard.GetComponent<PlatformGuard>();
+        int index = platformGuard.stuckObjects.IndexOf(objectToMove);
+        Debug.Log("stuck obj: " + platformGuard.stuckObjects.Count);
+        Debug.Log(index);
+        Debug.Log("stuck offset: " + platformGuard.stuckObjectsOffset.Count);
+
+
+        platformGuard.stuckObjects.Remove(objectToMove);
+        platformGuard.stuckObjectsOffset.Remove(objectToMove.transform.position - mainGuard.transform.position);
+
+        // mainGuard.GetComponent<PlatformGuard>().target = null;
         mainGuard.SetActive(false);
 
         while (ratio < 1f)
@@ -75,6 +90,11 @@ public class PlatformObjectMover : MonoBehaviour {
             yield return null;
         }
         mainGuard.SetActive(true);
+
+        platformGuard.stuckObjects.Add(objectToMove);
+        platformGuard.stuckObjectsOffset.Add((objectToMove.transform.position - mainGuard.transform.position));
+        incorrect = false;
+
     }
 }
 
