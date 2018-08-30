@@ -9,7 +9,7 @@ Material:
   m_Name: Default_Prototype Both
   m_Shader: {fileID: 4800000, guid: fc42ef0c3a7724442baa9257b1f3b22a, type: 3}
   m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 1
+  m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -23,11 +23,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoLaser:
-        m_Texture: {fileID: 2800000, guid: 2bc11ffdb946b41458b9dc99c2bc57c2, type: 3}
+        m_Texture: {fileID: 2800000, guid: b88ad88c9fe2a45a2ae52d7f4bc9ada6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoReal:
-        m_Texture: {fileID: 2800000, guid: 823e8f59cd24e40f0ab3d7a1074aa7e1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9eb0c797d10a44d419d36c8f396f77ad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -71,6 +71,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalLaser:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalReal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -119,6 +127,7 @@ Material:
     - _Lightmapping: 1
     - _Metallic: 0
     - _Mode: 0
+    - _NormalScale: 6.588235
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Phase: 1
@@ -130,7 +139,7 @@ Material:
     - _UVSec: 1
     - _Wavelength: 0.17857142
     - _ZWrite: 1
-    - __dirty: 1
+    - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.67910445, g: 0.67910445, b: 0.67910445, a: 1}
