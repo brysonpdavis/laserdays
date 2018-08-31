@@ -41,7 +41,7 @@ public class PlatformGuard : MonoBehaviour
         if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player")) && (col.transform.position.y >= this.transform.position.y))
         {
             stuckObjects.Add(col.gameObject);
-            Debug.Log("adding " + col.name);
+           // Debug.Log("adding " + col.name);
         }
 
 
@@ -78,7 +78,6 @@ public class PlatformGuard : MonoBehaviour
 
         if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player") || string.Equals(collisionTag, "Clickable") || string.Equals(collisionTag, "NoTouch") || string.Equals(collisionTag, "MorphOn"))
         {
-
             if (!(col.gameObject.layer == 23 || col.gameObject.layer == 24))
             {
 
@@ -126,6 +125,8 @@ public class PlatformGuard : MonoBehaviour
 
         if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")) && (col.transform.position.y <= this.transform.position.y))
         {
+            //Debug.Log("trying to unstick");
+
 
             if (platformController.isGroup)
             {
@@ -140,7 +141,7 @@ public class PlatformGuard : MonoBehaviour
                 }
 
 
-            if (stuckObjects.Count == 0)
+            if (stuckSokoban.Count == 0)
             {
                 GameObject check = transform.parent.transform.parent.GetComponent<PlatformController>().triggers[0];
 

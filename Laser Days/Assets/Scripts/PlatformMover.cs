@@ -19,7 +19,7 @@ public class PlatformMover : MonoBehaviour {
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
     {
-        Debug.Log("moving again" + this.name);
+        //Debug.Log("moving again" + this.name);
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
         checkObjectsPlace();

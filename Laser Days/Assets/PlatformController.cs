@@ -17,8 +17,8 @@ public class PlatformController : MonoBehaviour {
         foreach (PlatformMover platform in platformMovers)
         {
             platform.StopAllCoroutines();
-            platform.PlatformObjectSelectable();
-            Debug.Log(platform.name);
+         //   platform.PlatformObjectSelectable();
+          //  Debug.Log(platform.name);
         }
     }
 }

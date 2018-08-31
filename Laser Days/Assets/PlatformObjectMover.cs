@@ -22,7 +22,7 @@ public class PlatformObjectMover : MonoBehaviour {
 
 
         if ((other.CompareTag("Sokoban") || other.CompareTag("MorphOn")) && (other.gameObject.layer == mainGuard.layer)){
-                Debug.Log("here we go");
+             //   Debug.Log("here we go");
                 incorrect = true;
 
             objectToMove = other.gameObject;
