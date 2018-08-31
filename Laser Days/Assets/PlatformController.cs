@@ -11,5 +11,15 @@ public class PlatformController : MonoBehaviour {
     {
         platformMovers = GetComponentsInChildren<PlatformMover>();
     }
+
+    public void StopPlatforms()
+    {
+        foreach (PlatformMover platform in platformMovers)
+        {
+            platform.StopAllCoroutines();
+            platform.PlatformObjectSelectable();
+            Debug.Log(platform.name);
+        }
+    }
 }
 

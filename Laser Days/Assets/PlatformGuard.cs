@@ -12,7 +12,7 @@ public class PlatformGuard : MonoBehaviour
     public IList<Vector3> stuckObjectsOffset;
     public IList<GameObject> stuckSokoban;
     public GameObject mainGuard;
-    private PlatformController platformController;
+    public PlatformController platformController;
 
     void Start()
     {
@@ -183,7 +183,7 @@ public class PlatformGuard : MonoBehaviour
         {
             //set the offset for each obj
             stuckObjects[i].transform.position = GetComponentInParent<Transform>().position + stuckObjectsOffset[i];
-            Debug.Log("Stuck " + stuckObjects[i].name);
+           // Debug.Log("Stuck " + stuckObjects[i].name);
 
 
             // target.transform.position = GetComponentInParent<Transform>().position + offset;

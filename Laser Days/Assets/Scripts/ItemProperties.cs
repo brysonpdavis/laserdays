@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class ItemProperties : MonoBehaviour
 {
-    [Header("Your Clickables")]
+    public enum ObjectType { Clickable, Sokoban1x1, Sokoban2x2, Morph};
+    public ObjectType objectType;
+
+    [Header("Attributes")]
 
     public string itemName;
     public bool isKey;
     public string key = null;
 
+
     Renderer mRenderer;
     Material material;
     public Shader selectedShader;
+    public bool unflippable;
     private RaycastManager rm;
+    public bool objectCharge = true;
 
-    [SerializeField] public bool objectCharge = true;
-    [SerializeField] public bool boost = false;
-    public bool touchingzone = false;
-    [SerializeField] public bool inMotion = false;
-
-
-    [SerializeField] public int value;
-    [SerializeField] public bool touchingPlayer;
-    [SerializeField] public bool reducible;
-    [SerializeField] public bool unflippable;
-    [SerializeField] public int maxvalue;
-    [SerializeField] public int minvalue;
+    [HideInInspector] public bool boost = false;
+    [HideInInspector] public bool touchingzone = false;
+    [HideInInspector] public bool inMotion = false;
+    [HideInInspector]public int value;
+    [HideInInspector] public bool touchingPlayer;
+    [HideInInspector]public bool reducible;
+    [HideInInspector]public int maxvalue;
+    [HideInInspector]public int minvalue;
 
     private bool isRegen;
 
