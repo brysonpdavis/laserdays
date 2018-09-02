@@ -28,24 +28,30 @@ public class PlatformGuard : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        string collisionTag = col.tag;
+        string collisionTag = "Null";
+            if (col.CompareTag("Player")) { collisionTag = "Player"; }
+            else if (col.GetComponent<ItemProperties>()) { collisionTag = col.GetComponent<ItemProperties>().objectType.ToString(); }
         //string collisionTagParent = "";
 
 
         if (string.Equals(collisionTag, "MorphOn"))
         {
-            //Debug.Log("got one!");
-            // stuckObjects.Add(col.gameObject);
         }
 
-        if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player")) && (col.transform.position.y >= this.transform.position.y))
+        //objects colliding from above travel along
+        if ((string.Equals(collisionTag, "Sokoban1x1") || 
+             string.Equals(collisionTag, "Sokoban2x2") ||  
+             string.Equals(collisionTag, "Player"))
+            && (col.transform.position.y >= this.transform.position.y))
         {
             stuckObjects.Add(col.gameObject);
-           // Debug.Log("adding " + col.name);
         }
 
-
-        if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")) && (col.transform.position.y <= this.transform.position.y))
+        //objects colliding from below make the platform (either single or as group) get stuck
+        if ((string.Equals(collisionTag, "Sokoban1x1") || 
+             string.Equals(collisionTag, "Sokoban2x2") || 
+             string.Equals(collisionTag, "Clickable"))
+            && (col.transform.position.y <= this.transform.position.y))
         {
             if (platformController.isGroup)
             {
@@ -69,14 +75,22 @@ public class PlatformGuard : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        string collisionTag = col.tag;
+        string collisionTag = "Null";
+        if (col.CompareTag("Player")) { collisionTag = "Player"; }
+        else if (col.GetComponent<ItemProperties>()) {collisionTag = col.GetComponent<ItemProperties>().objectType.ToString();}
+
         string collisionTagParent = "";
         if (col.transform.parent)
         {
             collisionTagParent = col.transform.parent.tag;
         }
 
-        if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player") || string.Equals(collisionTag, "Clickable") || string.Equals(collisionTag, "NoTouch") || string.Equals(collisionTag, "MorphOn"))
+        if (string.Equals(collisionTag, "Sokoban1x1") || 
+            string.Equals(collisionTag, "Sokoban2x2") || 
+            string.Equals(collisionTag, "Player") || 
+            string.Equals(collisionTag, "Clickable") || 
+            string.Equals(collisionTag, "NoTouch") || 
+            string.Equals(collisionTag, "MorphOn"))
         {
             if (!(col.gameObject.layer == 23 || col.gameObject.layer == 24))
             {
@@ -89,14 +103,6 @@ public class PlatformGuard : MonoBehaviour
                 {
                     target = col.gameObject;
                 }
-
-
-                /*
-                if (target)
-                {
-                    offset = target.transform.position - GetComponentInParent<Transform>().position;
-                }
-                */
 
                 //run through all stuck objects, get offset value for each of them
                 stuckObjectsOffset.Clear();
@@ -115,7 +121,10 @@ public class PlatformGuard : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        string collisionTag = col.tag;
+        string collisionTag = "Null";
+        if (col.CompareTag("Player")) { collisionTag = "Player"; }
+        else if (col.GetComponent<ItemProperties>()) { collisionTag = col.GetComponent<ItemProperties>().objectType.ToString(); }
+
         string collisionTagParent = "";
 
         if (col.transform.parent)
@@ -123,11 +132,12 @@ public class PlatformGuard : MonoBehaviour
             collisionTagParent = col.transform.parent.tag;
         }
 
-        if ((string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Clickable")) && (col.transform.position.y <= this.transform.position.y))
+        //object that was jamming the platform has now been unstock and can be removed
+        if ((string.Equals(collisionTag, "Sokoban1x1") ||
+             string.Equals(collisionTag, "Sokoban2x2") || 
+             string.Equals(collisionTag, "Clickable"))
+            && (col.transform.position.y <= this.transform.position.y))
         {
-            //Debug.Log("trying to unstick");
-
-
             if (platformController.isGroup)
             {
                 foreach (PlatformMover platform in platformController.platformMovers)
@@ -159,8 +169,10 @@ public class PlatformGuard : MonoBehaviour
 
         }
 
-        //for 1x1 sokoban which are in a container, need to check parent
-        else if (string.Equals(collisionTag, "Sokoban") || string.Equals(collisionTag, "Player"))
+        //otherwise the object has been riding on top, so remove it from list of objects that should move with the platform
+        else if (string.Equals(collisionTag, "Sokoban1x1") || 
+                 string.Equals(collisionTag, "Sokoban2x2") || 
+                 string.Equals(collisionTag, "Player"))
         {
             stuckObjects.Remove(col.gameObject);
         }
@@ -169,9 +181,6 @@ public class PlatformGuard : MonoBehaviour
         {
             stuckObjects.Remove(col.gameObject);
         }
-
-
-
         target = null;
     }
 
@@ -184,12 +193,8 @@ public class PlatformGuard : MonoBehaviour
         {
             //set the offset for each obj
             stuckObjects[i].transform.position = GetComponentInParent<Transform>().position + stuckObjectsOffset[i];
-           // Debug.Log("Stuck " + stuckObjects[i].name);
 
-
-            // target.transform.position = GetComponentInParent<Transform>().position + offset;
         }
-        // target.transform.position = GetComponentInParent<Transform>().position + offset;
     }
 
 }

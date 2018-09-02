@@ -12,8 +12,6 @@ public class SokobanBumper : MonoBehaviour {
         Debug.Log(other.name);
         if (!other.CompareTag("Player") && (!other.CompareTag("Trigger")) && (!other.gameObject.Equals(this.transform.parent.parent)))
          {
-            //Debug.Log(other.name + "MADE IT!");
-
             attachedSecondary.SetActive(false);
         }
     }
@@ -24,8 +22,6 @@ public class SokobanBumper : MonoBehaviour {
 
         if (!other.CompareTag("Player") && !other.CompareTag("Trigger") && (!other.gameObject.Equals(this.transform.parent.parent)))
         {
-            //Debug.Log(other.name + "MADE IT off!");
-
             attachedSecondary.SetActive(true);
         }    
     }

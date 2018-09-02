@@ -94,7 +94,6 @@ public class PlatformTrigger : MonoBehaviour {
 
         foreach (PlatformMover platformSingle in platform)
         {
-
             Transform end = platformSingle.end;
             Vector3 start = platformSingle.start;
 

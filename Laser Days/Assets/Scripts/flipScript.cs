@@ -15,8 +15,8 @@ public class flipScript : MonoBehaviour {
     private AudioSource audioSource;
     public AudioSource audioSourceSecondary;
 
-    private AudioClip[] audioClips;
-    private AudioClip[] audioClipsSecondary;
+    private MFPP.FlipClipAsset flipSounds;
+    private AudioClip[] flipSoundsSecondary;
 
     public AudioClip flipFailClip;
     public bool flippedThisFrame = false;
@@ -39,8 +39,6 @@ public class flipScript : MonoBehaviour {
         if (space)
         {
             GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
-
-         
         } 
         else { GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
         }
@@ -52,8 +50,8 @@ public class flipScript : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
 		rm = GetComponent<RaycastManager>();
         SoundBox box = GetComponent<SoundBox>();
-        audioClips = box.flipClips;
-        audioClipsSecondary = box.flipClipsSecondary;
+        flipSounds = box.currentFlipClip;
+        flipSoundsSecondary = box.flipClipsSecondary;
         flipFailClip = box.flipFail;
 	}
 
@@ -129,7 +127,7 @@ public class flipScript : MonoBehaviour {
 
         //switch which morph is held
         if (held) {
-            if (held.CompareTag("MorphOff")){
+            if (held.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.MorphOff){
                 GameObject morph = held.GetComponent<Morph>().associatedMorph;
                 MFPP.Modules.PickUpModule pickUp = GetComponent<MFPP.Modules.PickUpModule>();
                 pickUp.PutDown();
@@ -137,12 +135,13 @@ public class flipScript : MonoBehaviour {
             }
         }
 
-        audioSource.clip = audioClips[Random.Range(0, audioClips.Length - 1)];
+        //play random flip sound!
+        audioSource.clip = flipSounds.defaultFlipClips.GetRandomFlipClip();
         audioSource.Play();
 
         //play secondary sound when there is a held object or are selected objects
         if (held || (selectedObjects) ){
-                    audioSourceSecondary.clip = audioClipsSecondary[Random.Range(0, audioClipsSecondary.Length - 1)];
+            audioSourceSecondary.clip = flipSounds.defaultFlipClips.GetRandomFlipSecondary();
             audioSourceSecondary.Play();
         }
 
@@ -152,16 +151,18 @@ public class flipScript : MonoBehaviour {
 
 	void Flip (GameObject obj)
 	{
+        ItemProperties.ObjectType type = obj.GetComponent<ItemProperties>().objectType;
         //for objects not being currently held: 
-        if (!obj.Equals(GetComponent<MFPP.Modules.PickUpModule>().heldObject)){
-            //check which layer the player has moved to, and then change object's layer, shader, and value
 
+        if (!obj.Equals(GetComponent<MFPP.Modules.PickUpModule>().heldObject)){
+
+            //check which layer the player has moved to, and then change object's layer, shader, and value
             if (PlayerInLaser())
             { //if player is now in laser world
                 SetObjectToLaser(obj); //set object to laser layer
 
 
-                if (obj.CompareTag("MorphOn") || obj.CompareTag("MorphOff"))
+                if ((type == ItemProperties.ObjectType.MorphOn) || (type == ItemProperties.ObjectType.MorphOff))
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
                     obj.GetComponent<Morph>().OnFlip(1, false);
@@ -180,7 +181,7 @@ public class flipScript : MonoBehaviour {
                 { //if player is now in real world
                     SetObjectToReal(obj); //set object to real layer
 
-                if (obj.CompareTag("MorphOn") || obj.CompareTag("MorphOff"))
+                if ((type == ItemProperties.ObjectType.MorphOn) || (type == ItemProperties.ObjectType.MorphOff))
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
                     obj.GetComponent<Morph>().OnFlip(0, false);
@@ -203,7 +204,7 @@ public class flipScript : MonoBehaviour {
             { //if player is now in laser world
                 SetObjectToLaser(obj); //set object to laser layer
 
-                if (obj.CompareTag("MorphOn") || obj.CompareTag("MorphOff"))
+                if ((type == ItemProperties.ObjectType.MorphOn) || (type == ItemProperties.ObjectType.MorphOff))
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
                     obj.GetComponent<Morph>().OnFlip(1, true);
@@ -215,7 +216,7 @@ public class flipScript : MonoBehaviour {
             { //if player is now in real world
                 SetObjectToReal(obj); //set object to real layer
 
-                if (obj.CompareTag("MorphOn") || obj.CompareTag("MorphOff"))
+                if ((type == ItemProperties.ObjectType.MorphOn) || (type == ItemProperties.ObjectType.MorphOff))
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
                     obj.GetComponent<Morph>().OnFlip(0, true);
@@ -265,13 +266,14 @@ public class flipScript : MonoBehaviour {
 	{
 		obj.layer = 10;
 		obj.transform.parent = Toolbox.Instance.GetLaserWorldParent();
+        ItemProperties.ObjectType type = obj.GetComponent<ItemProperties>().objectType;
 
-        if (obj.CompareTag("Sokoban")){
+        if ((type == ItemProperties.ObjectType.Sokoban1x1) || (type == ItemProperties.ObjectType.Sokoban2x2)){
             GameObject child = obj.transform.GetChild(0).gameObject;
             child.layer = 10;
         }
 
-        if (obj.CompareTag("MorphOff")){
+        if (type == ItemProperties.ObjectType.MorphOff) {
             GameObject child = obj.transform.GetChild(0).gameObject;
             child.layer = 10;
 
@@ -286,25 +288,29 @@ public class flipScript : MonoBehaviour {
 	{
 		obj.layer = 11;
 		obj.transform.parent = Toolbox.Instance.GetRealWorldParent();
- 
-            if (obj.CompareTag("Sokoban")){
-            GameObject child = obj.transform.GetChild(0).gameObject;
-            child.layer = 11;
-        }
+        ItemProperties.ObjectType type = obj.GetComponent<ItemProperties>().objectType;
 
-        if (obj.CompareTag("MorphOff"))
+ 
+        if ((type == ItemProperties.ObjectType.Sokoban1x1) || (type == ItemProperties.ObjectType.Sokoban2x2))
         {
             GameObject child = obj.transform.GetChild(0).gameObject;
             child.layer = 11;
-
-
-            Transform morph = obj.GetComponent<Morph>().associatedMorph.transform;
-            morph.GetChild(0).gameObject.layer = 11;
-            morph.parent = obj.transform;
-            //morph.gameObject.SetActive(false);
-
         }
 
+        if (type == ItemProperties.ObjectType.MorphOff)
+        {
+            {
+                GameObject child = obj.transform.GetChild(0).gameObject;
+                child.layer = 11;
+
+
+                Transform morph = obj.GetComponent<Morph>().associatedMorph.transform;
+                morph.GetChild(0).gameObject.layer = 11;
+                morph.parent = obj.transform;
+                //morph.gameObject.SetActive(false);
+
+            }
+        }
 
 	}
 }

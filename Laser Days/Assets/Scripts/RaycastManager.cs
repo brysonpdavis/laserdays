@@ -75,12 +75,15 @@ public class RaycastManager : MonoBehaviour {
         {
             //makes sure no objects have the toggle indicating they're within range.
             //if something was previously in range on the last frame it'll deselect it
+
             //objects on the default/shared layers are included in the layermask to block raycasts, but they turn off indicator if that's what the raycast hits
             if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 17)
             {
-                if (raycastedObj) {
+                if (raycastedObj)
+                {
                     raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                    if (raycastedObj.GetComponent<SelectionRenderChange>()){
+                    if (raycastedObj.GetComponent<SelectionRenderChange>())
+                    {
                         raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
 
                     }
@@ -90,10 +93,7 @@ public class RaycastManager : MonoBehaviour {
                 raycastedObj = null;
             }
 
-            else if (hit.collider.CompareTag("Clickable") || 
-                hit.collider.CompareTag("Sokoban") || 
-                hit.collider.CompareTag("MorphOn") || hit.collider.CompareTag("Wall"))
-            
+            else if (hit.collider.CompareTag("Clickable"))
             {
                 //TODO: IconCheck() Here
                 IconCheck(hit.distance, hit.collider.gameObject);
@@ -136,7 +136,7 @@ public class RaycastManager : MonoBehaviour {
                     }
                     if (ip.objectCharge)
                     {
-
+                        ItemProperties.ObjectType type = raycastedObj.GetComponent<ItemProperties>().objectType;
                         //if the object is already a selected object:
                         if (raycastedObj.GetComponent<ItemProperties>().selected)
                         {
@@ -148,7 +148,8 @@ public class RaycastManager : MonoBehaviour {
                             //put the object back to its original shader
                             if (this.gameObject.layer == 15) { 
 
-                                if (raycastedObj.CompareTag("MorphOn") || raycastedObj.CompareTag("MorphOff")){
+                                if (type == ItemProperties.ObjectType.MorphOn || type == ItemProperties.ObjectType.MorphOff)
+                                {
                                     raycastedObj.GetComponent<Renderer>().material.shader = morphLaserWorldShader; 
                                     //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                                 }
@@ -158,7 +159,7 @@ public class RaycastManager : MonoBehaviour {
                                 } 
                             }
                             else if (this.gameObject.layer == 16) { 
-                                if (raycastedObj.CompareTag("MorphOn") || raycastedObj.CompareTag("MorphOff"))
+                                if (type == ItemProperties.ObjectType.MorphOn || type == ItemProperties.ObjectType.MorphOff)
                                 {
                                     raycastedObj.GetComponent<Renderer>().material.shader = morphRealWorldShader;
                                 }
@@ -174,7 +175,7 @@ public class RaycastManager : MonoBehaviour {
 
 
                             //if it's a morph, make it drop its associated morph
-                            if (hit.collider.CompareTag("MorphOn"))
+                            if (hit.collider.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.MorphOn)
                             {
                                 hit.collider.GetComponent<Morph>().OnPutDown();
                             }
@@ -193,7 +194,7 @@ public class RaycastManager : MonoBehaviour {
                                 AddToList(raycastedObj);
 
                                 //if it's a morph, make it add its associated morph
-                                if (hit.collider.CompareTag("MorphOn"))
+                                if (hit.collider.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.MorphOn)
                                 {
                                     hit.collider.GetComponent<Morph>().OnPickup();
                                 }
@@ -247,30 +248,38 @@ public class RaycastManager : MonoBehaviour {
         ItemProperties ip = obj.GetComponent<ItemProperties>();
         ip.selected = true;
 
-        if (obj.CompareTag("Clickable"))
+        switch (obj.GetComponent<ItemProperties>().objectType)
+
         {
-            // obj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
-            obj.GetComponent<ItemProperties>().Select();
+        case ItemProperties.ObjectType.Clickable:
+            {
+                // obj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                obj.GetComponent<ItemProperties>().Select();
+                break;
+            }
+
+        case ItemProperties.ObjectType.Wall:
+            {
+                obj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                break;
+            }
+
+
+        case ItemProperties.ObjectType.MorphOn:
+            {
+                //change to morph shader when we have one!
+                break;
+            }
+
+
+        case ItemProperties.ObjectType.MorphOff:
+            {
+                //change to morph shader when we have one!
+                break;
+            }
+
+
         }
-
-        else if (obj.CompareTag("Wall"))
-        {
-            obj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
-        }
-
-        else if (obj.CompareTag("Sokoban"))
-        {
-            //TODO: change this to sokobanselected when there is one!
-            obj.GetComponent<Renderer>().material.shader = shaderselected;
-        }
-
-        else if (obj.CompareTag("MorphOn") || obj.CompareTag("MorphOff") )
-        {
-            //change to morph shader when we have one!
-
-        }
-
-
 
         // change shader back
         pc.UpdatePredictingSlider();

@@ -6,6 +6,9 @@ public class SoundBox : MonoBehaviour {
 
     public AudioClip[] flipClips;
     public AudioClip[] flipClipsSecondary;
+    public MFPP.FlipClipAsset currentFlipClip;
+
+    //public AudioClip[,] audioClipsTest;
 
     public AudioClip flipFail;
     public AudioClip sokobanClickOn;

@@ -7,6 +7,11 @@ public class PlatformController : MonoBehaviour {
     public bool isGroup;
     public List<GameObject> triggers = new List<GameObject>();
     public PlatformMover[] platformMovers;
+
+    public Color32 deactivatedColor;
+    public Color32 activationColor;
+
+
     private void Start()
     {
         platformMovers = GetComponentsInChildren<PlatformMover>();

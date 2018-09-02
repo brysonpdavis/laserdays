@@ -19,9 +19,14 @@ public class PlatformObjectMover : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        ItemProperties.ObjectType type = ItemProperties.ObjectType.Null;
+        if (other.GetComponent<ItemProperties>()) { type = other.GetComponent<ItemProperties>().objectType; } 
 
-
-        if ((other.CompareTag("Sokoban") || other.CompareTag("MorphOn")) && (other.gameObject.layer == mainGuard.layer)){
+        if ((type == ItemProperties.ObjectType.Sokoban1x1 || 
+             type == ItemProperties.ObjectType.Sokoban2x2 || 
+             type == ItemProperties.ObjectType.MorphOn)
+             && (other.gameObject.layer == mainGuard.layer))
+        {
              //   Debug.Log("here we go");
                 incorrect = true;
 
@@ -38,7 +43,12 @@ public class PlatformObjectMover : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Sokoban") || other.CompareTag("MorphOn"))
+        ItemProperties.ObjectType type = ItemProperties.ObjectType.Null;
+        if (other.GetComponent<ItemProperties>()) { type = other.GetComponent<ItemProperties>().objectType; } 
+
+        if (type == ItemProperties.ObjectType.Sokoban1x1 ||
+            type == ItemProperties.ObjectType.Sokoban2x2 ||
+            type == ItemProperties.ObjectType.MorphOn)
         {
             incorrect = false;
             //objectToMove = null;
@@ -56,7 +66,7 @@ public class PlatformObjectMover : MonoBehaviour {
     private IEnumerator CenterObjectRoutine()
     {
 
-        if (string.Equals(objectToMove.GetComponent<ItemProperties>().objectType.ToString(), "Sokoban2x2"))
+        if (objectToMove.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban2x2)
         {
 
             yield return new WaitForFixedUpdate();

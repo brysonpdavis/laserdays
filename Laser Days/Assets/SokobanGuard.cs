@@ -19,8 +19,6 @@ public class SokobanGuard : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-
-
         ItemProperties myItemProperties = this.GetComponentInParent<ItemProperties>();
         ItemProperties otherItemProperties = col.GetComponent<ItemProperties>();
 
@@ -29,9 +27,6 @@ public class SokobanGuard : MonoBehaviour
         if (string.Equals(collisionTag, "Sokoban"))
         {
             col.transform.SetParent(this.transform.parent);
-           // col.GetComponent<Rigidbody>().isKinematic = true;
-           // col.GetComponent<Rigidbody>().useGravity = false;
-        
         }
     }
     void OnTriggerExit(Collider col)
@@ -40,8 +35,6 @@ public class SokobanGuard : MonoBehaviour
 
         if (string.Equals(collisionTag, "Sokoban"))
         {
-
-            //col.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             player.GetComponent<MFPP.Player>().Movement.AllowMouseMove = true;
             col.transform.SetParent(this.transform.parent.transform.parent);
             target = null;

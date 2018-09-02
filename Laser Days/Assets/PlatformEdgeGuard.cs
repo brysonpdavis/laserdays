@@ -23,7 +23,12 @@ public class PlatformEdgeGuard : MonoBehaviour {
         player = Toolbox.Instance.GetPlayer();
         GameObject check = this.transform.parent.transform.parent.transform.parent.transform.gameObject;
         //Debug.Log(check.name);
-        if (check.CompareTag("Sokoban")){
+
+        //checks to see if is part of a sokoban or not
+        if (check.GetComponent<ItemProperties>() && 
+            (check.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban1x1 ||
+             check.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban2x2))
+        {
             parent = check;
             isMoveable = true;
 
@@ -98,11 +103,10 @@ public class PlatformEdgeGuard : MonoBehaviour {
                 audioSource.Play();  
             }
 
-
-
-            if (isMoveable && (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject) && player.GetComponent<MFPP.Modules.PickUpModule>().heldObject.Equals(parent))
+            if (isMoveable && 
+                (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject) &&
+                 player.GetComponent<MFPP.Modules.PickUpModule>().heldObject.Equals(parent))
             {
-
                 player.GetComponent<MFPP.Modules.PickUpModule>().PutDown();
 
             }

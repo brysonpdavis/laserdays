@@ -25,14 +25,14 @@ public class SokobanShift : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        //checks to be sure the object triggering the movement is a soko, what's being triggered is not this trigger's parent sokoban obj
+        //checks to be sure the object triggering the movement is a soko 1x1, what's being triggered is not this trigger's parent sokoban obj
         //and checking to be sure the object being moved in the correct world
-        if (other.CompareTag("Sokoban") && (!other.gameObject.Equals(parent))&& 
+        if (other.CompareTag("Clickable") && 
+            (other.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban1x1) &&
+            (!other.gameObject.Equals(parent)) && 
             !((other.gameObject.layer == (parent.layer+1)) || (other.gameObject.layer == (parent.layer - 1))))
         {
-            //Debug.Log("test"+ (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)));
             if (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)<=1.52f){
-            //    Debug.Log("attempting to load ");
                 if (!other.gameObject.GetComponent<ItemProperties>().inMotion)
                 {
                     objectToMove = other.gameObject;
@@ -47,7 +47,7 @@ public class SokobanShift : MonoBehaviour {
     {
         //moves the sokoban into place
 
-        //
+
             objectToMove.GetComponent<ItemProperties>().inMotion = true;
             float elapsedTime = 0;
             float ratio = elapsedTime / duration;
@@ -57,7 +57,9 @@ public class SokobanShift : MonoBehaviour {
             pickUp.PutDown();
         }
 
-        if (parent.CompareTag("Sokoban")){
+
+        //if the parent object has item properties it means that it is a sokoban
+        if (parent.GetComponent<ItemProperties>()){
          //   Debug.Log("Sokoban");
             objectToMove.transform.parent = parent.transform;
             objectToMove.GetComponent<BoxCollider>().enabled = false;
