@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SoundBox : MonoBehaviour {
 
-    public AudioClip[] flipClips;
-    public AudioClip[] flipClipsSecondary;
-    public MFPP.FlipClipAsset currentFlipClip;
+   // public AudioClip[] flipClips;
+   // public AudioClip[] flipClipsSecondary;
+    public MFPP.FlipClipAsset currentFlipPalette;
 
     //public AudioClip[,] audioClipsTest;
 
