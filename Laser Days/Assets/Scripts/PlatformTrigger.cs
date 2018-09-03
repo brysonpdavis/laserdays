@@ -32,8 +32,19 @@ public class PlatformTrigger : MonoBehaviour {
         platformOn = box.platformOn;
         platformOff = box.platformOff;
 
-        platformTriggers = transform.parent.GetComponentsInChildren<PlatformTrigger>();
-        totalTriggers = platformTriggers.Length;
+        if (this.gameObject.layer == platformContainer.layer)
+        {
+            platformTriggers = platformContainer.GetComponentsInChildren<PlatformTrigger>();
+            totalTriggers = platformTriggers.Length;
+        }
+
+        else 
+        {
+            platformTriggers = transform.parent.GetComponentsInChildren<PlatformTrigger>();
+            totalTriggers = platformTriggers.Length;
+        }
+
+
 
         RenderMat = GetComponent<Renderer>().material;
         RenderMat.SetColor("_PassiveColor", platformContainer.GetComponent<PlatformController>().PassiveColor);
@@ -54,65 +65,76 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        counter += 1;
-        on = true;
-
-
-        if (counter == 1){
-            //sound effect
-            audioSource.clip = platformOn;
-            audioSource.Play();
-        }
-
-        int checkNumber = 0;
-        RenderMat.SetInt("_isCollide", 1);
-
-
-        foreach (PlatformTrigger trigger in platformTriggers) {
-
-            if (trigger.on) {
-                checkNumber += 1;
-            }
-        }
-
-        //make sure all necessary triggers are selected. 
-        if (checkNumber==totalTriggers)
+        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform")
         {
-            MovePlatformToEnd();
+
+            counter += 1;
+            on = true;
+
+
+            if (counter == 1)
+            {
+                //sound effect
+                audioSource.clip = platformOn;
+                audioSource.Play();
+            }
+
+            int checkNumber = 0;
+            RenderMat.SetInt("_isCollide", 1);
+
 
             foreach (PlatformTrigger trigger in platformTriggers)
             {
-                trigger.RenderMat.SetInt("_isActive0", 1);
-                trigger.RenderMat.SetInt("_isActive1", 1);
 
+                if (trigger.on)
+                {
+                    checkNumber += 1;
+                }
             }
 
+            //make sure all necessary triggers are selected. 
+            if (checkNumber == totalTriggers)
+            {
+                MovePlatformToEnd();
+
+                foreach (PlatformTrigger trigger in platformTriggers)
+                {
+                    trigger.RenderMat.SetInt("_isActive0", 1);
+                    trigger.RenderMat.SetInt("_isActive1", 1);
+
+                }
+
+            }
         }
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        counter -= 1;
-        if (counter == 0)
+        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform")
         {
-            MovePlatformToStart();
-            RenderMat.SetInt("_isCollide", 0);
 
-            foreach (PlatformTrigger trigger in platformTriggers)
+            counter -= 1;
+            if (counter == 0)
             {
-                trigger.RenderMat.SetInt("_isActive0", 0);
-                trigger.RenderMat.SetInt("_isActive1", 0);
+                MovePlatformToStart();
+                RenderMat.SetInt("_isCollide", 0);
 
+                foreach (PlatformTrigger trigger in platformTriggers)
+                {
+                    trigger.RenderMat.SetInt("_isActive0", 0);
+                    trigger.RenderMat.SetInt("_isActive1", 0);
+
+                }
+
+                foreach (PlatformTrigger trigger in platformTriggers)
+                {
+                    trigger.moving = false;
+
+                }
+
+                on = false;
             }
-
-            foreach (PlatformTrigger trigger in platformTriggers)
-            {
-                trigger.moving = false;
-
-            }
-
-            on = false;
         }
     }
 
