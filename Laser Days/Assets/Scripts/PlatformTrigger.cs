@@ -65,7 +65,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform")
+        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "NoTouch")
         {
 
             counter += 1;
