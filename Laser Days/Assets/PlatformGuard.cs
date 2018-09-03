@@ -148,6 +148,7 @@ public class PlatformGuard : MonoBehaviour
             else 
                 {
                     stuckSokoban.Remove(col.gameObject);
+
                 }
 
 

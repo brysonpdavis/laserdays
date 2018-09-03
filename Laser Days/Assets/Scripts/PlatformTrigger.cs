@@ -20,6 +20,7 @@ public class PlatformTrigger : MonoBehaviour {
     private AudioClip platformOff;
     private AudioSource audioSource;
 
+    private Material RenderMat;
 
 
     private void Start()
@@ -33,6 +34,11 @@ public class PlatformTrigger : MonoBehaviour {
 
         platformTriggers = transform.parent.GetComponentsInChildren<PlatformTrigger>();
         totalTriggers = platformTriggers.Length;
+
+        RenderMat = GetComponent<Renderer>().material;
+        RenderMat.SetColor("_PassiveColor", platformContainer.GetComponent<PlatformController>().PassiveColor);
+        RenderMat.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
+
 
         if (platformContainer){
             platform = platformContainer.GetComponentsInChildren<PlatformMover>();
@@ -59,8 +65,7 @@ public class PlatformTrigger : MonoBehaviour {
         }
 
         int checkNumber = 0;
-
-        GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
+        RenderMat.SetInt("_isCollide", 1);
 
 
         foreach (PlatformTrigger trigger in platformTriggers) {
@@ -75,6 +80,13 @@ public class PlatformTrigger : MonoBehaviour {
         {
             MovePlatformToEnd();
 
+            foreach (PlatformTrigger trigger in platformTriggers)
+            {
+                trigger.RenderMat.SetInt("_isActive0", 1);
+                trigger.RenderMat.SetInt("_isActive1", 1);
+
+            }
+
         }
     }
 
@@ -85,6 +97,22 @@ public class PlatformTrigger : MonoBehaviour {
         if (counter == 0)
         {
             MovePlatformToStart();
+            RenderMat.SetInt("_isCollide", 0);
+
+            foreach (PlatformTrigger trigger in platformTriggers)
+            {
+                trigger.RenderMat.SetInt("_isActive0", 0);
+                trigger.RenderMat.SetInt("_isActive1", 0);
+
+            }
+
+            foreach (PlatformTrigger trigger in platformTriggers)
+            {
+                trigger.moving = false;
+
+            }
+
+            on = false;
         }
     }
 
@@ -96,6 +124,13 @@ public class PlatformTrigger : MonoBehaviour {
         {
             Transform end = platformSingle.end;
             Vector3 start = platformSingle.start;
+            platformSingle.IndicatorOn();
+
+
+            foreach (PlatformTrigger trigger in platformTriggers)
+            {
+                trigger.moving = true;
+            }
 
             //make sure either we're going up, or if we're going down that there's nobody beneath
             if ((end.position.y >= start.y) || platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0)
@@ -107,18 +142,13 @@ public class PlatformTrigger : MonoBehaviour {
 
         }
 
-        foreach (PlatformTrigger trigger in platformTriggers)
-        {
-            moving = true;
 
-        }
     }
 
     public void MovePlatformToStart () 
     {
         GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
 
-        on = false;
         //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
 
         foreach (PlatformMover platformSingle in platform)
@@ -126,6 +156,8 @@ public class PlatformTrigger : MonoBehaviour {
             Transform end = platformSingle.end;
             Vector3 start = platformSingle.start;
             platformSingle.StopAllCoroutines();
+            platformSingle.IndicatorOff();
+
 
             //check to be sure either we're goin up or we're going down and nothing is stuck beneath the platform
             if (( start.y >= end.position.y) || platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0) 
@@ -137,7 +169,7 @@ public class PlatformTrigger : MonoBehaviour {
 
         foreach (PlatformTrigger trigger in platformTriggers)
         {
-            moving = false;
+            trigger.moving = false;
 
         }
 

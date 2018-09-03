@@ -8,9 +8,11 @@ public class PlatformController : MonoBehaviour {
     public List<GameObject> triggers = new List<GameObject>();
     public PlatformMover[] platformMovers;
 
-    public Color32 deactivatedColor;
-    public Color32 activationColor;
+    [ColorUsageAttribute(true, true)]
+    public Color PassiveColor = new Color(0f, 0f, 0f, 0f);
 
+    [ColorUsageAttribute(true, true)]
+    public Color ActiveColor = new Color(0f, 0f, 0f, 0f);
 
     private void Start()
     {

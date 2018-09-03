@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlatformMover : MonoBehaviour {
 
     public PlatformGuard platformGuard;
+
+    public GameObject platformContainer;
+    public PlatformIndicator Indicator;
+
     public GameObject mainGuard;
     public PlatformObjectMover[] objectMovers;
     public  Vector3 start;
@@ -14,7 +18,10 @@ public class PlatformMover : MonoBehaviour {
     {
 
         start = this.transform.position;
-        // platformGuard = GetComponentInChildren<PlatformGuard>();
+
+        this.Indicator.SetColors(platformContainer.GetComponent<PlatformController>().PassiveColor,
+                            platformContainer.GetComponent<PlatformController>().ActiveColor);
+
     }
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
@@ -94,6 +101,18 @@ public class PlatformMover : MonoBehaviour {
             }
 
         }
+
+    }
+
+    public void IndicatorOn()
+    {
+        Indicator.On();
+
+    }
+
+    public void IndicatorOff()
+    {
+        Indicator.Off();
 
     }
 
