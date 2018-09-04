@@ -160,39 +160,34 @@ public class flipScript : MonoBehaviour {
                 SetObjectToLaser(obj); //set object to laser layer
 
 
-                if ((type == ItemProperties.ObjectType.MorphOn) || (type == ItemProperties.ObjectType.MorphOff))
+                if (type == ItemProperties.ObjectType.Morph) 
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
-                    obj.GetComponent<Morph>().OnFlip(1, false);
+                    obj.GetComponent<MorphController>().OnFlip(true);
+
                 }
 
-                else {
+
                     //otherise set the object to approperiate shader automaticalh
                     obj.GetComponent<Renderer>().material.shader = rm.laserWorldShader;  //shader change is now happening in flip script
                     obj.GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
                     obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
-
-                }
 
             }
                 else if ( PlayerInReal() )
                 { //if player is now in real world
                     SetObjectToReal(obj); //set object to real layer
 
-                if ((type == ItemProperties.ObjectType.MorphOn) || (type == ItemProperties.ObjectType.MorphOff))
+                if (type == ItemProperties.ObjectType.Morph)
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
-                    obj.GetComponent<Morph>().OnFlip(0, false);
+                    obj.GetComponent<MorphController>().OnFlip(false);
 
                 }
-
-                else{
                     obj.GetComponent<Renderer>().material.shader = rm.realWorldShader;  //shader change is now happening in flip script
                     obj.GetComponent<Transition>().SetStart(0f); //set it fully on for real world
                     obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
-
-
-                }
+                
                 }
             }
         //if the object IS being held, we do the same thing, just change layer without switching the shader (which will get switched on drop)
@@ -202,10 +197,10 @@ public class flipScript : MonoBehaviour {
             { //if player is now in laser world
                 SetObjectToLaser(obj); //set object to laser layer
 
-                if ((type == ItemProperties.ObjectType.MorphOn) || (type == ItemProperties.ObjectType.MorphOff))
+                if (type == ItemProperties.ObjectType.Morph)
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
-                    obj.GetComponent<Morph>().OnFlip(1, true);
+                    obj.GetComponent<MorphController>().OnFlip(true);
 
                 }
             }
@@ -214,10 +209,10 @@ public class flipScript : MonoBehaviour {
             { //if player is now in real world
                 SetObjectToReal(obj); //set object to real layer
 
-                if ((type == ItemProperties.ObjectType.MorphOn) || (type == ItemProperties.ObjectType.MorphOff))
+                if (type == ItemProperties.ObjectType.Morph)
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
-                    obj.GetComponent<Morph>().OnFlip(0, true);
+                    obj.GetComponent<MorphController>().OnFlip(false);
 
                 }
             }

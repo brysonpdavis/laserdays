@@ -265,17 +265,10 @@ public class RaycastManager : MonoBehaviour {
             }
 
 
-        case ItemProperties.ObjectType.MorphOn:
+        case ItemProperties.ObjectType.Morph:
             {
-                //change to morph shader when we have one!
-                break;
-            }
-
-
-        case ItemProperties.ObjectType.MorphOff:
-            {
-                //change to morph shader when we have one!
-                break;
+                    obj.GetComponent<MorphController>().OnSelection();
+                    break;
             }
 
 
@@ -292,6 +285,11 @@ public class RaycastManager : MonoBehaviour {
         //removing multiple at once shouldn't update the predicting slider at all, it's done separately on the flip
 
         obj.GetComponent<ItemProperties>().selected = false;
+
+        if (obj.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Morph)
+        {
+            obj.GetComponent<MorphController>().OnDeselection();
+        }
 
         //shader change is now happening in flip script
 

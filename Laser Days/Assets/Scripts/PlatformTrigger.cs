@@ -65,7 +65,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "NoTouch")
+        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "NoTouch" || other.tag == "MorphArm" || other.tag == "Morph")
         {
 
             counter += 1;
@@ -111,7 +111,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform")
+        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "MorphArm" || other.tag == "Morph")
         {
 
             counter -= 1;
