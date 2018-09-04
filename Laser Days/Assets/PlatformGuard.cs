@@ -40,7 +40,8 @@ public class PlatformGuard : MonoBehaviour
 
         //objects colliding from above travel along
         if ((string.Equals(collisionTag, "Sokoban1x1") || 
-             string.Equals(collisionTag, "Sokoban2x2") ||  
+             string.Equals(collisionTag, "Sokoban2x2") ||
+             string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Player"))
             && (col.transform.position.y >= this.transform.position.y))
         {
@@ -49,7 +50,8 @@ public class PlatformGuard : MonoBehaviour
 
         //objects colliding from below make the platform (either single or as group) get stuck
         if ((string.Equals(collisionTag, "Sokoban1x1") || 
-             string.Equals(collisionTag, "Sokoban2x2") || 
+             string.Equals(collisionTag, "Sokoban2x2") ||
+             string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Clickable"))
             && (col.transform.position.y <= this.transform.position.y))
         {
@@ -58,13 +60,14 @@ public class PlatformGuard : MonoBehaviour
                 foreach (PlatformMover platform in platformController.platformMovers)
                 {
                     platform.StopAllCoroutines();
-                    platform.PlatformObjectSelectable();
+                    //make everything but morphs selectable when platform is stuck
+                    platform.PlatformStuckSelectable();
                 }
             }
 
             else {
                 GetComponentInParent<PlatformMover>().StopAllCoroutines();
-                GetComponentInParent<PlatformMover>().PlatformObjectSelectable();
+                GetComponentInParent<PlatformMover>().PlatformStuckSelectable();
                 stuckSokoban.Add(col.transform.gameObject);
             }
         }
@@ -90,7 +93,7 @@ public class PlatformGuard : MonoBehaviour
             string.Equals(collisionTag, "Player") || 
             string.Equals(collisionTag, "Clickable") || 
             string.Equals(collisionTag, "NoTouch") || 
-            string.Equals(collisionTag, "MorphOn"))
+            string.Equals(collisionTag, "Morph"))
         {
             if (!(col.gameObject.layer == 23 || col.gameObject.layer == 24))
             {
@@ -135,6 +138,7 @@ public class PlatformGuard : MonoBehaviour
         //object that was jamming the platform has now been unstock and can be removed
         if ((string.Equals(collisionTag, "Sokoban1x1") ||
              string.Equals(collisionTag, "Sokoban2x2") || 
+             string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Clickable"))
             && (col.transform.position.y <= this.transform.position.y))
         {
@@ -148,7 +152,6 @@ public class PlatformGuard : MonoBehaviour
             else 
                 {
                     stuckSokoban.Remove(col.gameObject);
-
                 }
 
 
@@ -173,15 +176,12 @@ public class PlatformGuard : MonoBehaviour
         //otherwise the object has been riding on top, so remove it from list of objects that should move with the platform
         else if (string.Equals(collisionTag, "Sokoban1x1") || 
                  string.Equals(collisionTag, "Sokoban2x2") || 
+                 string.Equals(collisionTag, "Morph") || 
                  string.Equals(collisionTag, "Player"))
         {
             stuckObjects.Remove(col.gameObject);
         }
 
-        else if (string.Equals(collisionTag, "MorphOn"))
-        {
-            stuckObjects.Remove(col.gameObject);
-        }
         target = null;
     }
 

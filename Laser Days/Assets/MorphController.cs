@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MorphController : MonoBehaviour {
+    public float opacity;
+    public float duration = .5f;
+    public float armScale = 1f;
+    public bool morphRunning = false;
 
+    [Header("Internal Parts")]
     public GameObject realCollider;
     private Material realArmShader;
     public Renderer realPreview;
@@ -14,12 +19,12 @@ public class MorphController : MonoBehaviour {
     public Renderer laserPreview;
     private Material laserPreviewMaterial;
 
-    public float opacity;
+
 
     public Shader laserOnlyShader;
     public Shader realOnlyShader;
 
-    public float duration = 10f;
+
 
     private MFPP.Modules.PickUpModule pickUp;
 
@@ -41,6 +46,21 @@ public class MorphController : MonoBehaviour {
         laserArmShader = laserCollider.GetComponent<Renderer>().material;
         realArmShader = realCollider.GetComponent<Renderer>().material;
 
+
+        Vector3 startScaled = new Vector3(1, 3 * armScale, 1);
+        Vector3 startUnscaled = new Vector3(1, 1, 1);
+        if (this.gameObject.layer == 10)
+        {
+            laserCollider.transform.localScale = startScaled;
+            realCollider.transform.localScale = startUnscaled;
+        }
+
+        else 
+        {
+            laserCollider.transform.localScale = startUnscaled;
+            realCollider.transform.localScale = startScaled;
+        }
+
 	}
 	
 	// Update is called once per frame
@@ -51,7 +71,7 @@ public class MorphController : MonoBehaviour {
 
     public void OnFlip (bool dir) {
 
-        Debug.Log("called");
+       // Debug.Log("called");
         //we're going to laser
         if (dir)
         {
@@ -129,6 +149,7 @@ public class MorphController : MonoBehaviour {
 
     private IEnumerator MorphCoroutine(bool direction)
     {
+        morphRunning = true;
         //Debug.Log("moving again" + this.name);
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
@@ -139,6 +160,7 @@ public class MorphController : MonoBehaviour {
         float laserStart = laserCollider.transform.localScale.y;
 
         float durationScale;
+
 
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
@@ -160,13 +182,14 @@ public class MorphController : MonoBehaviour {
 
                 realScale.y = Mathf.Lerp(realStart, 1, (elapsedTime/durationScale));
                 realCollider.transform.localScale = realScale;
-                laserScale.y = Mathf.Lerp(laserStart, 3, (elapsedTime / durationScale));
+                laserScale.y = Mathf.Lerp(laserStart, 3*armScale, (elapsedTime / durationScale));
                 laserCollider.transform.localScale = laserScale;
               
 
                 yield return null;
             }
             this.tag = "Clickable";
+
         }
 
         else
@@ -181,7 +204,7 @@ public class MorphController : MonoBehaviour {
                 elapsedTime += Time.smoothDeltaTime;
                 ratio = elapsedTime / duration;
 
-                realScale.y = Mathf.Lerp(realStart, 3, (elapsedTime / durationScale));
+                realScale.y = Mathf.Lerp(realStart, 3*armScale, (elapsedTime / durationScale));
                 realCollider.transform.localScale = realScale;
 
                 laserScale.y = Mathf.Lerp(laserStart, 1, (elapsedTime / durationScale));
@@ -203,6 +226,9 @@ public class MorphController : MonoBehaviour {
             rigidbody.isKinematic = true;
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 }
+
+        morphRunning = false;
+
         yield return null;
 
     }

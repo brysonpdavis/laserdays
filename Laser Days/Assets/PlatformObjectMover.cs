@@ -24,7 +24,7 @@ public class PlatformObjectMover : MonoBehaviour {
 
         if ((type == ItemProperties.ObjectType.Sokoban1x1 || 
              type == ItemProperties.ObjectType.Sokoban2x2 || 
-             type == ItemProperties.ObjectType.MorphOn)
+             type == ItemProperties.ObjectType.Morph)
              && (other.gameObject.layer == mainGuard.layer))
         {
              //   Debug.Log("here we go");
@@ -48,7 +48,7 @@ public class PlatformObjectMover : MonoBehaviour {
 
         if (type == ItemProperties.ObjectType.Sokoban1x1 ||
             type == ItemProperties.ObjectType.Sokoban2x2 ||
-            type == ItemProperties.ObjectType.MorphOn)
+            type == ItemProperties.ObjectType.Morph)
         {
             incorrect = false;
             //objectToMove = null;

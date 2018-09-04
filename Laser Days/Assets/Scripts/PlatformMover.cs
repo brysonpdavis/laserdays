@@ -12,7 +12,9 @@ public class PlatformMover : MonoBehaviour {
     public GameObject mainGuard;
     public PlatformObjectMover[] objectMovers;
     public  Vector3 start;
-    public Transform end;                          
+    public Transform end;
+
+    private RaycastManager raycastManager;
 
     private void Start()
     {
@@ -21,6 +23,8 @@ public class PlatformMover : MonoBehaviour {
 
         this.Indicator.SetColors(platformContainer.GetComponent<PlatformController>().PassiveColor,
                             platformContainer.GetComponent<PlatformController>().ActiveColor);
+
+        raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
 
     }
 
@@ -70,9 +74,17 @@ public class PlatformMover : MonoBehaviour {
         {
             foreach (GameObject obj in platformGuard.stuckObjects)
             {
+                ItemProperties item = obj.GetComponent<ItemProperties>();
                 if (!obj.CompareTag("Player"))
                 {
                     obj.tag = ("NoTouch");
+                }
+
+                //makes sure all morphs get unselected when the platform is in motion!
+                if (item.objectType == ItemProperties.ObjectType.Morph && item.selected){
+                    raycastManager.RemoveFromList(obj, false);
+                    raycastManager.selectedObjs.Remove(obj);
+                    item.selected = false;
                 }
             }
         }
@@ -90,6 +102,21 @@ public class PlatformMover : MonoBehaviour {
             }
         }
     }
+
+    public void PlatformStuckSelectable()
+    {
+
+        foreach (GameObject obj in platformGuard.stuckObjects)
+        {
+            if (obj.GetComponent<ItemProperties>() && !(obj.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Morph))
+            {
+                obj.tag = "Clickable";
+            }
+        }
+    }
+
+
+
 
     void checkObjectsPlace(){
 
