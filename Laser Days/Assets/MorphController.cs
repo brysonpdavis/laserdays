@@ -142,6 +142,7 @@ public class MorphController : MonoBehaviour {
 
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
+        rigidbody.isKinematic = false;
 
         this.tag = "NoTouch";
 
@@ -191,7 +192,17 @@ public class MorphController : MonoBehaviour {
             this.tag = "Clickable";
         }
 
-        rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+
+        if (pickUp.heldObject && pickUp.heldObject.Equals(this.gameObject))
+        {
+            rigidbody.isKinematic = false;
+        }
+
+        else {
+            rigidbody.isKinematic = true;
+            rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                }
         yield return null;
 
     }
