@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemProperties : MonoBehaviour
 {
-    public enum ObjectType { Clickable, Sokoban1x1, Sokoban2x2, Morph, MorphOn, MorphOff, Wall, Null };
+    public enum ObjectType { Clickable, Sokoban1x1, Sokoban2x2, Morph, Wall, Null };
     public ObjectType objectType;
 
     [Header("Attributes")]

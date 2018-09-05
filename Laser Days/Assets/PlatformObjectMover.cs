@@ -11,11 +11,17 @@ public class PlatformObjectMover : MonoBehaviour {
     public GameObject objectToMove;
     public GameObject mainGuard;
     public bool motionCheck;
+    private MFPP.Modules.PickUpModule pickUp;
 
 
     public Vector3 objectsPosition;
     public Vector3 moverPosition;
 
+    private void Start()
+    {
+        pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,11 +37,14 @@ public class PlatformObjectMover : MonoBehaviour {
                 incorrect = true;
 
             objectToMove = other.gameObject;
+
             if (motionCheck && mainGuard.GetComponent<PlatformGuard>().target && mainGuard.GetComponent<PlatformGuard>().target.Equals(objectToMove))
             {
-                positionObject = (CenterObjectRoutine());
-                StartCoroutine(positionObject);
-                Debug.Log("GO!");
+                
+                    positionObject = (CenterObjectRoutine());
+                    StopAllCoroutines();
+                    StartCoroutine(positionObject);
+
             }
         }
     }
@@ -59,12 +68,14 @@ public class PlatformObjectMover : MonoBehaviour {
         positionObject = (CenterObjectRoutine());
         if (mainGuard.GetComponent<PlatformGuard>().target && mainGuard.GetComponent<PlatformGuard>().target.Equals(objectToMove)){
             objectToMove.tag = ("NoTouch");
+            StopAllCoroutines();
             StartCoroutine(positionObject);
         }
     }
 
     private IEnumerator CenterObjectRoutine()
     {
+
 
         if (objectToMove.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban2x2)
         {
@@ -76,14 +87,27 @@ public class PlatformObjectMover : MonoBehaviour {
 
         else
         {
-            Debug.Log(objectToMove.GetComponent<ItemProperties>().objectType.ToString());
+
+
+            if (pickUp.heldObject && pickUp.heldObject.Equals(objectToMove))
+            {
+                pickUp.PutDown();
+                pickUp.target = null;
+                yield return new WaitForFixedUpdate();
+            }
+
+
+            //Debug.Log(objectToMove.GetComponent<ItemProperties>().objectType.ToString());
             objectsPosition = objectToMove.transform.position;
-            moverPosition = position.position;
-            moverPosition.y = objectsPosition.y;
+
+
+            float differenceY = objectsPosition.y - position.position.y;
 
             Vector3 startpoint = objectToMove.transform.position;
             float elapsedTime = 0;
             float ratio = elapsedTime / duration;
+            float startGuardY = mainGuard.transform.parent.transform.position.y;
+            Debug.Log(startGuardY);
 
             PlatformGuard platformGuard = mainGuard.GetComponent<PlatformGuard>();
             int index = platformGuard.stuckObjects.IndexOf(objectToMove);
@@ -94,10 +118,16 @@ public class PlatformObjectMover : MonoBehaviour {
             platformGuard.stuckObjectsOffset.Remove(objectToMove.transform.position - mainGuard.transform.position);
             mainGuard.SetActive(false);
 
+
+
+
             while (ratio < 1f)
             {
+                moverPosition = position.position;
+                moverPosition.y = moverPosition.y+differenceY;
 
-                elapsedTime += Time.deltaTime;
+
+                elapsedTime += Time.smoothDeltaTime;
                 ratio = elapsedTime / duration;
                 //value = Vector3.Slerp(startpoint, moverPosition, ratio);
                 //objectToMove.transform.position = value;
@@ -107,11 +137,20 @@ public class PlatformObjectMover : MonoBehaviour {
 
                 yield return null;
             }
+
+
+            float newGuardY = mainGuard.transform.parent.transform.position.y - startGuardY;
+            Debug.Log(newGuardY);
+
+            Vector3 finalPosition = new Vector3(position.position.x, (position.position.y + differenceY + (newGuardY/2)), position.position.z);
+            objectToMove.transform.position = finalPosition;
+
             mainGuard.SetActive(true);
 
-            platformGuard.stuckObjects.Add(objectToMove);
+            //platformGuard.stuckObjects.Add(objectToMove);  [was adding this before, but realized that the platformGuard will be doing this already]
             platformGuard.stuckObjectsOffset.Add((objectToMove.transform.position - mainGuard.transform.position));
             incorrect = false;
+            StopAllCoroutines();
         }
     }
 }

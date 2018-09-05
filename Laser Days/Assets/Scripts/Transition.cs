@@ -146,16 +146,6 @@ public class Transition : MonoBehaviour
             yield return null;
         }
 
-        if (GetComponent<Morph>().turnOff){
-
-            if (!stillSelected)
-            {
-                this.gameObject.SetActive(false); 
-            }
-            //COULD TRANSITION HERE INSTEAD! [OTHER TURN OFF MOMENT THAT HAPPENS IS IN MORPH-PUTDOWN, FOR ASSOCIATED OBJ]
-            GetComponent<Morph>().turnOff = false;
-        }
-
         this.gameObject.layer = layerValue;
 
     }

@@ -148,37 +148,16 @@ public class RaycastManager : MonoBehaviour {
                             //put the object back to its original shader
                             if (this.gameObject.layer == 15) { 
 
-                                if (type == ItemProperties.ObjectType.MorphOn || type == ItemProperties.ObjectType.MorphOff)
-                                {
-                                    raycastedObj.GetComponent<Renderer>().material.shader = morphLaserWorldShader; 
-                                    //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                                }
-                                else {
                                     raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
                                     raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                                } 
                             }
                             else if (this.gameObject.layer == 16) { 
-                                if (type == ItemProperties.ObjectType.MorphOn || type == ItemProperties.ObjectType.MorphOff)
-                                {
-                                    raycastedObj.GetComponent<Renderer>().material.shader = morphRealWorldShader;
-                                }
-
-                                else {
                                     raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader;
                                     raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                                }
                             }
 
                             //remove it from list
                             RemoveFromList(raycastedObj, false);
-
-
-                            //if it's a morph, make it drop its associated morph
-                            if (hit.collider.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.MorphOn)
-                            {
-                                hit.collider.GetComponent<Morph>().OnPutDown();
-                            }
 
 
                             //play deselect sound effect
@@ -193,11 +172,6 @@ public class RaycastManager : MonoBehaviour {
                                 selectedObjs.Add(raycastedObj);
                                 AddToList(raycastedObj);
 
-                                //if it's a morph, make it add its associated morph
-                                if (hit.collider.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.MorphOn)
-                                {
-                                    hit.collider.GetComponent<Morph>().OnPickup();
-                                }
 
                                 //play the sound effect
                                 audioSource.clip = selectClip;

@@ -123,16 +123,6 @@ public class flipScript : MonoBehaviour {
 			Flip(held);
 		FlipList(things);
 
-        //switch which morph is held
-        if (held) {
-            if (held.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.MorphOff){
-                GameObject morph = held.GetComponent<Morph>().associatedMorph;
-                MFPP.Modules.PickUpModule pickUp = GetComponent<MFPP.Modules.PickUpModule>();
-                pickUp.PutDown();
-                pickUp.PickUp(morph.GetComponent<Rigidbody>());
-            }
-        }
-
         //play random flip sound!
         audioSource.clip = GetComponent<SoundBox>().currentFlipPalette.defaultFlipClips.GetRandomFlipClip();
         audioSource.Play();
@@ -266,16 +256,6 @@ public class flipScript : MonoBehaviour {
             child.layer = 10;
         }
 
-        if (type == ItemProperties.ObjectType.MorphOff) {
-            GameObject child = obj.transform.GetChild(0).gameObject;
-            child.layer = 10;
-
-            Transform morph = obj.GetComponent<Morph>().associatedMorph.transform;
-            morph.GetChild(0).gameObject.layer = 10;
-            morph.parent = obj.transform;
-            //morph.gameObject.SetActive(false);
-        }
-
 	}
 	void SetObjectToReal(GameObject obj)
 	{
@@ -288,21 +268,6 @@ public class flipScript : MonoBehaviour {
         {
             GameObject child = obj.transform.GetChild(0).gameObject;
             child.layer = 11;
-        }
-
-        if (type == ItemProperties.ObjectType.MorphOff)
-        {
-            {
-                GameObject child = obj.transform.GetChild(0).gameObject;
-                child.layer = 11;
-
-
-                Transform morph = obj.GetComponent<Morph>().associatedMorph.transform;
-                morph.GetChild(0).gameObject.layer = 11;
-                morph.parent = obj.transform;
-                //morph.gameObject.SetActive(false);
-
-            }
         }
 
 	}

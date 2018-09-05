@@ -15,6 +15,7 @@ public class PlatformMover : MonoBehaviour {
     public Transform end;
 
     private RaycastManager raycastManager;
+    private MFPP.Modules.PickUpModule pickUp;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class PlatformMover : MonoBehaviour {
                             platformContainer.GetComponent<PlatformController>().ActiveColor);
 
         raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
+        pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
 
     }
 
@@ -78,14 +80,24 @@ public class PlatformMover : MonoBehaviour {
                 if (!obj.CompareTag("Player"))
                 {
                     obj.tag = ("NoTouch");
+
+                    //makes sure all morphs get unselected when the platform is in motion!
+                    if (item.objectType == ItemProperties.ObjectType.Morph && item.selected)
+                    {
+                        raycastManager.RemoveFromList(obj, false);
+                        raycastManager.selectedObjs.Remove(obj);
+                        item.selected = false;
+                    }
+
                 }
 
-                //makes sure all morphs get unselected when the platform is in motion!
-                if (item.objectType == ItemProperties.ObjectType.Morph && item.selected){
-                    raycastManager.RemoveFromList(obj, false);
-                    raycastManager.selectedObjs.Remove(obj);
-                    item.selected = false;
+                if (pickUp.heldObject && pickUp.heldObject.Equals(obj))
+                {
+                    Debug.Log("Yo");
+                    pickUp.PutDown();
                 }
+
+
             }
         }
 

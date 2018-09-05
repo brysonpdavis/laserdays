@@ -34,10 +34,6 @@ public class PlatformGuard : MonoBehaviour
         //string collisionTagParent = "";
 
 
-        if (string.Equals(collisionTag, "MorphOn"))
-        {
-        }
-
         //objects colliding from above travel along
         if ((string.Equals(collisionTag, "Sokoban1x1") || 
              string.Equals(collisionTag, "Sokoban2x2") ||
@@ -52,7 +48,8 @@ public class PlatformGuard : MonoBehaviour
         if ((string.Equals(collisionTag, "Sokoban1x1") || 
              string.Equals(collisionTag, "Sokoban2x2") ||
              string.Equals(collisionTag, "Morph") || 
-             string.Equals(collisionTag, "Clickable"))
+             string.Equals(collisionTag, "Clickable") ||
+             col.tag == "MorphArm")
             && (col.transform.position.y <= this.transform.position.y))
         {
             if (platformController.isGroup)
@@ -139,7 +136,8 @@ public class PlatformGuard : MonoBehaviour
         if ((string.Equals(collisionTag, "Sokoban1x1") ||
              string.Equals(collisionTag, "Sokoban2x2") || 
              string.Equals(collisionTag, "Morph") || 
-             string.Equals(collisionTag, "Clickable"))
+             string.Equals(collisionTag, "Clickable") ||
+             col.tag == "MorphArm")
             && (col.transform.position.y <= this.transform.position.y))
         {
             if (platformController.isGroup)
@@ -180,6 +178,7 @@ public class PlatformGuard : MonoBehaviour
                  string.Equals(collisionTag, "Player"))
         {
             stuckObjects.Remove(col.gameObject);
+
         }
 
         target = null;
