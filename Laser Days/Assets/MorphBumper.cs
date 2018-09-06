@@ -22,6 +22,7 @@ public class MorphBumper : MonoBehaviour {
                 parentArmTrigger.parentMorph.StopAllCoroutines();
                 parentArmTrigger.parentMorph.morphRunning = false;
                 parentArmTrigger.parentMorph.tag = "Clickable";
+                parentArmTrigger.parentMorph.GetComponent<Rigidbody>().isKinematic = true;
             }
 
 

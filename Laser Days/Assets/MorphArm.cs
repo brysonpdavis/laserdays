@@ -47,6 +47,8 @@ public class MorphArm : MonoBehaviour {
                     parentMorph.StopAllCoroutines();
                     parentMorph.morphRunning = false;
                     parentMorph.tag = "Clickable";
+                    parentMorph.GetComponent<Rigidbody>().isKinematic = true;
+
                 }
 
             }
@@ -56,6 +58,8 @@ public class MorphArm : MonoBehaviour {
                 parentMorph.StopAllCoroutines();
                 parentMorph.morphRunning = false;
                 parentMorph.tag = "Clickable";
+                parentMorph.GetComponent<Rigidbody>().isKinematic = true;
+
             }
 
 

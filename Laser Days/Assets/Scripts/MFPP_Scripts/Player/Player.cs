@@ -849,6 +849,9 @@ namespace MFPP
 
          void ClampFinalMovement()
         {
+            //fixed issue with gravity being insane in opposite world from where player started. manually making sure negative velocity doesn't go nuts
+            if (FinalMovement.y < -14) { FinalMovement = new Vector3(FinalMovement.x, 0f, FinalMovement.z); }
+
             Vector3 planarFinalMovement = new Vector3(FinalMovement.x, 0, FinalMovement.z);
 
             if (planarFinalMovement.magnitude > Movement.MaxSpeed) // Check to see if the player is moving too fast in the horizontal plane
