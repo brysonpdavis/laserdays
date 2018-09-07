@@ -411,7 +411,7 @@ namespace MFPP
         /// <summary>
         /// The impulse buffer that awaits execution for the next frame.
         /// </summary>
-        protected Vector3 ImpulseBuffer { get; set; }
+        public Vector3 ImpulseBuffer { get; set; }
         /// <summary>
         /// The current height of this <see cref="Player"/>.
         /// </summary>
@@ -496,6 +496,7 @@ namespace MFPP
         public void AddImpulse(Vector3 impulse)
         {
             ImpulseBuffer += impulse;
+            Debug.Log("adding impulse " + impulse.sqrMagnitude);
         }
         /// <summary>
         /// Teleports the player to a specified position.
@@ -652,14 +653,14 @@ namespace MFPP
                 DesiredWorldMovement = transform.TransformVector(DesiredMovement); // Convert from local space to world space
 
                 FinalMovement = DesiredWorldMovement; // Apply desired world movement to final movement
-
-                if (ForceBuffer.sqrMagnitude > 0 || ImpulseBuffer.sqrMagnitude > 0) // Apply forces and impulses to final movement
+                if (ImpulseBuffer.sqrMagnitude > 0 || ForceBuffer.sqrMagnitude > 0) // Apply forces and impulses to final movement
                 {
+                    Debug.Log("I'm in");
                     FinalMovement += ForceBuffer;
                     FinalMovement += ImpulseBuffer;
                 }
 
-                if (!IsJumping && KinematicMovement.sqrMagnitude <= 0) // Negative step offset for stairs and downwards slopes
+                if (!IsJumping && KinematicMovement.sqrMagnitude <= 0 && (ImpulseBuffer.sqrMagnitude==0)) // Negative step offset for stairs and downwards slopes
                 {
                     Ray r = new Ray(transform.position + Vector3.up * (Radius * SlopeRadiusMultiplier), Vector3.down);
                     if (Physics.SphereCast(r, Radius * SlopeRadiusMultiplier, StepOffset + SkinWidth, CollisionLayers))

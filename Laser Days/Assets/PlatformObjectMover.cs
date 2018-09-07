@@ -123,7 +123,7 @@ public class PlatformObjectMover : MonoBehaviour {
 
             while (ratio < 1f)
             {
-                moverPosition = position.position;
+                moverPosition = position.transform.position;
                 moverPosition.y = moverPosition.y+differenceY;
 
 
@@ -142,7 +142,7 @@ public class PlatformObjectMover : MonoBehaviour {
             float newGuardY = mainGuard.transform.parent.transform.position.y - startGuardY;
             Debug.Log(newGuardY);
 
-            Vector3 finalPosition = new Vector3(position.position.x, (position.position.y + differenceY + (newGuardY/2)), position.position.z);
+            Vector3 finalPosition = new Vector3(position.position.x, (position.position.y + differenceY ), position.position.z);
             objectToMove.transform.position = finalPosition;
 
             mainGuard.SetActive(true);

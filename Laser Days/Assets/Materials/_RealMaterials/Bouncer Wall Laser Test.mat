@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Default Transition Real
-  m_Shader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 0
+  m_Name: Bouncer Wall Laser Test
+  m_Shader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -23,11 +23,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoLaser:
-        m_Texture: {fileID: 2800000, guid: b88ad88c9fe2a45a2ae52d7f4bc9ada6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2bc11ffdb946b41458b9dc99c2bc57c2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoReal:
-        m_Texture: {fileID: 2800000, guid: 9eb0c797d10a44d419d36c8f396f77ad, type: 3}
+        m_Texture: {fileID: 2800000, guid: 823e8f59cd24e40f0ab3d7a1074aa7e1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -47,19 +47,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Diffuse:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b88ad88c9fe2a45a2ae52d7f4bc9ada6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveMap:
-        m_Texture: {fileID: 2800000, guid: 667ae0b259a0d42ca882e292026397e2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 07790774372b74051bf1de269ee0443a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FirstTex:
+        m_Texture: {fileID: 2800000, guid: eb18006e3122d7e4a84e8ef8b708df02, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FourthTex:
+        m_Texture: {fileID: 2800000, guid: 6b2e75e162ed72c428ddc9ca9cac6452, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9470468fda72f4773a90a0306decbf0f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -67,6 +75,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Occlusion:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -78,8 +90,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SecondTex:
+        m_Texture: {fileID: 2800000, guid: 20fa208453803ab41b65dfe6fe92c848, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SelectedEffectMap:
+        m_Texture: {fileID: 2800000, guid: bf0062fb549f6493b803dd85fdd0ecc7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ThirdTex:
+        m_Texture: {fileID: 2800000, guid: 478de9d1d3cbac64bad0d9feaad9e272, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -87,38 +111,53 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaTestRef: 0.5
+    - _Amplitude: 0.33928573
+    - _Angle: 0.46428573
     - _BumpScale: 1
     - _Clip: 1
-    - _Cutoff: 0.5
+    - _Cutoff: 0.27
     - _DetailNormalMapScale: 1
-    - _DissolveEdgeThickness: 0.3560508
+    - _DissolveEdgeThickness: 0.418
     - _DstBlend: 0
     - _EdgeThickness: 0.01
+    - _EmissionScaleUI: 0
+    - _Gloss: 0.5
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0.48
     - _GlossyReflections: 1
     - _IsFlippable: 0
     - _IsSelected: 0
+    - _Lightmapping: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Phase: 1
+    - _Size: 25
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TransitionState: 0
-    - _UVSec: 0
+    - _TransitionState: 0.872
+    - _UVSec: 1
+    - _Wavelength: 0.17857142
     - _ZWrite: 1
     - __dirty: 0
     - _onHold: 0
     - _onHover: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DissolveEdgeColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Color1: {r: 0.67910445, g: 0.67910445, b: 0.67910445, a: 1}
+    - _Color2: {r: 0.14179105, g: 0.14179105, b: 0.14179105, a: 1}
+    - _DissolveEdgeColor: {r: 1, g: 0, b: 0, a: 0}
     - _EdgeColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HoldColor: {r: 0, g: 0, b: 0, a: 0}
-    - _HoverColor: {r: 0, g: 0, b: 0, a: 0}
-    - _SelectedEffectColor: {r: 8, g: 8, b: 8, a: 0}
-    - _TintA: {r: 1, g: 0, b: 0, a: 0}
-    - _TintB: {r: 0.9245283, g: 0.5585692, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
+    - _HoldColor: {r: 0.35268143, g: 0.98431367, b: 0, a: 0.28627452}
+    - _HoverColor: {r: 0.14403409, g: 0.050980367, b: 1, a: 0.32156864}
+    - _Indicator: {r: 1, g: 0, b: 0, a: 1}
+    - _SelectedEffectColor: {r: 2.919282, g: 0, b: 10.680627, a: 0}
+    - _SpecularColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _TintA: {r: 0, g: 0, b: 0, a: 0}
+    - _TintB: {r: 0, g: 0, b: 0, a: 0}

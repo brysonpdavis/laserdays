@@ -115,11 +115,16 @@ public class RaycastManager : MonoBehaviour {
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
 
                 if (!pickUp.heldObject || (pickUp.heldObject && !pickUp.heldObject.Equals(raycastedObj))){
-                    if (raycastedObj.GetComponent<SelectionRenderChange>()){
+                    if (raycastedObj.GetComponent<SelectionRenderChange>())
+                    {                             
                         raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
                     }
 
-                    else hit.collider.gameObject.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                    else
+                    {
+                        //hit.collider.gameObject.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                        raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                    }
                 }
 
 
@@ -234,7 +239,7 @@ public class RaycastManager : MonoBehaviour {
 
         case ItemProperties.ObjectType.Wall:
             {
-                obj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                obj.GetComponent<ItemProperties>().Select();
                 break;
             }
 
@@ -259,6 +264,7 @@ public class RaycastManager : MonoBehaviour {
         //removing multiple at once shouldn't update the predicting slider at all, it's done separately on the flip
 
         obj.GetComponent<ItemProperties>().selected = false;
+        obj.GetComponent<ItemProperties>().UnSelect();
 
         if (obj.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Morph)
         {
