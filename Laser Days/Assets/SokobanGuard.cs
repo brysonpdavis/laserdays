@@ -24,7 +24,7 @@ public class SokobanGuard : MonoBehaviour
 
         string collisionTag = col.tag;
 
-        if (string.Equals(collisionTag, "Sokoban"))
+        if (otherItemProperties && otherItemProperties.objectType == ItemProperties.ObjectType.Sokoban1x1)
         {
             col.transform.SetParent(this.transform.parent);
         }
@@ -33,7 +33,7 @@ public class SokobanGuard : MonoBehaviour
     {
         string collisionTag = col.tag;
 
-        if (string.Equals(collisionTag, "Sokoban"))
+        if (col.gameObject.GetComponent<ItemProperties>() && col.gameObject.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban1x1)
         {
             player.GetComponent<MFPP.Player>().Movement.AllowMouseMove = true;
             col.transform.SetParent(this.transform.parent.transform.parent);

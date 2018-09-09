@@ -53,7 +53,13 @@ public class Booster : MonoBehaviour {
             GetComponent<Renderer>().material.SetInt("_onHold", 1);
         }
 
-        box.PlayBoost();
+        if (other.gameObject.GetComponent<AudioSource>())
+        {
+            AudioSource source = other.gameObject.GetComponent<AudioSource>();
+            source.clip = box.booster;
+            source.Play();
+        }
+
 
 }
 
