@@ -10,11 +10,13 @@ public class Booster : MonoBehaviour {
     public bool affectsObjects = true;
     GameObject player;
     private MFPP.Modules.PickUpModule pickUp;
+    private SoundBox box;
 
 
     private void Start()
     {
         player = Toolbox.Instance.GetPlayer();
+        box = player.GetComponent<SoundBox>();
         pickUp = player.GetComponent<MFPP.Modules.PickUpModule>();
     }
 
@@ -51,6 +53,7 @@ public class Booster : MonoBehaviour {
             GetComponent<Renderer>().material.SetInt("_onHold", 1);
         }
 
+        box.PlayBoost();
 
 }
 

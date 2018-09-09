@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SoundBox : MonoBehaviour {
 
+    public AudioSource thisSource;
+
    // public AudioClip[] flipClips;
    // public AudioClip[] flipClipsSecondary;
     public MFPP.FlipClipAsset currentFlipPalette;
@@ -24,9 +26,19 @@ public class SoundBox : MonoBehaviour {
     public AudioClip platformOff;
 
     public AudioClip threshold;
-    
+    public AudioClip booster;
 
 
+    public void Start()
+    {
+        thisSource = GetComponent<AudioSource>();
+    }
+
+    public void PlayBoost()
+    {
+        thisSource.clip = booster;
+        thisSource.Play();
+    }
 
 
 }

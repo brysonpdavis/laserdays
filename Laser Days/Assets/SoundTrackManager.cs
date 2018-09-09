@@ -71,6 +71,7 @@ public class SoundTrackManager : MonoBehaviour {
             yield return new WaitForSeconds(flipClip.section2[currentChord].backgroundSound.length);
             play = false;
             if (counter == 20) {
+                yield return new WaitForSeconds(3);
                 counter = 0;
             }
             yield return null;
@@ -81,7 +82,7 @@ public class SoundTrackManager : MonoBehaviour {
 
     public void PlayPrimary(){
 
-        if (counter < 8)
+        if (counter <= 8)
         {
             audioSource.clip = flipClip.defaultFlipClips[currentChord].GetRandomFlipClip();
         }
@@ -95,7 +96,7 @@ public class SoundTrackManager : MonoBehaviour {
 
     public void PlaySecondary()
     {
-        if (counter < 8)
+        if (counter <= 8)
         {
             audioSource.clip = flipClip.defaultFlipClips[currentChord].GetRandomFlipSecondary();
 
