@@ -17,7 +17,7 @@ namespace MFPP
         /// The default flips name that we select from the FlipClips list.
         /// </summary>
 
-        public Data defaultFlipClips;
+        public List <Data> defaultFlipClips;
         /// <summary>
         /// The default flips to use and also fallback to in the case that no matching flips were found.
         /// </summary>
@@ -33,6 +33,12 @@ namespace MFPP
         /// FlipClip volume when crouching.
         /// </summary>
 
+        public class MainClips
+        {
+            public List<AudioClip> chords;
+            public List<Data> flips;
+        }
+
         [Serializable]
         public class Data
         {
@@ -42,9 +48,11 @@ namespace MFPP
             /// The name of the flip data.
             /// </summary>
 
-
+            public AudioClip backgroundSound;
             public List<UnityEngine.AudioClip> flips;
             public List<UnityEngine.AudioClip> flipsSecondary;
+            public List<UnityEngine.AudioClip> bass;
+
 
             /// <summary>
             /// The list of flip data.
@@ -72,7 +80,15 @@ namespace MFPP
                 if (flipsSecondary == null || flipsSecondary.Count <= 0)
                     return null;
 
-                return flipsSecondary[Random.Range(0, flips.Count)];
+                return flipsSecondary[Random.Range(0, flipsSecondary.Count)];
+            }
+
+            public UnityEngine.AudioClip GetRandomBass()
+            {
+                if (bass == null || bass.Count <= 0)
+                    return null;
+
+                return bass[Random.Range(0, bass.Count)];
             }
 
 

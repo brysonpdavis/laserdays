@@ -16,6 +16,7 @@ public class flipScript : MonoBehaviour {
     public AudioSource audioSourceSecondary;
 
     private MFPP.FlipClipAsset flipSounds;
+    private SoundTrackManager soundTrack;
 
     public AudioClip flipFailClip;
     public bool flippedThisFrame = false;
@@ -51,6 +52,7 @@ public class flipScript : MonoBehaviour {
         SoundBox box = GetComponent<SoundBox>();
         flipSounds = box.currentFlipPalette;
         flipFailClip = box.flipFail;
+        soundTrack = GetComponentInChildren<SoundTrackManager>();
 	}
 
 	void Update () {
@@ -123,14 +125,21 @@ public class flipScript : MonoBehaviour {
 			Flip(held);
 		FlipList(things);
 
-        //play random flip sound!
-        audioSource.clip = GetComponent<SoundBox>().currentFlipPalette.defaultFlipClips.GetRandomFlipClip();
-        audioSource.Play();
+
 
         //play secondary sound when there is a held object or are selected objects
         if (held || (selectedObjects) ){
-            audioSourceSecondary.clip = GetComponent<SoundBox>().currentFlipPalette.defaultFlipClips.GetRandomFlipSecondary();
-            audioSourceSecondary.Play();
+            // audioSourceSecondary.clip = GetComponent<SoundBox>().currentFlipPalette.defaultFlipClips.GetRandomFlipSecondary();
+            //audioSourceSecondary.Play();
+
+            soundTrack.PlaySecondary();
+        }
+
+        else {
+            //play random flip sound!
+            //  audioSource.clip = GetComponent<SoundBox>().currentFlipPalette.defaultFlipClips.GetRandomFlipClip();
+            // audioSource.Play();
+            soundTrack.PlayPrimary();
         }
 
 

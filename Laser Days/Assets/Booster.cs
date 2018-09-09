@@ -80,9 +80,7 @@ public class Booster : MonoBehaviour {
         //Debug.Log(transform.up);
         Vector3 boost = transform.up;
         boost *= playerBoostAmount;
-        //obj.GetComponent<MFPP.Player>().AddImpulse(boost);
-        obj.GetComponent<MFPP.Player>().ImpulseBuffer = boost;
-        //Debug.Log(obj.GetComponent<MFPP.Player>().ImpulseBuffer.sqrMagnitude);
+        obj.GetComponent<MFPP.Player>().AddImpulse(boost);
 
 
         yield return null;
