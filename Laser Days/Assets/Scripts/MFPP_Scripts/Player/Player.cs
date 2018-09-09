@@ -277,7 +277,7 @@ namespace MFPP
         /// </summary>
         public bool JustLanded
         {
-            get { return IsGrounded && !OldIsGrounded; }
+            get {return IsGrounded && !OldIsGrounded; }
         }
         /// <summary>
         /// Did this <see cref="Player"/> just air?
@@ -851,7 +851,7 @@ namespace MFPP
          void ClampFinalMovement()
         {
             //fixed issue with gravity being insane in opposite world from where player started. manually making sure negative velocity doesn't go nuts
-            if (FinalMovement.y < -14) { FinalMovement = new Vector3(FinalMovement.x, 0f, FinalMovement.z); }
+            if (FinalMovement.y < -14) { FinalMovement = new Vector3(FinalMovement.x, Physics.gravity.y, FinalMovement.z); }
 
             Vector3 planarFinalMovement = new Vector3(FinalMovement.x, 0, FinalMovement.z);
 

@@ -18,6 +18,10 @@ namespace MFPP
         /// </summary>
 
         public List <Data> defaultFlipClips;
+        public List<Data> section2;
+        public List<Data> section3;
+
+
         /// <summary>
         /// The default flips to use and also fallback to in the case that no matching flips were found.
         /// </summary>
