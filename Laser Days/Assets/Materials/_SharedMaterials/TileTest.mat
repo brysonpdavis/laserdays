@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TransitionStatic
-  m_Shader: {fileID: 4800000, guid: fc42ef0c3a7724442baa9257b1f3b22a, type: 3}
+  m_Name: TileTest
+  m_Shader: {fileID: 4800000, guid: 0104351153d2746ab82dc5b281882c1a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,14 +18,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlbedoLaser:
-        m_Texture: {fileID: 2800000, guid: bf96437e16c2443b0bc038aaaf889fee, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _AlbedoReal:
-        m_Texture: {fileID: 2800000, guid: 6e9508b107da548c5b9ec5b983f7207b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -58,12 +50,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MultitexLaser:
+        m_Texture: {fileID: 2800000, guid: 061a209b03c684e8891a83c5e2f3ed63, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MultitexReal:
+        m_Texture: {fileID: 2800000, guid: 654043fe5b54749c981f1ae170d11a4d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NormalLaser:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b8f964f1ad90b4233a228c233972a4e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalReal:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 549187ca9dc0b42c5a75dcfe8abcf152, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -88,7 +88,7 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _NormalScale: 6.588235
+    - _NormalScale: 0.6
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -101,3 +101,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HUE: {r: 1, g: 0.8132167, b: 0.031372547, a: 0}
+    - _MaterialColor: {r: 0.3254717, g: 0.9999997, b: 1, a: 0}

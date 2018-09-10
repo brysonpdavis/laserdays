@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112000006, guid: a27c4e0badec2452d9f496e533f4e367,
+  m_LightingDataAsset: {fileID: 112000004, guid: 2df45e81062d049588854e00d221f704,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -509,15 +509,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalRotation.x
@@ -731,7 +731,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.2
   cameraReal: 70
-  cameraLaser: 75
+  cameraLaser: 120
+--- !u!114 &1198232342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1198232336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a879e317c20b0d41a9a56f1a97f4cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyMethod: 1
+  SampleCount: 0
+  PerPixelNormals: 2
+  Intensity: 0.728
+  Tint: {r: 0.058477648, g: 0.035377353, b: 0.14150941, a: 1}
+  Radius: 1.2
+  PowerExponent: 1.05
+  Bias: 0.104
+  Thickness: 0.171
+  Downsample: 1
+  FadeEnabled: 1
+  FadeStart: 100
+  FadeLength: 50
+  FadeToIntensity: 0
+  FadeToTint: {r: 0, g: 0, b: 0, a: 1}
+  FadeToRadius: 2
+  FadeToPowerExponent: 1
+  FadeToThickness: 1
+  BlurEnabled: 1
+  BlurRadius: 3
+  BlurPasses: 2
+  BlurSharpness: 15
+  FilterEnabled: 1
+  FilterBlending: 0.75
+  FilterResponse: 0.5
 --- !u!4 &1384622080 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca,
