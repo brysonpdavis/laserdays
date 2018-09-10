@@ -56,7 +56,7 @@ public class Booster : MonoBehaviour {
         if (other.gameObject.GetComponent<AudioSource>())
         {
             AudioSource source = other.gameObject.GetComponent<AudioSource>();
-            source.clip = box.booster;
+            source.clip = box.PlayBoost();
             source.Play();
         }
 
