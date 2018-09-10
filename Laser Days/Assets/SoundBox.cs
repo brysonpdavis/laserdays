@@ -26,7 +26,7 @@ public class SoundBox : MonoBehaviour {
     public AudioClip platformOff;
 
     public AudioClip threshold;
-    public AudioClip booster;
+    public AudioClip[] booster;
 
 
     public void Start()
@@ -34,10 +34,9 @@ public class SoundBox : MonoBehaviour {
         thisSource = GetComponent<AudioSource>();
     }
 
-    public void PlayBoost()
+    public AudioClip PlayBoost()
     {
-        thisSource.clip = booster;
-        thisSource.Play();
+        return booster[Random.Range(0, booster.Length)];
     }
 
 
