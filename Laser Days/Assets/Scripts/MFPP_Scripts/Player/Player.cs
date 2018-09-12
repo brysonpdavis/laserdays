@@ -831,9 +831,9 @@ namespace MFPP
             for (int i = 0; i < overlappingCollidersCount; i++) {
                 Collider overlappingCollider = overlappingColliders[i];
 
-                if (overlappingCollider.gameObject.isStatic) {
-                    continue;
-                }
+                //if (overlappingCollider.gameObject.isStatic) {
+                //    continue;
+                //}
 
                 ignoredColliders.Add(overlappingCollider);
                 Physics.IgnoreCollision(CharacterController, overlappingCollider, true);
