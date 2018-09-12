@@ -9,23 +9,18 @@ public class Transition : MonoBehaviour
     Renderer mRenderer;
     Material material;
     public float ScaleSpeed = 1f;
+    public bool laserShared = false;
 
     private IEnumerator flipTransition;
-    private IEnumerator morphTransition;
-
     float offset;
     float speed;
 
     private void Awake()
     {
         mRenderer = GetComponent<Renderer>();
-
         material = mRenderer.material;
-
         offset = Random.value;
         speed = Random.Range(1f, 2f);
-
-
     }
 
 
@@ -35,50 +30,22 @@ public class Transition : MonoBehaviour
         //first need to make sure the object isn't already selected before starting any transition
         //objects that are selected will be flipped and shouldn't have any animation, but should change their parent gameobject
 
-        if (material){
-            float start = material.GetFloat("_TransitionState");
-
-           // if (start > 0f && start < 1f)
-           // {
-                //means that there's a transition animation already going. we need to be sure to stop it before moving on
-                //Debug.Log("I'm stopping one that's running!" + start + this.gameObject.name);
-         //       StopCoroutine(flipTransition);
-        //    }
-
-        //start new direction from where we've left off but in the direction we've specified with "end"
-        flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);
-        StartCoroutine(flipTransition);
-    }
-}
-
-
-
-    public void Morph(float end, float duration)
-    {
-
-        //first need to make sure the object isn't already selected before starting any transition
-        //objects that are selected will be flipped and shouldn't have any animation, but should change their parent gameobject
-
-
         if (material)
         {
-            float start = material.GetFloat("_TransitionStateB");
-           
+            float start = material.GetFloat("_TransitionState");
 
-            if (start > 0f && start < 1f)
-            {
-                //means that there's a transition animation already going. we need to be sure to stop it before moving on
-                StopAllCoroutines();
-            }
 
             //start new direction from where we've left off but in the direction we've specified with "end"
-            morphTransition = morphTransitionRoutine(start, end, duration / ScaleSpeed);
-            StartCoroutine(morphTransition);
+            flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);
+            StartCoroutine(flipTransition);
+                    
         }
     }
 
 
-    //use setstart to be sure that when gameobjects are initialized they start with dissolve amount that corresponds to the world that player is in
+
+    //use setstart to be sure that when gameobjects are initialized they start with 
+    //dissolve amount that corresponds to the world that player is in
     //useful when switching an object, immediately sets it without transition
     public void SetStart (float value){
 
@@ -108,45 +75,5 @@ public class Transition : MonoBehaviour
 
             yield return null;
         }
-        }
-
-
-
-    private IEnumerator morphTransitionRoutine(float startpoint, float endpoint, float duration)
-    {
-        int layerValue = this.gameObject.layer;
-        //Debug.Log("layervalue, " + this.gameObject.layer);
-
-        if (layerValue == 10){
-            this.gameObject.layer = 21;
-        }
-        if (layerValue == 11){
-            this.gameObject.layer = 22;
-        }
-
-        bool stillSelected = false;
-        if (Input.GetMouseButton(1))
-        {
-            
-            //important for not turning this gameobject off, as it needs to act as preview since new parent object will still be selected now!
-            stillSelected = true;
-        }
-        float elapsedTime = 0;
-        float ratio = elapsedTime / duration;
-
-        while (ratio < 1f)
-        {
-            elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / duration;
-            float value = Mathf.Lerp(startpoint, endpoint, ratio);
-
-            material.SetFloat("_TransitionStateB", value);
-            RendererExtensions.UpdateGIMaterials(mRenderer);
-
-            yield return null;
-        }
-
-        this.gameObject.layer = layerValue;
-
     }
 }
