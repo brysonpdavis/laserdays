@@ -100,8 +100,8 @@ public class flipScript : MonoBehaviour {
 
 	void FlipPlayerAndThings (GameObject player, GameObject held, IList<GameObject> things) {
 
+        GetComponent<MFPP.Player>().collisionLayers = null;
         bool selectedObjects = false;
-
         if (things.Count > 0) { selectedObjects = true; }
 
         space = !space;

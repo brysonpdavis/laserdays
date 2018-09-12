@@ -429,7 +429,7 @@ namespace MFPP
         /// </summary>
         public float CurrentSlopeSpeedMultiplier { get; protected set; }
 
-        private int? collisionLayers;
+        public int? collisionLayers;
         /// <summary>
         /// The collision layers that this <see cref="Player"/> collides into, see Physics window to change collision layers.
         /// </summary>
@@ -437,8 +437,10 @@ namespace MFPP
         {
             get
             {
+                //if (GetComponent<flipScript>().flippedThisFrame) { collisionLayers = null; }
                 if (collisionLayers == null)
                 {
+                    
                     int layers = 0;
 
                     for (int i = 0; i < 32; i++) // Check through all layers.
@@ -449,6 +451,7 @@ namespace MFPP
                     }
 
                     collisionLayers = layers;
+                   // Debug.Log(collisionLayers);
                 }
 
                 return collisionLayers ?? ~0;
@@ -851,7 +854,7 @@ namespace MFPP
         {
 
             //fixed issue with gravity being insane in opposite world from where player started. manually making sure negative velocity doesn't go nuts
-            if (FinalMovement.y < -14 && OldIsGrounded) { Debug.Log(Velocity); FinalMovement = new Vector3(FinalMovement.x, -1f, FinalMovement.z); }
+            //if (FinalMovement.y < -14 && OldIsGrounded) {Debug.Log(CollisionLayers); FinalMovement = new Vector3(FinalMovement.x, -1f, FinalMovement.z); }
             //Debug.Log(FinalMovement.y);
 
             Vector3 planarFinalMovement = new Vector3(FinalMovement.x, 0, FinalMovement.z);
