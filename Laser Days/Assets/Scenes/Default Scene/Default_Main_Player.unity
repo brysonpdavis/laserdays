@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112000004, guid: 2df45e81062d049588854e00d221f704,
+  m_LightingDataAsset: {fileID: 112000006, guid: f1ab20aeefff34622a3769c1db00302d,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -509,15 +509,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.8
+      value: -3.8
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.9
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -4.9
+      value: -2.2
       objectReference: {fileID: 0}
     - target: {fileID: 4394295467406840, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
       propertyPath: m_LocalRotation.x
@@ -698,7 +698,8 @@ Prefab:
       propertyPath: booster
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114457519073616458, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c4850768f41cd124c83f5785253d4aca, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1021934550 stripped
@@ -1020,6 +1021,40 @@ MonoBehaviour:
 --- !u!1 &1634057783 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1648359132011738, guid: c4850768f41cd124c83f5785253d4aca,
+    type: 2}
+  m_PrefabInternal: {fileID: 989824255}
+--- !u!114 &1634057784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1634057783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099865a30110c42d8a644bd3f19512d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisSource: {fileID: 1634057791}
+  currentFlipPalette: {fileID: 11400000, guid: d6e30acff03e34bcd9637bdc8720cffe, type: 2}
+  flipFail: {fileID: 0}
+  sokobanClickOn: {fileID: 8300000, guid: 59d2c2fc947174385a10ee241cf55e2a, type: 3}
+  sokobanClickOff: {fileID: 8300000, guid: 84f2f8f1564e34535882a03492e26246, type: 3}
+  sokobanShift: {fileID: 8300000, guid: 59d2c2fc947174385a10ee241cf55e2a, type: 3}
+  pickup: {fileID: 8300000, guid: b79d658ed773f46b69f56e3470dc0146, type: 3}
+  selection: {fileID: 8300000, guid: b79d658ed773f46b69f56e3470dc0146, type: 3}
+  deselect: {fileID: 8300000, guid: 1d13921266e964caa8d1e87978e52ff8, type: 3}
+  platformOn: {fileID: 8300000, guid: cded5697b5bff4ab2ade2ad4fa72cf42, type: 3}
+  platformOff: {fileID: 8300000, guid: 2ca7c441ed36d4f42bd045912050d464, type: 3}
+  threshold: {fileID: 0}
+  booster:
+  - {fileID: 8300000, guid: 02a56bb598d474051b3eb2fb1d0c99c9, type: 3}
+  - {fileID: 8300000, guid: 58636abdb8cd34ca48ec4006af5697bf, type: 3}
+  - {fileID: 8300000, guid: b280cd72d34b74ae09f3bbfcae22e9ce, type: 3}
+  - {fileID: 8300000, guid: ac2cd1e657e9141c7af9adca08c2831b, type: 3}
+  - {fileID: 8300000, guid: 2edfc2f2b7ea54b35bf6e39498df1d62, type: 3}
+--- !u!82 &1634057791 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82901438986702348, guid: c4850768f41cd124c83f5785253d4aca,
     type: 2}
   m_PrefabInternal: {fileID: 989824255}
 --- !u!114 &1634057798

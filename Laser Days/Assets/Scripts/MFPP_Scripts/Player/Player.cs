@@ -496,7 +496,7 @@ namespace MFPP
         public void AddImpulse(Vector3 impulse)
         {
             ImpulseBuffer += impulse;
-            Debug.Log("adding impulse " + impulse.sqrMagnitude);
+            //Debug.Log("adding impulse " + impulse.sqrMagnitude);
         }
         /// <summary>
         /// Teleports the player to a specified position.
@@ -655,7 +655,6 @@ namespace MFPP
                 FinalMovement = DesiredWorldMovement; // Apply desired world movement to final movement
                 if (ImpulseBuffer.sqrMagnitude > 0 || ForceBuffer.sqrMagnitude > 0) // Apply forces and impulses to final movement
                 {
-                    Debug.Log("I'm in");
                     FinalMovement += ForceBuffer;
                     FinalMovement += ImpulseBuffer;
                 }
@@ -850,8 +849,10 @@ namespace MFPP
 
          void ClampFinalMovement()
         {
+
             //fixed issue with gravity being insane in opposite world from where player started. manually making sure negative velocity doesn't go nuts
-            if (FinalMovement.y < -14) { FinalMovement = new Vector3(FinalMovement.x, Physics.gravity.y, FinalMovement.z); }
+            if (FinalMovement.y < -14) { FinalMovement = new Vector3(FinalMovement.x, -1f, FinalMovement.z); }
+            //Debug.Log(FinalMovement.y);
 
             Vector3 planarFinalMovement = new Vector3(FinalMovement.x, 0, FinalMovement.z);
 

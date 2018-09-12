@@ -32,15 +32,11 @@ public class Booster : MonoBehaviour {
 
         if (affectsPlayer && other.GetComponent<MFPP.Player>())
         {
-            Debug.Log("hitting player");
-            Debug.Log(other.GetComponent<MFPP.Player>().FinalMovement);
+            //Debug.Log("hitting player");
+            //Debug.Log(other.GetComponent<MFPP.Player>().FinalMovement);
             other.GetComponent<MFPP.Player>().FinalMovement = new Vector3(0f, 0f, 0f);
 
             StartCoroutine(OnBoost(other.gameObject));
-
-
-            //Debug.Log(other.GetComponent<MFPP.Player>().FinalMovement);
-            //Debug.Log(other.GetComponent<MFPP.Player>().
 
         }
 
@@ -53,7 +49,7 @@ public class Booster : MonoBehaviour {
             GetComponent<Renderer>().material.SetInt("_onHold", 1);
         }
 
-        if (other.gameObject.GetComponent<AudioSource>())
+        if (other.gameObject.GetComponent<AudioSource>() && (this.gameObject.layer + 5) == player.layer)
         {
             AudioSource source = other.gameObject.GetComponent<AudioSource>();
             source.clip = box.PlayBoost();
