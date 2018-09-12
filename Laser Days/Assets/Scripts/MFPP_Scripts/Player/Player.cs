@@ -851,7 +851,7 @@ namespace MFPP
         {
 
             //fixed issue with gravity being insane in opposite world from where player started. manually making sure negative velocity doesn't go nuts
-            if (FinalMovement.y < -14) { FinalMovement = new Vector3(FinalMovement.x, -1f, FinalMovement.z); }
+            if (FinalMovement.y < -14 && OldIsGrounded) { Debug.Log(Velocity); FinalMovement = new Vector3(FinalMovement.x, -1f, FinalMovement.z); }
             //Debug.Log(FinalMovement.y);
 
             Vector3 planarFinalMovement = new Vector3(FinalMovement.x, 0, FinalMovement.z);

@@ -79,7 +79,7 @@ public class Booster : MonoBehaviour {
 
     private IEnumerator OnBoost(GameObject obj)
     {
-        
+
         yield return new WaitForEndOfFrame();
         //Debug.Log(transform.up * playerBoostAmount);
         //Debug.Log(transform.up);
