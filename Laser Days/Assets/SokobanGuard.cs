@@ -26,6 +26,7 @@ public class SokobanGuard : MonoBehaviour
 
         if (otherItemProperties && otherItemProperties.objectType == ItemProperties.ObjectType.Sokoban1x1)
         {
+            col.GetComponent<Rigidbody>().isKinematic = false;
             col.transform.SetParent(this.transform.parent);
         }
     }
