@@ -111,6 +111,8 @@ public class TransitionController: MonoBehaviour
 
     public void PlayerCheck() {
 
+        if (!player) { player = Toolbox.Instance.GetPlayer(); }
+
         if (player.layer == 16)
         { //if player is starting in RW
 
