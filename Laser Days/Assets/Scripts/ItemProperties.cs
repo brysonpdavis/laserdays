@@ -20,7 +20,8 @@ public class ItemProperties : MonoBehaviour
     public bool unflippable;
     private RaycastManager rm;
     public bool objectCharge = true;
-    public bool secondaryLock; 
+    public bool secondaryLock;
+    [HideInInspector] public bool beenPickedUp = false;
 
     [HideInInspector] public bool boost = false;
     [HideInInspector] public bool touchingzone = false;
