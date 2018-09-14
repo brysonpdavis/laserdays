@@ -30,7 +30,9 @@ public class SokobanShift : MonoBehaviour {
         if (other.CompareTag("Clickable") && 
             (other.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban1x1) &&
             (!other.gameObject.Equals(parent)) && 
-            !((other.gameObject.layer == (parent.layer+1)) || (other.gameObject.layer == (parent.layer - 1))))
+            (other.gameObject.layer == parent.layer || other.gameObject.layer + 13 == parent.layer))
+
+           // !((other.gameObject.layer == (parent.layer+1)) || (other.gameObject.layer == (parent.layer - 1))))
         {
             if (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)<=1.52f){
                 if (!other.gameObject.GetComponent<ItemProperties>().inMotion)

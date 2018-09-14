@@ -45,23 +45,27 @@ public class PlatformEdgeGuard : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("Guard"))
+        if (other.CompareTag("Guard") && (associatedCollider.gameObject.layer == other.GetComponent<PlatformEdgeGuard>().associatedCollider.gameObject.layer))
         {
 
             //if the other object isn't the sokoban
-            if (!other.GetComponent<PlatformEdgeGuard>().parent)
+            if (!other.GetComponent<PlatformEdgeGuard>().parent )
             {
+                //&& other.gameObject.layer == this.gameObject.layer
+                Debug.Log("option 1");
                 ClickIn(other);
             }
 
             //if this object isn't a sokoban
             else if (!parent){
+                Debug.Log("option 2");
                 ClickIn(other);
             }
 
             //if the other object is on the same layer as this one
             else if (other.GetComponent<PlatformEdgeGuard>().parent.layer == parent.layer)
            {
+                Debug.Log("option 3");
                 ClickIn(other);
             }
        }
