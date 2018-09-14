@@ -13,8 +13,8 @@
                     else
                     {
                         Vector3 floatingPosition = this.transform.position + (sokobanPosition + mainCamera.transform.forward);
-                        target.angularVelocity *= 0.5f;
-                        target.velocity = ((floatingPosition - target.transform.position) * 10f);
+                        //Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * (MaxPickupDistance + 1);                         target.angularVelocity *= 0.5f;
+                        target.velocity = ((floatingPosition - target.transform.position) * currentPositionVelocity)/3;
                     }
 
                     //drops the held object if the player manages to get too far away from it
@@ -25,7 +25,7 @@
                     {
                         iconContainer.SetHold();                         target.useGravity = false;                         target.freezeRotation = true;
                         heldObject.GetComponent<Renderer>().material.SetInt("_onHold", 1);
-                        heldObject.GetComponent<ItemProperties>().Select();                         if (!target.GetComponent<ItemProperties>().beenPickedUp)
+                        heldObject.GetComponent<ItemProperties>().Select();                         target.constraints = RigidbodyConstraints.None;                         if (!target.GetComponent<ItemProperties>().beenPickedUp)
                             { StartCoroutine(SlowPickup()); }        
                         break;
                     }                  case ItemProperties.ObjectType.Sokoban1x1:
