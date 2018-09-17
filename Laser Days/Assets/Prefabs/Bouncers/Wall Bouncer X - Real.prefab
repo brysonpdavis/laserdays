@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 114415011814189116}
   - component: {fileID: 82353938338368752}
   - component: {fileID: 114754995801596638}
+  - component: {fileID: 114495417169448722}
   m_Layer: 11
   m_Name: Wall Bouncer X - Real
   m_TagString: Clickable
@@ -2643,6 +2644,8 @@ MonoBehaviour:
   selectedShader: {fileID: 0}
   unflippable: 1
   objectCharge: 0
+  secondaryLock: 0
+  beenPickedUp: 0
   boost: 0
   touchingzone: 0
   inMotion: 0
@@ -2727,6 +2730,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   laserShared: 0
+--- !u!114 &114495417169448722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1434298028045208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb3c467d07194e268d98151344d16f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114515610813888204
 MonoBehaviour:
   m_ObjectHideFlags: 1

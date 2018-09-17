@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 65969196064909258}
   - component: {fileID: 114613877817584356}
   - component: {fileID: 114506727615155040}
+  - component: {fileID: 114701018537115458}
   m_Layer: 10
   m_Name: Soko1x1 Laser
   m_TagString: Clickable
@@ -145,6 +146,8 @@ MonoBehaviour:
   selectedShader: {fileID: 0}
   unflippable: 1
   objectCharge: 1
+  secondaryLock: 0
+  beenPickedUp: 0
   boost: 0
   touchingzone: 0
   inMotion: 0
@@ -166,3 +169,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
+--- !u!114 &114701018537115458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1678789563262494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151ecae01ec37421797d1b87ad63b2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114753802409229756}
   - component: {fileID: 135978202618282368}
   - component: {fileID: 82363981751224974}
+  - component: {fileID: 114226007821637722}
   m_Layer: 11
   m_Name: TESTERSPHERE REAL
   m_TagString: Clickable
@@ -199,6 +200,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114226007821637722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936992001452044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc409df2aedc470b9336e3cce6785ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxVelocity: 8
 --- !u!114 &114654918946359356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,6 +230,8 @@ MonoBehaviour:
   selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
   unflippable: 0
   objectCharge: 1
+  secondaryLock: 0
+  beenPickedUp: 0
   boost: 0
   touchingzone: 0
   inMotion: 0
@@ -250,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!135 &135978202618282368
 SphereCollider:
   m_ObjectHideFlags: 1

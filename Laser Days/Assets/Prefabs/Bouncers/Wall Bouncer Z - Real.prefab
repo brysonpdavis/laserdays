@@ -639,6 +639,7 @@ GameObject:
   - component: {fileID: 114754044399917656}
   - component: {fileID: 82185167428504962}
   - component: {fileID: 114525850175344116}
+  - component: {fileID: 114906637871600040}
   m_Layer: 11
   m_Name: Wall Bouncer Z - Real
   m_TagString: Clickable
@@ -2692,6 +2693,8 @@ MonoBehaviour:
   selectedShader: {fileID: 0}
   unflippable: 1
   objectCharge: 0
+  secondaryLock: 0
+  beenPickedUp: 0
   boost: 0
   touchingzone: 0
   inMotion: 0
@@ -2915,6 +2918,17 @@ MonoBehaviour:
   snap: {fileID: 4018873407327492}
   objectToMove: {fileID: 0}
   mainGuard: {fileID: 1062663204233676}
+--- !u!114 &114906637871600040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1749062401084450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9687412c3004bf9af4ca7477705860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114912490930027680
 MonoBehaviour:
   m_ObjectHideFlags: 1

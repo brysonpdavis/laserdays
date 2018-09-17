@@ -63,6 +63,8 @@ GameObject:
   - component: {fileID: 114469990332081102}
   - component: {fileID: 114182159608215608}
   - component: {fileID: 65765167567793440}
+  - component: {fileID: 114869041318602686}
+  - component: {fileID: 114720558953809664}
   m_Layer: 11
   m_Name: Morph Real
   m_TagString: Clickable
@@ -579,6 +581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114182159608215608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -612,6 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114429420527217144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -624,6 +628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114469990332081102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -664,6 +669,17 @@ MonoBehaviour:
   parentMorph: {fileID: 114182159608215608}
   linkedBumper: {fileID: 0}
   colliding: 0
+--- !u!114 &114720558953809664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296476021553686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e4839d409a0448fb3cf229ee556952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114801793394355728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -682,6 +698,8 @@ MonoBehaviour:
   selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
   unflippable: 0
   objectCharge: 1
+  secondaryLock: 0
+  beenPickedUp: 0
   boost: 0
   touchingzone: 0
   inMotion: 0
@@ -704,6 +722,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliding: 0
   parentArmTrigger: {fileID: 114501255505854126}
+--- !u!114 &114869041318602686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296476021553686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e6b5d14a80f4843bb4bbad40a06749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114891048682079844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -716,6 +745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114970085866596638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -728,3 +758,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0

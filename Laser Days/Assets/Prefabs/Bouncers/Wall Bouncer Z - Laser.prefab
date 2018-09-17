@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 114279669380629138}
   - component: {fileID: 114027391122454822}
   - component: {fileID: 82309459842431072}
+  - component: {fileID: 114053605862126278}
   m_Layer: 10
   m_Name: Wall Bouncer Z - Laser
   m_TagString: Clickable
@@ -2558,6 +2559,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Renderers: []
+--- !u!114 &114053605862126278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175368908111970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9687412c3004bf9af4ca7477705860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114085247449778680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2966,6 +2978,8 @@ MonoBehaviour:
   selectedShader: {fileID: 0}
   unflippable: 1
   objectCharge: 0
+  secondaryLock: 0
+  beenPickedUp: 0
   boost: 0
   touchingzone: 0
   inMotion: 0

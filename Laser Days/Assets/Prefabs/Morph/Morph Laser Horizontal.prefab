@@ -169,6 +169,8 @@ GameObject:
   - component: {fileID: 114297848047439050}
   - component: {fileID: 114637396051856828}
   - component: {fileID: 65522468341069604}
+  - component: {fileID: 114922730600827270}
+  - component: {fileID: 114277516140358660}
   m_Layer: 10
   m_Name: Morph Laser Horizontal
   m_TagString: Clickable
@@ -622,6 +624,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
+--- !u!114 &114277516140358660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1901091928891886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e4839d409a0448fb3cf229ee556952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114297848047439050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -646,6 +660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114439390557841044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -658,6 +673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114451802682991026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -684,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114637396051856828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -736,6 +753,8 @@ MonoBehaviour:
   selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
   unflippable: 0
   objectCharge: 1
+  secondaryLock: 0
+  beenPickedUp: 0
   boost: 0
   touchingzone: 0
   inMotion: 0
@@ -784,3 +803,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
+--- !u!114 &114922730600827270
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1901091928891886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e6b5d14a80f4843bb4bbad40a06749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

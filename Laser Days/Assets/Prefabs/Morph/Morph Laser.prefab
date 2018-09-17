@@ -27,6 +27,8 @@ GameObject:
   - component: {fileID: 114231774454292722}
   - component: {fileID: 114260095041893286}
   - component: {fileID: 65831609255218718}
+  - component: {fileID: 114835705859621996}
+  - component: {fileID: 114187797772760256}
   m_Layer: 10
   m_Name: Morph Laser
   m_TagString: Clickable
@@ -579,6 +581,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
+--- !u!114 &114187797772760256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028284431939742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e4839d409a0448fb3cf229ee556952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114204812890166446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -616,6 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114260095041893286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -649,6 +664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114489549246955504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -681,6 +697,8 @@ MonoBehaviour:
   selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
   unflippable: 0
   objectCharge: 1
+  secondaryLock: 0
+  beenPickedUp: 0
   boost: 0
   touchingzone: 0
   inMotion: 0
@@ -716,6 +734,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
+--- !u!114 &114835705859621996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028284431939742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e6b5d14a80f4843bb4bbad40a06749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114932828036263556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -728,3 +758,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0

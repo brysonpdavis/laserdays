@@ -164,7 +164,6 @@ public class RaycastManager : MonoBehaviour {
                             //remove it from list
                             RemoveFromList(raycastedObj, false);
 
-
                             //play deselect sound effect
                             audioSource.clip = deselectClip;
                             audioSource.Play();
@@ -176,7 +175,6 @@ public class RaycastManager : MonoBehaviour {
                             if (!(GetComponent<MFPP.Modules.PickUpModule>().heldObject)) {
                                 selectedObjs.Add(raycastedObj);
                                 AddToList(raycastedObj);
-
 
                                 //play the sound effect
                                 audioSource.clip = selectClip;
@@ -294,45 +292,27 @@ public class RaycastManager : MonoBehaviour {
 
     public void IconCheck(float distance, GameObject raycastedObj)
     {
-        
-
+        InteractableObject interactable = raycastedObj.GetComponent<InteractableObject>();
 
 
         if (!pickUp.heldObject)
         {
             if (distance <= pickUp.MaxPickupDistance)
             {
-                if ((playerCam.transform.localEulerAngles.x > 65f) && (playerCam.transform.localEulerAngles.x < 91f) && crossHair.color == new Color32(255, 222, 77, 255))
+                if ((playerCam.transform.localEulerAngles.x > 55f) && (playerCam.transform.localEulerAngles.x < 91f) && crossHair.color == new Color32(255, 222, 77, 255))
                 {
-                    if (!raycastedObj.GetComponent<ItemProperties>().unflippable)
-                    {
-                        iconContainer.SetSelectHover();  
-                    }
-
-                    else {
-                        iconContainer.SetInteractHover();
-                    }
-
+                    interactable.DistantIconHover();
                 }
 
                 else {
-                    iconContainer.SetOpenHand(); 
+                    interactable.CloseIconHover();
                 }
             }
 
-            else if (!raycastedObj.GetComponent<ItemProperties>().unflippable) 
-            {
-                iconContainer.SetSelectHover();    
-            }
-
             else {
-                
-                iconContainer.SetInteractHover();
+                interactable.DistantIconHover();
             }
-
         }
-
-
     }
 
 }
