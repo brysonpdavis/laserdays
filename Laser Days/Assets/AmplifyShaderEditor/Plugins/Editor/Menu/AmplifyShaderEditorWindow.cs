@@ -1020,13 +1020,32 @@ namespace AmplifyShaderEditor
 		[MenuItem( "Assets/Create/Shader/Amplify Surface Shader" )]
 		public static void CreateNewShader()
 		{
-			string path = Selection.activeObject == null ? Application.dataPath : ( IOUtils.dataPath + AssetDatabase.GetAssetPath( Selection.activeObject ) );
+
+			string path = string.Empty; 
+			if( Selection.activeObject != null )
+			{
+				path = ( IOUtils.dataPath + AssetDatabase.GetAssetPath( Selection.activeObject ) );
+			}
+			else
+			{
+				UnityEngine.Object[] selection = Selection.GetFiltered( typeof( UnityEngine.Object ), SelectionMode.DeepAssets );
+				if( selection.Length > 0 && selection[ 0 ] != null )
+				{
+					path = ( IOUtils.dataPath + AssetDatabase.GetAssetPath( selection[0] ) );
+				}
+				else
+				{
+					path = Application.dataPath;
+				}
+
+			}
+
 			if( path.IndexOf( '.' ) > -1 )
 			{
 				path = path.Substring( 0, path.LastIndexOf( '/' ) );
 			}
 			path += "/";
-
+			
 			if( IOUtils.AllOpenedWindows.Count > 0 )
 			{
 				EditorWindow openedWindow = AmplifyShaderEditorWindow.GetWindow<AmplifyShaderEditorWindow>();
@@ -3145,7 +3164,7 @@ namespace AmplifyShaderEditor
 					Vector2 pos = node.Vec2Position;
 					node.Vec2Position = pos + deltaPos + m_copyPasteDeltaMul * Constants.CopyPasteDeltaPos;
 					//node.RefreshExternalReferences();
-					node.AfterDuplication( node );
+					node.AfterDuplication();
 					createdNodes.Add( node );
 					m_mainGraphInstance.SelectNode( node, true, false );
 				}
@@ -3314,7 +3333,9 @@ namespace AmplifyShaderEditor
 							{
 								case IOUtils.NodeParam:
 								{
-									System.Type type = System.Type.GetType( parameters[ IOUtils.NodeTypeId ] );
+									string typeStr = parameters[ IOUtils.NodeTypeId ];
+									//System.Type type = System.Type.GetType( parameters[ IOUtils.NodeTypeId ] );
+									System.Type type = System.Type.GetType( IOUtils.NodeTypeReplacer.ContainsKey( typeStr ) ? IOUtils.NodeTypeReplacer[ typeStr ] : typeStr );
 									if( type != null )
 									{
 										System.Type oldType = type;
@@ -3652,7 +3673,10 @@ namespace AmplifyShaderEditor
 													}
 													else
 													{
-														ShowMessage( string.Format( Constants.DeprecatedMessageStr, attribs.Name, attribs.DeprecatedAlternative ), MessageSeverity.Normal, false );
+														if( string.IsNullOrEmpty( attribs.DeprecatedAlternative ))
+															ShowMessage( string.Format( Constants.DeprecatedNoAlternativeMessageStr, attribs.Name, attribs.DeprecatedAlternative ), MessageSeverity.Normal, false );
+														else
+															ShowMessage( string.Format( Constants.DeprecatedMessageStr, attribs.Name, attribs.DeprecatedAlternative ), MessageSeverity.Normal, false );
 													}
 												}
 											}

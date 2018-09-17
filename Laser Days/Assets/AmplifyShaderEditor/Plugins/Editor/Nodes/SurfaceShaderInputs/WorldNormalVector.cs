@@ -100,7 +100,7 @@ namespace AmplifyShaderEditor
 					dataCollector.AddToInput( UniqueId, SurfaceInputs.INTERNALDATA, addSemiColon: false );
 					dataCollector.ForceNormal = true;
 
-					result = "WorldNormalVector( " + Constants.InputVarStr + " , " + m_inputPorts[ 0 ].GeneratePortInstructions( ref dataCollector ) + " )";
+					result = "(WorldNormalVector( " + Constants.InputVarStr + " , " + m_inputPorts[ 0 ].GeneratePortInstructions( ref dataCollector ) + " ))";
 					if( m_normalize )
 					{
 						result = string.Format( NormalizeFunc, result );

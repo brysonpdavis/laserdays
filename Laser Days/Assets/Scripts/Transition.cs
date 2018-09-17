@@ -21,6 +21,9 @@ public class Transition : MonoBehaviour
         material = mRenderer.material;
         offset = Random.value;
         speed = Random.Range(1f, 2f);
+       
+
+        material.SetColor("_ColorPass", Random.ColorHSV());
     }
 
 
@@ -62,12 +65,14 @@ public class Transition : MonoBehaviour
 
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
+        material.SetColor("_ColorPass", Random.ColorHSV());
         //int property = Shader.PropertyToID("_D7A8CF01");
       
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
+
             float value = Mathf.Lerp(startpoint, endpoint, ratio);
 
             material.SetFloat("_TransitionState", value);

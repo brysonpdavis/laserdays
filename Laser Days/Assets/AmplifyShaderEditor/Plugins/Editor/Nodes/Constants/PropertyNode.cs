@@ -119,6 +119,7 @@ namespace AmplifyShaderEditor
 
 		protected bool m_freeName;
 		protected bool m_freeType;
+		protected bool m_showVariableMode = false;
 		protected bool m_propertyNameIsDirty;
 
 		protected bool m_showAutoRegisterUI = true;
@@ -833,7 +834,7 @@ namespace AmplifyShaderEditor
 
 		public void ShowVariableMode()
 		{
-			if( m_freeType )
+			if( m_showVariableMode || m_freeType )
 				m_variableMode = (VariableMode)EditorGUILayoutEnumPopup( IgnoreVarDeclarationStr, m_variableMode );
 		}
 

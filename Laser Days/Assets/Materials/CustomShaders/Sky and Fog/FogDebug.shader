@@ -149,7 +149,7 @@
 
            float sky = 1;
            if (depth >= SKYBOX_THREASHOLD_VALUE){
-           sky = 0;
+             sky = 0;
            }
 
 

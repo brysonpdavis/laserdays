@@ -6,6 +6,134 @@ using UnityEditor;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
+	public class TemplateTagsRenderTools
+	{
+		private const string RenderTypeStr = " Render Type";
+		private const string RenderQueueStr = " Render Queue";
+		private const string EnableStr = "Use Render Helper";
+		private const double ReanalizeTreshold = 0.5;
+		private double m_timeSinceReanalyzeCheck = 0;
+
+		[SerializeField]
+		private RenderType m_currentRenderType = RenderType.Opaque;
+		[SerializeField]
+		private int m_renderTypeIndex = -1;
+		[SerializeField]
+		private RenderQueue m_currentRenderQueue = RenderQueue.Geometry;
+		[SerializeField]
+		private int m_renderQueueIndex = -1;
+		[SerializeField]
+		private bool m_enable = false;
+		[SerializeField]
+		private bool m_isLocked = true;
+
+		[SerializeField]
+		private bool m_reanalyzeTags = false;
+
+		public void Draw( UndoParentNode owner , ref List<CustomTagData> currentTags )
+		{
+			if( m_isLocked )
+				return;
+
+			if( m_reanalyzeTags )
+			{
+				if( ( EditorApplication.timeSinceStartup - m_timeSinceReanalyzeCheck ) > ReanalizeTreshold )
+				{
+					m_reanalyzeTags = false;
+					AnalyzeTags( ref currentTags, true );
+				}
+			}
+
+			EditorGUI.BeginChangeCheck();
+			m_enable = owner.EditorGUILayoutToggle( EnableStr, m_enable );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				if( m_enable )
+				{
+					AnalyzeTags( ref currentTags, true );
+				}
+			}
+			bool guiEnabled = GUI.enabled;
+			GUI.enabled = m_enable;
+			EditorGUI.BeginChangeCheck();
+			m_currentRenderType = (RenderType)owner.EditorGUILayoutEnumPopup( RenderTypeStr, m_currentRenderType );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				currentTags[ m_renderTypeIndex ].TagValue = m_currentRenderType.ToString();
+			}
+			
+			EditorGUI.BeginChangeCheck();
+			m_currentRenderQueue = (RenderQueue)owner.EditorGUILayoutEnumPopup( RenderQueueStr, m_currentRenderQueue);
+			if( EditorGUI.EndChangeCheck() )
+			{
+				currentTags[ m_renderQueueIndex ].TagValue = m_currentRenderQueue.ToString();
+			}
+			GUI.enabled = guiEnabled;
+		}
+
+		public bool AnalyzeTags( ref List<CustomTagData> currentTags , bool addItems )
+		{
+			m_reanalyzeTags = false;
+			bool foundRenderType = false;
+			bool foundRenderQueue = false;
+			int count = currentTags.Count;
+			for( int i = 0; i < count; i++ )
+			{
+				if( TemplateHelperFunctions.StringToReservedTags.ContainsKey( currentTags[ i ].TagName ) )
+				{
+					switch( TemplateHelperFunctions.StringToReservedTags[ currentTags[ i ].TagName ] )
+					{
+						case TemplateSpecialTags.RenderType:
+						{
+							foundRenderType = true;
+							m_renderTypeIndex = i;
+							m_currentRenderType = ( TemplateHelperFunctions.StringToRenderType.ContainsKey( currentTags[ i ].TagValue ) ) ? TemplateHelperFunctions.StringToRenderType[ currentTags[ i ].TagValue ] : RenderType.Opaque;
+						}
+						break;
+						case TemplateSpecialTags.Queue:
+						{
+							foundRenderQueue = true;
+							m_renderQueueIndex = i;
+							m_currentRenderQueue = ( TemplateHelperFunctions.StringToRenderQueue.ContainsKey( currentTags[ i ].TagValue ) ) ? TemplateHelperFunctions.StringToRenderQueue[ currentTags[ i ].TagValue ] : RenderQueue.Geometry;
+						}
+						break;
+					}
+				}
+			}
+			if( addItems && !foundRenderType )
+			{
+				m_renderTypeIndex = currentTags.Count - 1;
+				currentTags.Add( new CustomTagData( "RenderType", "Opaque", m_renderTypeIndex ));
+			}
+
+			if( addItems && !foundRenderQueue )
+			{
+				m_renderQueueIndex = currentTags.Count - 1;
+				currentTags.Add( new CustomTagData( "Queue", "Geometry", m_renderQueueIndex ) );
+			}
+			return !foundRenderType || !foundRenderQueue;
+		}
+
+		public void CheckTagUsage( int id )
+		{
+			if( m_isLocked )
+				return;
+			if( id == m_renderTypeIndex || id == m_renderQueueIndex )
+			{
+				m_reanalyzeTags = true;
+				m_timeSinceReanalyzeCheck = EditorApplication.timeSinceStartup;
+			}
+		}
+
+		public RenderType CurrentRenderType { get { return m_currentRenderType; } set { m_currentRenderType = value; } }
+		public int RenderTypeIndex { get { return m_renderTypeIndex; } set { m_renderTypeIndex = value; } }
+		public RenderQueue CurrentRenderQueue { get { return m_currentRenderQueue; } set { m_currentRenderQueue = value; } }
+		public int RenderQueueIndex { get { return m_renderQueueIndex; } set { m_renderQueueIndex = value; } }
+		public bool Enable { get { return m_enable; } set { m_enable = value; } }
+		public bool IsLocked { get { return m_isLocked; } set { m_isLocked = value; } }
+	}
+
+	[Serializable]
 	public class TemplateTagsModule : TemplateModuleParent
 	{
 		private const string CustomTagsStr = " SubShader Tags";
@@ -17,7 +145,10 @@ namespace AmplifyShaderEditor
 
 		private const float ShaderKeywordButtonLayoutWidth = 15;
 		private UndoParentNode m_currentOwner;
-		
+
+		//[SerializeField]
+		//private TemplateTagsRenderTools m_renderTools = new TemplateTagsRenderTools();
+
 		[SerializeField]
 		private List<CustomTagData> m_availableTags = new List<CustomTagData>();
 
@@ -25,6 +156,14 @@ namespace AmplifyShaderEditor
 
 		public TemplateTagsModule() : base( "SubShader Tags" ) { }
 
+		//void DetectSpecialTags()
+		//{
+		//	int count = m_availableTags.Count;
+		//	for( int i = 0; i < m_availableTags.Count; i++ )
+		//	{
+		//	}
+		//}
+		
 		public void CopyFrom( TemplateTagsModule other )
 		{
 			m_availableTags.Clear();
@@ -37,6 +176,7 @@ namespace AmplifyShaderEditor
 				m_availableTags.Add( newData );
 				m_availableTagsDict.Add( newData.TagName, newData );
 			}
+			//m_renderTools.AnalyzeTags( ref m_availableTags , false );
 		}
 		
 		public void ConfigureFromTemplateData( TemplateTagsModuleData tagsData )
@@ -53,6 +193,7 @@ namespace AmplifyShaderEditor
 					m_availableTags.Add( tagData );
 					m_availableTagsDict.Add( tagsData.Tags[ i ].Name, tagData );
 				}
+				//m_renderTools.AnalyzeTags( ref m_availableTags, false );
 			}
 			m_validData = newValidData;
 		}
@@ -66,6 +207,8 @@ namespace AmplifyShaderEditor
 
 		public override void Draw( UndoParentNode owner, bool style = true )
 		{
+			//m_renderTools.IsLocked = style;
+
 			m_currentOwner = owner;
 			bool foldout = owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedCustomTags;
 			if( style )
@@ -103,7 +246,7 @@ namespace AmplifyShaderEditor
 
 		void DrawMainBody()
 		{
-
+			//m_renderTools.Draw( m_currentOwner, ref m_availableTags );
 			EditorGUI.BeginChangeCheck();
 			{
 				EditorGUILayout.Separator();
@@ -129,6 +272,7 @@ namespace AmplifyShaderEditor
 						if( EditorGUI.EndChangeCheck() )
 						{
 							m_availableTags[ i ].TagName = UIUtils.RemoveShaderInvalidCharacters( m_availableTags[ i ].TagName );
+							//m_renderTools.CheckTagUsage( i );
 						}
 
 						//Tag Value
@@ -137,6 +281,7 @@ namespace AmplifyShaderEditor
 						if( EditorGUI.EndChangeCheck() )
 						{
 							m_availableTags[ i ].TagValue = UIUtils.RemoveShaderInvalidCharacters( m_availableTags[ i ].TagValue );
+							//m_renderTools.CheckTagUsage( i );
 						}
 
 						EditorGUIUtility.labelWidth = originalLabelWidth;
@@ -230,6 +375,7 @@ namespace AmplifyShaderEditor
 				{
 					AddTagFromRead( nodeParams[ index++ ] );
 				}
+			//	m_renderTools.AnalyzeTags( ref m_availableTags, false );
 			}
 		}
 
@@ -279,7 +425,9 @@ namespace AmplifyShaderEditor
 			m_currentOwner = null;
 			m_availableTagsDict.Clear();
 			m_availableTagsDict = null;
+		//	m_renderTools = null;
 		}
+
 		public List<CustomTagData> AvailableTags { get { return m_availableTags; } }
 
 		public bool HasRenderInfo( ref RenderType renderType, ref RenderQueue renderQueue )
@@ -302,9 +450,10 @@ namespace AmplifyShaderEditor
 				}
 				else if( m_availableTags[ i ].TagName.Equals( RenderQueueHelperStr ) )
 				{
-					if( TemplateHelperFunctions.StringToRenderQueue.ContainsKey( m_availableTags[ i ].TagValue ) )
+					string value = m_availableTags[ i ].TagValue.Split( '+' )[ 0 ].Split( '-' )[0];
+					if( TemplateHelperFunctions.StringToRenderQueue.ContainsKey( value ) )
 					{
-						renderQueue = TemplateHelperFunctions.StringToRenderQueue[ m_availableTags[ i ].TagValue ];
+						renderQueue = TemplateHelperFunctions.StringToRenderQueue[ value ];
 						foundRenderQueue = true;
 					}
 				}

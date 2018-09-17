@@ -23,6 +23,7 @@ namespace AmplifyShaderEditor
 		public const string GrabScreenPositionStr = "ase_grabScreenPos";
 		public const string GrabScreenPositionNormalizedStr = "ase_grabScreenPosNorm";
 		public const string WorldPositionStr = "ase_worldPos";
+		public const string RelativeWorldPositionStr = "ase_relWorldPos";
 		public const string WorldLightDirStr = "ase_worldlightDir";
 		public const string ObjectLightDirStr = "ase_objectlightDir";
 		public const string WorldNormalStr = "ase_worldNormal";

@@ -14,10 +14,15 @@ namespace AmplifyShaderEditor
 		public int TagId = -1;
 		public bool TagFoldout = true;
 
+		public TemplateSpecialTags SpecialTag = TemplateSpecialTags.None;
+		public int SpecialTagValue = -1;
+
 		public CustomTagData()
 		{
 			TagName = string.Empty;
 			TagValue = string.Empty;
+			SpecialTag = TemplateSpecialTags.None;
+			SpecialTagValue = -1;
 		}
 
 		public CustomTagData( CustomTagData other )

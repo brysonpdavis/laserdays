@@ -48,9 +48,9 @@ namespace AmplifyShaderEditor
 			//}
 		}
 
-		public override void AfterDuplication( ParentNode original )
+		public override void AfterDuplication()
 		{
-			base.AfterDuplication( original );
+			base.AfterDuplication();
 			m_isMainOutputNode = false;
 		}
 

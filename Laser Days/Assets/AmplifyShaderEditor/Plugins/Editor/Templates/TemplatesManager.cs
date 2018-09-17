@@ -417,8 +417,9 @@ namespace AmplifyShaderEditor
 			{ "0f8ba0101102bb14ebf021ddadce9b49","Legacy/Default Sprites" },
 			{ "0b6a9f8b4f707c74ca64c0be8e590de0","Legacy/Particles Alpha Blended" },
 			{ "e1de45c0d41f68c41b2cc20c8b9c05ef","Legacy/Multi Pass Unlit" },
-			{ "f53051a8190f7044fa936bd7fbe116c1","Impostors/Baking" },
-			{ "30a8e337ed84177439ca24b6a5c97cd1","Impostors/Runtime" }
+			{ "f53051a8190f7044fa936bd7fbe116c1","Impostors/Bake" },
+			{ "30a8e337ed84177439ca24b6a5c97cd1","Impostors/Runtime Specular" },
+			{ "964e57f8f828f8e44b6bc62ddfbe7b51","Impostors/Runtime Metallic" }
 		};
 
 

@@ -31,7 +31,7 @@ namespace AmplifyShaderEditor
 		[MenuItem( "Window/Amplify Shader Editor/Create Template Menu Items" )]
 		public static void CreateTemplateMenuItems()
 		{
-			TemplatesManager.CreateTemplateMenuItems();
+			UIUtils.CurrentWindow.TemplatesManagerInstance.CreateTemplateMenuItems();
 		}
 
 #else

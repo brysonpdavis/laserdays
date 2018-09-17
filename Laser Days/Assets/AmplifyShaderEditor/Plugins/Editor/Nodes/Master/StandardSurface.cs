@@ -278,7 +278,7 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private UsePassHelper m_usePass;
 
-		[ SerializeField]
+		[SerializeField]
 		private CustomTagsHelper m_customTagsHelper = new CustomTagsHelper();
 
 		[SerializeField]

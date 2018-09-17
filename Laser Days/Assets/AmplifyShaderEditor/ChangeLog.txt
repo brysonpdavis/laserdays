@@ -1,4 +1,42 @@
 Release Notes:
+v1.5.6 rev 00
+* New Samples:
+    * SRP Lightweight Terrain
+    * Multi Pass Distortion
+
+* New Node:
+    * Switch by Pipeline
+        * Shader function specific node to choose different paths according to current pipeline
+
+* New Shader Function:
+    * Fetch HD Color Pyramid
+
+* Fixes:
+    * Fixed world position issues over HD PBR Template
+    * Fixed transparent issues over HD PBR template
+    * Prevented WorldNormalVector macro to confuse lerp operations
+    * Fixed issue on created shaders being placed in incorrect folders when on two column node
+    * Fixed issue on property registering over multi-pass shaders
+
+* Improvements:
+    * Custom Options can now be added directly over templates
+    * Adding Final Color x Alpha custom option into LW PBR
+        * If toggled on multiples fragment final color by its alpha
+    * Apply Fog on LW PBR takes Add Pass directive into account
+    * Adding SRP support to Four Splats First Pass Terrain shader function
+    * Material Global lIllumination flags for emission can now be modified over Surface Rendering Options
+    * Activated Variable mode into 'Texture Sample' nodes
+
+v1.5.5 rev 01
+* Fixes:
+    * Fixed issue over incorrect name registration over 'Register Local Var' on pasting into another shader
+    * Fixed issue on reading shaders using old shader functions with deprecated nodes
+    * Fixed 'World Pos' node issue on HD SRP template
+    * Fixed issue on 'World Normal' node when used in 'Lerp' node
+
+* Improvements:
+    * 'Register/Get Local Var' nodes maintain connections even if copied to another shader
+
 v1.5.5 rev 00
 * New Node:
     * Diffuse And Specular From Metallic

@@ -878,6 +878,16 @@ namespace AmplifyShaderEditor
 			{
 				return result;
 			}
+			else if( m_currentSRPType == TemplateSRPType.HD )
+			{
+				if( GetCustomInterpolatedData( TemplateInfoOnSematics.RELATIVE_WORLD_POS, WirePortDataType.FLOAT3, PrecisionType.Float, ref result, useMasterNodeCategory, customCategory ) )
+				{
+					string worldPosVarName = GeneratorUtils.WorldPositionStr;
+					string relWorldPosConversion = string.Format( "GetAbsolutePositionWS( {0} )", result );
+					m_currentDataCollector.AddLocalVariable( -1, PrecisionType.Float, WirePortDataType.FLOAT3, worldPosVarName, relWorldPosConversion );
+					return worldPosVarName;
+				}
+			}
 
 			string varName = GeneratorUtils.WorldPositionStr;//UIUtils.GetInputValueFromType( SurfaceInputs.WORLD_POS );
 			if( HasCustomInterpolatedData( varName, useMasterNodeCategory, customCategory ) )

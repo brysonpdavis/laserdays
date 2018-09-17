@@ -18,9 +18,9 @@ namespace AmplifyShaderEditor
 	public class RenderingOptionsOpHelper
 	{
 		private const string RenderingOptionsStr = " Rendering Options";
-		
+		private readonly static GUIContent EmissionGIFlags = new GUIContent( "Emission GI Flag", "Modifies Emission GI flags" );
 		private readonly static GUIContent LODCrossfadeContent = new GUIContent( " LOD Group Cross Fade", "Applies a dither crossfade to be used with LOD groups for smoother transitions. Uses one interpolator\nDefault: OFF" );
-		private readonly static GUIContent DisableBatchingContent = new GUIContent( " Disable Batching", "\nDisables objects to be batched and used with DrawCallBatching Default: False" );
+		private readonly static GUIContent DisableBatchingContent = new GUIContent( "Disable Batching", "\nDisables objects to be batched and used with DrawCallBatching Default: False" );
 		private readonly static GUIContent IgnoreProjectorContent = new GUIContent( " Ignore Projector", "\nIf True then an object that uses this shader will not be affected by Projectors Default: False" );
 		private readonly static GUIContent ForceNoShadowCastingContent = new GUIContent( " Force No Shadow Casting", "\nIf True then an object that is rendered using this subshader will never cast shadows Default: False" );
 		private readonly static GUIContent ForceEnableInstancingContent = new GUIContent( " Force Enable Instancing", "\nIf True forces instancing on shader independent of having instanced properties" );
@@ -56,7 +56,7 @@ namespace AmplifyShaderEditor
 
 		[SerializeField]
 		private List<CodeGenerationData> m_codeGenerationDataList;
-
+		
 		public RenderingOptionsOpHelper()
 		{
 			m_codeGenerationDataList = new List<CodeGenerationData>();
@@ -110,6 +110,11 @@ namespace AmplifyShaderEditor
 				m_specularHighlightToggle = owner.EditorGUILayoutToggleLeft( SpecularHightlightsContent, m_specularHighlightToggle );
 				m_reflectionsToggle = owner.EditorGUILayoutToggleLeft( ReflectionsContent, m_reflectionsToggle );
 				m_disableBatching = (DisableBatchingTagValues)owner.EditorGUILayoutEnumPopup( DisableBatchingContent, m_disableBatching );
+				Material mat = owner.ContainerGraph.CurrentMaterial;
+				if( mat != null )
+				{
+					mat.globalIlluminationFlags = (MaterialGlobalIlluminationFlags)owner.EditorGUILayoutEnumPopup( EmissionGIFlags, mat.globalIlluminationFlags );
+				}
 			} );
 			owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedRenderingOptions = value;
 		}

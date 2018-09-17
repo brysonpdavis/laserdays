@@ -2424,10 +2424,7 @@ namespace AmplifyShaderEditor
 			return null;
 		}
 
-		public virtual void AfterDuplication( ParentNode original )
-		{
-
-		}
+		public virtual void AfterDuplication(){}
 
 		public override string ToString()
 		{
