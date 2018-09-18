@@ -22,6 +22,7 @@ public class flipScript : MonoBehaviour {
     public bool flippedThisFrame = false;
 
 	RaycastManager rm;
+    private string SoundtrackButton = "Submit";
 
 
     private void Awake()
@@ -96,6 +97,13 @@ public class flipScript : MonoBehaviour {
 				}
 			}
 		}
+
+        if (Input.GetButtonDown(SoundtrackButton))
+        {
+            if (soundTrack.gameObject.activeSelf) { soundTrack.gameObject.SetActive(false); }
+            else { soundTrack.gameObject.SetActive(true); }
+        }
+
 	}
 
 	void FlipPlayerAndThings (GameObject player, GameObject held, IList<GameObject> things) {
@@ -132,14 +140,20 @@ public class flipScript : MonoBehaviour {
             // audioSourceSecondary.clip = GetComponent<SoundBox>().currentFlipPalette.defaultFlipClips.GetRandomFlipSecondary();
             //audioSourceSecondary.Play();
 
-            soundTrack.PlaySecondary();
+            if (soundTrack)
+            {
+                soundTrack.PlaySecondary();
+            }
         }
 
         else {
             //play random flip sound!
             //  audioSource.clip = GetComponent<SoundBox>().currentFlipPalette.defaultFlipClips.GetRandomFlipClip();
             // audioSource.Play();
-            soundTrack.PlayPrimary();
+            if (soundTrack)
+            {
+                soundTrack.PlayPrimary();
+            }
         }
 
 

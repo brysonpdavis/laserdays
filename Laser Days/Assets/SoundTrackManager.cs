@@ -19,9 +19,14 @@ public class SoundTrackManager : MonoBehaviour {
         //secondarySource = GetComponentInChildren<AudioSource>();
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnDisable()
+    {
+        play = false;
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (!play) { StartCoroutine(Soundtrack()); }
         play = true;
 
