@@ -62,17 +62,15 @@ public class Transition : MonoBehaviour
 
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {
-
+        
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
-        material.SetColor("_ColorPass", Random.ColorHSV());
         //int property = Shader.PropertyToID("_D7A8CF01");
-      
+
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
-
             float value = Mathf.Lerp(startpoint, endpoint, ratio);
 
             material.SetFloat("_TransitionState", value);
@@ -80,5 +78,6 @@ public class Transition : MonoBehaviour
 
             yield return null;
         }
+
     }
 }
