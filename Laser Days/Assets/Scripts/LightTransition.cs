@@ -64,9 +64,11 @@ public class LightTransition : MonoBehaviour {
             Color colorValue = Color.Lerp(light.color, endColor, ratio);
             light.color = colorValue;
 
-            float strength = Mathf.Lerp(light.intensity, endStrength, ratio);
-            light.shadowStrength = strength;
-
+            if (light.shadows != LightShadows.None)
+            {
+                float strength = Mathf.Lerp(light.intensity, endStrength, ratio);
+                light.shadowStrength = strength;
+            }
             yield return null;
         }
     }
