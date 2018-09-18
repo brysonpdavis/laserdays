@@ -7,8 +7,11 @@ public class LightTransition : MonoBehaviour {
     private IEnumerator flipTransition;
     public float LaserIntensity;
     public Color LaserColor;
+    public float laserShadowStrength;
+
     public float RealIntensity;
     public Color realColor;
+    public float realShadowStrength;
     private Light light;
 
     private void Start()
@@ -20,28 +23,30 @@ public class LightTransition : MonoBehaviour {
         {
             light.intensity = LaserIntensity;
             light.color = LaserColor;
+            light.shadowStrength = laserShadowStrength;
         }
         else if (Player.layer == 16)
             light.intensity = RealIntensity;
             light.color = realColor;
+            light.shadowStrength = realShadowStrength;
     }
 
 
     public void Flip(bool direction, float duration)
     {
         if (direction) {
-            flipTransition = flipTransitionRoutine(RealIntensity, realColor,  duration);
+            flipTransition = flipTransitionRoutine(RealIntensity, realColor, realShadowStrength,  duration);
         }
 
         else 
-            flipTransition = flipTransitionRoutine(LaserIntensity, LaserColor, duration);
+            flipTransition = flipTransitionRoutine(LaserIntensity, LaserColor, laserShadowStrength, duration);
 
         StopAllCoroutines();
         StartCoroutine(flipTransition);
 
     }
 
-    private IEnumerator flipTransitionRoutine(float endpoint, Color endColor, float duration)
+    private IEnumerator flipTransitionRoutine(float endpoint, Color endColor, float endStrength, float duration)
     {
 
         float elapsedTime = 0;
@@ -58,6 +63,9 @@ public class LightTransition : MonoBehaviour {
 
             Color colorValue = Color.Lerp(light.color, endColor, ratio);
             light.color = colorValue;
+
+            float strength = Mathf.Lerp(light.intensity, endStrength, ratio);
+            light.shadowStrength = strength;
 
             yield return null;
         }
