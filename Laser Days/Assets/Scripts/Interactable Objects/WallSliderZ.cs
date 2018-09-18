@@ -50,6 +50,11 @@ public class WallSliderZ : InteractableObject {
         ResetWalk();
     }
 
+    public override void SetType()
+    {
+        objectType = ObjectType.Clickable;
+    }
+
     public override void DistantIconHover()
     {
         iconContainer.SetInteractHover();

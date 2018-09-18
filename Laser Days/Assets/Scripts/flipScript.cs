@@ -162,6 +162,9 @@ public class flipScript : MonoBehaviour {
 
 	void Flip (GameObject obj)
 	{
+
+        obj.GetComponent<FlippableObject>().OnFlip();
+
         InteractableObject.ObjectType type = obj.GetComponent<InteractableObject>().objectType;
         //for objects not being currently held: 
 

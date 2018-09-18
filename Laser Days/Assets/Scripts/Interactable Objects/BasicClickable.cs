@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicClickable : InteractableObject {
+public class BasicClickable : FlippableObject {
 
     public int maxVelocity = 8;
 
@@ -68,6 +68,11 @@ public class BasicClickable : InteractableObject {
         rigidbody.useGravity = true;
         ResetWalk();
 
+    }
+
+    public override void SetType()
+    {
+        objectType = ObjectType.Clickable;
     }
 
     public override void DistantIconHover()

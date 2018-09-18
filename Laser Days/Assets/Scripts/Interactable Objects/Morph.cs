@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Morph : InteractableObject {
+public class Morph : FlippableObject {
+
 
     public override void Pickup()
     {
@@ -55,6 +56,11 @@ public class Morph : InteractableObject {
     public override void DistantIconHover()
     {
         iconContainer.SetSelectHover();
+    }
+
+    public override void SetType()
+    {
+        objectType = ObjectType.Morph;
     }
 
     public override void CloseIconHover()

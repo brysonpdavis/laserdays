@@ -47,6 +47,11 @@ public class Sokoban1x1 : InteractableObject {
         ResetWalk();
     }
 
+    public override void SetType()
+    {
+        objectType = ObjectType.Sokoban1x1;
+    }
+
     public override void DistantIconHover()
     {
         iconContainer.SetInteractHover();

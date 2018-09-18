@@ -6,8 +6,8 @@ abstract public class InteractableObject : MonoBehaviour
 {
     //protected ItemProperties itemProperties;
     public enum ObjectType { Clickable, Sokoban1x1, Sokoban2x2, Morph, Wall, WallSliderX, WallSliderZ, Null };
-    public ObjectType objectType;
-    public string itemName;
+    [HideInInspector]public ObjectType objectType;
+    [HideInInspector]public string itemName;
 
 
     protected Rigidbody rigidbody;
@@ -31,7 +31,7 @@ abstract public class InteractableObject : MonoBehaviour
     [HideInInspector] public string key = null;
 
 
-    public int value;
+    [HideInInspector] public int value;
 
     [HideInInspector] public bool objectCharge = true;
     //public bool secondaryLock;
@@ -43,6 +43,8 @@ abstract public class InteractableObject : MonoBehaviour
 
     private void Awake()
     {
+        SetType();
+
         //sets all of the shaders to correct flip state [toggle that affects how selection looks]
         mRenderer = GetComponent<Renderer>();
         material = mRenderer.material;
@@ -102,7 +104,7 @@ abstract public class InteractableObject : MonoBehaviour
 
     }
 
-    public void UnSelect()
+    public virtual void UnSelect()
     {
         if (this.gameObject.layer == 10)
         {
@@ -113,11 +115,9 @@ abstract public class InteractableObject : MonoBehaviour
 
     }
 
-    public virtual void OnFlip() { }
-
     public virtual bool Flippable { get { return false; } }
 
-    public virtual bool HasBeenPickedUp{ get { return false; } }
+    protected virtual bool HasBeenPickedUp{ get { return false; } }
 
     public abstract void Pickup();
 
@@ -128,5 +128,7 @@ abstract public class InteractableObject : MonoBehaviour
     public abstract void CloseIconHover();
 
     public abstract void InteractingIconHover();
+
+    public abstract void SetType();
 
 }

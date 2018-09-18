@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StationaryWall : InteractableObject {
+public class StationaryWall : FlippableObject {
+
 
     public override void Pickup()
     {
@@ -28,6 +29,11 @@ public class StationaryWall : InteractableObject {
     public override void Drop()
     {
 
+    }
+
+    public override void SetType()
+    {
+        objectType = ObjectType.Wall;
     }
 
     public override void DistantIconHover()
