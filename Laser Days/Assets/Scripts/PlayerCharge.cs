@@ -54,7 +54,7 @@ public class PlayerCharge : MonoBehaviour {
             }
 
     public void ItemInteraction(GameObject item) {
-        ItemProperties itemProps = item.GetComponent<ItemProperties>();
+        InteractableObject itemProps = item.GetComponent<InteractableObject>();
         if(itemProps.objectCharge){
             
             //Check to see if it can be activated
@@ -87,14 +87,14 @@ public class PlayerCharge : MonoBehaviour {
 
     // Checks whether the object can be flipped
     public bool Check(GameObject item) {
-        ItemProperties ip = item.GetComponent<ItemProperties>();
+        InteractableObject ip = item.GetComponent<InteractableObject>();
         return (ip.boost) ? false : (ip.value + flipCost + rm.SumSelectedObjects() <= currentCharge);
     }
 
     public void UpdatePredictingSlider() {
         int heldValue;
         if (GetComponent<MFPP.Modules.PickUpModule>().heldObject)
-            heldValue = GetComponent<MFPP.Modules.PickUpModule>().heldObject.GetComponent<ItemProperties>().value;
+            heldValue = GetComponent<MFPP.Modules.PickUpModule>().heldObject.GetComponent<InteractableObject>().value;
         else
             heldValue = 0;
 

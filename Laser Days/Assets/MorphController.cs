@@ -41,7 +41,11 @@ public class MorphController : MonoBehaviour {
 
         pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
         laserPreviewMaterial = laserPreview.material;
+        laserPreviewMaterial.SetFloat("_Opacity", 0);
+
         realPreviewMaterial = realPreview.material;
+        realPreviewMaterial.SetFloat("_Opacity", 0);
+
 
         laserArmShader = laserCollider.GetComponent<Renderer>().material;
         realArmShader = realCollider.GetComponent<Renderer>().material;
@@ -120,7 +124,6 @@ public class MorphController : MonoBehaviour {
             {
                 laserPreviewMaterial.SetFloat("_Opacity", opacity);
             }
-
 
             StopAllCoroutines();
             StartCoroutine(MorphCoroutine(false));

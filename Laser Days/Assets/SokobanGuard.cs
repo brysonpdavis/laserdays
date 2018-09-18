@@ -19,12 +19,12 @@ public class SokobanGuard : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        ItemProperties myItemProperties = this.GetComponentInParent<ItemProperties>();
-        ItemProperties otherItemProperties = col.GetComponent<ItemProperties>();
+        InteractableObject myInteractableObject = this.GetComponentInParent<InteractableObject>();
+        InteractableObject otherInteractableObject = col.GetComponent<InteractableObject>();
 
         string collisionTag = col.tag;
 
-        if (otherItemProperties && otherItemProperties.objectType == ItemProperties.ObjectType.Sokoban1x1)
+        if (otherInteractableObject && otherInteractableObject.objectType == InteractableObject.ObjectType.Sokoban1x1)
         {
             col.GetComponent<Rigidbody>().isKinematic = false;
             col.transform.SetParent(this.transform.parent);
@@ -34,7 +34,7 @@ public class SokobanGuard : MonoBehaviour
     {
         string collisionTag = col.tag;
 
-        if (col.gameObject.GetComponent<ItemProperties>() && col.gameObject.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban1x1)
+        if (col.gameObject.GetComponent<InteractableObject>() && col.gameObject.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban1x1)
         {
             player.GetComponent<MFPP.Player>().Movement.AllowMouseMove = true;
             col.transform.SetParent(this.transform.parent.transform.parent);

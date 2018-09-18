@@ -62,7 +62,7 @@ public class flipScript : MonoBehaviour {
 
             if (heldObj) //first check to make sure the object that's held is flippable
             {
-                if (heldObj.GetComponent<ItemProperties>().unflippable)
+                if (!heldObj.GetComponent<InteractableObject>().Flippable)
                 {
                     GetComponent<MFPP.Modules.PickUpModule>().PutDown();
                     heldObj = null;
@@ -148,7 +148,7 @@ public class flipScript : MonoBehaviour {
 
 	void Flip (GameObject obj)
 	{
-        ItemProperties.ObjectType type = obj.GetComponent<ItemProperties>().objectType;
+        InteractableObject.ObjectType type = obj.GetComponent<InteractableObject>().objectType;
         //for objects not being currently held: 
 
         if (!obj.Equals(GetComponent<MFPP.Modules.PickUpModule>().heldObject)){
@@ -159,7 +159,7 @@ public class flipScript : MonoBehaviour {
                 SetObjectToLaser(obj); //set object to laser layer
 
 
-                if (type == ItemProperties.ObjectType.Morph) 
+                if (type == InteractableObject.ObjectType.Morph) 
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
                     obj.GetComponent<MorphController>().OnFlip(true);
@@ -177,7 +177,7 @@ public class flipScript : MonoBehaviour {
                 { //if player is now in real world
                     SetObjectToReal(obj); //set object to real layer
 
-                if (type == ItemProperties.ObjectType.Morph)
+                if (type == InteractableObject.ObjectType.Morph)
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
                     obj.GetComponent<MorphController>().OnFlip(false);
@@ -196,7 +196,7 @@ public class flipScript : MonoBehaviour {
             { //if player is now in laser world
                 SetObjectToLaser(obj); //set object to laser layer
 
-                if (type == ItemProperties.ObjectType.Morph)
+                if (type == InteractableObject.ObjectType.Morph)
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
                     obj.GetComponent<MorphController>().OnFlip(true);
@@ -208,7 +208,7 @@ public class flipScript : MonoBehaviour {
             { //if player is now in real world
                 SetObjectToReal(obj); //set object to real layer
 
-                if (type == ItemProperties.ObjectType.Morph)
+                if (type == InteractableObject.ObjectType.Morph)
                 {
                     // if it's a morph obj EITHER on or off do the transition on the object
                     obj.GetComponent<MorphController>().OnFlip(false);
@@ -258,9 +258,9 @@ public class flipScript : MonoBehaviour {
 	{
 		obj.layer = 10;
 		obj.transform.parent = Toolbox.Instance.GetLaserWorldParent();
-        ItemProperties.ObjectType type = obj.GetComponent<ItemProperties>().objectType;
+        InteractableObject.ObjectType type = obj.GetComponent<InteractableObject>().objectType;
 
-        if ((type == ItemProperties.ObjectType.Sokoban1x1) || (type == ItemProperties.ObjectType.Sokoban2x2)){
+        if ((type == InteractableObject.ObjectType.Sokoban1x1) || (type == InteractableObject.ObjectType.Sokoban2x2)){
             GameObject child = obj.transform.GetChild(0).gameObject;
             child.layer = 10;
         }
@@ -270,10 +270,10 @@ public class flipScript : MonoBehaviour {
 	{
 		obj.layer = 11;
 		obj.transform.parent = Toolbox.Instance.GetRealWorldParent();
-        ItemProperties.ObjectType type = obj.GetComponent<ItemProperties>().objectType;
+        InteractableObject.ObjectType type = obj.GetComponent<InteractableObject>().objectType;
 
  
-        if ((type == ItemProperties.ObjectType.Sokoban1x1) || (type == ItemProperties.ObjectType.Sokoban2x2))
+        if ((type == InteractableObject.ObjectType.Sokoban1x1) || (type == InteractableObject.ObjectType.Sokoban2x2))
         {
             GameObject child = obj.transform.GetChild(0).gameObject;
             child.layer = 11;

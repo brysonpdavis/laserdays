@@ -9,38 +9,37 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1936992001452044}
+  m_RootGameObject: {fileID: 1994488802805594}
   m_IsPrefabParent: 1
---- !u!1 &1936992001452044
+--- !u!1 &1994488802805594
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4245557099215798}
-  - component: {fileID: 33781705498164206}
-  - component: {fileID: 23499840823795124}
-  - component: {fileID: 54142511065939988}
-  - component: {fileID: 114654918946359356}
-  - component: {fileID: 114995238444956936}
-  - component: {fileID: 114753802409229756}
-  - component: {fileID: 135978202618282368}
-  - component: {fileID: 82363981751224974}
-  - component: {fileID: 114226007821637722}
-  m_Layer: 11
-  m_Name: TESTERSPHERE REAL
+  - component: {fileID: 4433325367217758}
+  - component: {fileID: 33512814365858648}
+  - component: {fileID: 23068850584257782}
+  - component: {fileID: 54144841728780516}
+  - component: {fileID: 114355824586829192}
+  - component: {fileID: 114050986139969536}
+  - component: {fileID: 135042915321683220}
+  - component: {fileID: 82538073070730346}
+  - component: {fileID: 114416274000176108}
+  m_Layer: 10
+  m_Name: TESTERSPHERE LASER
   m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4245557099215798
+--- !u!4 &4433325367217758
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
+  m_GameObject: {fileID: 1994488802805594}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -48,12 +47,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23499840823795124
+--- !u!23 &23068850584257782
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
+  m_GameObject: {fileID: 1994488802805594}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +62,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 614ccfb7393c34016a26b2b6cffb1399, type: 2}
+  - {fileID: 2100000, guid: 5fc99b2eab5bf4a15b93f84a0eae5d38, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,19 +82,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33781705498164206
+--- !u!33 &33512814365858648
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
+  m_GameObject: {fileID: 1994488802805594}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54142511065939988
+--- !u!54 &54144841728780516
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
+  m_GameObject: {fileID: 1994488802805594}
   serializedVersion: 2
   m_Mass: 2.5
   m_Drag: 0
@@ -105,12 +104,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!82 &82363981751224974
+--- !u!82 &82538073070730346
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
+  m_GameObject: {fileID: 1994488802805594}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -200,65 +199,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114226007821637722
+--- !u!114 &114050986139969536
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dc409df2aedc470b9336e3cce6785ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxVelocity: 8
---- !u!114 &114654918946359356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0d24b8f4ed254101b7817a1f1035509, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectType: 0
-  itemName: Cube
-  isKey: 0
-  key: 
-  selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
-  unflippable: 0
-  objectCharge: 1
-  secondaryLock: 0
-  beenPickedUp: 0
-  boost: 0
-  touchingzone: 0
-  inMotion: 0
-  value: 0
-  touchingPlayer: 0
-  reducible: 0
-  maxvalue: 0
-  minvalue: 0
-  selected: 0
---- !u!114 &114753802409229756
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
+  m_GameObject: {fileID: 1994488802805594}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 013b8a2115c534f08b89cfb9b4637979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Renderers: []
---- !u!114 &114995238444956936
+--- !u!114 &114355824586829192
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
+  m_GameObject: {fileID: 1994488802805594}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
@@ -266,12 +224,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   laserShared: 0
---- !u!135 &135978202618282368
+--- !u!114 &114416274000176108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1994488802805594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc409df2aedc470b9336e3cce6785ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectType: 0
+  itemName: 
+  selected: 0
+  selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
+  inMotion: 0
+  isKey: 0
+  key: 
+  value: 0
+  objectCharge: 1
+  beenPickedUp: 0
+  boost: 0
+  maxVelocity: 8
+  overridePop: {fileID: 0}
+--- !u!135 &135042915321683220
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1936992001452044}
+  m_GameObject: {fileID: 1994488802805594}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

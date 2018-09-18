@@ -45,7 +45,7 @@ public class Morph : InteractableObject {
         }
 
         iconContainer.SetOpenHand();
-        itemProperties.selected = false;
+        selected = false;
         rigidbody.freezeRotation = false;
         rigidbody.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         rigidbody.isKinematic = true;
@@ -54,7 +54,7 @@ public class Morph : InteractableObject {
 
     public override void DistantIconHover()
     {
-        iconContainer.SetInteractHover();
+        iconContainer.SetSelectHover();
     }
 
     public override void CloseIconHover()
@@ -66,4 +66,7 @@ public class Morph : InteractableObject {
     {
         iconContainer.SetDrag();
     }
+
+    public override bool Flippable { get { return true; } }
+
 }

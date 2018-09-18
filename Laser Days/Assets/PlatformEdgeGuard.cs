@@ -25,9 +25,9 @@ public class PlatformEdgeGuard : MonoBehaviour {
         //Debug.Log(check.name);
 
         //checks to see if is part of a sokoban or not
-        if (check.GetComponent<ItemProperties>() && 
-            (check.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban1x1 ||
-             check.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban2x2))
+        if (check.GetComponent<InteractableObject>() && 
+            (check.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban1x1 ||
+             check.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban2x2))
         {
             parent = check;
             isMoveable = true;
@@ -52,20 +52,20 @@ public class PlatformEdgeGuard : MonoBehaviour {
             if (!other.GetComponent<PlatformEdgeGuard>().parent )
             {
                 //&& other.gameObject.layer == this.gameObject.layer
-                Debug.Log("option 1");
+                //Debug.Log("option 1");
                 ClickIn(other);
             }
 
             //if this object isn't a sokoban
             else if (!parent){
-                Debug.Log("option 2");
+                //Debug.Log("option 2");
                 ClickIn(other);
             }
 
             //if the other object is on the same layer as this one
             else if (other.GetComponent<PlatformEdgeGuard>().parent.layer == parent.layer)
            {
-                Debug.Log("option 3");
+                //Debug.Log("option 3");
                 ClickIn(other);
             }
        }

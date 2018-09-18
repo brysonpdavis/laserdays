@@ -76,13 +76,13 @@ public class PlatformMover : MonoBehaviour {
         {
             foreach (GameObject obj in platformGuard.stuckObjects)
             {
-                ItemProperties item = obj.GetComponent<ItemProperties>();
+                InteractableObject item = obj.GetComponent<InteractableObject>();
                 if (!obj.CompareTag("Player"))
                 {
                     obj.tag = ("NoTouch");
 
                     //makes sure all morphs get unselected when the platform is in motion!
-                    if (item.objectType == ItemProperties.ObjectType.Morph && item.selected)
+                    if (item.objectType == InteractableObject.ObjectType.Morph && item.selected)
                     {
                         raycastManager.RemoveFromList(obj, false);
                         raycastManager.selectedObjs.Remove(obj);
@@ -108,7 +108,7 @@ public class PlatformMover : MonoBehaviour {
 
         foreach (GameObject obj in platformGuard.stuckObjects)
         {
-            if (obj.GetComponent<ItemProperties>())
+            if (obj.GetComponent<InteractableObject>())
             {
                 obj.tag = "Clickable";
             }
@@ -120,7 +120,7 @@ public class PlatformMover : MonoBehaviour {
 
         foreach (GameObject obj in platformGuard.stuckObjects)
         {
-            if (obj.GetComponent<ItemProperties>() && !(obj.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Morph))
+            if (obj.GetComponent<InteractableObject>() && !(obj.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Morph))
             {
                 obj.tag = "Clickable";
             }

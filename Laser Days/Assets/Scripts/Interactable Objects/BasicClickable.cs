@@ -17,12 +17,12 @@ public class BasicClickable : InteractableObject {
             rigidbody.useGravity = false;
             rigidbody.freezeRotation = true;
             renderer.material.SetInt("_onHold", 1);
-            itemProperties.Select();
+            Select();
             rigidbody.constraints = RigidbodyConstraints.None;
             
 
-            if (!rigidbody.GetComponent<ItemProperties>().beenPickedUp)
-            { StartCoroutine(SlowPickup()); }
+            if (!beenPickedUp)
+            { StartCoroutine(SlowPickup());}
     }
 
     public override void Drop()
@@ -35,14 +35,16 @@ public class BasicClickable : InteractableObject {
             renderer.material.shader = raycastManager.realWorldShader;
             renderer.material.SetInt("_onHold", 0);
             this.gameObject.layer = 11;
-            itemProperties.UnSelect();
+            UnSelect();
             GetComponent<Transition>().SetStart(0f);
+            currentPositionVelocity = originalVelocity;
+
         }
 
         else
         {
             renderer.material.shader = raycastManager.laserWorldShader;
-            itemProperties.UnSelect();
+            UnSelect();
             renderer.material.SetInt("_onHold", 0);
             this.gameObject.layer = 10;
             GetComponent<Transition>().SetStart(1f);
@@ -59,9 +61,9 @@ public class BasicClickable : InteractableObject {
 
 
         iconContainer.SetOpenHand();
-        itemProperties.selected = false;
+        selected = false;
         rigidbody.freezeRotation = false;
-        itemProperties.beenPickedUp = true;
+        beenPickedUp = true;
         rigidbody.constraints = RigidbodyConstraints.None;
         rigidbody.useGravity = true;
         ResetWalk();
@@ -115,5 +117,8 @@ public class BasicClickable : InteractableObject {
             audioSource.Play();
         }
     }
+
+    public override bool Flippable { get { return true; } }
+
 
 }

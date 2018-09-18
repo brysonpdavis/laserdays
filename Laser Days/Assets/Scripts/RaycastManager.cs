@@ -111,7 +111,7 @@ public class RaycastManager : MonoBehaviour {
 
                 CrosshairActive();
                 raycastedObj = hit.collider.gameObject;
-                ItemProperties ip = raycastedObj.GetComponent<ItemProperties>();
+                InteractableObject ip = raycastedObj.GetComponent<InteractableObject>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
 
                 if (!pickUp.heldObject || (pickUp.heldObject && !pickUp.heldObject.Equals(raycastedObj))){
@@ -132,7 +132,7 @@ public class RaycastManager : MonoBehaviour {
                 // SELECT ITEM: 
                 // if item boosts charge, add value to boost on right click
                 //only lets you select items that are flippable
-                if(Input.GetMouseButtonDown(1) && !hit.collider.GetComponent<ItemProperties>().unflippable)
+                if(Input.GetMouseButtonDown(1) && hit.collider.GetComponent<InteractableObject>().Flippable)
                 {
 
                     if (ip.boost)
@@ -141,9 +141,9 @@ public class RaycastManager : MonoBehaviour {
                     }
                     if (ip.objectCharge)
                     {
-                        ItemProperties.ObjectType type = raycastedObj.GetComponent<ItemProperties>().objectType;
+                        InteractableObject.ObjectType type = raycastedObj.GetComponent<InteractableObject>().objectType;
                         //if the object is already a selected object:
-                        if (raycastedObj.GetComponent<ItemProperties>().selected)
+                        if (raycastedObj.GetComponent<InteractableObject>().selected)
                         {
                             //unselect it
                             selectedObjs.Remove(raycastedObj);
@@ -222,27 +222,27 @@ public class RaycastManager : MonoBehaviour {
 
     public void AddToList(GameObject obj) 
     {
-        ItemProperties ip = obj.GetComponent<ItemProperties>();
+        InteractableObject ip = obj.GetComponent<InteractableObject>();
         ip.selected = true;
 
-        switch (obj.GetComponent<ItemProperties>().objectType)
+        switch (obj.GetComponent<InteractableObject>().objectType)
 
         {
-        case ItemProperties.ObjectType.Clickable:
+        case InteractableObject.ObjectType.Clickable:
             {
                 // obj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
-                obj.GetComponent<ItemProperties>().Select();
+                obj.GetComponent<InteractableObject>().Select();
                 break;
             }
 
-        case ItemProperties.ObjectType.Wall:
+        case InteractableObject.ObjectType.Wall:
             {
-                obj.GetComponent<ItemProperties>().Select();
+                obj.GetComponent<InteractableObject>().Select();
                 break;
             }
 
 
-        case ItemProperties.ObjectType.Morph:
+        case InteractableObject.ObjectType.Morph:
             {
                     obj.GetComponent<MorphController>().OnSelection();
                     break;
@@ -261,10 +261,10 @@ public class RaycastManager : MonoBehaviour {
         //added asGroup bool to check if player is removing single objects or multiple
         //removing multiple at once shouldn't update the predicting slider at all, it's done separately on the flip
 
-        obj.GetComponent<ItemProperties>().selected = false;
-        obj.GetComponent<ItemProperties>().UnSelect();
+        obj.GetComponent<InteractableObject>().selected = false;
+        obj.GetComponent<InteractableObject>().UnSelect();
 
-        if (obj.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Morph)
+        if (obj.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Morph)
         {
             obj.GetComponent<MorphController>().OnDeselection();
         }
@@ -281,7 +281,7 @@ public class RaycastManager : MonoBehaviour {
     {
         int i = 0;
         foreach (GameObject obj in objs) {
-            i += obj.GetComponent<ItemProperties>().value;
+            i += obj.GetComponent<InteractableObject>().value;
         }
         return i;
     }

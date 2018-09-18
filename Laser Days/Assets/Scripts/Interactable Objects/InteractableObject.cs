@@ -4,7 +4,12 @@ using UnityEngine;
 
 abstract public class InteractableObject : MonoBehaviour
 {
-    protected ItemProperties itemProperties;
+    //protected ItemProperties itemProperties;
+    public enum ObjectType { Clickable, Sokoban1x1, Sokoban2x2, Morph, Wall, WallSliderX, WallSliderZ, Null };
+    public ObjectType objectType;
+    public string itemName;
+
+
     protected Rigidbody rigidbody;
     protected MFPP.Player player;
     protected IconContainer iconContainer;
@@ -15,11 +20,44 @@ abstract public class InteractableObject : MonoBehaviour
     protected float currentPositionVelocity = 10f;
     protected AudioSource audioSource;
     private float multiplier;
+    public bool selected = false;
 
-    // Use this for initialization
+    //from item properties
+    Renderer mRenderer;
+    Material material;
+    public Shader selectedShader;
+    [HideInInspector]public bool inMotion = false;
+    [HideInInspector] public bool isKey = false;
+    [HideInInspector] public string key = null;
+
+
+    public int value;
+
+    [HideInInspector] public bool objectCharge = true;
+    //public bool secondaryLock;
+    [HideInInspector] public bool beenPickedUp = false;
+    [HideInInspector] public bool boost = false;
+
+
+
+
+    private void Awake()
+    {
+        //sets all of the shaders to correct flip state [toggle that affects how selection looks]
+        mRenderer = GetComponent<Renderer>();
+        material = mRenderer.material;
+
+        if (Flippable)
+        {
+            material.SetInt("_IsFlippable", 1);
+        }
+
+        else { material.SetInt("_IsFlippable", 0); }
+    }
+
     void Start()
     {
-        itemProperties = GetComponent<ItemProperties>();
+        //itemProperties = GetComponent<ItemProperties>();
         if (GetComponent<Rigidbody>())
         {
             rigidbody = GetComponent<Rigidbody>();
@@ -33,8 +71,11 @@ abstract public class InteractableObject : MonoBehaviour
         pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
         if (GetComponent<AudioSource>()) { audioSource = GetComponent<AudioSource>(); }
 
+
+
         //sets up the object to have a faster or slower glide to the player camera
-        if (itemProperties.objectType == ItemProperties.ObjectType.Clickable) { multiplier = 1f; }
+        //if (itemProperties.objectType == ItemProperties.ObjectType.Clickable) 
+        if (objectType == InteractableObject.ObjectType.Clickable) { multiplier = 1f; }
         else { multiplier = .25f; }
     }
 
@@ -54,6 +95,29 @@ abstract public class InteractableObject : MonoBehaviour
         rigidbody.angularVelocity *= 0.5f;
         rigidbody.velocity = ((floatingPosition - rigidbody.transform.position) * (currentPositionVelocity*multiplier));
     }
+
+    public void Select()
+    {
+        material.shader = selectedShader;
+
+    }
+
+    public void UnSelect()
+    {
+        if (this.gameObject.layer == 10)
+        {
+            material.shader = raycastManager.laserWorldShader;
+        }
+
+        else { material.shader = raycastManager.realWorldShader; }
+
+    }
+
+    public virtual void OnFlip() { }
+
+    public virtual bool Flippable { get { return false; } }
+
+    public virtual bool HasBeenPickedUp{ get { return false; } }
 
     public abstract void Pickup();
 

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class WallSliderZ : InteractableObject {
     
+    [SerializeField]
+    private bool secondaryLock;
+
     public override void Pickup()
     {
         InteractingIconHover();
         rigidbody.constraints = RigidbodyConstraints.None;
-        if (!itemProperties.secondaryLock) { rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY; }
+        if (!secondaryLock) { rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY; }
         else { rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY; }
         GetComponent<SelectionRenderChange>().SwitchRenderersOff();
         GetComponent<SelectionRenderChange>().OnHold();
@@ -40,7 +43,7 @@ public class WallSliderZ : InteractableObject {
         }
 
         iconContainer.SetOpenHand();
-        itemProperties.selected = false;
+        selected = false;
         rigidbody.freezeRotation = false;
         rigidbody.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         rigidbody.isKinematic = true;

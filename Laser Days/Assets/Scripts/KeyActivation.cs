@@ -19,9 +19,9 @@ public class KeyActivation : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.GetComponent<ItemProperties>() != null)
+        if (col.GetComponent<InteractableObject>() != null)
         {
-            if (col.GetComponent<ItemProperties>().isKey)
+            if (col.GetComponent<InteractableObject>().isKey)
             {
                 if (anyKey)
                 {
@@ -29,7 +29,7 @@ public class KeyActivation : MonoBehaviour
                 }
                 else
                 {
-                    if (key == col.GetComponent<ItemProperties>().key)
+                    if (key == col.GetComponent<InteractableObject>().key)
                     {
                         Unlock();
                     }
@@ -40,9 +40,9 @@ public class KeyActivation : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.GetComponent<ItemProperties>() != null)
+        if (col.GetComponent<InteractableObject>() != null)
         {
-            if (col.gameObject.GetComponent<ItemProperties>().isKey)
+            if (col.gameObject.GetComponent<InteractableObject>().isKey)
             {
                 if (anyKey)
                 {
@@ -50,7 +50,7 @@ public class KeyActivation : MonoBehaviour
                 }
                 else
                 {
-                    if (key == col.GetComponent<ItemProperties>().key)
+                    if (key == col.GetComponent<InteractableObject>().key)
                     {
                         Lock();
                     }

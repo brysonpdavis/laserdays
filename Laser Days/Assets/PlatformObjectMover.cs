@@ -25,12 +25,12 @@ public class PlatformObjectMover : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        ItemProperties.ObjectType type = ItemProperties.ObjectType.Null;
-        if (other.GetComponent<ItemProperties>()) { type = other.GetComponent<ItemProperties>().objectType; } 
+        InteractableObject.ObjectType type = InteractableObject.ObjectType.Null;
+        if (other.GetComponent<InteractableObject>()) { type = other.GetComponent<InteractableObject>().objectType; } 
 
-        if ((type == ItemProperties.ObjectType.Sokoban1x1 || 
-             type == ItemProperties.ObjectType.Sokoban2x2 || 
-             type == ItemProperties.ObjectType.Morph)
+        if ((type == InteractableObject.ObjectType.Sokoban1x1 || 
+             type == InteractableObject.ObjectType.Sokoban2x2 || 
+             type == InteractableObject.ObjectType.Morph)
              && (other.gameObject.layer == mainGuard.layer))
         {
              //   Debug.Log("here we go");
@@ -52,12 +52,12 @@ public class PlatformObjectMover : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        ItemProperties.ObjectType type = ItemProperties.ObjectType.Null;
-        if (other.GetComponent<ItemProperties>()) { type = other.GetComponent<ItemProperties>().objectType; } 
+        InteractableObject.ObjectType type = InteractableObject.ObjectType.Null;
+        if (other.GetComponent<InteractableObject>()) { type = other.GetComponent<InteractableObject>().objectType; } 
 
-        if (type == ItemProperties.ObjectType.Sokoban1x1 ||
-            type == ItemProperties.ObjectType.Sokoban2x2 ||
-            type == ItemProperties.ObjectType.Morph)
+        if (type == InteractableObject.ObjectType.Sokoban1x1 ||
+            type == InteractableObject.ObjectType.Sokoban2x2 ||
+            type == InteractableObject.ObjectType.Morph)
         {
             incorrect = false;
             //objectToMove = null;
@@ -77,7 +77,7 @@ public class PlatformObjectMover : MonoBehaviour {
     {
 
 
-        if (objectToMove.GetComponent<ItemProperties>().objectType == ItemProperties.ObjectType.Sokoban2x2)
+        if (objectToMove.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban2x2)
         {
 
             yield return new WaitForFixedUpdate();
@@ -97,7 +97,7 @@ public class PlatformObjectMover : MonoBehaviour {
             }
 
 
-            //Debug.Log(objectToMove.GetComponent<ItemProperties>().objectType.ToString());
+            //Debug.Log(objectToMove.GetComponent<InteractableObject>().objectType.ToString());
             objectsPosition = objectToMove.transform.position;
 
 

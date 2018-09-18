@@ -39,7 +39,7 @@ public class Sokoban2x2 : InteractableObject {
         }
 
         iconContainer.SetOpenHand();
-        itemProperties.selected = false;
+        selected = false;
         rigidbody.freezeRotation = false;
         rigidbody.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         rigidbody.isKinematic = true;

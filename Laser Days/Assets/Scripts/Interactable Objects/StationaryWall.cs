@@ -6,20 +6,20 @@ public class StationaryWall : InteractableObject {
 
     public override void Pickup()
     {
-        if (itemProperties.selected)
+        if (selected)
         {
             raycastManager.RemoveFromList(this.gameObject, false);
             raycastManager.selectedObjs.Remove(this.gameObject);
-            itemProperties.selected = false;
-            itemProperties.UnSelect();
+            selected = false;
+            UnSelect();
 
         }
         else
         {
             raycastManager.AddToList(this.gameObject);
             raycastManager.selectedObjs.Add(this.gameObject);
-            itemProperties.selected = true;
-            itemProperties.Select();
+            selected = true;
+            Select();
         }
 
         player.GetComponent<MFPP.Modules.PickUpModule>().KillPickup();
@@ -44,4 +44,7 @@ public class StationaryWall : InteractableObject {
     {
         iconContainer.SetDrag();
     }
+
+    public override bool Flippable { get { return true; } }
+
 }
