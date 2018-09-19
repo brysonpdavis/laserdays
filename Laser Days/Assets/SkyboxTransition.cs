@@ -15,6 +15,8 @@ public class SkyboxTransition : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
+        if (Toolbox.Instance.GetPlayer().layer == 16) { SetStart(0); }
+        else { SetStart(1); }
         material = RenderSettings.skybox;
     }
 

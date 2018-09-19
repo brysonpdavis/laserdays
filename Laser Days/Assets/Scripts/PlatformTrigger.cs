@@ -45,7 +45,6 @@ public class PlatformTrigger : MonoBehaviour {
         }
 
 
-
         RenderMat = GetComponent<Renderer>().material;
         RenderMat.SetColor("_PassiveColor", platformContainer.GetComponent<PlatformController>().PassiveColor);
         RenderMat.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
