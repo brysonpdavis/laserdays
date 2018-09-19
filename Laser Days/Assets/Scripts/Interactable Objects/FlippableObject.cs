@@ -8,8 +8,6 @@ abstract public class FlippableObject : InteractableObject
     [HideInInspector] public int timesFlipped = 0;
     [HideInInspector] public int maxFlips;
     public float secondaryFlipDuration = 1f;
-    Renderer mRenderer;
-    Material material;
     private IEnumerator flipTransition;
 
 
@@ -31,22 +29,22 @@ abstract public class FlippableObject : InteractableObject
             particleSystem.Play();
         }
 
-        if (material)
-        {
             float start = material.GetFloat("_TransitionStateB");
             if (player.gameObject.layer == 15)
             {
+                Debug.Log("gromie!");
                 float scaledDuration = secondaryFlipDuration * (1f - start);
                 StopAllCoroutines();
                 StartCoroutine(flipTransitionRoutine(start, 1, scaledDuration));
             }
             else
             {
+                Debug.Log("homie!");
                 float scaledDuration = secondaryFlipDuration * start;
                 StopAllCoroutines();
                 StartCoroutine(flipTransitionRoutine(start, 0, scaledDuration));
             }
-        }
+
 
 
         //StartCoroutine(flipTransition);

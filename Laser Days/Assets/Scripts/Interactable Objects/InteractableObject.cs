@@ -25,8 +25,8 @@ abstract public class InteractableObject : MonoBehaviour
     public bool selected = false;
 
     //from item properties
-    Renderer mRenderer;
-    Material material;
+    protected Renderer mRenderer;
+    protected Material material;
     public Shader selectedShader;
     [HideInInspector]public bool inMotion = false;
     [HideInInspector] public bool isKey = false;
