@@ -29,7 +29,7 @@ public class MorphArm : MonoBehaviour {
 
         if (parentMorph.morphRunning &&
             !(other.gameObject.tag == "Player") &&
-            other.gameObject.layer == parentMorph.gameObject.layer &&
+            (other.gameObject.layer == parentMorph.gameObject.layer || other.gameObject.layer == 17) &&
             other.gameObject.GetComponent<Rigidbody>() &&
             other.gameObject.GetComponent<Rigidbody>().isKinematic)
 

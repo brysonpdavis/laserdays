@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class FlippableObject : InteractableObject {
+abstract public class FlippableObject : InteractableObject
+{
 
-    public int timesFlipped = 0;
-    public int maxFlips;
+    [HideInInspector] public int timesFlipped = 0;
+    [HideInInspector] public int maxFlips;
+    public float secondaryFlipDuration = 1f;
+    Renderer mRenderer;
+    Material material;
+    private IEnumerator flipTransition;
 
-    public virtual void OnFlip() 
+
+    public virtual void OnFlip()
     {
         timesFlipped += 1;
 
-        if (timesFlipped == maxFlips+1)
+        if (timesFlipped == maxFlips + 1)
         {
             //this.gameObject.SetActive(false);
         }
@@ -24,7 +30,48 @@ abstract public class FlippableObject : InteractableObject {
             particleSystem.emission.SetBurst(0, burst);
             particleSystem.Play();
         }
+
+        if (material)
+        {
+            float start = material.GetFloat("_TransitionStateB");
+            if (player.gameObject.layer == 15)
+            {
+                float scaledDuration = secondaryFlipDuration * (1f - start);
+                flipTransition = flipTransitionRoutine(start, 1, scaledDuration);
+            }
+            else
+            {
+                float scaledDuration = secondaryFlipDuration * start;
+                flipTransition = flipTransitionRoutine(start, 0, scaledDuration);
+            }
+        }
+
+
+        StartCoroutine(flipTransition);
+
+
     }
 
     public virtual int TimesFlipped { get { return timesFlipped; } }
+
+
+    IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
+    {
+
+        float elapsedTime = 0;
+        float ratio = elapsedTime / duration;
+
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / duration;
+            float value = Mathf.Lerp(startpoint, endpoint, ratio);
+
+            material.SetFloat("_TransitionStateB", value);
+            RendererExtensions.UpdateGIMaterials(mRenderer);
+
+            yield return null;
+        }
+    }
 }
+
