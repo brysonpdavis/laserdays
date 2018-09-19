@@ -37,17 +37,19 @@ abstract public class FlippableObject : InteractableObject
             if (player.gameObject.layer == 15)
             {
                 float scaledDuration = secondaryFlipDuration * (1f - start);
-                flipTransition = flipTransitionRoutine(start, 1, scaledDuration);
+                StopAllCoroutines();
+                StartCoroutine(flipTransitionRoutine(start, 1, scaledDuration));
             }
             else
             {
                 float scaledDuration = secondaryFlipDuration * start;
-                flipTransition = flipTransitionRoutine(start, 0, scaledDuration);
+                StopAllCoroutines();
+                StartCoroutine(flipTransitionRoutine(start, 0, scaledDuration));
             }
         }
 
 
-        StartCoroutine(flipTransition);
+        //StartCoroutine(flipTransition);
 
 
     }
