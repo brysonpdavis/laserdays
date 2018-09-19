@@ -53,13 +53,14 @@ public class SkyboxTransition : MonoBehaviour {
         float elapsedTime = 0;
         float actualDuration = duration * (1 - (material.GetFloat("_TransitionState") / endpoint));
         float ratio = elapsedTime / actualDuration;
+        float start = material.GetFloat("_TransitionState");
         //int property = Shader.PropertyToID("_D7A8CF01");
 
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
-            float value = Mathf.Lerp(material.GetFloat("_TransitionState"), endpoint, ratio);
+            float value = Mathf.Lerp(start, endpoint, ratio);
             material.SetFloat("_TransitionState", value);
                 
             yield return null;

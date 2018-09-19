@@ -52,21 +52,25 @@ public class LightTransition : MonoBehaviour {
         float elapsedTime = 0;
         float actualDuration = duration*(1-(light.intensity / endpoint));
         float ratio = elapsedTime / actualDuration;
+        float intenseStart = light.intensity;
+        Color colorStart = light.color;
+        float shadowStart = light.shadowStrength;
         //int property = Shader.PropertyToID("_D7A8CF01");
 
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
-            float value = Mathf.Lerp(light.intensity, endpoint, ratio);
+            float value = Mathf.Lerp(intenseStart, endpoint, ratio);
             light.intensity = value;
 
-            Color colorValue = Color.Lerp(light.color, endColor, ratio);
+            Color colorValue = Color.Lerp(colorStart, endColor, ratio);
             light.color = colorValue;
 
             if (light.shadows != LightShadows.None)
             {
-                float strength = Mathf.Lerp(light.intensity, endStrength, ratio);
+                float strength = Mathf.Lerp(shadowStart, endStrength, ratio);
+                Mathf.Clamp01(strength);
                 light.shadowStrength = strength;
             }
             yield return null;
