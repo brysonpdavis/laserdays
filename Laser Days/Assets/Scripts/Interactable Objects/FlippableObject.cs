@@ -13,7 +13,7 @@ abstract public class FlippableObject : InteractableObject {
 
         if (timesFlipped == maxFlips+1)
         {
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
         }
     }
 
