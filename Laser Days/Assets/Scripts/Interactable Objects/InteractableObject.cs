@@ -19,6 +19,8 @@ abstract public class InteractableObject : MonoBehaviour
     protected MFPP.Modules.PickUpModule pickUp;
     protected float currentPositionVelocity = 10f;
     protected AudioSource audioSource;
+    protected ParticleSystem particleSystem;
+
     private float multiplier;
     public bool selected = false;
 
@@ -77,7 +79,11 @@ abstract public class InteractableObject : MonoBehaviour
 
         //sets up the object to have a faster or slower glide to the player camera
         //if (itemProperties.objectType == ItemProperties.ObjectType.Clickable) 
-        if (objectType == InteractableObject.ObjectType.Clickable) { multiplier = 1f; }
+        if (objectType == InteractableObject.ObjectType.Clickable)
+        {
+            multiplier = 1f;
+            particleSystem = GetComponent<ParticleSystem>();
+        }
         else { multiplier = .25f; }
     }
 

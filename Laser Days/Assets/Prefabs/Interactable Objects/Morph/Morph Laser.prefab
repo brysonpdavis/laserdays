@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33747669224269758}
   - component: {fileID: 23078053912846934}
   - component: {fileID: 54858087707122920}
-  - component: {fileID: 114543877204438462}
   - component: {fileID: 114322317914687096}
   - component: {fileID: 114231774454292722}
   - component: {fileID: 114260095041893286}
@@ -518,7 +517,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Size: {x: 0.5, y: 0.6, z: 0.5}
   m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!65 &65251731646462238
 BoxCollider:
@@ -667,35 +666,6 @@ MonoBehaviour:
   parentMorph: {fileID: 114260095041893286}
   linkedBumper: {fileID: 0}
   colliding: 0
---- !u!114 &114543877204438462
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1028284431939742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0d24b8f4ed254101b7817a1f1035509, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectType: 3
-  itemName: Cube
-  isKey: 0
-  key: 
-  selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
-  unflippable: 0
-  objectCharge: 1
-  secondaryLock: 0
-  beenPickedUp: 0
-  boost: 0
-  touchingzone: 0
-  inMotion: 0
-  value: 0
-  touchingPlayer: 0
-  reducible: 0
-  maxvalue: 0
-  minvalue: 0
-  selected: 0
 --- !u!114 &114745105254799892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -745,6 +715,8 @@ MonoBehaviour:
   objectCharge: 1
   beenPickedUp: 0
   boost: 0
+  timesFlipped: 0
+  maxFlips: 0
 --- !u!114 &114932828036263556
 MonoBehaviour:
   m_ObjectHideFlags: 1

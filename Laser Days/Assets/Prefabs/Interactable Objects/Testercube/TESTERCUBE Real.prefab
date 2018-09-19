@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23346448413317496}
   - component: {fileID: 65883050263306030}
   - component: {fileID: 54999689909048320}
-  - component: {fileID: 114850920278910964}
   - component: {fileID: 114082428988056788}
   - component: {fileID: 114997230485797772}
   - component: {fileID: 82911071799122650}
@@ -225,35 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   laserShared: 0
---- !u!114 &114850920278910964
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1158508201989184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0d24b8f4ed254101b7817a1f1035509, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectType: 0
-  itemName: Cube
-  isKey: 0
-  key: 
-  selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
-  unflippable: 0
-  objectCharge: 1
-  secondaryLock: 0
-  beenPickedUp: 0
-  boost: 0
-  touchingzone: 0
-  inMotion: 0
-  value: 0
-  touchingPlayer: 0
-  reducible: 0
-  maxvalue: 0
-  minvalue: 0
-  selected: 0
 --- !u!114 &114992728833493308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,6 +246,8 @@ MonoBehaviour:
   objectCharge: 1
   beenPickedUp: 0
   boost: 0
+  timesFlipped: 0
+  maxFlips: 0
   maxVelocity: 8
   overridePop: {fileID: 0}
 --- !u!114 &114997230485797772

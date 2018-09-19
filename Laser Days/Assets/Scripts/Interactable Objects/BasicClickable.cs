@@ -9,7 +9,6 @@ public class BasicClickable : FlippableObject {
     private float originalVelocity = 10f;
     public AudioClip overridePop;
 
-
     public override void Pickup () 
     {
             InteractingIconHover();
@@ -54,9 +53,9 @@ public class BasicClickable : FlippableObject {
 
         if (currentVelocity.magnitude > maxVelocity)
         {
-            Debug.Log("before " + currentVelocity);
+            //.Log("before " + currentVelocity);
             rigidbody.velocity = Vector3.ClampMagnitude(currentVelocity, maxVelocity);
-            Debug.Log(rigidbody.velocity + ", " + rigidbody.velocity.magnitude);
+            //Debug.Log(rigidbody.velocity + ", " + rigidbody.velocity.magnitude);
         }
 
 
@@ -113,6 +112,14 @@ public class BasicClickable : FlippableObject {
         rigidbody.constraints = RigidbodyConstraints.None;
         rigidbody.useGravity = false;
         currentPositionVelocity = originalVelocity;
+
+        ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 100f);
+
+        var main = particleSystem.main;
+        main.startLifetime = 4f;
+        //particleSystem.main.startLifetime = .5f;
+        particleSystem.emission.SetBurst(0, burst);
+        particleSystem.Play();
 
         if (audioSource)
         {
