@@ -24,7 +24,14 @@ abstract public class FlippableObject : InteractableObject
         material.SetInt("_Flippable", 1);
         material.SetFloat("_Shimmer", 1f);
         material.SetFloat("_onHold", 0f);
-        //Debug.Log(material.GetFloat("_onHold"));
+
+        if (GetComponent<ParticleSystem>())
+        {
+            Material particleMat = GetComponent<ParticleSystemRenderer>().material;
+            Color hoverColor = material.GetColor("_ShimmerColor");
+            particleMat.SetColor("_ParticleColor", hoverColor);
+        }
+
 
 
         RendererExtensions.UpdateGIMaterials(mRenderer);
