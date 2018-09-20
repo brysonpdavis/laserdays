@@ -71,7 +71,7 @@ public class TransitionController: MonoBehaviour
 
             foreach (Transition albo in components)
             {
-                if ((!albo.GetComponentInParent<InteractableObject>()) || !albo.GetComponent<InteractableObject>().selected)
+                if ((!albo.GetComponentInParent<InteractableObject>()) || !albo.GetComponentInParent<InteractableObject>().selected)
                 {
                     //makes sure it doesn't transition the held object either!
                     if (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject)
@@ -92,7 +92,7 @@ public class TransitionController: MonoBehaviour
 
             foreach (Transition albo in components)
             {
-                if ((!albo.GetComponentInParent<InteractableObject>()) || !albo.GetComponent<InteractableObject>().selected)
+                if ((!albo.GetComponentInParent<InteractableObject>()) || !albo.GetComponentInParent<InteractableObject>().selected)
                     //makes sure it doesn't transition the held object either!
                 if (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject)
                     {
