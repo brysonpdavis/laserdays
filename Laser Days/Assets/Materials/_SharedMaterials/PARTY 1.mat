@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Sokoban1x1 Laser
-  m_Shader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
+  m_Name: PARTY 1
+  m_Shader: {fileID: 4800000, guid: 38d8bf9125d02409aa53e4bdd61fe21f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -18,8 +18,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Albedo:
-        m_Texture: {fileID: 2800000, guid: b8c7cb61fe07f487691f132b5f021c09, type: 3}
+    - _ALPHA:
+        m_Texture: {fileID: 2800000, guid: 89185898bf02843d496513f0fb8f5783, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlphaMap:
+        m_Texture: {fileID: 2800000, guid: a2c928ca393434b84a1a34a0847cae77, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -38,18 +42,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Diffuse:
-        m_Texture: {fileID: 2800000, guid: b8c7cb61fe07f487691f132b5f021c09, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DissolveMap:
-        m_Texture: {fileID: 2800000, guid: 4213667ef65704f73b4663308f4e1b31, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EffectMap:
-        m_Texture: {fileID: 2800000, guid: 0f9deff7cdfa54eb0ae31d1428c54bae, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -58,15 +50,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MaterialMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -78,7 +62,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SelectedEffectMap:
+    - _TextureSample0:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample3:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShade:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -88,17 +80,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Clip: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DissolveEdgeThickness: 0.1
     - _DstBlend: 0
-    - _EdgeThickness: 0.049
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _IsFlippable: 0
-    - _IsSelected: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -106,23 +93,12 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TransitionState: 0
-    - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
-    - _onHold: 0
-    - _onHover: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorLaser: {r: 0.5568628, g: 0.2651229, b: 0.117647, a: 0}
-    - _ColorReal: {r: 0.4941176, g: 0.3254901, b: 0.3058823, a: 1}
-    - _DissolveEdgeColor: {r: 5.992157, g: 5.992157, b: 5.992157, a: 0}
-    - _EdgeColor: {r: 4, g: 4, b: 4, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HoldColor: {r: 0.3207546, g: 0.2876169, b: 0.1891242, a: 0.5921569}
-    - _HoverColor: {r: 1, g: 0.5836085, b: 0, a: 0.07058824}
-    - _SecondaryEffectColor: {r: 8, g: 8, b: 8, a: 0}
-    - _SelectedEffectColor: {r: 8, g: 8, b: 8, a: 0}
-    - _TintA: {r: 0.3207547, g: 0.19517621, b: 0.19517621, a: 0}
-    - _TintB: {r: 1, g: 0.9561808, b: 0, a: 0}
+    - _LineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ParticleColor: {r: 0.33333334, g: 0.52156866, b: 0.4784314, a: 1}
+    - _linecolor: {r: 0, g: 0, b: 0, a: 1}

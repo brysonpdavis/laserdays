@@ -46,11 +46,19 @@ Material:
         m_Texture: {fileID: 2800000, guid: 14b7ac4998d6f46de830629afdc9dc89, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EffectMap:
+        m_Texture: {fileID: 2800000, guid: 0f9deff7cdfa54eb0ae31d1428c54bae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaterialMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -80,12 +88,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Clip: 0.5
+    - _Clip: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DissolveEdgeThickness: 0.01
     - _DstBlend: 0
-    - _EdgeThickness: 0.01
+    - _EdgeThickness: 0.056
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -99,6 +107,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TransitionState: 1
+    - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
@@ -106,11 +115,14 @@ Material:
     - _onHover: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorLaser: {r: 0.9056604, g: 0.3289426, b: 0.3289426, a: 0}
+    - _ColorReal: {r: 0.1535244, g: 0.2830189, b: 0.2408941, a: 0}
     - _DissolveEdgeColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EdgeColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EdgeColor: {r: 2.996078, g: 2.996078, b: 2.996078, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HoldColor: {r: 0.24999997, g: 0.24999997, b: 0.24999997, a: 0.4}
-    - _HoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.2}
+    - _HoldColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+    - _HoverColor: {r: 1, g: 0.776, b: 0, a: 0.2039216}
+    - _SecondaryEffectColor: {r: 3.403922, g: 1.772549, b: 0, a: 0}
     - _SelectedEffectColor: {r: 43.974037, g: 21.549345, b: 0, a: 0}
     - _TintA: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 0}
     - _TintB: {r: 1, g: 0.8012763, b: 0.4481132, a: 0}

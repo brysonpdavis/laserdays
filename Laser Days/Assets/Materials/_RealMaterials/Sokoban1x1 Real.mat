@@ -46,11 +46,19 @@ Material:
         m_Texture: {fileID: 2800000, guid: 4213667ef65704f73b4663308f4e1b31, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EffectMap:
+        m_Texture: {fileID: 2800000, guid: 0f9deff7cdfa54eb0ae31d1428c54bae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaterialMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -85,7 +93,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DissolveEdgeThickness: 0.1
     - _DstBlend: 0
-    - _EdgeThickness: 0
+    - _EdgeThickness: 0.049
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -100,6 +108,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TransitionState: 0
+    - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
@@ -107,11 +116,14 @@ Material:
     - _onHover: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorLaser: {r: 0.5568628, g: 0.2651229, b: 0.117647, a: 0}
+    - _ColorReal: {r: 0.4941176, g: 0.3254901, b: 0.3058823, a: 1}
     - _DissolveEdgeColor: {r: 5.992157, g: 5.992157, b: 5.992157, a: 0}
-    - _EdgeColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EdgeColor: {r: 4, g: 4, b: 4, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HoldColor: {r: 0.9056604, g: 0.7638237, b: 0.34603062, a: 0.54509807}
-    - _HoverColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 0.5254902}
+    - _HoldColor: {r: 0.3207546, g: 0.2876169, b: 0.1891242, a: 0.5921569}
+    - _HoverColor: {r: 1, g: 0.5836085, b: 0, a: 0.07058824}
+    - _SecondaryEffectColor: {r: 8, g: 8, b: 8, a: 0}
     - _SelectedEffectColor: {r: 8, g: 8, b: 8, a: 0}
     - _TintA: {r: 0.3207547, g: 0.19517621, b: 0.19517621, a: 0}
     - _TintB: {r: 1, g: 0.9561808, b: 0, a: 0}
