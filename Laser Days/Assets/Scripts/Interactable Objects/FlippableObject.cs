@@ -153,16 +153,6 @@ abstract public class FlippableObject : InteractableObject
 
     }
 
-    public void Update()
-    {
-        if (selected || recentlySelected)
-        {
-            float g = material.GetFloat("_Elapsed");
-            material.SetFloat("_Elapsed", g + Time.deltaTime);
-
-        }
-
-    }
 
     IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {
@@ -194,7 +184,7 @@ abstract public class FlippableObject : InteractableObject
 
     IEnumerator ShimmerRoutine(float duration)
     {
-        selected = false;
+        if (!Toolbox.Instance.EqualToHeld(this.gameObject)) {selected = false;}
         float elapsedTime = 0;
         this.recentlySelected = true;
         float ratio = elapsedTime / duration;
@@ -207,6 +197,7 @@ abstract public class FlippableObject : InteractableObject
                 material.SetFloat("_onHold", 1f);
                 material.SetFloat("_Shimmer", 1f);
                 RendererExtensions.UpdateGIMaterials(mRenderer);
+                recentlySelected = false;
                 Debug.Log("breaking");
                 yield break;
             }
