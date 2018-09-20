@@ -65,4 +65,18 @@ public class SelectionRenderChange : MonoBehaviour {
         }
     }
 
+    public void SetFlippable()
+    {
+        Renderers = GetComponentsInChildren<Renderer>();
+
+        if (Renderers.Length > 0)
+        {
+            foreach (Renderer renderChange in Renderers)
+            {
+                renderChange.material.SetInt("_Flippable", 1);
+            }
+        }
+
+    }
+
 }

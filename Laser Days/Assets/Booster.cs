@@ -46,7 +46,8 @@ public class Booster : MonoBehaviour {
         }
 
         if (GetComponent<Renderer>()){
-            GetComponent<Renderer>().material.SetInt("_onHold", 1);
+            //TODO: change this to some other variable
+            //GetComponent<Renderer>().material.SetInt("_onHold", 1);
         }
 
         if (other.gameObject.GetComponent<AudioSource>() && (this.gameObject.layer + 5) == player.layer)
@@ -71,7 +72,8 @@ public class Booster : MonoBehaviour {
         if (GetComponent<Renderer>())
         {
             yield return new WaitForSeconds(.25f);
-            GetComponent<Renderer>().material.SetInt("_onHold", 0);
+            //TODO: change this to some other variable
+            //GetComponent<Renderer>().material.SetInt("_onHold", 0);
         }
 
         yield return null;

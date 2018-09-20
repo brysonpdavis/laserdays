@@ -20,6 +20,7 @@ abstract public class InteractableObject : MonoBehaviour
     protected float currentPositionVelocity = 10f;
     protected AudioSource audioSource;
     protected ParticleSystem particleSystem;
+    protected SelectionRenderChange selectionRenderChange;
 
     private float multiplier;
     public bool selected = false;
@@ -57,20 +58,21 @@ abstract public class InteractableObject : MonoBehaviour
 
     void Start()
     {
-        //itemProperties = GetComponent<ItemProperties>();
+        player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
+        iconContainer = Toolbox.Instance.GetIconContainer();
+        raycastManager = Toolbox.Instance.GetRaycastManager();
+        pickUp = Toolbox.Instance.GetPickUp();
+
         if (GetComponent<Rigidbody>())
         {
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.isKinematic = true;
         }
-        player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
-        iconContainer = Toolbox.Instance.GetIconContainer();
-        raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
-        renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
-        pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
+        renderer = GetComponent<Renderer>();
         if (GetComponent<AudioSource>()) { audioSource = GetComponent<AudioSource>(); }
-        CheckColor();
+        if (GetComponent<SelectionRenderChange>()) { selectionRenderChange = GetComponent<SelectionRenderChange>(); }
+        AfterStart();
 
 
 
@@ -103,23 +105,19 @@ abstract public class InteractableObject : MonoBehaviour
 
     public void Select()
     {
-        //material.shader = selectedShader;
-        material.SetFloat("_onHold", 1f);
 
+        if (selectionRenderChange){
+            selectionRenderChange.OnHold();
+        }
+            material.SetFloat("_onHold", 1f);
     }
 
     public virtual void UnSelect()
     {
-        material.SetFloat("_onHold", 0f);
-
-        /*
-        if (this.gameObject.layer == 10)
-        {
-            material.shader = raycastManager.laserWorldShader;
+        if (selectionRenderChange){
+            selectionRenderChange.OnDrop();
         }
-
-       else { material.shader = raycastManager.realWorldShader; }
-       */
+        material.SetFloat("_onHold", 0f);
 
     }
 
@@ -127,7 +125,7 @@ abstract public class InteractableObject : MonoBehaviour
 
     protected virtual bool HasBeenPickedUp{ get { return false; } }
 
-    protected virtual void CheckColor() {} //this is overrided in the flippable obj subclass, but called in this start
+    protected virtual void AfterStart() {} //for objects'/classes' additional initializations
 
     public abstract void Pickup();
 
@@ -140,5 +138,14 @@ abstract public class InteractableObject : MonoBehaviour
     public abstract void InteractingIconHover();
 
     public abstract void SetType();
+
+    protected virtual bool AmHeldObj()
+    {
+        if (pickUp.heldObject && pickUp.heldObject.Equals(this.gameObject))
+        {
+            return true;
+        }
+        else return false;
+    }
 
 }

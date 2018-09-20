@@ -76,10 +76,14 @@ public class RaycastManager : MonoBehaviour {
             //makes sure no objects have the toggle indicating they're within range.
             //if something was previously in range on the last frame it'll deselect it
 
-            //objects on the default/shared layers are included in the layermask to block raycasts, but they turn off indicator if that's what the raycast hits
+            //CASES TO TURN THINGS OFF:
+            //if (!Toolbox.Instance.GetPickUp().heldObject){
+
+            //1: objects on the default/shared layers are included in the layermask to block raycasts,
+            //if we were previously raycasting something OTHER than the held object, turn that off
             if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 17)
             {
-                if (raycastedObj)
+                if (raycastedObj && !pickUp.heldObject)
                 {
                     raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                     if (raycastedObj.GetComponent<SelectionRenderChange>())
@@ -93,13 +97,13 @@ public class RaycastManager : MonoBehaviour {
                 raycastedObj = null;
             }
 
+
             else if (hit.collider.CompareTag("Clickable"))
             {
-                //TODO: IconCheck() Here
                 IconCheck(hit.distance, hit.collider.gameObject);
 
-
-                if (raycastedObj)
+                //2: Turn off if we hit a new interactable object while not holding anything
+                if (raycastedObj && !Toolbox.Instance.EqualToHeld(raycastedObj))
                 {
                     raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                     if (raycastedObj.GetComponent<SelectionRenderChange>())
@@ -114,15 +118,16 @@ public class RaycastManager : MonoBehaviour {
                 InteractableObject ip = raycastedObj.GetComponent<InteractableObject>();
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
 
-                if (!pickUp.heldObject || (pickUp.heldObject && !pickUp.heldObject.Equals(raycastedObj))){
+                //SHOW HOVER: 1: if there isn't a held object, 2: keep setting an object to hover as long as it's the held object
+                if (!pickUp.heldObject || (pickUp.heldObject && pickUp.heldObject.Equals(raycastedObj))){
                     if (raycastedObj.GetComponent<SelectionRenderChange>())
                     {                             
+                        raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
                         raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
                     }
 
                     else
                     {
-                        //hit.collider.gameObject.GetComponent<Renderer>().material.SetInt("_onHover", 1);
                         raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
                     }
                 }
@@ -154,15 +159,15 @@ public class RaycastManager : MonoBehaviour {
                             if (this.gameObject.layer == 15) { 
 
                                     raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
-                                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+                                    //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                             }
                             else if (this.gameObject.layer == 16) { 
                                     raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader;
-                                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+                                    //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                             }
 
                             //remove it from list
-                            RemoveFromList(raycastedObj, false);
+                            RemoveFromList(raycastedObj, false, false);
 
                             //play deselect sound effect
                             audioSource.clip = deselectClip;
@@ -191,7 +196,8 @@ public class RaycastManager : MonoBehaviour {
 
         else{
             //if it hits nothing within the layermask it should also mke sure the raycasted obj from the last frame is set to off
-            if (raycastedObj)
+            //unless we're holding something
+            if (raycastedObj && !pickUp.heldObject)
             {
                 raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                // Debug.Log("turning off");
@@ -255,14 +261,17 @@ public class RaycastManager : MonoBehaviour {
         pc.UpdatePredictingSlider();
     }
 
-    public void RemoveFromList(GameObject obj, bool asGroup) 
+    public void RemoveFromList(GameObject obj, bool asGroup, bool duringFlip) 
     {
 
         //added asGroup bool to check if player is removing single objects or multiple
         //removing multiple at once shouldn't update the predicting slider at all, it's done separately on the flip
 
         obj.GetComponent<InteractableObject>().selected = false;
-        obj.GetComponent<InteractableObject>().UnSelect();
+        if (!duringFlip)
+        {
+            obj.GetComponent<InteractableObject>().UnSelect();
+        }
 
         if (obj.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Morph)
         {

@@ -165,78 +165,6 @@ public class flipScript : MonoBehaviour {
 
 	void Flip (GameObject obj)
 	{
-
-        InteractableObject.ObjectType type = obj.GetComponent<InteractableObject>().objectType;
-        //for objects not being currently held: 
-
-        if (!obj.Equals(GetComponent<MFPP.Modules.PickUpModule>().heldObject)){
-
-            //check which layer the player has moved to, and then change object's layer, shader, and value
-            if (PlayerInLaser())
-            { //if player is now in laser world
-                SetObjectToLaser(obj); //set object to laser layer
-
-
-                if (type == InteractableObject.ObjectType.Morph) 
-                {
-                    // if it's a morph obj EITHER on or off do the transition on the object
-                    obj.GetComponent<MorphController>().OnFlip(true);
-
-                }
-
-
-                    //otherise set the object to approperiate shader automaticalh
-                    obj.GetComponent<Renderer>().material.shader = rm.laserWorldShader;  //shader change is now happening in flip script
-                    obj.GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
-                    obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
-
-            }
-                else if ( PlayerInReal() )
-                { //if player is now in real world
-                    SetObjectToReal(obj); //set object to real layer
-
-                if (type == InteractableObject.ObjectType.Morph)
-                {
-                    // if it's a morph obj EITHER on or off do the transition on the object
-                    obj.GetComponent<MorphController>().OnFlip(false);
-
-                }
-                    obj.GetComponent<Renderer>().material.shader = rm.realWorldShader;  //shader change is now happening in flip script
-                    obj.GetComponent<Transition>().SetStart(0f); //set it fully on for real world
-                    obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
-                
-                }
-
-            }
-        //if the object IS being held, we do the same thing, just change layer without switching the shader (which will get switched on drop)
-        else {
-            
-            if ( PlayerInLaser() )
-            { //if player is now in laser world
-                SetObjectToLaser(obj); //set object to laser layer
-
-                if (type == InteractableObject.ObjectType.Morph)
-                {
-                    // if it's a morph obj EITHER on or off do the transition on the object
-                    obj.GetComponent<MorphController>().OnFlip(true);
-
-                }
-            }
-
-            else if ( PlayerInReal() )
-            { //if player is now in real world
-                SetObjectToReal(obj); //set object to real layer
-
-                if (type == InteractableObject.ObjectType.Morph)
-                {
-                    // if it's a morph obj EITHER on or off do the transition on the object
-                    obj.GetComponent<MorphController>().OnFlip(false);
-
-                }
-            }
-
-        }
-
         obj.GetComponent<FlippableObject>().OnFlip();
 	}
 
@@ -251,7 +179,7 @@ public class flipScript : MonoBehaviour {
 		{
 			foreach (GameObject obj in objs)
 			{
-				rm.RemoveFromList(obj, true);
+                rm.RemoveFromList(obj, true, true);
 			}
 			objs.Clear();
 		}
@@ -277,26 +205,11 @@ public class flipScript : MonoBehaviour {
 	{
 		obj.layer = 10;
 		obj.transform.parent = Toolbox.Instance.GetLaserWorldParent();
-        InteractableObject.ObjectType type = obj.GetComponent<InteractableObject>().objectType;
-
-        if ((type == InteractableObject.ObjectType.Sokoban1x1) || (type == InteractableObject.ObjectType.Sokoban2x2)){
-            GameObject child = obj.transform.GetChild(0).gameObject;
-            child.layer = 10;
-        }
 
 	}
 	void SetObjectToReal(GameObject obj)
 	{
 		obj.layer = 11;
 		obj.transform.parent = Toolbox.Instance.GetRealWorldParent();
-        InteractableObject.ObjectType type = obj.GetComponent<InteractableObject>().objectType;
-
- 
-        if ((type == InteractableObject.ObjectType.Sokoban1x1) || (type == InteractableObject.ObjectType.Sokoban2x2))
-        {
-            GameObject child = obj.transform.GetChild(0).gameObject;
-            child.layer = 11;
-        }
-
 	}
 }

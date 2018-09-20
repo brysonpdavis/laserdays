@@ -6,6 +6,10 @@ public class Toolbox : Singleton<Toolbox> {
 	GameObject realWorldParentObject;
     GameObject laserWorldParentObject;
     GameObject player;
+    RaycastManager raycastManager;
+    MFPP.Modules.PickUpModule pickUp;
+    flipScript flipScript;
+
     IconContainer iconContainer;
     public Color UIColorA;
     public Color UIColorB;
@@ -42,9 +46,49 @@ public class Toolbox : Singleton<Toolbox> {
     {
         return iconContainer;
     }
+
+
+    public RaycastManager GetRaycastManager()
+    {
+        return raycastManager;
+    }
+
+    public MFPP.Modules.PickUpModule GetPickUp()
+    {
+        return pickUp;    
+    }
+
+    public bool EqualToHeld(GameObject obj)
+    {
+        if (pickUp.heldObject && pickUp.heldObject.Equals(obj))
+        { return true; }
+
+        else
+            return false;
+
+    }
+
+    public flipScript GetFlip () 
+    {
+        return flipScript;
+    }
+
+    public bool PlayerInLaser()
+    {
+        return player.gameObject.layer == 15;
+    }
+    public bool PlayerInReal()
+    {
+        return player.gameObject.layer == 16;
+    }
+
     public void UpdateToolbox()
     {
         player  = GameObject.FindWithTag("Player");
+        raycastManager = player.GetComponent<RaycastManager>();
+        pickUp = player.GetComponent<MFPP.Modules.PickUpModule>();
+        flipScript = player.GetComponent<flipScript>();
+
         realWorldParentObject = GameObject.FindWithTag("Real");
         laserWorldParentObject = GameObject.FindWithTag("Laser");
         iconContainer = GameObject.FindWithTag("IconContainer").GetComponent<IconContainer>();

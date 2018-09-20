@@ -15,8 +15,10 @@ public class BasicClickable : FlippableObject {
             rigidbody.isKinematic = false;
             rigidbody.useGravity = false;
             rigidbody.freezeRotation = true;
-            renderer.material.SetInt("_onHold", 1);
             Select();
+            renderer.material.SetInt("_onHover", 1);
+
+
             rigidbody.constraints = RigidbodyConstraints.None;
             
 
@@ -33,20 +35,24 @@ public class BasicClickable : FlippableObject {
         if (player.GetComponent<flipScript>().space)
         {
             renderer.material.shader = raycastManager.realWorldShader;
-            renderer.material.SetInt("_onHold", 0);
+            GetComponent<Transition>().SetStart(0f);
+            renderer.material.SetInt("_onHover", 1);
+
+            //renderer.material.SetInt("_onHold", 0);
             this.gameObject.layer = 11;
             UnSelect();
-            GetComponent<Transition>().SetStart(0f);
 
         }
 
         else
         {
             renderer.material.shader = raycastManager.laserWorldShader;
-            UnSelect();
-            renderer.material.SetInt("_onHold", 0);
-            this.gameObject.layer = 10;
             GetComponent<Transition>().SetStart(1f);
+            UnSelect();
+            renderer.material.SetInt("_onHover", 1);
+
+            //renderer.material.SetInt("_onHold", 0);
+            this.gameObject.layer = 10;
         }
 
         Vector3 currentVelocity = rigidbody.velocity;

@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 65662805209600296}
   - component: {fileID: 114422488158114488}
   - component: {fileID: 114561114109043978}
-  - component: {fileID: 114507319359578350}
   - component: {fileID: 65608381145666934}
   - component: {fileID: 114534855853275900}
   - component: {fileID: 54036742021516296}
@@ -216,35 +215,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   laserShared: 0
---- !u!114 &114507319359578350
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1260442880113934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0d24b8f4ed254101b7817a1f1035509, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectType: 4
-  itemName: wall
-  isKey: 0
-  key: 
-  selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
-  unflippable: 0
-  objectCharge: 1
-  secondaryLock: 0
-  beenPickedUp: 0
-  boost: 0
-  touchingzone: 0
-  inMotion: 0
-  value: 0
-  touchingPlayer: 0
-  reducible: 0
-  maxvalue: 0
-  minvalue: 0
-  selected: 0
 --- !u!114 &114534855853275900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,3 +264,6 @@ MonoBehaviour:
   objectCharge: 1
   beenPickedUp: 0
   boost: 0
+  timesFlipped: 0
+  maxFlips: 0
+  secondaryFlipDuration: 1

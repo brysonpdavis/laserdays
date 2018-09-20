@@ -7,9 +7,10 @@ public class StationaryWall : FlippableObject {
 
     public override void Pickup()
     {
+        Debug.Log("Picking up");
         if (selected)
         {
-            raycastManager.RemoveFromList(this.gameObject, false);
+            raycastManager.RemoveFromList(this.gameObject, false, false);
             raycastManager.selectedObjs.Remove(this.gameObject);
             selected = false;
             UnSelect();
@@ -52,5 +53,10 @@ public class StationaryWall : FlippableObject {
     }
 
     public override bool Flippable { get { return true; } }
+
+    private void Update()
+    {
+        //Debug.Log(material.GetFloat("_onHold"));
+    }
 
 }

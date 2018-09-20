@@ -84,7 +84,7 @@ public class PlatformMover : MonoBehaviour {
                     //makes sure all morphs get unselected when the platform is in motion!
                     if (item.objectType == InteractableObject.ObjectType.Morph && item.selected)
                     {
-                        raycastManager.RemoveFromList(obj, false);
+                        raycastManager.RemoveFromList(obj, false, false);
                         raycastManager.selectedObjs.Remove(obj);
                         item.selected = false;
                     }
