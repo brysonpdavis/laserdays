@@ -166,8 +166,6 @@ public class flipScript : MonoBehaviour {
 	void Flip (GameObject obj)
 	{
 
-        obj.GetComponent<FlippableObject>().OnFlip();
-
         InteractableObject.ObjectType type = obj.GetComponent<InteractableObject>().objectType;
         //for objects not being currently held: 
 
@@ -208,6 +206,7 @@ public class flipScript : MonoBehaviour {
                     obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
                 
                 }
+
             }
         //if the object IS being held, we do the same thing, just change layer without switching the shader (which will get switched on drop)
         else {
@@ -238,7 +237,7 @@ public class flipScript : MonoBehaviour {
 
         }
 
-
+        obj.GetComponent<FlippableObject>().OnFlip();
 	}
 
 	void FlipList (IList<GameObject> objs)

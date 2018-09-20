@@ -50,13 +50,9 @@ abstract public class InteractableObject : MonoBehaviour
         //sets all of the shaders to correct flip state [toggle that affects how selection looks]
         mRenderer = GetComponent<Renderer>();
         material = mRenderer.material;
+        material.SetInt("_Flippable", 0);
+        material.SetFloat("_onHold", 0f);
 
-        if (Flippable)
-        {
-            material.SetInt("_IsFlippable", 1);
-        }
-
-        else { material.SetInt("_IsFlippable", 0); }
     }
 
     void Start()
@@ -107,18 +103,23 @@ abstract public class InteractableObject : MonoBehaviour
 
     public void Select()
     {
-        material.shader = selectedShader;
+        //material.shader = selectedShader;
+        material.SetFloat("_onHold", 1f);
 
     }
 
     public virtual void UnSelect()
     {
+        material.SetFloat("_onHold", 0f);
+
+        /*
         if (this.gameObject.layer == 10)
         {
             material.shader = raycastManager.laserWorldShader;
         }
 
-        else { material.shader = raycastManager.realWorldShader; }
+       else { material.shader = raycastManager.realWorldShader; }
+       */
 
     }
 

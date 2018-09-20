@@ -13,6 +13,7 @@ abstract public class FlippableObject : InteractableObject
 
     public virtual void OnFlip()
     {
+        
         timesFlipped += 1;
 
         if (timesFlipped == maxFlips + 1)
@@ -30,6 +31,7 @@ abstract public class FlippableObject : InteractableObject
         }
 
             float start = material.GetFloat("_TransitionStateB");
+            Debug.Log("start" + start);
             if (player.gameObject.layer == 15)
             {
                 //Debug.Log("gromie!");
@@ -48,13 +50,17 @@ abstract public class FlippableObject : InteractableObject
 
     protected override void CheckColor()
     {
+        material.SetInt("_Flippable", 1);
+        material.SetFloat("_Shimmer", 1f);
+        material.SetFloat("_onHold", 0f);
+        RendererExtensions.UpdateGIMaterials(mRenderer);
+
+
         //happens on Interactable Object's start, makes sure all objs start on correct world color
 
-        if (player.gameObject.layer == 15)
-            material.SetFloat("_TransitionStateB", 1);
+        if (this.gameObject.layer == 10) { Debug.Log("haha"); material.SetFloat("_TransitionStateB", 1); }
 
-        else 
-            material.SetFloat("_TransitionStateB", 0);
+        else { material.SetFloat("_TransitionStateB", 0); }
     }
 
     public virtual int TimesFlipped { get { return timesFlipped; } }
@@ -65,18 +71,34 @@ abstract public class FlippableObject : InteractableObject
 
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
+        Debug.Log(startpoint);
+        Debug.Log(endpoint);
 
         while (ratio < 1f)
         {
+
+
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
             float value = Mathf.Lerp(startpoint, endpoint, ratio);
 
             material.SetFloat("_TransitionStateB", value);
-            RendererExtensions.UpdateGIMaterials(mRenderer);
 
+
+            //shimmer stuff
+            float start = 1f;
+            float end = 0f;
+
+            if (!pickUp.heldObject || !this.gameObject.Equals(pickUp.heldObject))
+            {
+                float shimmerValue = Mathf.Lerp(startpoint, endpoint, ratio);
+                material.SetFloat("_Shimmer", shimmerValue);
+            }
+
+            RendererExtensions.UpdateGIMaterials(mRenderer);
             yield return null;
         }
+
     }
 }
 
