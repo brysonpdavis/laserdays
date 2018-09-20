@@ -74,6 +74,7 @@ abstract public class InteractableObject : MonoBehaviour
         mainCamera = Camera.main;
         pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
         if (GetComponent<AudioSource>()) { audioSource = GetComponent<AudioSource>(); }
+        CheckColor();
 
 
 
@@ -124,6 +125,8 @@ abstract public class InteractableObject : MonoBehaviour
     public virtual bool Flippable { get { return false; } }
 
     protected virtual bool HasBeenPickedUp{ get { return false; } }
+
+    protected virtual void CheckColor() {} //this is overrided in the flippable obj subclass, but called in this start
 
     public abstract void Pickup();
 

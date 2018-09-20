@@ -27,6 +27,7 @@ public class BasicClickable : FlippableObject {
     public override void Drop()
     {
         StopAllCoroutines();
+        currentPositionVelocity = originalVelocity;
 
         //put the object down with the right shader
         if (player.GetComponent<flipScript>().space)
@@ -36,7 +37,6 @@ public class BasicClickable : FlippableObject {
             this.gameObject.layer = 11;
             UnSelect();
             GetComponent<Transition>().SetStart(0f);
-            currentPositionVelocity = originalVelocity;
 
         }
 

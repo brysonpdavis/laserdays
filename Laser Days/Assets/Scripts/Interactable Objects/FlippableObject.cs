@@ -32,24 +32,29 @@ abstract public class FlippableObject : InteractableObject
             float start = material.GetFloat("_TransitionStateB");
             if (player.gameObject.layer == 15)
             {
-                Debug.Log("gromie!");
+                //Debug.Log("gromie!");
                 float scaledDuration = secondaryFlipDuration * (1f - start);
                 StopAllCoroutines();
                 StartCoroutine(flipTransitionRoutine(start, 1, scaledDuration));
             }
             else
             {
-                Debug.Log("homie!");
+                //Debug.Log("homie!");
                 float scaledDuration = secondaryFlipDuration * start;
                 StopAllCoroutines();
                 StartCoroutine(flipTransitionRoutine(start, 0, scaledDuration));
             }
+    }
 
+    protected override void CheckColor()
+    {
+        //happens on Interactable Object's start, makes sure all objs start on correct world color
 
+        if (player.gameObject.layer == 15)
+            material.SetFloat("_TransitionStateB", 1);
 
-        //StartCoroutine(flipTransition);
-
-
+        else 
+            material.SetFloat("_TransitionStateB", 0);
     }
 
     public virtual int TimesFlipped { get { return timesFlipped; } }

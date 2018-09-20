@@ -24,7 +24,7 @@ namespace MFPP.Modules
 
             Rigidbody r = hit.collider.attachedRigidbody; // Get rigidbody from collision.
 
-            if (r != null && !r.isKinematic) // If rigidbody is not null and is not kinematic then
+            if (r != null && !r.isKinematic && !Player.IsJumping) // If rigidbody is not null and is not kinematic then
             {
                 Vector3 playerVelocity = Player.FinalMovement; // Get the current player velocity (Final movement so that we can detect input pushing)
                 playerVelocity = new Vector3(playerVelocity.x, 0, playerVelocity.z); // Nullify Y axis.

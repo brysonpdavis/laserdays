@@ -38,7 +38,7 @@ public class StationaryWall : FlippableObject {
 
     public override void DistantIconHover()
     {
-        iconContainer.SetInteractHover();
+        iconContainer.SetSelectHover();
     }
 
     public override void CloseIconHover()
