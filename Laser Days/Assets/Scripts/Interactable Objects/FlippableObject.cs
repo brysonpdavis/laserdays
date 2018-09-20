@@ -8,8 +8,8 @@ abstract public class FlippableObject : InteractableObject
     [HideInInspector] public int timesFlipped = 0;
     [HideInInspector] public int maxFlips;
     public float secondaryFlipDuration = 1f;
-    public bool recentlySelected = false;
     private IEnumerator flipTransition;
+    private float scaledDuration;
 
 
     protected override void AfterStart()
@@ -53,38 +53,38 @@ abstract public class FlippableObject : InteractableObject
 
     protected void LayerSwitch()
     {
-            InteractableObject.ObjectType type = objectType;
+        InteractableObject.ObjectType type = objectType;
 
-            if (Toolbox.Instance.PlayerInLaser())
-            { 
-                SetObjectToLaser(); //set object to laser layer
-                if (type == InteractableObject.ObjectType.Morph)
-                {
-                    GetComponent<MorphController>().OnFlip(true);
-                }
-
-                if (!AmHeldObj())
-                {
-                    //set the object to approperiate shader unless currently held
-                    material.shader = raycastManager.laserWorldShader;
-                    GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
-                }
-
-            }
-            else if (Toolbox.Instance.PlayerInReal())
+        if (Toolbox.Instance.PlayerInLaser())
+        {
+            SetObjectToLaser(); //set object to laser layer
+            if (type == InteractableObject.ObjectType.Morph)
             {
-                SetObjectToReal(); //set object to real layer
-                if (type == InteractableObject.ObjectType.Morph)
-                {
-                    GetComponent<MorphController>().OnFlip(false);
-                }
-
-                if (!AmHeldObj())
-                {
-                    material.shader = raycastManager.realWorldShader;
-                    GetComponent<Transition>().SetStart(0f); //set it fully on for real world
-                }
+                GetComponent<MorphController>().OnFlip(true);
             }
+
+            if (!AmHeldObj())
+            {
+                //set the object to approperiate shader unless currently held
+                material.shader = raycastManager.laserWorldShader;
+                GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
+            }
+
+        }
+        else if (Toolbox.Instance.PlayerInReal())
+        {
+            SetObjectToReal(); //set object to real layer
+            if (type == InteractableObject.ObjectType.Morph)
+            {
+                GetComponent<MorphController>().OnFlip(false);
+            }
+
+            if (!AmHeldObj())
+            {
+                material.shader = raycastManager.realWorldShader;
+                GetComponent<Transition>().SetStart(0f); //set it fully on for real world
+            }
+        }
     }
 
     void SetObjectToLaser()
@@ -124,13 +124,15 @@ abstract public class FlippableObject : InteractableObject
     void ColorTransition()
     {
         float start = material.GetFloat("_TransitionStateB");
-        Debug.Log("start" + start);
+        //Debug.Log("start" + start);
         if (player.gameObject.layer == 15)
         {
             //Debug.Log("gromie!");
-            float scaledDuration = secondaryFlipDuration * (1f - start);
+            scaledDuration = secondaryFlipDuration * (1f - start);
             StopAllCoroutines();
             StartCoroutine(flipTransitionRoutine(start, 1, scaledDuration));
+            StartCoroutine(ShimmerRoutine(scaledDuration));
+
         }
         else
         {
@@ -138,6 +140,8 @@ abstract public class FlippableObject : InteractableObject
             float scaledDuration = secondaryFlipDuration * start;
             StopAllCoroutines();
             StartCoroutine(flipTransitionRoutine(start, 0, scaledDuration));
+            StartCoroutine(ShimmerRoutine(scaledDuration));
+
         }
 
     }
@@ -149,11 +153,12 @@ abstract public class FlippableObject : InteractableObject
         this.recentlySelected = true;
 
         float ratio = elapsedTime / duration;
-        Debug.Log(startpoint);
-        Debug.Log(endpoint);
+        //Debug.Log(startpoint);
+        //Debug.Log(endpoint);
 
         while (ratio < 1f)
         {
+
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
             float value = Mathf.Lerp(startpoint, endpoint, ratio);
@@ -161,23 +166,48 @@ abstract public class FlippableObject : InteractableObject
             material.SetFloat("_TransitionStateB", value);
 
 
+            RendererExtensions.UpdateGIMaterials(mRenderer);
+
+            yield return null;
+        }
+
+    }
+
+
+    IEnumerator ShimmerRoutine(float duration)
+    {
+        selected = false;
+        float elapsedTime = 0;
+        this.recentlySelected = true;
+        float ratio = elapsedTime / duration;
+
+
+        while (ratio < 1f)
+        {
+            if (selected)
+            {
+                material.SetFloat("_onHold", 1f);
+                material.SetFloat("_Shimmer", 1f);
+                RendererExtensions.UpdateGIMaterials(mRenderer);
+                Debug.Log("breaking");
+                yield break;
+            }
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / duration;
+
             //shimmer stuff
             float start = 1f;
             float end = 0f;
 
             if (!pickUp.heldObject || !this.gameObject.Equals(pickUp.heldObject))
             {
- 
+
                 float shimmerValue = Mathf.Lerp(start, end, ratio);
                 material.SetFloat("_onHold", shimmerValue);
                 material.SetFloat("_Shimmer", shimmerValue);
-                //Debug.Log("going" + shimmerValue);
                 RendererExtensions.UpdateGIMaterials(mRenderer);
 
             }
-
-            RendererExtensions.UpdateGIMaterials(mRenderer);
-
             yield return null;
         }
 
@@ -187,7 +217,6 @@ abstract public class FlippableObject : InteractableObject
             material.SetFloat("_onHold", 0f);
             material.SetFloat("_Shimmer", 1f);
         }
-
     }
 }
 

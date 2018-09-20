@@ -106,7 +106,6 @@ abstract public class InteractableObject : MonoBehaviour
 
     public void Select()
     {
-
         if (selectionRenderChange){
             selectionRenderChange.OnHold();
         }
@@ -144,6 +143,8 @@ abstract public class InteractableObject : MonoBehaviour
     public abstract void InteractingIconHover();
 
     public abstract void SetType();
+
+    protected virtual void StopShimmerRoutine() {} //used in flippable
 
     public void Update(){
         if(selected || recentlySelected){
