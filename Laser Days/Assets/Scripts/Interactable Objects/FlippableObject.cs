@@ -8,6 +8,7 @@ abstract public class FlippableObject : InteractableObject
     [HideInInspector] public int timesFlipped = 0;
     [HideInInspector] public int maxFlips;
     public float secondaryFlipDuration = 1f;
+    public bool recentlySelected = false;
     private IEnumerator flipTransition;
 
 
@@ -35,6 +36,17 @@ abstract public class FlippableObject : InteractableObject
         ParticleEffect();
         ColorTransition();
         LayerSwitch();
+    }
+
+    public void Update()
+    {
+        if (selected || recentlySelected)
+        {
+            float g = material.GetFloat("_Elapsed");
+            material.SetFloat("_Elapsed", g + Time.deltaTime);
+
+        }
+
     }
 
     public virtual int TimesFlipped { get { return timesFlipped; } }
@@ -134,6 +146,8 @@ abstract public class FlippableObject : InteractableObject
     {
 
         float elapsedTime = 0;
+        this.recentlySelected = true;
+
         float ratio = elapsedTime / duration;
         Debug.Log(startpoint);
         Debug.Log(endpoint);
@@ -167,6 +181,7 @@ abstract public class FlippableObject : InteractableObject
             yield return null;
         }
 
+        this.recentlySelected = false;
         if (!pickUp.heldObject || !this.gameObject.Equals(pickUp.heldObject))
         {
             material.SetFloat("_onHold", 0f);

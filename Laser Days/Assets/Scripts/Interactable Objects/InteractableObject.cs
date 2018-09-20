@@ -24,6 +24,7 @@ abstract public class InteractableObject : MonoBehaviour
 
     private float multiplier;
     public bool selected = false;
+    public bool recentlySelected = false;
 
     //from item properties
     protected Renderer mRenderer;
@@ -110,6 +111,8 @@ abstract public class InteractableObject : MonoBehaviour
             selectionRenderChange.OnHold();
         }
             material.SetFloat("_onHold", 1f);
+        material.SetFloat("_Elpapsed", 0f);
+        selected = true;
     }
 
     public virtual void UnSelect()
@@ -117,7 +120,10 @@ abstract public class InteractableObject : MonoBehaviour
         if (selectionRenderChange){
             selectionRenderChange.OnDrop();
         }
+
         material.SetFloat("_onHold", 0f);
+        //material.SetFloat("_Elpapsed", 0f);
+        selected = false;
 
     }
 
@@ -138,6 +144,15 @@ abstract public class InteractableObject : MonoBehaviour
     public abstract void InteractingIconHover();
 
     public abstract void SetType();
+
+    public void Update(){
+        if(selected || recentlySelected){
+            float g = material.GetFloat("_Elapsed");
+            material.SetFloat("_Elapsed", g + Time.deltaTime);
+
+        }
+
+    }
 
     protected virtual bool AmHeldObj()
     {
