@@ -153,6 +153,17 @@ abstract public class FlippableObject : InteractableObject
 
     }
 
+    public void Update()
+    {
+        if (selected || recentlySelected)
+        {
+            float g = material.GetFloat("_Elapsed");
+            material.SetFloat("_Elapsed", g + Time.deltaTime);
+
+        }
+
+    }
+
     IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {
 

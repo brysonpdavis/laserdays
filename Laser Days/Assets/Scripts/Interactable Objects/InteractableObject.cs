@@ -146,14 +146,6 @@ abstract public class InteractableObject : MonoBehaviour
 
     protected virtual void StopShimmerRoutine() {} //used in flippable
 
-    public void Update(){
-        if(selected || recentlySelected){
-            float g = material.GetFloat("_Elapsed");
-            material.SetFloat("_Elapsed", g + Time.deltaTime);
-
-        }
-
-    }
 
     protected virtual bool AmHeldObj()
     {
