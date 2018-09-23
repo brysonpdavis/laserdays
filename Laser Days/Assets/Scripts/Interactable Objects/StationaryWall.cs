@@ -20,7 +20,7 @@ public class StationaryWall : FlippableObject {
         {
             raycastManager.AddToList(this.gameObject);
             raycastManager.selectedObjs.Add(this.gameObject);
-            selected = true;
+            //selected = true;
             Select();
         }
 
@@ -54,9 +54,5 @@ public class StationaryWall : FlippableObject {
 
     public override bool Flippable { get { return true; } }
 
-    private void Update()
-    {
-        //Debug.Log(material.GetFloat("_onHold"));
-    }
 
 }
