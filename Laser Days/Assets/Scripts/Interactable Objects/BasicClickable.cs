@@ -40,7 +40,7 @@ public class BasicClickable : FlippableObject {
 
             //renderer.material.SetInt("_onHold", 0);
             this.gameObject.layer = 11;
-            UnSelect();
+           
 
         }
 
@@ -67,6 +67,7 @@ public class BasicClickable : FlippableObject {
 
         iconContainer.SetOpenHand();
         selected = false;
+        UnSelect();
         rigidbody.freezeRotation = false;
         beenPickedUp = true;
         rigidbody.constraints = RigidbodyConstraints.None;
