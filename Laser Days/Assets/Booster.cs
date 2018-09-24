@@ -41,6 +41,10 @@ public class Booster : MonoBehaviour {
         }
 
         else if (affectsObjects && other.GetComponent<Rigidbody>()){
+            //Debug.Log("hitting obj" + other.GetComponent<Rigidbody>().velocity);
+            Vector3 startVelocity = other.GetComponent<Rigidbody>().velocity;
+            startVelocity.y = 0f;
+            other.GetComponent<Rigidbody>().velocity = startVelocity;
             other.GetComponent<Rigidbody>().AddForce(transform.up * boostAmount, ForceMode.Impulse);
 
         }

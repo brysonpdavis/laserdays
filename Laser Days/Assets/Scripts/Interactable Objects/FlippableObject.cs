@@ -33,7 +33,6 @@ abstract public class FlippableObject : InteractableObject
         }
 
 
-
         RendererExtensions.UpdateGIMaterials(mRenderer);
     }
 
@@ -161,8 +160,6 @@ abstract public class FlippableObject : InteractableObject
         this.recentlySelected = true;
 
         float ratio = elapsedTime / duration;
-        //Debug.Log(startpoint);
-        //Debug.Log(endpoint);
 
         while (ratio < 1f)
         {

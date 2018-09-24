@@ -29,7 +29,7 @@ public class StationaryWall : FlippableObject {
     }
     public override void Drop()
     {
-
+        UnSelect();
     }
 
     public override void SetType()
