@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour {
     public DoorMover[] doorMovers;
+    public DoorTrigger[] doorTriggers;
     public float duration = 2f;
 
     public bool active = false;
@@ -12,6 +13,8 @@ public class DoorController : MonoBehaviour {
     private void Awake()
     {
         doorMovers = GetComponentsInChildren<DoorMover>();
+        doorTriggers = GetComponentsInChildren<DoorTrigger>();
+
     }
 
     public void OpenAll()
