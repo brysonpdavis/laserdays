@@ -144,7 +144,7 @@ public class RaycastManager : MonoBehaviour {
                     {
                         pc.ItemInteraction(raycastedObj);
                     }
-                    if (ip.objectCharge)
+                    if (ip.objectCharge && !Toolbox.Instance.EqualToHeld(raycastedObj))
                     {
                         InteractableObject.ObjectType type = raycastedObj.GetComponent<InteractableObject>().objectType;
                         //if the object is already a selected object:
