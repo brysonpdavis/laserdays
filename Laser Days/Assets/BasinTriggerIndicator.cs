@@ -9,6 +9,10 @@ public class BasinTriggerIndicator : MonoBehaviour
     private void Awake()
     {
         RenderMat = GetComponent<Renderer>().material;
+
+        UnCollide();
+        Deactivate();
+
     }
 
     public void Collide()
