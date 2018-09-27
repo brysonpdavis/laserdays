@@ -19,9 +19,9 @@ public class PlatformTrigger : MonoBehaviour {
     private AudioClip platformOn;
     private AudioClip platformOff;
     private AudioSource audioSource;
-
     private Material RenderMat;
 
+    private BasinTriggerIndicator basinIndicator;
 
     private void Start()
     {
@@ -57,8 +57,8 @@ public class PlatformTrigger : MonoBehaviour {
             platform = transform.parent.GetComponentsInChildren<PlatformMover>();
 
         }
-        
 
+        basinIndicator = GetComponentInChildren<BasinTriggerIndicator>();
     }
 
 
@@ -80,6 +80,7 @@ public class PlatformTrigger : MonoBehaviour {
 
             int checkNumber = 0;
             RenderMat.SetInt("_isCollide", 1);
+            if (basinIndicator) {basinIndicator.Collide(); }
 
 
             foreach (PlatformTrigger trigger in platformTriggers)
@@ -100,6 +101,10 @@ public class PlatformTrigger : MonoBehaviour {
                 {
                     trigger.RenderMat.SetInt("_isActive0", 1);
                     trigger.RenderMat.SetInt("_isActive1", 1);
+                    if (trigger.basinIndicator)
+                    {
+                        trigger.basinIndicator.Activate();
+                    }
 
                 }
 
@@ -118,11 +123,16 @@ public class PlatformTrigger : MonoBehaviour {
             {
                 MovePlatformToStart();
                 RenderMat.SetInt("_isCollide", 0);
+                if (basinIndicator) { basinIndicator.UnCollide(); }
 
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
                     trigger.RenderMat.SetInt("_isActive0", 0);
                     trigger.RenderMat.SetInt("_isActive1", 0);
+                    if (trigger.basinIndicator)
+                    {
+                        trigger.basinIndicator.Deactivate();
+                    }
 
                 }
 
