@@ -5123,48 +5123,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1643824046}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1001 &1079922743
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4968679304352970, guid: 97591eccca2364ebd9b876149c72ed50, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4968679304352970, guid: 97591eccca2364ebd9b876149c72ed50, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4968679304352970, guid: 97591eccca2364ebd9b876149c72ed50, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4968679304352970, guid: 97591eccca2364ebd9b876149c72ed50, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4968679304352970, guid: 97591eccca2364ebd9b876149c72ed50, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4968679304352970, guid: 97591eccca2364ebd9b876149c72ed50, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4968679304352970, guid: 97591eccca2364ebd9b876149c72ed50, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4968679304352970, guid: 97591eccca2364ebd9b876149c72ed50, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 97591eccca2364ebd9b876149c72ed50, type: 2}
-  m_IsPrefabParent: 0
 --- !u!114 &1096984603 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114519231979314474, guid: 165e90ffb1a364294b6d740d840d930e,
@@ -5232,7 +5190,7 @@ MonoBehaviour:
     stationaryBlending: 0.95
     motionBlending: 0.85
   subpixelMorphologicalAntialiasing:
-    quality: 2
+    quality: 0
   fastApproximateAntialiasing:
     fastMode: 0
     keepAlpha: 0
@@ -5344,13 +5302,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a879e317c20b0d41a9a56f1a97f4cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ApplyMethod: 1
+  ApplyMethod: 0
   SampleCount: 0
   PerPixelNormals: 2
-  Intensity: 0.508
+  Intensity: 0.383
   Tint: {r: 0.19934934, g: 0.1538804, b: 0.3584906, a: 1}
-  Radius: 0.9
-  PowerExponent: 0.73
+  Radius: 1.1
+  PowerExponent: 1.45
   Bias: 0.064
   Thickness: 0.171
   Downsample: 1
@@ -5384,10 +5342,10 @@ MonoBehaviour:
   sensitivityDepth: 0.85
   sensitivityNormals: 1
   lumThreshold: 0.2
-  edgeExp: 1
-  sampleDist: 1.2
+  edgeExp: 0.85
+  sampleDist: 1
   edgesOnly: 0
-  edgesOnlyBgColor: {r: 0, g: 0.97504187, b: 1, a: 1}
+  edgesOnlyBgColor: {r: 0, g: 0, b: 0, a: 1}
   edgeDetectShader: {fileID: 4800000, guid: 0d1644bdf064147baa97f235fc5b4903, type: 3}
 --- !u!114 &1198232344
 MonoBehaviour:

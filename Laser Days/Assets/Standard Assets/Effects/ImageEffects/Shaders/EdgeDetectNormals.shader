@@ -254,7 +254,24 @@ Shader "Hidden/EdgeDetect" {
 
 		return edge * lerp(tex2D(_MainTex, i.uv[0]), _BgColor, _BgFade);
 	}
-	
+
+    float ComputeDistance(float depth)
+        {
+            float dist = 0.0;
+            dist = depth * _ProjectionParams.z;
+            dist -= _ProjectionParams.y;
+            return dist;
+        }
+
+    float ComputeFog(float coord)
+        {
+            float fog = 0.0;
+            fog = 0.1 * coord;
+            fog = exp2(-fog);
+            saturate(fog);
+            return fog; 
+        }
+
 	half4 fragThin (v2f i) : SV_Target
 	{
 		half4 original = tex2D(_MainTex, i.uv[0]);
@@ -272,8 +289,19 @@ Shader "Hidden/EdgeDetect" {
 		
 		edge *= CheckSame(centerNormal, centerDepth, sample1);
 		edge *= CheckSame(centerNormal, centerDepth, sample2);
+
+        edge = 1-edge;
+
+        float f = ComputeDistance(centerDepth);
+        f = ComputeFog(f);
+        //step()
+        // f = 1 - f;
+        if(centerDepth>0.99){
+        f = 1;
+        }
 			
-		return edge * lerp(original, _BgColor, _BgFade);
+		return lerp(original, _BgColor, (edge*f));
+        //return lerp(original, _BgColor, (edge));
 	}
 	
 	ENDCG 

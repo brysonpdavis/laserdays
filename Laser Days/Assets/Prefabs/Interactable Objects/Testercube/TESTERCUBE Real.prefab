@@ -27,8 +27,9 @@ GameObject:
   - component: {fileID: 114997230485797772}
   - component: {fileID: 82911071799122650}
   - component: {fileID: 114992728833493308}
-  - component: {fileID: 198565776997528226}
-  - component: {fileID: 199390667381496248}
+  - component: {fileID: 198045603812694120}
+  - component: {fileID: 199109863400787284}
+  - component: {fileID: 64331128199565742}
   m_Layer: 11
   m_Name: TESTERCUBE Real
   m_TagString: Clickable
@@ -43,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1158508201989184}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.572687, y: 0.5, z: 2.7496572}
+  m_LocalPosition: {x: 0.8, y: 0.5, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,7 +91,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1158508201989184}
-  m_Mesh: {fileID: 4300000, guid: d9e1c9c4814fe4f218b36f7fb9726c3a, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 07b50a9a698224192b2c669da44b229f, type: 3}
 --- !u!54 &54999689909048320
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -106,6 +107,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &64331128199565742
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1158508201989184}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 07b50a9a698224192b2c669da44b229f, type: 3}
 --- !u!65 &65883050263306030
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -114,7 +129,7 @@ BoxCollider:
   m_GameObject: {fileID: 1158508201989184}
   m_Material: {fileID: 13400000, guid: 5fdb7305c9c9140cb9e9357a8c195a70, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -266,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Renderers: []
---- !u!198 &198565776997528226
+--- !u!198 &198045603812694120
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -452,7 +467,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.28491133, g: 0.31132078, b: 0.0748932, a: 0}
+      maxColor: {r: 0.10980393, g: 0.4431373, b: 0.39607847, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -514,8 +529,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
-      minScalar: 0.05
+      scalar: 0.05
+      minScalar: 0.01
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4100,7 +4115,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minVertexDistance: 0.2
-    textureMode: 0
+    textureMode: 3
     ribbonCount: 1
     worldSpace: 0
     dieWithParticles: 1
@@ -4854,7 +4869,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &199390667381496248
+--- !u!199 &199109863400787284
 ParticleSystemRenderer:
   serializedVersion: 5
   m_ObjectHideFlags: 1
@@ -4870,7 +4885,7 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 17c0ab103bfac4b42835e45a4534724a, type: 2}
+  - {fileID: 2100000, guid: 430e223705a744b93afdcea01edeedc3, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4894,7 +4909,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.005
+  m_MaxParticleSize: 0.05
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
