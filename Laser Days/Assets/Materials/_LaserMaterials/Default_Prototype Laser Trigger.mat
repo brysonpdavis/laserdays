@@ -7,12 +7,12 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Default_Prototype Laser Trigger
-  m_Shader: {fileID: 4800000, guid: 172825550a42f490ab08c917f3cf1fcf, type: 3}
+  m_Shader: {fileID: 4800000, guid: bfd6608316db64afcb59c069c952cc30, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2450
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -106,6 +106,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 478de9d1d3cbac64bad0d9feaad9e272, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TriggerMap:
+        m_Texture: {fileID: 2800000, guid: 3b7e16ba77998431581f2ffd2f5a036b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -115,11 +119,14 @@ Material:
     - _Amplitude: 0.33928573
     - _Angle: 0.46428573
     - _BumpScale: 1
+    - _Clip: 0.5
     - _Cutoff: 0.27
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EdgeThickness: 0.5
+    - _Elapsed: 0
     - _EmissionScaleUI: 0
+    - _Float1: 0
     - _Gloss: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0.48
@@ -133,12 +140,14 @@ Material:
     - _Opacity: 0.479
     - _Parallax: 0.02
     - _Phase: 1
+    - _ScrollSpeed: 0.6
     - _Size: 25
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TransitionState: 0
+    - _TransitionState: 1
     - _UVSec: 1
+    - _UseFresnel: 0
     - _Wavelength: 0.17857142
     - _ZWrite: 1
     - __dirty: 0
@@ -146,7 +155,7 @@ Material:
     - _isActive1: 0
     - _isCollide: 0
     m_Colors:
-    - _ActiveColor: {r: 1, g: 0, b: 0, a: 0}
+    - _ActiveColor: {r: 0.011614433, g: 0.10574686, b: 0.8207547, a: 0}
     - _Color: {r: 1, g: 0.7194258, b: 0, a: 1}
     - _Color1: {r: 0.67910445, g: 0.67910445, b: 0.67910445, a: 1}
     - _Color2: {r: 0.14179105, g: 0.14179105, b: 0.14179105, a: 1}
@@ -157,6 +166,8 @@ Material:
     - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
     - _Indicator: {r: 1, g: 0, b: 0, a: 1}
     - _PassiveColor: {r: 1, g: 0, b: 0, a: 0}
+    - _RestingColor: {r: 0.07208972, g: 0.20548098, b: 0.33962262, a: 0}
+    - _ShimmerColor: {r: 0.17254902, g: 0.39215687, b: 1.2470589, a: 0}
     - _SpecularColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _TintA: {r: 0.14668655, g: 1, b: 0, a: 0}
     - _TintB: {r: 1, g: 0.062745094, b: 0.64917433, a: 0}

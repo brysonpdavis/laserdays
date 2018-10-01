@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!33 &24498588
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -528,6 +529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   mainGuard: {fileID: 0}
+  platformController: {fileID: 0}
 --- !u!114 &30702571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,6 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!65 &30702572
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1012,6 +1015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!23 &78561228
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2951,8 +2955,8 @@ Transform:
   m_LocalPosition: {x: 9, y: 2.5, z: -1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1517460605}
-  m_RootOrder: 21
+  m_Father: {fileID: 523918572}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &406816825
 AudioSource:
@@ -3064,6 +3068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   mainGuard: {fileID: 0}
+  platformController: {fileID: 0}
 --- !u!114 &406816827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3077,6 +3082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &406816828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3091,8 +3097,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformContainer: {fileID: 523918571}
   time: 5
+  counter: 0
   totalTriggers: 0
   on: 0
+  moving: 0
 --- !u!65 &406816829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3700,6 +3708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!33 &469255552
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4256,6 +4265,7 @@ Transform:
   m_Children:
   - {fileID: 1675170712}
   - {fileID: 590741034}
+  - {fileID: 406816824}
   m_Father: {fileID: 398005820}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4451,7 +4461,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4051343525985096, guid: f493050d974d84e27bc6f592fe66f745, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4051343525985096, guid: f493050d974d84e27bc6f592fe66f745, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5437,6 +5447,12 @@ MonoBehaviour:
     loadInEditor: 1
     loadMethod: 1
   - scene:
+      editorAssetGUID: 46ceb14088841400f9cde4dbc43dbaff
+      name: Sokoban House 2
+      _path: Assets/Scenes/Default Scene/August Puzzles/Sokoban House 2.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
       editorAssetGUID: 3c48df34171d645f4b783ac6a960682c
       name: Sokoban House 3
       _path: Assets/Scenes/Default Scene/August Puzzles/Sokoban House 3.unity
@@ -6024,6 +6040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!33 &855120383
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6428,6 +6445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!33 &879700348
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7442,8 +7460,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformContainer: {fileID: 0}
   time: 1
+  counter: 0
   totalTriggers: 0
   on: 0
+  moving: 0
 --- !u!65 &982679179
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9216,6 +9236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!23 &1193580349
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10859,6 +10880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!23 &1441781877
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12287,6 +12309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!54 &1675170715
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12316,6 +12339,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformGuard: {fileID: 30702570}
+  platformContainer: {fileID: 523918571}
+  Indicator: {fileID: 0}
   mainGuard: {fileID: 30702568}
   objectMovers:
   - {fileID: 870239606}
@@ -14825,7 +14850,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4051343525985096, guid: f493050d974d84e27bc6f592fe66f745, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4051343525985096, guid: f493050d974d84e27bc6f592fe66f745, type: 2}
       propertyPath: m_LocalRotation.x
@@ -15379,6 +15404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!23 &2109133996
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class PlatformTrigger : MonoBehaviour {
     public int counter;
     private PlatformTrigger[] platformTriggers;
     public int totalTriggers;
+    public float ScrollSpeed = 0.4f;
     public bool on = false;
     public bool moving = false;
 
@@ -46,8 +47,8 @@ public class PlatformTrigger : MonoBehaviour {
 
 
         RenderMat = GetComponent<Renderer>().material;
-        RenderMat.SetColor("_PassiveColor", platformContainer.GetComponent<PlatformController>().PassiveColor);
-        RenderMat.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
+        //RenderMat.SetColor("_RestingColor", platformContainer.GetComponent<PlatformController>().PassiveColor);
+        //RenderMat.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
 
 
         if (platformContainer){
@@ -61,8 +62,15 @@ public class PlatformTrigger : MonoBehaviour {
         basinIndicator = GetComponentInChildren<BasinTriggerIndicator>();
     }
 
+	private void Update()
+	{
+        var temp = RenderMat.GetFloat("_Elapsed");
+        temp += (Time.deltaTime * ScrollSpeed);
+        RenderMat.SetFloat("_Elapsed", temp);
+	}
 
-    private void OnTriggerEnter(Collider other)
+
+	private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "NoTouch" || other.tag == "MorphArm")
         {
@@ -80,6 +88,7 @@ public class PlatformTrigger : MonoBehaviour {
 
             int checkNumber = 0;
             RenderMat.SetInt("_isCollide", 1);
+            ScrollSpeed *= -0.5f;
             if (basinIndicator) {basinIndicator.Collide(); }
 
 
@@ -99,8 +108,8 @@ public class PlatformTrigger : MonoBehaviour {
 
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
-                    trigger.RenderMat.SetInt("_isActive0", 1);
-                    trigger.RenderMat.SetInt("_isActive1", 1);
+                    //trigger.RenderMat.SetInt("_isActive0", 1);
+                    //trigger.RenderMat.SetInt("_isActive1", 1);
                     if (trigger.basinIndicator)
                     {
                         trigger.basinIndicator.Activate();
@@ -123,6 +132,7 @@ public class PlatformTrigger : MonoBehaviour {
             {
                 MovePlatformToStart();
                 RenderMat.SetInt("_isCollide", 0);
+                ScrollSpeed *= -2f;
                 if (basinIndicator) { basinIndicator.UnCollide(); }
 
                 foreach (PlatformTrigger trigger in platformTriggers)
