@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour {
 
-    public GameObject platformContainer;
+    private GameObject platformContainer;
     private PlatformMover[] platform;
 
     //public Transform start;
@@ -26,6 +26,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void Start()
     {
+        platformContainer = GetComponentInParent<PlatformController>().gameObject;
         platformContainer.GetComponent<PlatformController>().triggers.Add(this.gameObject);
 
         audioSource = GetComponent<AudioSource>();

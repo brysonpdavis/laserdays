@@ -24,6 +24,7 @@ abstract public class FlippableObject : InteractableObject
         material.SetInt("_Flippable", 1);
         material.SetFloat("_Shimmer", 1f);
         material.SetFloat("_onHold", 0f);
+        material.SetFloat("_EdgeThickness", Toolbox.Instance.EdgeGlowThickness());
 
         if (GetComponent<ParticleSystem>())
         {

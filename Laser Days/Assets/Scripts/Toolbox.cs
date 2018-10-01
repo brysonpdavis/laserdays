@@ -82,6 +82,12 @@ public class Toolbox : Singleton<Toolbox> {
         return player.gameObject.layer == 16;
     }
 
+
+    public float EdgeGlowThickness()
+    {
+        return .05f;
+    }
+
     public void UpdateToolbox()
     {
         player  = GameObject.FindWithTag("Player");
