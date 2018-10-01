@@ -43,6 +43,7 @@ abstract public class FlippableObject : InteractableObject
         ParticleEffect();
         ColorTransition();
         LayerSwitch();
+        FlipCore(true);
     }
 
     public void Update()
@@ -98,7 +99,6 @@ abstract public class FlippableObject : InteractableObject
     {
         this.gameObject.layer = 10;
         this.transform.parent = Toolbox.Instance.GetLaserWorldParent();
-
     }
     void SetObjectToReal()
     {
@@ -150,7 +150,6 @@ abstract public class FlippableObject : InteractableObject
             StartCoroutine(ShimmerRoutine(scaledDuration));
 
         }
-
     }
 
 
@@ -225,5 +224,20 @@ abstract public class FlippableObject : InteractableObject
             material.SetFloat("_Shimmer", 1f);
         }
     }
+
+    public virtual void FlipCore(bool onFlip)
+    {
+        if (GetComponentInChildren<Core>() && !AmHeldObj()|| !onFlip)
+            {
+                if (Toolbox.Instance.PlayerInLaser())
+                {
+                    GetComponentInChildren<Core>().Flip(true);
+                }
+                else if (Toolbox.Instance.PlayerInReal())
+                {
+                    GetComponentInChildren<Core>().Flip(false);
+                }
+            }
+        }
 }
 

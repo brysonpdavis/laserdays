@@ -17,6 +17,8 @@ public class RaycastManager : MonoBehaviour {
     public Shader shaderselected;
     public Shader realWorldShader;
     public Shader laserWorldShader;
+    public Shader coreLaser;
+    public Shader coreReal;
 
 
     public Shader morphShaderselected;

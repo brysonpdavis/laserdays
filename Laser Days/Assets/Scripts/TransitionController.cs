@@ -26,7 +26,6 @@ public class TransitionController: MonoBehaviour
             foreach (Transition albo in components)
             {
                 albo.SetStart(0f);
-
             }        
         }
 
@@ -36,7 +35,6 @@ public class TransitionController: MonoBehaviour
             foreach (Transition albo in components)
             {
                 albo.SetStart(1f);
-
             }   
             
         }
@@ -45,13 +43,10 @@ public class TransitionController: MonoBehaviour
 
     void LateUpdate() //check to make sure the switch is possible (just as player is doing at the same time)
     {
-
-
         bool isFlipped = player.GetComponent<flipScript>().flippedThisFrame;
         bool direction = player.GetComponent<flipScript>().space;
         if (Input.GetMouseButtonDown(0))
         {
-
             if (isFlipped)
             {
                 FlipSurrounding(direction);
@@ -79,13 +74,11 @@ public class TransitionController: MonoBehaviour
                         if (!albo.gameObject.Equals(player.GetComponent<MFPP.Modules.PickUpModule>().heldObject))
                         {
                             albo.Flip(0f, speed);
-
                         }
                     }
 
                     else { albo.Flip(0f, speed); }
                 }
-
             }
         }
         else {

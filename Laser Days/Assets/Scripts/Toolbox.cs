@@ -15,6 +15,9 @@ public class Toolbox : Singleton<Toolbox> {
     public Color UIColorB;
     public Color UIColorC;
 
+    public Shader laserCore;
+    public Shader realCore;
+
  
 	void Awake () {
 		// Your initialization code here
@@ -80,6 +83,16 @@ public class Toolbox : Singleton<Toolbox> {
     public bool PlayerInReal()
     {
         return player.gameObject.layer == 16;
+    }
+
+    public Shader CoreLaser()
+    {
+        return laserCore;
+    }
+
+    public Shader CoreReal()
+    {
+        return realCore;
     }
 
 

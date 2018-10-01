@@ -40,8 +40,6 @@ public class BasicClickable : FlippableObject {
 
             //renderer.material.SetInt("_onHold", 0);
             this.gameObject.layer = 11;
-           
-
         }
 
         else
@@ -64,7 +62,7 @@ public class BasicClickable : FlippableObject {
             //Debug.Log(rigidbody.velocity + ", " + rigidbody.velocity.magnitude);
         }
 
-
+        FlipCore(false);
         iconContainer.SetOpenHand();
         selected = false;
         UnSelect();
