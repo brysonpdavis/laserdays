@@ -72,89 +72,13 @@ public class PlatformTrigger : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "NoTouch" || other.tag == "MorphArm")
-        {
-
-            counter += 1;
-            on = true;
-
-
-            if (counter == 1)
-            {
-                //sound effect
-                audioSource.clip = platformOn;
-                audioSource.Play();
-            }
-
-            int checkNumber = 0;
-            RenderMat.SetInt("_isCollide", 1);
-            ScrollSpeed *= -0.5f;
-            if (basinIndicator) {basinIndicator.Collide(); }
-
-
-            foreach (PlatformTrigger trigger in platformTriggers)
-            {
-
-                if (trigger.on)
-                {
-                    checkNumber += 1;
-                }
-            }
-
-            //make sure all necessary triggers are selected. 
-            if (checkNumber == totalTriggers)
-            {
-                MovePlatformToEnd();
-
-                foreach (PlatformTrigger trigger in platformTriggers)
-                {
-                    //trigger.RenderMat.SetInt("_isActive0", 1);
-                    //trigger.RenderMat.SetInt("_isActive1", 1);
-                    if (trigger.basinIndicator)
-                    {
-                        trigger.basinIndicator.Activate();
-                    }
-
-                }
-
-            }
-        }
+        TriggerOn(other);
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "MorphArm" || other.tag == "NoTouch")
-        {
-
-            counter -= 1;
-            if (counter == 0)
-            {
-                MovePlatformToStart();
-                RenderMat.SetInt("_isCollide", 0);
-                ScrollSpeed *= -2f;
-                if (basinIndicator) { basinIndicator.UnCollide(); }
-
-                foreach (PlatformTrigger trigger in platformTriggers)
-                {
-                    trigger.RenderMat.SetInt("_isActive0", 0);
-                    trigger.RenderMat.SetInt("_isActive1", 0);
-                    if (trigger.basinIndicator)
-                    {
-                        trigger.basinIndicator.Deactivate();
-                    }
-
-                }
-
-                foreach (PlatformTrigger trigger in platformTriggers)
-                {
-                    trigger.moving = false;
-
-                }
-
-                on = false;
-            }
-        }
+        TriggerOff(other);
     }
 
 
@@ -218,6 +142,102 @@ public class PlatformTrigger : MonoBehaviour {
         audioSource.Play();
     }
 
+    public void TriggerOn(Collider other)
+    {
+        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "NoTouch" || other.tag == "MorphArm")
+        {
 
+            counter += 1;
+            on = true;
+
+
+            if (counter == 1)
+            {
+                //sound effect
+                audioSource.clip = platformOn;
+                audioSource.Play();
+            }
+
+            int checkNumber = 0;
+            RenderMat.SetInt("_isCollide", 1);
+
+            if (GetComponentInChildren<PuddleTrigger>())
+            {
+                GetComponentInChildren<PuddleTrigger>().Activate();
+            }
+
+            ScrollSpeed *= -0.5f;
+            if (basinIndicator) { basinIndicator.Collide(); }
+
+
+            foreach (PlatformTrigger trigger in platformTriggers)
+            {
+
+                if (trigger.on)
+                {
+                    checkNumber += 1;
+                }
+            }
+
+            //make sure all necessary triggers are selected. 
+            if (checkNumber == totalTriggers)
+            {
+                MovePlatformToEnd();
+
+                foreach (PlatformTrigger trigger in platformTriggers)
+                {
+                    //trigger.RenderMat.SetInt("_isActive0", 1);
+                    //trigger.RenderMat.SetInt("_isActive1", 1);
+                    if (trigger.basinIndicator)
+                    {
+                        trigger.basinIndicator.Activate();
+                    }
+
+                }
+
+            }
+        }  
+    }
+    public void TriggerOff(Collider other)
+    {
+        if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "MorphArm" || other.tag == "NoTouch")
+        {
+
+            counter -= 1;
+            if (counter == 0)
+            {
+                MovePlatformToStart();
+                RenderMat.SetInt("_isCollide", 0);
+
+                if (GetComponentInChildren<PuddleTrigger>())
+                {
+                    GetComponentInChildren<PuddleTrigger>().Deactivate();
+                }
+
+
+                ScrollSpeed *= -2f;
+                if (basinIndicator) { basinIndicator.UnCollide(); }
+
+                foreach (PlatformTrigger trigger in platformTriggers)
+                {
+                    trigger.RenderMat.SetInt("_isActive0", 0);
+                    trigger.RenderMat.SetInt("_isActive1", 0);
+                    if (trigger.basinIndicator)
+                    {
+                        trigger.basinIndicator.Deactivate();
+                    }
+
+                }
+
+                foreach (PlatformTrigger trigger in platformTriggers)
+                {
+                    trigger.moving = false;
+
+                }
+
+                on = false;
+            }
+        }
+    }
 
 }
