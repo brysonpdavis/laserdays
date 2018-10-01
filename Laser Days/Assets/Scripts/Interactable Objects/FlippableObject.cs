@@ -10,6 +10,7 @@ abstract public class FlippableObject : InteractableObject
     public float secondaryFlipDuration = 1f;
     private IEnumerator flipTransition;
     private float scaledDuration;
+    public Color shimmerColor;
 
 
     protected override void AfterStart()
@@ -25,14 +26,19 @@ abstract public class FlippableObject : InteractableObject
         material.SetFloat("_Shimmer", 1f);
         material.SetFloat("_onHold", 0f);
         material.SetFloat("_EdgeThickness", Toolbox.Instance.EdgeGlowThickness());
+        shimmerColor = material.GetColor("_ShimmerColor");
 
         if (GetComponent<ParticleSystem>())
         {
             Material particleMat = GetComponent<ParticleSystemRenderer>().material;
-            Color hoverColor = material.GetColor("_ShimmerColor");
-            particleMat.SetColor("_ParticleColor", hoverColor);
+            //shimmerColor
+            particleMat.SetColor("_ParticleColor", shimmerColor);
         }
 
+        if (GetComponentInChildren<Core>())
+        {
+            GetComponentInChildren<Core>().SetColor(shimmerColor);
+        }
 
         RendererExtensions.UpdateGIMaterials(mRenderer);
     }
@@ -194,8 +200,7 @@ abstract public class FlippableObject : InteractableObject
                 material.SetFloat("_onHold", 1f);
                 material.SetFloat("_Shimmer", 1f);
                 RendererExtensions.UpdateGIMaterials(mRenderer);
-                recentlySelected = false;
-                Debug.Log("breaking");
+                recentlySelected = false;              
                 yield break;
             }
             elapsedTime += Time.deltaTime;
