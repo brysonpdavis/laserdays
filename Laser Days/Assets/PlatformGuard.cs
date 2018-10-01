@@ -45,12 +45,12 @@ public class PlatformGuard : MonoBehaviour
         }
 
         //objects colliding from below make the platform (either single or as group) get stuck
-        if ((string.Equals(collisionTag, "Sokoban1x1") || 
+        if (((string.Equals(collisionTag, "Sokoban1x1") || 
              string.Equals(collisionTag, "Sokoban2x2") ||
              string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Clickable") ||
              col.tag == "MorphArm")
-            && (col.transform.position.y <= this.transform.position.y))
+             && (col.transform.position.y <= this.transform.position.y)) || (string.Equals(collisionTag, "StationaryWall")))
         {
             if (platformController.isGroup)
             {
@@ -68,8 +68,6 @@ public class PlatformGuard : MonoBehaviour
                 stuckSokoban.Add(col.transform.gameObject);
             }
         }
-
-
 
     }
 
@@ -133,12 +131,12 @@ public class PlatformGuard : MonoBehaviour
         }
 
         //object that was jamming the platform has now been unstock and can be removed
-        if ((string.Equals(collisionTag, "Sokoban1x1") ||
+        if (((string.Equals(collisionTag, "Sokoban1x1") ||
              string.Equals(collisionTag, "Sokoban2x2") || 
              string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Clickable") ||
              col.tag == "MorphArm")
-            && (col.transform.position.y <= this.transform.position.y))
+            && (col.transform.position.y <= this.transform.position.y)) || (string.Equals(collisionTag, "StationaryWall")))
         {
             if (platformController.isGroup)
             {
