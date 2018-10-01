@@ -50,7 +50,7 @@ public class PlatformGuard : MonoBehaviour
              string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Clickable") ||
              col.tag == "MorphArm")
-             && (col.transform.position.y <= this.transform.position.y)) || (string.Equals(collisionTag, "StationaryWall")))
+             && (col.transform.position.y <= this.transform.position.y)) || (string.Equals(collisionTag, "Wall")))
         {
             if (platformController.isGroup)
             {
@@ -136,7 +136,7 @@ public class PlatformGuard : MonoBehaviour
              string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Clickable") ||
              col.tag == "MorphArm")
-            && (col.transform.position.y <= this.transform.position.y)) || (string.Equals(collisionTag, "StationaryWall")))
+            && (col.transform.position.y <= this.transform.position.y)) || (string.Equals(collisionTag, "Wall")))
         {
             if (platformController.isGroup)
             {
