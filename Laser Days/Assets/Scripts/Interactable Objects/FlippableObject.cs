@@ -232,7 +232,7 @@ abstract public class FlippableObject : InteractableObject
 
     public virtual void FlipCore(bool onFlip)
     {
-        if (GetComponentInChildren<Core>() && !AmHeldObj()|| !onFlip)
+        if (GetComponentInChildren<Core>() && (!AmHeldObj()|| !onFlip))
             {
                 if (Toolbox.Instance.PlayerInLaser())
                 {
