@@ -99,12 +99,12 @@ public class PlatformTrigger : MonoBehaviour {
             }
 
             //make sure either we're going up, or if we're going down that there's nobody beneath
-            if ((end.position.y >= start.y) || platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0)
+            if (((end.position.y >= start.y) && platformSingle.mainGuard.GetComponent<PlatformGuard>().breakingObjectsAbove.Count == 0)
+                || platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0)
             {
                 //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
                 platformSingle.MovePlatform(start, end.position, time);
             }
-
 
         }
 
@@ -126,7 +126,8 @@ public class PlatformTrigger : MonoBehaviour {
 
 
             //check to be sure either we're goin up or we're going down and nothing is stuck beneath the platform
-            if (( start.y >= end.position.y) || platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0) 
+            if ((( start.y >= end.position.y) && platformSingle.mainGuard.GetComponent<PlatformGuard>().breakingObjectsAbove.Count == 0) 
+                || platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0)
             {
                 platformSingle.MovePlatform(end.position, start, time);
 

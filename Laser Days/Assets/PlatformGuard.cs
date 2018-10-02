@@ -11,6 +11,10 @@ public class PlatformGuard : MonoBehaviour
     public IList<GameObject> stuckObjects;
     public IList<Vector3> stuckObjectsOffset;
     public IList<GameObject> stuckSokoban;
+    public IList<GameObject> breakingObjectsAbove;
+    public IList<GameObject> breakingObjectsBelow;
+
+
     public GameObject mainGuard;
     public PlatformController platformController;
 
@@ -20,6 +24,9 @@ public class PlatformGuard : MonoBehaviour
         stuckObjects = new List<GameObject>();
         stuckObjectsOffset = new List<Vector3>();
         stuckSokoban = new List<GameObject>();
+        breakingObjectsAbove= new List<GameObject>();
+        breakingObjectsBelow = new List<GameObject>();
+
 
         //main controller is always in guard's parents parent
         platformController = transform.parent.transform.parent.GetComponent<PlatformController>();
@@ -42,15 +49,16 @@ public class PlatformGuard : MonoBehaviour
             && (col.transform.position.y >= this.transform.position.y))
         {
             stuckObjects.Add(col.gameObject);
+
         }
 
         //objects colliding from below make the platform (either single or as group) get stuck
-        if (((string.Equals(collisionTag, "Sokoban1x1") || 
+        if ((string.Equals(collisionTag, "Sokoban1x1") || 
              string.Equals(collisionTag, "Sokoban2x2") ||
              string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Clickable") ||
              col.tag == "MorphArm")
-             && (col.transform.position.y <= this.transform.position.y)) || (string.Equals(collisionTag, "Wall")))
+             && (col.transform.position.y <= this.transform.position.y))
         {
             if (platformController.isGroup)
             {
@@ -68,7 +76,34 @@ public class PlatformGuard : MonoBehaviour
                 stuckSokoban.Add(col.transform.gameObject);
             }
         }
+        
+        if (string.Equals(collisionTag, "Wall"))
+        {
+            if (col.transform.position.y <= this.transform.position.y)
+            {
+                breakingObjectsAbove.Add(col.transform.gameObject);
+            }
+            else
+                breakingObjectsBelow.Add(col.transform.gameObject);
 
+            if (platformController.isGroup)
+            {
+                foreach (PlatformMover platform in platformController.platformMovers)
+                {
+                    platform.StopAllCoroutines();
+                    //make everything but morphs selectable when platform is stuck
+                    platform.PlatformStuckSelectable();
+                }
+            }
+
+            else
+            {
+                GetComponentInParent<PlatformMover>().StopAllCoroutines();
+                GetComponentInParent<PlatformMover>().PlatformStuckSelectable();
+            }
+
+
+        }
     }
 
     void OnTriggerStay(Collider col)
@@ -131,12 +166,12 @@ public class PlatformGuard : MonoBehaviour
         }
 
         //object that was jamming the platform has now been unstock and can be removed
-        if (((string.Equals(collisionTag, "Sokoban1x1") ||
+        if ((string.Equals(collisionTag, "Sokoban1x1") ||
              string.Equals(collisionTag, "Sokoban2x2") || 
              string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Clickable") ||
              col.tag == "MorphArm")
-            && (col.transform.position.y <= this.transform.position.y)) || (string.Equals(collisionTag, "Wall")))
+            && (col.transform.position.y <= this.transform.position.y))
         {
             if (platformController.isGroup)
             {
@@ -169,6 +204,48 @@ public class PlatformGuard : MonoBehaviour
 
         }
 
+        if (string.Equals(collisionTag, "Wall"))
+        {
+            if (col.transform.position.y <= this.transform.position.y)
+            {
+                breakingObjectsAbove.Remove(col.transform.gameObject);
+
+                if (breakingObjectsAbove.Count == 0)
+                {
+                    GameObject check = transform.parent.transform.parent.GetComponent<PlatformController>().triggers[0];
+
+                    if (!check.GetComponent<PlatformTrigger>().moving)
+                    {
+                        check.GetComponent<PlatformTrigger>().MovePlatformToStart();
+
+                    }
+
+                    else
+                    {
+                        check.GetComponent<PlatformTrigger>().MovePlatformToEnd();
+                    }
+                }
+
+            }
+            else
+            {
+                breakingObjectsBelow.Remove(col.transform.gameObject);
+                if (breakingObjectsAbove.Count == 0)
+                {
+                    GameObject check = transform.parent.transform.parent.GetComponent<PlatformController>().triggers[0];
+
+                    if (!check.GetComponent<PlatformTrigger>().moving)
+                    {
+                        check.GetComponent<PlatformTrigger>().MovePlatformToStart();
+                    }
+
+                    else
+                    {
+                        check.GetComponent<PlatformTrigger>().MovePlatformToEnd();
+                    }
+                }
+            }
+        }
         //otherwise the object has been riding on top, so remove it from list of objects that should move with the platform
         else if (string.Equals(collisionTag, "Sokoban1x1") || 
                  string.Equals(collisionTag, "Sokoban2x2") || 
