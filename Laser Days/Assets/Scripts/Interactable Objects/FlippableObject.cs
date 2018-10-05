@@ -232,8 +232,13 @@ abstract public class FlippableObject : InteractableObject
 
     public virtual void FlipCore(bool onFlip)
     {
+        //if (!onFlip) { Debug.Log("!onflip"); }
+        //if (!AmHeldObj()) { Debug.Log("!amheldobj"); }
+        Debug.Log("called");
+
         if (GetComponentInChildren<Core>() && (!AmHeldObj()|| !onFlip))
             {
+            Debug.Log("going!");
                 if (Toolbox.Instance.PlayerInLaser())
                 {
                     GetComponentInChildren<Core>().Flip(true);

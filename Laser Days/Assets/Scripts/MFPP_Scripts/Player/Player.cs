@@ -313,6 +313,11 @@ namespace MFPP
                 return Movement.AllowMovement && Movement.Jump.AllowJump && canJumpOnThisSlope && !ceilingRaycast && (Movement.Jump.AutoJump ? GetButton(Controls.JumpButton) : GetButtonDown(Controls.JumpButton));
             }
         }
+
+        public bool IsBouncing
+        {
+            get; set;
+        }
         /// <summary>
         /// Is this <see cref="Player"/> crouching?
         /// </summary>
@@ -672,8 +677,10 @@ namespace MFPP
                     }
                 }
 
-                if (IsJumping) { // Jump
+                if (IsJumping && !IsBouncing) { // Jump
                     FinalMovement += Vector3.up * Movement.Jump.Power;
+                    //Debug.Log("jumping");
+
                    // StartCoroutine(PrintJumpHeight());
                 }
             }

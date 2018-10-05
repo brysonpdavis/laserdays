@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Booster : MonoBehaviour {
 
-    public int boostAmount = 20;
-    public int playerBoostAmount = 10;
+    public float boostAmount = 20;
+    public float playerBoostAmount = 10;
     public bool affectsPlayer = false;
     public bool affectsObjects = true;
     GameObject player;
@@ -25,19 +25,13 @@ public class Booster : MonoBehaviour {
     {
         
         if (pickUp.heldObject && pickUp.heldObject.Equals(other.gameObject))
-        {
-                pickUp.PutDown();
-        }
+            pickUp.PutDown();
 
 
         if (affectsPlayer && other.GetComponent<MFPP.Player>())
         {
-            //Debug.Log("hitting player");
-            //Debug.Log(other.GetComponent<MFPP.Player>().FinalMovement);
             other.GetComponent<MFPP.Player>().FinalMovement = new Vector3(0f, 0f, 0f);
-
             StartCoroutine(OnBoost(other.gameObject));
-
         }
 
         else if (affectsObjects && other.GetComponent<Rigidbody>()){
@@ -46,7 +40,6 @@ public class Booster : MonoBehaviour {
             startVelocity.y = 0f;
             other.GetComponent<Rigidbody>().velocity = startVelocity;
             other.GetComponent<Rigidbody>().AddForce(transform.up * boostAmount, ForceMode.Impulse);
-
         }
 
         if (GetComponent<Renderer>()){
@@ -85,16 +78,28 @@ public class Booster : MonoBehaviour {
 
     private IEnumerator OnBoost(GameObject obj)
     {
+        player.GetComponent<MFPP.Player>().IsBouncing = true;
+        float finalBoost = playerBoostAmount;
+        if (player.GetComponent<MFPP.Player>().IsJumping)
+        {
+            //makes sure it doesn't magnify jump and boost if the player does both at the same time
+            //Debug.Log("yo");
+            float jumpAmt = player.GetComponent<MFPP.Player>().Movement.Jump.Power;
+            finalBoost = playerBoostAmount -jumpAmt;
+        }
 
         yield return new WaitForEndOfFrame();
-        //Debug.Log(transform.up * playerBoostAmount);
-        //Debug.Log(transform.up);
+
         Vector3 boost = transform.up;
-        boost *= playerBoostAmount;
+        boost *= finalBoost;
         obj.GetComponent<MFPP.Player>().AddImpulse(boost);
+        //Debug.Log("boosting");
 
-
+        finalBoost = playerBoostAmount; //resets the player boost for next run
         yield return null;
+
+        player.GetComponent<MFPP.Player>().IsBouncing = false;
+
     }
 
 

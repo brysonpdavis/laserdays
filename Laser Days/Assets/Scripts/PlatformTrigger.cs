@@ -194,9 +194,7 @@ public class PlatformTrigger : MonoBehaviour {
                     {
                         trigger.basinIndicator.Activate();
                     }
-
                 }
-
             }
         }  
     }
@@ -228,13 +226,11 @@ public class PlatformTrigger : MonoBehaviour {
                     {
                         trigger.basinIndicator.Deactivate();
                     }
-
                 }
 
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
                     trigger.moving = false;
-
                 }
 
                 on = false;
