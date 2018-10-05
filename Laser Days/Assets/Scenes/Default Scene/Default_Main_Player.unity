@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7310195, g: 0.7131336, b: 0.5325999, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -89,8 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112000012, guid: 893c61463ac37432ab97e43b57b86a4d,
-    type: 2}
+  m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -114,12 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &41091053 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114076192113971896, guid: 2c153e2fda8e04bde8fbdee2485bbbb1,
-    type: 2}
-  m_PrefabInternal: {fileID: 384277673}
-  m_Script: {fileID: 11500000, guid: 83fe318d1e67e483ea2df1ff3a651e97, type: 3}
 --- !u!1001 &384277673
 Prefab:
   m_ObjectHideFlags: 0
@@ -341,6 +334,65 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &744699107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 744699110}
+  - component: {fileID: 744699109}
+  - component: {fileID: 744699108}
+  m_Layer: 0
+  m_Name: '! AmsMultiSceneSetup'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &744699108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 744699107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15cc1e8a133b04c4ba5d1c4801149eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _version: 1
+  _crossSceneReferences: []
+  _realSceneRootsForPostBuild: []
+  _mergedScenes: []
+--- !u!114 &744699109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 744699107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085c2289556c08443b40563cfe8016e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isMainScene: 1
+  _sceneSetup: []
+  _thisScenePath: Assets/Scenes/Default Scene/Default_Main_Player.unity
+--- !u!4 &744699110
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 744699107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &771396670 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114732561964921954, guid: 165e90ffb1a364294b6d740d840d930e,
@@ -4964,281 +5016,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &918362975
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 918362978}
-  - component: {fileID: 918362977}
-  - component: {fileID: 918362976}
-  m_Layer: 0
-  m_Name: '! AmsMultiSceneSetup'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &918362976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 918362975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15cc1e8a133b04c4ba5d1c4801149eaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _version: 1
-  _crossSceneReferences:
-  - _sourceObject: {fileID: 41091053}
-    _sourceField: spawnPoint,3
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: 4f7cfed0c9e1746e68c5dc47250ff60a
-        name: Tower_Sokoban 2
-        _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct
-          1/Tower_Sokoban 2.unity
-      fullPath: /SPAWNPOINTS/SPAWN Level 1
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 294608001
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
-  - _sourceObject: {fileID: 41091053}
-    _sourceField: spawnPoint,2
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: 4f7cfed0c9e1746e68c5dc47250ff60a
-        name: Tower_Sokoban 2
-        _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct
-          1/Tower_Sokoban 2.unity
-      fullPath: /SPAWNPOINTS/SPAWN Level 2
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 858384544
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
-  - _sourceObject: {fileID: 41091053}
-    _sourceField: spawnPoint,7
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: 5dd69926b18f34580aa9c45422c37994
-        name: Tower_Sokoban 4
-        _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct
-          1/Tower_Sokoban 4.unity
-      fullPath: /SPAWNPOINTS/SPAWN Level 1
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 756779964
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
-  - _sourceObject: {fileID: 41091053}
-    _sourceField: spawnPoint,6
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: 5dd69926b18f34580aa9c45422c37994
-        name: Tower_Sokoban 4
-        _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct
-          1/Tower_Sokoban 4.unity
-      fullPath: /SPAWNPOINTS/SPAWN Level 2
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 1507227145
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
-  - _sourceObject: {fileID: 41091053}
-    _sourceField: spawnPoint,5
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: 3d8b423789d684eb39b20162efa6804a
-        name: Tower_Sokoban 3
-        _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct
-          1/Tower_Sokoban 3.unity
-      fullPath: /SPAWNPOINTS/SPAWN Level 1
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 998874954
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
-  - _sourceObject: {fileID: 41091053}
-    _sourceField: spawnPoint,4
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: 3d8b423789d684eb39b20162efa6804a
-        name: Tower_Sokoban 3
-        _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct
-          1/Tower_Sokoban 3.unity
-      fullPath: /SPAWNPOINTS/SPAWN Level 2
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 2048504480
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
-  - _sourceObject: {fileID: 41091053}
-    _sourceField: spawnPoint,1
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: e2322d3589ca44c5798806aca88ec4d5
-        name: Tower_Sokoban 1
-        _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct
-          1/Tower_Sokoban 1.unity
-      fullPath: /SPAWNPOINTS/SPAWN Level 1
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 1955820882
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
-  - _sourceObject: {fileID: 41091053}
-    _sourceField: spawnPoint,0
-    DEPRECATED_fromObject:
-      scene:
-        editorAssetGUID: 
-        name: 
-        _path: 
-      fullPath: 
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 0
-      editorPrefabRelativePath: 
-      version: 0
-    _toObject:
-      scene:
-        editorAssetGUID: e2322d3589ca44c5798806aca88ec4d5
-        name: Tower_Sokoban 1
-        _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct
-          1/Tower_Sokoban 1.unity
-      fullPath: /SPAWNPOINTS/SPAWN Level 2
-      componentName: 
-      componentIndex: 0
-      editorLocalId: 2106782389
-      editorPrefabRelativePath: 
-      version: 1
-    _data:
-      data: []
-  _realSceneRootsForPostBuild: []
-  _mergedScenes: []
---- !u!114 &918362977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 918362975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 085c2289556c08443b40563cfe8016e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isMainScene: 0
-  _sceneSetup: []
-  _thisScenePath: Assets/Scenes/Default Scene/Default_Main_Player.unity
---- !u!4 &918362978
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 918362975}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.35, y: -0.45, z: -67.83}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &925116528 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1119479109278806, guid: 165e90ffb1a364294b6d740d840d930e,
@@ -5291,7 +5068,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1198232336}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.03446347, y: 0, z: 0, w: 0.999406}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5471,12 +5248,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 0
-  sensitivityDepth: 0.85
+  sensitivityDepth: 1.2
   sensitivityNormals: 1
   lumThreshold: 0.2
   edgeExp: 0.85
   sampleDist: 1
-  edgesOnly: 0
+  edgesOnly: 0.58
   edgesOnlyBgColor: {r: 0, g: 0, b: 0, a: 1}
   edgeDetectShader: {fileID: 4800000, guid: 0d1644bdf064147baa97f235fc5b4903, type: 3}
 --- !u!114 &1198232344
@@ -5506,11 +5283,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1634057783}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
-  m_LocalPosition: {x: 0, y: 3.3, z: 0}
-=======
-  m_LocalPosition: {x: -4.9, y: 0.5, z: -3.2}
->>>>>>> 6f04718537a604d543cc9e3ccf7ffbc9644ea267
+  m_LocalPosition: {x: -10.26, y: 3.3, z: -8.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1198232337}
@@ -5853,8 +5626,8 @@ MonoBehaviour:
   shaderselected: {fileID: 13, guid: 0000000000000000f000000000000000, type: 0}
   realWorldShader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
   laserWorldShader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
-  coreLaser: {fileID: 4800000, guid: a39c5e86e389449c4a5e4c5e46bdb175, type: 3}
-  coreReal: {fileID: 4800000, guid: 748e4e00c886545d1bbe77d010912367, type: 3}
+  coreLaser: {fileID: 0}
+  coreReal: {fileID: 0}
   morphShaderselected: {fileID: 0}
   morphRealWorldShader: {fileID: 4800000, guid: 9b9ccdb909d8949e0b5b037ec83139b7,
     type: 3}
@@ -6457,7 +6230,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1119479109278806, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1676700275156628, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
       propertyPath: m_IsActive
@@ -6498,6 +6271,46 @@ Prefab:
     - target: {fileID: 1238615254728040, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114375166415987654, guid: 165e90ffb1a364294b6d740d840d930e,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114375166415987654, guid: 165e90ffb1a364294b6d740d840d930e,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224236235264814946, guid: 165e90ffb1a364294b6d740d840d930e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 224236235264814946, guid: 165e90ffb1a364294b6d740d840d930e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114375166415987654, guid: 165e90ffb1a364294b6d740d840d930e,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 114375166415987654, guid: 165e90ffb1a364294b6d740d840d930e,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.8745099
+      objectReference: {fileID: 0}
+    - target: {fileID: 114375166415987654, guid: 165e90ffb1a364294b6d740d840d930e,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 114375166415987654, guid: 165e90ffb1a364294b6d740d840d930e,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.29411766
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
