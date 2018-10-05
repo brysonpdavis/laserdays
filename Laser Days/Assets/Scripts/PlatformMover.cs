@@ -27,7 +27,10 @@ public class PlatformMover : MonoBehaviour {
 
         raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
         pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
-
+        LineRenderer LR = gameObject.GetComponent<LineRenderer>();
+        LR.positionCount = 2;
+        LR.SetPosition(0, gameObject.transform.position);
+        LR.SetPosition(1, end.position);
     }
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
