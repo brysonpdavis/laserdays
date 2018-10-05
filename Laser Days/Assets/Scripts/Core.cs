@@ -20,7 +20,6 @@ public class Core : MonoBehaviour {
         {
             renderMat.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreLaser;
             GetComponent<Transition>().SetStart(1f);
-
         }
         else
         {
