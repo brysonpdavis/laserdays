@@ -11,16 +11,16 @@ public class BasicClickable : FlippableObject {
 
     public override void Pickup () 
     {
+        if (raycastManager.selectedObjs.Contains(this.gameObject))
+        { raycastManager.selectedObjs.Remove(this.gameObject); }
+
             InteractingIconHover();
             rigidbody.isKinematic = false;
             rigidbody.useGravity = false;
             rigidbody.freezeRotation = true;
             Select();
             renderer.material.SetInt("_onHover", 1);
-
-
             rigidbody.constraints = RigidbodyConstraints.None;
-            
 
             if (!beenPickedUp)
             { StartCoroutine(SlowPickup());}

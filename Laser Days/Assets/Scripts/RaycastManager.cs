@@ -91,7 +91,6 @@ public class RaycastManager : MonoBehaviour {
                     if (raycastedObj.GetComponent<SelectionRenderChange>())
                     {
                         raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
-
                     }
                 }
                 CrosshairNormal();
