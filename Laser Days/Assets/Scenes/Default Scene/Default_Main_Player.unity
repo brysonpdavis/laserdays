@@ -378,7 +378,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMainScene: 1
-  _sceneSetup: []
+  _sceneSetup:
+  - scene:
+      editorAssetGUID: df0f231b6bd9c4986935ffb3bb371956
+      name: Default_Main_Player
+      _path: Assets/Scenes/Default Scene/Default_Main_Player.unity
+    loadInEditor: 1
+    loadMethod: 1
   _thisScenePath: Assets/Scenes/Default Scene/Default_Main_Player.unity
 --- !u!4 &744699110
 Transform:
@@ -5626,8 +5632,8 @@ MonoBehaviour:
   shaderselected: {fileID: 13, guid: 0000000000000000f000000000000000, type: 0}
   realWorldShader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
   laserWorldShader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
-  coreLaser: {fileID: 0}
-  coreReal: {fileID: 0}
+  coreLaser: {fileID: 4800000, guid: a39c5e86e389449c4a5e4c5e46bdb175, type: 3}
+  coreReal: {fileID: 4800000, guid: 748e4e00c886545d1bbe77d010912367, type: 3}
   morphShaderselected: {fileID: 0}
   morphRealWorldShader: {fileID: 4800000, guid: 9b9ccdb909d8949e0b5b037ec83139b7,
     type: 3}
@@ -5845,7 +5851,7 @@ MonoBehaviour:
   enabled: 1
   executionOrder: 0
   MaxPickupDistance: 2
-  breakDistance: 5
+  breakDistance: 3
   maxVelocity: 6
   PickUpButton: Pick Up
   playerCam: {fileID: 1198232337}
