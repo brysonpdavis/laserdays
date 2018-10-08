@@ -153,41 +153,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1168766624865846
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4411209643581190}
-  - component: {fileID: 33788407696372266}
-  - component: {fileID: 23916495104464952}
-  - component: {fileID: 114278899849086802}
-  - component: {fileID: 114722582816830668}
-  - component: {fileID: 82584286613439290}
-  m_Layer: 11
-  m_Name: Main Trigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!1 &1178191463015292
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4057738277211308}
-  m_Layer: 11
-  m_Name: Platform
-  m_TagString: Platform
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1270124473305576
 GameObject:
   m_ObjectHideFlags: 1
@@ -256,7 +221,7 @@ GameObject:
   - component: {fileID: 114722582816830668}
   - component: {fileID: 82584286613439290}
   m_Layer: 11
-  m_Name: Main Trigger(Clone)(Clone)
+  m_Name: Main Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -916,19 +881,6 @@ Transform:
   m_Father: {fileID: 4595447968218220}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4057738277211308
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1178191463015292}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4095360862344624
 Transform:
   m_ObjectHideFlags: 1
@@ -1166,7 +1118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350237925155750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.7167635, y: -0.5, z: 15.275653}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4302197064506028}
@@ -1698,7 +1650,7 @@ MeshRenderer:
   m_SortingOrder: 0
 --- !u!23 &23337552390809394
 MeshRenderer:
-  m_ObjectHideFlags: 61
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1119098033750848}
@@ -1985,7 +1937,7 @@ MeshFilter:
   m_Mesh: {fileID: 4300002, guid: 4502f745219b3431da0f5ce839202715, type: 3}
 --- !u!33 &33035110540750242
 MeshFilter:
-  m_ObjectHideFlags: 61
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1119098033750848}
@@ -2202,7 +2154,7 @@ MeshFilter:
   m_Mesh: {fileID: 4300000, guid: fe88436a01c3b4dfa97a53134b68d207, type: 3}
 --- !u!54 &54496005394419596
 Rigidbody:
-  m_ObjectHideFlags: 61
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1119098033750848}
@@ -2217,7 +2169,7 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!64 &64604610411961176
 MeshCollider:
-  m_ObjectHideFlags: 61
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1119098033750848}
@@ -2740,7 +2692,7 @@ MonoBehaviour:
   laserShared: 0
 --- !u!114 &114172182565074908
 MonoBehaviour:
-  m_ObjectHideFlags: 61
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1119098033750848}
@@ -2784,10 +2736,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d8e803c46444f9a4c25bf60757376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformContainer: {fileID: 1394984757199048}
   time: 5
   counter: 0
   totalTriggers: 0
-  ScrollSpeed: 0.4
   on: 0
   moving: 0
 --- !u!114 &114281535616775008
@@ -2930,7 +2882,7 @@ MonoBehaviour:
   ActiveColor: {r: 0.024692152, g: 3.4555535, b: 0, a: 0}
 --- !u!114 &114578763426256374
 MonoBehaviour:
-  m_ObjectHideFlags: 61
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1119098033750848}
