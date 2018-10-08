@@ -18,6 +18,8 @@ public class Transition : MonoBehaviour
     private void Awake()
     {
         mRenderer = GetComponent<Renderer>();
+        if (GetComponent<LineRenderer>())
+            mRenderer = GetComponent<LineRenderer>();
         material = mRenderer.material;
         offset = Random.value;
         speed = Random.Range(1f, 2f);
