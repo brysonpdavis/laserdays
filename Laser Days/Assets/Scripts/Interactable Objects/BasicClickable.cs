@@ -19,6 +19,7 @@ public class BasicClickable : FlippableObject {
             rigidbody.useGravity = false;
             rigidbody.freezeRotation = true;
             Select();
+            renderer.material.SetFloat("_Shimmer", 1f);
             renderer.material.SetInt("_onHover", 1);
             rigidbody.constraints = RigidbodyConstraints.None;
 
