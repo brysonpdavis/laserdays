@@ -79,8 +79,9 @@ public class PlatformGuard : MonoBehaviour
 
 
         //walls go into separate lists for colliding above/below
-        if (string.Equals(collisionTag, "Wall"))
+        if (string.Equals(collisionTag, "Wall") || col.gameObject.CompareTag("Wall"))
         {
+            Debug.Log("wallhit");
             if (col.transform.position.y <= this.transform.position.y)
                 breakingObjectsAbove.Add(col.transform.gameObject);
             
@@ -194,7 +195,7 @@ public class PlatformGuard : MonoBehaviour
 
         }
 
-        if (string.Equals(collisionTag, "Wall"))
+        if (string.Equals(collisionTag, "Wall") || col.gameObject.CompareTag("Wall"))
         {
             if (col.transform.position.y <= this.transform.position.y)
             {
