@@ -78,7 +78,9 @@ public class PlatformEdgeGuard : MonoBehaviour {
 
             active = false;
             associatedCollider.SetActive(true);
-            associatedRenderer.enabled = true;
+            //associatedRenderer.enabled = true;
+            StopAllCoroutines();
+            StartCoroutine(EdgeRender(true));
 
 
             if (secondaryTrigger.active && clickOffClip && (this.gameObject.layer + 5 == player.layer)){
@@ -98,7 +100,10 @@ public class PlatformEdgeGuard : MonoBehaviour {
         if (active && secondaryTrigger.active)
         {
             associatedCollider.SetActive(false);
-            associatedRenderer.enabled = false;
+            //associatedRenderer.enabled = false;
+            StopAllCoroutines();
+            StartCoroutine(EdgeRender(false));
+
 
             //playing sound effect
 
@@ -115,6 +120,39 @@ public class PlatformEdgeGuard : MonoBehaviour {
 
             }
 
+        }
+    }
+
+
+    private IEnumerator EdgeRender(bool on)
+    {
+        float duration = .2f;
+        float scaledDuration;
+        Material material = associatedRenderer.material;
+        float startpoint = material.GetFloat("_Open");
+        float endpoint;
+
+        //will be visible
+        if (on)
+            endpoint = 0f;
+        
+        //will be invisible
+        else
+            endpoint = 1f;
+       
+        float elapsedTime = 0;
+        float ratio = elapsedTime / duration;
+        //int property = Shader.PropertyToID("_D7A8CF01");
+      
+        while (ratio< 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / duration;
+            float value = Mathf.Lerp(startpoint, endpoint, ratio);
+            material.SetFloat("_Open", value);
+            RendererExtensions.UpdateGIMaterials(associatedRenderer);
+
+            yield return null;
         }
     }
 
