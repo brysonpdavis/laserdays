@@ -52,7 +52,7 @@ public class WallSliderZ : InteractableObject {
 
     public override void SetType()
     {
-        objectType = ObjectType.Clickable;
+        objectType = ObjectType.WallSliderZ;
     }
 
     public override void DistantIconHover()
