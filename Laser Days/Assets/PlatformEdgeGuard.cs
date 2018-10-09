@@ -96,7 +96,7 @@ public class PlatformEdgeGuard : MonoBehaviour {
     private void ClickIn (Collider other)
     {
 
-
+        Debug.Log("clicking");
         active = true;
         if (active && secondaryTrigger.active)
         {
