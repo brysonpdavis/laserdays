@@ -485,8 +485,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1384335954755520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.9, y: 0, z: -4.1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: -5}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 4137449114776052}
@@ -551,7 +551,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3fd643f47027c4aa39b2cd39f855e201, type: 2}
+  - {fileID: 2100000, guid: a23195c5abb9e42399d758be3fd744b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -794,7 +794,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1804529661733262}
-  m_Mesh: {fileID: 4300000, guid: fe88436a01c3b4dfa97a53134b68d207, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 001d0abab2bbf4f978ed4761522b9abb, type: 3}
 --- !u!33 &33743664043825854
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -941,6 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114269058454044730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -953,6 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114270198535248270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -971,6 +973,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 0}
+  clickOffClip: {fileID: 0}
 --- !u!114 &114486116180812366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -983,6 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114660735608327214
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -995,6 +1001,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostAmount: 30
+  playerBoostAmount: 10
+  affectsPlayer: 0
+  affectsObjects: 1
 --- !u!114 &114774566138655398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1007,6 +1016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114776997120836124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1038,6 +1048,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 0}
+  clickOffClip: {fileID: 0}
 --- !u!114 &114863312056572252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1050,3 +1063,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0

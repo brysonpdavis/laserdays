@@ -481,7 +481,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1820650369865956}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 3.7, y: 0, z: -1.2}
+  m_LocalPosition: {x: 2.6000001, y: 0, z: -4.4}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 4909340216676640}
@@ -780,7 +780,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1035546582149372}
-  m_Mesh: {fileID: 4300000, guid: fe88436a01c3b4dfa97a53134b68d207, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 001d0abab2bbf4f978ed4761522b9abb, type: 3}
 --- !u!33 &33665994095996930
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -925,6 +925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114389957750897046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -943,6 +944,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 0}
+  clickOffClip: {fileID: 0}
 --- !u!114 &114530237704845994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -971,6 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114678079317465298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -983,6 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114683374395953418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1001,6 +1007,9 @@ MonoBehaviour:
   isMoveable: 0
   parent: {fileID: 0}
   player: {fileID: 0}
+  audioSource: {fileID: 0}
+  clickInClip: {fileID: 0}
+  clickOffClip: {fileID: 0}
 --- !u!114 &114760745397489064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1013,6 +1022,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostAmount: 30
+  playerBoostAmount: 10
+  affectsPlayer: 0
+  affectsObjects: 1
 --- !u!114 &114926671619429888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1025,6 +1037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114940515887478182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1037,6 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
+  laserShared: 0
 --- !u!114 &114970785989089018
 MonoBehaviour:
   m_ObjectHideFlags: 1
