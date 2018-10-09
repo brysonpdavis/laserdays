@@ -156,4 +156,22 @@ abstract public class InteractableObject : MonoBehaviour
         else return false;
     }
 
+    protected virtual void CheckBouncer()
+    {
+        //check to make sure which icon for the bouncer to use - only called using sokoban 2x2, and wall bouncer x, y
+        if (GetComponentInChildren<Booster>())
+        {
+            Booster booster = GetComponentInChildren<Booster>();
+            if (booster.affectsObjects && booster.affectsPlayer)
+                iconContainer.SetBothBounce();
+            else if (booster.affectsObjects && !booster.affectsPlayer)
+                iconContainer.SetObjectBounce();
+            else if (booster.affectsPlayer && !booster.affectsObjects)
+                iconContainer.SetPlayerBounce();
+        }
+        else
+            iconContainer.SetInteractHover();
+        
+    }
+
 }

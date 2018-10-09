@@ -58,7 +58,7 @@ public class WallSliderX : InteractableObject {
 
     public override void DistantIconHover()
     {
-        iconContainer.SetInteractHover();
+        CheckBouncer();
     }
 
     public override void CloseIconHover()

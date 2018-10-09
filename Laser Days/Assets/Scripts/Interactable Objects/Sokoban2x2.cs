@@ -53,7 +53,7 @@ public class Sokoban2x2 : InteractableObject {
 
     public override void DistantIconHover()
     {
-        iconContainer.SetInteractHover();
+        CheckBouncer();
     }
 
     public override void CloseIconHover()

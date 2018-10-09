@@ -10,7 +10,9 @@ public class DoorTrigger : MonoBehaviour {
 
     private void Awake()
     {
-        controller = GetComponentInParent<DoorController>();
+
+        if (!controller)
+            controller = GetComponentInParent<DoorController>();
     }
 
     private void OnTriggerEnter(Collider other)
