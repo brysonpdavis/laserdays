@@ -7,6 +7,8 @@ public class PlatformController : MonoBehaviour {
     public bool isGroup;
     public List<GameObject> triggers = new List<GameObject>(); 
     public PlatformMover[] platformMovers;
+    public PlatformGuard[] platformGuards;
+
     public PlatformTrigger[] platformTriggers;
 
     //public LineRenderer[] lines;
@@ -23,6 +25,7 @@ public class PlatformController : MonoBehaviour {
         
         platformMovers = GetComponentsInChildren<PlatformMover>();
         platformTriggers = GetComponentsInChildren<PlatformTrigger>();
+        platformGuards = GetComponentsInChildren<PlatformGuard>();
 
         foreach (PlatformMover plat in platformMovers)
         {
@@ -32,6 +35,11 @@ public class PlatformController : MonoBehaviour {
         foreach (PlatformTrigger trig in platformTriggers)
         {
             trig.platformContainer = this.gameObject;
+        }
+
+        foreach (PlatformGuard guard in platformGuards)
+        {
+            guard.platformController = this.gameObject.GetComponent<PlatformController>();
         }
     }
 

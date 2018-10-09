@@ -26,10 +26,10 @@ public class PlatformGuard : MonoBehaviour
         stuckSokoban = new List<GameObject>();
         breakingObjectsAbove= new List<GameObject>();
         breakingObjectsBelow = new List<GameObject>();
-
+        mainGuard = this.gameObject;
 
         //main controller is always in guard's parents parent
-        platformController = transform.parent.transform.parent.GetComponent<PlatformController>();
+        //platformController = transform.parent.transform.parent.GetComponent<PlatformController>();
     }
 
 
@@ -184,7 +184,7 @@ public class PlatformGuard : MonoBehaviour
 
             if (stuckSokoban.Count == 0)
             {
-                GameObject check = transform.parent.transform.parent.GetComponent<PlatformController>().triggers[0];
+                GameObject check = platformController.platformTriggers[0].gameObject;
 
                 if (!check.GetComponent<PlatformTrigger>().moving)
                     check.GetComponent<PlatformTrigger>().MovePlatformToStart();
