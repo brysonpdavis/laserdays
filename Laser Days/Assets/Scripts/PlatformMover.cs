@@ -28,7 +28,7 @@ public class PlatformMover : MonoBehaviour {
         raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
         pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
 
-        LineRenderer LR = gameObject.GetComponentInChildren<LineRenderer>();
+        LineRenderer LR = gameObject.transform.parent.gameObject.GetComponentInChildren<LineRenderer>();
         LR.positionCount = 2;
         Vector3 begin = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.1f, gameObject.transform.position.z);
         LR.SetPosition(0, begin);
