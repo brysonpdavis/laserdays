@@ -5,7 +5,7 @@ using UnityEngine;
 abstract public class InteractableObject : MonoBehaviour
 {
     //protected ItemProperties itemProperties;
-    public enum ObjectType { Clickable, Sokoban1x1, Sokoban2x2, Morph, Wall, WallSliderX, WallSliderZ, Null };
+    public enum ObjectType { Clickable, SingleWorldClickable, Sokoban1x1, Sokoban2x2, Morph, Wall, WallSliderX, WallSliderZ, Null };
     [HideInInspector]public ObjectType objectType;
     [HideInInspector]public string itemName;
 
@@ -79,7 +79,7 @@ abstract public class InteractableObject : MonoBehaviour
 
         //sets up the object to have a faster or slower glide to the player camera
         //if (itemProperties.objectType == ItemProperties.ObjectType.Clickable) 
-        if (objectType == InteractableObject.ObjectType.Clickable)
+        if (objectType == InteractableObject.ObjectType.Clickable || objectType == InteractableObject.ObjectType.SingleWorldClickable)
         {
             multiplier = 1f;
             particleSystem = GetComponent<ParticleSystem>();
