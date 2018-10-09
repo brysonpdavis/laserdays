@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Default_Prototype Laser Transparent
-  m_Shader: {fileID: 4800000, guid: db1a66fa839234c6bb7aa466c1cf40f5, type: 3}
+  m_Shader: {fileID: 4800000, guid: 38caa04dd6c544db68563d526de074e8, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -98,6 +98,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 478de9d1d3cbac64bad0d9feaad9e272, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TriggerMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -106,11 +110,13 @@ Material:
     - _AlphaTestRef: 0.5
     - _Amplitude: 0.33928573
     - _Angle: 0.46428573
+    - _Animated: 0
     - _BumpScale: 1
     - _Cutoff: 0.27
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EdgeThickness: 0.01
+    - _Elapsed: 0
     - _EmissionScaleUI: 0
     - _Gloss: 0.5
     - _GlossMapScale: 1
@@ -134,7 +140,9 @@ Material:
     - _Wavelength: 0.17857142
     - _ZWrite: 1
     - __dirty: 0
+    - _isCollide: 0
     m_Colors:
+    - _ActiveColor: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0.8666667, b: 0, a: 1}
     - _Color1: {r: 0.67910445, g: 0.67910445, b: 0.67910445, a: 1}
     - _Color2: {r: 0.14179105, g: 0.14179105, b: 0.14179105, a: 1}
@@ -144,6 +152,8 @@ Material:
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
     - _Indicator: {r: 1, g: 0, b: 0, a: 1}
+    - _RestingColor: {r: 1.0377358, g: 1.0377358, b: 1.0377358, a: 0.22352941}
+    - _ShimmerColor: {r: 0.07915098, g: 0.6698113, b: 0, a: 0}
     - _SpecularColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _TintA: {r: 0, g: 0, b: 0, a: 0}
     - _TintB: {r: 0, g: 0, b: 0, a: 0}
