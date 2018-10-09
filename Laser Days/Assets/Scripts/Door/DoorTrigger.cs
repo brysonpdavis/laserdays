@@ -17,27 +17,32 @@ public class DoorTrigger : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        counter += 1;
-        active = true;
-
-        if (counter == 1)
+        if (other.CompareTag("Player") || other.CompareTag("Clickable"))
         {
-            controller.OpenAll();
-        }
+            counter += 1;
+            active = true;
 
+            if (counter == 1)
+            {
+                controller.OpenAll();
+            }
+        }
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        counter -= 1;
-        if (counter == 0)
+        if (other.CompareTag("Player") || other.CompareTag("Clickable"))
         {
-            active = false;
+            counter -= 1;
+            if (counter == 0)
+            {
+                active = false;
 
-            if (CheckOtherTriggers())
-                controller.CloseAll(); 
+                if (CheckOtherTriggers())
+                    controller.CloseAll();
 
+            }
         }
     }
 
