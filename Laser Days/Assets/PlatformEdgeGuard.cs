@@ -40,6 +40,7 @@ public class PlatformEdgeGuard : MonoBehaviour {
 
         audioSource = GetComponentInParent<AudioSource>();
         //associatedCollider = GetComponentInChildren<BoxCollider>().gameObject;
+        associatedRenderer.material.SetFloat("_Open", 0f);
     }
 
     private void OnTriggerEnter(Collider other)

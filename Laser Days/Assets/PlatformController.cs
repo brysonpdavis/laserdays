@@ -16,21 +16,15 @@ public class PlatformController : MonoBehaviour {
     [ColorUsageAttribute(true, true)]
     public Color ActiveColor = new Color(0f, 0f, 0f, 0f);
 
-    private void Start()
+    private void Awake()
     {
         
         platformMovers = GetComponentsInChildren<PlatformMover>();
-        //lines = new LineRenderer[2];
 
-        //for (int i = 0; i < platformMovers.Length; i++)
-        //{
-        //    lines[i] = gameObject.AddComponent<LineRenderer>();
-        //    lines[i].positionCount = 2;
-        //    lines[i].SetPosition(0, platformMovers[i].gameObject.transform.position);
-        //    lines[i].SetPosition(1, new Vector3(20,20,20));
-
-
-        //}
+        foreach (PlatformMover plat in platformMovers)
+        {
+            plat.platformContainer = this.gameObject;
+        }
 
     }
 
