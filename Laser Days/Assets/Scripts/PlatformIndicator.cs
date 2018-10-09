@@ -10,6 +10,7 @@ public class PlatformIndicator : MonoBehaviour {
     void Awake()
     {
         RenderMat = GetComponent<Renderer>().material;
+        RenderMat.SetInt("_Animated", 0);
     }
 
 
@@ -23,19 +24,17 @@ public class PlatformIndicator : MonoBehaviour {
 	
     public void SetColors(Color a, Color b)
     {
-        RenderMat.SetColor("_PassiveColor", a);
+        RenderMat.SetColor("_RestingColor", a);
         RenderMat.SetColor("_ActiveColor", b);
     }
 
     public void On () 
     {
-        RenderMat.SetInt("_isActive0", 1);
-        RenderMat.SetInt("_isActive1", 1);
+        RenderMat.SetInt("_isCollide", 1);
 	}
 
     public void Off ()
     {
-        RenderMat.SetInt("_isActive0", 0);
-        RenderMat.SetInt("_isActive1", 0);
+        RenderMat.SetInt("_isCollide", 0);
     }
 }

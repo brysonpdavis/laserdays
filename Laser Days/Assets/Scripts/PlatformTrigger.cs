@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour {
 
-    private GameObject platformContainer;
+    public GameObject platformContainer;
     private PlatformMover[] platform;
 
     //public Transform start;
@@ -26,8 +26,6 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void Start()
     {
-        platformContainer = GetComponentInParent<PlatformController>().gameObject;
-        platformContainer.GetComponent<PlatformController>().triggers.Add(this.gameObject);
 
         audioSource = GetComponent<AudioSource>();
         SoundBox box = Toolbox.Instance.GetPlayer().GetComponent<SoundBox>();
@@ -49,8 +47,8 @@ public class PlatformTrigger : MonoBehaviour {
 
         RenderMat = GetComponent<Renderer>().material;
         RenderMat.SetInt("_Animated", 1);
-        //RenderMat.SetColor("_RestingColor", platformContainer.GetComponent<PlatformController>().PassiveColor);
-        //RenderMat.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
+        RenderMat.SetColor("_RestingColor", platformContainer.GetComponent<PlatformController>().RestingColor);
+        RenderMat.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
 
 
         if (platformContainer){
@@ -114,7 +112,6 @@ public class PlatformTrigger : MonoBehaviour {
 
     public void MovePlatformToStart () 
     {
-        GetComponent<Renderer>().material.SetInt("_IsSelected", 0);
 
         //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
 

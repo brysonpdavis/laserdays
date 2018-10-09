@@ -16,24 +16,27 @@ public class PlatformMover : MonoBehaviour {
 
     private RaycastManager raycastManager;
     private MFPP.Modules.PickUpModule pickUp;
+    private LineRenderer LR;
 
     private void Start()
     {
 
         start = this.transform.position;
 
-        this.Indicator.SetColors(platformContainer.GetComponent<PlatformController>().PassiveColor,
+        this.Indicator.SetColors(platformContainer.GetComponent<PlatformController>().RestingColor,
                             platformContainer.GetComponent<PlatformController>().ActiveColor);
 
         raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
         pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
 
-        LineRenderer LR = gameObject.transform.parent.gameObject.GetComponentInChildren<LineRenderer>();
+        LR = gameObject.transform.parent.gameObject.GetComponentInChildren<LineRenderer>();
         LR.positionCount = 2;
         Vector3 begin = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.1f, gameObject.transform.position.z);
         LR.SetPosition(0, begin);
         Vector3 finish = new Vector3(end.position.x, end.position.y - 0.1f, end.position.z);
         LR.SetPosition(1, finish);
+        LR.material.SetColor("_RestingColor", platformContainer.GetComponent<PlatformController>().RestingColor);
+        LR.material.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
     }
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
@@ -152,13 +155,17 @@ public class PlatformMover : MonoBehaviour {
     public void IndicatorOn()
     {
         Indicator.On();
+        LR.material.SetInt("isCollide", 1);
+        RendererExtensions.UpdateGIMaterials(LR);
+
 
     }
 
     public void IndicatorOff()
     {
         Indicator.Off();
-
+        LR.material.SetInt("isCollide", 0);
+        RendererExtensions.UpdateGIMaterials(LR);
     }
 
     }
