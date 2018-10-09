@@ -79,7 +79,7 @@ public class PlatformGuard : MonoBehaviour
 
 
         //walls go into separate lists for colliding above/below
-        if (string.Equals(collisionTag, "Wall") || col.gameObject.CompareTag("Wall"))
+        if (string.Equals(collisionTag, "Wall") || col.gameObject.CompareTag("Wall") || string.Equals(collisionTag, "Sokoban2x2") )
         {
             Debug.Log("wallhit");
             if (col.transform.position.y <= this.transform.position.y)
@@ -118,7 +118,7 @@ public class PlatformGuard : MonoBehaviour
         }
 
         if (string.Equals(collisionTag, "Sokoban1x1") || 
-            string.Equals(collisionTag, "Sokoban2x2") || 
+            //string.Equals(collisionTag, "Sokoban2x2") || 
             string.Equals(collisionTag, "Player") || 
             string.Equals(collisionTag, "Clickable") || 
             string.Equals(collisionTag, "NoTouch") || 
@@ -195,7 +195,7 @@ public class PlatformGuard : MonoBehaviour
 
         }
 
-        if (string.Equals(collisionTag, "Wall") || col.gameObject.CompareTag("Wall"))
+        if (string.Equals(collisionTag, "Wall") || col.gameObject.CompareTag("Wall") || string.Equals(collisionTag, "Sokoban2x2"))
         {
             if (col.transform.position.y <= this.transform.position.y)
             {
