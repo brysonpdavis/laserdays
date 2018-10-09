@@ -73,7 +73,7 @@ Shader "Trigger/LaserGoopTransparent"
 }
 /*ASEBEGIN
 Version=15500
-146;98;1273;781;1002.87;961.1996;1.879677;True;False
+647;65;1273;781;1002.87;961.1996;1.879677;True;False
 Node;AmplifyShaderEditor.TextureCoordinatesNode;6;-1726.388,-161.7387;Float;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;63;-1774.02,53.81596;Float;False;Property;_Elapsed;Elapsed;7;1;[HideInInspector];Create;True;0;0;False;0;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;52;-1386.568,-1143.88;Float;False;Constant;_Float2;Float 2;5;0;Create;True;0;0;False;0;0.1;0;0;0;0;1;FLOAT;0
@@ -159,4 +159,4 @@ WireConnection;37;2;85;0
 WireConnection;37;9;91;0
 WireConnection;37;11;92;0
 ASEEND*/
-//CHKSM=13498601719AAB5281F4296735B0F060AF070EAF
+//CHKSM=6E49291D37191245D39E8BF065C30B322CBE471D
