@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0829292, g: 0.108459115, b: 0.15674183, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13090,32 +13090,33 @@ MonoBehaviour:
   - scene:
       editorAssetGUID: e2322d3589ca44c5798806aca88ec4d5
       name: Tower_Sokoban 1
-      _path: Assets/Scenes/Tower Rebuild (New Kit)/Tower_Sokoban Oct 1/Tower_Sokoban
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct 1/Tower_Sokoban
         1.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
       editorAssetGUID: 4f7cfed0c9e1746e68c5dc47250ff60a
       name: Tower_Sokoban 2
-      _path: Assets/Scenes/Tower Rebuild (New Kit)/Tower_Sokoban Oct 1/Tower_Sokoban
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct 1/Tower_Sokoban
         2.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
       editorAssetGUID: 3d8b423789d684eb39b20162efa6804a
       name: Tower_Sokoban 3
-      _path: Assets/Scenes/Tower Rebuild (New Kit)/Tower_Sokoban Oct 1/Tower_Sokoban
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct 1/Tower_Sokoban
         3.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
       editorAssetGUID: 5dd69926b18f34580aa9c45422c37994
       name: Tower_Sokoban 4
-      _path: Assets/Scenes/Tower Rebuild (New Kit)/Tower_Sokoban Oct 1/Tower_Sokoban
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban Oct 1/Tower_Sokoban
         4.unity
     loadInEditor: 1
     loadMethod: 1
-  _thisScenePath: Assets/Scenes/Tower Rebuild (New Kit)/Tower_Sokoban Oct 1/Tower_Sokoban.unity
+  _thisScenePath: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Tower_Sokoban
+    Oct 1/Tower_Sokoban.unity
 --- !u!4 &741853348
 Transform:
   m_ObjectHideFlags: 0
@@ -13171,7 +13172,9 @@ MonoBehaviour:
   isGroup: 0
   triggers: []
   platformMovers: []
-  PassiveColor: {r: 1, g: 0, b: 0, a: 0}
+  platformGuards: []
+  platformTriggers: []
+  RestingColor: {r: 0, g: 0, b: 0, a: 0}
   ActiveColor: {r: 0.024692152, g: 3.4555535, b: 0, a: 0}
 --- !u!1 &769783678
 GameObject:
@@ -15580,6 +15583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3f2b88bf73042f99224cd1850adb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScrollSpeed: 0.4
 --- !u!23 &931676533
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16947,7 +16951,9 @@ MonoBehaviour:
   isGroup: 0
   triggers: []
   platformMovers: []
-  PassiveColor: {r: 1, g: 0, b: 0, a: 0}
+  platformGuards: []
+  platformTriggers: []
+  RestingColor: {r: 0, g: 0, b: 0, a: 0}
   ActiveColor: {r: 0.024692152, g: 3.4555535, b: 0, a: 0}
 --- !u!4 &993995067
 Transform:
@@ -21596,6 +21602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d8e803c46444f9a4c25bf60757376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformContainer: {fileID: 0}
   time: 5
   counter: 0
   totalTriggers: 0
@@ -27592,6 +27599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d8e803c46444f9a4c25bf60757376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformContainer: {fileID: 0}
   time: 5
   counter: 0
   totalTriggers: 0
@@ -28481,7 +28489,9 @@ MonoBehaviour:
   isGroup: 0
   triggers: []
   platformMovers: []
-  PassiveColor: {r: 1, g: 0, b: 0, a: 0}
+  platformGuards: []
+  platformTriggers: []
+  RestingColor: {r: 0, g: 0, b: 0, a: 0}
   ActiveColor: {r: 0.024692152, g: 3.4555535, b: 0, a: 0}
 --- !u!4 &1694364569
 Transform:
@@ -31162,7 +31172,9 @@ MonoBehaviour:
   isGroup: 0
   triggers: []
   platformMovers: []
-  PassiveColor: {r: 0.7490196, g: 0, b: 0, a: 0}
+  platformGuards: []
+  platformTriggers: []
+  RestingColor: {r: 0, g: 0, b: 0, a: 0}
   ActiveColor: {r: 2.673141, g: 1.9743531, b: 0.2662049, a: 0}
 --- !u!1001 &1839797724
 Prefab:
@@ -33198,6 +33210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3f2b88bf73042f99224cd1850adb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScrollSpeed: 0.4
 --- !u!23 &1958118433
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -34645,6 +34658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d8e803c46444f9a4c25bf60757376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformContainer: {fileID: 0}
   time: 5
   counter: 0
   totalTriggers: 0
@@ -34839,6 +34853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3f2b88bf73042f99224cd1850adb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScrollSpeed: 0.4
 --- !u!33 &2058881461
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -35600,6 +35615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3f2b88bf73042f99224cd1850adb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScrollSpeed: 0.4
 --- !u!23 &2104836013
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36025,6 +36041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d8e803c46444f9a4c25bf60757376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformContainer: {fileID: 0}
   time: 5
   counter: 0
   totalTriggers: 0

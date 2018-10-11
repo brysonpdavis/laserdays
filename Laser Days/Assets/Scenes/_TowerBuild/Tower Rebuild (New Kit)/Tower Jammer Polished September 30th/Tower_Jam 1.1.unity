@@ -2416,6 +2416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d8e803c46444f9a4c25bf60757376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformContainer: {fileID: 0}
   time: 5
   counter: 0
   totalTriggers: 0
@@ -5268,7 +5269,7 @@ Transform:
   - {fileID: 700159607}
   - {fileID: 144045610}
   m_Father: {fileID: 401307635}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &705416142
 MonoBehaviour:
@@ -5285,7 +5286,9 @@ MonoBehaviour:
   isGroup: 0
   triggers: []
   platformMovers: []
-  PassiveColor: {r: 0.7490196, g: 0, b: 0, a: 0}
+  platformGuards: []
+  platformTriggers: []
+  RestingColor: {r: 0, g: 0, b: 0, a: 0}
   ActiveColor: {r: 2.673141, g: 1.9743531, b: 0.2662049, a: 0}
 --- !u!1001 &722252580
 Prefab:
@@ -7720,7 +7723,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4947834265270760, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.122
       objectReference: {fileID: 0}
     - target: {fileID: 4947834265270760, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -7748,7 +7751,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4947834265270760, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4947834265270760, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
       propertyPath: m_LocalScale.y
@@ -7756,7 +7759,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4947834265270760, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
@@ -9185,7 +9188,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1354745425}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4, y: 0, z: 3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1951547541}
@@ -11014,7 +11017,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4947834265270760, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4947834265270760, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -12582,7 +12585,9 @@ MonoBehaviour:
   isGroup: 0
   triggers: []
   platformMovers: []
-  PassiveColor: {r: 1, g: 0, b: 0, a: 0}
+  platformGuards: []
+  platformTriggers: []
+  RestingColor: {r: 0, g: 0, b: 0, a: 0}
   ActiveColor: {r: 0.024692152, g: 3.4555535, b: 0, a: 0}
 --- !u!1001 &1986804638
 Prefab:
@@ -13133,6 +13138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d8e803c46444f9a4c25bf60757376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformContainer: {fileID: 0}
   time: 5
   counter: 0
   totalTriggers: 0
