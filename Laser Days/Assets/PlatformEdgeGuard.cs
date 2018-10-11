@@ -85,6 +85,7 @@ public class PlatformEdgeGuard : MonoBehaviour {
 
 
             if (secondaryTrigger.active && clickOffClip && (this.gameObject.layer + 5 == player.layer)){
+                Toolbox.Instance.SetVolume(audioSource);
                 audioSource.clip = clickOffClip;
                 audioSource.Play();
             }
@@ -107,6 +108,7 @@ public class PlatformEdgeGuard : MonoBehaviour {
             //playing sound effect
 
             if (clickInClip && (this.gameObject.layer+5 == player.layer)){
+                Toolbox.Instance.SetVolume(audioSource);
                 audioSource.clip = clickInClip;
                 audioSource.Play();  
             }

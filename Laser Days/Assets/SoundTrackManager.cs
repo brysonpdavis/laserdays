@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SoundTrackManager : MonoBehaviour {
 
@@ -11,14 +13,23 @@ public class SoundTrackManager : MonoBehaviour {
     public bool play;
     private int currentChord;
     private int counter = 0;
+    public Slider mainSlider;
 
 	// Use this for initialization
 	void Start () {
 
         audioSource = GetComponent<AudioSource>();
+        mainSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
         //secondarySource = GetComponentInChildren<AudioSource>();
 
 	}
+
+    public void ValueChangeCheck()
+    {
+        audioSource.volume = mainSlider.value;
+        secondarySource.volume = mainSlider.value;
+        bass.volume = mainSlider.value;
+    }
 
     private void OnDisable()
     {
@@ -29,10 +40,15 @@ public class SoundTrackManager : MonoBehaviour {
     void Update () {
         if (!play) { StartCoroutine(Soundtrack()); }
         play = true;
-
-
-
 	}
+
+    public void SetVolume()
+    {
+        float value = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>().value;
+        audioSource.volume = value;
+        secondarySource.volume = value;
+        bass.volume = value;
+    }
 
     private IEnumerator Soundtrack()
     {
@@ -95,6 +111,7 @@ public class SoundTrackManager : MonoBehaviour {
         else
         { audioSource.clip = flipClip.section2[currentChord].GetRandomFlipClip(); }
 
+        Toolbox.Instance.SetVolume(audioSource);
         audioSource.Play();
     }
 
@@ -109,6 +126,7 @@ public class SoundTrackManager : MonoBehaviour {
         else
         { audioSource.clip = flipClip.section2[currentChord].GetRandomFlipSecondary(); }
 
+        Toolbox.Instance.SetVolume(audioSource);
         audioSource.Play();
 
     }

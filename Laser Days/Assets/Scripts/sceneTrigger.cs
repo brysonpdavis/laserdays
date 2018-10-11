@@ -12,7 +12,18 @@ public class sceneTrigger : MonoBehaviour
     private Collider linkedCollider;
     private Collider player;
     private TransitionController[] transitionControllers;
+    private FlippableObject[] internalFlippables;
 
+
+    private void Awake()
+    {
+        internalFlippables = GetComponentsInChildren<FlippableObject>();
+
+        foreach (FlippableObject obj in internalFlippables)
+        {
+            obj.sceneContainer = this.transform.GetChild(0);
+        }
+    }
 
     private void Start()
     {

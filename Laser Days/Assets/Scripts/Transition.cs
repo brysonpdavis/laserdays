@@ -20,7 +20,15 @@ public class Transition : MonoBehaviour
         mRenderer = GetComponent<Renderer>();
         if (GetComponent<LineRenderer>())
             mRenderer = GetComponent<LineRenderer>();
+
         material = mRenderer.material;
+
+       /* if (GetComponent<ParticleSystem>())
+        {
+            mRenderer = GetComponent<ParticleSystemRenderer>();
+            material = GetComponent<ParticleSystemRenderer>().trailMaterial;
+        }
+        */
         offset = Random.value;
         speed = Random.Range(1f, 2f);
     }

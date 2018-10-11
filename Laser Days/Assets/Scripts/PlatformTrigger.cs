@@ -138,6 +138,7 @@ public class PlatformTrigger : MonoBehaviour {
 
         }
 
+        Toolbox.Instance.SetVolume(audioSource);
         audioSource.clip = platformOff;
         audioSource.Play();
     }
@@ -154,6 +155,7 @@ public class PlatformTrigger : MonoBehaviour {
             if (counter == 1)
             {
                 //sound effect
+                Toolbox.Instance.SetVolume(audioSource);
                 audioSource.clip = platformOn;
                 audioSource.Play();
             }
