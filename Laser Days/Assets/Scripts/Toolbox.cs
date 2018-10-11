@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Toolbox : Singleton<Toolbox> {
 	protected Toolbox () {} // guarantee this will be always a singleton only - can't use the constructor!
@@ -17,13 +20,32 @@ public class Toolbox : Singleton<Toolbox> {
 
     public Shader laserCore;
     public Shader realCore;
+    public GameObject pauseMenu;
+    public Slider soundEffectsSlider;
+    public float soundEffectsVolume;
+
 
  
 	void Awake () {
 		// Your initialization code here
         UpdateToolbox();
         DontDestroyOnLoad(this.gameObject);
+
+        soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();
+        soundEffectsSlider.onValueChanged.AddListener(delegate { VolumeChangeCheck(); });
+
 	}
+
+    void VolumeChangeCheck()
+    {
+        soundEffectsVolume = soundEffectsSlider.value;
+        player.GetComponent<MFPP.Player>().Footstep.GlobalVolume = soundEffectsVolume;
+    }
+
+    public void SetVolume(AudioSource audio)
+    {
+        audio.volume = soundEffectsVolume;
+    }
  
 	// (optional) allow runtime registration of global objects
 	static public T RegisterComponent<T> () where T: Component {
@@ -68,7 +90,6 @@ public class Toolbox : Singleton<Toolbox> {
 
         else
             return false;
-
     }
 
     public flipScript GetFlip () 
@@ -101,16 +122,26 @@ public class Toolbox : Singleton<Toolbox> {
         return .05f;
     }
 
+    public GameObject GetPauseMenu()
+    {
+        return pauseMenu;
+    }
+
     public void UpdateToolbox()
     {
         player  = GameObject.FindWithTag("Player");
         raycastManager = player.GetComponent<RaycastManager>();
         pickUp = player.GetComponent<MFPP.Modules.PickUpModule>();
         flipScript = player.GetComponent<flipScript>();
+        UpdateTransforms();
+        iconContainer = GameObject.FindWithTag("IconContainer").GetComponent<IconContainer>();
+        pauseMenu = GameObject.Find("PauseMenu");
 
+    }
+
+    public void UpdateTransforms()
+    {
         realWorldParentObject = GameObject.FindWithTag("Real");
         laserWorldParentObject = GameObject.FindWithTag("Laser");
-        iconContainer = GameObject.FindWithTag("IconContainer").GetComponent<IconContainer>();
-
     }
 }

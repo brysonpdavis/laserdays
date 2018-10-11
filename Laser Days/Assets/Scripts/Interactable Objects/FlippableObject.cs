@@ -11,6 +11,9 @@ abstract public class FlippableObject : InteractableObject
     private IEnumerator flipTransition;
     private float scaledDuration;
     public Color shimmerColor;
+    public Transform sceneContainer;
+    public Transform realTransform;
+    public Transform laserTransform;
 
 
     protected override void AfterStart()
@@ -41,6 +44,11 @@ abstract public class FlippableObject : InteractableObject
         }
 
         RendererExtensions.UpdateGIMaterials(mRenderer);
+
+        realTransform = sceneContainer.Find("Real");
+        laserTransform = sceneContainer.Find("Laser");
+
+
     }
 
     public virtual void OnFlip()
@@ -104,12 +112,12 @@ abstract public class FlippableObject : InteractableObject
     void SetObjectToLaser()
     {
         this.gameObject.layer = 10;
-        this.transform.parent = Toolbox.Instance.GetLaserWorldParent();
+        this.transform.parent = laserTransform;     //Toolbox.Instance.GetLaserWorldParent();
     }
     void SetObjectToReal()
     {
         this.gameObject.layer = 11;
-        this.transform.parent = Toolbox.Instance.GetRealWorldParent();
+        this.transform.parent = realTransform;  //Toolbox.Instance.GetRealWorldParent();
     }
 
     void MaxFlipCheck()

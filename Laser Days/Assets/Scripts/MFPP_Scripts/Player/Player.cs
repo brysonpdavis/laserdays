@@ -517,9 +517,17 @@ namespace MFPP
 
             if (resetVelocity)
             {
+                DesiredMovement = Vector3.zero;
+                DesiredWorldMovement = Vector3.zero;
                 FinalMovement = Vector3.zero;
                 KinematicMovement = Vector3.zero;
                 KinematicAngles = Vector3.zero;
+                ForceBuffer = Vector3.zero;
+                ImpulseBuffer = Vector3.zero;
+                TotalVelocity = Vector3.zero;
+                //Velocity = Vector3.zero;
+                OldVelocity = Vector3.zero;
+                GetComponent<CharacterController>().Move(Vector3.zero);
             }
         }
 
@@ -555,14 +563,15 @@ namespace MFPP
 
         private void Update()
         {
-            BeforeUpdate(); // Call before update (along with its modules)
-
-            DoMouse(); // Mouse related
-            // DoMovement(); // Movement related
-            UpdateHeight(); // Update the height
-            DoFootsteps(); // Footsteps related
-
-            AfterUpdate(); // Call after update (along with its modules)
+            if (!LevelLoadingMenu.gameIsPaused)
+            {
+                BeforeUpdate(); // Call before update (along with its modules)
+                DoMouse(); // Mouse related
+                // DoMovement(); // Movement related
+                UpdateHeight(); // Update the height
+                DoFootsteps(); // Footsteps related
+                AfterUpdate(); // Call after update (along with its modules)
+            }
         }
 
         private void FixedUpdate()
@@ -953,7 +962,7 @@ namespace MFPP
         /// <summary>
         /// The kinematic movement of this <see cref="Player"/>, also known as the pushing/pulling force of other kinematic <see cref="Rigidbody"/>(ies).
         /// </summary>
-        public Vector3 KinematicMovement { get; protected set; }
+        public Vector3 KinematicMovement { get; set; }
         /// <summary>
         /// The kinematic movement of this <see cref="Player"/> performed in the previous frame.
         /// </summary>
@@ -961,7 +970,7 @@ namespace MFPP
         /// <summary>
         /// The kinematic angular movement, useful for rotating the <see cref="Player"/> as we rotate along a kinematic body.
         /// </summary>
-        public Vector3 KinematicAngles { get; protected set; }
+        public Vector3 KinematicAngles { get; set; }
         /// <summary>
         /// The list of colliders that are colliding with this <see cref="Player"/> in this frame.
         /// </summary>

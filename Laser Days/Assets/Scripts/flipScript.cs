@@ -82,6 +82,7 @@ public class flipScript : MonoBehaviour {
 					
                     // make a sound effect letting player
 					// know that they don't have enough charge
+                    Toolbox.Instance.SetVolume(audioSource);
                     audioSource.clip = flipFailClip;
                     audioSource.Play();
 

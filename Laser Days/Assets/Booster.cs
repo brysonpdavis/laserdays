@@ -50,6 +50,7 @@ public class Booster : MonoBehaviour {
         if (other.gameObject.GetComponent<AudioSource>() && (this.gameObject.layer + 5) == player.layer)
         {
             AudioSource source = other.gameObject.GetComponent<AudioSource>();
+            Toolbox.Instance.SetVolume(source);
             source.clip = box.PlayBoost();
             source.Play();
         }
