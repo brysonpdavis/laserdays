@@ -7,6 +7,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
     public Scene scene;
     public GameObject button;
+    public GameObject myButton;
     // Use this for initialization
     void Start()
     {
@@ -20,7 +21,7 @@ public class Spawner : MonoBehaviour {
             //if (!parent.transform.Find(scene.name))
             //{
 
-                GameObject myButton = Instantiate(button);
+                myButton = Instantiate(button);
                 myButton.GetComponent<Image>().enabled = true;
                 myButton.GetComponent<Button>().enabled = true;
                 myButton.transform.GetChild(0).gameObject.SetActive(true);
@@ -31,5 +32,17 @@ public class Spawner : MonoBehaviour {
                 myButton.transform.SetParent(parent);
           //  }
         }
+    }
+
+    public void OnPuzzleCompletion()
+    {
+        ColorBlock cb = myButton.GetComponent<Button>().colors;
+        cb.normalColor = Color.green;
+        myButton.GetComponent<Button>().colors = cb;
+
+
+        Color newBackground = myButton.GetComponent<Image>().color;
+        newBackground.a = .7f;
+        myButton.GetComponent<Image>().color = newBackground;
     }
 }
