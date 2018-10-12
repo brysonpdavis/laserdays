@@ -21,7 +21,7 @@ public class sceneTrigger : MonoBehaviour
 
         foreach (FlippableObject obj in internalFlippables)
         {
-            obj.sceneContainer = this.transform.GetChild(0);
+            obj.sceneContainer = this.transform.GetChild(1);
         }
     }
 
