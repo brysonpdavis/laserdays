@@ -21,6 +21,7 @@ abstract public class InteractableObject : MonoBehaviour
     protected AudioSource audioSource;
     protected ParticleSystem particleSystem;
     protected SelectionRenderChange selectionRenderChange;
+    [SerializeField] protected float pickupDistance = 2f;
 
     private float multiplier;
     public bool selected = false;
@@ -99,7 +100,7 @@ abstract public class InteractableObject : MonoBehaviour
 
     public void HoldPosition()
     {
-        Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * pickUp.MaxPickupDistance;
+        Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * pickupDistance; //pickUp.MaxPickupDistance;
         rigidbody.angularVelocity *= 0.5f;
         rigidbody.velocity = ((floatingPosition - rigidbody.transform.position) * (currentPositionVelocity*multiplier));
     }

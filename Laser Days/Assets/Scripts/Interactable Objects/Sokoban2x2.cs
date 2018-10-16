@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sokoban2x2 : InteractableObject {
+
+
     public override void Pickup()
     {
+        pickupDistance = 2.3f;
         InteractingIconHover();
         rigidbody.constraints = RigidbodyConstraints.None;
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;

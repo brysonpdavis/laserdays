@@ -6,6 +6,7 @@ public class Sokoban1x1 : InteractableObject {
 
     public override void Pickup()
     {
+        pickupDistance = 2.3f;
         InteractingIconHover();
         rigidbody.isKinematic = false;
         rigidbody.constraints = RigidbodyConstraints.None;
