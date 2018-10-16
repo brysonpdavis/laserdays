@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 114415011814189116}
   - component: {fileID: 82353938338368752}
   - component: {fileID: 114754995801596638}
-  - component: {fileID: 114096403400103002}
+  - component: {fileID: 114716797122883210}
   m_Layer: 11
   m_Name: Floor Bouncer Real
   m_TagString: Clickable
@@ -2533,29 +2533,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114096403400103002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1434298028045208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3e4839d409a0448fb3cf229ee556952, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectType: 0
-  itemName: 
-  selected: 0
-  recentlySelected: 0
-  selectedShader: {fileID: 0}
-  inMotion: 0
-  isKey: 0
-  key: 
-  value: 0
-  objectCharge: 1
-  beenPickedUp: 0
-  boost: 0
 --- !u!114 &114106389962254714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2825,6 +2802,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   laserShared: 0
+--- !u!114 &114716797122883210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1434298028045208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527da8edd9f314eb5a63d1e1641aa686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectType: 0
+  itemName: 
+  pickupDistance: 2
+  selected: 0
+  recentlySelected: 0
+  selectedShader: {fileID: 0}
+  inMotion: 0
+  isKey: 0
+  key: 
+  value: 0
+  objectCharge: 1
+  beenPickedUp: 0
+  boost: 0
 --- !u!114 &114754995801596638
 MonoBehaviour:
   m_ObjectHideFlags: 1

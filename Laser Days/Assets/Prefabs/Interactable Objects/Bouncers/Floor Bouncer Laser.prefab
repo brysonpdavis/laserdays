@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 114220612493102598}
   - component: {fileID: 114494484404179640}
   - component: {fileID: 82961850921687002}
-  - component: {fileID: 114883128279660506}
+  - component: {fileID: 114224016453842070}
   m_Layer: 10
   m_Name: Floor Bouncer Laser
   m_TagString: Clickable
@@ -1301,7 +1301,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1197838375947322}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.125, z: 0}
+  m_LocalPosition: {x: 0, y: 0.125, z: 7}
   m_LocalScale: {x: 1.4, y: 0.25000024, z: 1.4}
   m_Children:
   - {fileID: 4423006972804182}
@@ -2601,6 +2601,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   laserShared: 0
+--- !u!114 &114224016453842070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197838375947322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527da8edd9f314eb5a63d1e1641aa686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectType: 0
+  itemName: 
+  pickupDistance: 2
+  selected: 0
+  recentlySelected: 0
+  selectedShader: {fileID: 0}
+  inMotion: 0
+  isKey: 0
+  key: 
+  value: 0
+  objectCharge: 1
+  beenPickedUp: 0
+  boost: 0
 --- !u!114 &114227781261819560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2907,29 +2931,6 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
   clickOffClip: {fileID: 8300000, guid: 5318443e2cb32d74d9f5d294f3c21aa8, type: 3}
---- !u!114 &114883128279660506
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1197838375947322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3e4839d409a0448fb3cf229ee556952, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectType: 0
-  itemName: 
-  selected: 0
-  recentlySelected: 0
-  selectedShader: {fileID: 0}
-  inMotion: 0
-  isKey: 0
-  key: 
-  value: 0
-  objectCharge: 1
-  beenPickedUp: 0
-  boost: 0
 --- !u!114 &114926542151533148
 MonoBehaviour:
   m_ObjectHideFlags: 1

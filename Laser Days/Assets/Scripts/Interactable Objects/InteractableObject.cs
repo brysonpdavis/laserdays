@@ -5,7 +5,7 @@ using UnityEngine;
 abstract public class InteractableObject : MonoBehaviour
 {
     //protected ItemProperties itemProperties;
-    public enum ObjectType { Clickable, SingleWorldClickable, Sokoban1x1, Sokoban2x2, Morph, Wall, WallSliderX, WallSliderZ, Null };
+    public enum ObjectType { Clickable, SingleWorldClickable, Sokoban1x1, Sokoban2x2, Morph, Wall, WallSliderX, WallSliderZ, FloorBouncer, Null };
     [HideInInspector]public ObjectType objectType;
     [HideInInspector]public string itemName;
 
