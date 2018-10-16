@@ -131,7 +131,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         if (nextScene.IsValid())
         {
-            SceneManager.SetActiveScene(nextScene);
+           // SceneManager.SetActiveScene(nextScene);
         }
 
         //give new scene spawners reference to correct button
