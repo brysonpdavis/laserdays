@@ -30,6 +30,7 @@ public class PlatformObjectMover : MonoBehaviour {
 
         if ((type == InteractableObject.ObjectType.Sokoban1x1 || 
              type == InteractableObject.ObjectType.Sokoban2x2 || 
+             type == InteractableObject.ObjectType.FloorBouncer ||
              type == InteractableObject.ObjectType.Morph)
              && (other.gameObject.layer == mainGuard.layer))
         {
@@ -57,6 +58,7 @@ public class PlatformObjectMover : MonoBehaviour {
 
         if (type == InteractableObject.ObjectType.Sokoban1x1 ||
             type == InteractableObject.ObjectType.Sokoban2x2 ||
+            type == InteractableObject.ObjectType.FloorBouncer ||
             type == InteractableObject.ObjectType.Morph)
         {
             incorrect = false;
@@ -120,22 +122,24 @@ public class PlatformObjectMover : MonoBehaviour {
 
 
 
-
-            while (ratio < 1f)
+            if (objectToMove.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban1x1)
             {
-                moverPosition = position.transform.position;
-                moverPosition.y = moverPosition.y+differenceY;
+                while (ratio < 1f)
+                {
+                    moverPosition = position.transform.position;
+                    moverPosition.y = moverPosition.y + differenceY;
 
 
-                elapsedTime += Time.smoothDeltaTime;
-                ratio = elapsedTime / duration;
-                //value = Vector3.Slerp(startpoint, moverPosition, ratio);
-                //objectToMove.transform.position = value;
-                objectToMove.transform.position = Vector3.Slerp(startpoint, moverPosition, ratio);
+                    elapsedTime += Time.smoothDeltaTime;
+                    ratio = elapsedTime / duration;
+                    //value = Vector3.Slerp(startpoint, moverPosition, ratio);
+                    //objectToMove.transform.position = value;
+                    objectToMove.transform.position = Vector3.Slerp(startpoint, moverPosition, ratio);
 
-                // Debug.Log(objectToMove.transform.position);
+                    // Debug.Log(objectToMove.transform.position);
 
-                yield return null;
+                    yield return null;
+                }
             }
 
 
