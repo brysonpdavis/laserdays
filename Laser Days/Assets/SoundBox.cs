@@ -28,6 +28,8 @@ public class SoundBox : MonoBehaviour {
     public AudioClip threshold;
     public AudioClip[] booster;
 
+    public AudioClip completionZone;
+
     public AudioClip pop;
 
     public void Start()
