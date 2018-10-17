@@ -150,17 +150,11 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         //give new scene spawners reference to correct button
         GameObject[] sceneObjects = nextScene.GetRootGameObjects();
-        /*
-        if (sceneObjects[1].transform.GetChild(0).Find(spawnPoint).gameObject)
-        {
-            GameObject newSpawner = sceneObjects[1].transform.GetChild(0).Find(spawnPoint).gameObject;
-            newSpawner.GetComponent<Spawner>().myButton = myButton;
-        }
-        else
-            Debug.Log("help!");
-            */
+
         StartCoroutine(FadeIn());
 
+        Debug.Log(spawnPoint);
+        GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton = myButton;
 
         //resetting player
         Toolbox.Instance.GetRaycastManager().selectedObjs.Clear();
