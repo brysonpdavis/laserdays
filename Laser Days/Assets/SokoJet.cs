@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using Poly2Tri;
 using UnityScript.Scripting.Pipeline;
-using UnityEditor.ShaderGraph;
+//using UnityEditor.ShaderGraph;
 
 public class SokoJet : MonoBehaviour {
 

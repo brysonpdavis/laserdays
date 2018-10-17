@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
+    public enum Difficulty { Easy, Medium, Hard };
+    public Difficulty difficulty;
     public Scene scene;
     public GameObject button;
     public GameObject myButton;
@@ -24,12 +26,30 @@ public class Spawner : MonoBehaviour {
                 myButton = Instantiate(button);
                 myButton.GetComponent<Image>().enabled = true;
                 myButton.GetComponent<Button>().enabled = true;
+
+
+
                 myButton.transform.GetChild(0).gameObject.SetActive(true);
                 Text text = myButton.GetComponentInChildren<Text>();
 
                 text.text = gameObject.name;
                 myButton.name = scene.name;
-                myButton.transform.SetParent(parent);
+
+            switch (difficulty)
+            {
+                case (Difficulty.Easy):
+                    myButton.transform.SetParent(LevelLoadingMenu.easyButtons.transform.GetChild(0).transform.GetChild(0));
+                        break;
+                case (Difficulty.Medium):
+                    myButton.transform.SetParent(LevelLoadingMenu.mediumButtons.transform.GetChild(0).transform.GetChild(0));
+                    break;
+                case (Difficulty.Hard):
+                    myButton.transform.SetParent(LevelLoadingMenu.hardButtons.transform.GetChild(0).transform.GetChild(0));
+                    break;
+            }
+
+
+                //myButton.transform.SetParent(parent);
           //  }
         }
     }

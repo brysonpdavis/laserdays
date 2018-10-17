@@ -10,6 +10,11 @@ public class LevelLoadingMenu : MonoBehaviour {
     public static bool gameIsPaused = true;
     public GameObject pauseMenuUI;
     public GameObject buttonContainer;
+    [SerializeField] public static GameObject easyButtons;
+    [SerializeField] public static GameObject mediumButtons;
+    [SerializeField] public static GameObject hardButtons;
+
+
     public GameObject soundtrackSlider;
     public GameObject soundEffectSlider;
     bool transitionIsDone = true;
@@ -19,15 +24,24 @@ public class LevelLoadingMenu : MonoBehaviour {
     public float fadeDuration = .5f;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
         background = pauseMenuUI.GetComponent<Image>();
         backgroundColor = background.color;
         buttonContainer = pauseMenuUI.transform.GetChild(0).gameObject;
+
+        easyButtons = buttonContainer.transform.GetChild(0).gameObject;
+        mediumButtons = buttonContainer.transform.GetChild(1).gameObject;
+        hardButtons = buttonContainer.transform.GetChild(2).gameObject;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Start()
+    {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Default_Main_Player"));
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (gameIsPaused && transitionIsDone)
