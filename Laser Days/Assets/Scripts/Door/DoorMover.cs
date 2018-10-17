@@ -9,7 +9,6 @@ public class DoorMover : MonoBehaviour {
     public bool leftDoor;
 
 
-
 	// Use this for initialization
 	void Start () {
         controller = GetComponentInParent<DoorController>();

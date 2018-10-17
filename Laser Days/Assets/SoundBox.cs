@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundBox : MonoBehaviour {
+public class SoundBox : Singleton<SoundBox> {
 
     public AudioSource thisSource;
 

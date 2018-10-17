@@ -7,9 +7,13 @@ public class DoorTrigger : MonoBehaviour {
     public DoorController controller;
     public bool active = false;
     private int counter = 0;
-
+    private Material RenderMat;
+    private AudioSource audio;
     private void Awake()
     {
+        audio = GetComponent<AudioSource>();
+        RenderMat = GetComponent<Renderer>().material;
+
 
         if (!controller)
             controller = GetComponentInParent<DoorController>();
@@ -24,7 +28,11 @@ public class DoorTrigger : MonoBehaviour {
 
             if (counter == 1)
             {
+                RenderMat.SetInt("_isCollide", 1);
                 controller.OpenAll();
+                audio.clip = SoundBox.Instance.platformOn;
+                Toolbox.Instance.SetVolume(audio);
+                audio.Play();
             }
         }
 
@@ -37,7 +45,13 @@ public class DoorTrigger : MonoBehaviour {
             counter -= 1;
             if (counter == 0)
             {
+                RenderMat.SetInt("_isCollide", 0);
                 active = false;
+
+                audio.clip = SoundBox.Instance.platformOff;
+                Toolbox.Instance.SetVolume(audio);
+                audio.Play();
+
 
                 if (CheckOtherTriggers())
                     controller.CloseAll();

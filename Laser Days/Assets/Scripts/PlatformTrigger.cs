@@ -29,8 +29,8 @@ public class PlatformTrigger : MonoBehaviour {
 
         audioSource = GetComponent<AudioSource>();
         SoundBox box = Toolbox.Instance.GetPlayer().GetComponent<SoundBox>();
-        platformOn = box.platformOn;
-        platformOff = box.platformOff;
+        platformOn = SoundBox.Instance.platformOn;
+        platformOff = SoundBox.Instance.platformOff;
 
         if (this.gameObject.layer == platformContainer.layer)
         {
