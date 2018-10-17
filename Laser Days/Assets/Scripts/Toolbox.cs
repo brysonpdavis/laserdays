@@ -44,6 +44,7 @@ public class Toolbox : Singleton<Toolbox> {
 
     public void SetVolume(AudioSource audio)
     {
+        VolumeChangeCheck();
         audio.volume = soundEffectsVolume;
     }
  
