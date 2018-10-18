@@ -33,8 +33,8 @@ public class PlatformEdgeGuard : MonoBehaviour {
             isMoveable = true;
 
             //sets up for sound effects for sokoban when they click on and off to guards
-            clickInClip = player.GetComponent<SoundBox>().sokobanClickOn;
-            clickOffClip = player.GetComponent<SoundBox>().sokobanClickOff;
+            clickInClip = SoundBox.Instance.sokobanClickOn;
+            clickOffClip = SoundBox.Instance.sokobanClickOff;
         }
 
 

@@ -25,9 +25,8 @@ public class PuzzleCompletion : MonoBehaviour {
 
             if (counter == 1)
             {
-                GameObject player = Toolbox.Instance.GetPlayer();
-                AudioClip clip = player.GetComponent<SoundBox>().completionZone;
-                AudioSource audio = player.GetComponent<AudioSource>();
+                AudioClip clip = SoundBox.Instance.completionZone;
+                AudioSource audio = SoundBox.Instance.thisSource;
                 audio.clip = clip;
                 audio.volume = Toolbox.Instance.soundEffectsVolume;
                 audio.Play();
