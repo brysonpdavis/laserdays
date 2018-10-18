@@ -236,7 +236,7 @@ namespace MFPP
                     return data;
 
                 // Check for texture
-                data = GetData(mr.sharedMaterial.mainTexture);
+                //data = GetData(mr.sharedMaterial.mainTexture);
 
                 if (data != null)
                     return data;

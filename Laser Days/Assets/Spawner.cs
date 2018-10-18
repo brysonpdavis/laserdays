@@ -23,23 +23,23 @@ public class Spawner : MonoBehaviour {
             //if (!parent.transform.Find(scene.name))
             //{
 
-                myButton = Instantiate(button);
-                myButton.GetComponent<Image>().enabled = true;
-                myButton.GetComponent<Button>().enabled = true;
+            myButton = Instantiate(button);
+            myButton.GetComponent<Image>().enabled = true;
+            myButton.GetComponent<Button>().enabled = true;
 
 
 
-                myButton.transform.GetChild(0).gameObject.SetActive(true);
-                Text text = myButton.GetComponentInChildren<Text>();
+            myButton.transform.GetChild(0).gameObject.SetActive(true);
+            Text text = myButton.GetComponentInChildren<Text>();
 
-                text.text = gameObject.name;
-                myButton.name = scene.name;
+            text.text = gameObject.name;
+            myButton.name = scene.name;
 
             switch (difficulty)
             {
                 case (Difficulty.Easy):
                     myButton.transform.SetParent(LevelLoadingMenu.easyButtons.transform.GetChild(0).transform.GetChild(0));
-                        break;
+                    break;
                 case (Difficulty.Medium):
                     myButton.transform.SetParent(LevelLoadingMenu.mediumButtons.transform.GetChild(0).transform.GetChild(0));
                     break;
@@ -49,8 +49,15 @@ public class Spawner : MonoBehaviour {
             }
 
 
-                //myButton.transform.SetParent(parent);
-          //  }
+            //myButton.transform.SetParent(parent);
+            //  }
+        }
+
+        //scene is being loaded, button has already been set. now linking existing button to the completion zone to do color change, etc.
+        else
+        {
+            Debug.Log("scene is loaded");
+            myButton = GameObject.Find(scene.name);
         }
     }
 
