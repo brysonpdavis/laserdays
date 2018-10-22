@@ -40,7 +40,10 @@ public class PlatformTrigger : MonoBehaviour {
 
         else 
         {
-            platformTriggers = transform.parent.GetComponentsInChildren<PlatformTrigger>();
+            platformTriggers = platformContainer.GetComponentsInChildren<PlatformTrigger>();
+            //redundent code temporarily, all triggers are in platform container folder now
+            //leaving this in case anything breaks
+            //platformTriggers = transform.parent.GetComponentsInChildren<PlatformTrigger>();
             totalTriggers = platformTriggers.Length;
         }
 
