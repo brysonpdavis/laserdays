@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlatformMover : MonoBehaviour {
 
     public PlatformGuard platformGuard;
-
     public GameObject platformContainer;
     public PlatformIndicator Indicator;
-
     public GameObject mainGuard;
     public PlatformObjectMover[] objectMovers;
-    public  Vector3 start;
+    [HideInInspector] public  Vector3 start;
     public Transform end;
+
+    public float durationMultiplier = 1f;
 
     private RaycastManager raycastManager;
     private MFPP.Modules.PickUpModule pickUp;
@@ -43,17 +43,17 @@ public class PlatformMover : MonoBehaviour {
     {
         //Debug.Log("moving again" + this.name);
         float elapsedTime = 0;
-        float ratio = elapsedTime / duration;
+        float ratio = elapsedTime / (duration * durationMultiplier);
         checkObjectsPlace();
         PlatformObjectsUnselectable();
 
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.5f);
 
 
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / duration;
+            ratio = elapsedTime / (duration * durationMultiplier);
             transform.position = Vector3.Lerp(startPos, endPos, ratio);
             yield return null;
         }
