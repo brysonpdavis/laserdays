@@ -31,11 +31,11 @@ public class PlatformIndicator : MonoBehaviour {
 
     public void On () 
     {
-        RenderMat.SetFloat("_isCollide", 1);
+        RenderMat.SetFloat("_isActive", 1);
 	}
 
     public void Off ()
     {
-        RenderMat.SetFloat("_isCollide", 0);
+        RenderMat.SetFloat("_isActive", 0);
     }
 }

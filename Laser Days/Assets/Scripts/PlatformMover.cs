@@ -158,7 +158,7 @@ public class PlatformMover : MonoBehaviour {
     public void IndicatorOn()
     {
         Indicator.On();
-        LR.material.SetFloat("_isCollide", 1);
+        LR.material.SetFloat("_isActive", 1);
     
 
 
@@ -167,7 +167,7 @@ public class PlatformMover : MonoBehaviour {
     public void IndicatorOff()
     {
         Indicator.Off();
-        LR.material.SetFloat("_isCollide", 0);
+        LR.material.SetFloat("_isActive", 0);
 
     }
 
