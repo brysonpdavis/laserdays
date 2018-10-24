@@ -52,6 +52,7 @@ public class PlatformTrigger : MonoBehaviour {
         RenderMat.SetInt("_Animated", 1);
         RenderMat.SetColor("_RestingColor", platformContainer.GetComponent<PlatformController>().RestingColor);
         RenderMat.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
+        RenderMat.SetColor("_ShimmerColor", platformContainer.GetComponent<PlatformController>().ShimmerColor);
 
 
         if (platformContainer){
@@ -164,7 +165,7 @@ public class PlatformTrigger : MonoBehaviour {
             }
 
             int checkNumber = 0;
-            RenderMat.SetInt("_isCollide", 1);
+            RenderMat.SetFloat("_isCollide", 1f);
 
             if (GetComponentInChildren<PuddleTrigger>())
             {
@@ -191,8 +192,7 @@ public class PlatformTrigger : MonoBehaviour {
 
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
-                    //trigger.RenderMat.SetInt("_isActive0", 1);
-                    //trigger.RenderMat.SetInt("_isActive1", 1);
+                    trigger.RenderMat.SetFloat("_isActive", 1f);
                     if (trigger.basinIndicator)
                     {
                         trigger.basinIndicator.Activate();
@@ -210,7 +210,7 @@ public class PlatformTrigger : MonoBehaviour {
             if (counter == 0)
             {
                 MovePlatformToStart();
-                RenderMat.SetInt("_isCollide", 0);
+                RenderMat.SetFloat("_isCollide", 0);
 
                 if (GetComponentInChildren<PuddleTrigger>())
                 {
@@ -223,8 +223,7 @@ public class PlatformTrigger : MonoBehaviour {
 
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
-                    trigger.RenderMat.SetInt("_isActive0", 0);
-                    trigger.RenderMat.SetInt("_isActive1", 0);
+
                     if (trigger.basinIndicator)
                     {
                         trigger.basinIndicator.Deactivate();
@@ -234,6 +233,7 @@ public class PlatformTrigger : MonoBehaviour {
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
                     trigger.moving = false;
+                    trigger.RenderMat.SetFloat("_isActive", 0);
                 }
 
                 on = false;

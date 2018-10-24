@@ -23,8 +23,11 @@ public class PlatformMover : MonoBehaviour {
 
         start = this.transform.position;
 
-        this.Indicator.SetColors(platformContainer.GetComponent<PlatformController>().RestingColor,
-                            platformContainer.GetComponent<PlatformController>().ActiveColor);
+        Color RC = platformContainer.GetComponent<PlatformController>().RestingColor;
+        Color AC = platformContainer.GetComponent<PlatformController>().ActiveColor;
+        Color SC = platformContainer.GetComponent<PlatformController>().ShimmerColor;
+
+        this.Indicator.SetColors(RC,AC, SC);
 
         raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
         pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
@@ -35,8 +38,8 @@ public class PlatformMover : MonoBehaviour {
         LR.SetPosition(0, begin);
         Vector3 finish = new Vector3(end.position.x, end.position.y - 0.1f, end.position.z);
         LR.SetPosition(1, finish);
-        LR.material.SetColor("_RestingColor", platformContainer.GetComponent<PlatformController>().RestingColor);
-        LR.material.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
+        LR.material.SetColor("_RestingColor", RC);
+        LR.material.SetColor("_ActiveColor", AC);
     }
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
@@ -155,8 +158,8 @@ public class PlatformMover : MonoBehaviour {
     public void IndicatorOn()
     {
         Indicator.On();
-        LR.material.SetInt("isCollide", 1);
-        RendererExtensions.UpdateGIMaterials(LR);
+        LR.material.SetFloat("_isCollide", 1);
+    
 
 
     }
@@ -164,8 +167,8 @@ public class PlatformMover : MonoBehaviour {
     public void IndicatorOff()
     {
         Indicator.Off();
-        LR.material.SetInt("isCollide", 0);
-        RendererExtensions.UpdateGIMaterials(LR);
+        LR.material.SetFloat("_isCollide", 0);
+
     }
 
     }

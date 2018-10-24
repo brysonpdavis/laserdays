@@ -20,6 +20,10 @@ public class PlatformController : MonoBehaviour {
     [ColorUsageAttribute(true, true)]
     public Color ActiveColor = new Color(0f, 0f, 0f, 0f);
 
+    [ColorUsageAttribute(true, true)]
+    public Color ShimmerColor = new Color(0f, 0f, 0f, 0f);
+
+
     private void Awake()
     {
         

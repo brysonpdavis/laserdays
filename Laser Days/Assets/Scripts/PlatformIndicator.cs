@@ -22,19 +22,20 @@ public class PlatformIndicator : MonoBehaviour {
     }
 
 	
-    public void SetColors(Color a, Color b)
+    public void SetColors(Color a, Color b, Color c)
     {
         RenderMat.SetColor("_RestingColor", a);
         RenderMat.SetColor("_ActiveColor", b);
+        RenderMat.SetColor("_ShimmerColor", c);
     }
 
     public void On () 
     {
-        RenderMat.SetInt("_isCollide", 1);
+        RenderMat.SetFloat("_isCollide", 1);
 	}
 
     public void Off ()
     {
-        RenderMat.SetInt("_isCollide", 0);
+        RenderMat.SetFloat("_isCollide", 0);
     }
 }
