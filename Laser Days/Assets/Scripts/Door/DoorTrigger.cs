@@ -7,8 +7,10 @@ public class DoorTrigger : MonoBehaviour {
     public DoorController controller;
     public bool active = false;
     private int counter = 0;
+    public float ScrollSpeed = 0.4f;
     private Material RenderMat;
     private AudioSource audio;
+   
     private void Awake()
     {
         audio = GetComponent<AudioSource>();
@@ -17,6 +19,22 @@ public class DoorTrigger : MonoBehaviour {
 
         if (!controller)
             controller = GetComponentInParent<DoorController>();
+    }
+
+    private void Start()
+    {
+        RenderMat = GetComponent<Renderer>().material;
+        RenderMat.SetInt("_Animated", 1);
+        RenderMat.SetColor("_RestingColor", controller.RestingColor);
+        RenderMat.SetColor("_ActiveColor", controller.ActiveColor);
+        RenderMat.SetColor("_ShimmerColor", controller.ShimmerColor);
+    }
+
+    private void Update()
+    {
+        var temp = RenderMat.GetFloat("_Elapsed");
+        temp += (Time.deltaTime * ScrollSpeed);
+        RenderMat.SetFloat("_Elapsed", temp);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +46,9 @@ public class DoorTrigger : MonoBehaviour {
 
             if (counter == 1)
             {
-                RenderMat.SetInt("_isCollide", 1);
+                RenderMat.SetFloat("_isCollide", 1f);
+                RenderMat.SetFloat("_isActive", 1f);
+                ScrollSpeed *= -0.5f;
                 controller.OpenAll();
                 audio.clip = SoundBox.Instance.platformOn;
                 Toolbox.Instance.SetVolume(audio);
@@ -45,7 +65,9 @@ public class DoorTrigger : MonoBehaviour {
             counter -= 1;
             if (counter == 0)
             {
-                RenderMat.SetInt("_isCollide", 0);
+                RenderMat.SetFloat("_isCollide", 0f);
+                RenderMat.SetFloat("_isActive", 0f);
+                ScrollSpeed *= -2f;
                 active = false;
 
                 audio.clip = SoundBox.Instance.platformOff;
