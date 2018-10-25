@@ -24,9 +24,12 @@ public class PlatformTrigger : MonoBehaviour {
 
     private BasinTriggerIndicator basinIndicator;
 
+    private void OnEnable()
+    {
+        counter = 0;
+    }
     private void Start()
     {
-
         audioSource = GetComponent<AudioSource>();
         SoundBox box = Toolbox.Instance.GetPlayer().GetComponent<SoundBox>();
         platformOn = SoundBox.Instance.platformOn;
@@ -82,6 +85,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("exit");
         TriggerOff(other);
     }
 

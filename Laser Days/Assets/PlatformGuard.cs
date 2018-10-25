@@ -18,6 +18,9 @@ public class PlatformGuard : MonoBehaviour
     public GameObject mainGuard;
     public PlatformController platformController;
 
+    private bool initialized = false;
+
+
     void Start()
     {
         target = null;
@@ -28,8 +31,23 @@ public class PlatformGuard : MonoBehaviour
         breakingObjectsBelow = new List<GameObject>();
         mainGuard = this.gameObject;
 
+        initialized = true;
+
         //main controller is always in guard's parents parent
         //platformController = transform.parent.transform.parent.GetComponent<PlatformController>();
+    }
+
+    private void OnEnable()
+    {
+        if (initialized)
+        {
+            stuckObjects.Clear();
+            stuckObjectsOffset.Clear();
+            stuckSokoban.Clear();
+            breakingObjectsAbove.Clear();
+            breakingObjectsBelow.Clear();
+        }
+
     }
 
 
