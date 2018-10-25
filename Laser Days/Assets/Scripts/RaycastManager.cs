@@ -48,6 +48,7 @@ public class RaycastManager : MonoBehaviour {
     private MFPP.Modules.PickUpModule pickUp;
     private IconContainer iconContainer;
     private Transform playerCam;
+    private float Radius;
 
 
     void Start () {
@@ -60,6 +61,7 @@ public class RaycastManager : MonoBehaviour {
         pickUp = GetComponent<MFPP.Modules.PickUpModule>();
         iconContainer = Toolbox.Instance.GetIconContainer();
         playerCam = GetComponentInChildren<Camera>().transform;
+        Radius = GetComponent<CharacterController>().radius;
 
     }
 	
@@ -309,9 +311,13 @@ public class RaycastManager : MonoBehaviour {
         {
             if (distance <= pickUp.MaxPickupDistance)
             {
-                if ((playerCam.transform.localEulerAngles.x > 55f) && (playerCam.transform.localEulerAngles.x < 91f) && crossHair.color == new Color32(255, 222, 77, 255))
+
+                Ray r = new Ray(transform.position + Vector3.up * Radius, Vector3.down);
+                RaycastHit hit;
+
+                if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity) && hit.collider.gameObject.Equals(raycastedObj))
                 {
-                    interactable.DistantIconHover();
+                        interactable.DistantIconHover();
                 }
 
                 else {
