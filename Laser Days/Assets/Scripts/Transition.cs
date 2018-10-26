@@ -9,8 +9,8 @@ public class Transition : MonoBehaviour
     Renderer mRenderer;
     Material material;
     public float ScaleSpeed = 1f;
-    public bool laserShared = false;
-
+    public bool sharedMaterial = false;
+    public IList<Material> sharedmaterials;
     private IEnumerator flipTransition;
     float offset;
     float speed;
@@ -21,17 +21,29 @@ public class Transition : MonoBehaviour
         if (GetComponent<LineRenderer>())
             mRenderer = GetComponent<LineRenderer>();
 
-        material = mRenderer.material;
-
-       /* if (GetComponent<ParticleSystem>())
+       
+        if (gameObject.layer == 10 || gameObject.layer == 11 )
+            material = mRenderer.material;
+        else 
         {
-            mRenderer = GetComponent<ParticleSystemRenderer>();
-            material = GetComponent<ParticleSystemRenderer>().trailMaterial;
+            material = mRenderer.sharedMaterial;
+            sharedMaterial = true;
         }
-        */
+
+
         offset = Random.value;
         speed = Random.Range(1f, 2f);
     }
+
+    private void Start()
+    {
+        if (sharedMaterial)
+        {
+            if (!sharedmaterials.Contains(material))
+                sharedmaterials.Add(material);
+        }
+    }
+
 
 
     public void Flip(float end, float duration)
@@ -40,7 +52,7 @@ public class Transition : MonoBehaviour
         //first need to make sure the object isn't already selected before starting any transition
         //objects that are selected will be flipped and shouldn't have any animation, but should change their parent gameobject
 
-        if (material)
+        if (material && !sharedMaterial)
         {
             float start = material.GetFloat("_TransitionState");
 
