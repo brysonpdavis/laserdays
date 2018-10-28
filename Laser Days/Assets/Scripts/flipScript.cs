@@ -136,6 +136,7 @@ public class flipScript : MonoBehaviour {
         if (held)
 			Flip(held);
 		FlipList(things);
+        Toolbox.Instance.FlipSharedMaterials(space);
 
 
 

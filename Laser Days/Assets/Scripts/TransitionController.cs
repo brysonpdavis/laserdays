@@ -9,12 +9,13 @@ public class TransitionController: MonoBehaviour
     private GameObject player;
     public float speed = .4f;
     private Component[] components;
-    public IList<Material> sharedMaterials;
+    bool initialized = false;
 
 
     private void Awake()
     {
-        InitializeSharedMaterials();
+        //if (!initialized)
+          //  InitializeSharedMaterials();
     }
     // Use this for initialization
     void Start()
@@ -57,7 +58,7 @@ public class TransitionController: MonoBehaviour
             if (isFlipped)
             {
                 FlipSurrounding(direction);
-                FlipSharedMaterials(direction);
+               // FlipSharedMaterials(direction);
             }
 
         }
@@ -137,53 +138,6 @@ public class TransitionController: MonoBehaviour
 
         }
 
-    }
-
-    void InitializeSharedMaterials()
-    {
-        //sets all children transitions to know that this is their parent controller
-        sharedMaterials = new List<Material>();
-        components = GetComponentsInChildren<Transition>();
-        foreach (Transition transition in components)
-        {
-            transition.sharedmaterials = sharedMaterials;
-        }
-    }
-
-    void FlipSharedMaterials(bool direction)
-    {
-        float end = 0f;
-        StopAllCoroutines();
-        if (direction)
-            end = 0f;
-        else
-            end = 1f;
-        foreach (Material mat in sharedMaterials)
-        {
-            float start = mat.GetFloat("_TransitionState");
-            StartCoroutine(FlipTransitionRoutineShared(mat, start, end));
-        }
-
-    }
-
-    private IEnumerator FlipTransitionRoutineShared(Material material, float startpoint, float endpoint)
-    {
-
-        float elapsedTime = 0;
-        float ratio = elapsedTime / speed;
-        //int property = Shader.PropertyToID("_D7A8CF01");
-
-        while (ratio < 1f)
-        {
-            elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / speed;
-            float value = Mathf.Lerp(startpoint, endpoint, ratio);
-
-            material.SetFloat("_TransitionState", value);
-            //RendererExtensions.UpdateGIMaterials(mRenderer);
-
-            yield return null;
-        }
     }
 
 }

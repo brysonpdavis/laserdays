@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -12,6 +14,7 @@ public class Toolbox : Singleton<Toolbox> {
     RaycastManager raycastManager;
     MFPP.Modules.PickUpModule pickUp;
     flipScript flipScript;
+    public float globalFlipSpeed = .4f;
 
     IconContainer iconContainer;
     public Color UIColorA;
@@ -23,12 +26,14 @@ public class Toolbox : Singleton<Toolbox> {
     public GameObject pauseMenu;
     public Slider soundEffectsSlider;
     public float soundEffectsVolume;
+    public IList<Material> sharedMaterials;
 
 
  
 	void Awake () {
 		// Your initialization code here
         UpdateToolbox();
+        sharedMaterials = new List<Material>();
         DontDestroyOnLoad(this.gameObject);
 
         soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();
@@ -144,5 +149,42 @@ public class Toolbox : Singleton<Toolbox> {
     {
         realWorldParentObject = GameObject.FindWithTag("Real");
         laserWorldParentObject = GameObject.FindWithTag("Laser");
+    }
+
+    public void FlipSharedMaterials(bool direction)
+    {
+        float end = 0f;
+        StopAllCoroutines();
+        if (direction)
+            end = 0f;
+        else
+            end = 1f;
+        foreach (Material mat in sharedMaterials)
+        {
+            float start = mat.GetFloat("_TransitionState");
+            StartCoroutine(FlipTransitionRoutineShared(mat, start, end));
+        }
+
+        //Debug.Log(sharedMaterials.Count);
+
+    }
+
+    private IEnumerator FlipTransitionRoutineShared(Material material, float startpoint, float endpoint)
+    {
+        float elapsedTime = 0;
+        float ratio = elapsedTime / globalFlipSpeed;
+        //int property = Shader.PropertyToID("_D7A8CF01");
+
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / globalFlipSpeed;
+            float value = Mathf.Lerp(startpoint, endpoint, ratio);
+
+            material.SetFloat("_TransitionState", value);
+            //RendererExtensions.UpdateGIMaterials(mRenderer);
+
+            yield return null;
+        }
     }
 }

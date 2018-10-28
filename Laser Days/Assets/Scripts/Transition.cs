@@ -10,7 +10,7 @@ public class Transition : MonoBehaviour
     Material material;
     public float ScaleSpeed = 1f;
     public bool sharedMaterial = false;
-    public IList<Material> sharedmaterials;
+    //public IList<Material> sharedmaterials;
     private IEnumerator flipTransition;
     float offset;
     float speed;
@@ -22,8 +22,9 @@ public class Transition : MonoBehaviour
             mRenderer = GetComponent<LineRenderer>();
 
        
-        if (gameObject.layer == 10 || gameObject.layer == 11 )
-            material = mRenderer.material;
+//        if ((gameObject.layer == 10 || gameObject.layer == 11)  && (GetComponent<InteractableObject>() || GetComponent<Core>()))
+       if ((gameObject.layer == 10 || gameObject.layer == 11))
+        material = mRenderer.material;
         else 
         {
             material = mRenderer.sharedMaterial;
@@ -39,8 +40,8 @@ public class Transition : MonoBehaviour
     {
         if (sharedMaterial)
         {
-            if (!sharedmaterials.Contains(material))
-                sharedmaterials.Add(material);
+            if (!Toolbox.Instance.sharedMaterials.Contains(material))
+                Toolbox.Instance.sharedMaterials.Add(material);
         }
     }
 
