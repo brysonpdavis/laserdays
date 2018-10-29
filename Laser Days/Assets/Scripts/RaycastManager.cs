@@ -83,9 +83,15 @@ public class RaycastManager : MonoBehaviour {
             //CASES TO TURN THINGS OFF:
             //if (!Toolbox.Instance.GetPickUp().heldObject){
 
+            if (hit.collider.CompareTag("Completion"))
+            {
+                raycastedObj = hit.collider.gameObject;
+            }
+
+
             //1: objects on the default/shared layers are included in the layermask to block raycasts,
             //if we were previously raycasting something OTHER than the held object, turn that off
-            if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 17)
+            else if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 17)
             {
                 if (raycastedObj && !pickUp.heldObject)
                 {
@@ -99,6 +105,7 @@ public class RaycastManager : MonoBehaviour {
                 itemNameText.text = null;
                 raycastedObj = null;
             }
+
 
 
             else if (hit.collider.CompareTag("Clickable"))
