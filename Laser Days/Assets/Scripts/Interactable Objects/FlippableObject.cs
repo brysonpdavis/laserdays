@@ -166,6 +166,32 @@ abstract public class FlippableObject : InteractableObject
         }
     }
 
+    public void AddToTransitionList(TransitionController controller)
+    {
+        if (!controller.transitions.Contains(GetComponent<Transition>()))
+            controller.transitions.Add(GetComponent<Transition>());
+
+        if (GetComponentInChildren<Core>())
+        {
+            Transition core = GetComponentInChildren<Core>().gameObject.GetComponent<Transition>();
+            if (!controller.transitions.Contains(core))
+                controller.transitions.Add(core);
+        }
+    }
+
+    public void RemoveFromTransitionList(TransitionController controller)
+    {
+        if (controller.transitions.Contains(GetComponent<Transition>()))
+            controller.transitions.Remove(GetComponent<Transition>());
+
+        if (GetComponentInChildren<Core>())
+        {
+            Transition core = GetComponentInChildren<Core>().gameObject.GetComponent<Transition>();
+            if (controller.transitions.Contains(core))
+                controller.transitions.Remove(core);
+        }
+    }
+
 
     IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {

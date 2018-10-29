@@ -14,7 +14,9 @@ public class sceneTrigger : MonoBehaviour
     private TransitionController[] transitionControllers;
     private FlippableObject[] internalFlippables;
     public Transform laserBackgroundContainer;
-    public Transform realBackgroundContainer;  
+    public Transform realBackgroundContainer;
+    public TransitionController realTransitionController;
+    public TransitionController laserTransitionController;
 
     Transform realTransform;
     Transform laserTransform;
@@ -35,6 +37,18 @@ public class sceneTrigger : MonoBehaviour
         //gathering the real and laser transforms for this scene
         realTransform = sceneContainer.Find("Real");
         laserTransform = sceneContainer.Find("Laser");
+
+        //find the transition controllers within the scene
+        TransitionController[] controllers = GetComponentsInChildren<TransitionController>();
+        foreach (TransitionController control in controllers)
+        {
+            if (control.gameObject.CompareTag("Laser"))
+                laserTransitionController = control;
+
+            else if (control.gameObject.CompareTag("Real"))
+                realTransitionController = control;
+        }
+
     }
 
     private void Start()
@@ -63,14 +77,18 @@ public class sceneTrigger : MonoBehaviour
     //if player or flippables enter a new scene
     void OnTriggerEnter(Collider collider)
     {
+        Transition t = collider.GetComponent<Transition>();
+
+
         //when colliding with player, make sure target scene isn't already open, if it's not then load the scene on top (additive) of current scene
         if (collider.tag.Equals("Player"))
         {
             //if part of the scene isn't loaded upon enter, load all 3 parts
             if (Interior.activeInHierarchy == false)
             {
-                
-                foreach (TransitionController transition in transitionControllers) {
+
+                foreach (TransitionController transition in transitionControllers)
+                {
 
                     transition.PlayerCheck();
                 }
@@ -81,21 +99,33 @@ public class sceneTrigger : MonoBehaviour
 
             if (Toolbox.Instance.GetPickUp().heldObject)
             {
+                FlippableObject flippable = Toolbox.Instance.GetPickUp().heldObject.GetComponent<FlippableObject>();
 
                 if (collider.gameObject.layer == 10)
+                {
+                    //add new transform parent / transform list
                     Toolbox.Instance.GetPickUp().heldObject.GetComponent<Collider>().transform.parent = laserTransform;
+                    flippable.AddToTransitionList(laserTransitionController);
+                }
 
                 else
+                {
+                    //add to new transform parent / transform list
                     Toolbox.Instance.GetPickUp().heldObject.GetComponent<Collider>().transform.parent = realTransform;
+                    flippable.AddToTransitionList(realTransitionController);
+                }
 
+                //set its laser/real transforms to this scene
+                flippable.laserTransform = laserTransform;
+                flippable.realTransform = realTransform;
+
+                //remove from whichever background transitions list it was in
+                flippable.RemoveFromTransitionList(laserBackgroundContainer.GetComponentInParent<TransitionController>());
+                flippable.RemoveFromTransitionList(realBackgroundContainer.GetComponentInParent<TransitionController>());
+
+                    
             }
         }
-
-        //flippables' real/laser parent containers need to be set to that of this scene when they enter
-
-
-
-    
     }
 
     //if player or flippables exit whatever scene, flippables need to be set to the background
@@ -113,26 +143,44 @@ public class sceneTrigger : MonoBehaviour
         }
 
 
-        
+
         if (collider.GetComponent<FlippableObject>() && !Toolbox.Instance.EqualToHeld(collider.gameObject))
         {
             Debug.Log("my guy!");
             SetFlippable(collider);
         }
-
-
     }
 
+
+    //PUTS THE HELD OBJECT IN THE BACKGROUND SCENE
     void SetFlippable(Collider collider)
     {
+        Transition t = collider.GetComponent<Transition>();
+        FlippableObject flippable = collider.GetComponent<FlippableObject>();
         if (collider.gameObject.layer == 10)
-                collider.transform.parent = laserBackgroundContainer;
+        {
+            //set it to the new transform parent
+            collider.transform.parent = laserBackgroundContainer;
 
-            else
-                collider.transform.parent = realBackgroundContainer;
+            //add it to the background scene transition list
+            flippable.AddToTransitionList(laserBackgroundContainer.GetComponentInParent<TransitionController>());
+        }
 
-            collider.GetComponent<FlippableObject>().laserTransform = laserBackgroundContainer; 
-            collider.GetComponent<FlippableObject>().realTransform = realBackgroundContainer; 
+
+        else
+        {
+            collider.transform.parent = realBackgroundContainer;
+            flippable.AddToTransitionList(realBackgroundContainer.GetComponentInParent<TransitionController>());
+        }
+
+
+            //remove it from whichever transition controller it was initially in
+            flippable.RemoveFromTransitionList(laserTransitionController);
+            flippable.RemoveFromTransitionList(realTransitionController);
+
+            //set its laser/real transforms so it knows which container to switch to
+            flippable.laserTransform = laserBackgroundContainer; 
+            flippable.realTransform = realBackgroundContainer; 
     }
 
 }

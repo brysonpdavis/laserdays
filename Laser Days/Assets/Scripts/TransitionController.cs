@@ -7,8 +7,9 @@ public class TransitionController: MonoBehaviour
     
     private PlayerCharge pc;
     private GameObject player;
-    public float speed = .4f;
+    private float speed;
     private Component[] components;
+    public IList<Transition> transitions;
     bool initialized = false;
 
 
@@ -20,6 +21,10 @@ public class TransitionController: MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        speed = Toolbox.Instance.globalRealLaserFlipSpeed;
+
+        InitializeList();
+
         //automatically set up the player and charge that script will be checking
 
         player = Toolbox.Instance.GetPlayer();
@@ -28,8 +33,8 @@ public class TransitionController: MonoBehaviour
         //make sure all materials are starting on correct transition material based on player
         if (player.layer == 16){ //if player is starting in RW
 
-            components = GetComponentsInChildren<Transition>();
-            foreach (Transition albo in components)
+            //components = GetComponentsInChildren<Transition>();
+            foreach (Transition albo in transitions)
             {
                 albo.SetStart(0f);
             }        
@@ -37,8 +42,8 @@ public class TransitionController: MonoBehaviour
 
         else {
             //player is in LW
-            components = GetComponentsInChildren<Transition>();
-            foreach (Transition albo in components)
+           // components = GetComponentsInChildren<Transition>();
+            foreach (Transition albo in transitions)
             {
                 albo.SetStart(1f);
             }   
@@ -68,12 +73,12 @@ public class TransitionController: MonoBehaviour
 
     void FlipSurrounding(bool direction)
     {
-        components = GetComponentsInChildren<Transition>();
+        //components = GetComponentsInChildren<Transition>();
 
         if (direction) //means player has switched to 'real world': material should transition from current value to zero
         {
 
-            foreach (Transition albo in components)
+            foreach (Transition albo in transitions)
             {
                 if ((!albo.GetComponentInParent<InteractableObject>()) || !albo.GetComponentInParent<InteractableObject>().selected)
                 {
@@ -92,7 +97,7 @@ public class TransitionController: MonoBehaviour
         }
         else {
 
-            foreach (Transition albo in components)
+            foreach (Transition albo in transitions)
             {
                 if ((!albo.GetComponentInParent<InteractableObject>()) || !albo.GetComponentInParent<InteractableObject>().selected)
                     //makes sure it doesn't transition the held object either!
@@ -115,11 +120,12 @@ public class TransitionController: MonoBehaviour
 
         if (!player) { player = Toolbox.Instance.GetPlayer(); }
 
+        InitializeList();
+
         if (player.layer == 16)
         { //if player is starting in RW
-
-            components = GetComponentsInChildren<Transition>();
-            foreach (Transition albo in components)
+            
+            foreach (Transition albo in transitions)
             {
                 albo.SetStart(0f);
 
@@ -129,13 +135,24 @@ public class TransitionController: MonoBehaviour
         else
         {
             //player is in LW
-            components = GetComponentsInChildren<Transition>();
-            foreach (Transition albo in components)
+            foreach (Transition albo in transitions)
             {
                 albo.SetStart(1f);
 
             }
 
+        }
+
+    }
+
+    void InitializeList()
+    {
+        components = GetComponentsInChildren<Transition>();
+        transitions = new List<Transition>();
+
+        foreach (Transition t in components)
+        {
+            transitions.Add(t);
         }
 
     }

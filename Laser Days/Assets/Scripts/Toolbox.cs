@@ -15,6 +15,7 @@ public class Toolbox : Singleton<Toolbox> {
     MFPP.Modules.PickUpModule pickUp;
     flipScript flipScript;
     public float globalFlipSpeed = .4f;
+    public float globalRealLaserFlipSpeed = .2f;
 
     IconContainer iconContainer;
     public Color UIColorA;
