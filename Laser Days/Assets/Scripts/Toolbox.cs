@@ -32,7 +32,10 @@ public class Toolbox : Singleton<Toolbox> {
 
  
 	void Awake () {
-		// Your initialization code here
+
+        SetCustomValuesOnInstance();
+
+        // Your initialization code here
         UpdateToolbox();
         sharedMaterials = new List<Material>();
         DontDestroyOnLoad(this.gameObject);
@@ -188,4 +191,18 @@ public class Toolbox : Singleton<Toolbox> {
             yield return null;
         }
     }
+
+    void SetCustomValuesOnInstance()
+    {
+        if (Toolbox.Instance)
+        {
+            //setting correct values if toolbox has already instantiated itself
+            Toolbox.Instance.globalFlipSpeed = globalFlipSpeed;
+            Toolbox.Instance.globalRealLaserFlipSpeed = globalRealLaserFlipSpeed;
+            Toolbox.Instance.realCore = realCore;
+            Toolbox.Instance.laserCore = laserCore;
+            Toolbox.Instance.pauseMenu = pauseMenu;
+        }
+    }
+
 }
