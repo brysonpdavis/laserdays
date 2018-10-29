@@ -28,7 +28,7 @@ public class PuzzleCompletion : MonoBehaviour {
         if (mRenderer)
             material = mRenderer.material;
 
-        mySpawners = transform.parent.GetComponentsInChildren<Spawner>();
+        mySpawners = transform.parent.transform.parent.GetComponentsInChildren<Spawner>();
 
         rotX = Random.Range(5f, 10f);
         rotY = Random.Range(30f, 90f);
