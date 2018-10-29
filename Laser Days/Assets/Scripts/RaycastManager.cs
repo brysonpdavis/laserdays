@@ -86,6 +86,7 @@ public class RaycastManager : MonoBehaviour {
             if (hit.collider.CompareTag("Completion"))
             {
                 raycastedObj = hit.collider.gameObject;
+                IconCheck(hit.distance, hit.collider.gameObject);
             }
 
 
@@ -313,8 +314,15 @@ public class RaycastManager : MonoBehaviour {
     {
         InteractableObject interactable = raycastedObj.GetComponent<InteractableObject>();
 
+        if (raycastedObj.CompareTag("Completion"))
+        {
+            if (distance <= pickUp.MaxPickupDistance)
+                iconContainer.SetOpenHand();
 
-        if (!pickUp.heldObject)
+            //can have an else with another icon
+        }
+
+        else if (!pickUp.heldObject)
         {
             if (distance <= pickUp.MaxPickupDistance)
             {
