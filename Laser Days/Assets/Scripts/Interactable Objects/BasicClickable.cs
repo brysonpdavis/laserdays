@@ -8,6 +8,11 @@ public class BasicClickable : FlippableObject {
 
     private float originalVelocity = 10f;
     public AudioClip overridePop;
+    //public AudioClip collide;
+    private MFPP.SoundContainerAsset sounds;
+    private bool wait = false;
+    private float waitTime = .2f;
+
 
     public override void Pickup () 
     {
@@ -30,6 +35,7 @@ public class BasicClickable : FlippableObject {
     public override void Drop()
     {
         StopAllCoroutines();
+        wait = false;
         currentPositionVelocity = originalVelocity;
 
         //put the object down with the right shader
@@ -138,6 +144,28 @@ public class BasicClickable : FlippableObject {
 
     public override bool Flippable { get { return true; } }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!wait && gameObject.layer == Toolbox.Instance.GetPlayer().layer-5)
+        {
+            audioSource.clip = Toolbox.Instance.testercubeSounds.main.GetRandomSoundClip();
 
+            //Vector3 vel = rigidbody.velocity / 6f;
+            //float value = Vector3.ClampMagnitude(vel, 1f).magnitude;
+            //Debug.Log(value);
+            audioSource.volume = Toolbox.Instance.soundEffectsVolume; //* value;
+            audioSource.Play();
+            StartCoroutine(WaitTime());
+                   
+        }
+    }
+
+    private IEnumerator WaitTime()
+    {
+        wait = true;
+        yield return new WaitForSeconds(waitTime);
+        wait = false;
+        yield return null;
+    }
 
 }

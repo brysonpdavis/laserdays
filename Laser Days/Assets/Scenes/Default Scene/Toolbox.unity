@@ -113,6 +113,57 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &256858284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 256858286}
+  - component: {fileID: 256858285}
+  m_Layer: 0
+  m_Name: Toolbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &256858285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 256858284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049133b1df625428c94d38ebee1e299b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalFlipSpeed: 0.4
+  globalRealLaserFlipSpeed: 0.2
+  UIColorA: {r: 0, g: 0, b: 0, a: 0}
+  UIColorB: {r: 0, g: 0, b: 0, a: 0}
+  UIColorC: {r: 0, g: 0, b: 0, a: 0}
+  laserCore: {fileID: 4800000, guid: a39c5e86e389449c4a5e4c5e46bdb175, type: 3}
+  realCore: {fileID: 4800000, guid: 748e4e00c886545d1bbe77d010912367, type: 3}
+  pauseMenu: {fileID: 0}
+  soundEffectsSlider: {fileID: 0}
+  soundEffectsVolume: 0
+  testercubeSounds: {fileID: 11400000, guid: c806353e8dd0c4c06a2f18426172b6eb, type: 2}
+--- !u!4 &256858286
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 256858284}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &769794928
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +193,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _version: 1
-  _crossSceneReferences: []
+  _crossSceneReferences:
+  - _sourceObject: {fileID: 256858285}
+    _sourceField: soundEffectsSlider
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: df0f231b6bd9c4986935ffb3bb371956
+        name: Default_Main_Player
+        _path: Assets/Scenes/Default Scene/Default_Main_Player.unity
+      fullPath: /Canvas/PauseMenu/Sound Effect Volume
+      componentName: UnityEngine.UI.Slider, UnityEngine.UI, Version=1.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      componentIndex: 0
+      editorLocalId: 925116528
+      editorPrefabRelativePath: PauseMenu/Sound Effect Volume
+      version: 1
+    _data:
+      data: []
+  - _sourceObject: {fileID: 256858285}
+    _sourceField: pauseMenu
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: df0f231b6bd9c4986935ffb3bb371956
+        name: Default_Main_Player
+        _path: Assets/Scenes/Default Scene/Default_Main_Player.unity
+      fullPath: /Canvas/PauseMenu
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 925116528
+      editorPrefabRelativePath: PauseMenu
+      version: 1
+    _data:
+      data: []
   _realSceneRootsForPostBuild: []
   _mergedScenes: []
 --- !u!114 &769794930
@@ -170,5 +274,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

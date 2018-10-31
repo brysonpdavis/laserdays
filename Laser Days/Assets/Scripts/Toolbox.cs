@@ -28,6 +28,7 @@ public class Toolbox : Singleton<Toolbox> {
     public Slider soundEffectsSlider;
     public float soundEffectsVolume;
     public IList<Material> sharedMaterials;
+    public MFPP.SoundContainerAsset testercubeSounds;
 
 
  
@@ -202,6 +203,7 @@ public class Toolbox : Singleton<Toolbox> {
             Toolbox.Instance.realCore = realCore;
             Toolbox.Instance.laserCore = laserCore;
             Toolbox.Instance.pauseMenu = pauseMenu;
+            Toolbox.Instance.testercubeSounds = testercubeSounds;
         }
     }
 
