@@ -113,6 +113,64 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &3337026
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 744613355}
+    m_Modifications:
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 18.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -15.999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_RootOrder
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432939790174982, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_Name
+      value: WALL_2x4x1 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.0000017
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.0000017
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e456212d346944b67a0a423e02bf6664, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &14632754
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &103103589
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -705,7 +763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &106091525
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -774,7 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &125113458
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1040,7 +1098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &193868804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,7 +1443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &287007541
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1439,7 +1497,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 22.000004
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1447,7 +1505,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -15.999998
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1700,7 +1758,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4800364025960860, guid: 298718ca63583433391d546b6389fa8f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -15
+      value: -9.5
       objectReference: {fileID: 0}
     - target: {fileID: 4800364025960860, guid: 298718ca63583433391d546b6389fa8f, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1725,7 +1783,7 @@ Prefab:
     - target: {fileID: 114926542151533148, guid: 298718ca63583433391d546b6389fa8f,
         type: 2}
       propertyPath: playerBoostAmount
-      value: 6
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4800364025960860, guid: 298718ca63583433391d546b6389fa8f, type: 2}
       propertyPath: m_LocalScale.x
@@ -2317,7 +2375,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -16
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3230,7 +3288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &529651933
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3548,7 +3606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!65 &580906482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3849,7 +3907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &614705940
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3966,7 +4024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!54 &614842381
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4154,7 +4212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &633606371
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4592,7 +4650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &709909968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5362,7 +5420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &768133077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5565,7 +5623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &793490601
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5845,7 +5903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &826054428
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6035,7 +6093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &841915342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6665,7 +6723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &910619992
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6788,7 +6846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &947810949
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6901,7 +6959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &952289200
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6970,7 +7028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &970567376
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7316,7 +7374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &991225194
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7481,7 +7539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &992880864
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7773,7 +7831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &1047342074
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8281,6 +8339,11 @@ Prefab:
       propertyPath: difficulty
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 135485572208877420, guid: ff160c47402d6406d9c4124b589bea50,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
   m_IsPrefabParent: 0
@@ -8330,6 +8393,7 @@ MonoBehaviour:
   platformTriggers: []
   RestingColor: {r: 0, g: 0, b: 0, a: 0}
   ActiveColor: {r: 0.024692152, g: 3.4555535, b: 0, a: 0}
+  ShimmerColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1107436512
 Transform:
   m_ObjectHideFlags: 0
@@ -8875,7 +8939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &1157431086
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8998,7 +9062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &1180102443
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9212,7 +9276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &1195670990
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9399,7 +9463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!54 &1202897230
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9484,6 +9548,77 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1202897226}
   m_Mesh: {fileID: 4300002, guid: 5dcb2b022bef04ce794a5fd3ff972f71, type: 3}
+--- !u!1001 &1220499847
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1106666465}
+    m_Modifications:
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 20.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145302355954886, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_Name
+      value: FLOOR_4x4x0.5 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23451152735237018, guid: 55029670829bc433690cb5909d505f2b,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b65a55f8d0d3454eb2dd25aadd931ec, type: 2}
+    - target: {fileID: 1145302355954886, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358298692602908, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907533742573892, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 55029670829bc433690cb5909d505f2b, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1220510610
 GameObject:
   m_ObjectHideFlags: 0
@@ -10764,7 +10899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &1508320648
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11318,7 +11453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &1633203063
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -11404,7 +11539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!65 &1652497880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11931,7 +12066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!23 &1752710077
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12227,7 +12362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!65 &1827038090
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12904,7 +13039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!54 &1994073499
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13213,7 +13348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &2029534904
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -13511,7 +13646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!33 &2123609831
 MeshFilter:
   m_ObjectHideFlags: 0

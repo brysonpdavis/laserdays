@@ -2114,11 +2114,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4978384008116886, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 4.75
       objectReference: {fileID: 0}
     - target: {fileID: 4978384008116886, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8.5
+      value: -8.75
       objectReference: {fileID: 0}
     - target: {fileID: 4978384008116886, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2130,11 +2130,25 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4978384008116886, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4978384008116886, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 135485572208877420, guid: ff160c47402d6406d9c4124b589bea50,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 135485572208877420, guid: ff160c47402d6406d9c4124b589bea50,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4696201974585052, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 65560449512967876, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
@@ -2237,7 +2251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea442527bfda48a8a679061f6607ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.4
 --- !u!1001 &411461336
 Prefab:
   m_ObjectHideFlags: 0
@@ -3292,6 +3305,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserBackgroundContainer: {fileID: 0}
   realBackgroundContainer: {fileID: 0}
+  realTransitionController: {fileID: 0}
+  laserTransitionController: {fileID: 0}
 --- !u!1001 &663254029
 Prefab:
   m_ObjectHideFlags: 0
@@ -3384,7 +3399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea442527bfda48a8a679061f6607ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.4
 --- !u!1001 &686645636
 Prefab:
   m_ObjectHideFlags: 0
@@ -4415,7 +4429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea442527bfda48a8a679061f6607ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.4
 --- !u!4 &937801693 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4440704273592894, guid: f33f48fb0bdb446edbf69f90aab1ab13,
