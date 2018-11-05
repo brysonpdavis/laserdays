@@ -17,6 +17,8 @@ public class PlatformMover : MonoBehaviour {
     private RaycastManager raycastManager;
     private MFPP.Modules.PickUpModule pickUp;
     private LineRenderer LR;
+    private AudioSource audio;
+    private bool playerLayer;
 
     private void Start()
     {
@@ -40,21 +42,44 @@ public class PlatformMover : MonoBehaviour {
         LR.SetPosition(1, finish);
         LR.material.SetColor("_RestingColor", RC);
         LR.material.SetColor("_ActiveColor", AC);
+
+        //setup the audio
+        if (!GetComponent<AudioSource>())
+            this.gameObject.AddComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
+        audio.spatialBlend = 1f;
     }
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
     {
-        //Debug.Log("moving again" + this.name);
+        yield return new WaitForSeconds(.5f);
+        PlayAudio(SoundBox.Instance.platformStart);
+        yield return new WaitForSeconds(SoundBox.Instance.platformStart.length);
+
+        audio.loop = true;
+        PlayAudio(SoundBox.Instance.platformRunning);
+
         float elapsedTime = 0;
         float ratio = elapsedTime / (duration * durationMultiplier);
         checkObjectsPlace();
         PlatformObjectsUnselectable();
 
-        yield return new WaitForSeconds(.5f);
+        //yield return new WaitForSeconds(.5f);
+        //play starting sound
 
 
         while (ratio < 1f)
         {
+
+            if (!playerLayer)
+            {
+                audio.mute = true;
+            }
+            else
+                audio.mute = false;
+
+
+
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / (duration * durationMultiplier);
             transform.position = Vector3.Lerp(startPos, endPos, ratio);
@@ -66,7 +91,28 @@ public class PlatformMover : MonoBehaviour {
         yield return null;
 
 
+        audio.mute = true;
+        audio.loop = false;
+        yield return new WaitForSeconds(.2f);
+        audio.Stop();
+        audio.mute = false;
+        PlayAudio(SoundBox.Instance.platformEnd);
+    }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        if (audio && audio.isPlaying)
+            audio.Stop();
+    }
+
+    private void Update()
+    {
+        if (Toolbox.Instance.GetPlayer().layer == (gameObject.layer + 5))
+            playerLayer = true;
+        else
+            playerLayer = false;
+            
     }
 
     public void MovePlatform(Vector3 startPos, Vector3 endPos, float duration)
@@ -140,7 +186,15 @@ public class PlatformMover : MonoBehaviour {
     }
 
 
-
+    void PlayAudio(AudioClip clip)
+    {
+        if (playerLayer)
+        {
+            audio.clip = clip;
+            audio.volume = Toolbox.Instance.soundEffectsVolume;
+            audio.Play();
+        }
+    }
 
     void checkObjectsPlace(){
 

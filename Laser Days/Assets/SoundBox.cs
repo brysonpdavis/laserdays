@@ -32,6 +32,10 @@ public class SoundBox : Singleton<SoundBox> {
 
     public AudioClip pop;
 
+    public AudioClip platformStart;
+    public AudioClip platformEnd;
+    public AudioClip platformRunning;
+
     public void Start()
     {
         thisSource = GetComponent<AudioSource>();
