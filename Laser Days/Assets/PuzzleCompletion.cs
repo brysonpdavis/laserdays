@@ -62,6 +62,7 @@ public class PuzzleCompletion : MonoBehaviour {
         }
 
         StartCoroutine(TransitionLaserOff());
+        core.GetComponent<Collider>().enabled = false;
 
 
     }
@@ -75,6 +76,12 @@ public class PuzzleCompletion : MonoBehaviour {
             innerRing.Rotate(innerRotX * Time.deltaTime, innerRotY * Time.deltaTime, innerRotZ * Time.deltaTime);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("what");
+        if (other.CompareTag("Player"))
+            CompletionInteract();
+    }
 
     private IEnumerator TransitionLaserOff()
     {
