@@ -1,6 +1,9 @@
 Shader "Hidden/GlobalFog" {
 Properties {
 	_MainTex ("Base (RGB)", 2D) = "black" {}
+    _BlastDistance("Blast Distance", float) = 0
+    _BlastWidth("Scan Width", float) = 4
+    _BlastColor("Blast Color", Color) = (0,0,0,0) 
 }
 
 CGINCLUDE
@@ -21,6 +24,11 @@ CGINCLUDE
 	
 	int4 _SceneFogMode; // x = fog mode, y = use radial flag
 	float4 _SceneFogParams;
+    
+    float _BlastDistance;
+    float _BlastWidth;
+    uniform float4 _BlastColor;
+    
 	#ifndef UNITY_APPLY_FOG
 	half4 unity_FogColor;
 	half4 unity_FogDensity;
@@ -132,6 +140,8 @@ CGINCLUDE
 		float dpth = Linear01Depth(rawDepth);
 		float4 wsDir = dpth * i.interpolatedRay;
 		float4 wsPos = _CameraWS + wsDir;
+        
+        float4 blastCol;
 
 		// Compute fog distance
 		float g = _DistanceParams.x;
@@ -149,7 +159,23 @@ CGINCLUDE
 		
 		// Lerp between fog color & original scene color
 		// by fog amount
-		return lerp (unity_FogColor, sceneColor, fogFac);
+        
+        float4 fff = lerp (unity_FogColor, sceneColor, fogFac);
+        
+        float amt;
+        
+        if(g < _BlastDistance && g > _BlastDistance - _BlastWidth)
+        {
+            amt = _BlastColor.a;
+            float diff = 1 - (_BlastDistance - g) / (_BlastWidth);
+            amt *= diff;
+        
+        } else 
+        {
+            amt = 0;
+        }
+        
+		return lerp (fff, _BlastColor, amt);
 	}
 
 ENDCG

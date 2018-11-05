@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEditor.ShaderGraph;
 
 namespace UnityStandardAssets.ImageEffects
 {
@@ -25,11 +26,19 @@ namespace UnityStandardAssets.ImageEffects
         public float edgeExp = 1.0f;
         public float sampleDist = 1.0f;
         public float edgesOnly = 0.0f;
-        public Color edgesOnlyBgColor = Color.white;
+        private Color edgesOnlyBgColor = Color.white;
+
+        public Color LC;
+        public Color RC;
+
+        private bool Animating;
+        private float num = 0;
+        public float speed;
 
         public Shader edgeDetectShader;
         private Material edgeDetectMaterial = null;
         private EdgeDetectMode oldMode = EdgeDetectMode.SobelDepthThin;
+
 
 
         public override bool CheckResources ()
@@ -45,6 +54,30 @@ namespace UnityStandardAssets.ImageEffects
             if (!isSupported)
                 ReportAutoDisable ();
             return isSupported;
+        }
+
+        private void Update()
+        {
+            if(Animating){
+                num += speed;
+                Mathf.Clamp(num, 0f, 1f);
+                edgesOnlyBgColor = Color.Lerp(RC, LC, num);
+                if(num <= 0f || num >= 1f){
+                    Animating = false;
+                }
+            } 
+        }
+
+        public void Shift(bool toLaser){
+
+            if(toLaser){
+                speed = Mathf.Abs(speed);
+            } else {
+                speed = - Mathf.Abs(speed);
+            }
+
+            Animating = true;
+
         }
 
 

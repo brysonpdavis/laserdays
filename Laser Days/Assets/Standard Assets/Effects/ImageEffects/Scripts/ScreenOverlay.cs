@@ -19,10 +19,16 @@ namespace UnityStandardAssets.ImageEffects
 
         public OverlayBlendMode blendMode = OverlayBlendMode.Overlay;
         public float intensity = 1.0f;
+        private float currIntensity = 1.0f;
         public Texture2D texture = null;
 
         public Shader overlayShader = null;
         private Material overlayMaterial = null;
+
+        private bool Animating;
+        private float num = 0f;
+
+        public float speed = 0.07f;
 
 
         public override bool CheckResources ()
@@ -36,6 +42,42 @@ namespace UnityStandardAssets.ImageEffects
             return isSupported;
         }
 
+        private void Update()
+        {
+            if (Animating)
+            {
+                num += speed;
+                Mathf.Clamp(num, 0f, 1f);
+                currIntensity = (num) * intensity;
+                if (num <= 0f || num >= 1f)
+                {
+                    Animating = false;
+                }
+            }
+        }
+
+        public void Shift(bool toLaser)
+        {
+
+            if (toLaser)
+            {
+                speed = Mathf.Abs(speed);
+            }
+            else
+            {
+                speed = -Mathf.Abs(speed);
+            }
+
+            Animating = true;
+
+        }
+
+
+
+
+
+
+        [ImageEffectOpaque]
         void OnRenderImage (RenderTexture source, RenderTexture destination)
 		{
             if (CheckResources() == false)
@@ -61,7 +103,7 @@ namespace UnityStandardAssets.ImageEffects
 			#endif
 
             overlayMaterial.SetVector("_UV_Transform", UV_Transform);
-            overlayMaterial.SetFloat ("_Intensity", intensity);
+            overlayMaterial.SetFloat ("_Intensity", currIntensity);
             overlayMaterial.SetTexture ("_Overlay", texture);
             Graphics.Blit (source, destination, overlayMaterial, (int) blendMode);
         }

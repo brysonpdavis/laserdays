@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 [DisallowMultipleComponent]
 
@@ -21,7 +22,12 @@ public class flipScript : MonoBehaviour {
     public AudioClip flipFailClip;
     public bool flippedThisFrame = false;
 
-	RaycastManager rm;
+    private UnityStandardAssets.ImageEffects.GlobalFog Fogger;
+    private UnityStandardAssets.ImageEffects.EdgeDetection Edger;
+    private UnityStandardAssets.ImageEffects.ScreenOverlay Over;
+
+
+    RaycastManager rm;
     private string SoundtrackButton = "Submit";
 
 
@@ -46,8 +52,11 @@ public class flipScript : MonoBehaviour {
 
         //Debug.Log(Camera.main.fieldOfView);
 
+        Fogger = Camera.main.GetComponent<GlobalFog>();
+        Edger = Camera.main.GetComponent<EdgeDetection>();
+        Over = Camera.main.GetComponent<ScreenOverlay>();
 
-		pc = GetComponent<PlayerCharge>();
+        pc = GetComponent<PlayerCharge>();
         audioSource = GetComponent<AudioSource>();
 		rm = GetComponent<RaycastManager>();
         SoundBox box = GetComponent<SoundBox>();
@@ -115,19 +124,26 @@ public class flipScript : MonoBehaviour {
 
         space = !space;
 
+       
+
         //change the layer that the player is on, for changing its collision detection
         if (space)
         { player.layer = 16;  //set player to real world
                 GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
            // Camera.main.GetComponent<CameraTransition>().Flip(true);
             GetComponent<SkyboxTransition>().Flip(true);
+            //Fogger.Blast(false);
+            //Edger.Shift(false);
+            //Over.Shift(false);
 
         } 
         else { player.layer = 15; //set player to laser world
             GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
                                                                                       //   Camera.main.GetComponent<CameraTransition>().Flip(false);
             GetComponent<SkyboxTransition>().Flip(false);
-
+            //Fogger.Blast(true);
+            //Edger.Shift(true);
+            //Over.Shift(true);
         } 
 
 

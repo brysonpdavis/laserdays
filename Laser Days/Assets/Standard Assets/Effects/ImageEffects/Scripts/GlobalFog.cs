@@ -6,7 +6,7 @@ namespace UnityStandardAssets.ImageEffects
     [ExecuteInEditMode]
     [RequireComponent (typeof(Camera))]
     [AddComponentMenu ("Image Effects/Rendering/Global Fog")]
-    class GlobalFog : PostEffectsBase
+    public class GlobalFog : PostEffectsBase
 	{
 		[Tooltip("Apply distance-based fog?")]
         public bool  distanceFog = true;
@@ -23,8 +23,23 @@ namespace UnityStandardAssets.ImageEffects
 		[Tooltip("Push fog away from the camera by this amount")]
         public float startDistance = 0.0f;
 
+
+        public Color LC;
+        public Color RC;
+
+        public float StartSpeed = 20;
+        public float BlastAccel = 1;
+
+        private float BlastSpeed = 0;
+
         public Shader fogShader = null;
         private Material fogMaterial = null;
+
+
+        private float BlastDistance = 0f;
+        
+
+        bool isBlasting = false;
 
 
         public override bool CheckResources ()
@@ -36,6 +51,40 @@ namespace UnityStandardAssets.ImageEffects
             if (!isSupported)
                 ReportAutoDisable ();
             return isSupported;
+        }
+
+        private void Update()
+        {
+            if(isBlasting)
+            {
+                BlastDistance += Time.deltaTime * BlastSpeed;
+                BlastSpeed *= BlastAccel;
+            }
+
+            if(BlastDistance >=1000f)
+            {
+                isBlasting = false;
+                fogMaterial.SetColor("_BlastColor", new Color(0, 0, 0, 0));
+            }
+        }
+
+        public void Blast(bool toLaser)
+
+        {
+            Camera cam = GetComponent<Camera>();
+            Transform camtr = cam.transform;
+            if(toLaser){
+                fogMaterial.SetColor("_BlastColor", LC);
+
+            } else {
+
+                fogMaterial.SetColor("_BlastColor", RC);
+            }
+            isBlasting = true;
+            BlastDistance = 2f;
+            BlastSpeed = StartSpeed;
+
+
         }
 
         [ImageEffectOpaque]
@@ -86,6 +135,7 @@ namespace UnityStandardAssets.ImageEffects
             sceneParams.w = linear ? sceneEnd * invDiff : 0.0f;
             fogMaterial.SetVector("_SceneFogParams", sceneParams);
             fogMaterial.SetVector("_SceneFogMode", new Vector4((int)sceneMode, useRadialDistance ? 1 : 0, 0, 0));
+            fogMaterial.SetFloat("_BlastDistance", BlastDistance);
 
             int pass = 0;
             if (distanceFog && heightFog)
@@ -94,6 +144,9 @@ namespace UnityStandardAssets.ImageEffects
                 pass = 1; // distance only
             else
                 pass = 2; // height only
+
+
+
             Graphics.Blit(source, destination, fogMaterial, pass);
         }
     }
