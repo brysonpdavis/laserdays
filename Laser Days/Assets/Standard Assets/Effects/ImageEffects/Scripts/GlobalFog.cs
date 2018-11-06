@@ -66,6 +66,7 @@ namespace UnityStandardAssets.ImageEffects
                 isBlasting = false;
                 fogMaterial.SetColor("_BlastColor", new Color(0, 0, 0, 0));
             }
+        
         }
 
         public void Blast(bool toLaser)

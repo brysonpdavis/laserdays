@@ -132,8 +132,8 @@ public class flipScript : MonoBehaviour {
                 GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
            // Camera.main.GetComponent<CameraTransition>().Flip(true);
             GetComponent<SkyboxTransition>().Flip(true);
-            //Fogger.Blast(false);
-            //Edger.Shift(false);
+            Fogger.Blast(false);
+            Edger.Shift(false);
             //Over.Shift(false);
 
         } 
@@ -141,8 +141,8 @@ public class flipScript : MonoBehaviour {
             GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
                                                                                       //   Camera.main.GetComponent<CameraTransition>().Flip(false);
             GetComponent<SkyboxTransition>().Flip(false);
-            //Fogger.Blast(true);
-            //Edger.Shift(true);
+           Fogger.Blast(true);
+            Edger.Shift(true);
             //Over.Shift(true);
         } 
 

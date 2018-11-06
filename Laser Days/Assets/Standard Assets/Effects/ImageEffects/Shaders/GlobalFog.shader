@@ -2,8 +2,8 @@ Shader "Hidden/GlobalFog" {
 Properties {
 	_MainTex ("Base (RGB)", 2D) = "black" {}
     _BlastDistance("Blast Distance", float) = 0
-    _BlastWidth("Scan Width", float) = 4
-    _BlastColor("Blast Color", Color) = (0,0,0,0) 
+    _BlastWidth("Scan Width", float) = 10
+    _BlastColor("Blast Color", Color) = (0,0,0,0)
 }
 
 CGINCLUDE
@@ -164,10 +164,10 @@ CGINCLUDE
         
         float amt;
         
-        if(g < _BlastDistance && g > _BlastDistance - _BlastWidth)
+        if(g < (_BlastDistance + _BlastWidth/2) && g > (_BlastDistance - _BlastWidth/2))
         {
             amt = _BlastColor.a;
-            float diff = 1 - (_BlastDistance - g) / (_BlastWidth);
+            float diff = 1 - pow((abs(g - _BlastDistance)/(_BlastWidth/2)),3);
             amt *= diff;
         
         } else 
