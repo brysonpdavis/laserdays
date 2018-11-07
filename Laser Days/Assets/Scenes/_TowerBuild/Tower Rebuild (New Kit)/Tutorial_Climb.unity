@@ -2286,7 +2286,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &274869378
 BoxCollider:
@@ -3152,6 +3152,11 @@ Prefab:
     - target: {fileID: 4279692143730718, guid: 98ff16ca2d5cf4ee1bc4775a7b9e3e8f, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990717752534392, guid: 98ff16ca2d5cf4ee1bc4775a7b9e3e8f,
+        type: 2}
+      propertyPath: time
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98ff16ca2d5cf4ee1bc4775a7b9e3e8f, type: 2}
@@ -4524,7 +4529,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &428446472
 BoxCollider:
@@ -4551,7 +4556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: E to hold objects.
+  text: Press E to hold and drop objects.
 --- !u!1001 &435651891
 Prefab:
   m_ObjectHideFlags: 0
@@ -9009,7 +9014,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &897248699
 BoxCollider:
@@ -9036,7 +9041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: 
+  text: You can select objects from a great distance.
 --- !u!1001 &909589698
 Prefab:
   m_ObjectHideFlags: 0
@@ -9906,7 +9911,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1033727410
 BoxCollider:
@@ -9933,7 +9938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Tiles can bounce you...
+  text: Tiles can bounce you.
 --- !u!1001 &1037162076
 Prefab:
   m_ObjectHideFlags: 0
@@ -10455,6 +10460,64 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 959dd5fb315ac496f993c025ead3ea52, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1059957500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1560909165133650, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1059957501}
+  - component: {fileID: 1059957503}
+  - component: {fileID: 1059957502}
+  m_Layer: 0
+  m_Name: Move upwards.
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1059957501
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1059957500}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26.96, y: 0, z: -16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2078990460}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1059957502
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65058712319789338, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1059957500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 15.76}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1059957503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114834483706287366, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1059957500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Move upwards.
 --- !u!1001 &1061943176
 Prefab:
   m_ObjectHideFlags: 0
@@ -11824,7 +11887,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1197269146
 BoxCollider:
@@ -11851,7 +11914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Sometimes multiple buttons are needed.
+  text: Sometimes multiple goops are needed.
 --- !u!1001 &1205367595
 Prefab:
   m_ObjectHideFlags: 0
@@ -12256,7 +12319,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1263496115
 BoxCollider:
@@ -12283,7 +12346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Right click an object and it will flip when you do...
+  text: Right click an object and it will switch when you do.
 --- !u!1001 &1265067474
 Prefab:
   m_ObjectHideFlags: 0
@@ -13230,7 +13293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1357105811
 BoxCollider:
@@ -13257,7 +13320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Objects in goop can activate platforms.
+  text: Objects in goop can also activate platforms.
 --- !u!1001 &1363450470
 Prefab:
   m_ObjectHideFlags: 0
@@ -14397,7 +14460,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1512861822
 BoxCollider:
@@ -15857,7 +15920,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4575925103956882, guid: 9c5c0d0e940c34647a2e4101d9aac07a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4575925103956882, guid: 9c5c0d0e940c34647a2e4101d9aac07a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -16316,7 +16379,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1702238249
 BoxCollider:
@@ -17472,7 +17535,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1829667368
 BoxCollider:
@@ -18879,7 +18942,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078990460}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2042334136
 BoxCollider:
@@ -18906,7 +18969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: and sometimes slide.
+  text: Tiles can slide as well.
 --- !u!1 &2043279161 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1934784067310998, guid: 9c5c0d0e940c34647a2e4101d9aac07a,
@@ -19302,6 +19365,64 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e456212d346944b67a0a423e02bf6664, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2073087101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1560909165133650, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2073087102}
+  - component: {fileID: 2073087104}
+  - component: {fileID: 2073087103}
+  m_Layer: 0
+  m_Name: Completion Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2073087102
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2073087101}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 33.05, y: 66.6, z: -15.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2078990460}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2073087103
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65058712319789338, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2073087101}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2073087104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114834483706287366, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2073087101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: These symbols mark the end of a puzzle.
 --- !u!4 &2078990460 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4742952854233344, guid: ff160c47402d6406d9c4124b589bea50,
