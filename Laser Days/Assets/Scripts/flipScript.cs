@@ -10,6 +10,7 @@ public class flipScript : MonoBehaviour {
 	[SerializeField] private int envSize = 100;
 	public bool space;
 	private PlayerCharge pc;
+    private flipburst flipburst;
 
     //sounds
     private AudioSource audioSource;
@@ -20,6 +21,8 @@ public class flipScript : MonoBehaviour {
 
     public AudioClip flipFailClip;
     public bool flippedThisFrame = false;
+    public GameObject ring;
+    private GameObject currentRing;
 
 	RaycastManager rm;
     private string SoundtrackButton = "Submit";
@@ -54,6 +57,7 @@ public class flipScript : MonoBehaviour {
         flipSounds = box.currentFlipPalette;
         flipFailClip = box.flipFail;
         soundTrack = GetComponentInChildren<SoundTrackManager>();
+        flipburst = GetComponentInChildren<flipburst>();
 	}
 
 	void Update () {
@@ -112,6 +116,7 @@ public class flipScript : MonoBehaviour {
         GetComponent<MFPP.Player>().collisionLayers = null;
         bool selectedObjects = false;
         if (things.Count > 0) { selectedObjects = true; }
+        flipburst.Boom();
 
         space = !space;
 
@@ -137,6 +142,8 @@ public class flipScript : MonoBehaviour {
 			Flip(held);
 		FlipList(things);
         Toolbox.Instance.FlipSharedMaterials(space);
+        currentRing = Instantiate(ring);
+        currentRing.transform.position = transform.position;
 
 
 

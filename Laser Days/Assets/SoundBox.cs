@@ -36,6 +36,8 @@ public class SoundBox : Singleton<SoundBox> {
     public AudioClip platformEnd;
     public AudioClip platformRunning;
 
+    public AudioClip sokobanDrag;
+
     public void Start()
     {
         thisSource = GetComponent<AudioSource>();

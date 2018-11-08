@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 82602220282577372}
   - component: {fileID: 114488427273644126}
   - component: {fileID: 114124301720409138}
+  - component: {fileID: 82879620497461554}
   m_Layer: 11
   m_Name: Sokoban 2x2 Real
   m_TagString: Clickable
@@ -2765,6 +2766,101 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &82879620497461554
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048491043780162}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114043575051172302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2813,6 +2909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectType: 2
   itemName: 
+  pickupDistance: 2
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 0}
@@ -2851,7 +2948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114225450096465730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2864,7 +2961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114237938476591960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2893,7 +2990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114239636818429656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2964,7 +3061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114346947292249878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2977,7 +3074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114352819501824884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3047,7 +3144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114432132277724960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3060,7 +3157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114439162776295912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3124,7 +3221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114588099774670856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3137,7 +3234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114620661603118756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3150,7 +3247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114640018007528532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3163,7 +3260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114682582086454848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3232,7 +3329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114741878187279304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3245,7 +3342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114811319580140856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3258,7 +3355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114924018702818818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3271,7 +3368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!114 &114944117232530832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3335,7 +3432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  sharedMaterial: 0
 --- !u!120 &120764887071781294
 LineRenderer:
   m_ObjectHideFlags: 1

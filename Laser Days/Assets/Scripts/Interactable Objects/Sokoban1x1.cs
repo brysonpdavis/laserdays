@@ -18,6 +18,13 @@ public class Sokoban1x1 : InteractableObject {
 
         player.Movement.Speed = 1;
         player.GetComponent<MFPP.Modules.BobModule>().BobSpeed = 1.5f;
+        selected = true;
+        latestPosition = transform.position;
+
+        audio.clip = SoundBox.Instance.sokobanDrag;
+        audio.volume = Toolbox.Instance.soundEffectsVolume;
+        audio.loop = true;
+        audio.Play();
 
     }
 
@@ -46,11 +53,17 @@ public class Sokoban1x1 : InteractableObject {
         rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         rigidbody.isKinematic = true;
         ResetWalk();
+        audio.Stop();
     }
 
     public override void SetType()
     {
         objectType = ObjectType.Sokoban1x1;
+
+        if (audio)
+        {
+            audio.clip = SoundBox.Instance.sokobanDrag;
+        }
     }
 
     public override void DistantIconHover()
@@ -66,5 +79,11 @@ public class Sokoban1x1 : InteractableObject {
     public override void InteractingIconHover()
     {
         iconContainer.SetDrag();
+    }
+
+    private void LateUpdate()
+    {
+        CheckMovement();
+        latestPosition = transform.position;
     }
 }

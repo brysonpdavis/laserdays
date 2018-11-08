@@ -22,6 +22,8 @@ abstract public class InteractableObject : MonoBehaviour
     protected ParticleSystem particleSystem;
     protected SelectionRenderChange selectionRenderChange;
     [SerializeField] protected float pickupDistance = 2f;
+    protected Vector3 latestPosition;
+    protected AudioSource audio;
 
     private float multiplier;
     public bool selected = false;
@@ -64,6 +66,7 @@ abstract public class InteractableObject : MonoBehaviour
         iconContainer = Toolbox.Instance.GetIconContainer();
         raycastManager = Toolbox.Instance.GetRaycastManager();
         pickUp = Toolbox.Instance.GetPickUp();
+        audio = GetComponent<AudioSource>();
 
         if (GetComponent<Rigidbody>())
         {
@@ -174,5 +177,24 @@ abstract public class InteractableObject : MonoBehaviour
             iconContainer.SetInteractHover();
         
     }
+
+    protected virtual void CheckMovement()
+    {
+        if (selected && !latestPosition.Equals(transform.position))
+        {
+            Debug.Log(rigidbody.velocity.magnitude * Toolbox.Instance.soundEffectsVolume);
+            //Debug.Log((latestPosition - transform.position).magnitude * Toolbox.Instance.soundEffectsVolume * 50f);
+            audio.volume = (rigidbody.velocity.magnitude * Toolbox.Instance.soundEffectsVolume);
+            //audio.volume = (latestPosition - transform.position).magnitude * Toolbox.Instance.soundEffectsVolume * 50f; //volume * movement;
+            audio.mute = false;
+        }
+
+        else 
+        {
+            audio.mute = true;
+
+        }
+    }
+
 
 }
