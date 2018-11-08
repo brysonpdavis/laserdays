@@ -12,6 +12,16 @@ public class flipScript : MonoBehaviour {
 	public bool space;
 	private PlayerCharge pc;
 
+    public GameObject ring;
+    private GameObject CurrentRing;
+
+    private shake Shake;
+    private flipburst ps;
+
+    public float camShakeDur = 0f;
+    public float camShakeMag = 0f;
+
+
     //sounds
     private AudioSource audioSource;
     public AudioSource audioSourceSecondary;
@@ -56,9 +66,14 @@ public class flipScript : MonoBehaviour {
         Edger = Camera.main.GetComponent<EdgeDetection>();
         Over = Camera.main.GetComponent<ScreenOverlay>();
 
+        ps = GetComponentInChildren<flipburst>();
+
         pc = GetComponent<PlayerCharge>();
         audioSource = GetComponent<AudioSource>();
 		rm = GetComponent<RaycastManager>();
+
+        Shake = Camera.main.GetComponent<shake>();
+
         SoundBox box = GetComponent<SoundBox>();
         flipSounds = box.currentFlipPalette;
         flipFailClip = box.flipFail;
@@ -124,7 +139,17 @@ public class flipScript : MonoBehaviour {
 
         space = !space;
 
-       
+        CurrentRing = Instantiate(ring);
+       CurrentRing.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+
+        Shake.stopYOU();
+        StartCoroutine(Shake.Shake(camShakeDur, camShakeMag));
+
+
+        ps.Boom();
+
+
 
         //change the layer that the player is on, for changing its collision detection
         if (space)
@@ -132,18 +157,18 @@ public class flipScript : MonoBehaviour {
                 GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
            // Camera.main.GetComponent<CameraTransition>().Flip(true);
             GetComponent<SkyboxTransition>().Flip(true);
-            Fogger.Blast(false);
+            //Fogger.Blast(false);
             Edger.Shift(false);
-            //Over.Shift(false);
+            Over.Shift(false);
 
         } 
         else { player.layer = 15; //set player to laser world
             GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
                                                                                       //   Camera.main.GetComponent<CameraTransition>().Flip(false);
             GetComponent<SkyboxTransition>().Flip(false);
-           Fogger.Blast(true);
+           //Fogger.Blast(true);
             Edger.Shift(true);
-            //Over.Shift(true);
+            Over.Shift(true);
         } 
 
 

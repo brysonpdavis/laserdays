@@ -26,7 +26,7 @@ namespace UnityStandardAssets.ImageEffects
         public float edgeExp = 1.0f;
         public float sampleDist = 1.0f;
         public float edgesOnly = 0.0f;
-        private Color edgesOnlyBgColor = Color.white;
+        private Color edgesOnlyBgColor = Color.black;
 
         public Color LC;
         public Color RC;
