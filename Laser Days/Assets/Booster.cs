@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Utility;
 
 public class Booster : MonoBehaviour {
 
@@ -11,6 +12,14 @@ public class Booster : MonoBehaviour {
     GameObject player;
     private MFPP.Modules.PickUpModule pickUp;
     private SoundBox box;
+
+
+    public int count = 1;
+    public GameObject ring;
+    private GameObject currentRing;
+
+
+
 
 
     private void Start()
@@ -32,6 +41,8 @@ public class Booster : MonoBehaviour {
         {
             other.GetComponent<MFPP.Player>().FinalMovement = new Vector3(0f, 0f, 0f);
             StartCoroutine(OnBoost(other.gameObject));
+            Burst();
+
         }
 
         else if (affectsObjects && other.GetComponent<Rigidbody>()){
@@ -40,6 +51,8 @@ public class Booster : MonoBehaviour {
             startVelocity.y = 0f;
             other.GetComponent<Rigidbody>().velocity = startVelocity;
             other.GetComponent<Rigidbody>().AddForce(transform.up * boostAmount, ForceMode.Impulse);
+            Burst();
+
         }
 
         if (GetComponent<Renderer>()){
@@ -57,7 +70,22 @@ public class Booster : MonoBehaviour {
 
 
 }
+    private void Burst()
+    {
+        if (gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer)
+        {
 
+
+            for (int i = 0; i < count; i++)
+            {
+                currentRing = Instantiate(ring);
+                currentRing.transform.position = transform.parent.transform.position;
+                currentRing.GetComponent<BoostPulse>().Pulse(i * 0.1f);
+            }
+        }
+
+
+    }
     private void OnTriggerExit(Collider other)
     {
         StartCoroutine(RenderActivationOff());
@@ -81,6 +109,7 @@ public class Booster : MonoBehaviour {
     {
         player.GetComponent<MFPP.Player>().IsBouncing = true;
         float finalBoost = playerBoostAmount;
+
         if (player.GetComponent<MFPP.Player>().IsJumping)
         {
             //makes sure it doesn't magnify jump and boost if the player does both at the same time
@@ -95,6 +124,9 @@ public class Booster : MonoBehaviour {
         boost *= finalBoost;
         obj.GetComponent<MFPP.Player>().AddImpulse(boost);
         //Debug.Log("boosting");
+
+        //Burst();
+
 
         finalBoost = playerBoostAmount; //resets the player boost for next run
         yield return null;
