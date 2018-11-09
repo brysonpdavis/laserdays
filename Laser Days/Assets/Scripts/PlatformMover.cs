@@ -48,6 +48,7 @@ public class PlatformMover : MonoBehaviour {
             this.gameObject.AddComponent<AudioSource>();
         audio = GetComponent<AudioSource>();
         audio.spatialBlend = 1f;
+        audio.playOnAwake = false;
     }
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)

@@ -15,6 +15,7 @@ public class DoorMover : MonoBehaviour {
         controller = GetComponentInParent<DoorController>();
         gameObject.AddComponent<AudioSource>();
         audio = GetComponent<AudioSource>();
+        audio.playOnAwake = false;
         audio.clip = SoundBox.Instance.doorActive;
         audio.loop = true;
 	}
