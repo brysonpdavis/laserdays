@@ -8,6 +8,9 @@ public class Booster : MonoBehaviour {
     public float playerBoostAmount = 10;
     public bool affectsPlayer = false;
     public bool affectsObjects = true;
+
+    private ParticleSystem particleSystem;
+
     GameObject player;
     private MFPP.Modules.PickUpModule pickUp;
     private SoundBox box;
@@ -18,6 +21,8 @@ public class Booster : MonoBehaviour {
         player = Toolbox.Instance.GetPlayer();
         box = player.GetComponent<SoundBox>();
         pickUp = player.GetComponent<MFPP.Modules.PickUpModule>();
+
+        particleSystem = transform.parent.GetComponentInChildren<ParticleSystem>();
     }
 
 
@@ -32,6 +37,7 @@ public class Booster : MonoBehaviour {
         {
             other.GetComponent<MFPP.Player>().FinalMovement = new Vector3(0f, 0f, 0f);
             StartCoroutine(OnBoost(other.gameObject));
+            Boom();
         }
 
         else if (affectsObjects && other.GetComponent<Rigidbody>()){
@@ -40,6 +46,7 @@ public class Booster : MonoBehaviour {
             startVelocity.y = 0f;
             other.GetComponent<Rigidbody>().velocity = startVelocity;
             other.GetComponent<Rigidbody>().AddForce(transform.up * boostAmount, ForceMode.Impulse);
+            Boom();
         }
 
         if (GetComponent<Renderer>()){
@@ -77,11 +84,31 @@ public class Booster : MonoBehaviour {
         yield return null;
     }
 
+    private void Boom()
+    {
+
+        ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 5);
+
+        var main = particleSystem.main;
+        main.startLifetime = 0.4f;
+        //particleSystem.main.startLifetime = .5f;
+        particleSystem.emission.SetBurst(0, burst);
+        particleSystem.Play();
+    }
+
+
+
+
+
     private IEnumerator OnBoost(GameObject obj)
     {
         player.GetComponent<MFPP.Player>().IsBouncing = true;
         float finalBoost = playerBoostAmount;
+
+      
         if (player.GetComponent<MFPP.Player>().IsJumping)
+
+
         {
             //makes sure it doesn't magnify jump and boost if the player does both at the same time
             //Debug.Log("yo");

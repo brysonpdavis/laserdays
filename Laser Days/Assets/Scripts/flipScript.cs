@@ -158,7 +158,7 @@ public class flipScript : MonoBehaviour {
            // Camera.main.GetComponent<CameraTransition>().Flip(true);
             GetComponent<SkyboxTransition>().Flip(true);
             //Fogger.Blast(false);
-            Edger.Shift(false);
+            //Edger.Shift(false);
             Over.Shift(false);
 
         } 
@@ -167,7 +167,7 @@ public class flipScript : MonoBehaviour {
                                                                                       //   Camera.main.GetComponent<CameraTransition>().Flip(false);
             GetComponent<SkyboxTransition>().Flip(false);
            //Fogger.Blast(true);
-            Edger.Shift(true);
+            //Edger.Shift(true);
             Over.Shift(true);
         } 
 

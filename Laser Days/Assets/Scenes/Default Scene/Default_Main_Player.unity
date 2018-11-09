@@ -5362,9 +5362,9 @@ MonoBehaviour:
   edgeExp: 3.05
   sampleDist: 1
   edgesOnly: 1
-  LC: {r: 0, g: 0, b: 0, a: 0.7254902}
-  RC: {r: 0, g: 0, b: 0, a: 0.73333335}
-  speed: 0.07
+  LC: {r: 0, g: 0, b: 0, a: 0}
+  RC: {r: 0, g: 0, b: 0, a: 0}
+  speed: 0
   edgeDetectShader: {fileID: 4800000, guid: 0d1644bdf064147baa97f235fc5b4903, type: 3}
 --- !u!114 &1198232344
 MonoBehaviour:
@@ -5384,10 +5384,10 @@ MonoBehaviour:
   height: 1
   heightDensity: 2
   startDistance: 0
-  LC: {r: 1, g: 0.575119, b: 0.3066038, a: 0.27450982}
-  RC: {r: 0.033374865, g: 0.0562498, b: 0.2830189, a: 0.3764706}
+  LC: {r: 0, g: 0, b: 0, a: 1}
+  RC: {r: 0, g: 0, b: 0, a: 1}
   StartSpeed: 20
-  BlastAccel: 1.02
+  BlastAccel: 1
   fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
 --- !u!114 &1198232345
 MonoBehaviour:
@@ -5404,7 +5404,7 @@ MonoBehaviour:
   intensity: 0
   texture: {fileID: 2800000, guid: 9adcc0227ea524a05a17b13a7927699a, type: 3}
   overlayShader: {fileID: 4800000, guid: 8c81db0e527d24acc9bcec04e87781bd, type: 3}
-  speed: 0.1
+  speed: 0.07
 --- !u!114 &1198232346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6131,7 +6131,7 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0
     donutRadius: 0.1
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 90, y: 0, z: 0}
@@ -6213,7 +6213,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 355.41
+      value: 360
       mode: 0
       spread: 0
       speed:
@@ -6457,13 +6457,13 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.8666687
+          time: 0.8500061
           value: 0
-          inSlope: 1
-          outSlope: 1
+          inSlope: 0.0862531
+          outSlope: 0.0862531
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.18577696
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -10475,8 +10475,8 @@ MonoBehaviour:
   envSize: 0
   space: 1
   ring: {fileID: 1136413369149286, guid: 004f5d4c49f5f46568b591d11b2f8b35, type: 2}
-  camShakeDur: 1
-  camShakeMag: 0.2
+  camShakeDur: 0.2
+  camShakeMag: 0
   audioSourceSecondary: {fileID: 2134396829}
   flipFailClip: {fileID: 0}
   flippedThisFrame: 1
