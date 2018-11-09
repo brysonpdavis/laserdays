@@ -19,6 +19,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     private AudioClip platformOn;
     private AudioClip platformOff;
+    private AudioClip platformTriggered;
     private AudioSource audioSource;
     private Material RenderMat;
 
@@ -34,6 +35,7 @@ public class PlatformTrigger : MonoBehaviour {
         SoundBox box = Toolbox.Instance.GetPlayer().GetComponent<SoundBox>();
         platformOn = SoundBox.Instance.platformOn;
         platformOff = SoundBox.Instance.platformOff;
+        platformTriggered = SoundBox.Instance.platformTriggered;
 
         if (this.gameObject.layer == platformContainer.layer)
         {
@@ -148,7 +150,8 @@ public class PlatformTrigger : MonoBehaviour {
 
         Toolbox.Instance.SetVolume(audioSource);
         audioSource.clip = platformOff;
-        audioSource.Play();
+        if (gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer)
+            audioSource.Play();
     }
 
     public void TriggerOn(Collider other)
@@ -158,15 +161,6 @@ public class PlatformTrigger : MonoBehaviour {
 
             counter += 1;
             on = true;
-
-
-            if (counter == 1)
-            {
-                //sound effect
-                Toolbox.Instance.SetVolume(audioSource);
-                audioSource.clip = platformOn;
-                audioSource.Play();
-            }
 
             int checkNumber = 0;
             RenderMat.SetFloat("_isCollide", 1f);
@@ -192,6 +186,7 @@ public class PlatformTrigger : MonoBehaviour {
             //make sure all necessary triggers are selected. 
             if (checkNumber == totalTriggers)
             {
+                audioSource.clip = platformOn;
                 MovePlatformToEnd();
 
                 foreach (PlatformTrigger trigger in platformTriggers)
@@ -203,6 +198,13 @@ public class PlatformTrigger : MonoBehaviour {
                     }
                 }
             }
+            else 
+                audioSource.clip = platformTriggered;
+
+            Toolbox.Instance.SetVolume(audioSource);
+            if (counter == 1 && gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer)
+                audioSource.Play();
+
         }  
     }
     public void TriggerOff(Collider other)

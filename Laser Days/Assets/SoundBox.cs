@@ -16,6 +16,7 @@ public class SoundBox : Singleton<SoundBox> {
     public AudioClip sokobanClickOn;
     public AudioClip sokobanClickOff;
     public AudioClip sokobanShift;
+    public AudioClip sokoban2x2Running;
 
     public AudioClip pickup;
     public AudioClip selection;
@@ -23,6 +24,7 @@ public class SoundBox : Singleton<SoundBox> {
 
 
     public AudioClip platformOn;
+    public AudioClip  platformTriggered;
     public AudioClip platformOff;
 
     public AudioClip threshold;

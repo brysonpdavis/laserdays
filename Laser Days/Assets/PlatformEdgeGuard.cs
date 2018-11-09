@@ -38,7 +38,7 @@ public class PlatformEdgeGuard : MonoBehaviour {
         }
 
 
-        audioSource = GetComponentInParent<AudioSource>();
+        audioSource = gameObject.AddComponent<AudioSource>();//GetComponentInParent<AudioSource>();
         //associatedCollider = GetComponentInChildren<BoxCollider>().gameObject;
         associatedRenderer.material.SetFloat("_Open", 0f);
     }

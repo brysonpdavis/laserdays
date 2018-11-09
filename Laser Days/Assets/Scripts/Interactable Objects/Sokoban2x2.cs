@@ -21,6 +21,12 @@ public class Sokoban2x2 : InteractableObject {
         player.Movement.Speed = 1;
         player.Movement.Jump.Power = 0;
         player.GetComponent<MFPP.Modules.BobModule>().BobSpeed = 1.5f;
+        selected = true;
+
+        audio.clip = SoundBox.Instance.sokoban2x2Running;
+        audio.volume = Toolbox.Instance.soundEffectsVolume;
+        audio.loop = true;
+        audio.Play();
 
     }
     public override void Drop()
@@ -52,6 +58,12 @@ public class Sokoban2x2 : InteractableObject {
     public override void SetType()
     {
         objectType = ObjectType.Sokoban2x2;
+        //looping background tone
+        //audio = GetComponent<AudioSource>();
+        //audio.clip = SoundBox.Instance.sokoban2x2Running;
+        //audio.volume = Toolbox.Instance.soundEffectsVolume;
+        //audio.loop = true;
+        //audio.Play();
     }
 
     public override void DistantIconHover()
@@ -67,5 +79,11 @@ public class Sokoban2x2 : InteractableObject {
     public override void InteractingIconHover()
     {
         iconContainer.SetDrag();
+    }
+
+    private void LateUpdate()
+    {
+        CheckMovement();
+        latestPosition = transform.position;
     }
 }
