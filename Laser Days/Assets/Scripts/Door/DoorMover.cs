@@ -7,11 +7,16 @@ public class DoorMover : MonoBehaviour {
     public bool jammed;
     public DoorController controller;
     public bool leftDoor;
+    private AudioSource audio;
 
 
 	// Use this for initialization
 	void Start () {
         controller = GetComponentInParent<DoorController>();
+        gameObject.AddComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
+        audio.clip = SoundBox.Instance.doorActive;
+        audio.loop = true;
 	}
 	
     public void Open()
@@ -22,6 +27,7 @@ public class DoorMover : MonoBehaviour {
 
     public void Close ()
     {
+        audio.mute = true;
         StopAllCoroutines();
         StartCoroutine(MoveDoorCoroutine(false, controller.duration));
 
@@ -30,6 +36,8 @@ public class DoorMover : MonoBehaviour {
     public void Jam ()
     {
         StopAllCoroutines();
+        audio.mute = true;
+        //audio.Stop();
     }
 
     private IEnumerator MoveDoorCoroutine(bool direction, float duration)
@@ -40,6 +48,9 @@ public class DoorMover : MonoBehaviour {
         float elapsedTime = 0;
         float scaledDuration;
 
+        audio.volume = Toolbox.Instance.soundEffectsVolume;
+        audio.mute = false;
+        audio.Play();
 
         if (direction) //meaning we're opening
         {
@@ -60,11 +71,11 @@ public class DoorMover : MonoBehaviour {
         else //door is closing
         {
             end = 0f;
-            scaledDuration = duration * ((Mathf.Abs(start)/.8f));
+            scaledDuration = duration * ((Mathf.Abs(start) / .8f));
         }
 
 
-        Vector3 newposition = new Vector3 (start, 0f, 0f);
+        Vector3 newposition = new Vector3(start, 0f, 0f);
         float ratio = elapsedTime / scaledDuration;
 
         while (ratio < 1f)
@@ -74,8 +85,19 @@ public class DoorMover : MonoBehaviour {
             newposition.x = Mathf.Lerp(start, end, ratio);
             this.transform.localPosition = newposition;
             yield return null;
+            if (!(gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer))
+            {
+                audio.mute = true;
+            }
+            else
+                audio.mute = false;
+
+
         }
         yield return null;
+        audio.mute = true;
+        yield return new WaitForSeconds(.5f);
+        audio.Stop();
     }
 
 }

@@ -40,6 +40,7 @@ public class SoundBox : Singleton<SoundBox> {
 
     public AudioClip sokobanDrag;
 
+    public AudioClip doorActive;
     public void Start()
     {
         thisSource = GetComponent<AudioSource>();

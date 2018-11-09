@@ -182,8 +182,7 @@ abstract public class InteractableObject : MonoBehaviour
     {
         if (selected && !latestPosition.Equals(transform.position))
         {
-            Debug.Log(rigidbody.velocity.magnitude * Toolbox.Instance.soundEffectsVolume);
-            //Debug.Log((latestPosition - transform.position).magnitude * Toolbox.Instance.soundEffectsVolume * 50f);
+            //Debug.Log(rigidbody.velocity.magnitude * Toolbox.Instance.soundEffectsVolume);
             audio.volume = (rigidbody.velocity.magnitude * Toolbox.Instance.soundEffectsVolume);
             //audio.volume = (latestPosition - transform.position).magnitude * Toolbox.Instance.soundEffectsVolume * 50f; //volume * movement;
             audio.mute = false;
