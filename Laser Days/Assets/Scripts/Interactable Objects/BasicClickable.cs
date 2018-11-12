@@ -27,6 +27,7 @@ public class BasicClickable : FlippableObject {
             renderer.material.SetFloat("_Shimmer", 1f);
             renderer.material.SetInt("_onHover", 1);
             rigidbody.constraints = RigidbodyConstraints.None;
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
 
             if (!beenPickedUp)
             { StartCoroutine(SlowPickup());}

@@ -37,7 +37,7 @@ public class Booster : MonoBehaviour {
             pickUp.PutDown();
 
 
-        if (affectsPlayer && other.GetComponent<MFPP.Player>())
+        if (affectsPlayer && other.GetComponent<MFPP.Player>() && !Toolbox.Instance.EqualToHeld(transform.parent.gameObject))
         {
             other.GetComponent<MFPP.Player>().FinalMovement = new Vector3(0f, 0f, 0f);
             StartCoroutine(OnBoost(other.gameObject));
