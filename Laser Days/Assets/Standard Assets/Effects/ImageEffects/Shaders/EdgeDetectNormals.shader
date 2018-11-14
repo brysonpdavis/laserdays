@@ -266,7 +266,7 @@ Shader "Hidden/EdgeDetect" {
     float ComputeFog(float coord)
         {
             float fog = 0.0;
-            fog = 0.005 * coord;
+            fog = 0.06 * coord;
             fog = exp2(-fog);
             saturate(fog);
             return fog; 
