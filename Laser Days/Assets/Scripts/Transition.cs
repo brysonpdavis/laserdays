@@ -14,6 +14,7 @@ public class Transition : MonoBehaviour
     private IEnumerator flipTransition;
     float offset;
     float speed;
+    public bool shared;
 
     private void Awake()
     {
@@ -23,8 +24,8 @@ public class Transition : MonoBehaviour
 
        
 //        if ((gameObject.layer == 10 || gameObject.layer == 11)  && (GetComponent<InteractableObject>() || GetComponent<Core>()))
-       if ((gameObject.layer == 10 || gameObject.layer == 11))
-        material = mRenderer.material;
+        if ((gameObject.layer == 10 || gameObject.layer == 11) && !shared)
+            material = mRenderer.material;
         else 
         {
             material = mRenderer.sharedMaterial;
