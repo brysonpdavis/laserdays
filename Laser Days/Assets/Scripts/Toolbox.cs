@@ -5,10 +5,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Toolbox : Singleton<Toolbox> {
-	protected Toolbox () {} // guarantee this will be always a singleton only - can't use the constructor!
- 
-	GameObject realWorldParentObject;
+public class Toolbox : Singleton<Toolbox>
+{
+    protected Toolbox() { } // guarantee this will be always a singleton only - can't use the constructor!
+
+    GameObject realWorldParentObject;
     GameObject laserWorldParentObject;
     GameObject player;
     RaycastManager raycastManager;
@@ -30,9 +31,18 @@ public class Toolbox : Singleton<Toolbox> {
     public IList<Material> sharedMaterials;
     public MFPP.SoundContainerAsset testercubeSounds;
 
+    //plant materials
+    public Material realFoliage;
+    public Material[] realFoliageArray;
 
- 
-	void Awake () {
+    public Material laserFoliage;
+    public Material[] laserFoliageArray;
+
+
+
+
+    void Awake()
+    {
 
         SetCustomValuesOnInstance();
 
@@ -44,7 +54,12 @@ public class Toolbox : Singleton<Toolbox> {
         soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();
         soundEffectsSlider.onValueChanged.AddListener(delegate { VolumeChangeCheck(); });
 
-	}
+
+        //foliage instantiation
+        FoliageSetup(laserFoliageArray, laserFoliage);
+        FoliageSetup(realFoliageArray, realFoliage);
+
+    }
 
     void VolumeChangeCheck()
     {
@@ -57,11 +72,12 @@ public class Toolbox : Singleton<Toolbox> {
         VolumeChangeCheck();
         audio.volume = soundEffectsVolume;
     }
- 
-	// (optional) allow runtime registration of global objects
-	static public T RegisterComponent<T> () where T: Component {
-		return Instance.GetOrAddComponent<T>();
-	}
+
+    // (optional) allow runtime registration of global objects
+    static public T RegisterComponent<T>() where T : Component
+    {
+        return Instance.GetOrAddComponent<T>();
+    }
 
     public Transform GetRealWorldParent()
     {
@@ -91,7 +107,7 @@ public class Toolbox : Singleton<Toolbox> {
 
     public MFPP.Modules.PickUpModule GetPickUp()
     {
-        return pickUp;    
+        return pickUp;
     }
 
     public bool EqualToHeld(GameObject obj)
@@ -103,7 +119,7 @@ public class Toolbox : Singleton<Toolbox> {
             return false;
     }
 
-    public flipScript GetFlip () 
+    public flipScript GetFlip()
     {
         return flipScript;
     }
@@ -136,6 +152,16 @@ public class Toolbox : Singleton<Toolbox> {
     public GameObject GetPauseMenu()
     {
         return pauseMenu;
+    }
+
+    public Material GetLaserFoliageMaterial()
+    {
+        return laserFoliageArray[Random.Range(0, laserFoliageArray.Length)];
+    }
+
+    public Material GetRealFoliageMaterial()
+    {
+        return realFoliageArray[Random.Range(0, realFoliageArray.Length)];
     }
 
     public void UpdateToolbox()
@@ -204,6 +230,25 @@ public class Toolbox : Singleton<Toolbox> {
             Toolbox.Instance.laserCore = laserCore;
             Toolbox.Instance.pauseMenu = pauseMenu;
             Toolbox.Instance.testercubeSounds = testercubeSounds;
+            Toolbox.Instance.laserFoliageArray = laserFoliageArray;
+            Toolbox.Instance.laserFoliage = laserFoliage;
+            Toolbox.Instance.realFoliageArray = realFoliageArray;
+            Toolbox.Instance.realFoliage = realFoliage;
+        }
+    }
+
+    void FoliageSetup(Material[] materialArray, Material material)
+    {
+        materialArray = new Material[9];
+        for (int x = 0; x < 3; x++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                Material temp = material;
+                temp.SetFloat("_colShiftX", .16f+(x *.33f));
+                temp.SetFloat("_colShiftY", .16f+(y * .33f));
+                materialArray[y * 3 + x] = temp;
+            }
         }
     }
 
