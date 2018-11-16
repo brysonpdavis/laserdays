@@ -8,7 +8,7 @@ public class PerlinSpawnerScript : MonoBehaviour {
     public int sampleDensity;
     public IList<Vector3> samplePoints;
     public int numberToSpawn;
-    public GameObject prefab;
+    public GameObject[] prefabList;
     public int spawnAreaSize;
     public Transform parentTransform;
     public bool randomRot;
@@ -54,13 +54,16 @@ public class PerlinSpawnerScript : MonoBehaviour {
 
         for (int s = 0; s < numberToSpawn; s++)
         {
-            GameObject spawnedObj = Instantiate(prefab);
+            //GameObject spawnedObj = Instantiate(prefab);
+            GameObject spawnedObj = Instantiate(prefabList[Random.Range(0, prefabList.Length)]);
             if (parentTransform)
                 spawnedObj.transform.parent = parentTransform;
             //spawnedObj.transform.position = samplePoints[Random.Range(0, samplePoints.Count)];
             spawnedObj.transform.position = samplePoints[s];
             if (randomRot)
                 spawnedObj.transform.Rotate(0f, Random.Range(0.0f, 360.0f), 0f);
+            spawnedObj.GetComponent<Renderer>().material.SetFloat("_colShiftX", Random.Range(0f, 1f));
+            spawnedObj.GetComponent<Renderer>().material.SetFloat("_colShiftX", Random.Range(0f, 1f));
         }
 
     }
