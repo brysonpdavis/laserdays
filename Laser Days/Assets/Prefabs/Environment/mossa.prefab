@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23981404630097732}
   - component: {fileID: 114528474502005980}
   - component: {fileID: 114905736747849796}
+  - component: {fileID: 64708663434690370}
   m_Layer: 11
   m_Name: mossa
   m_TagString: Untagged
@@ -85,6 +86,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1641882883595654}
   m_Mesh: {fileID: 4300004, guid: e40644ad134524830befd30702869047, type: 3}
+--- !u!64 &64708663434690370
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641882883595654}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300004, guid: e40644ad134524830befd30702869047, type: 3}
 --- !u!114 &114528474502005980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,5 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 1
-  shared: 1
+  shared: 0

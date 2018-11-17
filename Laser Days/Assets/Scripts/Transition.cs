@@ -7,9 +7,10 @@ using UnityEngine;
 public class Transition : MonoBehaviour
 {
     Renderer mRenderer;
+    private MaterialPropertyBlock _propBlock;
     Material material;
     public float ScaleSpeed = 1f;
-    public bool sharedMaterial = false;
+    private bool sharedMaterial = false;
     //public IList<Material> sharedmaterials;
     private IEnumerator flipTransition;
     float offset;
@@ -18,18 +19,21 @@ public class Transition : MonoBehaviour
 
     private void Awake()
     {
+        _propBlock = new MaterialPropertyBlock();
         mRenderer = GetComponent<Renderer>();
         if (GetComponent<LineRenderer>())
             mRenderer = GetComponent<LineRenderer>();
 
        
 //        if ((gameObject.layer == 10 || gameObject.layer == 11)  && (GetComponent<InteractableObject>() || GetComponent<Core>()))
-        if ((gameObject.layer == 10 || gameObject.layer == 11) && !shared)
-            material = mRenderer.material;
-        else 
+        //if ((gameObject.layer == 10 || gameObject.layer == 11) && !shared)
+        //    material = mRenderer.material;
+        //else 
+        if (!(gameObject.layer == 10 || gameObject.layer == 11) || shared)
         {
             material = mRenderer.sharedMaterial;
             sharedMaterial = true;
+            shared = true;
         }
 
 
@@ -54,16 +58,14 @@ public class Transition : MonoBehaviour
         //first need to make sure the object isn't already selected before starting any transition
         //objects that are selected will be flipped and shouldn't have any animation, but should change their parent gameobject
 
-        if (material && !sharedMaterial)
-        {
-            float start = material.GetFloat("_TransitionState");
+            mRenderer.GetPropertyBlock(_propBlock);
+            
+            float start = _propBlock.GetFloat("_TransitionState");  //material.GetFloat("_TransitionState");
 
 
             //start new direction from where we've left off but in the direction we've specified with "end"
             flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);
             StartCoroutine(flipTransition);
-                    
-        }
     }
 
 
@@ -73,10 +75,9 @@ public class Transition : MonoBehaviour
     //useful when switching an object, immediately sets it without transition
     public void SetStart (float value){
 
-        if (material)
-        {
-            material.SetFloat("_TransitionState", value);
-        }
+            //material.SetFloat("_TransitionState", value);
+            _propBlock.SetFloat("_TransitionState",value);
+            mRenderer.SetPropertyBlock(_propBlock);
     }
 
 
@@ -94,7 +95,9 @@ public class Transition : MonoBehaviour
             ratio = elapsedTime / duration;
             float value = Mathf.Lerp(startpoint, endpoint, ratio);
 
-            material.SetFloat("_TransitionState", value);
+            _propBlock.SetFloat("_TransitionState", value);
+            mRenderer.SetPropertyBlock(_propBlock);
+            //material.SetFloat("_TransitionState", value);
             RendererExtensions.UpdateGIMaterials(mRenderer);
 
             yield return null;

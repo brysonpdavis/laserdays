@@ -152,7 +152,8 @@ public class TransitionController: MonoBehaviour
 
         foreach (Transition t in components)
         {
-            transitions.Add(t);
+            if (t.shared)
+                transitions.Add(t);
         }
 
     }
