@@ -62,8 +62,8 @@ public class PerlinSpawnerScript : MonoBehaviour {
             spawnedObj.transform.position = samplePoints[s];
             if (randomRot)
                 spawnedObj.transform.Rotate(0f, Random.Range(0.0f, 360.0f), 0f);
-            spawnedObj.GetComponent<Renderer>().material.SetFloat("_colShiftX", Random.Range(0f, 1f));
-            spawnedObj.GetComponent<Renderer>().material.SetFloat("_colShiftX", Random.Range(0f, 1f));
+            //spawnedObj.GetComponent<Renderer>().material.SetFloat("_colShiftX", Random.Range(0f, 1f));
+            //spawnedObj.GetComponent<Renderer>().material.SetFloat("_colShiftX", Random.Range(0f, 1f));
         }
 
     }
