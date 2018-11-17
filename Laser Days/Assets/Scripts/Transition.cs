@@ -16,6 +16,11 @@ public class Transition : MonoBehaviour
     float offset;
     float speed;
     public bool shared;
+    bool transitionAllChildren;
+    private Transition[] childrenTransitions;
+
+    private bool amCore;
+
 
     private void Awake()
     {
@@ -24,11 +29,6 @@ public class Transition : MonoBehaviour
         if (GetComponent<LineRenderer>())
             mRenderer = GetComponent<LineRenderer>();
 
-       
-//        if ((gameObject.layer == 10 || gameObject.layer == 11)  && (GetComponent<InteractableObject>() || GetComponent<Core>()))
-        //if ((gameObject.layer == 10 || gameObject.layer == 11) && !shared)
-        //    material = mRenderer.material;
-        //else 
         if (!(gameObject.layer == 10 || gameObject.layer == 11) || shared)
         {
             material = mRenderer.sharedMaterial;
@@ -39,6 +39,8 @@ public class Transition : MonoBehaviour
 
         offset = Random.value;
         speed = Random.Range(1f, 2f);
+        SetupChildrenTransitions();
+
     }
 
     private void Start()
@@ -50,7 +52,28 @@ public class Transition : MonoBehaviour
         }
     }
 
+    private void SetupChildrenTransitions()
+    {
+        //set all objects to transition children to have bool setup
+        //only happens on relevant objects
+        if (GetComponent<PlatformMover>() || GetComponent<InteractableObject>())
+        {
+            transitionAllChildren = true;
+            childrenTransitions = GetComponentsInChildren<Transition>();
+        }
 
+        if (GetComponent<Core>())
+        {
+            amCore = true;
+        }
+    }
+
+    private bool CoreParentHeldCheck()
+    {
+        if (!amCore || (amCore && !Toolbox.Instance.EqualToHeld(transform.parent.gameObject)))
+            return true;
+        else return false;
+    }
 
     public void Flip(float end, float duration)
     {
@@ -61,11 +84,23 @@ public class Transition : MonoBehaviour
             mRenderer.GetPropertyBlock(_propBlock);
             
             float start = _propBlock.GetFloat("_TransitionState");  //material.GetFloat("_TransitionState");
+            
 
 
             //start new direction from where we've left off but in the direction we've specified with "end"
-            flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);
-            StartCoroutine(flipTransition);
+            if (!Toolbox.Instance.EqualToHeld(this.gameObject) && CoreParentHeldCheck())
+            {
+                flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);
+                StartCoroutine(flipTransition);
+
+            }
+            
+            if (transitionAllChildren)
+                foreach (Transition transition in childrenTransitions)
+                {
+                if (!transition.gameObject.Equals(this.gameObject) && !Toolbox.Instance.EqualToHeld(transition.gameObject))
+                        transition.Flip(end, duration);
+                }
     }
 
 
@@ -75,11 +110,12 @@ public class Transition : MonoBehaviour
     //useful when switching an object, immediately sets it without transition
     public void SetStart (float value){
 
-            //material.SetFloat("_TransitionState", value);
-            _propBlock.SetFloat("_TransitionState",value);
-            mRenderer.SetPropertyBlock(_propBlock);
+        //material.SetFloat("_TransitionState", value);
+        if (GetComponent<Sokoban1x1>())
+            Debug.Log("starting");
+        _propBlock.SetFloat("_TransitionState",value);
+        mRenderer.SetPropertyBlock(_propBlock);
     }
-
 
 
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)

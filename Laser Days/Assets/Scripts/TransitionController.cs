@@ -26,6 +26,7 @@ public class TransitionController: MonoBehaviour
         InitializeList();
 
         //automatically set up the player and charge that script will be checking
+        PlayerCheck();
 
         player = Toolbox.Instance.GetPlayer();
         pc = player.GetComponent<PlayerCharge>();
@@ -75,45 +76,21 @@ public class TransitionController: MonoBehaviour
     {
         //components = GetComponentsInChildren<Transition>();
 
-        if (direction) //means player has switched to 'real world': material should transition from current value to zero
-        {
-
             foreach (Transition albo in transitions)
             {
                 if ((!albo.GetComponentInParent<InteractableObject>()) || !albo.GetComponentInParent<InteractableObject>().selected)
                 {
                     //makes sure it doesn't transition the held object either!
-                    if (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject)
+                    if (!Toolbox.Instance.EqualToHeld(this.gameObject))
                     {
-                        if (!albo.gameObject.Equals(player.GetComponent<MFPP.Modules.PickUpModule>().heldObject))
-                        {
+                        if (direction)
                             albo.Flip(0f, speed);
-                        }
+                        else
+                            albo.Flip(1f, speed);
+                      
                     }
-
-                    else { albo.Flip(0f, speed); }
                 }
             }
-        }
-        else {
-
-            foreach (Transition albo in transitions)
-            {
-                if ((!albo.GetComponentInParent<InteractableObject>()) || !albo.GetComponentInParent<InteractableObject>().selected)
-                    //makes sure it doesn't transition the held object either!
-                if (player.GetComponent<MFPP.Modules.PickUpModule>().heldObject)
-                    {
-                        if (!albo.gameObject.Equals(player.GetComponent<MFPP.Modules.PickUpModule>().heldObject))
-                        {
-                            albo.Flip(1f, speed);
-
-                        }
-                    }
-                    else { albo.Flip(1f, speed); }
-            }
-
-        }
-
     }
 
     public void PlayerCheck() {
@@ -122,20 +99,22 @@ public class TransitionController: MonoBehaviour
 
         InitializeList();
 
+        //sets ALL contained objects to correct transition state when player enters scene
+        Transition[] currentTransitions = GetComponentsInChildren<Transition>();
+
         if (player.layer == 16)
         { //if player is starting in RW
             
-            foreach (Transition albo in transitions)
+            foreach (Transition albo in currentTransitions)
             {
                 albo.SetStart(0f);
-
             }
         }
 
         else
         {
             //player is in LW
-            foreach (Transition albo in transitions)
+            foreach (Transition albo in currentTransitions)
             {
                 albo.SetStart(1f);
 
@@ -155,7 +134,6 @@ public class TransitionController: MonoBehaviour
             if (t.shared)
                 transitions.Add(t);
         }
-
     }
 
 }

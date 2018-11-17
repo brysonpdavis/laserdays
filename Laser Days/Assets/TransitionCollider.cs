@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TransitionCollider : MonoBehaviour
 {
-    public float mySpeed = 20;
+    public float mySpeed = 3;
     float speed = .4f;
-    Collider collider;
+    SphereCollider collider;
     bool direction;
 
     private void Start()
     {
-        collider = GetComponent<Collider>();
+        collider = GetComponent<SphereCollider>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,10 +45,15 @@ public class TransitionCollider : MonoBehaviour
         Vector3 startpoint;
         Vector3 endpoint;
 
-        startpoint = new Vector3(0f, 0f, 0f);
-        endpoint = new Vector3(100f, 100f, 100f);
+        startpoint = new Vector3(.000001f, 0.000001f, 0.000001f);
+        endpoint = new Vector3(500000f, 500000f, 500000f);
 
+        float start = .00001f;
+        float end = 500f;
+        collider.enabled = false;
+        yield return new WaitForEndOfFrame();
 
+        collider.enabled = true;
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
@@ -56,10 +61,13 @@ public class TransitionCollider : MonoBehaviour
             //float value = Mathf.Lerp(startpoint, endpoint, ratio);
             Vector3 value = Vector3.Lerp(startpoint, endpoint, ratio);
 
+            float radialValue = Mathf.Lerp(start, end, ratio);
             collider.transform.localScale = value;
-
+            //collider.radius = radialValue;
             yield return null;
         }
+
+        //collider.transform.localScale = new Vector3(500000f, 500000f, 500000f);;
     }
 
 
