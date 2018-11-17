@@ -26,8 +26,13 @@ public class Transition : MonoBehaviour
     {
         _propBlock = new MaterialPropertyBlock();
         mRenderer = GetComponent<Renderer>();
+
         if (GetComponent<LineRenderer>())
+        {
             mRenderer = GetComponent<LineRenderer>();
+            shared = true;
+        }
+            
 
         if (!(gameObject.layer == 10 || gameObject.layer == 11) || shared)
         {
