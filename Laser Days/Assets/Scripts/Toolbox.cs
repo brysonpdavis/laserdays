@@ -5,10 +5,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Toolbox : Singleton<Toolbox> {
-	protected Toolbox () {} // guarantee this will be always a singleton only - can't use the constructor!
- 
-	GameObject realWorldParentObject;
+public class Toolbox : Singleton<Toolbox>
+{
+    protected Toolbox() { } // guarantee this will be always a singleton only - can't use the constructor!
+
+    GameObject realWorldParentObject;
     GameObject laserWorldParentObject;
     GameObject player;
     RaycastManager raycastManager;
@@ -30,9 +31,8 @@ public class Toolbox : Singleton<Toolbox> {
     public IList<Material> sharedMaterials;
     public MFPP.SoundContainerAsset testercubeSounds;
 
-
- 
-	void Awake () {
+    void Awake()
+    {
 
         SetCustomValuesOnInstance();
 
@@ -43,8 +43,7 @@ public class Toolbox : Singleton<Toolbox> {
 
         soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();
         soundEffectsSlider.onValueChanged.AddListener(delegate { VolumeChangeCheck(); });
-
-	}
+    }
 
     void VolumeChangeCheck()
     {
@@ -57,11 +56,12 @@ public class Toolbox : Singleton<Toolbox> {
         VolumeChangeCheck();
         audio.volume = soundEffectsVolume;
     }
- 
-	// (optional) allow runtime registration of global objects
-	static public T RegisterComponent<T> () where T: Component {
-		return Instance.GetOrAddComponent<T>();
-	}
+
+    // (optional) allow runtime registration of global objects
+    static public T RegisterComponent<T>() where T : Component
+    {
+        return Instance.GetOrAddComponent<T>();
+    }
 
     public Transform GetRealWorldParent()
     {
@@ -91,7 +91,7 @@ public class Toolbox : Singleton<Toolbox> {
 
     public MFPP.Modules.PickUpModule GetPickUp()
     {
-        return pickUp;    
+        return pickUp;
     }
 
     public bool EqualToHeld(GameObject obj)
@@ -103,7 +103,7 @@ public class Toolbox : Singleton<Toolbox> {
             return false;
     }
 
-    public flipScript GetFlip () 
+    public flipScript GetFlip()
     {
         return flipScript;
     }
@@ -137,6 +137,7 @@ public class Toolbox : Singleton<Toolbox> {
     {
         return pauseMenu;
     }
+
 
     public void UpdateToolbox()
     {

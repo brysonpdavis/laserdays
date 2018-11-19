@@ -23,6 +23,7 @@ public class flipScript : MonoBehaviour {
     public bool flippedThisFrame = false;
     public GameObject ring;
     private GameObject currentRing;
+    TransitionCollider transitionCollider;
 
 	RaycastManager rm;
     private string SoundtrackButton = "Submit";
@@ -58,6 +59,8 @@ public class flipScript : MonoBehaviour {
         flipFailClip = box.flipFail;
         soundTrack = GetComponentInChildren<SoundTrackManager>();
         flipburst = GetComponentInChildren<flipburst>();
+        transitionCollider = GetComponentInChildren<TransitionCollider>();
+
 	}
 
 	void Update () {
@@ -125,13 +128,16 @@ public class flipScript : MonoBehaviour {
         { player.layer = 16;  //set player to real world
                 GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
            // Camera.main.GetComponent<CameraTransition>().Flip(true);
-            GetComponent<SkyboxTransition>().Flip(true);
+            GetComponent<SkyboxTransition>().Flip(false);
+            transitionCollider.FlipTransitions(true);
 
         } 
         else { player.layer = 15; //set player to laser world
             GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
                                                                                       //   Camera.main.GetComponent<CameraTransition>().Flip(false);
             GetComponent<SkyboxTransition>().Flip(false);
+            transitionCollider.FlipTransitions(false);
+
 
         } 
 
