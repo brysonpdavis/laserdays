@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TransitionCollider : MonoBehaviour
 {
-    public float mySpeed = 3;
-    float speed = .4f;
+    public float mySpeed = 1f;
+    public float speed = .4f;
     SphereCollider collider;
     bool direction;
 
