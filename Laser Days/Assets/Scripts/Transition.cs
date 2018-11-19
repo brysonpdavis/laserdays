@@ -17,12 +17,12 @@ public class Transition : MonoBehaviour
     float speed;
     public bool shared;
     bool transitionAllChildren;
-    private Transition[] childrenTransitions;
+    protected Transition[] childrenTransitions;
 
     private bool amCore;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _propBlock = new MaterialPropertyBlock();
         mRenderer = GetComponent<Renderer>();
@@ -48,7 +48,7 @@ public class Transition : MonoBehaviour
 
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (sharedMaterial)
         {
@@ -80,7 +80,7 @@ public class Transition : MonoBehaviour
         else return false;
     }
 
-    public void Flip(float end, float duration)
+    public virtual void Flip(float end, float duration)
     {
 
         //first need to make sure the object isn't already selected before starting any transition
@@ -113,11 +113,11 @@ public class Transition : MonoBehaviour
     //use setstart to be sure that when gameobjects are initialized they start with 
     //dissolve amount that corresponds to the world that player is in
     //useful when switching an object, immediately sets it without transition
-    public void SetStart (float value){
+    public virtual void SetStart (float value){
 
         //material.SetFloat("_TransitionState", value);
-        if (GetComponent<Sokoban1x1>())
-            Debug.Log("starting");
+        //if (GetComponent<Sokoban1x1>())
+            //Debug.Log("starting");
         _propBlock.SetFloat("_TransitionState",value);
         mRenderer.SetPropertyBlock(_propBlock);
     }
