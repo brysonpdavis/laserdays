@@ -20,9 +20,14 @@ namespace UnityStandardAssets.ImageEffects
         public OverlayBlendMode blendMode = OverlayBlendMode.Overlay;
         public float intensity = 1.0f;
         public Texture2D texture = null;
+        public Texture2D texture1 = null;
+        public Texture2D texture2 = null;
 
         public Shader overlayShader = null;
         private Material overlayMaterial = null;
+
+        private int boi = 0;
+        private int frames = 0;
 
 
         public override bool CheckResources ()
@@ -44,6 +49,9 @@ namespace UnityStandardAssets.ImageEffects
                 return;
             }
 
+
+            frames++;
+
             Vector4 UV_Transform = new  Vector4(1, 0, 0, 1);
 
 			#if UNITY_WP8
@@ -60,9 +68,29 @@ namespace UnityStandardAssets.ImageEffects
 			}
 			#endif
 
+
+            if(frames%5 == 0)
+            {
+                if (boi == 0)
+                    overlayMaterial.SetTexture("_Overlay", texture);
+
+                if (boi == 1)
+                    overlayMaterial.SetTexture("_Overlay", texture1);
+
+                if (boi == 2)
+                    overlayMaterial.SetTexture("_Overlay", texture2);
+
+                boi++;
+
+                if (boi >= 3)
+                    boi = 0;
+            }
+
+           
+
             overlayMaterial.SetVector("_UV_Transform", UV_Transform);
             overlayMaterial.SetFloat ("_Intensity", intensity);
-            overlayMaterial.SetTexture ("_Overlay", texture);
+
             Graphics.Blit (source, destination, overlayMaterial, (int) blendMode);
         }
     }

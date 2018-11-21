@@ -14,7 +14,7 @@ public class flipburst : MonoBehaviour {
 	public void Boom()
     {
 
-        ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 20);
+        ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 100);
 
         var main = particleSystem.main;
         main.startLifetime = 2f;

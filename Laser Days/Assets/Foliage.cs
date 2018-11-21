@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
+
 public class Foliage : MonoBehaviour {
 
 
@@ -41,6 +42,17 @@ public class Foliage : MonoBehaviour {
         Mesh mesh = GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
 
+        Color[] orignalColors;
+
+        if (mesh.colors.Length > 0) {
+
+            orignalColors = mesh.colors;
+        } else 
+        {
+            orignalColors = new Color[vertices.Length];
+        }
+
+
         // create new colors array where the colors will be created.
         Color[] colors = new Color[vertices.Length];
 
@@ -48,7 +60,7 @@ public class Foliage : MonoBehaviour {
         var rx = Random.Range(0f, 1f);
         var ry = Random.Range(0f, 1f);
         for (int i = 0; i < vertices.Length; i++)
-            colors[i] = new Color(rx, ry, 0, 0);
+            colors[i] = new Color(orignalColors[i].r + rx, orignalColors[i].g + ry, 0, 0);
             
         mesh.colors = colors;
     }
