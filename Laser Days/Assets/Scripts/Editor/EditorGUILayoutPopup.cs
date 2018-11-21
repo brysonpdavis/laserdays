@@ -49,6 +49,27 @@ public class EditorGUILayoutPopup : EditorWindow
             NewObject(true);
         }
 
+        if (GUILayout.Button("RotateX+90"))
+        {
+            GameObject current = (GameObject)Selection.activeObject;
+            Vector3 rot = new Vector3(90f, 0f, 0f);
+            current.GetComponent<Transform>().Rotate(rot);
+        }
+
+        if (GUILayout.Button("RotateY+90"))
+        {
+            GameObject current = (GameObject)Selection.activeObject;
+            Vector3 rot = new Vector3(0f, 90f, 0f);
+            current.GetComponent<Transform>().Rotate(rot);
+        }
+
+        if (GUILayout.Button("RotateZ+90"))
+        {
+            GameObject current = (GameObject)Selection.activeObject;
+            Vector3 rot = new Vector3(0f, 0f, 90f);
+            current.GetComponent<Transform>().Rotate(rot);
+        }
+
 
     }
 
