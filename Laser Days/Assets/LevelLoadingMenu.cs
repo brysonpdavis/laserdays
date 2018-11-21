@@ -23,6 +23,9 @@ public class LevelLoadingMenu : MonoBehaviour {
     float startAlpha;
     public float fadeDuration = .5f;
 
+    private bool lastSceneCompleted;
+    private GameObject lastSceneButton;
+
 	// Use this for initialization
 	void Awake () {
 
@@ -81,6 +84,43 @@ public class LevelLoadingMenu : MonoBehaviour {
         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
         Time.timeScale = 1f;
         StartCoroutine(loadNextScene(name, spawnPoint, myButton));
+
+        //set new scene button to orange
+        bool newSceneCompleted = false;
+        ColorBlock cb = myButton.GetComponent<Button>().colors;
+        if (cb.normalColor == Color.green)
+            newSceneCompleted = true;
+
+        cb.normalColor = Color.yellow;
+        myButton.GetComponent<Button>().colors = cb;
+
+        Color newBackground = lastSceneButton.GetComponent<Image>().color;
+        newBackground.a = .7f;
+        lastSceneButton.GetComponent<Image>().color = newBackground;
+
+        if (lastSceneButton)
+            ClearPreviousButton();
+        //new scene is now previous scene
+        lastSceneButton = myButton;
+        lastSceneCompleted = newSceneCompleted;
+    }
+
+    public void ClearPreviousButton()
+    {
+        //reset previous button
+        ColorBlock cb = lastSceneButton.GetComponent<Button>().colors;
+        if (!(cb.normalColor == Color.green))
+        {
+            cb.normalColor = Color.white;
+
+            Color newBackground = lastSceneButton.GetComponent<Image>().color;
+            newBackground.a = .7f;
+            lastSceneButton.GetComponent<Image>().color = newBackground;
+        }
+
+        lastSceneButton.GetComponent<Button>().colors = cb;
+
+
     }
 
     IEnumerator FadeOut()

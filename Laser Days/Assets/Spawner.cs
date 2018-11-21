@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour {
     public Scene scene;
     public GameObject button;
     public GameObject myButton;
+    public bool completed = false;
     // Use this for initialization
     void Start()
     {
@@ -71,5 +72,6 @@ public class Spawner : MonoBehaviour {
         Color newBackground = myButton.GetComponent<Image>().color;
         newBackground.a = .7f;
         myButton.GetComponent<Image>().color = newBackground;
+        completed = true;
     }
 }

@@ -79,7 +79,6 @@ public class sceneTrigger : MonoBehaviour
     {
         Transition t = collider.GetComponent<Transition>();
 
-
         //when colliding with player, make sure target scene isn't already open, if it's not then load the scene on top (additive) of current scene
         if (collider.tag.Equals("Player"))
         {
@@ -149,6 +148,7 @@ public class sceneTrigger : MonoBehaviour
             Debug.Log("my guy!");
             SetFlippable(collider);
         }
+
     }
 
 

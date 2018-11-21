@@ -9,7 +9,7 @@ public class DeselectMenu : MonoBehaviour
 
     // Add a menu item named "Do Something with a Shortcut Key" to MyMenu in the menu bar
     // and give it a shortcut (ctrl-g on Windows, cmd-g on macOS).
-    [MenuItem("DeselectPlay/Deselect All and Play %g")]
+    [MenuItem("RustForms/Deselect All and Play %g")]
     static void DoSomethingWithAShortcutKey()
     {
         Debug.Log("Deselecting and Starting");
