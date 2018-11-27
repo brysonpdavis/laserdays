@@ -128,7 +128,7 @@ public class flipScript : MonoBehaviour {
         { player.layer = 16;  //set player to real world
                 GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
            // Camera.main.GetComponent<CameraTransition>().Flip(true);
-            GetComponent<SkyboxTransition>().Flip(false);
+            GetComponent<SkyboxTransition>().Flip(true);
             transitionCollider.FlipTransitions(true);
 
         } 

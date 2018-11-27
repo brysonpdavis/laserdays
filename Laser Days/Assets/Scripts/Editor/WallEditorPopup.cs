@@ -37,7 +37,7 @@ public class WallEditorPopup : EditorWindow
 
         index = EditorGUILayout.Popup(index, namesArray);
 
-       
+        //menu for entering the opening the material
         GUILayout.BeginHorizontal();
         material = (Material)EditorGUILayout.ObjectField("material", material, typeof(Material));
         GUILayout.EndHorizontal();
@@ -60,6 +60,7 @@ public class WallEditorPopup : EditorWindow
             GameObject current = (GameObject)Selection.activeObject;
             Vector3 rot = new Vector3(0f, 90f, 0f);
             current.GetComponent<Transform>().Rotate(rot);
+            //ClampRotation(current.transform.rotation, current);
         }
 
         if (GUILayout.Button("RotateY+180"))
@@ -67,6 +68,7 @@ public class WallEditorPopup : EditorWindow
             GameObject current = (GameObject)Selection.activeObject;
             Vector3 rot = new Vector3(0f, 180f, 0f);
             current.GetComponent<Transform>().Rotate(rot);
+            //ClampRotation(current.transform.rotation, current);
         }
 
         if (GUILayout.Button("RotateX+90"))
@@ -74,6 +76,7 @@ public class WallEditorPopup : EditorWindow
             GameObject current = (GameObject)Selection.activeObject;
             Vector3 rot = new Vector3(90f, 0f, 0f);
             current.GetComponent<Transform>().Rotate(rot);
+            //ClampRotation(current.transform.rotation, current);
         }
 
         if (GUILayout.Button("RotateZ+90"))
@@ -81,8 +84,10 @@ public class WallEditorPopup : EditorWindow
             GameObject current = (GameObject)Selection.activeObject;
             Vector3 rot = new Vector3(0f, 0f, 90f);
             current.GetComponent<Transform>().Rotate(rot);
+            //ClampRotation(current.transform.rotation, current);
         }
 
+        ///movements
         if (GUILayout.Button("+X"))
         {
             GameObject current = (GameObject)Selection.activeObject;
@@ -125,6 +130,18 @@ public class WallEditorPopup : EditorWindow
             current.GetComponent<Transform>().Translate(mov);
         }
 
+    }
+
+
+    void ClampRotation(Quaternion rotation, GameObject current)
+    {
+        var vec = current.transform.eulerAngles;
+        vec.x = Mathf.Round(vec.x * 100f) / 100f;
+        //Debug.Log(vec.x);
+        vec.y = Mathf.Round(vec.y * 100f) / 100f;
+        vec.y = Mathf.Round(vec.z * 100f) / 100f;
+
+        current.transform.rotation = rotation;
     }
 
     void NewObject(bool destroy)
