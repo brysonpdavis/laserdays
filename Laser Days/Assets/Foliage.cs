@@ -40,16 +40,32 @@ public class Foliage : MonoBehaviour {
     {
         Mesh mesh = GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
+        Color[] colors;        
 
         // create new colors array where the colors will be created.
-        Color[] colors = new Color[vertices.Length];
+        if (mesh.colors.Length > 0)
+        {
+
+            colors = mesh.colors;
+        } else 
+        {
+            colors = new Color[vertices.Length];
+        }
+
+
 
 
         var rx = Random.Range(0f, 1f);
         var ry = Random.Range(0f, 1f);
+
         for (int i = 0; i < vertices.Length; i++)
-            colors[i] = new Color(rx, ry, 0, 0);
-            
+        {
+
+            var nr = (colors[i].r + rx) % 1;
+            var ng = (colors[i].g + ry) % 1;
+
+            colors[i] = new Color(nr, ng, 0, 0);
+        }  
         mesh.colors = colors;
     }
 }
