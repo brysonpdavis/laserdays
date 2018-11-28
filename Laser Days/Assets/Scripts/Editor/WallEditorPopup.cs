@@ -161,18 +161,28 @@ public class WallEditorPopup : EditorWindow
             tempRotation = Selection.activeGameObject.GetComponent<Transform>().rotation;
             string currentName = Selection.activeGameObject.name;
 
-            currentName = currentName.Remove(currentName.IndexOf("(Clone)"));
-            //currentName = currentName.Replace("(Clone)", "");
+            if (currentName.Contains(" "))
+                currentName = currentName.Remove(currentName.IndexOf(" "));
+
             Debug.Log(currentName);
 
             if (names.Contains(currentName) && destroy)
             {
                 DestroyImmediate(Selection.activeGameObject);
             }
-            Selection.activeObject = Instantiate(newGuy, tempPosition, tempRotation, parent);
+            Selection.activeObject = PrefabUtility.InstantiatePrefab(newGuy);// tempPosition, tempRotation, parent);
+            Selection.activeGameObject.transform.position = tempPosition;
+            Selection.activeGameObject.transform.rotation = tempRotation;
+            Selection.activeGameObject.transform.parent = parent;
         }
 
-        else Selection.activeObject = Instantiate(newGuy, tempPosition, tempRotation);
+        else
+        {
+            Selection.activeObject = Instantiate(newGuy, tempPosition, tempRotation);
+            Selection.activeGameObject.transform.position = tempPosition;
+            Selection.activeGameObject.transform.rotation = tempRotation;
+        }
+
 
 
         if (material)
