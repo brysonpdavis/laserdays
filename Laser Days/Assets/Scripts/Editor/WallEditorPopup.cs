@@ -160,9 +160,11 @@ public class WallEditorPopup : EditorWindow
             tempPosition = Selection.activeGameObject.GetComponent<Transform>().position;
             tempRotation = Selection.activeGameObject.GetComponent<Transform>().rotation;
             string currentName = Selection.activeGameObject.name;
-            currentName = currentName.Replace("(Clone)", "");
 
+            currentName = currentName.Remove(currentName.IndexOf("(Clone)"));
+            //currentName = currentName.Replace("(Clone)", "");
             Debug.Log(currentName);
+
             if (names.Contains(currentName) && destroy)
             {
                 DestroyImmediate(Selection.activeGameObject);
