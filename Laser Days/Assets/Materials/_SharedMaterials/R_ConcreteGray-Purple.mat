@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: S_TerrainVar1
-  m_Shader: {fileID: 4800000, guid: 0104351153d2746ab82dc5b281882c1a, type: 3}
-  m_ShaderKeywords: _SPECULARHIGHLIGHTS_OFF
-  m_LightmapFlags: 4
+  m_Name: R_ConcreteGray-Purple
+  m_Shader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -18,14 +18,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlbedoLaser:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _AlbedoReal:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -42,37 +34,37 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _DissolveMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _EffectMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 667ae0b259a0d42ca882e292026397e2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 100, y: 100}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 100, y: 100}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaterialMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 50, y: 50}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NormalLaser:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalReal:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 20, y: 20}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -82,37 +74,43 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _Clip: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EdgeThickness: 0
+    - _Elapsed: 0
+    - _Flippable: 1
     - _GlossMapScale: 1
-    - _Glossiness: 1
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _NormalScale: 0.3
+    - _NormalScale: 6.588235
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Shimmer: 0
     - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 0
+    - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SteppedTransition: 0
-    - _TransitionState: 1
+    - _TransitionState: 0
+    - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
+    - _onHold: 0
+    - _onHover: 0
     m_Colors:
-    - _Color: {r: 0.6698113, g: 0.591614, b: 0.56554824, a: 1}
-    - _ColorLaser: {r: 0.33962262, g: 0.27714488, b: 0.27714488, a: 0}
-    - _ColorReal: {r: 0.741, g: 0.58546644, b: 0.45634755, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorLaser: {r: 0.5, g: 0.4174528, b: 0.49893028, a: 0}
+    - _ColorReal: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
+    - _ShimmerColor: {r: 8, g: 8, b: 8, a: 0}
