@@ -19557,6 +19557,47 @@ Transform:
   m_PrefabParentObject: {fileID: 4477189348471888, guid: ff160c47402d6406d9c4124b589bea50,
     type: 2}
   m_PrefabInternal: {fileID: 401307632}
+--- !u!1 &401307634 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1103060098149164, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 401307632}
+--- !u!95 &401307635
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 401307634}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!320 &401307636
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 401307634}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: c711e44f1ca9348ef8b525548caa5be9, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 114001662809437666, guid: c711e44f1ca9348ef8b525548caa5be9, type: 2}
+    value: {fileID: 401307634}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1001 &401793320
 Prefab:
   m_ObjectHideFlags: 0
@@ -34631,15 +34672,15 @@ MonoBehaviour:
   _isMainScene: 1
   _sceneSetup:
   - scene:
-      editorAssetGUID: d074773d6fccd46b09bdf686c515dbd5
-      name: BLUEROOM
-      _path: Assets/Scenes/Default Scene/BLUEROOM.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
       editorAssetGUID: 182c1324c898548fe99b79b6c5e62443
       name: Toolbox
       _path: Assets/Scenes/Default Scene/Toolbox.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: df0f231b6bd9c4986935ffb3bb371956
+      name: Default_Main_Player
+      _path: Assets/Scenes/Default Scene/Default_Main_Player.unity
     loadInEditor: 1
     loadMethod: 1
   _thisScenePath: Assets/Scenes/Default Scene/BLUEROOM.unity
