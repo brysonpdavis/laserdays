@@ -14,101 +14,12 @@ MonoBehaviour:
   m_NextId: 0
   m_Tracks:
   - {fileID: 114985285986739776}
-  - {fileID: 114034198749029414}
   - {fileID: 114259303761100084}
   m_FixedDuration: 0
   m_EditorSettings:
-    m_Framerate: 60
+    m_Framerate: 30
   m_DurationMode: 0
   m_Version: 0
---- !u!114 &114034198749029414
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05acc715f855ced458d76ee6f8ac6c61, type: 3}
-  m_Name: Cinemachine Track
-  m_EditorClassIdentifier: 
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips:
-  - m_Start: 0
-    m_ClipIn: 0
-    m_Asset: {fileID: 114851660901575020}
-    m_Duration: 2
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114034198749029414}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1
-    m_Version: 1
-  m_Version: 1
 --- !u!114 &114259303761100084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,7 +32,7 @@ MonoBehaviour:
   m_Name: Recorder Track
   m_EditorClassIdentifier: 
   m_Locked: 0
-  m_Muted: 0
+  m_Muted: 1
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 11400000}
@@ -130,7 +41,7 @@ MonoBehaviour:
   - m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114429621645685206}
-    m_Duration: 2
+    m_Duration: 15.95
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114259303761100084}
     m_EaseInDuration: 0
@@ -232,8 +143,8 @@ MonoBehaviour:
   m_AssetID: e7cf57ed6788c4ff482cb98e7aed4576
   m_CaptureEveryNthFrame: 1
   m_FrameRateMode: 1
-  m_FrameRate: 60
-  m_FrameRateExact: 512
+  m_FrameRate: 30
+  m_FrameRateExact: 64
   m_StartFrame: 0
   m_EndFrame: 10
   m_StartTime: 0
@@ -264,20 +175,6 @@ MonoBehaviour:
   m_Name: RecorderClip
   m_EditorClassIdentifier: 
   m_Settings: {fileID: 114306089911000862}
---- !u!114 &114851660901575020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90fb794a295e73545af71bcdb7375791, type: 3}
-  m_Name: CinemachineShot
-  m_EditorClassIdentifier: 
-  VirtualCamera:
-    exposedName: a9eefce7b9de54270ba59e7decd1b05d
-    defaultValue: {fileID: 0}
 --- !u!114 &114985285986739776
 MonoBehaviour:
   m_ObjectHideFlags: 1

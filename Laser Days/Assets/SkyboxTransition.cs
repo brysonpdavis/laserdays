@@ -11,12 +11,23 @@ public class SkyboxTransition : MonoBehaviour {
     float speed;
     public float duration;
 
+    public bool transitionFog;
+    public Color laserFog;
+    public Color realFog;
 
     // Use this for initialization
     void Awake()
     {
-        if (Toolbox.Instance.GetPlayer().layer == 16) { SetStart(0); }
-        else { SetStart(1); }
+        if (Toolbox.Instance.GetPlayer().layer == 16) 
+        { 
+            SetStart(0); 
+            RenderSettings.fogColor = realFog; 
+        }
+        else 
+        { 
+            SetStart(1); 
+            RenderSettings.fogColor = laserFog;
+        }
         material = RenderSettings.skybox;
     }
 
@@ -25,10 +36,14 @@ public class SkyboxTransition : MonoBehaviour {
         if (direction)
         {
             flipTransition = flipTransitionRoutine(0f);
+            //going to RenderSettings.fogColor = realFog;
         }
 
         else
+        {
             flipTransition = flipTransitionRoutine(1f);
+            //going to RenderSettings.fogColor = laserFog;
+        }
 
         StopAllCoroutines();
         StartCoroutine(flipTransition);
@@ -57,6 +72,14 @@ public class SkyboxTransition : MonoBehaviour {
         float ratio = elapsedTime / actualDuration;
         float start = material.GetFloat("_TransitionState");
         //int property = Shader.PropertyToID("_D7A8CF01");
+        Color endFog;
+        Color startFog = RenderSettings.fogColor;
+
+        if (endpoint == 0f)
+            endFog = realFog;
+        else
+            endFog = laserFog;
+
 
         while (ratio < 1f)
         {
@@ -64,7 +87,11 @@ public class SkyboxTransition : MonoBehaviour {
             ratio = elapsedTime / duration;
             float value = Mathf.Lerp(start, endpoint, ratio);
             material.SetFloat("_TransitionState", value);
-                
+            if (transitionFog)
+            {
+                Color lerpFog = Color.Lerp(startFog, endFog, ratio);
+                RenderSettings.fogColor = lerpFog;
+            }   
             yield return null;
         }
     }
