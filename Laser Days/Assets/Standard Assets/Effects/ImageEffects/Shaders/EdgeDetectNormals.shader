@@ -287,6 +287,7 @@ Shader "Hidden/EdgeDetect" {
 		
 		half edge = 1.0;
         half4 white = (1,1,1,1);
+        half4 black  = (0,0,0,0);
 		
 		edge *= CheckSame(centerNormal, centerDepth, sample1);
 		edge *= CheckSame(centerNormal, centerDepth, sample2);
@@ -301,7 +302,7 @@ Shader "Hidden/EdgeDetect" {
         //f = 1;
         }
 			
-		return lerp(original, _BgColor, (edge*f*_BgColor.w));
+		return lerp(original, _BgColor, (edge*f*_BgColor.a));
         //return lerp(original, _BgColor, (edge));
 	}
 	

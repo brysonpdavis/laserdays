@@ -6,6 +6,7 @@ public class TransitionCollider : MonoBehaviour
 {
     public float mySpeed = 1f;
     public float speed = .4f;
+    public float endSize = 500000f;
     SphereCollider collider;
     bool direction;
 
@@ -46,7 +47,7 @@ public class TransitionCollider : MonoBehaviour
         Vector3 endpoint;
 
         startpoint = new Vector3(.000001f, 0.000001f, 0.000001f);
-        endpoint = new Vector3(500000f, 500000f, 500000f);
+        endpoint = new Vector3(endSize, endSize, endSize);
 
         float start = .00001f;
         float end = 500f;
