@@ -266,7 +266,7 @@ Shader "Hidden/EdgeDetect" {
     float ComputeFog(float coord)
         {
             float fog = 0.0;
-            fog = 0.06 * coord;
+            fog = 0.03 * coord;
             fog = exp2(-fog);
             saturate(fog);
             return fog; 
@@ -299,7 +299,7 @@ Shader "Hidden/EdgeDetect" {
         //step()
         // f = 1 - f;
         if(centerDepth>0.99){
-        //f = 1;
+        f = 1;
         }
 			
 		return lerp(original, _BgColor, (edge*f*_BgColor.a));
