@@ -29,8 +29,8 @@ public class BasicClickable : FlippableObject {
             rigidbody.constraints = RigidbodyConstraints.None;
             transform.localRotation = Quaternion.Euler(Vector3.zero);
 
-            if (!beenPickedUp)
-            { StartCoroutine(SlowPickup());}
+           // if (!beenPickedUp)
+        //{StartCoroutine(SlowPickup());}
     }
 
     public override void Drop()

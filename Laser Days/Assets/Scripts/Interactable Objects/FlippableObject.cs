@@ -48,6 +48,14 @@ abstract public class FlippableObject : InteractableObject
         realTransform = sceneContainer.Find("Real");
         laserTransform = sceneContainer.Find("Laser");
 
+        if(GetComponent<Rigidbody>()){
+            var rb = GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.None;
+            rb.isKinematic = false;
+            rb.useGravity = true;
+
+        }
+
 
     }
 
