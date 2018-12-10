@@ -19,6 +19,8 @@ MonoBehaviour:
   - {fileID: 114634662826626354}
   - {fileID: 114484020626749842}
   - {fileID: 114048391426146596}
+  - {fileID: 114989740860447978}
+  - {fileID: 114335091986263894}
 --- !u!114 &114048391426146596
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -30,22 +32,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
   m_Name: Grain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   colored:
     overrideState: 1
-    value: 1
+    value: 0
   intensity:
     overrideState: 1
-    value: 0.38
+    value: 0.1
   size:
     overrideState: 1
-    value: 0.76
+    value: 0.35
   lumContrib:
     overrideState: 1
-    value: 0.77
+    value: 0.47
 --- !u!114 &114281024840488584
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -57,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9746f408d6f1e994fa5e88f4f770670f, type: 3}
   m_Name: Recolor
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -66,28 +68,28 @@ MonoBehaviour:
     value: {r: 0, g: 0, b: 0, a: 0}
   edgeSource:
     overrideState: 1
-    value: 2
+    value: 0
   edgeThreshold:
     overrideState: 1
-    value: 0.5
+    value: 0
   edgeContrast:
     overrideState: 1
-    value: 0.5
+    value: 0
   fillGradient:
     overrideState: 1
     value:
       serializedVersion: 2
-      key0: {r: 0.008677464, g: 0.16862746, b: 0.3679245, a: 1}
-      key1: {r: 0.4874977, g: 0.17942329, b: 0.6037736, a: 1}
-      key2: {r: 1, g: 0.5382719, b: 0.16509432, a: 0}
-      key3: {r: 1, g: 1, b: 1, a: 0}
-      key4: {r: 1, g: 1, b: 1, a: 0}
+      key0: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 1, g: 0.9207624, b: 0.6273585, a: 0}
+      key3: {r: 1, g: 0.9207624, b: 0.6273585, a: 0}
+      key4: {r: 1, g: 0.9207624, b: 0.6273585, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 24672
-      ctime1: 39899
-      ctime2: 47802
+      ctime0: 18697
+      ctime1: 65535
+      ctime2: 65535
       ctime3: 65535
       ctime4: 65535
       ctime5: 0
@@ -101,12 +103,55 @@ MonoBehaviour:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
-      m_NumColorKeys: 4
+      m_Mode: 0
+      m_NumColorKeys: 2
       m_NumAlphaKeys: 2
   fillOpacity:
     overrideState: 1
+    value: 1
+--- !u!114 &114335091986263894
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b924e2dad56384a8df2a1e111bb675, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  mode:
+    overrideState: 0
     value: 0
+  color:
+    overrideState: 0
+    value: {r: 0, g: 0, b: 0, a: 1}
+  center:
+    overrideState: 0
+    value: {x: 0.5, y: 0.5}
+  intensity:
+    overrideState: 0
+    value: 0
+  smoothness:
+    overrideState: 0
+    value: 0.2
+  roundness:
+    overrideState: 0
+    value: 1
+  rounded:
+    overrideState: 0
+    value: 0
+  mask:
+    overrideState: 0
+    value: {fileID: 0}
+    defaultState: 1
+  opacity:
+    overrideState: 0
+    value: 1
 --- !u!114 &114366407162351606
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -128,7 +173,7 @@ MonoBehaviour:
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 1
+    value: 0.05
   fastMode:
     overrideState: 1
     value: 1
@@ -143,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ba51565624d441a5a5234bb0e6647, type: 3}
   m_Name: Overlay
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -151,15 +196,15 @@ MonoBehaviour:
     overrideState: 1
     value:
       serializedVersion: 2
-      key0: {r: 0.2924528, g: 0.27727836, b: 0.27727836, a: 1}
-      key1: {r: 0.46999446, g: 0.1308295, b: 0.5660378, a: 1}
+      key0: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0.9429027, b: 0.25, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
+      ctime0: 386
       ctime1: 65535
       ctime2: 0
       ctime3: 0
@@ -180,7 +225,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
   opacity:
     overrideState: 1
-    value: 0.513
+    value: 0.06
   angle:
     overrideState: 1
     value: 8
@@ -1595,10 +1640,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 3
+    value: 6
   threshold:
     overrideState: 1
-    value: 1.5
+    value: 0.31
   softKnee:
     overrideState: 1
     value: 0.5
@@ -1624,3 +1669,30 @@ MonoBehaviour:
   dirtIntensity:
     overrideState: 0
     value: 0
+--- !u!114 &114989740860447978
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
+  m_Name: DepthOfField
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  focusDistance:
+    overrideState: 1
+    value: 7.43
+  aperture:
+    overrideState: 1
+    value: 2.4
+  focalLength:
+    overrideState: 1
+    value: 65
+  kernelSize:
+    overrideState: 1
+    value: 1
