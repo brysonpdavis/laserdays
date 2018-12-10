@@ -5294,7 +5294,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 4e9ad4c3b8dbd4c3fa9e9473e3cac3f2, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 4e9ad4c3b8dbd4c3fa9e9473e3cac3f2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5897,13 +5897,13 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 150
+    maxNumParticles: 1000
     size3D: 0
     rotation3D: 1
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6104,7 +6104,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 25
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -7799,11 +7799,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9053,7 +9053,7 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
+    enabled: 1
     mode: 0
     ratio: 1
     lifetime:
@@ -9185,7 +9185,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10046,7 +10046,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4608
   stopNaNPropagation: 1
-  antialiasingMode: 1
+  antialiasingMode: 0
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -10227,7 +10227,7 @@ MonoBehaviour:
   heightFog: 0
   height: 1
   heightDensity: 0.001
-  startDistance: 100
+  startDistance: 60
   fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
 --- !u!114 &1198232345
 MonoBehaviour:
@@ -11729,7 +11729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySpeed: 1.4
-  speed: 0.4
+  speed: 1
   endSize: 1000000
 --- !u!135 &2071524816
 SphereCollider:
