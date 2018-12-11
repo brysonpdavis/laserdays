@@ -31,8 +31,8 @@ public class PuzzleCompletion : MonoBehaviour {
         mySpawners = transform.parent.transform.parent.GetComponentsInChildren<Spawner>();
 
         rotX = Random.Range(5f, 10f);
-        rotY = Random.Range(30f, 90f);
-        rotZ = Random.Range(30f, 40f);
+        rotY = Random.Range(5F, 10f);
+        rotZ = Random.Range(5f, 10F);
 
         innerRotX = Random.Range(5f, 10f);
         innerRotY = Random.Range(30f, 90f);

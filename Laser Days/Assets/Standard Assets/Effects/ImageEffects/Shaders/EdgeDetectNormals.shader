@@ -303,7 +303,7 @@ Shader "Hidden/EdgeDetect" {
         }
 			
 		return lerp(original, _BgColor, (edge*f*_BgColor.a));
-        //return lerp(original, _BgColor, (edge));
+        //return lerp(white, black, (edge));
 	}
 	
 	ENDCG 

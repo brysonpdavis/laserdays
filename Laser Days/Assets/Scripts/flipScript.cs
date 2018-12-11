@@ -12,6 +12,8 @@ public class flipScript : MonoBehaviour {
 	private PlayerCharge pc;
     private flipburst flipburst;
 
+    private int frames = 0;
+
     //sounds
     private AudioSource audioSource;
     public AudioSource audioSourceSecondary;
@@ -21,8 +23,11 @@ public class flipScript : MonoBehaviour {
 
     public AudioClip flipFailClip;
     public bool flippedThisFrame = false;
-    public GameObject ring;
+    public GameObject[] ring;
     private GameObject currentRing;
+
+    private int rc;
+
     TransitionCollider transitionCollider;
 
 	RaycastManager rm;
@@ -64,6 +69,28 @@ public class flipScript : MonoBehaviour {
 	}
 
 	void Update () {
+
+
+
+       
+        if (Input.GetKey(KeyCode.Z))
+        {
+            frames++;
+            if (frames == 20)
+            {
+                frames = 0;
+                currentRing = Instantiate(ring[rc]);
+                currentRing.transform.position = transform.position;
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                rc++;
+                rc = rc % ring.Length;
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
@@ -148,8 +175,11 @@ public class flipScript : MonoBehaviour {
 			Flip(held);
 		FlipList(things);
         Toolbox.Instance.FlipSharedMaterials(space);
-        currentRing = Instantiate(ring);
-        currentRing.transform.position = transform.position;
+
+
+
+
+
 
 
 
