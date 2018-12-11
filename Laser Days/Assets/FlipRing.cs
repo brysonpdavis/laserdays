@@ -8,9 +8,12 @@ public class FlipRing : MonoBehaviour {
     public float mySpeed = 2f;
     public float startScale = 0f;
     public float endScale = 10f;
+    public bool leftRot = false;
+    public bool rightRot = false;
 
     private Renderer mRenderer;
     private Material material;
+
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +25,11 @@ public class FlipRing : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (rightRot)
+            transform.Rotate(0f, .5f, 0f);
+
+        if (leftRot)
+            transform.Rotate(0f, -.5f, 0f);
 	}
 
     private IEnumerator RingGrow ()

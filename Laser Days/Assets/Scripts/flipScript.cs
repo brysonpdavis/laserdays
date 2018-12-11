@@ -82,6 +82,17 @@ public class flipScript : MonoBehaviour {
                 currentRing = Instantiate(ring[rc]);
                 currentRing.transform.position = transform.position;
 
+                if (Input.GetKey(KeyCode.LeftAlt))
+                {
+                    currentRing.GetComponent<FlipRing>().mySpeed *= 10f;
+                }
+
+                if (Input.GetKey(KeyCode.LeftShift))
+                    currentRing.GetComponent<FlipRing>().leftRot = true;
+
+                else if (Input.GetKey(KeyCode.RightShift))
+                    currentRing.GetComponent<FlipRing>().rightRot = true;
+
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
@@ -89,6 +100,8 @@ public class flipScript : MonoBehaviour {
                 rc++;
                 rc = rc % ring.Length;
             }
+
+
         }
 
         if (Input.GetMouseButtonDown(0))
