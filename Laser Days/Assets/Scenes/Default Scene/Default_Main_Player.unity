@@ -225,6 +225,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 50, y: -130, z: 0}
+--- !u!1 &298716309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 298716310}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &298716310
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 298716309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &481406504
 GameObject:
   m_ObjectHideFlags: 0
@@ -9946,7 +9974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &899082973
 Transform:
   m_ObjectHideFlags: 0
@@ -9988,7 +10016,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -10038,7 +10066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1119930146
 Transform:
   m_ObjectHideFlags: 0
@@ -10080,7 +10108,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -10333,7 +10361,7 @@ MonoBehaviour:
   edgeExp: 0.85
   sampleDist: 1
   edgesOnly: 0
-  edgesOnlyBgColor: {r: 0, g: 0, b: 0, a: 1}
+  edgesOnlyBgColor: {r: 0, g: 0, b: 0, a: 0.75686276}
   edgeDetectShader: {fileID: 4800000, guid: 0d1644bdf064147baa97f235fc5b4903, type: 3}
 --- !u!114 &1198232344
 MonoBehaviour:
@@ -10341,7 +10369,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1198232336}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
   m_Name: 
@@ -10475,7 +10503,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1634057783}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 10.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1119930146}
@@ -10633,6 +10661,7 @@ GameObject:
   - component: {fileID: 1430146075}
   - component: {fileID: 1430146077}
   - component: {fileID: 1430146078}
+  - component: {fileID: 1430146079}
   m_Layer: 16
   m_Name: WorldTransition
   m_TagString: Untagged
@@ -10665,10 +10694,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.4
-  fogColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 0}
-  fogDensity: 0.001
-  skyboxColor: {r: 0.26666668, g: 0.42352942, b: 0.4, a: 0}
-  ambientEnvironment: {r: 0.72156864, g: 0.7294118, b: 0.7490196, a: 0}
+  fogColor: {r: 0.5188679, g: 0.35631073, b: 0.3010413, a: 0}
+  fogDensity: 0.05
+  skyboxColor: {r: 0.44798437, g: 0.3715735, b: 0.4716981, a: 0}
+  ambientEnvironment: {r: 0.77254903, g: 0.33333334, b: 0.49803922, a: 0}
 --- !u!114 &1430146076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10699,10 +10728,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.4
-  fogColor: {r: 0.5188679, g: 0.39404592, b: 0.39404592, a: 0}
+  fogColor: {r: 0.46652457, g: 0.5377358, b: 0.367791, a: 0}
   fogDensity: 0.05
-  skyboxColor: {r: 0.16820931, g: 0.26415092, b: 0.24975967, a: 0}
-  ambientEnvironment: {r: 0.16740835, g: 0.1788766, b: 0.20754719, a: 0}
+  skyboxColor: {r: 0.19215687, g: 0.34117648, b: 0.29411766, a: 0}
+  ambientEnvironment: {r: 0.34509805, g: 0.5764706, b: 0.38431373, a: 0}
 --- !u!114 &1430146078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10714,11 +10743,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd79cb6f52b0413ab5a9d0a1ac7b3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 2
-  fogColor: {r: 0.5188679, g: 0.39404592, b: 0.39404592, a: 0}
+  duration: 0.4
+  fogColor: {r: 0.67058825, g: 0.4277896, b: 0.34901962, a: 0}
   fogDensity: 0.05
-  skyboxColor: {r: 0.735849, g: 0.72114444, b: 0.60742253, a: 0}
-  ambientEnvironment: {r: 0.26666668, g: 0.42352942, b: 0.4, a: 0}
+  skyboxColor: {r: 0.6698113, g: 0.4742766, b: 0.3507031, a: 0}
+  ambientEnvironment: {r: 0.8117647, g: 0.70955974, b: 0.5254902, a: 0}
+--- !u!114 &1430146079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1430146073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd79cb6f52b0413ab5a9d0a1ac7b3e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.4
+  fogColor: {r: 0.44965428, g: 0.36525455, b: 0.4528302, a: 0}
+  fogDensity: 0.05
+  skyboxColor: {r: 0.5019608, g: 0.1254902, b: 0.1254902, a: 0}
+  ambientEnvironment: {r: 0.754717, g: 0.35007355, b: 0.29547882, a: 0}
 --- !u!1 &1538516477
 GameObject:
   m_ObjectHideFlags: 0
@@ -11407,7 +11452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1772045075
 Transform:
   m_ObjectHideFlags: 0
@@ -11449,7 +11494,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -11457,6 +11502,34 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1961515982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1961515983}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1961515983
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1961515982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1965297122
 GameObject:
   m_ObjectHideFlags: 0
@@ -11687,7 +11760,7 @@ Prefab:
     - target: {fileID: 224369464347530956, guid: 165e90ffb1a364294b6d740d840d930e,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.000000059604645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224369464347530956, guid: 165e90ffb1a364294b6d740d840d930e,
         type: 2}
@@ -11702,7 +11775,7 @@ Prefab:
     - target: {fileID: 224475377256954016, guid: 165e90ffb1a364294b6d740d840d930e,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.000000059604645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224475377256954016, guid: 165e90ffb1a364294b6d740d840d930e,
         type: 2}
@@ -11717,7 +11790,7 @@ Prefab:
     - target: {fileID: 224333452779672502, guid: 165e90ffb1a364294b6d740d840d930e,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.000000059604645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224333452779672502, guid: 165e90ffb1a364294b6d740d840d930e,
         type: 2}
@@ -11978,6 +12051,11 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 224978929834073710, guid: 165e90ffb1a364294b6d740d840d930e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 25.300049
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 165e90ffb1a364294b6d740d840d930e, type: 2}
