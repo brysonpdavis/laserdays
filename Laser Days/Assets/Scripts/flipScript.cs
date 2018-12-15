@@ -11,6 +11,7 @@ public class flipScript : MonoBehaviour {
 	public bool space;
 	private PlayerCharge pc;
     private flipburst flipburst;
+    GameObject tempRing;
 
     private int frames = 0;
 
@@ -71,7 +72,19 @@ public class flipScript : MonoBehaviour {
 	void Update () {
 
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            tempRing = ring[0];
 
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            tempRing = ring[1];
+
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            tempRing = ring[2];
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            tempRing = ring[3];
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+            tempRing = ring[4];
+        
        
         if (Input.GetKey(KeyCode.Z))
         {
@@ -79,8 +92,9 @@ public class flipScript : MonoBehaviour {
             if (frames == 20)
             {
                 frames = 0;
-                currentRing = Instantiate(ring[rc]);
+                currentRing = Instantiate(tempRing);
                 currentRing.transform.position = transform.position;
+                currentRing.transform.parent = gameObject.transform;
 
                 if (Input.GetKey(KeyCode.LeftAlt))
                 {
@@ -94,13 +108,6 @@ public class flipScript : MonoBehaviour {
                     currentRing.GetComponent<FlipRing>().rightRot = true;
 
             }
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                rc++;
-                rc = rc % ring.Length;
-            }
-
 
         }
 

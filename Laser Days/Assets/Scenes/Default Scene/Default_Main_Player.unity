@@ -10299,7 +10299,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1198232336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92723cc4af66d41b192682a84759486b, type: 3}
   m_Name: 
@@ -10662,6 +10662,7 @@ GameObject:
   - component: {fileID: 1430146077}
   - component: {fileID: 1430146078}
   - component: {fileID: 1430146079}
+  - component: {fileID: 1430146080}
   m_Layer: 16
   m_Name: WorldTransition
   m_TagString: Untagged
@@ -10711,11 +10712,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 0}
   worldTransitions: []
-  directionalRotations:
-  - {x: 5.28, y: 31.77, z: 16.6, w: 0}
-  - {x: 20, y: 1, z: 90, w: 0}
-  - {x: 160, y: 200, z: 9, w: 0}
-  rotationTime: 25
 --- !u!114 &1430146077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10764,6 +10760,22 @@ MonoBehaviour:
   fogDensity: 0.05
   skyboxColor: {r: 0.5019608, g: 0.1254902, b: 0.1254902, a: 0}
   ambientEnvironment: {r: 0.754717, g: 0.35007355, b: 0.29547882, a: 0}
+--- !u!114 &1430146080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1430146073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcccf0f9cfdf4bd2925f96ac34cb5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationTime: 1
+  directionalRotations:
+  - {x: 160, y: 200, z: 9, w: 25}
+  - {x: 5, y: 31, z: 17, w: 0}
+  - {x: 10, y: 1, z: 90, w: 0}
 --- !u!1 &1538516477
 GameObject:
   m_ObjectHideFlags: 0
@@ -10999,9 +11011,9 @@ MonoBehaviour:
   flipFailClip: {fileID: 0}
   flippedThisFrame: 1
   ring:
-  - {fileID: 1533002151840832, guid: 4fd7b176b88b04bda99dd6b6240322bb, type: 2}
-  - {fileID: 1533002151840832, guid: 3af62f7b529e34cc2ba46fc4468d3b31, type: 2}
-  - {fileID: 1533002151840832, guid: 370fa7d75cd3a427a9d5656b9247ff7c, type: 2}
+  - {fileID: 1533002151840832, guid: f64e6f4d1371e43b7846f8a4c970fc7a, type: 2}
+  - {fileID: 1533002151840832, guid: 304a8622da9df4bc59dd785f6df2f6a1, type: 2}
+  - {fileID: 1533002151840832, guid: 78748b464691845718b543719c044a7a, type: 2}
 --- !u!82 &1634057791
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11247,8 +11259,8 @@ MonoBehaviour:
     mouseLocked: 1
     mouseXAxis: Mouse X
     mouseYAxis: Mouse Y
-    mouseSensitivity: 1
-    mouseSmoothing: 0
+    mouseSensitivity: 0.8
+    mouseSmoothing: 1
     horizontalAxis: Horizontal
     verticalAxis: Vertical
     jumpButton: Jump

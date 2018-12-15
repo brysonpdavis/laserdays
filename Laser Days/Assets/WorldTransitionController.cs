@@ -6,83 +6,60 @@ public class WorldTransitionController : MonoBehaviour {
 
     public Material material;
     public WorldTransition[] worldTransitions;
-    public Quaternion[] directionalRotations;
-    public float rotationTime = 1f;
-    private Transform directionalLight;
+
+    private bool grav = false;
     //public Quaternion angle;
 
     private void Awake()
     {
         material = RenderSettings.skybox;
         worldTransitions = GetComponents<WorldTransition>();
-        directionalLight = GameObject.Find("Directional Light").transform;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Keypad0))
         {
             WorldTransition(worldTransitions[0]);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        else if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             WorldTransition(worldTransitions[1]);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             WorldTransition(worldTransitions[2]);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Keypad3))
         {
             WorldTransition(worldTransitions[3]);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (Input.GetKeyDown(KeyCode.Keypad4))
         {
             WorldTransition(worldTransitions[4]);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        else if (Input.GetKeyDown(KeyCode.Keypad5))
         {
             WorldTransition(worldTransitions[5]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            WorldTransition(worldTransitions[6]);
+            if (grav)
+            //WorldTransition(worldTransitions[6]);
+                Physics.gravity = new Vector3(1f, 15.81f, 0f);
+            else
+                Physics.gravity = new Vector3(1f, -9.81f, 0f);
+
+            grav = !grav;
         }
-
-
-        //light rotations
-        else if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            DirectionalRotation(directionalRotations[0]);
-        }
-
-        //light rotations
-        else if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            DirectionalRotation(directionalRotations[1]);
-        }
-
-        //light rotations
-        else if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            DirectionalRotation(directionalRotations[2]);
-        }
-
 
     }
 
     private void WorldTransition(WorldTransition world)
     {
-        StopCoroutine("WorldTransitionRoutine");
-        //StopAllCoroutines();
-        StartCoroutine(WorldTransitionRoutine(world));
-    }
-
-    private void DirectionalRotation(Quaternion rotation)
-    {
         //StopCoroutine("WorldTransitionRoutine");
         StopAllCoroutines();
-        StartCoroutine(DirectionalLightRoutine(rotation));
+        StartCoroutine(WorldTransitionRoutine(world));
     }
 
 
@@ -109,6 +86,7 @@ public class WorldTransitionController : MonoBehaviour {
             //lerp skybox
             Color skyboxColor = Color.Lerp(startSkybox, worldTransition.skyboxColor, ratio);
             material.SetColor("_LaserColor", skyboxColor);
+            material.SetColor("_RealColor", skyboxColor);
 
             //lerp ambient
             Color ambient = Color.Lerp(startAmbient, worldTransition.ambientEnvironment, ratio);
@@ -122,28 +100,6 @@ public class WorldTransitionController : MonoBehaviour {
             float currentDensity = Mathf.Lerp(startDensity, worldTransition.fogDensity, ratio);
             RenderSettings.fogDensity = currentDensity;
 
-            yield return null;
-        }
-    }
-
-    private IEnumerator DirectionalLightRoutine(Quaternion finalRotation)
-    {
-
-        float elapsedTime = 0;
-        float ratio = elapsedTime / rotationTime;
-        Debug.Log(ratio);
-
-        Quaternion startRotation = directionalLight.rotation;
-
-
-        while (ratio < 1f)
-        {
-            Debug.Log(ratio);
-            elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / rotationTime;
-
-            Quaternion current = Quaternion.Lerp(startRotation, finalRotation, ratio);
-            directionalLight.rotation = current;
             yield return null;
         }
     }
