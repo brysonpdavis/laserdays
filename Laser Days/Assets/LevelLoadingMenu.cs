@@ -41,11 +41,13 @@ public class LevelLoadingMenu : MonoBehaviour {
     private void Start()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Default_Main_Player"));
+        GetComponent<CanvasScaler>().enabled = true;
+        Resume();
     }
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) || (Input.GetKeyDown(KeyCode.Escape)))
         {
             if (gameIsPaused && transitionIsDone)
                 Resume();
