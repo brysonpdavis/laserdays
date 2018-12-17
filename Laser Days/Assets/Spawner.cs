@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour {
     public GameObject myButton;
     public bool completed = false;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         scene = gameObject.scene;
 
