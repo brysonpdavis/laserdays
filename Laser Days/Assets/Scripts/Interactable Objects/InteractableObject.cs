@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UniqueId))]
+
 abstract public class InteractableObject : MonoBehaviour
 {
     //protected ItemProperties itemProperties;
@@ -59,6 +61,7 @@ abstract public class InteractableObject : MonoBehaviour
         material.SetFloat("_onHold", 0f);
 
     }
+
 
     void Start()
     {
@@ -194,6 +197,4 @@ abstract public class InteractableObject : MonoBehaviour
 
         }
     }
-
-
 }
