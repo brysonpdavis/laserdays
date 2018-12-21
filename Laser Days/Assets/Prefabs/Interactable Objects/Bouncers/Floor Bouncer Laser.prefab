@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 114494484404179640}
   - component: {fileID: 82961850921687002}
   - component: {fileID: 114224016453842070}
+  - component: {fileID: 114576538607924880}
   m_Layer: 10
   m_Name: Floor Bouncer Laser
   m_TagString: Clickable
@@ -451,7 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114220612493102598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -464,7 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114224016453842070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -482,6 +483,8 @@ MonoBehaviour:
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 
@@ -518,6 +521,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Renderers: []
+--- !u!114 &114576538607924880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197838375947322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!114 &114709139802729812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -530,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114977680223684718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -543,4 +558,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0

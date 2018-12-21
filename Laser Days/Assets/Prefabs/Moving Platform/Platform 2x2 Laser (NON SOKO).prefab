@@ -572,6 +572,7 @@ GameObject:
   - component: {fileID: 54397368802110238}
   - component: {fileID: 114458732304724224}
   - component: {fileID: 64851359669182666}
+  - component: {fileID: 114489296911115502}
   m_Layer: 10
   m_Name: Platform
   m_TagString: Platform
@@ -2446,7 +2447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114029270348344926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2459,7 +2460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114035378088451668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2472,7 +2473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114048230754562754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2506,7 +2507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114136430059327870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2529,6 +2530,7 @@ MonoBehaviour:
   - {fileID: 114659770949744956}
   start: {x: 0, y: 0, z: 0}
   end: {fileID: 4382842803006982}
+  durationMultiplier: 1
 --- !u!114 &114148005899231154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2619,7 +2621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114321782951529216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2651,7 +2653,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
+--- !u!114 &114489296911115502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1659304323409918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0fe622a737e04596b4e86eaf43cf34a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!114 &114538803183390546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2695,7 +2709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114659770949744956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2769,7 +2783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114807542109806400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2782,7 +2796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114813990642737302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2830,7 +2844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114905662556431516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2883,7 +2897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114951704854907926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2957,7 +2971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!120 &120858960929046190
 LineRenderer:
   m_ObjectHideFlags: 1

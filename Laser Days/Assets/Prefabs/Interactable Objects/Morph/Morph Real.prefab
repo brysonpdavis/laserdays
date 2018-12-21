@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 114182159608215608}
   - component: {fileID: 65765167567793440}
   - component: {fileID: 114869041318602686}
+  - component: {fileID: 114986105564121072}
   m_Layer: 11
   m_Name: Morph Real
   m_TagString: Clickable
@@ -579,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114182159608215608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -613,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114429420527217144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,7 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114469990332081102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -693,8 +694,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectType: 3
   itemName: 
+  pickupDistance: 2
   selected: 0
+  recentlySelected: 0
   selectedShader: {fileID: 0}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 
@@ -704,6 +709,11 @@ MonoBehaviour:
   boost: 0
   timesFlipped: 0
   maxFlips: 0
+  secondaryFlipDuration: 1
+  shimmerColor: {r: 0, g: 0, b: 0, a: 0}
+  sceneContainer: {fileID: 0}
+  realTransform: {fileID: 0}
+  laserTransform: {fileID: 0}
 --- !u!114 &114891048682079844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -716,7 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
 --- !u!114 &114970085866596638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -729,4 +739,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
+--- !u!114 &114986105564121072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296476021553686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 

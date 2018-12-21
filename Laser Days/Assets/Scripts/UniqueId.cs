@@ -39,21 +39,21 @@ using System.Runtime.Serialization.Formatters.Binary;
  
      // global lookup of IDs to Components - we can esnure at edit time that no two 
      // components which are loaded at the same time have the same ID. 
-     static Dictionary<string, UniqueId> allGuids = new Dictionary<string, UniqueId> ();
+    static Dictionary<string, UniqueId> allGuids = new Dictionary<string, UniqueId> ();
  
-     public string uniqueId;
-    private InteractableObject interactable;
+    public string uniqueId;
+    protected InteractableObject interactable;
 
-    private void Awake()
+    private void Start()
     {
-        interactable = GetComponent<InteractableObject>();
+        //Toolbox.Instance.allIds.Add(this);
     }
 
     // Only compile the code in an editor build
 #if UNITY_EDITOR
 
     // Whenever something changes in the editor (note the [ExecuteInEditMode])
-    void Update(){
+    protected void Update(){
          // Don't do anything when running the game
          if (Application.isPlaying)
              return;
@@ -91,43 +91,52 @@ using System.Runtime.Serialization.Formatters.Binary;
      // entry still hangs around when we reload the same level again
      // but now the THIS pointer has changed and we end up changing 
      // our ID unnecessarily
-     void OnDestroy(){
+     protected void OnDestroy(){
          allGuids.Remove(uniqueId);
+        //if (Toolbox.Instance.allIds.Contains(this))
+                //Toolbox.Instance.allIds.Remove(this);
      }
 #endif
 
-    public void OnDisable()
+    public void Save()
     {
-        if (Application.isPlaying)
+        if (Application.isPlaying && gameObject.activeInHierarchy)
         {
             SaveObj();
         }
     }
 
-    public void OnEnable()
+    public virtual void Awake()
     {
+        interactable = GetComponent<InteractableObject>();
+
         if (Application.isPlaying)
         {
             InteractableObjectData data = LoadObjData();
-            ObjSetup(data);
+            //if (data != null)
+                ObjSetup(data);
         }
     }
 
 
-    public void SaveObj()
+    public virtual void SaveObj()
     {
+        Debug.Log(gameObject.name);
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/" + uniqueId;
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        InteractableObjectData data = new InteractableObjectData(interactable);
+        InteractableObjectData data = new InteractableObjectData(interactable) ;
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public InteractableObjectData LoadObjData()
+    public virtual InteractableObjectData LoadObjData()
     {
         string path = Application.persistentDataPath + "/" + uniqueId;
+
+        if (!Toolbox.Instance.allIds.Contains(this))
+            Toolbox.Instance.allIds.Add(this);
 
         if (File.Exists(path))
         {
@@ -137,22 +146,47 @@ using System.Runtime.Serialization.Formatters.Binary;
             InteractableObjectData data = formatter.Deserialize(stream) as InteractableObjectData;
             stream.Close();
             return data;
-
         }
 
         else 
         {
-            Debug.LogError("Save file not found in " + path);
+          //  Debug.LogError("Save file not found in " + path);
             return null;
         }
     }
 
 
-    public void ObjSetup(InteractableObjectData objectData)
+    public void ClearObjData()
     {
-        Vector3 position = new Vector3(objectData.position[0], objectData.position[1], objectData.position[2]);
-        gameObject.transform.position = position;
+        string path = Application.persistentDataPath + "/" + uniqueId;
 
-        gameObject.layer = objectData.layer;
+        if (File.Exists(path))
+            File.Delete(path);
+
+        else
+        {
+            Debug.LogError("Can't find a save to delete" + path);
+        }
+    }
+
+
+    public virtual void ObjSetup(InteractableObjectData objectData)
+    {
+        if (objectData != null)
+        {
+            Vector3 position = new Vector3(objectData.position[0], objectData.position[1], objectData.position[2]);
+            gameObject.transform.position = position;
+            gameObject.layer = objectData.layer;
+            gameObject.name = objectData.name;
+
+            interactable = GetComponent<InteractableObject>();
+            //Debug.Log(gameObject.name);
+
+            if (objectData.layer == 11)
+                interactable.LoadShader(true);
+            if (objectData.layer == 10)
+                interactable.LoadShader(false);
+
+        }
     }
 }

@@ -64,7 +64,6 @@ public class PuzzleCompletion : MonoBehaviour {
         StartCoroutine(TransitionLaserOff());
         core.GetComponent<Collider>().enabled = false;
 
-
     }
 
     private void Update()

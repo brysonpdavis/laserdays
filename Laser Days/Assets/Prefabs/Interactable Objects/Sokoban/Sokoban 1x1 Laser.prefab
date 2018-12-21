@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114506727615155040}
   - component: {fileID: 114701018537115458}
   - component: {fileID: 82038628742069970}
+  - component: {fileID: 114215402966303366}
   m_Layer: 10
   m_Name: Sokoban 1x1 Laser
   m_TagString: Clickable
@@ -211,6 +212,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114215402966303366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1678789563262494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!114 &114506727615155040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -235,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114701018537115458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,6 +266,8 @@ MonoBehaviour:
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 0}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 

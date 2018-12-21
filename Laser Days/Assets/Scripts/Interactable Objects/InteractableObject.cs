@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(UniqueId))]
+//[RequireComponent(typeof(UniqueId))]
 
 abstract public class InteractableObject : MonoBehaviour
 {
@@ -35,6 +35,8 @@ abstract public class InteractableObject : MonoBehaviour
     protected Renderer mRenderer;
     protected Material material;
     public Shader selectedShader;
+    public Shader realShader;
+    public Shader laserShader;
     [HideInInspector]public bool inMotion = false;
     [HideInInspector] public bool isKey = false;
     [HideInInspector] public string key = null;
@@ -152,6 +154,23 @@ abstract public class InteractableObject : MonoBehaviour
     public abstract void SetType();
 
     protected virtual void StopShimmerRoutine() {} //used in flippable
+
+    public virtual void LoadShader(bool real)
+    {
+        if (real)
+        {
+            //Debug.Log("real shader");
+            GetComponent<Renderer>().material.shader = Toolbox.Instance.GetRaycastManager().realWorldShader;
+        }
+         
+        else
+        {
+           // Debug.Log("laser shader");
+            GetComponent<Renderer>().material.shader = Toolbox.Instance.GetRaycastManager().laserWorldShader;//raycastManager.laserWorldShader;
+        }
+           
+    }
+
 
 
     protected virtual bool AmHeldObj()

@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 114833788400318540}
   - component: {fileID: 82980727193870084}
   - component: {fileID: 114419117392972996}
+  - component: {fileID: 114145240632156394}
   m_Layer: 10
   m_Name: Wall Bouncer Z - Laser
   m_TagString: Clickable
@@ -451,7 +452,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
+--- !u!114 &114145240632156394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942197446220062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!114 &114419117392972996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -469,6 +482,8 @@ MonoBehaviour:
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 0}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 
@@ -489,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114700629781987786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -502,7 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114786334854829318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -544,4 +559,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0

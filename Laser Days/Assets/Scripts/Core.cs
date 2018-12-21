@@ -16,6 +16,10 @@ public class Core : MonoBehaviour {
     }
     public void Flip(bool dir)
     {
+        //quick setup for if we're changing the core shader before the core itself has done the awake
+        if (!renderMat)
+            renderMat = GetComponent<Renderer>().material;
+
         if (dir)
         {
             renderMat.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreLaser;

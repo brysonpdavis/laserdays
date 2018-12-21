@@ -117,7 +117,12 @@ public class Transition : MonoBehaviour
 
         //material.SetFloat("_TransitionState", value);
         //if (GetComponent<Sokoban1x1>())
-            //Debug.Log("starting");
+        //Debug.Log("starting");
+
+        //in case start has not occurred yet
+        if (!mRenderer)
+            Awake();
+        
         _propBlock.SetFloat("_TransitionState",value);
         mRenderer.SetPropertyBlock(_propBlock);
     }

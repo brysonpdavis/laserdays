@@ -138,6 +138,13 @@ abstract public class FlippableObject : InteractableObject
         }
     }
 
+    public override void LoadShader(bool real)
+    {
+        base.LoadShader(real);
+        GetComponentInChildren<Core>().Flip(!real);
+
+    }
+
     void ParticleEffect()
     {
         if (GetComponent<ParticleSystem>())

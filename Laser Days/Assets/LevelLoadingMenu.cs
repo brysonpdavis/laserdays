@@ -17,6 +17,8 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     public GameObject soundtrackSlider;
     public GameObject soundEffectSlider;
+
+
     bool transitionIsDone = true;
     public Image background;
     private Color backgroundColor;
@@ -78,6 +80,16 @@ public class LevelLoadingMenu : MonoBehaviour {
         Time.timeScale = 1f;
     }
 
+    public void FullSave()
+    {
+        Toolbox.Instance.FullSave();
+    }
+
+    public void FullReset()
+    {
+        Toolbox.Instance.FullReset();
+    }
+
     public void LoadScene()
     {
         string name = EventSystem.current.currentSelectedGameObject.name;
@@ -85,7 +97,9 @@ public class LevelLoadingMenu : MonoBehaviour {
         string spawnPoint = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text;
         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
         Time.timeScale = 1f;
+
         StartCoroutine(loadNextScene(name, spawnPoint, myButton));
+
 
         //set new scene button to orange
         bool newSceneCompleted = false;
@@ -102,6 +116,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         if (lastSceneButton)
             ClearPreviousButton();
+
         //new scene is now previous scene
         lastSceneButton = myButton;
         lastSceneCompleted = newSceneCompleted;
@@ -171,6 +186,10 @@ public class LevelLoadingMenu : MonoBehaviour {
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(fadeDuration);
   
+        //reset all of the scene's save data before re-loading in the scene
+        GameObject.Find(spawnPoint).GetComponentInParent<SceneUniqueIds>().SceneResetSave();
+
+
         AsyncOperation _async = new AsyncOperation();
         SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(name));
 

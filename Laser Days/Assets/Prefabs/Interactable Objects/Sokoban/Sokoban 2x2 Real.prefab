@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114488427273644126}
   - component: {fileID: 114124301720409138}
   - component: {fileID: 82879620497461554}
+  - component: {fileID: 114998344038892356}
   m_Layer: 11
   m_Name: Sokoban 2x2 Real
   m_TagString: Clickable
@@ -2913,6 +2914,8 @@ MonoBehaviour:
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 0}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 
@@ -2948,7 +2951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114225450096465730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2961,7 +2964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114237938476591960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2990,7 +2993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114239636818429656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3061,7 +3064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114346947292249878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3074,7 +3077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114352819501824884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3132,6 +3135,8 @@ MonoBehaviour:
   playerBoostAmount: 10
   affectsPlayer: 0
   affectsObjects: 1
+  count: 1
+  ring: {fileID: 0}
 --- !u!114 &114402794195487274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3144,7 +3149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114432132277724960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3157,7 +3162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114439162776295912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3221,7 +3226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114588099774670856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3234,7 +3239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114620661603118756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3247,7 +3252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114640018007528532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3260,7 +3265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114682582086454848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3329,7 +3334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114741878187279304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3342,7 +3347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114811319580140856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3355,7 +3360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114924018702818818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3368,7 +3373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114944117232530832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3432,7 +3437,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
+--- !u!114 &114998344038892356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048491043780162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!120 &120764887071781294
 LineRenderer:
   m_ObjectHideFlags: 1

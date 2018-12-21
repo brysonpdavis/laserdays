@@ -829,6 +829,7 @@ GameObject:
   - component: {fileID: 82829835012212746}
   - component: {fileID: 114854283230141856}
   - component: {fileID: 82366355532790430}
+  - component: {fileID: 114628993396322130}
   m_Layer: 10
   m_Name: Sokoban 2x2 Laser
   m_TagString: Clickable
@@ -2915,7 +2916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114039256027422784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2928,7 +2929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114060467672404022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2941,7 +2942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114062379926772288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2995,7 +2996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114080648760074366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3008,7 +3009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114131990236473220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3021,7 +3022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114147865701233386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3050,7 +3051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114212597661199632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3087,6 +3088,8 @@ MonoBehaviour:
   playerBoostAmount: 10
   affectsPlayer: 0
   affectsObjects: 1
+  count: 1
+  ring: {fileID: 0}
 --- !u!114 &114340766174438018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3099,7 +3102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114341476944052636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3126,7 +3129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114482126144965930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3139,7 +3142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114512193790254088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3201,7 +3204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114593724872280174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3223,6 +3226,18 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   clickInClip: {fileID: 8300000, guid: a117a7d6609124f4db07394664024ac8, type: 3}
   clickOffClip: {fileID: 8300000, guid: 5318443e2cb32d74d9f5d294f3c21aa8, type: 3}
+--- !u!114 &114628993396322130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1973852104417434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!114 &114639386555718664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3277,7 +3292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114701282372225532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3311,7 +3326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114807315336157452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3345,7 +3360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114814994967479490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3358,7 +3373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114854283230141856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3376,6 +3391,8 @@ MonoBehaviour:
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 0}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 
@@ -3411,7 +3428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114976168951659704
 MonoBehaviour:
   m_ObjectHideFlags: 1

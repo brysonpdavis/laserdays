@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114244580572583010}
   - component: {fileID: 114082829356843402}
   - component: {fileID: 82531880610758104}
+  - component: {fileID: 114221750652331694}
   m_Layer: 11
   m_Name: Sokoban 1x1 Real
   m_TagString: Clickable
@@ -309,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114082829356843402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -327,6 +328,8 @@ MonoBehaviour:
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 0}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 
@@ -334,6 +337,18 @@ MonoBehaviour:
   objectCharge: 1
   beenPickedUp: 0
   boost: 0
+--- !u!114 &114221750652331694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1733300038991116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!114 &114244580572583010
 MonoBehaviour:
   m_ObjectHideFlags: 1

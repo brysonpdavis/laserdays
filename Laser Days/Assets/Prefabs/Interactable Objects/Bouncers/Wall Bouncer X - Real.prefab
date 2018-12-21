@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 82858278125587604}
   - component: {fileID: 114575254896430532}
   - component: {fileID: 114960110444507474}
+  - component: {fileID: 114545377311871284}
   m_Layer: 11
   m_Name: Wall Bouncer X - Real
   m_TagString: Clickable
@@ -451,7 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114288822335837370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -481,7 +482,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
+--- !u!114 &114545377311871284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957545461321632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!114 &114575254896430532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -506,7 +519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114921345792453898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -519,7 +532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  sharedMaterial: 0
+  shared: 0
 --- !u!114 &114960110444507474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -537,6 +550,8 @@ MonoBehaviour:
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 

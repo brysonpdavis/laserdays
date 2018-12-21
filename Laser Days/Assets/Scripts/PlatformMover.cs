@@ -11,44 +11,50 @@ public class PlatformMover : MonoBehaviour {
     public PlatformObjectMover[] objectMovers;
     [HideInInspector] public  Vector3 start;
     public Transform end;
+    bool initialized = false;
 
     public float durationMultiplier = 1f;
-
     private RaycastManager raycastManager;
     private MFPP.Modules.PickUpModule pickUp;
     private LineRenderer LR;
     private AudioSource audio;
     private bool playerLayer;
 
-    private void Start()
+
+    public void Start()
     {
+        if (!initialized)
+        {
+            start = this.transform.position;
 
-        start = this.transform.position;
+            Color RC = platformContainer.GetComponent<PlatformController>().RestingColor;
+            Color AC = platformContainer.GetComponent<PlatformController>().ActiveColor;
+            Color SC = platformContainer.GetComponent<PlatformController>().ShimmerColor;
 
-        Color RC = platformContainer.GetComponent<PlatformController>().RestingColor;
-        Color AC = platformContainer.GetComponent<PlatformController>().ActiveColor;
-        Color SC = platformContainer.GetComponent<PlatformController>().ShimmerColor;
+            this.Indicator.SetColors(RC, AC, SC);
 
-        this.Indicator.SetColors(RC,AC, SC);
+            raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
+            pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
 
-        raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
-        pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
+            LR = gameObject.transform.parent.gameObject.GetComponentInChildren<LineRenderer>();
+            LR.positionCount = 2;
+            Vector3 begin = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.1f, gameObject.transform.position.z);
+            LR.SetPosition(0, begin);
+            Vector3 finish = new Vector3(end.position.x, end.position.y - 0.1f, end.position.z);
+            LR.SetPosition(1, finish);
+            LR.material.SetColor("_RestingColor", RC);
+            LR.material.SetColor("_ActiveColor", AC);
 
-        LR = gameObject.transform.parent.gameObject.GetComponentInChildren<LineRenderer>();
-        LR.positionCount = 2;
-        Vector3 begin = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.1f, gameObject.transform.position.z);
-        LR.SetPosition(0, begin);
-        Vector3 finish = new Vector3(end.position.x, end.position.y - 0.1f, end.position.z);
-        LR.SetPosition(1, finish);
-        LR.material.SetColor("_RestingColor", RC);
-        LR.material.SetColor("_ActiveColor", AC);
+            //setup the audio
+            if (!GetComponent<AudioSource>())
+                this.gameObject.AddComponent<AudioSource>();
+            audio = GetComponent<AudioSource>();
+            audio.spatialBlend = 1f;
+            audio.playOnAwake = false;
 
-        //setup the audio
-        if (!GetComponent<AudioSource>())
-            this.gameObject.AddComponent<AudioSource>();
-        audio = GetComponent<AudioSource>();
-        audio.spatialBlend = 1f;
-        audio.playOnAwake = false;
+            initialized = true;
+        }
+
     }
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)

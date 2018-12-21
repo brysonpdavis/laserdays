@@ -18,6 +18,7 @@ public class Toolbox : Singleton<Toolbox>
     public float globalFlipSpeed = .4f;
     public float globalRealLaserFlipSpeed = .2f;
 
+
     IconContainer iconContainer;
     public Color UIColorA;
     public Color UIColorB;
@@ -30,6 +31,8 @@ public class Toolbox : Singleton<Toolbox>
     public float soundEffectsVolume;
     public IList<Material> sharedMaterials;
     public MFPP.SoundContainerAsset testercubeSounds;
+    public IList<UniqueId> allIds = new List<UniqueId>();
+    
 
     void Awake()
     {
@@ -55,6 +58,33 @@ public class Toolbox : Singleton<Toolbox>
     {
         VolumeChangeCheck();
         audio.volume = soundEffectsVolume;
+    }
+
+    public void FullReset()
+    {
+        player.GetComponent<PlayerSave>().ClearObjData();
+        foreach (UniqueId id in allIds)
+        {
+            id.ClearObjData();
+        }
+    }
+
+    public void FullSave()
+    {
+        //save all individual objects
+        Debug.Log(allIds.Count);
+
+        player.GetComponent<PlayerSave>().SavePlayerFile();
+
+        foreach (UniqueId id in allIds)
+        {
+            if (id.enabled && id != null)
+            {
+                Debug.Log(id.gameObject.name);
+                //id.Save();
+                id.SaveObj();
+            }
+        }
     }
 
     // (optional) allow runtime registration of global objects
@@ -205,6 +235,7 @@ public class Toolbox : Singleton<Toolbox>
             Toolbox.Instance.laserCore = laserCore;
             Toolbox.Instance.pauseMenu = pauseMenu;
             Toolbox.Instance.testercubeSounds = testercubeSounds;
+            Toolbox.Instance.allIds = allIds;
         }
     }
 

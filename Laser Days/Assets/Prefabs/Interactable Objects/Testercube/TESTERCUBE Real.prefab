@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 198045603812694120}
   - component: {fileID: 199109863400787284}
   - component: {fileID: 64331128199565742}
+  - component: {fileID: 114872983770142330}
   m_Layer: 11
   m_Name: TESTERCUBE Real
   m_TagString: Clickable
@@ -340,6 +341,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+--- !u!114 &114872983770142330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1158508201989184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!114 &114992728833493308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -357,6 +370,8 @@ MonoBehaviour:
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 4800000, guid: 3b507e64b6c6f4faf91102e87c8d863b, type: 3}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 

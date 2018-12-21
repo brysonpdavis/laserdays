@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 199999387772697962}
   - component: {fileID: 64918045138689722}
   - component: {fileID: 114734565854257632}
+  - component: {fileID: 114386440112028792}
   m_Layer: 11
   m_Name: SingleCube Real
   m_TagString: Clickable
@@ -240,7 +241,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
-  laserShared: 0
+  shared: 0
+--- !u!114 &114386440112028792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677845160391484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca50275370484a7f8b345717b6b27eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!114 &114734565854257632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,9 +267,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectType: 0
   itemName: 
+  pickupDistance: 2
   selected: 0
   recentlySelected: 0
   selectedShader: {fileID: 0}
+  realShader: {fileID: 0}
+  laserShader: {fileID: 0}
   inMotion: 0
   isKey: 0
   key: 
