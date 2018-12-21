@@ -29,32 +29,35 @@ public class PlayerSave : MonoBehaviour{
 
     private void Start()
     {
-
-        if (data.heldObj)
+        if (data != null)
         {
-            GameObject prevHeld = GameObject.Find("prevHeldObj");
-            prevHeld.name = data.heldObjName;
-            Debug.Log("object was called " + data.heldObjName);
 
-            pickUp.PickUp(prevHeld.GetComponent<Rigidbody>());
+
+            if (data.heldObj)
+            {
+                GameObject prevHeld = GameObject.Find("prevHeldObj");
+                prevHeld.name = data.heldObjName;
+                Debug.Log("object was called " + data.heldObjName);
+
+                pickUp.PickUp(prevHeld.GetComponent<Rigidbody>());
+            }
+
+            foreach (string s in data.completedLevels)
+            {
+                Debug.Log("looking for " + s);
+                Button button = GameObject.Find(s).GetComponent<Button>();
+                ColorBlock cb = button.colors;
+                cb.normalColor = Color.green;
+
+
+                Color newBackground = button.GetComponent<Image>().color;
+                newBackground.a = .7f;
+                button.GetComponent<Image>().color = newBackground;
+
+
+                button.colors = cb;
+            }
         }
-
-        foreach (string s in data.completedLevels)
-        {
-            Debug.Log("looking for " + s);
-            Button button = GameObject.Find(s).GetComponent<Button>();
-            ColorBlock cb = button.colors;
-            cb.normalColor = Color.green;
-
-
-            Color newBackground = button.GetComponent<Image>().color;
-            newBackground.a = .7f;
-            button.GetComponent<Image>().color = newBackground;
-
-
-            button.colors = cb;
-        }
-            
     }
 
     public void SavePlayerFile()
