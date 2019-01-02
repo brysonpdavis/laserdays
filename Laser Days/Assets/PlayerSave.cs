@@ -19,20 +19,13 @@ public class PlayerSave : MonoBehaviour{
     {
         player = gameObject;
         pickUp = GetComponent <MFPP.Modules.PickUpModule>();
-
-        if (Application.isPlaying)
-        {
-            data = LoadObjData();
-            ObjSetup(data);
-        }
     }
 
-    private void Start()
+    private void HeldObjsMenuSetup()
     {
         if (data != null)
         {
-
-
+            
             if (data.heldObj)
             {
                 GameObject prevHeld = GameObject.Find("prevHeldObj");
@@ -45,7 +38,9 @@ public class PlayerSave : MonoBehaviour{
             foreach (string s in data.completedLevels)
             {
                 Debug.Log("looking for " + s);
-                Button button = GameObject.Find(s).GetComponent<Button>();
+                GameObject test = GameObject.Find(s);
+                Debug.Log("found " + test.name);
+                Button button = test.GetComponent<Button>();//GameObject.Find(s).GetComponent<Button>();
                 ColorBlock cb = button.colors;
                 cb.normalColor = Color.green;
 
@@ -58,6 +53,14 @@ public class PlayerSave : MonoBehaviour{
                 button.colors = cb;
             }
         }
+    }
+
+    public void PlayerSetup()
+    {
+        data = LoadObjData();
+        ObjSetup(data);
+        HeldObjsMenuSetup();
+        Debug.Log("attempting setup");
     }
 
     public void SavePlayerFile()

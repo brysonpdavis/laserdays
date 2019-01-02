@@ -44,7 +44,7 @@ public class LevelLoadingMenu : MonoBehaviour {
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Default_Main_Player"));
         GetComponent<CanvasScaler>().enabled = true;
-        Resume();
+        //Resume();
     }
 
     // Update is called once per frame
@@ -71,7 +71,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         Time.timeScale = 0f;
     }
 
-    void Resume()
+    public void Resume()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -80,15 +80,6 @@ public class LevelLoadingMenu : MonoBehaviour {
         Time.timeScale = 1f;
     }
 
-    public void FullSave()
-    {
-        Toolbox.Instance.FullSave();
-    }
-
-    public void FullReset()
-    {
-        Toolbox.Instance.FullReset();
-    }
 
     public void LoadScene()
     {

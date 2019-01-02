@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class Toolbox : Singleton<Toolbox>
 {
@@ -17,6 +19,8 @@ public class Toolbox : Singleton<Toolbox>
     flipScript flipScript;
     public float globalFlipSpeed = .4f;
     public float globalRealLaserFlipSpeed = .2f;
+    public bool loadFromSave = false;
+    public bool loadSelection = false;
 
 
     IconContainer iconContainer;
@@ -63,9 +67,29 @@ public class Toolbox : Singleton<Toolbox>
     public void FullReset()
     {
         player.GetComponent<PlayerSave>().ClearObjData();
+        loadSelection = true;
+        //foreach (UniqueId id in allIds)
+        //{
+        //    id.ClearObjData();
+        //}
+
+        string path = Application.persistentDataPath;
+        if (Directory.Exists(path)) { Directory.Delete(path, true); }
+        Directory.CreateDirectory(path);
+    }
+
+
+    public void LoadFromSave()
+    {
+        player.GetComponent<PlayerSave>().PlayerSetup();
+        loadSelection = true;
+        loadFromSave = true;
         foreach (UniqueId id in allIds)
         {
-            id.ClearObjData();
+            if (id.enabled && id != null)
+            {
+                id.Setup();
+            }
         }
     }
 

@@ -110,11 +110,23 @@ using System.Runtime.Serialization.Formatters.Binary;
     {
         interactable = GetComponent<InteractableObject>();
 
+
         if (Application.isPlaying)
         {
-            InteractableObjectData data = LoadObjData();
-            //if (data != null)
-                ObjSetup(data);
+
+            //if this object wakes up before player has decided what to do, then add the object to the toolbox list.
+            if (!Toolbox.Instance.loadSelection)
+            {
+                if (!Toolbox.Instance.allIds.Contains(this))
+                    Toolbox.Instance.allIds.Add(this);
+            }
+
+
+            //if player has already decided to load from save and that decision has been made
+            if (Toolbox.Instance.loadSelection && Toolbox.Instance.loadFromSave)
+            {
+                Setup();
+            }
         }
     }
 
@@ -169,7 +181,15 @@ using System.Runtime.Serialization.Formatters.Binary;
         }
     }
 
+    //TO BE CALLED FROM TOOLBOX
+    public virtual void Setup()
+    {
+        InteractableObjectData data = LoadObjData();
+        ObjSetup(data);
+    }
 
+
+    //used by this script internally
     public virtual void ObjSetup(InteractableObjectData objectData)
     {
         if (objectData != null)

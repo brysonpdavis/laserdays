@@ -20,10 +20,27 @@ public class UniqueIdPlatform : UniqueId {
 
         if (Application.isPlaying)
         {
-           // Debug.Log("platform ID: " + uniqueId);
-            PlatformData data = LoadObjData();
-            ObjSetup(data);
+
+            //if this object wakes up before player has decided what to do, then add the object to the toolbox list.
+            if (!Toolbox.Instance.loadSelection)
+            {
+                if (!Toolbox.Instance.allIds.Contains(this))
+                    Toolbox.Instance.allIds.Add(this);
+            }
+
+
+            //if player has already decided to load from save and that decision has been made
+            if (Toolbox.Instance.loadSelection && Toolbox.Instance.loadFromSave)
+            {
+                Setup();
+            }
         }
+    }
+
+    public override void Setup()
+    {
+        PlatformData data = LoadObjData();
+        ObjSetup(data);
     }
 
     public override void SaveObj()

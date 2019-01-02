@@ -8,15 +8,51 @@ public class OpeningTitleScreen : MonoBehaviour {
     CanvasGroup canvas;
     public float duration = 2f;
 
+    private void Awake()
+    {
+        canvas = GetComponent<CanvasGroup>();
+        Time.timeScale = 0f;
+
+    }
 
     private void Start()
     {
-        canvas = GetComponent<CanvasGroup>();
+
+    }
+
+    public void FullSave()
+    {
+        Toolbox.Instance.FullSave();
+    }
+
+    public void FullReset()
+    {
+        Toolbox.Instance.FullReset();
+        Time.timeScale = 1f;
+
+
+
+        StartCoroutine(FadeOnAwake());
+
+    }
+
+    public void LoadFromSave()
+    {
+        Toolbox.Instance.LoadFromSave();
+        Time.timeScale = 1f;
+
         StartCoroutine(FadeOnAwake());
     }
 
     private IEnumerator FadeOnAwake()
     {
+
+        GameObject pause = GameObject.Find("PauseMenu");
+        if (pause)
+        {
+            Debug.Log("turning off menu");
+            GetComponentInParent<LevelLoadingMenu>().Resume();
+        }
         yield return new WaitForSeconds(1f);
 
         float elapsedTime = 0;
@@ -32,9 +68,10 @@ public class OpeningTitleScreen : MonoBehaviour {
             yield return null;
 
         }
-        
 
+        this.gameObject.SetActive(false);
 
+        Time.timeScale = 1f;
     }
 
 }

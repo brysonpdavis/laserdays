@@ -36,6 +36,8 @@ public class Spawner : MonoBehaviour {
             text.text = gameObject.name;
             myButton.name = scene.name;
 
+            Debug.Log("created button gameobject with name: " + myButton.name);
+
             switch (difficulty)
             {
                 case (Difficulty.Easy):
