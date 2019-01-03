@@ -59,7 +59,7 @@ public class TransitionController: MonoBehaviour
     {
         bool isFlipped = player.GetComponent<flipScript>().flippedThisFrame;
         bool direction = player.GetComponent<flipScript>().space;
-        if (Input.GetMouseButtonDown(0) && !(Time.timeScale < 0.0f))
+        if (Input.GetMouseButtonDown(0) && Time.timeScale > 0.0f)
         {
             if (isFlipped)
             {
