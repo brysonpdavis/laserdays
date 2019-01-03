@@ -12,6 +12,7 @@ public class IconContainer : MonoBehaviour {
     public Sprite holdFill;
 
     public Sprite drag;
+    public Sprite dragFill;
     public Sprite openHand;
     public Sprite openHandFill;
     public Sprite objectBounce;
@@ -49,6 +50,11 @@ public class IconContainer : MonoBehaviour {
     public void SetDrag()
     {
         canvasSprite.sprite = drag;
+    }
+
+    public void SetDragFill()
+    {
+        canvasSprite.sprite = dragFill;
     }
 
     public void SetOpenHand()

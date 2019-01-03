@@ -65,12 +65,12 @@ public class Morph : FlippableObject {
 
     public override void CloseIconHover()
     {
-        iconContainer.SetOpenHand();
+        iconContainer.SetOpenHandFill();
     }
 
     public override void InteractingIconHover()
     {
-        iconContainer.SetDrag();
+        iconContainer.SetDragFill();
     }
 
     public override bool Flippable { get { return true; } }
