@@ -94,12 +94,12 @@ public class BasicClickable : FlippableObject {
 
     public override void CloseIconHover()
     {
-        iconContainer.SetOpenHand();
+        iconContainer.SetOpenHandFill();
     }
 
     public override void InteractingIconHover()
     {
-        iconContainer.SetHold();
+        iconContainer.SetHoldFill();
     }
 
 
