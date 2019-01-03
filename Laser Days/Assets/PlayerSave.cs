@@ -11,6 +11,7 @@ public class PlayerSave : MonoBehaviour{
     public GameObject playerContainer;
     static GameObject player;
     MFPP.Modules.PickUpModule pickUp;
+    public GameObject prevHeld;
     PlayerSaveData data;
     public GameObject levelButtonContainer;
     IList<string> completedLevels = new List<String>();
@@ -18,7 +19,8 @@ public class PlayerSave : MonoBehaviour{
     void Awake()
     {
         player = gameObject;
-        pickUp = GetComponent <MFPP.Modules.PickUpModule>();
+        pickUp = GetComponent<MFPP.Modules.PickUpModule>();
+        //CheckForHeld();
     }
 
     private void HeldObjsMenuSetup()
@@ -28,11 +30,13 @@ public class PlayerSave : MonoBehaviour{
             
             if (data.heldObj)
             {
-                GameObject prevHeld = GameObject.Find("prevHeldObj");
-                prevHeld.name = data.heldObjName;
-                Debug.Log("object was called " + data.heldObjName);
+                //prevHeld = GameObject.Find("prevHeldObj");
+                //prevHeld.name = data.heldObjName;
+                //Debug.Log("prevheld!");
+                //prevHeld.SetActive(true);
+                //pickUp.PickUp(prevHeld.GetComponent<Rigidbody>());
+                }
 
-                pickUp.PickUp(prevHeld.GetComponent<Rigidbody>());
             }
 
             foreach (string s in data.completedLevels)
@@ -53,7 +57,6 @@ public class PlayerSave : MonoBehaviour{
                 button.colors = cb;
             }
         }
-    }
 
     public void PlayerSetup()
     {
@@ -61,6 +64,13 @@ public class PlayerSave : MonoBehaviour{
         ObjSetup(data);
         HeldObjsMenuSetup();
         Debug.Log("attempting setup");
+    }
+
+    public void CheckForHeld()
+    {
+        prevHeld = GameObject.Find("prevHeldObj");
+        prevHeld.name = data.heldObjName;
+        Debug.Log("object was called " + data.heldObjName);
     }
 
     public void SavePlayerFile()

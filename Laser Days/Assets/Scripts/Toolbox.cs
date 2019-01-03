@@ -81,7 +81,6 @@ public class Toolbox : Singleton<Toolbox>
 
     public void LoadFromSave()
     {
-        player.GetComponent<PlayerSave>().PlayerSetup();
         loadSelection = true;
         loadFromSave = true;
         foreach (UniqueId id in allIds)
@@ -91,6 +90,8 @@ public class Toolbox : Singleton<Toolbox>
                 id.Setup();
             }
         }
+
+        player.GetComponent<PlayerSave>().PlayerSetup();
     }
 
     public void FullSave()
