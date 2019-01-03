@@ -10,12 +10,12 @@ public class MorphController : MonoBehaviour {
 
     [Header("Internal Parts")]
     public GameObject realCollider;
-    private Material realArmShader;
+    private MaterialPropertyBlock realArmShader; 
     public Renderer realPreview;
     private Material realPreviewMaterial;
 
     public GameObject laserCollider;
-    private Material laserArmShader;
+    private MaterialPropertyBlock laserArmShader;
     public Renderer laserPreview;
     private Material laserPreviewMaterial;
 
@@ -35,6 +35,9 @@ public class MorphController : MonoBehaviour {
         Physics.IgnoreCollision(this.gameObject.GetComponent<BoxCollider>(), laserCollider.GetComponent<BoxCollider>());
         Physics.IgnoreCollision(laserCollider.GetComponent<BoxCollider>(), realCollider.GetComponent<BoxCollider>());
 
+
+        realArmShader = new MaterialPropertyBlock();
+        laserArmShader = new MaterialPropertyBlock();
     }
 
     void Start () {
@@ -47,8 +50,9 @@ public class MorphController : MonoBehaviour {
         realPreviewMaterial.SetFloat("_Opacity", 0);
 
 
-        laserArmShader = laserCollider.GetComponent<Renderer>().material;
-        realArmShader = realCollider.GetComponent<Renderer>().material;
+        laserCollider.GetComponent<Renderer>().GetPropertyBlock(laserArmShader);
+        realCollider.GetComponent<Renderer>().GetPropertyBlock(realArmShader);
+
 
 
         Vector3 startScaled = new Vector3(1, 3 * armScale, 1);
@@ -82,14 +86,21 @@ public class MorphController : MonoBehaviour {
             this.gameObject.layer = 10;
 
             laserCollider.layer = 10;
-            laserArmShader.shader = laserOnlyShader;
+
+            realCollider.GetComponent<Renderer>().material.shader = laserOnlyShader;
+            laserCollider.GetComponent<Renderer>().material.shader = laserOnlyShader;
+
+
             laserArmShader.SetFloat("_TransitionState", 1);
+            laserCollider.GetComponent<Renderer>().SetPropertyBlock(laserArmShader);
             //laserCollider.GetComponent<Transition>().StopAllCoroutines();
 
 
             realCollider.layer = 10;
-            realArmShader.shader = laserOnlyShader;
+            //realArmShader.shader = laserOnlyShader;
             realArmShader.SetFloat("_TransitionState", 1);
+            realCollider.GetComponent<Renderer>().SetPropertyBlock(realArmShader);
+
 
             //start coroutine
 
@@ -110,13 +121,17 @@ public class MorphController : MonoBehaviour {
 
             this.gameObject.layer = 11;
 
-            laserCollider.layer = 11;
-            laserArmShader.shader = realOnlyShader;
-            laserArmShader.SetFloat("_TransitionState", 0);
+            realCollider.GetComponent<Renderer>().material.shader = realOnlyShader;
+            laserCollider.GetComponent<Renderer>().material.shader = realOnlyShader;
 
+
+
+            laserCollider.layer = 11;
+            laserArmShader.SetFloat("_TransitionState", 0);
+            laserCollider.GetComponent<Renderer>().SetPropertyBlock(laserArmShader);
             realCollider.layer = 11;
-            realArmShader.shader = realOnlyShader;
             realArmShader.SetFloat("_TransitionState", 0);
+            realCollider.GetComponent<Renderer>().SetPropertyBlock(realArmShader);
 
 
             //if object is currently held
