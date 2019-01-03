@@ -203,22 +203,37 @@ public class RaycastManager : MonoBehaviour {
                 }
             }
 
+            //for objects on real/laser layers that aren't interactable
+            else 
+            {
+                ClearRaycast();
+            }
+
         }
 
+        //if the raycast hits nothing
         else{
-            //if it hits nothing within the layermask it should also mke sure the raycasted obj from the last frame is set to off
-            //unless we're holding something
-            if (raycastedObj && !pickUp.heldObject)
-            {
-                raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-               // Debug.Log("turning off");
-            }
-            //turns off the rest of the selection indicator
-            CrosshairNormal();
-            itemNameText.text = null;
-            raycastedObj = null;
+            
+            ClearRaycast();
         }
 	}
+
+    void ClearRaycast()
+    {
+        //if it hits nothing within the layermask it should also mke sure the raycasted obj from the last frame is set to off
+        //same idea for when hitting non-interactable objects on real/laser layers
+        //works unless player is holding something
+
+        if (raycastedObj && !pickUp.heldObject)
+        {
+            raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+        }
+
+        //turns off the rest of the selection indicator
+        CrosshairNormal();
+        itemNameText.text = null;
+        raycastedObj = null;
+    }
 
 
     //changing color of crosshair based on raycast
