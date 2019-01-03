@@ -20,6 +20,8 @@ public class DoorController : MonoBehaviour {
     [ColorUsageAttribute(true, true)]
     public Color ShimmerColor = new Color(0f, 0f, 0f, 0f);
 
+    public Texture2D ScrollText;
+
     // Use this for initialization
     private void Awake()
     {
@@ -35,7 +37,8 @@ public class DoorController : MonoBehaviour {
 
         foreach (DoorIndicator indicator in doorIndicators)
         {
-            indicator.SetColors(RestingColor, ActiveColor, ShimmerColor);
+            indicator.SetColors(RestingColor, ActiveColor, ShimmerColor, ScrollText);
+
         }
     }
 

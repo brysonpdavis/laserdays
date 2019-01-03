@@ -58,6 +58,7 @@ public class PlatformTrigger : MonoBehaviour {
         RenderMat.SetColor("_RestingColor", platformContainer.GetComponent<PlatformController>().RestingColor);
         RenderMat.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
         RenderMat.SetColor("_ShimmerColor", platformContainer.GetComponent<PlatformController>().ShimmerColor);
+        RenderMat.SetTexture("_TriggerMap", platformContainer.GetComponent<PlatformController>().ScrollText);
 
 
         if (platformContainer){

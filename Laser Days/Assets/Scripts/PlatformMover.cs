@@ -30,8 +30,9 @@ public class PlatformMover : MonoBehaviour {
             Color RC = platformContainer.GetComponent<PlatformController>().RestingColor;
             Color AC = platformContainer.GetComponent<PlatformController>().ActiveColor;
             Color SC = platformContainer.GetComponent<PlatformController>().ShimmerColor;
+            Texture2D ST = platformContainer.GetComponent<PlatformController>().ScrollText;
 
-            this.Indicator.SetColors(RC, AC, SC);
+            this.Indicator.SetColors(RC, AC, SC, ST);
 
             raycastManager = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>();
             pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();

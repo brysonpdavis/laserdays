@@ -28,6 +28,7 @@ public class DoorTrigger : MonoBehaviour {
         RenderMat.SetColor("_RestingColor", controller.RestingColor);
         RenderMat.SetColor("_ActiveColor", controller.ActiveColor);
         RenderMat.SetColor("_ShimmerColor", controller.ShimmerColor);
+        RenderMat.SetTexture("_TriggerMap", controller.ScrollText);
     }
 
     private void Update()

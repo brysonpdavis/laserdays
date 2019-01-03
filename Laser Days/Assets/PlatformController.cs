@@ -23,6 +23,9 @@ public class PlatformController : MonoBehaviour {
     [ColorUsageAttribute(true, true)]
     public Color ShimmerColor = new Color(0f, 0f, 0f, 0f);
 
+    public Texture2D ScrollText;
+
+
 
     private void Awake()
     {

@@ -23,11 +23,12 @@ public class DoorIndicator : MonoBehaviour
     }
 
 
-    public void SetColors(Color a, Color b, Color c)
+    public void SetColors(Color a, Color b, Color c, Texture2D d)
     {
         RenderMat.SetColor("_RestingColor", a);
         RenderMat.SetColor("_ActiveColor", b);
         RenderMat.SetColor("_ShimmerColor", c);
+        RenderMat.SetTexture("_TriggerMap", d);
     }
 
     public void On()
