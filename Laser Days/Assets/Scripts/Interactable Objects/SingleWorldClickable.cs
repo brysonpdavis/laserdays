@@ -23,6 +23,8 @@ public class SingleWorldClickable : InteractableObject {
         renderer.material.SetInt("_onHover", 1);
         rigidbody.constraints = RigidbodyConstraints.None;
 
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
+
         if (!beenPickedUp)
         { StartCoroutine(SlowPickup()); }
     }
