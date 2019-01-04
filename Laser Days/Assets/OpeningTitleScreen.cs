@@ -18,6 +18,8 @@ public class OpeningTitleScreen : MonoBehaviour {
     private void Start()
     {
 
+        //only for this version, since there's no load and save
+        StartCoroutine(FadeOnAwake());
     }
 
     public void FullSave()

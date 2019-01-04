@@ -259,6 +259,7 @@ public class Toolbox : Singleton<Toolbox>
             Toolbox.Instance.realCore = realCore;
             Toolbox.Instance.laserCore = laserCore;
             Toolbox.Instance.pauseMenu = pauseMenu;
+            //Toolbox.Instance.soundEffectsSlider = soundEffectsSlider;
             Toolbox.Instance.testercubeSounds = testercubeSounds;
             Toolbox.Instance.allIds = allIds;
         }
