@@ -11,7 +11,7 @@ public class OpeningTitleScreen : MonoBehaviour {
     private void Awake()
     {
         canvas = GetComponent<CanvasGroup>();
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
 
     }
 
