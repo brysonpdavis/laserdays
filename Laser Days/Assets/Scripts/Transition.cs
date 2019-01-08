@@ -31,6 +31,7 @@ public class Transition : MonoBehaviour
         {
             mRenderer = GetComponent<LineRenderer>();
             shared = true;
+            sharedMaterial = true;
         }
             
 

@@ -66,14 +66,17 @@ public class Spawner : MonoBehaviour {
 
     public void OnPuzzleCompletion()
     {
-        ColorBlock cb = myButton.GetComponent<Button>().colors;
-        cb.normalColor = Color.green;
-        myButton.GetComponent<Button>().colors = cb;
+        if (myButton)
+        {
+            ColorBlock cb = myButton.GetComponent<Button>().colors;
+            cb.normalColor = Color.green;
+            myButton.GetComponent<Button>().colors = cb;
 
 
-        Color newBackground = myButton.GetComponent<Image>().color;
-        newBackground.a = .7f;
-        myButton.GetComponent<Image>().color = newBackground;
-        completed = true;
+            Color newBackground = myButton.GetComponent<Image>().color;
+            newBackground.a = .7f;
+            myButton.GetComponent<Image>().color = newBackground;
+            completed = true;
+        }
     }
 }
