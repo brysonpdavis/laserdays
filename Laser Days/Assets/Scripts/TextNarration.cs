@@ -7,18 +7,29 @@ public class TextNarration : MonoBehaviour {
 
     public string text;
     private Text canvasText;
+    public bool singleActivation;
+    bool activated = false;
+    private Image background;
 
 
 	// Use this for initialization
 	void Start () {
         canvasText = GameObject.Find("TextNarration").GetComponent<Text>();
+        background = canvasText.gameObject.GetComponentInChildren<Image>();
 	}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            canvasText.text = text;
+
+            if (!singleActivation || (singleActivation&& !activated))
+            {
+                canvasText.text = text;
+                background.enabled = true;
+                activated = true;
+            }
+
         }
     }
 
@@ -27,6 +38,7 @@ public class TextNarration : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             canvasText.text = null;
+            background.enabled = false;
         }
     }
 
