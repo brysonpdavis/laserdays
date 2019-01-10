@@ -16,6 +16,7 @@ public class TextNarration : MonoBehaviour {
 	void Start () {
         canvasText = GameObject.Find("TextNarration").GetComponent<Text>();
         background = canvasText.gameObject.GetComponentInChildren<Image>();
+        background.enabled = false;
 	}
 
     private void OnTriggerEnter(Collider other)
