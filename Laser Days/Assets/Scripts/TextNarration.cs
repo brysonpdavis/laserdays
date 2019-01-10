@@ -9,14 +9,21 @@ public class TextNarration : MonoBehaviour {
     private Text canvasText;
     public bool singleActivation;
     bool activated = false;
-    private Image background;
+    private GameObject background;
 
 
 	// Use this for initialization
 	void Start () {
-        canvasText = GameObject.Find("TextNarration").GetComponent<Text>();
-        background = canvasText.gameObject.GetComponentInChildren<Image>();
-        background.enabled = false;
+        //canvasText = GameObject.Find("TextNarration").GetComponent<Text>();
+        //background = canvasText.gameObject.GetComponentInChildren<Image>();
+        //background.gameObject.SetActive(false);
+
+        canvasText = Toolbox.Instance.GetNarrationText();
+        background = Toolbox.Instance.GetNarrationBackground();
+
+        if (background.activeInHierarchy)
+            background.SetActive(false);
+
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -27,7 +34,7 @@ public class TextNarration : MonoBehaviour {
             if (!singleActivation || (singleActivation&& !activated))
             {
                 canvasText.text = text;
-                background.enabled = true;
+                background.SetActive(true);
                 activated = true;
             }
 
@@ -39,7 +46,8 @@ public class TextNarration : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             canvasText.text = null;
-            background.enabled = false;
+            //background.enabled = false;
+            background.SetActive(false);
         }
     }
 

@@ -36,6 +36,9 @@ public class Toolbox : Singleton<Toolbox>
     public IList<Material> sharedMaterials;
     public MFPP.SoundContainerAsset testercubeSounds;
     public IList<UniqueId> allIds = new List<UniqueId>();
+    Text narrationText;
+    GameObject narrationBackground;
+     
     
 
     void Awake()
@@ -193,6 +196,16 @@ public class Toolbox : Singleton<Toolbox>
         return pauseMenu;
     }
 
+    public Text GetNarrationText()
+    {
+        return narrationText;
+    }
+
+
+    public GameObject GetNarrationBackground()
+    {
+        return narrationBackground;
+    }
 
     public void UpdateToolbox()
     {
@@ -203,6 +216,12 @@ public class Toolbox : Singleton<Toolbox>
         UpdateTransforms();
         iconContainer = GameObject.FindWithTag("IconContainer").GetComponent<IconContainer>();
         pauseMenu = GameObject.Find("PauseMenu");
+
+
+        //text narration
+        narrationText = GameObject.Find("TextNarration").GetComponent<Text>();
+        narrationBackground = narrationText.gameObject.GetComponentInChildren<Image>().gameObject;
+
 
     }
 
