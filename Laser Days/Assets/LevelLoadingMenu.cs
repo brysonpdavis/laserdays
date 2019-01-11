@@ -80,12 +80,6 @@ public class LevelLoadingMenu : MonoBehaviour {
         Time.timeScale = 1f;
     }
 
-    public void SetMouseSensitivity()
-    {
-        float value = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>().value;
-        Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().Controls.MouseSensitivity = value;
-    }
-
 
     public void LoadScene()
     {
