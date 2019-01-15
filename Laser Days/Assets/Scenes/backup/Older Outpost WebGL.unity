@@ -3841,7 +3841,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &66752419
 Transform:
   m_ObjectHideFlags: 0
@@ -3850,11 +3850,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 66752418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.5, y: 9.5, z: 16}
+  m_LocalPosition: {x: -18.5, y: 11.5, z: 37.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &66752420
 BoxCollider:
@@ -3881,8 +3881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Right click to select objects, and they will switch when you do. This can
-    be useful for switching objects from a distance.
+  text: Right click to select objects, and they will switch when you do.
+  singleActivation: 0
 --- !u!1 &67783210
 GameObject:
   m_ObjectHideFlags: 0
@@ -4563,7 +4563,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5598,7 +5598,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.5
+      value: -0.99999976
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5622,7 +5622,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9206,7 +9206,7 @@ GameObject:
   - component: {fileID: 162777890}
   - component: {fileID: 162777892}
   - component: {fileID: 162777891}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fallen down!
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9225,7 +9225,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &162777891
 BoxCollider:
@@ -9253,6 +9253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Exploring is good! You can activate goop as well.
+  singleActivation: 0
 --- !u!1 &162968977
 GameObject:
   m_ObjectHideFlags: 0
@@ -16755,7 +16756,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4948167166034560, guid: f47d146368db5468ba40f86f24657505, type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4948167166034560, guid: f47d146368db5468ba40f86f24657505, type: 2}
       propertyPath: m_LocalScale.x
@@ -18187,7 +18188,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.5
+      value: -1.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18211,7 +18212,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -18254,7 +18255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &319465349
 BoxCollider:
@@ -18282,6 +18283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Place objects in goop to activate platforms and doors.
+  singleActivation: 0
 --- !u!1 &321138937
 GameObject:
   m_ObjectHideFlags: 0
@@ -19051,6 +19053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: WASD to move. Left click to switch.
+  singleActivation: 0
 --- !u!4 &342030932
 Transform:
   m_ObjectHideFlags: 0
@@ -19059,7 +19062,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 342030929}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 64, y: 4.5, z: 36}
+  m_LocalPosition: {x: 79.5, y: 4.5, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
@@ -22832,7 +22835,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22856,7 +22859,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -24652,7 +24655,7 @@ GameObject:
   - component: {fileID: 454310899}
   - component: {fileID: 454310901}
   - component: {fileID: 454310900}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Between Worlds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24667,11 +24670,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 454310898}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19, y: 15, z: 1}
+  m_LocalPosition: {x: -21, y: 11.5, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &454310900
 BoxCollider:
@@ -24684,7 +24687,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 3, z: 3}
+  m_Size: {x: 5.31, y: 4, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &454310901
 MonoBehaviour:
@@ -24698,7 +24701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Objects with cores can travel between worlds with you.
+  text: Objects with cores can switch worlds while you hold them.
+  singleActivation: 0
 --- !u!1 &454944232
 GameObject:
   m_ObjectHideFlags: 0
@@ -33732,7 +33736,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -33756,7 +33760,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -34452,11 +34456,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 623375187}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.5, y: 24, z: 12.5}
+  m_LocalPosition: {x: -18.5, y: 18.5, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &623375189
 BoxCollider:
@@ -34469,7 +34473,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
+  m_Size: {x: 4, y: 5, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &623375190
 MonoBehaviour:
@@ -34484,6 +34488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Welcome to Crosshatch!
+  singleActivation: 0
 --- !u!1 &626187950
 GameObject:
   m_ObjectHideFlags: 0
@@ -36878,7 +36883,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8a3294528d09454fb66a2c855ce2181, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8a3294528d09454fb66a2c855ce2181, type: 3}
       propertyPath: m_LocalScale.x
@@ -38695,64 +38700,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a773b176b2ecb44ac93d42fae06ab537, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &695981499
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1560909165133650, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 695981500}
-  - component: {fileID: 695981502}
-  - component: {fileID: 695981501}
-  m_Layer: 0
-  m_Name: Pick up
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &695981500
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 695981499}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 8.5, z: -3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 949161902}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &695981501
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65058712319789338, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 695981499}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5, y: 3, z: 3}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &695981502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114834483706287366, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 695981499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: '''E'' to hold and drop objects like this stone.'
 --- !u!1 &696466057
 GameObject:
   m_ObjectHideFlags: 0
@@ -51361,7 +51308,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &919969500
 BoxCollider:
@@ -51389,6 +51336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Glowing tiles can bounce you. Use 'E' to slide it.
+  singleActivation: 0
 --- !u!1 &921987745
 GameObject:
   m_ObjectHideFlags: 0
@@ -52995,7 +52943,6 @@ Transform:
   - {fileID: 2120452446}
   - {fileID: 1763622301}
   - {fileID: 1450245692}
-  - {fileID: 695981500}
   - {fileID: 319465348}
   - {fileID: 162777890}
   - {fileID: 1591986369}
@@ -60200,7 +60147,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -60224,7 +60171,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -73343,7 +73290,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -73367,7 +73314,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -77303,7 +77250,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8a3294528d09454fb66a2c855ce2181, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8a3294528d09454fb66a2c855ce2181, type: 3}
       propertyPath: m_LocalScale.x
@@ -83522,7 +83469,7 @@ GameObject:
   - component: {fileID: 1450245694}
   - component: {fileID: 1450245693}
   m_Layer: 0
-  m_Name: Leap of faith!
+  m_Name: Pick Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83536,7 +83483,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1450245691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 2.5, z: -3}
+  m_LocalPosition: {x: 4.5, y: 2.5, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
@@ -83553,7 +83500,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
+  m_Size: {x: 10.42, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1450245694
 MonoBehaviour:
@@ -83567,7 +83514,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Don't be afraid to take leaps of faith.
+  text: '''E'' to hold and drop objects like this stone.'
+  singleActivation: 0
 --- !u!1 &1451106396
 GameObject:
   m_ObjectHideFlags: 0
@@ -91525,7 +91473,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1591986370
 BoxCollider:
@@ -91553,6 +91501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Standing in the goop will activate it as well.
+  singleActivation: 0
 --- !u!1 &1594460687 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 0003ae95478da4b049148da90e7f8ede, type: 3}
@@ -97344,7 +97293,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4948167166034560, guid: f47d146368db5468ba40f86f24657505, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4948167166034560, guid: f47d146368db5468ba40f86f24657505, type: 2}
       propertyPath: m_LocalScale.x
@@ -100073,7 +100022,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4645843790795788, guid: ca1c4b90b04f84355b6816e4f68594e4, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 23730506419492892, guid: ca1c4b90b04f84355b6816e4f68594e4,
         type: 2}
@@ -100867,7 +100816,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1763622300}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13, y: 3.5, z: 36}
+  m_LocalPosition: {x: 13, y: 3.5, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
@@ -100899,6 +100848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Explore the buildings to learn about Crosshatch!
+  singleActivation: 0
 --- !u!1001 &1764790649
 Prefab:
   m_ObjectHideFlags: 0
@@ -102503,7 +102453,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4948167166034560, guid: f47d146368db5468ba40f86f24657505, type: 2}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4948167166034560, guid: f47d146368db5468ba40f86f24657505, type: 2}
       propertyPath: m_LocalScale.x
@@ -102837,7 +102787,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8a3294528d09454fb66a2c855ce2181, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8a3294528d09454fb66a2c855ce2181, type: 3}
       propertyPath: m_LocalScale.x
@@ -108294,7 +108244,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -108318,7 +108268,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -109386,7 +109336,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -113995,11 +113945,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.5
+      value: 24.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e634fe445acb546b380a2b982c8909b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -120435,7 +120385,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2120452445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.5, y: 4.5, z: 36}
+  m_LocalPosition: {x: 53, y: 4.5, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949161902}
@@ -120467,6 +120417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: '''Space'' to Jump and ''Shift'' to Sprint'
+  singleActivation: 0
 --- !u!1 &2120531568
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,12 +6,19 @@ using UnityEngine.UI;
 public class TextNarration : MonoBehaviour {
 
     public string text;
+    GameObject container;
     private Text canvasText;
+    public bool singleActivation;
+    bool activated = false;
+    private GameObject background;
 
 
 	// Use this for initialization
 	void Start () {
-        canvasText = GameObject.Find("TextNarration").GetComponent<Text>();
+        container = GameObject.Find("TextNarration");
+        canvasText = container.GetComponentInChildren<Text>();
+        background = container.gameObject.GetComponentInChildren<Image>().gameObject;
+
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -19,6 +26,15 @@ public class TextNarration : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             canvasText.text = text;
+
+            if (!singleActivation || (singleActivation && !activated))
+            {
+                canvasText.text = text;
+                //background.enabled = true;
+                background.SetActive(true);
+                activated = true;
+            }
+
         }
     }
 
@@ -27,6 +43,8 @@ public class TextNarration : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             canvasText.text = null;
+            background.SetActive(false); // = false;
+
         }
     }
 
