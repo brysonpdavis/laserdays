@@ -85,7 +85,6 @@ public class SingleWorldClickable : InteractableObject {
     public override void DistantIconHover()
     {
         iconContainer.SetInteractHover();
-        Debug.Log("tryin");
     }
 
     public override void CloseIconHover()

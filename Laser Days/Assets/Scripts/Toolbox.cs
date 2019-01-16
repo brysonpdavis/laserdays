@@ -36,6 +36,11 @@ public class Toolbox : Singleton<Toolbox>
     public IList<Material> sharedMaterials;
     public MFPP.SoundContainerAsset testercubeSounds;
     public IList<UniqueId> allIds = new List<UniqueId>();
+    public AudioSource SoundEffectsAudio;
+
+    public GameObject narrationContainer;
+    public Text narrationText;
+    public GameObject narrationBackground;
     
 
     void Awake()
@@ -193,6 +198,18 @@ public class Toolbox : Singleton<Toolbox>
         return pauseMenu;
     }
 
+    public void SetNarration(string text)
+    {
+        narrationText.text = text;
+        narrationBackground.SetActive(true);
+    }
+
+    public void ClearNarration()
+    {
+        narrationText.text = null;
+        narrationBackground.SetActive(false);
+    }
+
 
     public void UpdateToolbox()
     {
@@ -204,6 +221,18 @@ public class Toolbox : Singleton<Toolbox>
         iconContainer = GameObject.FindWithTag("IconContainer").GetComponent<IconContainer>();
         pauseMenu = GameObject.Find("PauseMenu");
 
+
+        if (Toolbox.Instance == this)
+        {
+            narrationContainer = GameObject.Find("TextNarration");
+            narrationText = narrationContainer.GetComponentInChildren<Text>();
+            narrationBackground = narrationContainer.gameObject.GetComponentInChildren<Image>().gameObject;
+            SoundEffectsAudio = GameObject.Find("SoundEffectsAudio").GetComponent<AudioSource>();
+
+            ClearNarration();
+
+        }
+            
     }
 
     public void UpdateTransforms()
@@ -249,6 +278,13 @@ public class Toolbox : Singleton<Toolbox>
         }
     }
 
+    public void PlaySoundEffect(AudioClip audio)
+    {
+        SoundEffectsAudio.clip = audio;
+        SoundEffectsAudio.volume = soundEffectsSlider.value;
+        SoundEffectsAudio.Play();
+    }
+
     void SetCustomValuesOnInstance()
     {
         if (Toolbox.Instance)
@@ -261,6 +297,15 @@ public class Toolbox : Singleton<Toolbox>
             Toolbox.Instance.pauseMenu = pauseMenu;
             Toolbox.Instance.testercubeSounds = testercubeSounds;
             Toolbox.Instance.allIds = allIds;
+            //Toolbox.Instance.SoundEffectsAudio = SoundEffectsAudio;
+
+            //Debug.Log("working here");
+            //Toolbox.Instance.narrationText = narrationText;
+            //Toolbox.Instance.narrationContainer= narrationContainer;
+            //Toolbox.Instance.narrationBackground = narrationBackground;
+
+            ////ClearNarration();
+            //
         }
     }
 

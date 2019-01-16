@@ -10,6 +10,8 @@ public class LevelLoadingMenu : MonoBehaviour {
     public static bool gameIsPaused = true;
     public GameObject pauseMenuUI;
     public GameObject buttonContainer;
+    public GameObject sensitivitySlider;
+    public GameObject saveButton;
     [SerializeField] public static GameObject easyButtons;
     [SerializeField] public static GameObject mediumButtons;
     [SerializeField] public static GameObject hardButtons;
@@ -42,7 +44,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     private void Start()
     {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Default_Main_Player"));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Default_Main_Player January"));
         GetComponent<CanvasScaler>().enabled = true;
         //Resume();
     }
@@ -68,6 +70,8 @@ public class LevelLoadingMenu : MonoBehaviour {
         pauseMenuUI.SetActive(true);
         soundEffectSlider.SetActive(true);
         soundtrackSlider.SetActive(true);
+        sensitivitySlider.SetActive(true);
+        saveButton.SetActive(true);
         Time.timeScale = 0f;
     }
 
@@ -112,6 +116,8 @@ public class LevelLoadingMenu : MonoBehaviour {
         lastSceneButton = myButton;
         lastSceneCompleted = newSceneCompleted;
     }
+
+    public void SetMouseSensitivity()     {         float value = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>().value;         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().Controls.MouseSensitivity = value;     } 
 
     public void ClearPreviousButton()
     {
@@ -173,6 +179,8 @@ public class LevelLoadingMenu : MonoBehaviour {
         buttonContainer.SetActive(false);
         soundEffectSlider.SetActive(false);
         soundtrackSlider.SetActive(false);
+        sensitivitySlider.SetActive(false);
+        saveButton.SetActive(false);
 
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(fadeDuration);
