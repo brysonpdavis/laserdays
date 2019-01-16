@@ -48,7 +48,7 @@ Shader "Custom/PortalCard"
 			float screenDepth53 = LinearEyeDepth(UNITY_SAMPLE_DEPTH(tex2Dproj(_CameraDepthTexture,UNITY_PROJ_COORD( ase_screenPos ))));
 			float distanceDepth53 = abs( ( screenDepth53 - LinearEyeDepth( ase_screenPosNorm.z ) ) / ( _Float2 ) );
 			float clampResult54 = clamp( distanceDepth53 , 0.0 , 1.0 );
-			float cameraDepthFade107 = (( i.eyeDepth -_ProjectionParams.y - 6.0 ) / 40.0);
+			float cameraDepthFade107 = (( i.eyeDepth -_ProjectionParams.y - 6.34 ) / 3.19);
 			float clampResult110 = clamp( cameraDepthFade107 , 0.0 , 1.0 );
 			o.Alpha = ( _COL.a * clampResult54 * clampResult110 );
 		}
@@ -60,13 +60,13 @@ Shader "Custom/PortalCard"
 }
 /*ASEBEGIN
 Version=15500
-198;216;1273;781;363.9919;794.0089;1;True;False
-Node;AmplifyShaderEditor.RangedFloatNode;52;-358.9386,-606.8964;Float;False;Property;_Float2;Float 2;1;0;Create;True;0;0;False;0;0.1;7;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.CameraDepthFade;107;-89.10045,-401.4286;Float;False;3;2;FLOAT3;0,0,0;False;0;FLOAT;40;False;1;FLOAT;6;False;1;FLOAT;0
-Node;AmplifyShaderEditor.DepthFade;53;-104.635,-568.9926;Float;False;True;1;0;FLOAT;1;False;1;FLOAT;0
+500;461;1273;781;817.2343;786.074;1.37649;True;False
+Node;AmplifyShaderEditor.RangedFloatNode;52;-358.9386,-606.8964;Float;False;Property;_Float2;Float 2;1;0;Create;True;0;0;False;0;0.1;12;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.CameraDepthFade;107;-89.10045,-402.8051;Float;False;3;2;FLOAT3;0,0,0;False;0;FLOAT;3.19;False;1;FLOAT;6.34;False;1;FLOAT;0
+Node;AmplifyShaderEditor.DepthFade;53;-148.6827,-586.8867;Float;False;True;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.ClampOpNode;110;347.0833,-401.3133;Float;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ClampOpNode;54;94.43775,-589.7723;Float;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;2;338.677,-754.2544;Float;False;Property;_COL;COL;0;1;[HDR];Create;True;0;0;False;0;0,0,0,0;1.69866,1.69866,1.69866,0.8235294;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;2;338.677,-754.2544;Float;False;Property;_COL;COL;0;1;[HDR];Create;True;0;0;False;0;0,0,0,0;0,0,0,1;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ClampOpNode;54;95.81424,-589.7723;Float;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;108;731.6177,-464.9133;Float;False;3;3;0;FLOAT;0;False;1;FLOAT;1;False;2;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.StandardSurfaceOutputNode;37;1204.828,-559.1193;Float;False;True;2;Float;ASEMaterialInspector;0;0;Unlit;Custom/PortalCard;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;False;False;False;False;False;Off;1;False;-1;0;False;-1;False;0;False;-1;0;False;-1;False;3;Transparent;0.2;True;False;0;False;Transparent;;Transparent;All;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;0;False;-1;False;0;False;-1;255;False;-1;255;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;False;2;15;10;25;False;0.5;False;2;5;False;-1;10;False;-1;0;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;Relative;0;Legacy Shaders/VertexLit;-1;-1;-1;-1;0;False;0;0;False;-1;-1;0;True;62;0;0;0;15;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
 WireConnection;53;0;52;0
@@ -78,4 +78,4 @@ WireConnection;108;2;110;0
 WireConnection;37;2;2;0
 WireConnection;37;9;108;0
 ASEEND*/
-//CHKSM=D336284D73AF8FB89F8D8709B3641024005845E7
+//CHKSM=E740CDB5889C6725304A946F1458A54C63220D2E
