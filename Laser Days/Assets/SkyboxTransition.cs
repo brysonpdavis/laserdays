@@ -19,7 +19,7 @@ public class SkyboxTransition : MonoBehaviour {
 
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         if (Toolbox.Instance.GetPlayer().layer == 16) 
         { 
