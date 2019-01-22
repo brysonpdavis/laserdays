@@ -13,7 +13,10 @@ public class SkyboxTransition : MonoBehaviour {
 
     public bool transitionFog;
     public Color laserFog;
+    public Color laserAmbient;
     public Color realFog;
+    public Color realAbmient;
+
 
     // Use this for initialization
     void Awake()
@@ -21,12 +24,14 @@ public class SkyboxTransition : MonoBehaviour {
         if (Toolbox.Instance.GetPlayer().layer == 16) 
         { 
             SetStart(0); 
-            RenderSettings.fogColor = realFog; 
+            RenderSettings.fogColor = realFog;
+            RenderSettings.ambientLight = realAbmient;
         }
         else 
         { 
             SetStart(1); 
             RenderSettings.fogColor = laserFog;
+            RenderSettings.ambientLight = laserAmbient;
         }
         material = RenderSettings.skybox;
     }
@@ -73,12 +78,21 @@ public class SkyboxTransition : MonoBehaviour {
         float start = material.GetFloat("_TransitionState");
         //int property = Shader.PropertyToID("_D7A8CF01");
         Color endFog;
+        Color endAmbient;
         Color startFog = RenderSettings.fogColor;
+        Color startAmbient = RenderSettings.ambientLight;
 
         if (endpoint == 0f)
+        {
             endFog = realFog;
+            endAmbient = realAbmient;
+        }
         else
+        {
             endFog = laserFog;
+            endAmbient = laserAmbient;
+        }
+            
 
 
         while (ratio < 1f)
@@ -90,7 +104,9 @@ public class SkyboxTransition : MonoBehaviour {
             if (transitionFog)
             {
                 Color lerpFog = Color.Lerp(startFog, endFog, ratio);
+                Color lerpAmbient = Color.Lerp(startAmbient, endAmbient, ratio);
                 RenderSettings.fogColor = lerpFog;
+                RenderSettings.ambientLight = lerpAmbient;
             }   
             yield return null;
         }
