@@ -43,8 +43,12 @@ public class DeselectMenu : MonoBehaviour
     [MenuItem("RustForms/Random Y %#e")]
     static void RandomY()
     {
-        GameObject current = (GameObject)Selection.activeObject;
-        current.transform.eulerAngles = new Vector3 (current.transform.rotation.x, Random.Range(0, 359), current.transform.rotation.z);
+        GameObject[] current = Selection.gameObjects;//(GameObject)Selection.activeObject;
+        foreach (GameObject g in current)
+        {
+            g.transform.eulerAngles = new Vector3(g.transform.rotation.x, Random.Range(0, 359), g.transform.rotation.z);
+        }
+                                        
     }
 
 }
