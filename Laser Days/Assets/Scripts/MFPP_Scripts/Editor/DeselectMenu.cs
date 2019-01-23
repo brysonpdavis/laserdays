@@ -20,7 +20,7 @@ public class DeselectMenu : MonoBehaviour
     }
 
 
-    [MenuItem("RustForms/Copy Material &w")]
+    [MenuItem("RustForms/Copy Material %#w")]
     static void CopyMaterial()
     {
         GameObject current = (GameObject)Selection.activeObject;
