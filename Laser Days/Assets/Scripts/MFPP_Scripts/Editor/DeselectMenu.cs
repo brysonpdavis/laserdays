@@ -1,5 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
 public class DeselectMenu : MonoBehaviour
 {
     // Validated menu item.
@@ -34,8 +37,14 @@ public class DeselectMenu : MonoBehaviour
     {
         GameObject current = (GameObject)Selection.activeObject;
         if (myMaterial && current.GetComponent<Renderer>().sharedMaterial)
-            current.GetComponent<Renderer>().sharedMaterial = myMaterial;
-           
+            current.GetComponent<Renderer>().sharedMaterial = myMaterial;    
+    }
+
+    [MenuItem("RustForms/Random Y %#e")]
+    static void RandomY()
+    {
+        GameObject current = (GameObject)Selection.activeObject;
+        current.transform.eulerAngles = new Vector3 (current.transform.rotation.x, Random.Range(0, 359), current.transform.rotation.z);
     }
 
 }
