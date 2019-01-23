@@ -35,9 +35,14 @@ public class DeselectMenu : MonoBehaviour
     [MenuItem("RustForms/Paste Material %w")]
     static void PasteMaterial()
     {
-        GameObject current = (GameObject)Selection.activeObject;
-        if (myMaterial && current.GetComponent<Renderer>().sharedMaterial)
-            current.GetComponent<Renderer>().sharedMaterial = myMaterial;    
+        GameObject[] selectedMaterials = Selection.gameObjects;
+
+        foreach (GameObject current in selectedMaterials)
+        {
+            if (myMaterial && current.GetComponent<Renderer>().sharedMaterial)
+                current.GetComponent<Renderer>().sharedMaterial = myMaterial;
+        }
+    
     }
 
     [MenuItem("RustForms/Random Y %#e")]
