@@ -34,7 +34,7 @@ public class Transition : MonoBehaviour
         }
             
 
-        if (!(gameObject.layer == 10 || gameObject.layer == 11) || shared)
+        if (!(gameObject.layer == 10 || gameObject.layer == 11 || gameObject.layer == 27) || shared)
         {
             material = mRenderer.sharedMaterial;
             sharedMaterial = true;

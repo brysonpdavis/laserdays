@@ -41,7 +41,12 @@ public class Toolbox : Singleton<Toolbox>
     public GameObject narrationContainer;
     public Text narrationText;
     public GameObject narrationBackground;
-    
+
+
+    //default fog settings
+    public float fogDensityDefault;
+    public float cameraFogStartDefault;
+
 
     void Awake()
     {
@@ -221,6 +226,8 @@ public class Toolbox : Singleton<Toolbox>
         iconContainer = GameObject.FindWithTag("IconContainer").GetComponent<IconContainer>();
         pauseMenu = GameObject.Find("PauseMenu");
 
+        cameraFogStartDefault = Camera.main.GetComponent<UnityStandardAssets.ImageEffects.GlobalFog>().startDistance;
+        fogDensityDefault = RenderSettings.fogDensity;
 
         if (Toolbox.Instance == this)
         {
