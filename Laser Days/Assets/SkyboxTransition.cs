@@ -12,6 +12,8 @@ public class SkyboxTransition : MonoBehaviour {
     public float duration;
 
     public bool transitionFog;
+    public float fogMultiplier = 1f;
+    public float ambientMultiplier = 1f;
     public Color laserFog;
     public Color laserAmbient;
     public Color realFog;
@@ -24,14 +26,14 @@ public class SkyboxTransition : MonoBehaviour {
         if (Toolbox.Instance.GetPlayer().layer == 16) 
         { 
             SetStart(0); 
-            RenderSettings.fogColor = realFog;
-            RenderSettings.ambientLight = realAbmient;
+            RenderSettings.fogColor = realFog*fogMultiplier;
+            RenderSettings.ambientLight = realAbmient*ambientMultiplier;
         }
         else 
         { 
             SetStart(1); 
-            RenderSettings.fogColor = laserFog;
-            RenderSettings.ambientLight = laserAmbient;
+            RenderSettings.fogColor = laserFog*fogMultiplier;
+            RenderSettings.ambientLight = laserAmbient*ambientMultiplier;
         }
         material = RenderSettings.skybox;
     }
@@ -84,13 +86,13 @@ public class SkyboxTransition : MonoBehaviour {
 
         if (endpoint == 0f)
         {
-            endFog = realFog;
-            endAmbient = realAbmient;
+            endFog = realFog*fogMultiplier;
+            endAmbient = realAbmient*ambientMultiplier;
         }
         else
         {
-            endFog = laserFog;
-            endAmbient = laserAmbient;
+            endFog = laserFog*fogMultiplier;
+            endAmbient = laserAmbient*ambientMultiplier;
         }
             
 
