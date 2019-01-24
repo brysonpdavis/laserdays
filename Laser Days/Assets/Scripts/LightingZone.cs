@@ -10,6 +10,8 @@ public class LightingZone : MonoBehaviour {
     public float density = .1f;
     public float distance = 0f;
 
+    public bool resetOnExit = true;
+
     SkyboxTransition skybox;
     UnityStandardAssets.ImageEffects.GlobalFog fog;
 
@@ -32,7 +34,7 @@ public class LightingZone : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && resetOnExit)
         {
             StopAllCoroutines();
             StartCoroutine(fogRoutine(1f, 1f, Toolbox.Instance.fogDensityDefault, Toolbox.Instance.cameraFogStartDefault));
