@@ -30,6 +30,8 @@ public class LevelLoadingMenu : MonoBehaviour {
     private bool lastSceneCompleted;
     private GameObject lastSceneButton;
 
+    bool sceneIsLoading = false;
+
 	// Use this for initialization
 	void Awake () {
 
@@ -51,7 +53,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Tab) || (Input.GetKeyDown(KeyCode.Escape)))
+        if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetKeyDown(KeyCode.Escape))) && !sceneIsLoading)
         {
             if (gameIsPaused && transitionIsDone)
                 Resume();
@@ -173,6 +175,7 @@ public class LevelLoadingMenu : MonoBehaviour {
     IEnumerator loadNextScene(string name, string spawnPoint, GameObject myButton)
     {
 
+        sceneIsLoading = true;
         Cursor.visible = false;
 
 
@@ -230,6 +233,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         player.GetComponent<CharacterController>().velocity.Set(0f, 0f, 0f);
 
         Toolbox.Instance.UpdateTransforms();
+        sceneIsLoading = false;
 
     }
 }

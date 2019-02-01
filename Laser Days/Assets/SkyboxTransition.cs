@@ -23,6 +23,9 @@ public class SkyboxTransition : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
+        material = RenderSettings.skybox;
+
         if (Toolbox.Instance.GetPlayer().layer == 16) 
         { 
             SetStart(0); 
@@ -35,7 +38,7 @@ public class SkyboxTransition : MonoBehaviour {
             RenderSettings.fogColor = laserFog*fogMultiplier;
             RenderSettings.ambientLight = laserAmbient*ambientMultiplier;
         }
-        material = RenderSettings.skybox;
+
     }
 
     public void Flip(bool direction)
