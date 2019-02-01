@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 11121039}
   - component: {fileID: 11121038}
   m_Layer: 0
-  m_Name: Goop (1)
+  m_Name: Goop in one world.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -378,7 +378,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 453741805}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &11121038
 BoxCollider:
@@ -406,6 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Goop in one world can activate platforms or doors in the other.
+  lore: 0
   singleActivation: 0
 --- !u!1001 &14468493
 Prefab:
@@ -4288,7 +4289,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 453741805}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &233443488
 BoxCollider:
@@ -4316,6 +4317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Objects that help you are often only in one world.
+  lore: 0
   singleActivation: 0
 --- !u!1001 &235491286
 Prefab:
@@ -7714,15 +7716,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 78.5
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -18.5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 13
+      value: -11.25
       objectReference: {fileID: 0}
     - target: {fileID: 65058712319789338, guid: ff160c47402d6406d9c4124b589bea50,
         type: 2}
@@ -8467,7 +8469,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 453741805}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &458377276
 BoxCollider:
@@ -8495,6 +8497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: '''Space'' to Jump, ''Shift'' to Sprint.'
+  lore: 0
   singleActivation: 0
 --- !u!4 &463524109 stripped
 Transform:
@@ -12005,6 +12008,66 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 70524053b7bd4473dbbdf5dd05901ba8, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &643635064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1560909165133650, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 643635065}
+  - component: {fileID: 643635067}
+  - component: {fileID: 643635066}
+  m_Layer: 0
+  m_Name: The city was
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &643635065
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 643635064}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9, y: -3, z: 17.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 453741805}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &643635066
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65058712319789338, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 643635064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 20, z: 20}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &643635067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114834483706287366, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 643635064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: The City was built above a vast system of mines and quarries.
+  lore: 1
+  singleActivation: 0
 --- !u!1001 &646484724
 Prefab:
   m_ObjectHideFlags: 0
@@ -13609,6 +13672,12 @@ MonoBehaviour:
     loadInEditor: 1
     loadMethod: 1
   - scene:
+      editorAssetGUID: 5531c77a4527b4feea3aaa3c5365fdec
+      name: Entry Hall
+      _path: Assets/Scenes/Default Scene/Entry Hall.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
       editorAssetGUID: e6ce10e0c3b1343a78a9660e94ceec73
       name: 1A.1 Tower_Sokoban Janaury
       _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/_Tower Progressions
@@ -13623,23 +13692,10 @@ MonoBehaviour:
     loadInEditor: 1
     loadMethod: 1
   - scene:
-      editorAssetGUID: 5a46221b723c14ff99df8c19e1940f7c
-      name: Quarry Exit
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/_Tower Progressions
-        for DEMO/Quarry Exit.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
       editorAssetGUID: b8ae3fb4407234972b807dbc1d7a099e
       name: 1C.1 Tower_Plat_4.1
       _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/_Tower Progressions
         for DEMO/1C.1 Tower_Plat_4.1.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 182c1324c898548fe99b79b6c5e62443
-      name: Toolbox
-      _path: Assets/Scenes/Default Scene/Toolbox.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
@@ -13655,9 +13711,16 @@ MonoBehaviour:
     loadInEditor: 1
     loadMethod: 1
   - scene:
-      editorAssetGUID: 5531c77a4527b4feea3aaa3c5365fdec
-      name: Entry Hall
-      _path: Assets/Scenes/Default Scene/Entry Hall.unity
+      editorAssetGUID: 5a46221b723c14ff99df8c19e1940f7c
+      name: Quarry Exit
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/_Tower Progressions
+        for DEMO/Quarry Exit.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 182c1324c898548fe99b79b6c5e62443
+      name: Toolbox
+      _path: Assets/Scenes/Default Scene/Toolbox.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
@@ -26246,65 +26309,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad939d8f1294e4f41b1ae7d3a834fc97, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1452859281
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1560909165133650, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1452859282}
-  - component: {fileID: 1452859284}
-  - component: {fileID: 1452859283}
-  m_Layer: 0
-  m_Name: Pick up
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1452859282
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1452859281}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.5, y: -42.5, z: 30}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 453741805}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1452859283
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65058712319789338, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1452859281}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 16, y: 16, z: 16}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1452859284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114834483706287366, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1452859281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: Press 'E' to hold and carry objects like these stones.
-  singleActivation: 0
 --- !u!4 &1459410635 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4889729888588940, guid: ed6099056eff645d2bd0860ac80bd599,
@@ -34514,65 +34518,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1880506725}
   m_Mesh: {fileID: 4300002, guid: 363a6db4c59c94d5bb0fe412045e97ab, type: 3}
---- !u!1 &1885542494
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1560909165133650, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1885542495}
-  - component: {fileID: 1885542497}
-  - component: {fileID: 1885542496}
-  m_Layer: 0
-  m_Name: Door
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1885542495
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1885542494}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.5, y: -28, z: 36}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 453741805}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1885542496
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65058712319789338, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1885542494}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 8, z: 20}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1885542497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114834483706287366, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1885542494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: Placing objects in goop can activate doors.
-  singleActivation: 0
 --- !u!1 &1886059628
 GameObject:
   m_ObjectHideFlags: 0
@@ -37062,65 +37007,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2015958135}
   m_Mesh: {fileID: 4300000, guid: 363a6db4c59c94d5bb0fe412045e97ab, type: 3}
---- !u!1 &2018239644
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1560909165133650, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2018239645}
-  - component: {fileID: 2018239647}
-  - component: {fileID: 2018239646}
-  m_Layer: 0
-  m_Name: Goop
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2018239645
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2018239644}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: -45.5, z: 30}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 453741805}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2018239646
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65058712319789338, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2018239644}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 16, z: 18.4}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2018239647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114834483706287366, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2018239644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: Placing objects in goop can activate platforms or doors.
-  singleActivation: 0
 --- !u!1 &2033163489
 GameObject:
   m_ObjectHideFlags: 0

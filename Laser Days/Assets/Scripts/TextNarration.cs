@@ -9,6 +9,7 @@ public class TextNarration : MonoBehaviour
     public string text;
     GameObject container;
     private Text canvasText;
+    public bool lore = false;
     public bool singleActivation;
     bool activated = false;
     private GameObject background;
@@ -34,7 +35,10 @@ public class TextNarration : MonoBehaviour
                 Toolbox.Instance.SetNarration(text);
                 activated = true;
 
-                Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
+                if (lore)
+                    Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
+                else
+                    Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
             }
 
         }
