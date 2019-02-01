@@ -6,18 +6,19 @@ using UnityEngine.UI;
 public class OpeningTitleScreen : MonoBehaviour {
 
     CanvasGroup canvas;
+    public float waitTime = 0f;
     public float duration = 2f;
 
     private void Awake()
     {
         canvas = GetComponent<CanvasGroup>();
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
 
     }
 
     private void Start()
     {
-
+        StartCoroutine(FadeOnAwake());
     }
 
     public void FullSave()
@@ -46,6 +47,7 @@ public class OpeningTitleScreen : MonoBehaviour {
 
     private IEnumerator FadeOnAwake()
     {
+        yield return new WaitForSeconds(waitTime);
 
         GameObject pause = GameObject.Find("PauseMenu");
         if (pause)
