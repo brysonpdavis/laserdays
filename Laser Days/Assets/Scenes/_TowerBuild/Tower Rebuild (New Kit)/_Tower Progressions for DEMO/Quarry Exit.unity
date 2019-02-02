@@ -6198,8 +6198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: After years of heavy mining, objects became bound to one dimension. Moving
-    between the worlds became dangerous. People left The City.
+  text: After years of mining, objects became bound to one dimension. Moving between
+    the worlds became dangerous. People left The City.
   lore: 1
   singleActivation: 0
 --- !u!1001 &617797983
@@ -7756,7 +7756,8 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 64330736029213868, guid: d91418bcfa92d487e9e1448f05264c65, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d91418bcfa92d487e9e1448f05264c65, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &877319821
@@ -12161,6 +12162,23 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1736ec46f02254cb28de3a8137f22afb, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1412212404 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1226288713808994, guid: d91418bcfa92d487e9e1448f05264c65,
+    type: 2}
+  m_PrefabInternal: {fileID: 854944597}
+--- !u!65 &1412212405
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1412212404}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 0.5, z: 4}
+  m_Center: {x: -2, y: -0.25, z: -2}
 --- !u!1001 &1412581681
 Prefab:
   m_ObjectHideFlags: 0
