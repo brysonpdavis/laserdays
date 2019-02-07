@@ -5,7 +5,6 @@ using UnityEngine;
 public class BasicClickable : FlippableObject {
 
     public int maxVelocity = 8;
-
     private float originalVelocity = 10f;
     public AudioClip overridePop;
     //public AudioClip collide;
@@ -29,8 +28,8 @@ public class BasicClickable : FlippableObject {
             rigidbody.constraints = RigidbodyConstraints.None;
             transform.localRotation = Quaternion.Euler(Vector3.zero);
 
-            if (!beenPickedUp)
-        {StartCoroutine(SlowPickup());}
+        if (slowPickup && !beenPickedUp)
+            {StartCoroutine(SlowPickup());}
     }
 
     public override void Drop()

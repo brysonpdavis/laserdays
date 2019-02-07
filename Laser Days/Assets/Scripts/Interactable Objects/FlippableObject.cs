@@ -10,6 +10,7 @@ abstract public class FlippableObject : InteractableObject
     public float secondaryFlipDuration = 1f;
     private IEnumerator flipTransition;
     private float scaledDuration;
+    public bool slowPickup = false;
     public Color shimmerColor;
     public Transform sceneContainer;
     public Transform realTransform;
@@ -48,10 +49,13 @@ abstract public class FlippableObject : InteractableObject
         realTransform = sceneContainer.Find("Real");
         laserTransform = sceneContainer.Find("Laser");
 
+        if (!slowPickup)
+            rigidbody.isKinematic = false;
+
         //if(GetComponent<Rigidbody>()){
         //    var rb = GetComponent<Rigidbody>();
         //    rb.constraints = RigidbodyConstraints.None;
-        //    rb.isKinematic = false;
+        //   rb.isKinematic = false;
         //    rb.useGravity = true;
 
         //}
