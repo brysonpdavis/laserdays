@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Text))]
 public class TextNarration : MonoBehaviour
 {
 
@@ -21,6 +22,9 @@ public class TextNarration : MonoBehaviour
         //container = GameObject.Find("TextNarration");
         //canvasText = container.GetComponentInChildren<Text>();
         //background = container.gameObject.GetComponentInChildren<Image>().gameObject;
+
+        if (GetComponent<UnityEngine.UI.Text>())
+           text = GetComponent<UnityEngine.UI.Text>().text;
 
     }
 
