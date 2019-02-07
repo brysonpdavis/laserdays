@@ -108,9 +108,14 @@ public class PlatformTrigger : MonoBehaviour {
                 trigger.moving = true;
             }
 
+            Debug.Log(platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckObjects.Count);
+
             //make sure either we're going up, or if we're going down that there's nobody beneath
-            if (((end.position.y >= start.y) && platformSingle.mainGuard.GetComponent<PlatformGuard>().breakingObjectsAbove.Count == 0)
-                || platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0)
+            if (
+
+                (platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckObjects.Count <= 1) && 
+                (((end.position.y >= start.y) && platformSingle.mainGuard.GetComponent<PlatformGuard>().breakingObjectsAbove.Count == 0)
+                    || platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0))
             {
                 //make sure that the platform is at the same position as either the start or end position, otherwise it won't be activated
                 platformSingle.MovePlatform(start, end.position, time);
@@ -134,9 +139,17 @@ public class PlatformTrigger : MonoBehaviour {
             platformSingle.IndicatorOff();
 
 
-            //check to be sure either we're goin up or we're going down and nothing is stuck beneath the platform
-            if ((( start.y >= end.position.y) && platformSingle.mainGuard.GetComponent<PlatformGuard>().breakingObjectsAbove.Count == 0) 
-                || platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0)
+            Debug.Log(platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckObjects.Count);
+
+            //check to be sure either we're goin up and nothing is breaking from above or we're going down and nothing is stuck beneath the platform
+            if (
+
+                (platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckObjects.Count <= 1) && 
+
+                //platform is moving back to high position and nothing is blocking it
+                (((start.y >= end.position.y) && platformSingle.mainGuard.GetComponent<PlatformGuard>().breakingObjectsAbove.Count == 0) ||
+                //platform is moving to lower position and nothing is blocking from below
+                 (platformSingle.mainGuard.GetComponent<PlatformGuard>().stuckSokoban.Count == 0)))
             {
                 platformSingle.MovePlatform(end.position, start, time);
 

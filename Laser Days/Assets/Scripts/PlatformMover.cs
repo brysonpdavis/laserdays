@@ -60,6 +60,7 @@ public class PlatformMover : MonoBehaviour {
 
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
     {
+        checkObjectsPlace();
         yield return new WaitForSeconds(.5f);
         PlayAudio(SoundBox.Instance.platformStart);
         yield return new WaitForSeconds(SoundBox.Instance.platformStart.length);
@@ -69,8 +70,19 @@ public class PlatformMover : MonoBehaviour {
 
         float elapsedTime = 0;
         float ratio = elapsedTime / (duration * durationMultiplier);
-        checkObjectsPlace();
+
         PlatformObjectsUnselectable();
+
+        Vector3 carriedObjectPosition = Vector3.zero;
+
+        if (mainGuard.GetComponent<PlatformGuard>().target)
+        {
+            carriedObjectPosition = mainGuard.GetComponent<PlatformGuard>().target.transform.position;
+            carriedObjectPosition += endPos;
+
+            Debug.Log(mainGuard.GetComponent<PlatformGuard>().target.transform.position.y);
+            Debug.Log(carriedObjectPosition.y);
+        }
 
         //yield return new WaitForSeconds(.5f);
         //play starting sound
@@ -91,6 +103,8 @@ public class PlatformMover : MonoBehaviour {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / (duration * durationMultiplier);
             transform.position = Vector3.Lerp(startPos, endPos, ratio);
+
+
             yield return null;
         }
         transform.position = endPos;
@@ -105,6 +119,13 @@ public class PlatformMover : MonoBehaviour {
         audio.Stop();
         audio.mute = false;
         PlayAudio(SoundBox.Instance.platformEnd);
+
+        if (mainGuard.GetComponent<PlatformGuard>().target)
+        {
+            mainGuard.GetComponent<PlatformGuard>().target.transform.position = carriedObjectPosition += endPos;
+        }
+
+
     }
 
     private void OnDisable()

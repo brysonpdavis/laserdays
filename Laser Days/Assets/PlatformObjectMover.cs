@@ -34,7 +34,7 @@ public class PlatformObjectMover : MonoBehaviour {
              type == InteractableObject.ObjectType.Morph)
              && (other.gameObject.layer == mainGuard.layer))
         {
-             //   Debug.Log("here we go");
+                Debug.Log("here we go");
                 incorrect = true;
 
             objectToMove = other.gameObject;
@@ -121,33 +121,44 @@ public class PlatformObjectMover : MonoBehaviour {
             mainGuard.SetActive(false);
 
 
+            //TURNING OFF THE ANIMATION TEMPORARILY - KEPT PUTTING IT IN SLIGHTLY OFF POSITIONS
 
-            if (objectToMove.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban1x1)
-            {
-                while (ratio < 1f)
-                {
-                    moverPosition = position.transform.position;
-                    moverPosition.y = moverPosition.y + differenceY;
-
-
-                    elapsedTime += Time.smoothDeltaTime;
-                    ratio = elapsedTime / duration;
-                    //value = Vector3.Slerp(startpoint, moverPosition, ratio);
-                    //objectToMove.transform.position = value;
-                    objectToMove.transform.position = Vector3.Slerp(startpoint, moverPosition, ratio);
-
-                    // Debug.Log(objectToMove.transform.position);
-
-                    yield return null;
-                }
-            }
+            //if (objectToMove.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban1x1)
+            //{
+            //    while (ratio < 1f)
+            //    {
+            //        moverPosition = position.transform.position;
+            //        moverPosition.y = moverPosition.y + differenceY;
 
 
-            float newGuardY = mainGuard.transform.parent.transform.position.y - startGuardY;
-            Debug.Log(newGuardY);
+            //        elapsedTime += Time.smoothDeltaTime;
+            //        ratio = elapsedTime / duration;
+            //        //value = Vector3.Slerp(startpoint, moverPosition, ratio);
+            //        //objectToMove.transform.position = value;
+            //        objectToMove.transform.position = Vector3.Slerp(startpoint, moverPosition, ratio);
 
-            Vector3 finalPosition = new Vector3(position.position.x, (position.position.y + differenceY ), position.position.z);
-            objectToMove.transform.position = finalPosition;
+            //        // Debug.Log(objectToMove.transform.position);
+
+            //        yield return null;
+            //    }
+            //}
+
+
+            //float newGuardY = mainGuard.transform.parent.transform.position.y - startGuardY;
+            //Debug.Log(newGuardY);
+
+            //Vector3 finalPosition = new Vector3(position.position.x, (position.position.y + differenceY ), position.position.z);
+            //objectToMove.transform.position = finalPosition;
+
+            Debug.Log("starting spot ");
+            Debug.Log(objectToMove.transform.position.y);
+
+            moverPosition = position.transform.position;
+            moverPosition.y = objectToMove.transform.position.y;
+            objectToMove.transform.position = moverPosition;
+            Debug.Log("ending spot ");
+            Debug.Log(objectToMove.transform.position.y);
+            
 
             mainGuard.SetActive(true);
 
