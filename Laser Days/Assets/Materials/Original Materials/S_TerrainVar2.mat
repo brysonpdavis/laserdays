@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: S_TerrainVar2
-  m_Shader: {fileID: 4800000, guid: 0104351153d2746ab82dc5b281882c1a, type: 3}
+  m_Shader: {fileID: 4800000, guid: c284815f8bda94710886db31bd115231, type: 3}
   m_ShaderKeywords: _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,6 +18,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AccentMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AlbedoLaser:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -30,7 +34,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Deatil:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -56,11 +68,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 100, y: 100}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaterialMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 50, y: 50}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -91,6 +103,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -103,6 +116,7 @@ Material:
     - _NormalScale: 0.3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 0
     - _SrcBlend: 1
@@ -113,6 +127,10 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Color: {r: 0.6698113, g: 0.591614, b: 0.56554824, a: 1}
-    - _ColorLaser: {r: 0.36376068, g: 0.34752136, b: 0.38, a: 0}
-    - _ColorReal: {r: 0.76, g: 0.4771111, b: 0.39688888, a: 0}
+    - _ColorLaser: {r: 0.36376065, g: 0.34752133, b: 0.37999994, a: 1}
+    - _ColorReal: {r: 0.76, g: 0.4771111, b: 0.39688885, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LaserAccent: {r: 0.36376065, g: 0.34752133, b: 0.37999994, a: 1}
+    - _LaserBase: {r: 0.36376065, g: 0.34752133, b: 0.37999994, a: 1}
+    - _RealAccent: {r: 0.76, g: 0.4771111, b: 0.39688885, a: 1}
+    - _RealBase: {r: 0.76, g: 0.4771111, b: 0.39688885, a: 1}

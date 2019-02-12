@@ -19,6 +19,8 @@ struct v2f_ao {
 uniform float2 _NoiseScale;
 float4 _CameraDepthNormalsTexture_ST;
 
+
+
 v2f_ao vert_ao (appdata_img v)
 {
 	v2f_ao o;
@@ -28,7 +30,15 @@ v2f_ao vert_ao (appdata_img v)
 	return o;
 }
 
+
+
 sampler2D _CameraDepthNormalsTexture;
+
+
+sampler2D _CameraGBufferTexture1;
+float4 _CameraGBufferTexture1_ST;
+
+
 sampler2D _RandomTexture;
 float4 _Params; // x=radius, y=minz, z=attenuation power, w=SSAO power
 
@@ -271,8 +281,13 @@ half4 frag( v2f i ) : SV_Target
 	half4 c = tex2D (_MainTex, i.uv[0]);
 	half ao = tex2D (_SSAO, i.uv[1]).r;
 	ao = pow (ao, _Params.w);
-	c.rgb *= ao;
-	return c;
+	half4 ee = tex2D(_CameraGBufferTexture1, i.uv[0]);
+    half4 eeee = half4(ee.b,ee.b,ee.b,1);
+    
+    ao = 1 - ao;
+    
+    return lerp(c, eeee, ao);
+	
 }
 ENDCG
 	}

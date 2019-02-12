@@ -24,6 +24,9 @@ Shader "Hidden/EdgeDetect" {
 
 	sampler2D _CameraDepthNormalsTexture;
 	half4 _CameraDepthNormalsTexture_ST;
+    
+    sampler2D _CameraGBufferTexture1;
+    half4 _CameraGBufferTexture1_ST;
 
 	sampler2D_float _CameraDepthTexture;
 	half4 _CameraDepthTexture_ST;
@@ -72,6 +75,15 @@ Shader "Hidden/EdgeDetect" {
 		return len * lerp(original, _BgColor, _BgFade);			
 	}	
 	
+    inline half CheckSameExtra (float centerExtra, half4 theSampleA, half4 theSampleB)
+    {
+        float diff = centerExtra * 2 - theSampleA - theSampleB; 
+        float len = dot(diff,diff);
+        len = step(len, 0.05);
+  
+        return len;
+    }   
+    
 	inline half CheckSame (half2 centerNormal, float centerDepth, half4 theSample)
 	{
 		// difference in normals
@@ -279,11 +291,18 @@ Shader "Hidden/EdgeDetect" {
 		half4 center = tex2D (_CameraDepthNormalsTexture, i.uv[1]);
 		half4 sample1 = tex2D (_CameraDepthNormalsTexture, i.uv[2]);
 		half4 sample2 = tex2D (_CameraDepthNormalsTexture, i.uv[3]);
+        
+        half4 centerExtra = tex2D (_CameraGBufferTexture1, i.uv[1]);
+        half4 sample1A = tex2D (_CameraGBufferTexture1, i.uv[2]);
+        half4 sample2B = tex2D (_CameraGBufferTexture1, i.uv[3]);
 		
 		// encoded normal
 		half2 centerNormal = center.xy;
 		// decoded depth
 		float centerDepth = DecodeFloatRG (center.zw);
+        
+        float CEa = centerExtra.r;
+        
 		
 		half edge = 1.0;
         half4 white = (1,1,1,1);
@@ -291,6 +310,7 @@ Shader "Hidden/EdgeDetect" {
 		
 		edge *= CheckSame(centerNormal, centerDepth, sample1);
 		edge *= CheckSame(centerNormal, centerDepth, sample2);
+        edge *= CheckSameExtra(CEa, sample1A, sample2B);
 
         edge = 1-edge;
 
@@ -302,6 +322,7 @@ Shader "Hidden/EdgeDetect" {
         f = 1;
         }
 			
+        //return (centerExtra);    
 		return lerp(original, _BgColor, (edge*f*_BgColor.a));
         //return lerp(original, _BgColor, (edge));
 	}

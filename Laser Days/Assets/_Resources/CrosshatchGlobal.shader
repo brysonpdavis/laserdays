@@ -1,6 +1,6 @@
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "Hidden/Internal-DeferredShading" {
+Shader "Hidden/CrosshatchGlobalShading" {
 Properties {
 	_LightTexture0 ("", any) = "" {}
 	_LightTextureB0 ("", 2D) = "" {}
@@ -34,7 +34,7 @@ CGPROGRAM
 #include "UnityStandardUtils.cginc"
 #include "UnityGBuffer.cginc"
 #include "UnityStandardBRDF.cginc"
-#include "UnityStandardBRDFCustom.cginc"
+#include "CrosshatchBRDF.cginc"
 
 sampler2D _CameraGBufferTexture0;
 sampler2D _CameraGBufferTexture1;
