@@ -66,7 +66,6 @@ public class PlatformTrigger : MonoBehaviour {
         }
         else {
             platform = transform.parent.GetComponentsInChildren<PlatformMover>();
-
         }
 
         basinIndicator = GetComponentInChildren<BasinTriggerIndicator>();

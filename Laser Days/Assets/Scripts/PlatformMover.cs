@@ -19,7 +19,7 @@ public class PlatformMover : MonoBehaviour {
     private LineRenderer LR;
     private AudioSource audio;
     private bool playerLayer;
-
+    public bool platformIsMoving = false;
 
     public void Start()
     {
@@ -61,9 +61,14 @@ public class PlatformMover : MonoBehaviour {
     private IEnumerator MovePlatformCoroutine(Vector3 startPos, Vector3 endPos, float duration)
     {
         checkObjectsPlace();
+        platformIsMoving = true;
+        Debug.Log("Platformismoving");
+
         yield return new WaitForSeconds(.5f);
         PlayAudio(SoundBox.Instance.platformStart);
         yield return new WaitForSeconds(SoundBox.Instance.platformStart.length);
+
+
 
         audio.loop = true;
         PlayAudio(SoundBox.Instance.platformRunning);
@@ -125,12 +130,17 @@ public class PlatformMover : MonoBehaviour {
             mainGuard.GetComponent<PlatformGuard>().target.transform.position = carriedObjectPosition += endPos;
         }
 
+        platformIsMoving = false;
+        Debug.Log("platformStoppedMoving");
+
 
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
+        platformIsMoving = false;
+        Debug.Log("platformStoppedMoving");
         if (audio && audio.isPlaying)
             audio.Stop();
     }

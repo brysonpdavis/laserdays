@@ -32,7 +32,8 @@ public class PlatformObjectMover : MonoBehaviour {
              type == InteractableObject.ObjectType.Sokoban2x2 || 
              type == InteractableObject.ObjectType.FloorBouncer ||
              type == InteractableObject.ObjectType.Morph)
-             && (other.gameObject.layer == mainGuard.layer))
+             && (other.gameObject.layer == mainGuard.layer)
+            && mainGuard.GetComponent<PlatformGuard>().stuckObjects.Contains(other.gameObject))
         {
                 Debug.Log("here we go");
                 incorrect = true;
@@ -77,7 +78,11 @@ public class PlatformObjectMover : MonoBehaviour {
 
     private IEnumerator CenterObjectRoutine()
     {
-
+        if (!mainGuard.GetComponent<PlatformGuard>().stuckObjects.Contains(objectToMove))
+        {
+            Debug.Log("doesn't contain");
+            mainGuard.GetComponent<PlatformGuard>().stuckObjects.Add(objectToMove);
+        }
 
         if (objectToMove.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban2x2)
         {
@@ -162,7 +167,7 @@ public class PlatformObjectMover : MonoBehaviour {
 
             mainGuard.SetActive(true);
 
-            //platformGuard.stuckObjects.Add(objectToMove);  [was adding this before, but realized that the platformGuard will be doing this already]
+            platformGuard.stuckObjects.Add(objectToMove);  //[was adding this before, but realized that the platformGuard will be doing this already]
             platformGuard.stuckObjectsOffset.Add((objectToMove.transform.position - mainGuard.transform.position));
             incorrect = false;
             StopAllCoroutines();

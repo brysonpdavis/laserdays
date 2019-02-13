@@ -64,12 +64,16 @@ public class PlatformGuard : MonoBehaviour
         //2:objects from above jam the platform if there's already something on it
         if ((string.Equals(collisionTag, "Sokoban1x1") ||
              string.Equals(collisionTag, "FloorBouncer") ||
-             //string.Equals(collisionTag, "Sokoban2x2") ||
              string.Equals(collisionTag, "Morph") || 
              string.Equals(collisionTag, "Player"))
-            && (col.transform.position.y >= this.transform.position.y))
+            //be sure we're colliding from above
+            && (col.transform.position.y >= this.transform.position.y)
+            //be sure we're NOT moving
+            && !platformController.platformMovers[0].platformIsMoving
+           )
         {
                 stuckObjects.Add(col.gameObject);
+            Debug.Log("ADDING" + col.gameObject.name);
         }
 
         //objects colliding from below make the platform (either single or as group) get stuck
@@ -111,6 +115,7 @@ public class PlatformGuard : MonoBehaviour
                     platform.StopAllCoroutines();
                     //make everything but morphs selectable when platform is stuck
                     platform.PlatformStuckSelectable();
+                    platform.platformIsMoving = false;
                 }
             }
 
@@ -118,6 +123,7 @@ public class PlatformGuard : MonoBehaviour
             {
                 GetComponentInParent<PlatformMover>().StopAllCoroutines();
                 GetComponentInParent<PlatformMover>().PlatformStuckSelectable();
+                GetComponentInParent<PlatformMover>().platformIsMoving = false;
             }
     }
 
@@ -157,6 +163,7 @@ public class PlatformGuard : MonoBehaviour
                 stuckObjectsOffset.Clear();
                 for (int i = 0; i < stuckObjects.Count; i++)
                 {
+                    Debug.Log("offsetting" + i + stuckObjects[i].name);
                     stuckObjectsOffset.Add(stuckObjects[i].transform.position - GetComponentInParent<Transform>().position);
                     // target.transform.position = GetComponentInParent<Transform>().position + offset;
                 }
@@ -271,6 +278,7 @@ public class PlatformGuard : MonoBehaviour
         {
             //set the offset for each obj
             stuckObjects[i].transform.position = GetComponentInParent<Transform>().position + stuckObjectsOffset[i];
+            Debug.Log(stuckObjectsOffset[i]);
             //Debug.Log(stuckObjects[i].transform.position.y);
         }
     }
