@@ -889,7 +889,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: 2
     m_CustomResolution: -1
     m_Strength: 0.767
@@ -14248,8 +14248,8 @@ GameObject:
   - component: {fileID: 1198232340}
   - component: {fileID: 1198232339}
   - component: {fileID: 1198232342}
-  - component: {fileID: 1198232343}
   - component: {fileID: 1198232344}
+  - component: {fileID: 1198232343}
   - component: {fileID: 1198232338}
   - component: {fileID: 1198232345}
   - component: {fileID: 1198232346}
@@ -14446,7 +14446,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1198232336}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 730475ee64f9a894bbac0d9e6f22e813, type: 3}
   m_Name: 
@@ -14458,7 +14458,7 @@ MonoBehaviour:
   edgeExp: 0.85
   sampleDist: 1
   edgesOnly: 0
-  edgesOnlyBgColor: {r: 0, g: 0, b: 0, a: 1}
+  edgesOnlyBgColor: {r: 0, g: 0, b: 0, a: 0.9019608}
   edgeDetectShader: {fileID: 4800000, guid: 0d1644bdf064147baa97f235fc5b4903, type: 3}
 --- !u!114 &1198232344
 MonoBehaviour:
@@ -15340,13 +15340,14 @@ GameObject:
   - component: {fileID: 1411098579}
   - component: {fileID: 1411098578}
   - component: {fileID: 1411098577}
+  - component: {fileID: 1411098580}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1411098576
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15419,6 +15420,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1411098575}
+--- !u!114 &1411098580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1411098575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1420882031
 GameObject:
   m_ObjectHideFlags: 0

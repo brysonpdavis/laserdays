@@ -15,6 +15,8 @@ float _TransitionState;
 
 float _AlphaCutoff;
 
+
+//Vertex Structure
 struct VertexData {
     float4 vertex : POSITION;
     float3 normal : NORMAL;
@@ -22,6 +24,7 @@ struct VertexData {
     float2 uv : TEXCOORD0;
 };
 
+//v2f Structure
 struct Interpolators {
     float4 pos : SV_POSITION;
     float4 uv : TEXCOORD0;
@@ -43,35 +46,68 @@ struct Interpolators {
     #endif
 };
 
-
+//Returns an accent mask value per fragment. 
 float GetAccentMask (Interpolators i) {
-  
-    float3 accTex = tex2D(_AccentMap, i.uv.xy);
-    float accMask = lerp(accTex.r, accTex.g, _TransitionState);
-    accMask = step(0.1, accMask);
+    float3 accTex = tex2D(_AccentMap, i.uv.xy); 
+    float accMask = 0;   
     
+    #if defined(SHARED)
+        accMask = lerp(accTex.r, accTex.g, _TransitionState);
+        return step(0.1, accMask); 
+    #endif
     
-    return accMask;
+    #if defined(REAL)
+        accMask = accTex.r;
+        return step(0.1, accMask);
+    #else 
+        accMask = accTex.g;
+        return step(0.1, accMask);
+    #endif
 }
 
+//Returns albedo per fragment by blending MaterialMap, BaseColor, AccentColor, and AccentMap.
 float3 GetAlbedo (Interpolators i) {
-    float3 albedo;
     float3 tex = tex2D(_MainTex, i.uv.xy);
-    float3 detCol = lerp(_RealAccent, _LaserAccent, _TransitionState);
-   
-    float val = lerp(tex.r, tex.g, _TransitionState);
-    float3 col = lerp(_RealBase, _LaserBase, _TransitionState);
-    col = lerp(col, detCol, GetAccentMask(i));
+    float3 col = float3(0,0,0);
     
-    albedo = val * col;
-    return albedo;
+    #if defined(SHARED)
+        float3 accCol = lerp(_RealAccent, _LaserAccent, _TransitionState);
+        float val = lerp(tex.r, tex.g, _TransitionState);
+        col = lerp(_RealBase, _LaserBase, _TransitionState);
+        col = lerp(col, accCol, GetAccentMask(i));
+        return val * col;
+    #endif
+    
+    #if defined(REAL)
+        col = lerp(_RealBase, _RealAccent, GetAccentMask(i));
+        return tex.r * col;
+    #else
+        col = lerp(_LaserBase, _LaserAccent, GetAccentMask(i));
+        return tex.g * col;
+    #endif
 }
 
+//Keeping this to be called, but just returning one.
 float GetAlpha (Interpolators i) {
-    float alpha = 1;
-    return alpha;
+    return 1.0;
 }
 
+//Returns alpha at fragment to determine whether it gets clipped. 
+float GetAlphaSingle (Interpolators i){
+    float emv = tex2D(_EffectMap, i.uv.xy).r;
+    
+    #if defined(REAL)
+        emv -= _TransitionState;
+        emv = step(0,emv);
+        return emv;
+    #else
+        emv += _TransitionState;
+        emv = step(1,emv);
+        return emv;
+    #endif            
+}
+
+// As it was.
 float3 GetTangentSpaceNormal (Interpolators i) {
     float3 normal = float3(0, 0, 1);
     #if defined(_NORMAL_MAP)
@@ -88,26 +124,23 @@ float3 GetTangentSpaceNormal (Interpolators i) {
     return normal;
 }
 
+//Return constant low value for metallic. Part of keeping shading how we want. 
 float GetMetallic (Interpolators i) {
-    #if defined(_METALLIC_MAP)
-        return tex2D(_MetallicMap, i.uv.xy).r;
-    #else
-        return 0.05;
-    #endif
+   return 0.05;
 }
 
+//Return smoothness set through material. Currently has no effect. Fix this. 
 float GetSmoothness (Interpolators i) {
     return _Smoothness;
 }
 
+
+//Currently not using occlusion. But could use unused chanels of MaterialMap.
 float GetOcclusion (Interpolators i) {
-    #if defined(_OCCLUSION_MAP)
-        return lerp(1, tex2D(_OcclusionMap, i.uv.xy).g, _OcclusionStrength);
-    #else
-        return 1;
-    #endif
+   return 1;
 }
 
+//Currently not using emmision but will have to use it for interactables. 
 float3 GetEmission (Interpolators i) {
     #if defined(FORWARD_BASE_PASS) || defined(DEFERRED_PASS)
         #if defined(_EMISSION_MAP)
@@ -121,6 +154,7 @@ float3 GetEmission (Interpolators i) {
     return 0;
 }
 
+//As it was.
 void ComputeVertexLightColor (inout Interpolators i) {
     #if defined(VERTEXLIGHT_ON)
         i.vertexLightColor = Shade4PointLights(
@@ -132,6 +166,7 @@ void ComputeVertexLightColor (inout Interpolators i) {
     #endif
 }
 
+//As it was.
 float3 CreateBinormal (float3 normal, float3 tangent, float binormalSign) {
     return cross(normal, tangent.xyz) *
         (binormalSign * unity_WorldTransformParams.w);
@@ -282,8 +317,8 @@ struct FragmentOutput {
 
 FragmentOutput MyFragmentProgram (Interpolators i) {
     float alpha = GetAlpha(i);
-    #if defined(_RENDERING_CUTOUT)
-        clip(alpha - _AlphaCutoff);
+    #if defined(USECLIP)
+        clip(GetAlphaSingle(i) - _AlphaCutoff);
     #endif
 
     InitializeFragmentNormal(i);
@@ -310,6 +345,8 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         i.normal, viewDir,
         CreateLight(i), CreateIndirectLight(i, viewDir)
     );
+    
+    
     color.rgb += GetEmission(i);
     #if defined(_RENDERING_FADE) || defined(_RENDERING_TRANSPARENT)
         color.a = alpha;

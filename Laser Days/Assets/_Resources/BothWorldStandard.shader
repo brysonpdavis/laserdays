@@ -61,6 +61,7 @@
             #pragma fragment MyFragmentProgram
 
             #define FORWARD_BASE_PASS
+            #define SHARED
 
             #include "CrosshatchLighting.cginc"
 
@@ -91,6 +92,8 @@
             
             #pragma vertex MyVertexProgram
             #pragma fragment MyFragmentProgram
+            
+            #define SHARED
 
             #include "CrosshatchLighting.cginc"
 
@@ -125,6 +128,7 @@
             #pragma fragment MyFragmentProgram
 
             #define DEFERRED_PASS
+            #define SHARED
 
             #include "CrosshatchLighting.cginc"
 
@@ -148,12 +152,15 @@
 
             #pragma vertex MyShadowVertexProgram
             #pragma fragment MyShadowFragmentProgram
+            
+            #define SHARED
 
             #include "My Shadows.cginc"
 
             ENDCG
         }
     }
-
+    
+    
     //CustomEditor "MyLightingShaderGUI"
 }

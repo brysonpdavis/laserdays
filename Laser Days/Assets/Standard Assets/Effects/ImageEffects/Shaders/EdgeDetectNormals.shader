@@ -318,7 +318,7 @@ Shader "Hidden/EdgeDetect" {
         f = ComputeFog(f);
         //step()
         // f = 1 - f;
-        if(centerDepth>0.99){
+        if(centerDepth>0.999){
         f = 1;
         }
 			

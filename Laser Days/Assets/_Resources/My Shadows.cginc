@@ -11,16 +11,19 @@
 	#endif
 #endif
 
-#if SHADOWS_SEMITRANSPARENT || defined(_RENDERING_CUTOUT)
+#if SHADOWS_SEMITRANSPARENT || defined(_RENDERING_CUTOUT) || defined (USECLIP)
 	#if !defined(_SMOOTHNESS_ALBEDO)
 		#define SHADOWS_NEED_UV 1
 	#endif
 #endif
 
+
+
 float4 _Tint;
-sampler2D _MainTex;
-float4 _MainTex_ST;
+sampler2D _EffectMap;
+float4 _EffectMap_ST;
 float _AlphaCutoff;
+float _TransitionState;
 
 sampler3D _DitherMaskLOD;
 
@@ -32,9 +35,9 @@ struct VertexData {
 
 struct InterpolatorsVertex {
 	float4 position : SV_POSITION;
-	#if SHADOWS_NEED_UV
+	
 		float2 uv : TEXCOORD0;
-	#endif
+
 	#if defined(SHADOWS_CUBE)
 		float3 lightVec : TEXCOORD1;
 	#endif
@@ -47,20 +50,30 @@ struct Interpolators {
 		float4 positions : SV_POSITION;
 	#endif
 
-	#if SHADOWS_NEED_UV
+	
 		float2 uv : TEXCOORD0;
-	#endif
+
 	#if defined(SHADOWS_CUBE)
 		float3 lightVec : TEXCOORD1;
 	#endif
 };
 
 float GetAlpha (Interpolators i) {
-	float alpha = _Tint.a;
-	#if SHADOWS_NEED_UV
-		alpha *= tex2D(_MainTex, i.uv.xy).a;
-	#endif
-	return alpha;
+	float emv = tex2D(_EffectMap, i.uv.xy).r;
+    
+    #if defined(SHARED)
+        return 1.0;
+    #endif
+    
+    #if defined(REAL)
+        emv -= _TransitionState;
+        emv = step(0,emv);
+        return emv;
+    #else
+        emv += _TransitionState;
+        emv = step(1,emv);
+        return emv;
+    #endif   
 }
 
 InterpolatorsVertex MyShadowVertexProgram (VertexData v) {
@@ -74,15 +87,15 @@ InterpolatorsVertex MyShadowVertexProgram (VertexData v) {
 		i.position = UnityApplyLinearShadowBias(i.position);
 	#endif
 
-	#if SHADOWS_NEED_UV
-		i.uv = TRANSFORM_TEX(v.uv, _MainTex);
-	#endif
+	
+		i.uv = TRANSFORM_TEX(v.uv, _EffectMap);
+
 	return i;
 }
 
 float4 MyShadowFragmentProgram (Interpolators i) : SV_TARGET {
 	float alpha = GetAlpha(i);
-	#if defined(_RENDERING_CUTOUT)
+	#if defined(USECLIP)
 		clip(alpha - _AlphaCutoff);
 	#endif
 
