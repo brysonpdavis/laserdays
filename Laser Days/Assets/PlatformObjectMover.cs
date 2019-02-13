@@ -167,7 +167,7 @@ public class PlatformObjectMover : MonoBehaviour {
 
             mainGuard.SetActive(true);
 
-            platformGuard.stuckObjects.Add(objectToMove);  //[was adding this before, but realized that the platformGuard will be doing this already]
+            platformGuard.stuckObjects.Add(objectToMove);  //need to add it as a stuck obj since the platform was moving before so it couldn't be added
             platformGuard.stuckObjectsOffset.Add((objectToMove.transform.position - mainGuard.transform.position));
             incorrect = false;
             StopAllCoroutines();

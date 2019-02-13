@@ -163,7 +163,6 @@ public class PlatformGuard : MonoBehaviour
                 stuckObjectsOffset.Clear();
                 for (int i = 0; i < stuckObjects.Count; i++)
                 {
-                    Debug.Log("offsetting" + i + stuckObjects[i].name);
                     stuckObjectsOffset.Add(stuckObjects[i].transform.position - GetComponentInParent<Transform>().position);
                     // target.transform.position = GetComponentInParent<Transform>().position + offset;
                 }
@@ -278,8 +277,7 @@ public class PlatformGuard : MonoBehaviour
         {
             //set the offset for each obj
             stuckObjects[i].transform.position = GetComponentInParent<Transform>().position + stuckObjectsOffset[i];
-            Debug.Log(stuckObjectsOffset[i]);
-            //Debug.Log(stuckObjects[i].transform.position.y);
+
         }
     }
 
