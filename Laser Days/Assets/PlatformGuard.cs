@@ -76,6 +76,12 @@ public class PlatformGuard : MonoBehaviour
             Debug.Log("ADDING" + col.gameObject.name);
         }
 
+        //always add the player
+        if (string.Equals(collisionTag, "Player"))
+        {
+            stuckObjects.Add(col.gameObject);
+        }
+
         //objects colliding from below make the platform (either single or as group) get stuck
         if ((string.Equals(collisionTag, "Sokoban1x1") || 
              string.Equals(collisionTag, "Sokoban2x2") ||
