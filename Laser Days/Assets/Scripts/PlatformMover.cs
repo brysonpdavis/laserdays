@@ -125,10 +125,10 @@ public class PlatformMover : MonoBehaviour {
         audio.mute = false;
         PlayAudio(SoundBox.Instance.platformEnd);
 
-        if (mainGuard.GetComponent<PlatformGuard>().target)
-        {
-            mainGuard.GetComponent<PlatformGuard>().target.transform.position = carriedObjectPosition += endPos;
-        }
+        //if (mainGuard.GetComponent<PlatformGuard>().target)
+        //{
+        //    mainGuard.GetComponent<PlatformGuard>().target.transform.position = carriedObjectPosition += endPos;
+        //}
 
         platformIsMoving = false;
         Debug.Log("platformStoppedMoving");

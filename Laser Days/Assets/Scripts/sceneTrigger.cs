@@ -145,7 +145,7 @@ public class sceneTrigger : MonoBehaviour
 
         if (collider.GetComponent<FlippableObject>() && !Toolbox.Instance.EqualToHeld(collider.gameObject))
         {
-            Debug.Log("my guy!");
+            Debug.Log("setting flippable! " + collider.gameObject.name);
             SetFlippable(collider);
         }
 

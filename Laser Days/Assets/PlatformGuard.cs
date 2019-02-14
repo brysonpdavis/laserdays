@@ -158,7 +158,7 @@ public class PlatformGuard : MonoBehaviour
 
                 if (!col.GetComponent<InteractableObject>() && !string.Equals(collisionTag, "Player"))
                 {
-                   // target = col.transform.parent.gameObject;
+                   // not using player on trigger stay
                 }
                 else if (col.transform.position.y > this.transform.position.y)
                 {
