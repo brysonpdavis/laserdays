@@ -77,7 +77,7 @@ public class PlatformGuard : MonoBehaviour
         }
 
         //always add the player
-        if (string.Equals(collisionTag, "Player"))
+        if (string.Equals(collisionTag, "Player") && (col.transform.position.y >= this.transform.position.y))
         {
             stuckObjects.Add(col.gameObject);
         }
