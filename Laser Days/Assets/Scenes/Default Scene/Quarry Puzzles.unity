@@ -13318,6 +13318,66 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1310127293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1560909165133650, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1310127294}
+  - component: {fileID: 1310127296}
+  - component: {fileID: 1310127295}
+  m_Layer: 0
+  m_Name: Goop Platform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1310127294
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1310127293}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 31, y: -26.5, z: 7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1617872195}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1310127295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65058712319789338, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1310127293}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.933956, y: 2.9238396, z: 7.6397133}
+  m_Center: {x: -1.5330219, y: -3.5380802, z: -1.1801434}
+--- !u!114 &1310127296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114834483706287366, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1310127293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Goop puddles also activate moving platforms.
+  lore: 0
+  singleActivation: 0
 --- !u!1001 &1311323027
 Prefab:
   m_ObjectHideFlags: 0
@@ -15087,6 +15147,20 @@ Prefab:
         type: 2}
       propertyPath: durationMultiplier
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742725423346244, guid: 453f96bfa0a864bb79df149f18229f59, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575367464234716, guid: 453f96bfa0a864bb79df149f18229f59,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54925400098860198, guid: 453f96bfa0a864bb79df149f18229f59,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 453f96bfa0a864bb79df149f18229f59, type: 2}

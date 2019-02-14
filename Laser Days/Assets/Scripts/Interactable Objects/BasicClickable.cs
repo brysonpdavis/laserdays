@@ -31,7 +31,10 @@ public class BasicClickable : FlippableObject {
         if (slowPickup && !beenPickedUp)
             {StartCoroutine(SlowPickup());}
     }
-
+    private void OnCollisionExit(Collision collision)
+    {
+        transform.position = transform.position + new Vector3(0f, 0.00001f, 0f);
+    }
     public override void Drop()
     {
         StopAllCoroutines();
