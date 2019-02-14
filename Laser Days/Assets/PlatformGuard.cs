@@ -64,8 +64,8 @@ public class PlatformGuard : MonoBehaviour
         //2:objects from above jam the platform if there's already something on it
         if ((string.Equals(collisionTag, "Sokoban1x1") ||
              string.Equals(collisionTag, "FloorBouncer") ||
-             string.Equals(collisionTag, "Morph") || 
-             string.Equals(collisionTag, "Player"))
+             string.Equals(collisionTag, "Morph")
+             )
             //be sure we're colliding from above
             && (col.transform.position.y >= this.transform.position.y)
             //be sure we're NOT moving
