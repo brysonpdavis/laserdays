@@ -472,11 +472,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4279692143730718, guid: 98ff16ca2d5cf4ee1bc4775a7b9e3e8f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4279692143730718, guid: 98ff16ca2d5cf4ee1bc4775a7b9e3e8f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4279692143730718, guid: 98ff16ca2d5cf4ee1bc4775a7b9e3e8f, type: 2}
       propertyPath: m_LocalPosition.z
@@ -504,7 +504,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1065058602692160, guid: 98ff16ca2d5cf4ee1bc4775a7b9e3e8f, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98ff16ca2d5cf4ee1bc4775a7b9e3e8f, type: 2}
@@ -4584,15 +4584,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4856338232594452, guid: 25173227b0eb7413eab766e5a012d131, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 22.5
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4856338232594452, guid: 25173227b0eb7413eab766e5a012d131, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -22.5
+      value: -18.5
       objectReference: {fileID: 0}
     - target: {fileID: 4856338232594452, guid: 25173227b0eb7413eab766e5a012d131, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -23
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 4856338232594452, guid: 25173227b0eb7413eab766e5a012d131, type: 2}
       propertyPath: m_LocalRotation.x
@@ -7774,6 +7774,7 @@ Transform:
   - {fileID: 1550663654}
   - {fileID: 1007802361}
   - {fileID: 1328389672}
+  - {fileID: 1387147674}
   m_Father: {fileID: 1054989587}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10815,27 +10816,33 @@ GameObject:
   - component: {fileID: 1080918714}
   - component: {fileID: 1080918716}
   - component: {fileID: 1080918715}
+  - component: {fileID: 1080918718}
+  - component: {fileID: 1080918717}
   m_Layer: 0
-  m_Name: Right click
+  m_Name: Matching Color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1080918714
-Transform:
+--- !u!224 &1080918714
+RectTransform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1080918713}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 31.5, y: -16.5, z: -23.5}
+  m_LocalPosition: {x: 0, y: 0, z: -23.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1617872195}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 31.5, y: -16.5}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!65 &1080918715
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10861,10 +10868,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: RIGHT CLICK to select an object and it will cross with you. This is useful
-    for crossing objects from a distance.
+  text: 
   lore: 0
   singleActivation: 0
+--- !u!114 &1080918717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1080918713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: A goop puddle's color matches the device it activates.
+--- !u!222 &1080918718
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1080918713}
 --- !u!1001 &1082094095
 Prefab:
   m_ObjectHideFlags: 0
@@ -11618,6 +11663,67 @@ Transform:
   m_PrefabParentObject: {fileID: 4234253924244304, guid: ff160c47402d6406d9c4124b589bea50,
     type: 2}
   m_PrefabInternal: {fileID: 401307632}
+--- !u!1001 &1127829145
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 813153364}
+    m_Modifications:
+    - target: {fileID: 4940144781767500, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940144781767500, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940144781767500, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940144781767500, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940144781767500, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940144781767500, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940144781767500, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940144781767500, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+      propertyPath: m_RootOrder
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 23539211801204848, guid: 82379e403e7fb4b4da530fd1e32c43d7,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e084fe910d712463e9bac2bb2b0b34cb, type: 2}
+    - target: {fileID: 1561054530185224, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 33263795340339480, guid: 82379e403e7fb4b4da530fd1e32c43d7,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300004, guid: c7952456646dc417fb30906ba706b7b5, type: 3}
+    - target: {fileID: 23872079045987472, guid: 82379e403e7fb4b4da530fd1e32c43d7,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e084fe910d712463e9bac2bb2b0b34cb, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 82379e403e7fb4b4da530fd1e32c43d7, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &1129786175 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4520027691836714, guid: e456212d346944b67a0a423e02bf6664,
@@ -11719,6 +11825,8 @@ GameObject:
   - component: {fileID: 1154319633}
   - component: {fileID: 1154319635}
   - component: {fileID: 1154319634}
+  - component: {fileID: 1154319637}
+  - component: {fileID: 1154319636}
   m_Layer: 0
   m_Name: Platforms Moving YOU
   m_TagString: Untagged
@@ -11726,20 +11834,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1154319633
-Transform:
+--- !u!224 &1154319633
+RectTransform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4744589059248086, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154319632}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24, y: -24.5, z: -24}
+  m_LocalPosition: {x: 0, y: 0, z: -24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1617872195}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 24, y: -24.5}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!65 &1154319634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11765,9 +11877,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: People also rode on the platforms.
+  text: 
   lore: 0
   singleActivation: 0
+--- !u!114 &1154319636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1154319632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "RIGHT CLICK to select an object from afar. \nWhen selected, it will cross
+    worlds with you. "
+--- !u!222 &1154319637
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1154319632}
 --- !u!1001 &1156298275
 Prefab:
   m_ObjectHideFlags: 0
@@ -13674,6 +13826,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4054710169636742, guid: 1a53c29ca8979470990e86f22f050ff6,
     type: 2}
   m_PrefabInternal: {fileID: 161137136}
+--- !u!4 &1387147674 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4940144781767500, guid: 82379e403e7fb4b4da530fd1e32c43d7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1127829145}
 --- !u!4 &1391173900 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4069876542499614, guid: a773b176b2ecb44ac93d42fae06ab537,
@@ -15839,6 +15996,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8baabe734751f415b9e548b21a37a325, type: 2}
+    - target: {fileID: 64518765891849562, guid: 3353b2ef7f15846a1898d8280c603e89,
+        type: 2}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3353b2ef7f15846a1898d8280c603e89, type: 2}
   m_IsPrefabParent: 0
@@ -17328,6 +17490,11 @@ Prefab:
     - target: {fileID: 4474341307924010, guid: 3353b2ef7f15846a1898d8280c603e89, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 64518765891849562, guid: 3353b2ef7f15846a1898d8280c603e89,
+        type: 2}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3353b2ef7f15846a1898d8280c603e89, type: 2}
@@ -19946,8 +20113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Use E to carry boxes. Their glowing cores allow you carry them across dimensions
-    while you hold them.
+  text: Use E to carry boxes. Their glowing cores allow you carry them across dimensions.
   lore: 0
   singleActivation: 0
 --- !u!1001 &2016081269
@@ -20419,6 +20585,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a3928e57b3d34c3d91b5586e77f117f, type: 2}
+    - target: {fileID: 1194228275293804, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 740c84f58cf6f4f1499ea81d3c97687b, type: 2}
   m_IsPrefabParent: 0

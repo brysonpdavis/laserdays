@@ -149,7 +149,7 @@ public class PlatformGuard : MonoBehaviour
             //string.Equals(collisionTag, "Sokoban2x2") || 
             string.Equals(collisionTag, "FloorBouncer") ||
             string.Equals(collisionTag, "Player") || 
-            string.Equals(collisionTag, "Clickable") || 
+            //string.Equals(collisionTag, "Clickable") || 
             string.Equals(collisionTag, "NoTouch") || 
             string.Equals(collisionTag, "Morph"))
         {

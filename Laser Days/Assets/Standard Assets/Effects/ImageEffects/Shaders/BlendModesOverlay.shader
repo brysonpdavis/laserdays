@@ -15,7 +15,10 @@ Shader "Hidden/BlendModesOverlay" {
 			
 	sampler2D _Overlay;
 	half4 _Overlay_ST;
-
+    
+    sampler2D _CameraDepthTexture;
+    half4 _CameraDepthTexture_ST;
+    
 	sampler2D _MainTex;
 	half4 _MainTex_ST;
 	
