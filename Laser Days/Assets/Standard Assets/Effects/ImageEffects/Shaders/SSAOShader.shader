@@ -281,12 +281,13 @@ half4 frag( v2f i ) : SV_Target
 	half4 c = tex2D (_MainTex, i.uv[0]);
 	half ao = tex2D (_SSAO, i.uv[1]).r;
 	ao = pow (ao, _Params.w);
-	half4 ee = tex2D(_CameraGBufferTexture1, i.uv[0]);
+	half4 ee = tex2D(_RandomTexture, i.uv[0]);
     half4 eeee = half4(ee.b,ee.b,ee.b,1);
     
     ao = 1 - ao;
     
-    return lerp(c, eeee, ao);
+    return lerp(c, ee, ao);
+    //return ee;
 	
 }
 ENDCG

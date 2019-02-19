@@ -24,19 +24,19 @@ public class SimpleRotator : MonoBehaviour
         //rotX = 0f;
         //rotY = 10f;
         //rotZ = 0f;
-        mat = GetComponent<Renderer>().material;
-        mat.SetFloat("_c",0f);
-        add = Mathf.PI  / 180;
+        //mat = GetComponent<Renderer>().material;
+        //mat.SetFloat("_c",0f);
+        //add = Mathf.PI  / 180;
 
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         transform.Rotate(rotX * Time.deltaTime, rotY * Time.deltaTime, rotZ * Time.deltaTime);
         
-        mat.SetFloat("_c", mat.GetFloat("_c") + add);
+        //mat.SetFloat("_c", mat.GetFloat("_c") + add);
 
     }
 }
