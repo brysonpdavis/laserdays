@@ -1,16 +1,11 @@
-﻿// Upgrade NOTE: commented out 'float4x4 _CameraToWorld', a built-in variable
-// Upgrade NOTE: replaced '_CameraToWorld' with 'unity_CameraToWorld'
-// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// http://www.popekim.com/2012/10/siggraph-2012-screen-space-decals-in.html
-
-Shader "Decal/DecalShader"
+﻿Shader "Crosshatch/Patch"
 {
 	Properties
 	{
-		_MainTex ("Diffuse", 2D) = "white" {}
+		_MainTex ("Patch Map", 2D) = "white" {}
+        _RealColor("Real Color", Color) = (0,0,0,0)
+        _LaserColor("Laser Color", Color) = (0,0,0,0)
+        _TransitionState("Transition State", Range(0,1)) = 0
 	}
 	SubShader
 	{
@@ -47,23 +42,36 @@ Shader "Decal/DecalShader"
 				o.orientation = mul ((float3x3)unity_ObjectToWorld, float3(0,1,0));
 				return o;
 			}
+            
+            
+            
 
 			CBUFFER_START(UnityPerCamera2)
-			// float4x4 _CameraToWorld;
+		
 			CBUFFER_END
 
 			sampler2D _MainTex;
 			sampler2D_float _CameraDepthTexture;
 			sampler2D _NormalsCopy;
+            float4 _RealColor;
+            float4 _LaserColor;
+            float _TransitionState;
+            
+            
+            float getMask(v2f i)
+            {
+                float3 tex = tex2D(_MainTex, i.uv);
+                float mask = lerp(tex.r, tex.g, _TransitionState);
+                return step(0.1, mask); 
+            }
+            
+            float4 getCol(v2f i)
+            {
+                return lerp (_RealColor, _LaserColor, _TransitionState);
+            }
+            
 
-			//void frag(
-			//	v2f i,
-			//	out half4 outDiffuse : COLOR0,			// RT0: diffuse color (rgb), --unused-- (a)
-			//	out half4 outSpecRoughness : COLOR1,	// RT1: spec color (rgb), roughness (a)
-			//	out half4 outNormal : COLOR2,			// RT2: normal (rgb), --unused-- (a)
-			//	out half4 outEmission : COLOR3			// RT3: emission (rgb), --unused-- (a)
-			//)
-			fixed4 frag(v2f i) : SV_Target
+			void frag(v2f i, out half4 outDiffuse : COLOR0, out half4 outExtra : COLOR1)
 			{
 				i.ray = i.ray * (_ProjectionParams.z / i.ray.z);
 				float2 uv = i.screenUV.xy / i.screenUV.w;
@@ -80,11 +88,13 @@ Shader "Decal/DecalShader"
 				i.uv = opos.xz+0.5;
 
 				half3 normal = tex2D(_NormalsCopy, uv).rgb;
+                half alph = getMask(i);
 				fixed3 wnormal = normal.rgb * 2.0 - 1.0;
 				clip (dot(wnormal, i.orientation) - 0.3);
-
-				fixed4 col = tex2D (_MainTex, i.uv);
-				return col;
+			    outDiffuse = half4(getCol(i).rgb, alph);
+                
+                float4 spec = float4(1, 0,0, getMask(i));
+                outExtra = spec;
 			}
 			ENDCG
 		}		

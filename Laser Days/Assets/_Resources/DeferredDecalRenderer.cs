@@ -94,8 +94,10 @@ public class DeferredDecalRenderer : MonoBehaviour
 		var normalsID = Shader.PropertyToID("_NormalsCopy");
 		buf.GetTemporaryRT (normalsID, -1, -1);
 		buf.Blit (BuiltinRenderTextureType.GBuffer2, normalsID);
-		// render diffuse-only decals into diffuse channel
-		buf.SetRenderTarget (BuiltinRenderTextureType.GBuffer0, BuiltinRenderTextureType.CameraTarget);
+        // render diffuse-only decals into diffuse channel
+        RenderTargetIdentifier[] mrta = { BuiltinRenderTextureType.GBuffer0, BuiltinRenderTextureType.GBuffer1};
+        buf.SetRenderTarget(mrta, BuiltinRenderTextureType.CameraTarget);
+
 		foreach (var decal in system.m_DecalsDiffuse)
 		{
 			buf.DrawMesh (m_CubeMesh, decal.transform.localToWorldMatrix, decal.m_Material);

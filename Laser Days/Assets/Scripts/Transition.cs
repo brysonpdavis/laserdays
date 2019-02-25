@@ -32,6 +32,11 @@ public class Transition : MonoBehaviour
             mRenderer = GetComponent<LineRenderer>();
             shared = true;
         }
+
+        if(GetComponent<Decal>()){
+
+
+        }
             
 
         if (!(gameObject.layer == 10 || gameObject.layer == 11 || gameObject.layer == 27) || shared)
@@ -144,7 +149,7 @@ public class Transition : MonoBehaviour
             _propBlock.SetFloat("_TransitionState", value);
             mRenderer.SetPropertyBlock(_propBlock);
             //material.SetFloat("_TransitionState", value);
-            RendererExtensions.UpdateGIMaterials(mRenderer);
+            //RendererExtensions.UpdateGIMaterials(mRenderer);
 
             yield return null;
         }
