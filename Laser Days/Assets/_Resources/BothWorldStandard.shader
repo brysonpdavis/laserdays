@@ -63,7 +63,7 @@
             #define FORWARD_BASE_PASS
             #define SHARED
 
-            #include "CrosshatchLighting.cginc"
+            #include "CrosshatchCommon.cginc"
 
             ENDCG
         }
@@ -95,7 +95,7 @@
             
             #define SHARED
 
-            #include "CrosshatchLighting.cginc"
+            #include "CrosshatchCommon.cginc"
 
             ENDCG
         }
@@ -130,7 +130,7 @@
             #define DEFERRED_PASS
             #define SHARED
 
-            #include "CrosshatchLighting.cginc"
+            #include "CrosshatchCommon.cginc"
 
             ENDCG
         }

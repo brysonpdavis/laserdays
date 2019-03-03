@@ -119,6 +119,7 @@ public class flipScript : MonoBehaviour {
         GetComponent<MFPP.Player>().collisionLayers = null;
         bool selectedObjects = false;
         if (things.Count > 0) { selectedObjects = true; }
+
         flipburst.Boom();
 
         space = !space;
@@ -130,6 +131,8 @@ public class flipScript : MonoBehaviour {
            // Camera.main.GetComponent<CameraTransition>().Flip(true);
             GetComponent<SkyboxTransition>().Flip(true);
             transitionCollider.FlipTransitions(true);
+
+
 
         } 
         else { player.layer = 15; //set player to laser world

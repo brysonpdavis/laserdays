@@ -11,13 +11,19 @@ public class SkyboxTransition : MonoBehaviour {
     float speed;
     public float duration;
 
+
+
     public bool transitionFog;
     public float fogMultiplier = 1f;
     public float ambientMultiplier = 1f;
+
     public Color laserFog;
     public Color laserAmbient;
     public Color realFog;
     public Color realAbmient;
+
+    public Material realGlobalParticle;
+    public Material laserGlobalParticle;
 
 
     // Use this for initialization
@@ -31,12 +37,18 @@ public class SkyboxTransition : MonoBehaviour {
             SetStart(0); 
             RenderSettings.fogColor = realFog*fogMultiplier;
             RenderSettings.ambientLight = realAbmient*ambientMultiplier;
+
+            realGlobalParticle.SetFloat("_TransitionState", 0);
+            laserGlobalParticle.SetFloat("_TransitionState", 0);
         }
         else 
         { 
             SetStart(1); 
             RenderSettings.fogColor = laserFog*fogMultiplier;
             RenderSettings.ambientLight = laserAmbient*ambientMultiplier;
+
+            realGlobalParticle.SetFloat("_TransitionState", 1);
+            laserGlobalParticle.SetFloat("_TransitionState", 1);
         }
 
     }
@@ -91,6 +103,7 @@ public class SkyboxTransition : MonoBehaviour {
         {
             endFog = realFog*fogMultiplier;
             endAmbient = realAbmient*ambientMultiplier;
+
         }
         else
         {
@@ -105,7 +118,11 @@ public class SkyboxTransition : MonoBehaviour {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
             float value = Mathf.Lerp(start, endpoint, ratio);
+
             material.SetFloat("_TransitionState", value);
+            realGlobalParticle.SetFloat("_TransitionState", value);
+            laserGlobalParticle.SetFloat("_TransitionState", value);
+
             if (transitionFog)
             {
                 Color lerpFog = Color.Lerp(startFog, endFog, ratio);

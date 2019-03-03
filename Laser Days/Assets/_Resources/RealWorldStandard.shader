@@ -64,7 +64,7 @@
             #define USECLIP
             #define REAL
 
-            #include "CrosshatchLighting.cginc"
+            #include "CrosshatchCommon.cginc"
 
             ENDCG
         }
@@ -96,7 +96,7 @@
             #define USECLIP
             #define REAL
 
-            #include "CrosshatchLighting.cginc"
+            #include "CrosshatchCommon.cginc"
 
             ENDCG
         }
@@ -132,7 +132,7 @@
             #define USECLIP
             #define REAL
 
-            #include "CrosshatchLighting.cginc"
+            #include "CrosshatchCommon.cginc"
 
             ENDCG
         }

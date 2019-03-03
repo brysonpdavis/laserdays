@@ -63,7 +63,7 @@
             #define FORWARD_BASE_PASS
             #define USECLIP
 
-            #include "CrosshatchLighting.cginc"
+            #include "CrosshatchCommon.cginc"
 
             ENDCG
         }
@@ -94,7 +94,7 @@
             #pragma fragment MyFragmentProgram
             
             #define USECLIP
-            #include "CrosshatchLighting.cginc"
+            #include "CrosshatchCommon.cginc"
 
             ENDCG
         }
@@ -130,7 +130,7 @@
             #define USECLIP
            
 
-            #include "CrosshatchLighting.cginc"
+            #include "CrosshatchCommon.cginc"
 
             ENDCG
         }

@@ -1,4 +1,4 @@
-﻿Shader "Crosshatch/Patch"
+﻿Shader "Crosshatch/DecalPatch"
 {
 	Properties
 	{
@@ -13,7 +13,7 @@
 		{
 			Fog { Mode Off } // no fog in g-buffers pass
 			ZWrite Off
-			Blend SrcAlpha OneMinusSrcAlpha
+			Blend One One
 
 			CGPROGRAM
 			#pragma target 3.0
@@ -63,6 +63,7 @@
                 float3 tex = tex2D(_MainTex, i.uv);
                 float mask = lerp(tex.r, tex.g, _TransitionState);
                 return step(0.1, mask); 
+                
             }
             
             float4 getCol(v2f i)
@@ -82,16 +83,17 @@
 				float3 wpos = mul (unity_CameraToWorld, vpos).xyz;
 				float3 opos = mul (unity_WorldToObject, float4(wpos,1)).xyz;
 
-				clip (float3(0.5,0.5,0.5) - abs(opos.xyz));
+				clip (0.5 - abs(opos.xyz));
 
 
-				i.uv = opos.xz+0.5;
+				i.uv = opos.xz-0.5;
 
 				half3 normal = tex2D(_NormalsCopy, uv).rgb;
                 half alph = getMask(i);
 				fixed3 wnormal = normal.rgb * 2.0 - 1.0;
-				clip (dot(wnormal, i.orientation) - 0.3);
-			    outDiffuse = half4(getCol(i).rgb, alph);
+				//clip (dot(wnormal, i.orientation) - 0.3);
+			    
+                outDiffuse = half4(getCol(i).rgb, getMask(i));
                 
                 float4 spec = float4(1, 0,0, getMask(i));
                 outExtra = spec;

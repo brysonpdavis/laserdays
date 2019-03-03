@@ -17,24 +17,19 @@ public class DeferredDecalSystem
 	}
 
 	internal HashSet<Decal> m_DecalsDiffuse = new HashSet<Decal>();
-	internal HashSet<Decal> m_DecalsNormals = new HashSet<Decal>();
-	internal HashSet<Decal> m_DecalsBoth = new HashSet<Decal>();
+
 
 	public void AddDecal (Decal d)
 	{
 		RemoveDecal (d);
 		if (d.m_Kind == Decal.Kind.DiffuseOnly)
 			m_DecalsDiffuse.Add (d);
-		if (d.m_Kind == Decal.Kind.NormalsOnly)
-			m_DecalsNormals.Add (d);
-		if (d.m_Kind == Decal.Kind.Both)
-			m_DecalsBoth.Add (d);
+	
 	}
 	public void RemoveDecal (Decal d)
 	{
 		m_DecalsDiffuse.Remove (d);
-		m_DecalsNormals.Remove (d);
-		m_DecalsBoth.Remove (d);
+
 	}
 }
 
@@ -102,19 +97,7 @@ public class DeferredDecalRenderer : MonoBehaviour
 		{
 			buf.DrawMesh (m_CubeMesh, decal.transform.localToWorldMatrix, decal.m_Material);
 		}
-		// render normals-only decals into normals channel
-		buf.SetRenderTarget (BuiltinRenderTextureType.GBuffer2, BuiltinRenderTextureType.CameraTarget);
-		foreach (var decal in system.m_DecalsNormals)
-		{
-			buf.DrawMesh (m_CubeMesh, decal.transform.localToWorldMatrix, decal.m_Material);
-		}
-		// render diffuse+normals decals into two MRTs
-		RenderTargetIdentifier[] mrt = {BuiltinRenderTextureType.GBuffer0, BuiltinRenderTextureType.GBuffer2};
-		buf.SetRenderTarget (mrt, BuiltinRenderTextureType.CameraTarget);
-		foreach (var decal in system.m_DecalsBoth)
-		{
-			buf.DrawMesh (m_CubeMesh, decal.transform.localToWorldMatrix, decal.m_Material);
-		}
+	
 		// release temporary normals RT
 		buf.ReleaseTemporaryRT (normalsID);
 	}

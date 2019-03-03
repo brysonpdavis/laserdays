@@ -20,7 +20,8 @@ public class PuzzleCompletionCrystal : MonoBehaviour {
         if (mRenderer)
             material = mRenderer.material;
 
-        mySpawners = transform.parent.transform.parent.GetComponentsInChildren<Spawner>();
+        mySpawners = transform.parent.GetComponentsInChildren<Spawner>();
+
         myBursts = GetComponentsInChildren<CompletionBurst>();
 
 	}
@@ -84,7 +85,7 @@ public class PuzzleCompletionCrystal : MonoBehaviour {
             yield return null;
         }
 
-        mRenderer.enabled = false;
+        //mRenderer.enabled = false;
     }
 
 }
