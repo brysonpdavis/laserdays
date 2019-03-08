@@ -49,7 +49,7 @@ abstract public class FlippableObject : InteractableObject
         realTransform = sceneContainer.Find("Real");
         laserTransform = sceneContainer.Find("Laser");
 
-        if (!slowPickup)
+        if (!slowPickup && !(objectType==ObjectType.Wall))
             rigidbody.isKinematic = false;
 
         //if(GetComponent<Rigidbody>()){
