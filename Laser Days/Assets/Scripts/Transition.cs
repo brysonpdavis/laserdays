@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.ShaderGraph;
 
 [DisallowMultipleComponent]
 
@@ -142,15 +143,23 @@ public class Transition : MonoBehaviour
       
         while (ratio < 1f)
         {
-            elapsedTime += Time.deltaTime;
+
             ratio = elapsedTime / duration;
+
+
+
             float value = Mathf.Lerp(startpoint, endpoint, ratio);
+
+
+
 
             _propBlock.SetFloat("_TransitionState", value);
             mRenderer.SetPropertyBlock(_propBlock);
             //material.SetFloat("_TransitionState", value);
             //RendererExtensions.UpdateGIMaterials(mRenderer);
 
+
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
     }

@@ -107,7 +107,14 @@ public class PlatformMover : MonoBehaviour {
 
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / (duration * durationMultiplier);
-            transform.position = Vector3.Lerp(startPos, endPos, ratio);
+
+            float a = ratio * ratio;
+            float b = 1 - ratio;
+            b = b * b;
+            b = 1 - b;
+            float rr = (1 - ratio) * a + ratio * b;
+
+            transform.position = Vector3.Lerp(startPos, endPos, rr);
 
 
             yield return null;
