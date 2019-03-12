@@ -13,7 +13,7 @@ public class Toolbox : Singleton<Toolbox>
 
     GameObject realWorldParentObject;
     GameObject laserWorldParentObject;
-    GameObject player;
+    public GameObject player;
     RaycastManager raycastManager;
     MFPP.Modules.PickUpModule pickUp;
     flipScript flipScript;
@@ -239,6 +239,35 @@ public class Toolbox : Singleton<Toolbox>
             ClearNarration();
 
         }
+
+        Debug.Log("adding player info!");
+        Toolbox.Instance.player = player;
+        Toolbox.Instance.pickUp = pickUp;
+        Toolbox.Instance.raycastManager = raycastManager;
+        Toolbox.Instance.flipScript = flipScript;
+            UpdateTransforms();
+        Toolbox.Instance.iconContainer = iconContainer;
+        Toolbox.Instance.pauseMenu = pauseMenu;
+        if (!Toolbox.Instance.narrationContainer)
+        {
+            Toolbox.Instance.narrationContainer = GameObject.Find("TextNarration");
+        }
+
+        if (!Toolbox.Instance.narrationText)
+            Toolbox.Instance.narrationText = Toolbox.Instance.narrationContainer.GetComponentInChildren<Text>();
+
+
+        Toolbox.Instance.SoundEffectsAudio = GameObject.Find("SoundEffectsAudio").GetComponent<AudioSource>();
+
+
+        Toolbox.Instance.soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();
+        Toolbox.Instance.soundEffectsSlider.onValueChanged.AddListener(delegate { VolumeChangeCheck(); });
+
+        if (!Toolbox.Instance.narrationBackground)
+        {
+            Toolbox.Instance.narrationBackground = GameObject.Find("TextNarration").GetComponentInChildren<Image>().gameObject;
+        }
+
             
     }
 
@@ -296,6 +325,7 @@ public class Toolbox : Singleton<Toolbox>
     {
         if (Toolbox.Instance)
         {
+            //Toolbox.player = player;
             //setting correct values if toolbox has already instantiated itself
             Toolbox.Instance.globalFlipSpeed = globalFlipSpeed;
             Toolbox.Instance.globalRealLaserFlipSpeed = globalRealLaserFlipSpeed;

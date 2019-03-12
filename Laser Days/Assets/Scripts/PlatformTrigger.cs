@@ -32,7 +32,8 @@ public class PlatformTrigger : MonoBehaviour {
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        SoundBox box = Toolbox.Instance.GetPlayer().GetComponent<SoundBox>();
+        //SoundBox box = SoundBox.Instance;//Toolbox.Instance.GetPlayer().GetComponent<SoundBox>();
+        Debug.Log(SoundBox.Instance.GetInstanceID());
         platformOn = SoundBox.Instance.platformOn;
         platformOff = SoundBox.Instance.platformOff;
         platformTriggered = SoundBox.Instance.platformTriggered;

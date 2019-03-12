@@ -56,8 +56,8 @@ public class RaycastManager : MonoBehaviour {
         mainCam = Camera.main;
         pc = GetComponent<PlayerCharge>();
         audioSource = GetComponent<AudioSource>();
-        selectClip = GetComponent<SoundBox>().selection;
-        deselectClip = GetComponent<SoundBox>().deselect;
+        selectClip = SoundBox.Instance.selection;
+        deselectClip = SoundBox.Instance.deselect;
         pickUp = GetComponent<MFPP.Modules.PickUpModule>();
         iconContainer = Toolbox.Instance.GetIconContainer();
         playerCam = GetComponentInChildren<Camera>().transform;

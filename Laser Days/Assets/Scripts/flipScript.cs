@@ -54,7 +54,7 @@ public class flipScript : MonoBehaviour {
 		pc = GetComponent<PlayerCharge>();
         audioSource = GetComponent<AudioSource>();
 		rm = GetComponent<RaycastManager>();
-        SoundBox box = GetComponent<SoundBox>();
+        SoundBox box = SoundBox.Instance;
         flipSounds = box.currentFlipPalette;
         flipFailClip = box.flipFail;
         soundTrack = GetComponentInChildren<SoundTrackManager>();

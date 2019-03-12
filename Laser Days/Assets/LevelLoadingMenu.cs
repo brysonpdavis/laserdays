@@ -12,6 +12,7 @@ public class LevelLoadingMenu : MonoBehaviour {
     public GameObject buttonContainer;
     public GameObject sensitivitySlider;
     public GameObject saveButton;
+    public string reset;
     [SerializeField] public static GameObject easyButtons;
     [SerializeField] public static GameObject mediumButtons;
     [SerializeField] public static GameObject hardButtons;
@@ -84,6 +85,12 @@ public class LevelLoadingMenu : MonoBehaviour {
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void Home()
+    {
+        Time.timeScale = 1f;
+        StartCoroutine(GoHome());
     }
 
 
@@ -171,6 +178,20 @@ public class LevelLoadingMenu : MonoBehaviour {
         Resume();
     }
 
+    IEnumerator GoHome()
+    {
+        StartCoroutine(FadeOut());
+        yield return new WaitForSeconds(fadeDuration);
+
+        AsyncOperation _async = new AsyncOperation();
+        _async = SceneManager.LoadSceneAsync("Home Menu", LoadSceneMode.Single);
+        _async.allowSceneActivation = true;
+        while (!_async.isDone)
+        {
+            yield return null;
+        }
+        Toolbox.Instance.UpdateToolbox();
+    }
 
     IEnumerator loadNextScene(string name, string spawnPoint, GameObject myButton)
     {
