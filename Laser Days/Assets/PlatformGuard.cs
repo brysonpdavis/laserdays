@@ -258,7 +258,7 @@ public class PlatformGuard : MonoBehaviour
         {
             stuckObjects.Remove(col.gameObject);
 
-            if (stuckObjects.Count <= 1)
+            if (stuckObjects.Count <= 1 && platformController.platformTriggers[0].moving)
                 ReturnPlatformAfterJam();
         }
 

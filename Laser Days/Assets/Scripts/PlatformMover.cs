@@ -64,9 +64,12 @@ public class PlatformMover : MonoBehaviour {
         platformIsMoving = true;
         Debug.Log("Platformismoving");
 
-        yield return new WaitForSeconds(.5f);
-        PlayAudio(SoundBox.Instance.platformStart);
-        yield return new WaitForSeconds(SoundBox.Instance.platformStart.length);
+        if (startPos.Equals(start) || startPos.Equals(end.position))
+        {
+            yield return new WaitForSeconds(.5f);
+            PlayAudio(SoundBox.Instance.platformStart);
+            yield return new WaitForSeconds(SoundBox.Instance.platformStart.length);
+        }
 
 
 
