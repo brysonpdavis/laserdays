@@ -25,7 +25,7 @@ public class Booster : MonoBehaviour {
     private void Start()
     {
         player = Toolbox.Instance.GetPlayer();
-        box = player.GetComponent<SoundBox>();
+        box = SoundBox.Instance;
         pickUp = player.GetComponent<MFPP.Modules.PickUpModule>();
     }
 

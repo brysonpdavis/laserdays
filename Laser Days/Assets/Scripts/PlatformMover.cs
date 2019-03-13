@@ -166,10 +166,11 @@ public class PlatformMover : MonoBehaviour {
 
     public void MovePlatform(Vector3 startPos, Vector3 endPos, float duration)
     {
-        if (!(this.transform.position == startPos) && !(this.transform.position == endPos))
-        {
+        //REASON FOR COMMENTING: was making platforms not stop coroutines going in other directions
+        //if (!(this.transform.position == startPos) && !(this.transform.position == endPos)) 
+        //{
             StopAllCoroutines();
-        }
+        //}
 
         float actualDuration = (duration * (Vector3.Distance(this.transform.position, endPos)/Vector3.Distance(startPos, endPos)));
 
