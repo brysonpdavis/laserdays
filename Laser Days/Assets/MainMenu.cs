@@ -41,6 +41,11 @@ public class MainMenu : MonoBehaviour {
         StartCoroutine(Restart());
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     IEnumerator Restart()
     {
         //StartCoroutine(FadeOut());

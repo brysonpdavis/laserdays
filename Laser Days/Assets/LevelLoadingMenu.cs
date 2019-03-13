@@ -90,6 +90,7 @@ public class LevelLoadingMenu : MonoBehaviour {
     public void Home()
     {
         Time.timeScale = 1f;
+        TurnOffMenuItems();
         StartCoroutine(GoHome());
     }
 
@@ -146,6 +147,15 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     }
 
+    private void TurnOffMenuItems()
+    {
+        buttonContainer.SetActive(false);
+        soundEffectSlider.SetActive(false);
+        soundtrackSlider.SetActive(false);
+        sensitivitySlider.SetActive(false);
+        saveButton.SetActive(false);
+    }
+
     IEnumerator FadeOut()
     {
         float elapsedTime = 0;
@@ -199,12 +209,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         sceneIsLoading = true;
         Cursor.visible = false;
 
-
-        buttonContainer.SetActive(false);
-        soundEffectSlider.SetActive(false);
-        soundtrackSlider.SetActive(false);
-        sensitivitySlider.SetActive(false);
-        saveButton.SetActive(false);
+        TurnOffMenuItems();
 
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(fadeDuration);
