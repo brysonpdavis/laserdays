@@ -18,6 +18,7 @@ public class Booster : MonoBehaviour {
     public GameObject ring;
     private GameObject currentRing;
 
+    private ParticleSystem partSystem;
 
 
 
@@ -27,6 +28,15 @@ public class Booster : MonoBehaviour {
         player = Toolbox.Instance.GetPlayer();
         box = SoundBox.Instance;
         pickUp = player.GetComponent<MFPP.Modules.PickUpModule>();
+
+        
+        partSystem = GetComponent<ParticleSystem>();
+
+        if (partSystem)
+        {
+            partSystem.emission.SetBursts(new ParticleSystem.Burst[3]);        
+        }
+
     }
 
 
@@ -75,13 +85,35 @@ public class Booster : MonoBehaviour {
         if (gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer)
         {
 
-
-            for (int i = 0; i < count; i++)
+            if (!partSystem)
             {
-                currentRing = Instantiate(ring);
-                currentRing.transform.position = transform.parent.transform.position;
-                currentRing.GetComponent<BoostPulse>().Pulse(i * 0.1f);
+                for (int i = 0; i < count; i++)
+                {
+                    currentRing = Instantiate(ring);
+                    currentRing.transform.position = transform.parent.transform.position;
+                    currentRing.GetComponent<BoostPulse>().Pulse(i * 0.1f);
+                }
             }
+
+            if(partSystem)
+            {
+                ParticleSystem.Burst burst = new ParticleSystem.Burst(Time.fixedDeltaTime, 25, 25, 1, 0);
+                ParticleSystem.Burst burst2 = new ParticleSystem.Burst(partSystem.time + Time.fixedDeltaTime, 0, 0, 1, 0);
+
+
+
+                partSystem.emission.SetBurst(0, burst);
+                //partSystem.emission.SetBurst(0, burst2);
+
+                //partSystem.emission.SetBursts(0, burst);
+
+                partSystem.Play();
+
+            }
+
+
+
+
         }
 
 
