@@ -324,8 +324,10 @@ Shader "Hidden/EdgeDetect" {
         f = 1;
         }
 			
-        //return (centerExtra; 
-        float pm = lerp(0,1,(edge*f));   
+        //return (centerExtra;
+        _PauseMenu = saturate(_PauseMenu);
+        float4 blu = float4(0,0.64,0.85,1); 
+        float4 pm = lerp(0,1,(edge*f));   
 		float4 sc = lerp(original, _BgColor, (edge*f*_BgColor.a));
         return lerp(sc, pm, _PauseMenu);
         //return lerp(original, _BgColor, (edge));
