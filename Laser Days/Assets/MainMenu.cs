@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour {
 
     public float fadeDuration = .5f;
     public string resetScene;
+    public Image background;
+    public GameObject container;
 
 
 	// Use this for initialization
@@ -21,20 +23,20 @@ public class MainMenu : MonoBehaviour {
 		
 	}
 
-    //IEnumerator FadeOut()
-    //{
-    //    float elapsedTime = 0;
-    //    float ratio = elapsedTime / fadeDuration;
-    //    Color fader = background.color;
-    //    while (ratio < 1f)
-    //    {
-    //        elapsedTime += Time.deltaTime;
-    //        ratio = elapsedTime / fadeDuration;
-    //        Color newColor = Color.Lerp(fader, Color.black, ratio);
-    //        background.color = newColor;
-    //        yield return null;
-    //    }
-    //}
+    IEnumerator FadeOut()
+    {
+        float elapsedTime = 0;
+        float ratio = elapsedTime / fadeDuration;
+        Color fader = background.color;
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / fadeDuration;
+            Color newColor = Color.Lerp(fader, Color.black, ratio);
+            background.color = newColor;
+            yield return null;
+        }
+    }
 
     public void RestartScene()
     {
@@ -48,8 +50,10 @@ public class MainMenu : MonoBehaviour {
 
     IEnumerator Restart()
     {
-        //StartCoroutine(FadeOut());
-        //yield return new WaitForSeconds(fadeDuration);
+        container.SetActive(false);
+
+        StartCoroutine(FadeOut());
+        yield return new WaitForSeconds(fadeDuration);
 
         AsyncOperation _async = new AsyncOperation();
         _async = SceneManager.LoadSceneAsync(resetScene, LoadSceneMode.Single);
