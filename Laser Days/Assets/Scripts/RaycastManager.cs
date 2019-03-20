@@ -148,7 +148,7 @@ public class RaycastManager : MonoBehaviour {
                 // SELECT ITEM: 
                 // if item boosts charge, add value to boost on right click
                 //only lets you select items that are flippable
-                if(Input.GetMouseButtonDown(1) && hit.collider.GetComponent<InteractableObject>().Flippable)
+                if(Input.GetButtonDown("Select") && hit.collider.GetComponent<InteractableObject>().Flippable)
                 {
 
                     if (ip.boost)

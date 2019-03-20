@@ -64,7 +64,7 @@ public class flipScript : MonoBehaviour {
 	}
 
 	void Update () {
-        if (Input.GetMouseButtonDown(0) && Time.timeScale > 0.0f)
+        if (Input.GetButtonDown("Switch") && Time.timeScale > 0.0f)
         {
             GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
 
