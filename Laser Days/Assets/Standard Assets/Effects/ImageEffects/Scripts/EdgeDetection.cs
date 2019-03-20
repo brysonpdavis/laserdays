@@ -24,6 +24,9 @@ namespace UnityStandardAssets.ImageEffects
         public float lumThreshold = 0.2f;
         public float edgeExp = 1.0f;
         public float sampleDist = 1.0f;
+
+        public float PauseMenu = 0.0f;
+
         public float edgesOnly = 0.0f;
         public Color edgesOnlyBgColor = Color.white;
 
@@ -82,6 +85,7 @@ namespace UnityStandardAssets.ImageEffects
             edgeDetectMaterial.SetVector ("_BgColor", edgesOnlyBgColor);
             edgeDetectMaterial.SetFloat ("_Exponent", edgeExp);
             edgeDetectMaterial.SetFloat ("_Threshold", lumThreshold);
+            edgeDetectMaterial.SetFloat("_PauseMenu", PauseMenu);
 
             Graphics.Blit (source, destination, edgeDetectMaterial, (int) mode);
         }

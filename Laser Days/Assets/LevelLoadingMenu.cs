@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
+using UnityEditor.ShaderGraph;
 
 public class LevelLoadingMenu : MonoBehaviour {
 
@@ -20,6 +22,12 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     public GameObject soundtrackSlider;
     public GameObject soundEffectSlider;
+
+
+    private EdgeDetection edge;
+
+    [SerializeField] public static Color completedColor = new Color32(40, 195, 120, 255);
+    [SerializeField] public static Color visitedColor = new Color32(241, 149, 40, 255);
 
 
     bool transitionIsDone = true;
@@ -50,6 +58,9 @@ public class LevelLoadingMenu : MonoBehaviour {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Default_Main_Player January"));
         GetComponent<CanvasScaler>().enabled = true;
         //Resume();
+
+        edge = Camera.main.GetComponent<EdgeDetection>();
+
     }
 
     // Update is called once per frame
@@ -57,7 +68,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetKeyDown(KeyCode.Escape))) && !sceneIsLoading)
         {
             if (gameIsPaused && transitionIsDone)
-                Resume();
+                Resume(true);
             else
                 Pause();
         }
@@ -75,15 +86,28 @@ public class LevelLoadingMenu : MonoBehaviour {
         soundtrackSlider.SetActive(true);
         sensitivitySlider.SetActive(true);
         saveButton.SetActive(true);
+        edge.PauseMenu = 1f;
+        StopAllCoroutines();
+        StartCoroutine(PauseMenuIn());
+
         Time.timeScale = 0f;
     }
 
-    public void Resume()
+    public void Resume(bool exitPause)
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
+        edge.PauseMenu = 0f;
+       
+
+        if (exitPause) 
+        {
+            StopAllCoroutines();
+            StartCoroutine(PauseMenuOut());
+        }
+
         Time.timeScale = 1f;
     }
 
@@ -109,10 +133,10 @@ public class LevelLoadingMenu : MonoBehaviour {
         //set new scene button to orange
         bool newSceneCompleted = false;
         ColorBlock cb = myButton.GetComponent<Button>().colors;
-        if (cb.normalColor == Color.green)
+        if (cb.normalColor == completedColor)
             newSceneCompleted = true;
 
-        cb.normalColor = Color.yellow;
+        cb.normalColor = visitedColor;
         myButton.GetComponent<Button>().colors = cb;
 
         Color newBackground = lastSceneButton.GetComponent<Image>().color;
@@ -133,7 +157,7 @@ public class LevelLoadingMenu : MonoBehaviour {
     {
         //reset previous button
         ColorBlock cb = lastSceneButton.GetComponent<Button>().colors;
-        if (!(cb.normalColor == Color.green))
+        if (!(cb.normalColor == completedColor))
         {
             cb.normalColor = Color.white;
 
@@ -165,7 +189,17 @@ public class LevelLoadingMenu : MonoBehaviour {
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / fadeDuration;
+
+            var r = ratio * ratio;
+            var b = 1f - ratio;
+            b *= b;
+            b = 1f - b;
+            var c = Mathf.Lerp(r, b, ratio);
+
             Color newColor = Color.Lerp(fader, Color.black, ratio);
+
+           //edge.PauseMenu = ratio;
+
             background.color = newColor;
             yield return null;
         }
@@ -176,17 +210,80 @@ public class LevelLoadingMenu : MonoBehaviour {
         float elapsedTime = 0;
         float ratio = elapsedTime / fadeDuration;
         Color fader = background.color;
+       
+        //fade from black to balck with white outlines
         while (ratio < 1f)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             ratio = elapsedTime / fadeDuration;
+
+            ratio *= 2;
+            ratio = Mathf.Clamp(ratio, 0f, 1f);
+
             Color newColor = Color.Lerp(Color.black, Color.clear, ratio);
+
+     
+
             background.color = newColor;
             yield return null;
         }
+
+        elapsedTime = 0f;
+        ratio = elapsedTime / fadeDuration;
+
+        //fade from white outlines to scene
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            ratio = elapsedTime / fadeDuration;
+
+          
+            edge.PauseMenu = 1f - ratio;
+
+            yield return null;
+        }
         transitionIsDone = true;
-        Resume();
+
+        Resume(false);
     }
+
+    IEnumerator PauseMenuIn()
+    {
+        float elapsedTime = 0;
+        float ratio = elapsedTime / fadeDuration;
+   
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            ratio = elapsedTime / fadeDuration;
+
+            edge.PauseMenu = ratio;
+
+            yield return null;
+        }
+
+        
+    }
+
+    IEnumerator PauseMenuOut()
+    {
+        float elapsedTime = 0;
+        float ratio = elapsedTime / fadeDuration;
+
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.unscaledDeltaTime * 2;
+            ratio = elapsedTime / fadeDuration;
+
+            edge.PauseMenu = 1f - ratio;
+
+            yield return null;
+        }
+       
+       
+    }
+
+
 
     IEnumerator GoHome()
     {

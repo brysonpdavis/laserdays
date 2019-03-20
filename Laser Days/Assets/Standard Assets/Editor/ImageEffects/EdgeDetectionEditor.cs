@@ -2,6 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
+
 namespace UnityStandardAssets.ImageEffects
 {
     [CustomEditor (typeof(EdgeDetection))]
@@ -20,6 +21,7 @@ namespace UnityStandardAssets.ImageEffects
 
         SerializedProperty edgeExp;
         SerializedProperty sampleDist;
+        SerializedProperty PauseMenu;
 
 
         void OnEnable () {
@@ -37,6 +39,7 @@ namespace UnityStandardAssets.ImageEffects
 
             edgeExp = serObj.FindProperty("edgeExp");
             sampleDist = serObj.FindProperty("sampleDist");
+            PauseMenu = serObj.FindProperty("PauseMenu");
         }
 
 
@@ -59,6 +62,8 @@ namespace UnityStandardAssets.ImageEffects
             }
 
             EditorGUILayout.PropertyField (sampleDist, new GUIContent(" Sample Distance"));
+
+            PauseMenu.floatValue = EditorGUILayout.Slider(" Pause Menu", PauseMenu.floatValue, 0.0f, 1.0f);
 
             EditorGUILayout.Separator ();
 

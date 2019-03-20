@@ -12,6 +12,9 @@ public class Spawner : MonoBehaviour {
     public GameObject myButton;
     public bool completed = false;
     // Use this for initialization
+
+
+
     void Awake()
     {
         scene = gameObject.scene;
@@ -67,7 +70,7 @@ public class Spawner : MonoBehaviour {
     public void OnPuzzleCompletion()
     {
         ColorBlock cb = myButton.GetComponent<Button>().colors;
-        cb.normalColor = Color.green;
+        cb.normalColor = LevelLoadingMenu.completedColor;
         myButton.GetComponent<Button>().colors = cb;
 
 

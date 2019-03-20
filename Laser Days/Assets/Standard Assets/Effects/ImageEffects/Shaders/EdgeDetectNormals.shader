@@ -38,6 +38,8 @@ Shader "Hidden/EdgeDetect" {
 	uniform float _Exponent;
 
 	uniform float _Threshold;
+    
+    uniform float _PauseMenu;
 
 	struct v2flum {
 		float4 pos : SV_POSITION;
@@ -322,8 +324,10 @@ Shader "Hidden/EdgeDetect" {
         f = 1;
         }
 			
-        //return (centerExtra;    
-		return lerp(original, _BgColor, (edge*f*_BgColor.a));
+        //return (centerExtra; 
+        float pm = lerp(0,1,(edge*f));   
+		float4 sc = lerp(original, _BgColor, (edge*f*_BgColor.a));
+        return lerp(sc, pm, _PauseMenu);
         //return lerp(original, _BgColor, (edge));
 	}
 	

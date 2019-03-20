@@ -53,7 +53,7 @@ public class OpeningTitleScreen : MonoBehaviour {
         if (pause)
         {
             Debug.Log("turning off menu");
-            GetComponentInParent<LevelLoadingMenu>().Resume();
+            GetComponentInParent<LevelLoadingMenu>().Resume(true);
         }
         yield return new WaitForSeconds(1f);
 
