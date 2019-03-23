@@ -28,9 +28,8 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     private EdgeDetection edge;
 
-    [SerializeField] public static Color completedColor = new Color32(40, 195, 120, 255);
-    [SerializeField] public static Color visitedColor = new Color32(241, 149, 40, 255);
-
+    [SerializeField] public static Color completedColor = new Color32(41, 188, 34, 255);
+    [SerializeField] public static Color visitedColor = new Color32(160, 140, 65, 255);
 
     bool transitionIsDone = true;
     public Image background;
