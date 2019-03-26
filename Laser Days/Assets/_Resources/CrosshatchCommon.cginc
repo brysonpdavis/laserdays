@@ -11,6 +11,8 @@ float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST;
 
 float _Smoothness;
 
+int _LineB, _LineC;
+
 float _TransitionState;
 
 float _AlphaCutoff;
@@ -362,7 +364,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         #endif
         output.gBuffer0.rgb = GetAlbedo(i);
         output.gBuffer0.a = GetOcclusion(i);
-        output.gBuffer1.rgb = float3(GetAccentMask(i).r, 1.0, tex2D(_MainTex, i.uv.xy).b);
+        output.gBuffer1.rgb = float3(GetAccentMask(i).r, _LineB, _LineC);
         output.gBuffer1.a = GetSmoothness(i);
         output.gBuffer2 = float4(i.normal * 0.5 + 0.5, 1);
         output.gBuffer3 = color;

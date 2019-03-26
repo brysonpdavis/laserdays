@@ -14,6 +14,9 @@
         _LaserAccent("Laser Accent Color", Color) = (0,0,0,0)
         
         _Smoothness("Smoothness", Range(0,1)) = 0
+        _LineB ("Extra Outline B", int) = 0
+        _LineC ("Extra Outline C", int) = 0
+        
         
         [PerRendererData]_TransitionState("Transition State", Range(0,1)) = 0
         

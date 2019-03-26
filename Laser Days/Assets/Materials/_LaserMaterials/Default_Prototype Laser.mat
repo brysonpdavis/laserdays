@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Default_Prototype Laser
-  m_Shader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6faca4b50f4df48889f040aada6b8d65, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -18,6 +18,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AccentMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Albedo:
         m_Texture: {fileID: 2800000, guid: 9eb0c797d10a44d419d36c8f396f77ad, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -71,7 +75,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9470468fda72f4773a90a0306decbf0f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 862e8f8026a6a40d3a8f997637514f94, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaterialMap:
@@ -119,6 +123,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _AlphaTestRef: 0.5
     - _Amplitude: 0.33928573
     - _Angle: 0.46428573
@@ -139,6 +144,8 @@ Material:
     - _IsFlippable: 0
     - _IsSelected: 0
     - _Lightmapping: 1
+    - _LineB: 0
+    - _LineC: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -150,7 +157,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TransitionState: 0
+    - _TransitionState: 1
     - _TransitionStateB: 1
     - _UVSec: 1
     - _Wavelength: 0.17857142
@@ -162,7 +169,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.67910445, g: 0.67910445, b: 0.67910445, a: 1}
     - _Color2: {r: 0.14179105, g: 0.14179105, b: 0.14179105, a: 1}
-    - _ColorLaser: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0.2}
+    - _ColorLaser: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
     - _ColorReal: {r: 0.5, g: 0.5, b: 0.5, a: 0.2}
     - _DissolveEdgeColor: {r: 0, g: 0, b: 0, a: 0}
     - _EdgeColor: {r: 0, g: 0, b: 0, a: 0}
@@ -173,6 +180,10 @@ Material:
     - _HoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.2}
     - _Indicator: {r: 1, g: 0, b: 0, a: 1}
     - _InteractColor: {r: 0.24999997, g: 0.24999997, b: 0.24999997, a: 0.4}
+    - _LaserAccent: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+    - _LaserBase: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+    - _RealAccent: {r: 0, g: 0, b: 0, a: 0}
+    - _RealBase: {r: 0, g: 0, b: 0, a: 0}
     - _SelectedEffectColor: {r: 8, g: 8, b: 8, a: 0}
     - _ShimmerColor: {r: 8, g: 8, b: 8, a: 0}
     - _SpecularColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

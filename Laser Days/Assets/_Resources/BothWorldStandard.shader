@@ -13,11 +13,15 @@
         _LaserBase("Laser Base Color", Color) = (0,0,0,0)
         _LaserAccent("Laser Accent Color", Color) = (0,0,0,0)
         
+        _LineB ("Extra Outline B", int) = 0
+        _LineC ("Extra Outline C", int) = 0
+        
         _Smoothness("Smoothness", Range(0,1)) = 0
         
         _TransitionState("Transition State", Range(0,1)) = 0
         
         _AlphaCutoff ("Alpha Cutoff", Range(0, 1)) = 0.5
+        
 
         [HideInInspector] _SrcBlend ("_SrcBlend", Float) = 1
         [HideInInspector] _DstBlend ("_DstBlend", Float) = 0

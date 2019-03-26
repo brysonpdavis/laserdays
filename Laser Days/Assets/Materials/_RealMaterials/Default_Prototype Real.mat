@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Default_Prototype Real
-  m_Shader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
+  m_Shader: {fileID: 4800000, guid: 664eff677580e453faaf42f802736470, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -18,6 +18,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AccentMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Albedo:
         m_Texture: {fileID: 2800000, guid: b88ad88c9fe2a45a2ae52d7f4bc9ada6, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -71,7 +75,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9470468fda72f4773a90a0306decbf0f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 862e8f8026a6a40d3a8f997637514f94, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaterialMap:
@@ -119,6 +123,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _AlphaTestRef: 0.5
     - _Amplitude: 0.33928573
     - _Angle: 0.46428573
@@ -139,12 +144,15 @@ Material:
     - _IsFlippable: 0
     - _IsSelected: 0
     - _Lightmapping: 1
+    - _LineB: 0
+    - _LineC: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Phase: 1
     - _Size: 25
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -171,6 +179,10 @@ Material:
     - _HoverColor: {r: 0, g: 0, b: 0, a: 0}
     - _Indicator: {r: 1, g: 0, b: 0, a: 1}
     - _InteractColor: {r: 0.6698113, g: 0.23064253, b: 0.23064253, a: 0}
+    - _LaserAccent: {r: 0, g: 0, b: 0, a: 0}
+    - _LaserBase: {r: 0, g: 0, b: 0, a: 0}
+    - _RealAccent: {r: 0.9150943, g: 0.4994921, b: 0.4704966, a: 1}
+    - _RealBase: {r: 0.764151, g: 0.37129083, b: 0.29196334, a: 1}
     - _SecondaryEffectColor: {r: 8, g: 8, b: 8, a: 0}
     - _SelectedEffectColor: {r: 8, g: 8, b: 8, a: 0}
     - _ShimmerColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}

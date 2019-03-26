@@ -77,13 +77,15 @@ Shader "Hidden/EdgeDetect" {
 		return len * lerp(original, _BgColor, _BgFade);			
 	}	
 	
-    inline half CheckSameExtra (float centerExtra, half4 theSampleA, half4 theSampleB)
+    inline half CheckSameExtra (float4 centerExtra, half4 theSampleA, half4 theSampleB)
     {
-        float diff = centerExtra * 2 - theSampleA - theSampleB; 
+        float3 diff = centerExtra.rgb * 2 - theSampleA.rgb - theSampleB.rgb; 
         float len = dot(diff,diff);
         len = step(len, 0.05);
-  
         return len;
+        
+  
+        
     }   
     
 	inline half CheckSame (half2 centerNormal, float centerDepth, half4 theSample)
@@ -312,8 +314,9 @@ Shader "Hidden/EdgeDetect" {
 		
 		edge *= CheckSame(centerNormal, centerDepth, sample1);
 		edge *= CheckSame(centerNormal, centerDepth, sample2);
-        edge *= CheckSameExtra(CEa, sample1A, sample2B);
-
+        edge *= CheckSameExtra(centerExtra, sample1A, sample2B);
+        
+         //return edge;
         edge = 1-edge;
 
         float f = ComputeDistance(centerDepth);
@@ -324,7 +327,7 @@ Shader "Hidden/EdgeDetect" {
         f = 1;
         }
 			
-        //return (centerExtra;
+       
         _PauseMenu = saturate(_PauseMenu);
         float4 blu = float4(0,0.64,0.85,1); 
         float4 pm = lerp(0,1,(edge*f));   

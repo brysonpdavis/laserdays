@@ -15,6 +15,11 @@
         
         _Smoothness("Smoothness", Range(0,1)) = 0
         
+         _LineB ("Extra Outline B", int) = 0
+        _LineC ("Extra Outline C", int) = 0
+        
+        
+        
         [PerRendererData]_TransitionState("Transition State", Range(0,1)) = 0
         
         _AlphaCutoff ("Alpha Cutoff", Range(0, 1)) = 0.5
