@@ -4103,11 +4103,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4772353815074556, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4978384008116886, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1856557671804646, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_IsActive
@@ -4132,6 +4132,11 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 224564698421668188, guid: ff160c47402d6406d9c4124b589bea50,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
@@ -14033,7 +14038,7 @@ GameObject:
   - component: {fileID: 2056637426}
   - component: {fileID: 2056637427}
   m_Layer: 0
-  m_Name: Crystal
+  m_Name: The Road
   m_TagString: Spawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14333,53 +14338,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b8cd4a95fb1543f8afda17f235732b7, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1254610311
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1856557671804646, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1254610312}
-  - component: {fileID: 1254610313}
-  m_Layer: 0
-  m_Name: The Pit
-  m_TagString: Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1254610312
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4772353815074556, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1254610311}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -7.500003, y: 7.580002, z: -19.830002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1729545655}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1254610313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114898644889336374, guid: ff160c47402d6406d9c4124b589bea50,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1254610311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc90dbf93449e4ea4a1f3b74a2934443, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  difficulty: 0
-  button: {fileID: 0}
-  myButton: {fileID: 0}
-  completed: 0
 --- !u!1 &1255847077 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 9d758d97af93b4180b811f3f793fecbc, type: 3}
@@ -20206,7 +20164,7 @@ Transform:
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 1729545655}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1776668487
 BoxCollider:
@@ -21796,7 +21754,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1729545655}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1885542496
 BoxCollider:
@@ -21823,7 +21781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf3f23f51304ba3bad946b1ea0a40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Goop puddles active doors when touched.
+  text: Goop puddles activate doors when touched.
   lore: 0
   singleActivation: 0
 --- !u!1 &1892098188
@@ -22475,7 +22433,7 @@ Transform:
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 1729545655}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1945456231
 BoxCollider:
@@ -23947,11 +23905,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1219695891}
   m_LocalRotation: {x: 0, y: 0.90640014, z: 0, w: -0.42242017}
-  m_LocalPosition: {x: 3.9999928, y: 47, z: -51.000008}
+  m_LocalPosition: {x: 39.499996, y: 40, z: -51.00001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1729545655}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2056637427
 MonoBehaviour:
@@ -24484,7 +24442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2112896527
 Transform:
   m_ObjectHideFlags: 0
@@ -24497,7 +24455,7 @@ Transform:
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 1729545655}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2112896528
 BoxCollider:
