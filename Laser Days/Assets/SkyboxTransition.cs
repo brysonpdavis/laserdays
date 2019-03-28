@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class SkyboxTransition : MonoBehaviour {
 
@@ -49,6 +50,20 @@ public class SkyboxTransition : MonoBehaviour {
 
             realGlobalParticle.SetFloat("_TransitionState", 1);
             laserGlobalParticle.SetFloat("_TransitionState", 1);
+        }
+
+
+        PostProcessLayer p = Camera.main.GetComponent<PostProcessLayer>();
+        int q = QualitySettings.GetQualityLevel();
+        if (q == 1)
+        {
+
+            p.antialiasingMode = PostProcessLayer.Antialiasing.None;
+
+     
+        } else 
+        {
+            p.antialiasingMode = PostProcessLayer.Antialiasing.FastApproximateAntialiasing;
         }
 
     }

@@ -62,6 +62,11 @@ public class Toolbox : Singleton<Toolbox>
         soundEffectsSlider.onValueChanged.AddListener(delegate { VolumeChangeCheck(); });
     }
 
+    private void Start()
+    {
+
+    }
+
     void VolumeChangeCheck()
     {
         soundEffectsVolume = soundEffectsSlider.value;

@@ -15,10 +15,12 @@ namespace UnityStandardAssets.Utility
         private Text m_Text;
 
 
+
         private void Start()
         {
             m_FpsNextPeriod = Time.realtimeSinceStartup + fpsMeasurePeriod;
             m_Text = GetComponent<Text>();
+            m_Text.enabled = false;
         }
 
 
@@ -33,6 +35,21 @@ namespace UnityStandardAssets.Utility
                 m_FpsNextPeriod += fpsMeasurePeriod;
                 m_Text.text = string.Format(display, m_CurrentFps);
             }
+
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+
+            {
+                if(!m_Text.enabled)
+                {
+                    m_Text.enabled = true;
+                } else 
+                {
+                    m_Text.enabled = false;
+                }
+            }
+
         }
+
+
     }
 }
