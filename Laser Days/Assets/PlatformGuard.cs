@@ -68,10 +68,11 @@ public class PlatformGuard : MonoBehaviour
              )
             //be sure we're colliding from above
             && (col.transform.position.y >= this.transform.position.y)
-            //be sure we're NOT moving
-            && !platformController.platformMovers[0].platformIsMoving
+            //be sure we're NOT moving 
+            //&& !platformController.platformMovers[0].platformIsMoving //was causing platform glitches so not using it, but I remember it was solving some sort of bug as well. will look for better solution
            )
         {
+            if (!stuckObjects.Contains(col.gameObject))
                 stuckObjects.Add(col.gameObject);
             Debug.Log("ADDING" + col.gameObject.name);
         }
