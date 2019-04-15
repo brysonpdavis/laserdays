@@ -1,5 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//Script for setting up and transitions global lighting variables
+//Copyright (c) 2019 Rustforms.
+
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -23,6 +25,8 @@ public class SkyboxTransition : MonoBehaviour {
     public Color realFog;
     public Color realAbmient;
 
+    public Color GlobalShadow;
+
     public Material realGlobalParticle;
     public Material laserGlobalParticle;
 
@@ -32,6 +36,8 @@ public class SkyboxTransition : MonoBehaviour {
     {
 
         material = RenderSettings.skybox;
+
+        Shader.SetGlobalColor("_GlobalShadowColor", GlobalShadow);
 
         if (Toolbox.Instance.GetPlayer().layer == 16) 
         { 

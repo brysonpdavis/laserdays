@@ -27,10 +27,13 @@ Shader "Hidden/EdgeDetect" {
     
     sampler2D _CameraGBufferTexture1;
     half4 _CameraGBufferTexture1_ST;
+    
+    sampler2D _ShadowMapTexture;
+    half4 _ShadowMapTexture_ST;
 
 	sampler2D_float _CameraDepthTexture;
 	half4 _CameraDepthTexture_ST;
-
+    
 	uniform half4 _Sensitivity; 
 	uniform half4 _BgColor;
 	uniform half _BgFade;
@@ -80,6 +83,17 @@ Shader "Hidden/EdgeDetect" {
     inline half CheckSameExtra (float4 centerExtra, half4 theSampleA, half4 theSampleB)
     {
         float3 diff = centerExtra.rgb * 2 - theSampleA.rgb - theSampleB.rgb; 
+        float len = dot(diff,diff);
+        len = step(len, 0.05);
+        return len;
+        
+  
+        
+    }   
+    
+    inline half CheckSameShadow (float centershadow, float shadowA, float shadowB)
+    {
+        float3 diff = centershadow * 2 - shadowA - shadowB; 
         float len = dot(diff,diff);
         len = step(len, 0.05);
         return len;
@@ -299,6 +313,10 @@ Shader "Hidden/EdgeDetect" {
         half4 centerExtra = tex2D (_CameraGBufferTexture1, i.uv[1]);
         half4 sample1A = tex2D (_CameraGBufferTexture1, i.uv[2]);
         half4 sample2B = tex2D (_CameraGBufferTexture1, i.uv[3]);
+        
+        half centershadow = tex2D(_ShadowMapTexture, i.uv[1]);
+        half shadowA = tex2D(_ShadowMapTexture, i.uv[2]);
+        half shadowB = tex2D(_ShadowMapTexture, i.uv[3]);
 		
 		// encoded normal
 		half2 centerNormal = center.xy;
@@ -315,6 +333,7 @@ Shader "Hidden/EdgeDetect" {
 		edge *= CheckSame(centerNormal, centerDepth, sample1);
 		edge *= CheckSame(centerNormal, centerDepth, sample2);
         edge *= CheckSameExtra(centerExtra, sample1A, sample2B);
+
         
          //return edge;
         edge = 1-edge;
@@ -329,9 +348,13 @@ Shader "Hidden/EdgeDetect" {
 			
        
         _PauseMenu = saturate(_PauseMenu);
-        float4 blu = float4(0,0.64,0.85,1); 
+        
+        //return centershadow;
+
         float4 pm = lerp(0,1,(edge*f));   
 		float4 sc = lerp(original, _BgColor, (edge*f*_BgColor.a));
+        
+        
         return lerp(sc, pm, _PauseMenu);
         //return lerp(original, _BgColor, (edge));
 	}

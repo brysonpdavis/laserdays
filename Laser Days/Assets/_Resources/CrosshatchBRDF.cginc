@@ -1,4 +1,8 @@
-﻿#include "UnityCG.cginc"
+﻿//Modified from Unity Standard Shader Assets. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
+//Additions Copyright (c) 2019 Rustforms.
+
+
+#include "UnityCG.cginc"
 #include "UnityStandardConfig.cginc"
 #include "UnityLightingCommon.cginc"
 
@@ -8,7 +12,9 @@ half4 BRDF_Unity_Toon (half3 diffColor, half3 specColor, half oneMinusReflectivi
     UnityLight light, UnityIndirect gi)
 {
     float3 halfDir = Unity_SafeNormalize (float3(light.dir) + viewDir);
-
+    
+    //   normal.y *= 0.3;
+    half nla = smoothstep(0.0, 0.5, saturate(4 * dot(normal, light.dir)));
     half nl = smoothstep(0.0, 0.05, saturate (dot(normal, light.dir)));
     float nh = saturate(dot(normal, halfDir));
     half nv = saturate(dot(normal, viewDir));
@@ -82,13 +88,15 @@ half4 BRDF_Unity_Toon (half3 diffColor, half3 specColor, half oneMinusReflectivi
     surfaceReduction = 1.0 - roughness*perceptualRoughness*surfaceReduction;
 
     half grazingTerm = saturate(smoothness + (1-oneMinusReflectivity));
+    /**
     half3 color =   (diffColor + 0.0 * specColor) * light.color * nl
                     + gi.diffuse * diffColor
                     + surfaceReduction * gi.specular * FresnelLerpFast ((specColor * 0), grazingTerm, nv);
+    **/                
                     
-                    
-                      half3 color2 =   (diffColor) * light.color * nl
-                    + gi.diffuse * diffColor;
-
+    
+    
+    half3 color2 = diffColor * light.color * nl + gi.diffuse * diffColor;
+    
     return half4(color2, 1);
 }

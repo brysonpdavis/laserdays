@@ -1,4 +1,5 @@
-// Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
+//Modified from Unity Standard Shader Assets. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
+//Additions Copyright (c) 2019 Rustforms.
 
 Shader "Hidden/CrosshatchGlobalShading" {
 Properties {
@@ -50,6 +51,14 @@ half4 CalculateLight (unity_v2f_deferred i)
 	UnityDeferredCalculateLightParams (i, wpos, uv, light.dir, atten, fadeDist);
 
 	light.color = _LightColor.rgb * atten;
+    
+    //light.color = float3(atten, atten, atten);
+    
+    //float3 shadowColor = float3(0,0,0.1);
+    //float3 ww = max(shadowColor, _LightColor.rgb);
+    //light.color = lerp(shadowColor, _LightColor.rgb, atten).rgb;
+    //light.color = (_LightColor.rgb * atten);
+    ////light.color = float3(atten, atten, atten);
 
 	// unpack Gbuffer
 	half4 gbuffer0 = tex2D (_CameraGBufferTexture0, uv);
@@ -65,10 +74,10 @@ half4 CalculateLight (unity_v2f_deferred i)
 	ind.diffuse = 0;
 	ind.specular = 0;
 
-    half4 res = UNITY_BRDF_PBS (data.diffuseColor, data.specularColor, oneMinusReflectivity, data.smoothness, data.normalWorld, -eyeVec, light, ind);
+    half4 res = BRDF_Unity_Toon (data.diffuseColor, data.specularColor, oneMinusReflectivity, data.smoothness, data.normalWorld, -eyeVec, light, ind);
 
 	return res;
-}
+}    
 
 #ifdef UNITY_HDR_ON
 half4
