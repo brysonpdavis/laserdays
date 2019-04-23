@@ -296,7 +296,7 @@ Shader "Hidden/EdgeDetect" {
     float ComputeFog(float coord)
         {
             float fog = 0.0;
-            fog = 0.03 * coord;
+            fog = 0.007 * coord;
             fog = exp2(-fog);
             saturate(fog);
             return fog; 
@@ -332,7 +332,7 @@ Shader "Hidden/EdgeDetect" {
 		
 		edge *= CheckSame(centerNormal, centerDepth, sample1);
 		edge *= CheckSame(centerNormal, centerDepth, sample2);
-        edge *= CheckSameExtra(centerExtra, sample1A, sample2B);
+        //edge *= CheckSameExtra(centerExtra, sample1A, sample2B);
 
         
          //return edge;
@@ -354,7 +354,7 @@ Shader "Hidden/EdgeDetect" {
         float4 pm = lerp(0,1,(edge*f));   
 		float4 sc = lerp(original, _BgColor, (edge*f*_BgColor.a));
         
-        
+        //return lerp(white,black, edge * 1);
         return lerp(sc, pm, _PauseMenu);
         //return lerp(original, _BgColor, (edge));
 	}

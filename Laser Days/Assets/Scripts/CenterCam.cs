@@ -7,6 +7,8 @@ public class CenterCam : MonoBehaviour {
     bool on = false;
     public float interval = 0.1f;
     GameObject player;
+    private int count = 0;
+    
 
     // Update is called once per frame
     private void Start()
@@ -44,15 +46,13 @@ public class CenterCam : MonoBehaviour {
             player.transform.position += new Vector3(0f, 1f * interval, 0f);
         }
 
-        if(Input.GetKeyDown(KeyCode.J))
+        if(Input.GetKeyDown(KeyCode.C))
         {
-            ScreenCapture.CaptureScreenshot("/Users/seamusedson/Desktop/outA.png", 1);
+            ScreenCapture.CaptureScreenshot("/Users/seamusedson/Desktop/" + count + ".png", 1);
+            count++;
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            ScreenCapture.CaptureScreenshot("/Users/seamusedson/Desktop/outB.png", 1);
-        }
+
 
 
     }
