@@ -281,12 +281,18 @@ half4 frag( v2f i ) : SV_Target
 	half4 c = tex2D (_MainTex, i.uv[0]);
 	half ao = tex2D (_SSAO, i.uv[1]).r;
 	ao = pow (ao, _Params.w);
-	half4 ee = tex2D(_RandomTexture, i.uv[0]);
-    half4 eeee = half4(ee.b,ee.b,ee.b,1);
+	half4 stipple = tex2D(_RandomTexture, i.uv[0]);
     
-    ao = 1 - ao;
+    stipple = step(stipple, 0.98);
     
-    return lerp(c, ee, ao);
+    ao = saturate(ao + stipple.r);
+    ao = 1 - step(ao, 0.9);
+    
+    
+    //ao = 1 - ao;
+    
+    return ao * c;
+    //return lerp(c, ee, ao);
     //return ee;
 	
 }

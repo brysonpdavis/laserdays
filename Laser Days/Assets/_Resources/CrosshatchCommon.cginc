@@ -76,18 +76,18 @@ float3 GetAlbedo (Interpolators i) {
     float3 col = float3(0,0,0);
     
     #if defined(SHARED)
-        float3 accCol = lerp(_RealAccent, _LaserAccent, _TransitionState);
+        float4 accCol = lerp(_RealAccent, _LaserAccent, _TransitionState);
         float val = lerp(tex.r, tex.g, _TransitionState);
         col = lerp(_RealBase, _LaserBase, _TransitionState);
-        col = lerp(col, accCol, GetAccentMask(i));
+        col = lerp(col, accCol, GetAccentMask(i) * accCol.a);
         return val * col;
     #endif
     
     #if defined(REAL)
-        col = lerp(_RealBase, _RealAccent, GetAccentMask(i));
+        col = lerp(_RealBase, _RealAccent, GetAccentMask(i) * _RealAccent.a);
         return tex.r * col;
     #else
-        col = lerp(_LaserBase, _LaserAccent, GetAccentMask(i));
+        col = lerp(_LaserBase, _LaserAccent, GetAccentMask(i) * _LaserAccent.a);
         return tex.g * col;
     #endif
 }

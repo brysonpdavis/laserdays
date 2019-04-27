@@ -332,7 +332,7 @@ Shader "Hidden/EdgeDetect" {
 		
 		edge *= CheckSame(centerNormal, centerDepth, sample1);
 		edge *= CheckSame(centerNormal, centerDepth, sample2);
-        //edge *= CheckSameExtra(centerExtra, sample1A, sample2B);
+        edge *= CheckSameExtra(centerExtra, sample1A, sample2B);
 
         
          //return edge;

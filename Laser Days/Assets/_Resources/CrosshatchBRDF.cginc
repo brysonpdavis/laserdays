@@ -96,7 +96,7 @@ half4 BRDF_Unity_Toon (half3 diffColor, half3 specColor, half oneMinusReflectivi
                     
     
     
-    half3 color2 = diffColor * light.color * nl + gi.diffuse * diffColor;
+    half3 color2 = diffColor * light.color * nla + gi.diffuse * diffColor;
     
     return half4(color2, 1);
 }

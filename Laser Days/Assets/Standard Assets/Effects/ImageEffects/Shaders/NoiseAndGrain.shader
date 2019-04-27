@@ -19,6 +19,9 @@ Shader "Hidden/NoiseAndGrain" {
 		uniform float3 _NoiseAmount;
 		uniform float3 _ThreshholdRGB;
 		uniform float3 _MidGrey;	
+        
+        sampler2D _CameraDepthNormalsTexture;
+        half4 _CameraDepthNormalsTexture_ST;
 		
 		struct v2f 
 		{
@@ -81,8 +84,9 @@ Shader "Hidden/NoiseAndGrain" {
 			m += (tex2D(_NoiseTex, i.uvRg.xy) * float4(1,0,0,0)).rgb;
 			m += (tex2D(_NoiseTex, i.uvRg.zw) * float4(0,1,0,0)).rgb;
 			m += (tex2D(_NoiseTex, i.uvB.xy) * float4(0,0,1,0)).rgb;
-
-			m = saturate(lerp(float3(0.5,0.5,0.5), m, _NoisePerChannel.rgb * float3(finalIntensity,finalIntensity,finalIntensity) ));
+            
+            
+			m = saturate(lerp(float3(0.5,0.5,0.5), m, _NoisePerChannel.rgb * float3(finalIntensity,finalIntensity,finalIntensity)));
 
 			return float4(Overlay(m, color.rgb), color.a);
 		} 
