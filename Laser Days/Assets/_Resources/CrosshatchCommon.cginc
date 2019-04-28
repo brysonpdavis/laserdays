@@ -6,8 +6,8 @@
 #include "CrosshatchBRDF.cginc"
 
 float4 _RealBase, _RealAccent, _LaserBase, _LaserAccent;
-sampler2D _MainTex, _AccentMap, _EffectMap;
-float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST;
+sampler2D _MainTex, _AccentMap, _EffectMap, _ShadingMap;
+float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST, _ShadingMap_ST;
 
 float _Smoothness;
 
@@ -142,7 +142,14 @@ float GetSmoothness (Interpolators i) {
 
 //Currently not using occlusion. But could use unused chanels of MaterialMap.
 float GetOcclusion (Interpolators i) {
-   return 1;
+   
+   float o;
+   float3 s = tex2D(_ShadingMap, i.uv.zw);
+   s = step(0.3, s); 
+   o = s.b;
+   return o;
+   
+   
 }
 
 //Currently not using emmision but will have to use it for interactables. 
@@ -191,8 +198,8 @@ Interpolators MyVertexProgram (VertexData v) {
     #endif
 
     i.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);
-    i.uv.zw = TRANSFORM_TEX(v.uv, _AccentMap);
-    i.uv.zw = TRANSFORM_TEX(v.uv, _EffectMap);
+    i.uv.zw = TRANSFORM_TEX(v.uv, _ShadingMap);
+    //i.uv.zw = TRANSFORM_TEX(v.uv, _EffectMap);
 
     TRANSFER_SHADOW(i);
 
@@ -282,7 +289,7 @@ UnityIndirect CreateIndirectLight (Interpolators i, float3 viewDir) {
         
         indirectLight.specular = 0.0;
 
-        float occlusion = GetOcclusion(i);
+        float occlusion = 1;
         indirectLight.diffuse *= occlusion;
         indirectLight.specular *= occlusion;
 

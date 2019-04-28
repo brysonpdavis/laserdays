@@ -20,6 +20,12 @@ Shader "Hidden/Amplify Occlusion/Apply"
 		UNITY_DECLARE_SCREENSPACE_TEXTURE( _AO_GBufferAlbedo );
 		UNITY_DECLARE_SCREENSPACE_TEXTURE( _AO_GBufferEmission );
 		UNITY_DECLARE_SCREENSPACE_TEXTURE( _AO_ApplyOcclusionTexture );
+        
+        // Added to sample occlusion noise textures from albedo aplha channel
+        sampler2D _CameraGBufferTexture0;
+        float4 _CameraGBufferTexture0_ST;
+        
+        
 
 		half4		_AO_Levels;
 		half4		_AO_FadeToTint;
@@ -156,7 +162,7 @@ Shader "Hidden/Amplify Occlusion/Apply"
 
 			const half4 occlusionRGBA = CalcOcclusion( occlusion, linearDepth );
 
-			return half4( occlusionRGBA.rgb, 1 );
+			return half4(occlusionRGBA.rgb, 1 );
 		}
 
 
@@ -220,7 +226,7 @@ Shader "Hidden/Amplify Occlusion/Apply"
 			else
 			{
 				albedo = half4( 1, 1, 1, occlusionRGBA.a );
-				emission = half4( occlusionRGBA.rgb, 1 );
+				emission = half4(occlusionRGBA.rgb, 1 );
 			}
 
 			DeferredOutput OUT;
@@ -313,8 +319,28 @@ Shader "Hidden/Amplify Occlusion/Apply"
 				const half4 temporalAcc = TemporalFilter( screenPos, occlusionDepth, aUseMotionVectors, aTemporalDilation, occlusion );
 
 				const half4 occlusionRGBA = CalcOcclusion( occlusion, occlusionDepth.y );
-
-				OUT.occlusionColor = occlusionRGBA;
+                
+                half4 hatching = tex2D(_CameraGBufferTexture0, IN.uv);
+                
+                half4 occlusionHatching = occlusionRGBA + hatching.aaaa;
+                           
+                occlusionHatching *= occlusionHatching;
+                
+                occlusionHatching = saturate(occlusionHatching);
+                
+                occlusionHatching = step(0.2, occlusionHatching);
+                
+                occlusionHatching = saturate(occlusionHatching + 0.8);
+                 
+                
+                
+                
+                
+                //***********************
+                //Blending spot for post effect 
+                //***********************
+				
+                OUT.occlusionColor = occlusionHatching;
 				OUT.temporalAcc = temporalAcc;
 			}
 			else
@@ -359,7 +385,7 @@ Shader "Hidden/Amplify Occlusion/Apply"
 			FetchOcclusion_LinearDepth( screenPos, occlusion, linearDepth );
 
 			const half4 occlusionRGBA = CalcOcclusion( occlusion, linearDepth );
-
+            
 			return half4( occlusionRGBA.rgb, 1 );
 		}
 	ENDCG

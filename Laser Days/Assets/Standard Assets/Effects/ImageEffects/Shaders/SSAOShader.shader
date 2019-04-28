@@ -1,6 +1,7 @@
 Shader "Hidden/SSAO" {
 Properties {
 	_MainTex ("", 2D) = "" {}
+    _Cubed ("", Cube) = "" {}
 	_RandomTexture ("", 2D) = "" {}
 	_SSAO ("", 2D) = "" {}
 }
@@ -10,15 +11,20 @@ Subshader {
 CGINCLUDE
 // Common code used by several SSAO passes below
 #include "UnityCG.cginc"
+
 struct v2f_ao {
-	float4 pos : SV_POSITION;
+	float4 pos : SV_POSITION;    
 	float2 uv : TEXCOORD0;
 	float2 uvr : TEXCOORD1;
 };
 
 uniform float2 _NoiseScale;
+
+sampler2D _CameraDepthNormalsTexture;
 float4 _CameraDepthNormalsTexture_ST;
 
+sampler2D _CameraGBufferTexture0;
+float4 _CameraGBufferTexture0_ST;
 
 
 v2f_ao vert_ao (appdata_img v)
@@ -27,20 +33,14 @@ v2f_ao vert_ao (appdata_img v)
 	o.pos = UnityObjectToClipPos(v.vertex);
 	o.uv = TRANSFORM_TEX(v.texcoord, _CameraDepthNormalsTexture);
 	o.uvr = v.texcoord.xy * _NoiseScale;
-	return o;
+    return o;
 }
-
-
-
-sampler2D _CameraDepthNormalsTexture;
-
-
-sampler2D _CameraGBufferTexture1;
-float4 _CameraGBufferTexture1_ST;
 
 
 sampler2D _RandomTexture;
 float4 _Params; // x=radius, y=minz, z=attenuation power, w=SSAO power
+
+samplerCUBE _Cubed;
 
 // HLSL and GLSL do not support arbitrarily sized arrays as function parameters (eg. float bla[]), whereas Cg does.
 #if !defined(UNITY_COMPILER_CG)
@@ -257,7 +257,7 @@ CGPROGRAM
 
 struct v2f {
 	float4 pos : SV_POSITION;
-	float2 uv[2] : TEXCOORD0;
+	float2 uv[3] : TEXCOORD0;
 };
 
 sampler2D _MainTex;
@@ -272,6 +272,8 @@ v2f vert (appdata_img v)
 	o.pos = UnityObjectToClipPos(v.vertex);
 	o.uv[0] = UnityStereoScreenSpaceUVAdjust(MultiplyUV (UNITY_MATRIX_TEXTURE0, v.texcoord), _MainTex_ST);
 	o.uv[1] = UnityStereoScreenSpaceUVAdjust(MultiplyUV (UNITY_MATRIX_TEXTURE1, v.texcoord), _SSAO_ST);
+    float2 uv = v.texcoord.xy;
+    o.uv[2] = UnityStereoScreenSpaceUVAdjust(uv, _MainTex_ST);
 	return o;
 }
 
@@ -281,20 +283,22 @@ half4 frag( v2f i ) : SV_Target
 	half4 c = tex2D (_MainTex, i.uv[0]);
 	half ao = tex2D (_SSAO, i.uv[1]).r;
 	ao = pow (ao, _Params.w);
-	half4 stipple = tex2D(_RandomTexture, i.uv[0]);
     
-    stipple = step(stipple, 0.98);
+    half stipple = tex2D (_CameraGBufferTexture0, i.uv[2]).a;
     
-    ao = saturate(ao + stipple.r);
-    ao = 1 - step(ao, 0.9);
+    ao = smoothstep(0,0.6, ao);
+   
+   ao = saturate(ao + stipple);
+    
+    ao = ao * ao * ao * ao;
     
     
-    //ao = 1 - ao;
+    //ao = step(0.8, ao);
+    ao = saturate(ao + 0.8);
+   
     
     return ao * c;
-    //return lerp(c, ee, ao);
-    //return ee;
-	
+  
 }
 ENDCG
 	}

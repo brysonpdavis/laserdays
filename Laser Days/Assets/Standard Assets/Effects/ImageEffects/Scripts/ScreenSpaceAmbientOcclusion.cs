@@ -33,6 +33,10 @@ namespace UnityStandardAssets.ImageEffects
         private Material m_SSAOMaterial;
 
         public Texture2D m_RandomTexture;
+        public Cubemap m_Cubed;
+
+
+
 
         private bool m_Supported;
 
@@ -91,6 +95,7 @@ namespace UnityStandardAssets.ImageEffects
             {
                 m_SSAOMaterial = CreateMaterial (m_SSAOShader);
                 m_SSAOMaterial.SetTexture ("_RandomTexture", m_RandomTexture);
+                m_SSAOMaterial.SetTexture("_Cubed", m_Cubed);
             }
         }
 

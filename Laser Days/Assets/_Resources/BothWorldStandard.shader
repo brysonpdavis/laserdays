@@ -7,6 +7,8 @@
         [NoScaleOffset] _AccentMap("Accent Map", 2D) = "black" {}
         [NoScaleOffset] _EffectMap("Effect Map", 2D) = "white" {}
         
+         _ShadingMap("Occlusion Deatil Map", 2D) = "white" {}
+        
         _RealBase("Real Base Color", Color) = (0,0,0,0)  
         _RealAccent("Real Accent Color", Color) = (0,0,0,0)
         
