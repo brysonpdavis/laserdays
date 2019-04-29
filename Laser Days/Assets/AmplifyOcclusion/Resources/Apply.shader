@@ -323,6 +323,7 @@ Shader "Hidden/Amplify Occlusion/Apply"
                 half4 hatching = tex2D(_CameraGBufferTexture0, IN.uv);
                 
                 half4 occlusionHatching = occlusionRGBA + hatching.aaaa;
+                //half4 occlusionHatching = occlusionRGBA;
                            
                 occlusionHatching *= occlusionHatching;
                 
@@ -330,7 +331,7 @@ Shader "Hidden/Amplify Occlusion/Apply"
                 
                 occlusionHatching = step(0.2, occlusionHatching);
                 
-                occlusionHatching = saturate(occlusionHatching + 0.8);
+                //occlusionHatching = saturate(occlusionHatching + 0.4);
                  
                 
                 
@@ -340,6 +341,7 @@ Shader "Hidden/Amplify Occlusion/Apply"
                 //Blending spot for post effect 
                 //***********************
 				
+                //OUT.occlusionColor = hatching.aaaa;
                 OUT.occlusionColor = occlusionHatching;
 				OUT.temporalAcc = temporalAcc;
 			}
