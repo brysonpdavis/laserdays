@@ -70,6 +70,7 @@ namespace UnityStandardAssets.ImageEffects
         }
 
         [ImageEffectOpaque]
+       
         void OnRenderImage (RenderTexture source, RenderTexture destination)
 		{
             if (CheckResources () == false)
