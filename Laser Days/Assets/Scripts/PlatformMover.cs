@@ -45,6 +45,8 @@ public class PlatformMover : MonoBehaviour {
             LR.SetPosition(1, finish);
             LR.material.SetColor("_RestingColor", RC);
             LR.material.SetColor("_ActiveColor", AC);
+            LR.material.SetColor("_ShimmerColor", SC);
+            LR.material.SetFloat("_isLineRenderer", 1.0f);
 
             //setup the audio
             if (!GetComponent<AudioSource>())

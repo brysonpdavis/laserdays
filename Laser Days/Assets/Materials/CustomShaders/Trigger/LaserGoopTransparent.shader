@@ -25,7 +25,8 @@ Shader "Trigger/LaserGoopTransparent"
 		#include "UnityCG.cginc"
 		#pragma target 3.0
 		#pragma surface surf Unlit alpha:fade keepalpha noshadow vertex:vertexDataFunc 
-		struct Input
+		
+        struct Input
 		{
 			float4 screenPos;
 			float2 uv_texcoord;

@@ -6,12 +6,12 @@
 #include "CrosshatchBRDF.cginc"
 
 float4 _RealBase, _RealAccent, _LaserBase, _LaserAccent;
-sampler2D _MainTex, _AccentMap, _EffectMap;
-float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST;
-
-float _ZFightOffset;
+sampler2D _MainTex, _AccentMap, _EffectMap, _ShadingMap;
+float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST, _ShadingMap_ST;
 
 float _Smoothness;
+
+int _LineA;
 
 float _TransitionState;
 
@@ -73,10 +73,23 @@ float GetAccentMask (Interpolators i) {
 //Returns albedo per fragment by blending MaterialMap, BaseColor, AccentColor, and AccentMap.
 float3 GetAlbedo (Interpolators i) {
     float3 tex = tex2D(_MainTex, i.uv.xy);
-    float val = lerp(tex.r, tex.g, _TransitionState);
     float3 col = float3(0,0,0);
-    col = lerp(_RealBase, _LaserBase, _TransitionState);
-    return val * col;
+    
+    #if defined(SHARED)
+        float4 accCol = lerp(_RealAccent, _LaserAccent, _TransitionState);
+        float val = lerp(tex.r, tex.g, _TransitionState);
+        col = lerp(_RealBase, _LaserBase, _TransitionState);
+        col = lerp(col, accCol, GetAccentMask(i) * accCol.a);
+        return val * col;
+    #endif
+    
+    #if defined(REAL)
+        col = lerp(_RealBase, _RealAccent, GetAccentMask(i) * _RealAccent.a);
+        return tex.r * col;
+    #else
+        col = lerp(_LaserBase, _LaserAccent, GetAccentMask(i) * _LaserAccent.a);
+        return tex.g * col;
+    #endif
 }
 
 //Keeping this to be called, but just returning one.
@@ -84,13 +97,29 @@ float GetAlpha (Interpolators i) {
     return 1.0;
 }
 
+float3 GetSpec (Interpolators i){
+    
+    float rr = GetAccentMask(i) * 0.25; 
+    
+    float gg = 0.25 * floor(_LineA);
+    
+    return float3(rr,gg,0);
+}
+
+
 //Returns alpha at fragment to determine whether it gets clipped. 
 float GetAlphaSingle (Interpolators i){
-    float4 t = tex2D(_AccentMap, i.uv.xy);
-    float m = lerp(t.r, t.g, _TransitionState);
-    m = step(0.3, m);
-    return m;
-               
+    float emv = tex2D(_EffectMap, i.uv.xy).r;
+    
+    #if defined(REAL)
+        emv -= _TransitionState;
+        emv = step(0,emv);
+        return emv;
+    #else
+        emv += _TransitionState;
+        emv = step(1,emv);
+        return emv;
+    #endif            
 }
 
 // As it was.
@@ -123,7 +152,14 @@ float GetSmoothness (Interpolators i) {
 
 //Currently not using occlusion. But could use unused chanels of MaterialMap.
 float GetOcclusion (Interpolators i) {
-   return 1;
+   
+   float o;
+   float3 s = tex2D(_ShadingMap, i.uv.zw);
+   s = step(0.3, s); 
+   o = s.b;
+   return o;
+   
+   
 }
 
 //Currently not using emmision but will have to use it for interactables. 
@@ -160,9 +196,6 @@ float3 CreateBinormal (float3 normal, float3 tangent, float binormalSign) {
 
 Interpolators MyVertexProgram (VertexData v) {
     Interpolators i;
-    
-    v.vertex += float4((_ZFightOffset * v.normal), 0);
-    
     i.pos = UnityObjectToClipPos(v.vertex);
     i.worldPos = mul(unity_ObjectToWorld, v.vertex);
     i.normal = UnityObjectToWorldNormal(v.normal);
@@ -175,8 +208,8 @@ Interpolators MyVertexProgram (VertexData v) {
     #endif
 
     i.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);
-    i.uv.zw = TRANSFORM_TEX(v.uv, _AccentMap);
-    i.uv.zw = TRANSFORM_TEX(v.uv, _EffectMap);
+    i.uv.zw = TRANSFORM_TEX(v.uv, _ShadingMap);
+    //i.uv.zw = TRANSFORM_TEX(v.uv, _EffectMap);
 
     TRANSFER_SHADOW(i);
 
@@ -266,7 +299,7 @@ UnityIndirect CreateIndirectLight (Interpolators i, float3 viewDir) {
         
         indirectLight.specular = 0.0;
 
-        float occlusion = GetOcclusion(i);
+        float occlusion = 1;
         indirectLight.diffuse *= occlusion;
         indirectLight.specular *= occlusion;
 
@@ -348,7 +381,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         #endif
         output.gBuffer0.rgb = GetAlbedo(i);
         output.gBuffer0.a = GetOcclusion(i);
-        output.gBuffer1.rgb = float3(GetAlphaSingle(i), 1.0, 1.0);
+        output.gBuffer1.rgb = GetSpec(i);
         output.gBuffer1.a = GetSmoothness(i);
         output.gBuffer2 = float4(i.normal * 0.5 + 0.5, 1);
         output.gBuffer3 = color;

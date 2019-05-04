@@ -11,6 +11,7 @@ public class PlatformIndicator : MonoBehaviour {
     {
         RenderMat = GetComponent<Renderer>().material;
         RenderMat.SetInt("_Animated", 0);
+        //RenderMat.SetInt("_isLineRender", 1);
     }
 
 

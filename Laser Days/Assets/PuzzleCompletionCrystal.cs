@@ -82,7 +82,7 @@ public class PuzzleCompletionCrystal : MonoBehaviour {
             float value = Mathf.Lerp(0f, 1f, ratio);
             material.SetFloat("_TransitionState", value);
          
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         //mRenderer.enabled = false;

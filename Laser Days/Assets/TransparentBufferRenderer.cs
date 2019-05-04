@@ -3,6 +3,8 @@ using UnityEngine.Rendering;
 using System.Collections;
 using System.Collections.Generic;
 
+// Renders transparent gemoetry information into CameraGbuffer1
+// So that there can be outlines on trasparent stuff 
 
 public class TransparentBufferGroup
 {
@@ -33,35 +35,26 @@ public class TransparentBufferGroup
     }
 }
 
-[ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
 public class TransparentBufferRenderer : MonoBehaviour
 {
   
 
     private Camera cam;
-    CommandBuffer buf;
+    CommandBuffer buff;
+    private Material tempMat;
 
     private Dictionary<Camera, CommandBuffer> m_Cameras = new Dictionary<Camera, CommandBuffer>(); 
 
-    private void Start()
-    {
-        //cam = Camera.main;
-
-
-    }
-
     private void Update()
     {
-
-
         cam = Camera.main;
 
         if(!cam){
             return;
         }
 
-        CommandBuffer buff = null;
+        buff = null;
 
         if (m_Cameras.ContainsKey(cam))
         {
@@ -71,21 +64,29 @@ public class TransparentBufferRenderer : MonoBehaviour
         else
         {
             buff = new CommandBuffer();
-            buff.name = "Transparent Geo Outlines";
+            buff.name = "Transparent Buffer Object";
             m_Cameras[cam] = buff;
+
+            // Render right after opaque and alpha test 
             cam.AddCommandBuffer(CameraEvent.AfterGBuffer, buff);
         }
       
         var group = TransparentBufferGroup.instance;
 
+        // Only seemed to work when writing to both Gbuffers, but only assigning value to GBuffer1
+        //
         RenderTargetIdentifier[] mrta = { BuiltinRenderTextureType.GBuffer0, BuiltinRenderTextureType.GBuffer1};
 
 
         buff.SetRenderTarget(mrta, BuiltinRenderTextureType.CameraTarget);
-
         foreach (var o in group.m_Objects)
         {
-            buff.DrawRenderer(o.m_Renderer, o.m_Material);
+            if (o.replaceShader)
+            {
+                tempMat = new Material(o.m_Renderer.sharedMaterial);
+                tempMat.shader = o.replaceShader;
+                buff.DrawRenderer(o.m_Renderer, tempMat);
+            }
         }
 
     }

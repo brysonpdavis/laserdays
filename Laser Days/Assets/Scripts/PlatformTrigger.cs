@@ -72,7 +72,7 @@ public class PlatformTrigger : MonoBehaviour {
         basinIndicator = GetComponentInChildren<BasinTriggerIndicator>();
     }
 
-	private void Update()
+	private void FixedUpdate()
 	{
         var temp = RenderMat.GetFloat("_Elapsed");
         temp += (Time.deltaTime * ScrollSpeed);
@@ -184,7 +184,7 @@ public class PlatformTrigger : MonoBehaviour {
                 GetComponentInChildren<PuddleTrigger>().Activate();
             }
 
-            ScrollSpeed *= -0.5f;
+
             if (basinIndicator) { basinIndicator.Collide(); }
 
 
@@ -202,6 +202,8 @@ public class PlatformTrigger : MonoBehaviour {
             {
                 audioSource.clip = platformOn;
                 MovePlatformToEnd();
+
+                ScrollSpeed *= -2f;
 
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
@@ -238,7 +240,7 @@ public class PlatformTrigger : MonoBehaviour {
                 }
 
 
-                ScrollSpeed *= -2f;
+                ScrollSpeed *= -0.5f;
                 if (basinIndicator) { basinIndicator.UnCollide(); }
 
                 foreach (PlatformTrigger trigger in platformTriggers)

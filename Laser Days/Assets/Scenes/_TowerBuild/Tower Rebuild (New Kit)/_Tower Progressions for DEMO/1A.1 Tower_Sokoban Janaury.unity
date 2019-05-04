@@ -310,8 +310,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: d9ea5f45e91cd48dcb9da2ef1593e1b1, type: 2}
+  replaceShader: {fileID: 4800000, guid: 89736994e789c4fd8968294097f7aae2, type: 3}
   m_Renderer: {fileID: 56139359}
+--- !u!1 &60479639 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1512460152388990, guid: 453f96bfa0a864bb79df149f18229f59,
+    type: 2}
+  m_PrefabInternal: {fileID: 9500855}
+--- !u!120 &60479643 stripped
+LineRenderer:
+  m_PrefabParentObject: {fileID: 120842328692949334, guid: 453f96bfa0a864bb79df149f18229f59,
+    type: 2}
+  m_PrefabInternal: {fileID: 9500855}
+--- !u!114 &60479644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 60479639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 4800000, guid: 89736994e789c4fd8968294097f7aae2, type: 3}
+  m_Renderer: {fileID: 60479643}
 --- !u!1001 &94322751
 Prefab:
   m_ObjectHideFlags: 0
@@ -533,6 +556,11 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1.4
       objectReference: {fileID: 0}
+    - target: {fileID: 23095984303462920, guid: adc72ec3fb7974246b66b3b76387ece2,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a8c95e8c426374ef2bceb258f3baefff, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adc72ec3fb7974246b66b3b76387ece2, type: 2}
   m_IsPrefabParent: 0
@@ -625,7 +653,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114069383894012078, guid: a7eeb87712c4240c9a95ac3ce13b8a0f,
+    - target: {fileID: 114129333125923670, guid: a7eeb87712c4240c9a95ac3ce13b8a0f,
         type: 2}
       propertyPath: m_Renderer
       value: 
@@ -1341,52 +1369,52 @@ Prefab:
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: RestingColor.a
-      value: 0.7490196
+      value: 0.34117648
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: RestingColor.r
-      value: 0.11764706
+      value: 0.18320575
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: RestingColor.g
-      value: 0.29803923
+      value: 0.21698111
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: RestingColor.b
-      value: 0.2911181
+      value: 0.21520345
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: ActiveColor.r
-      value: 0.05046281
+      value: 0.4433962
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: ActiveColor.g
-      value: 0.13207549
+      value: 0.30785888
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: ActiveColor.b
-      value: 0.12624602
+      value: 0.11921501
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: ShimmerColor.r
-      value: 0.0735137
+      value: 18.145409
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: ShimmerColor.g
-      value: 0.26415092
+      value: 6.6599536
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
       propertyPath: ShimmerColor.b
-      value: 0.24599497
+      value: 0.2567742
       objectReference: {fileID: 0}
     - target: {fileID: 114190367275616526, guid: c1248d6475e944975bc1e80504aea99e,
         type: 2}
@@ -2141,3 +2169,26 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55029670829bc433690cb5909d505f2b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2119845647 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1006742691471244, guid: 453f96bfa0a864bb79df149f18229f59,
+    type: 2}
+  m_PrefabInternal: {fileID: 9500855}
+--- !u!23 &2119845651 stripped
+MeshRenderer:
+  m_PrefabParentObject: {fileID: 23798481302171792, guid: 453f96bfa0a864bb79df149f18229f59,
+    type: 2}
+  m_PrefabInternal: {fileID: 9500855}
+--- !u!114 &2119845653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2119845647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 4800000, guid: 89736994e789c4fd8968294097f7aae2, type: 3}
+  m_Renderer: {fileID: 2119845651}
