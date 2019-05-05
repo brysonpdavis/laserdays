@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: RealGlass
-  m_Shader: {fileID: 4800000, guid: 525ae4166c71a4a09b3ff9b183ce736b, type: 3}
-  m_ShaderKeywords: 
+  m_Name: R_Glass
+  m_Shader: {fileID: 4800000, guid: 2ce7ad6531ac740ad96f40c3966463db, type: 3}
+  m_ShaderKeywords: _REAL_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -18,6 +18,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AccentMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -34,12 +38,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EffectMap:
+        m_Texture: {fileID: 2800000, guid: 40240aa37529c403f9c7f06d98291e76, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d9fcd52aee8384113b9e5ee427639678, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -67,10 +75,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _ChromaticAberration: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _Dirtiness: 0.031
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -78,8 +88,9 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 0.637
+    - _Opacity: 0.132
     - _Parallax: 0.02
+    - _Real: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -88,9 +99,15 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
+    - _Accent: {r: 0, g: 0, b: 0, a: 0.18039216}
+    - _Base: {r: 0, g: 0, b: 0, a: 0.5019608}
     - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Highlight: {r: 1, g: 1, b: 1, a: 0}
+    - _LaserAccent: {r: 0, g: 0.0037371768, b: 0.03773582, a: 0}
+    - _LaserBase: {r: 0.4716981, g: 0.39097247, b: 0.15352438, a: 0}
     - _Real: {r: 0.21573514, g: 0.4396582, b: 0.4528302, a: 0}
+    - _RealAccent: {r: 0.2830189, g: 0.21760415, b: 0.21760415, a: 0}
+    - _RealBase: {r: 0.09189214, g: 0.25488472, b: 0.3301887, a: 0}
     - _hihlight: {r: 0, g: 0, b: 0, a: 0}
     - _laser: {r: 0.3584906, g: 0.33791685, b: 0.23504807, a: 0}

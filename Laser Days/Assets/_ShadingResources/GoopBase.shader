@@ -72,6 +72,9 @@
         }
         
 		void surf (Input i, inout SurfaceOutput o) {
+        
+            float clipValue = goopAlpha(i.uv_texcoord, _TriggerMap, _TriggerMap_ST, _TransitionState, _Elapsed, _Real);
+            clip(clipValue - _AlphaCutoff);
             
             float sceneZ = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
             float surfZ = -mul(UNITY_MATRIX_V, float4(i.worldPos.xyz, 1)).z;
@@ -93,16 +96,11 @@
             shimmer = saturate(shimmer + _isLineRender);
             
             o.Emission += shimmer * _ShimmerColor * intensity;
-           
-            
-           
-            
+
             o.Alpha = _RestingColor.a;
-            o.Alpha = lerp(_RestingColor.a, 1, 0.2);
+            o.Alpha = lerp(_RestingColor.a, 1, 0.2 * intersect);
                
-            float clipValue = goopAlpha(i.uv_texcoord, _TriggerMap, _TriggerMap_ST, _TransitionState, _Elapsed, _Real);
             
-            clip(clipValue - _AlphaCutoff);
 		}
 		ENDCG
 	}

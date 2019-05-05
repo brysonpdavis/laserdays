@@ -20,6 +20,7 @@ public class PlatformMover : MonoBehaviour {
     private AudioSource audio;
     private bool playerLayer;
     public bool platformIsMoving = false;
+    public bool TweenControl = false;
 
     public void Start()
     {
@@ -97,7 +98,6 @@ public class PlatformMover : MonoBehaviour {
         //yield return new WaitForSeconds(.5f);
         //play starting sound
 
-
         while (ratio < 1f)
         {
 
@@ -108,22 +108,14 @@ public class PlatformMover : MonoBehaviour {
             else
                 audio.mute = false;
 
-
-
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / (duration * durationMultiplier);
 
-            float a = ratio * ratio;
-            float b = 1 - ratio;
-            b = b * b;
-            b = 1 - b;
-            float rr = (1 - ratio) * a + ratio * b;
-
-            transform.position = Vector3.Lerp(startPos, endPos, rr);
-
+            transform.position = Vector3.Lerp(startPos, endPos, TweeningFunctions.EaseInOut(ratio));
 
             yield return null;
         }
+
         transform.position = endPos;
         PlatformObjectSelectable();
         mainGuard.SetActive(true);

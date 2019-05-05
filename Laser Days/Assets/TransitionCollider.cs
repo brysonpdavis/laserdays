@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TransitionCollider : MonoBehaviour
 {
-    public float mySpeed = 1f;
+    public float growthSpeed = 1f;
     public float speed = .4f;
     public float endSize = 500000f;
     SphereCollider collider;
@@ -42,12 +42,12 @@ public class TransitionCollider : MonoBehaviour
     {
 
         float elapsedTime = 0;
-        float ratio = elapsedTime / mySpeed;
+        float ratio = elapsedTime / growthSpeed;
         //int property = Shader.PropertyToID("_D7A8CF01");
         Vector3 startpoint;
         Vector3 endpoint;
 
-        startpoint = new Vector3(.000001f, 0.000001f, 0.000001f);
+        startpoint = new Vector3(0.000001f, 0.000001f, 0.000001f);
         endpoint = new Vector3(endSize, endSize, endSize);
 
         float start = .00001f;
@@ -59,7 +59,7 @@ public class TransitionCollider : MonoBehaviour
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / mySpeed;
+            ratio = elapsedTime / growthSpeed;
             //float value = Mathf.Lerp(startpoint, endpoint, ratio);
             Vector3 value = Vector3.Lerp(startpoint, endpoint, ratio);
 

@@ -10,7 +10,6 @@ inline float4 crossPan (float time)
     return panned;
 }
 
-
 //Goop vertex animation function - multiply result by vertex normal
 inline float goopVertexAnimation (float3 pos, float time, float animate)
 {
@@ -20,9 +19,14 @@ inline float goopVertexAnimation (float3 pos, float time, float animate)
     return m; 
 }
 
-
-
-
+//Goop vertex animation function - multiply result by vertex normal
+inline float goopPlantVertexAnimation (float3 pos, float time, float animate)
+{
+    float m = pos.x * pos.z + 5 * pos.y + time;
+    m = sin(m * 0.2) + 1;
+    m *= 0.6;
+    return m; 
+}
 
 //Crystal vertex animation function - multiply result by vertex normal
 inline float crystalVertexAnimation (float3 pos, float trans, float mag)
@@ -70,9 +74,41 @@ inline float goopShimmer (float2 uv, sampler2D tex, float4 ST, float trans, floa
             
     float result = tex_b - tex_a;
     result = step(0, result);
-    return result;
-                      
+    return result;                   
 }
+
+//Accent map for both singe and double world glass shaders
+inline float glassAccent (float2 uv, sampler2D tex, float4 ST, float trans)
+{
+    float2 map_uv = uv * ST.xy + ST.zw;
+    float2 tex_a = tex2D(tex, map_uv).rg;
+    float acc = lerp(tex_a.r, tex_a.g, trans);
+    acc = step(0.1, acc);
+    return acc;                   
+}
+
+//Clip value for single world glass
+//TODO refactor all alpha functions - to use another world like clip
+inline float glassSingleAlpha (float2 uv, sampler2D tex, float4 ST, float trans, float real)
+{
+    float tex_a = tex2D(tex, (uv * ST.xy + ST.zw )).r;
+    tex_a -= trans;
+    tex_a = step(0, tex_a);
+    float tex_b = 1 - tex_a;
+    return saturate(tex_a * real + tex_b * (1 - real));
+}
+
+inline float goopPlantIntensity(float3 pos, float time)
+{
+    float m = pos.x * pos.z + 2*pos.y + time;
+    m = sin(m);
+    
+    m = (m + 1) * 0.4;
+    m *= m * m;
+    return m;
+    
+}
+
 
 
 

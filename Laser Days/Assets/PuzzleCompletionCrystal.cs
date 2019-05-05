@@ -56,10 +56,6 @@ public class PuzzleCompletionCrystal : MonoBehaviour {
 
     }
 
-    private void Update()
-    {
-       
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -79,7 +75,7 @@ public class PuzzleCompletionCrystal : MonoBehaviour {
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
-            float value = Mathf.Lerp(0f, 1f, ratio);
+            float value = Mathf.Lerp(0f, 1f, TweeningFunctions.EaseOut(ratio));
             material.SetFloat("_TransitionState", value);
          
             yield return new WaitForFixedUpdate();

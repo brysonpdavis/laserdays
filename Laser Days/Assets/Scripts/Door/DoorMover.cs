@@ -83,8 +83,9 @@ public class DoorMover : MonoBehaviour {
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / scaledDuration;
-            newposition.x = Mathf.Lerp(start, end, ratio);
+            newposition.x = Mathf.Lerp(start, end, TweeningFunctions.EaseIn(ratio));
             this.transform.localPosition = newposition;
+
             yield return null;
             if (!(gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer))
             {

@@ -11,7 +11,6 @@
 
         _AlphaCutoff("Alpha Cutoff", Range(0,1)) = 0.5
         
- 
         [HideInInspector] _texcoord( "", 2D ) = "white" {}
         
 	}
@@ -64,9 +63,7 @@
             
             o.Emission.rgb = _BaseColor.rgb;
             o.Alpha = _BaseColor.a;
-           
-               
-            
+             
 		}
 		ENDCG
 	}

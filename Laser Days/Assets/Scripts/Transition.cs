@@ -133,7 +133,6 @@ public class Transition : MonoBehaviour
         mRenderer.SetPropertyBlock(_propBlock);
     }
 
-
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {
 
@@ -143,21 +142,13 @@ public class Transition : MonoBehaviour
       
         while (ratio < 1f)
         {
-
             ratio = elapsedTime / duration;
-
-
-
-            float value = Mathf.Lerp(startpoint, endpoint, ratio);
-
-
-
+            float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.EaseInOut(ratio));
 
             _propBlock.SetFloat("_TransitionState", value);
             mRenderer.SetPropertyBlock(_propBlock);
             //material.SetFloat("_TransitionState", value);
             //RendererExtensions.UpdateGIMaterials(mRenderer);
-
 
             elapsedTime += Time.deltaTime;
             yield return null;
