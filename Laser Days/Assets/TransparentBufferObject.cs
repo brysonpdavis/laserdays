@@ -3,33 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Adds this renderer to command buffer render group - script on camera 
-// Needs the proper shader that corresponds to the shader on object - ie Goop -> Goop
-// TODO Check for these pairings, and don't add object if not, throw error
-
 [ExecuteInEditMode]
 public class TransparentBufferObject : MonoBehaviour
 {
-
-    public Shader replaceShader;
+    [HideInInspector] public Shader replaceShader;
     [HideInInspector] public Renderer m_Renderer;
 
-    public void OnEnable()
-
+    private void tryAdd()
     {
-        if (replaceShader)
+        if (GetComponent<Renderer>())
         {
             m_Renderer = GetComponent<Renderer>();
-            TransparentBufferGroup.instance.AddObject(this);
+
+            Shader materialShader = m_Renderer.sharedMaterial.shader;
+            Shader temp = null;
+
+            //Check if this object's shader has a match in the list of replacable shaders      
+            if (TransparentBufferGroup.instance.CheckForReplacment(materialShader, out temp))
+            {
+                //Add this object to the list of objects to be rendered in the tranparent outline buffer
+                replaceShader = temp;
+                TransparentBufferGroup.instance.AddObject(this);
+            }  else 
+            {
+                Debug.Log("No matching shader found. Object not added to buffer.");
+                Debug.Log(materialShader.name);
+            }        
         }
+        else
+        {
+            Debug.Log("No renderer found. Object not added to buffer.");
+        }
+    }
+
+    public void OnEnable()
+    {
+        tryAdd();
     }
 
     public void Start()
     {
-        if (replaceShader)
-        {
-            m_Renderer = GetComponent<Renderer>();
-            TransparentBufferGroup.instance.AddObject(this);
-        }
+        tryAdd();
     }
 
     public void OnDisable()

@@ -1,4 +1,4 @@
-﻿Shader "Crosshatch/OutlineBuffer/Goop"
+﻿Shader "Crosshatch/OutlineBuffer/Goop-PlantVariant"
 {
     Properties
     {
@@ -96,7 +96,7 @@
                 float4 spec = float4(0, 0,0.5, 0.25);
                 
                 float shimmer = tex2D(_AccentMap, i.uv.xy *_AccentMap_ST.xy + _AccentMap_ST.zw);
-                float intensity = goopPlantIntensity(i.worldPos, _Elapsed);
+                float intensity = goopShimmer(i.uv.xy, _AccentMap, _AccentMap_ST, _TransitionState, _Elapsed, _Real);
                 shimmer = saturate(shimmer - intensity);
                 shimmer = 1 - step(0.1, shimmer);
                 

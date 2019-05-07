@@ -10,13 +10,14 @@ inline float4 crossPan (float time)
     return panned;
 }
 
-//Goop vertex animation function - multiply result by vertex normal
-inline float goopVertexAnimation (float3 pos, float time, float animate)
+//Goop vertex animation function
+inline float3 goopVertexAnimation (float3 pos, float3 norm, float time, float animate)
 {
-    float m = pos.x * pos.z + time;
-    m = 0.04 * sin(m * 8);
-    m *= animate;
-    return m; 
+    float offset = pos.x * pos.z + time;
+    float magnitude = 0.04 * sin(offset * 8);
+    float3 movement = magnitude * norm.xyz;
+    movement *= animate;
+    return movement; 
 }
 
 //Goop vertex animation function - multiply result by vertex normal

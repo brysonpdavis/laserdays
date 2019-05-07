@@ -8,15 +8,26 @@ using System.Collections.Generic;
 
 public class TransparentBufferGroup
 {
+    [HideInInspector] public Dictionary<Shader, Shader> shaderPairs;
+
+    private void Awake()
+    {
+        shaderPairs = buildShaderPairs();
+    }
+
     static TransparentBufferGroup m_Instance;
+
     static public TransparentBufferGroup instance
     {
         get
         {
             if (m_Instance == null)
                 m_Instance = new TransparentBufferGroup();
+                m_Instance.shaderPairs = m_Instance.buildShaderPairs();
             return m_Instance;
         }
+         
+
     }
 
     internal HashSet<TransparentBufferObject> m_Objects = new HashSet<TransparentBufferObject>();
@@ -31,6 +42,32 @@ public class TransparentBufferGroup
     {
         m_Objects.Remove(o);
 
+    }
+
+    public bool CheckForReplacment(Shader matShader, out Shader matchingShader)
+    {
+        bool contains = shaderPairs.ContainsKey(matShader);
+        matchingShader = null;
+
+        if(contains)
+        {
+            matchingShader = shaderPairs[matShader];
+        }
+
+        return contains;
+    }
+
+
+    private Dictionary<Shader, Shader> buildShaderPairs()
+    {
+        Dictionary<Shader, Shader> dict = new Dictionary<Shader, Shader>();
+        dict.Add(Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
+        dict.Add(Shader.Find("Crosshatch/CompletionCrystal"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
+        dict.Add(Shader.Find("Custom/CrystalCore"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
+        dict.Add(Shader.Find("Crosshatch/Glass-Shared"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Shared"));
+        dict.Add(Shader.Find("Crosshatch/Glass-Single"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Single"));
+        dict.Add(Shader.Find("Crosshatch/Goop-PlantVariant"), Shader.Find("Crosshatch/OutlineBuffer/Goop-PlantVariant"));
+        return dict;
     }
 }
 
@@ -53,6 +90,8 @@ public class TransparentBufferRenderer : MonoBehaviour
 
         buff = null;
 
+        //Check if the buffer has already been added to the camera
+        //if it has, clear it and move on
         if (m_Cameras.ContainsKey(cam))
         {
             buff = m_Cameras[cam];

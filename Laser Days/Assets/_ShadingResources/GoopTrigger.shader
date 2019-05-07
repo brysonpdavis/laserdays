@@ -1,8 +1,8 @@
-﻿Shader "Crosshatch/Goop" {
+﻿Shader "Crosshatch/Goop-Trigger" {
 	
     Properties {
 		
-        [Toggle]_Real("Is Real", float) = 0
+        [Toggle]_Real("REAL", float) = 0
         [Toggle]_Animated("Use Vertex Animation", Float) = 0
          _TriggerMap("Goop Map", 2D) = "white" {}
         
@@ -21,7 +21,6 @@
         [HideInInspector]_isLineRender("_isLineRender", Range ( 0 , 1)) = 0
         
         _AlphaCutoff("Alpha Cutoff", Range(0,1)) = 0.5
-        
 
         [HideInInspector] _texcoord( "", 2D ) = "white" {}
         
@@ -60,17 +59,15 @@
         {
             return half4 ( 0, 0, 0, s.Alpha );
         }
-        
-        
+                
         void vertexDataFunc( inout appdata_full v, out Input o )
         {
             UNITY_INITIALIZE_OUTPUT( Input, o );
-            float3 vert = v.vertex.xyz;
-            float3 norm = v.normal.xyz;
-            float mag = goopVertexAnimation(v.vertex.xyz, _Elapsed, _Animated);       
-            v.vertex.xyz += mag * norm; 
+            float3 movement = goopVertexAnimation(v.vertex.xyz, v.normal.xyz, _Elapsed, _Animated);       
+            v.vertex.xyz += movement; 
         }
         
+
 		void surf (Input i, inout SurfaceOutput o) {
         
             float clipValue = goopAlpha(i.uv_texcoord, _TriggerMap, _TriggerMap_ST, _TransitionState, _Elapsed, _Real);
@@ -79,7 +76,7 @@
             float sceneZ = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
             float surfZ = -mul(UNITY_MATRIX_V, float4(i.worldPos.xyz, 1)).z;
             float diff = sceneZ - surfZ;
-            float intersect = saturate(diff / _FadeLength);
+            float intersect = 1 - saturate(diff / _FadeLength);
             
             
             float shimmer = goopShimmer(i.uv_texcoord, _TriggerMap, _TriggerMap_ST, _TransitionState, _Elapsed, _Real);
@@ -88,7 +85,7 @@
             
             float intensity = lerp(0.05, 1, activity);
         
-            float3 dark = _RestingColor.rgb * 0.8;
+            float3 dark = _RestingColor.rgb * 0.4;
 
             o.Emission.rgb = lerp(_RestingColor.rgb, dark, intersect);
             o.Emission = lerp(o.Emission.rgb, _ActiveColor, activity);
@@ -98,7 +95,7 @@
             o.Emission += shimmer * _ShimmerColor * intensity;
 
             o.Alpha = _RestingColor.a;
-            o.Alpha = lerp(_RestingColor.a, 1, 0.2 * intersect);
+            o.Alpha = lerp(_RestingColor.a, 1, 0.4 * intersect);
                
             
 		}

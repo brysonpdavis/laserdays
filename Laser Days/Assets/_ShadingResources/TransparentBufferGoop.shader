@@ -1,19 +1,13 @@
-﻿Shader "Crosshatch/OutlineBuffer/Goop"
+﻿Shader "Crosshatch/OutlineBuffer/Goop-Trigger"
 {
     Properties
     {
         [Toggle]_Real("REAL", float) = 0
-        
-        [HDR]_RestingColor("Resting Color", Color) = (0,0,0,0)
-        [HDR]_ShimmerColor("Shimmer Color", Color) = (0,0,0,0)
-        [HDR]_ActiveColor("Active Color", Color) = (0,0,0,0)
-        
-        
         [Toggle]_Animated("Use Vertex Animation", Float) = 0
+        
         [HideInInspector]_Elapsed("Elapsed", Float) = 0
         
-        _TriggerMap("Trigger Map", 2D) = "white" {}
-        _EffectMap("Effect Map", 2D) = "white" {}
+        _TriggerMap("Goop Map", 2D) = "white" {}
         
         _TransitionState("Transition State", Range( 0 , 1)) = 0
         
@@ -21,9 +15,7 @@
         [HideInInspector]_isCollide("isCollide", Range( 0 , 1)) = 0
         
         _AlphaCutoff("Alpha Cutoff", Range(0,1)) = 0.5
-        
-        
-        
+
         [HideInInspector] _texcoord( "", 2D ) = "white" {}
     }
     
@@ -64,30 +56,25 @@
             sampler2D _TriggerMap;
             float4 _TriggerMap_ST;
         
-            sampler2D _CameraDepthTexture;
-        
             uniform float _Real;
-         
-            uniform float4 _RestingColor, _ShimmerColor, _ActiveColor;
-        
+  
             uniform float _Animated, _Elapsed, _AlphaCutoff;
         
-            uniform float _TransitionState, _isActive, isCollide;
-        
+            uniform float _TransitionState;
+           
 
             Interpolators vert (VertexData v)
             {
                 Interpolators i;
-                float4 temp = v.vertex;
-                float mag = goopVertexAnimation(v.vertex.xyz, _Elapsed, _Animated);       
-                temp.xyz += mag * v.normal;
+                float3 newPos = v.vertex.xyz;
+                float3 movement = goopVertexAnimation(v.vertex.xyz, v.normal.xyz, _Elapsed, _Animated);       
+                newPos += movement;
                 
-                i.pos = UnityObjectToClipPos(temp);
+                i.pos = UnityObjectToClipPos(newPos);
                 
                 i.uv.xy = v.uv;
                 
                 return i;
-                
             }
             
 

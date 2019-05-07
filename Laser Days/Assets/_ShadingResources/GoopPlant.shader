@@ -1,4 +1,4 @@
-﻿Shader "Crosshatch/GoopPlantVariant" {
+﻿Shader "Crosshatch/Goop-PlantVariant" {
     
     Properties {
         
@@ -79,7 +79,7 @@
             float diff = sceneZ - surfZ;
             float intersect = 1 - saturate(diff / _FadeLength);
             
-            float intensity = goopPlantIntensity(i.worldPos, _Elapsed);
+            float intensity = goopShimmer(i.uv_texcoord, _AccentMap, _AccentMap_ST, _TransitionState, _Elapsed, _Real);
             float acc = tex2D(_AccentMap, i.uv_texcoord * _AccentMap_ST.xy + _AccentMap_ST.zw);
             
             acc = saturate(acc - intensity);
@@ -93,7 +93,7 @@
 
             
             
-            o.Emission += acc * _ShimmerColor;
+            o.Emission += intensity * _ShimmerColor;
 
             o.Alpha = _RestingColor.a;
             o.Alpha = lerp(_RestingColor.a, 1, 0.4 * intersect);
