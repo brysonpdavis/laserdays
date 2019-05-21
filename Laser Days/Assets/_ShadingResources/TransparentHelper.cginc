@@ -24,8 +24,8 @@ inline float3 goopVertexAnimation (float3 pos, float3 norm, float time, float an
 inline float goopPlantVertexAnimation (float3 pos, float time, float animate)
 {
     float m = pos.x * pos.z + 5 * pos.y + time;
-    m = sin(m * 0.2) + 1;
-    m *= 0.6;
+    m = sin(m * 0.8) + 1;
+    m *= 0.07;
     return m; 
 }
 

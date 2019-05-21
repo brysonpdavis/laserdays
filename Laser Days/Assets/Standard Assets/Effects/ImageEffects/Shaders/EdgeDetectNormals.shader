@@ -79,16 +79,30 @@ Shader "Hidden/EdgeDetect" {
 
 		return len * lerp(original, _BgColor, _BgFade);			
 	}	
+    
+    inline float ComputeDistance(float depth)
+    {
+        float dist = 0.0;
+        dist = depth * _ProjectionParams.z;
+        dist -= _ProjectionParams.y;
+        return dist;
+    }
+
+    inline float ComputeFog(float depth, float density)
+    {
+        float fog = 0.0;
+        fog = density * ComputeDistance(depth);
+        fog = exp2(-fog);
+        saturate(fog);
+        return fog; 
+    }
 	
     inline half CheckSameExtra (float4 centerExtra, half4 theSampleA, half4 theSampleB)
     {
         float3 diff = centerExtra.rgb * 2 - theSampleA.rgb - theSampleB.rgb; 
         float len = dot(diff,diff);
-        len = step(len, 0.05);
-        return len;
-        
-  
-        
+        len = step(len, 0.01);
+        return len;   
     }   
     
     inline half CheckSameShadow (float centershadow, float shadowA, float shadowB)
@@ -97,17 +111,18 @@ Shader "Hidden/EdgeDetect" {
         float len = dot(diff,diff);
         len = step(len, 0.05);
         return len;
-        
-  
-        
     }   
     
-	inline half CheckSame (half2 centerNormal, float centerDepth, half4 theSample)
+	inline half CheckSame (half2 centerNormal, float centerDepth, half4 theSample, half mod)
 	{
 		// difference in normals
 		// do not bother decoding normals - there's no need here
-		half2 diff = abs(centerNormal - theSample.xy) * _Sensitivity.y;
-		int isSameNormal = (diff.x + diff.y) * _Sensitivity.y < 0.1;
+
+        
+        float modSensitivity = saturate(_Sensitivity.y * (1 - mod));
+        
+		half2 diff = abs(centerNormal - theSample.xy) * modSensitivity;
+		int isSameNormal = (diff.x + diff.y) * modSensitivity < 0.1;
 		// difference in depth
 		float sampleDepth = DecodeFloatRG (theSample.zw);
 		float zdiff = abs(centerDepth-sampleDepth);
@@ -119,7 +134,34 @@ Shader "Hidden/EdgeDetect" {
 		// 0 - otherwise
 		
 		return isSameNormal * isSameDepth ? 1.0 : 0.0;
+        
 	}	
+    
+    inline half2 MyCheckSame (half2 centerNormal, float centerDepth, half4 theSample, half mod)
+    {
+        // difference in normals
+        // do not bother decoding normals - there's no need here
+
+        
+        float modSensitivity = saturate(_Sensitivity.y * (1 - mod));
+        
+        half2 diff = abs(centerNormal - theSample.xy) * modSensitivity;
+        int isSameNormal = (diff.x + diff.y) * modSensitivity < 0.1;
+        // difference in depth
+        float sampleDepth = DecodeFloatRG (theSample.zw);
+        float zdiff = abs(centerDepth-sampleDepth);
+        // scale the required threshold by the distance
+        int isSameDepth = zdiff * _Sensitivity.x < 0.09 * centerDepth;
+    
+        // return:
+        // 1 - if normals and depth are similar enough
+        // 0 - otherwise
+        
+        half same = isSameNormal * isSameDepth ? 1.0 : 0.0;
+        half minDepth = min(centerDepth, sampleDepth);
+        return half2(same, minDepth);
+    }   
+        
 		
 	v2f vertRobert( appdata_img v ) 
 	{
@@ -279,28 +321,13 @@ Shader "Hidden/EdgeDetect" {
 
 		half edge = 1.0;
 		
-		edge *= CheckSame(sample1.xy, DecodeFloatRG(sample1.zw), sample2);
-		edge *= CheckSame(sample3.xy, DecodeFloatRG(sample3.zw), sample4);
+		edge *= CheckSame(sample1.xy, DecodeFloatRG(sample1.zw), sample2, 0);
+		edge *= CheckSame(sample3.xy, DecodeFloatRG(sample3.zw), sample4, 0);
 
 		return edge * lerp(tex2D(_MainTex, i.uv[0]), _BgColor, _BgFade);
 	}
 
-    float ComputeDistance(float depth)
-        {
-            float dist = 0.0;
-            dist = depth * _ProjectionParams.z;
-            dist -= _ProjectionParams.y;
-            return dist;
-        }
-
-    float ComputeFog(float coord)
-        {
-            float fog = 0.0;
-            fog = 0.007 * coord;
-            fog = exp2(-fog);
-            saturate(fog);
-            return fog; 
-        }
+  
 
 	half4 fragThin (v2f i) : SV_Target
 	{
@@ -313,46 +340,37 @@ Shader "Hidden/EdgeDetect" {
         half4 centerExtra = tex2D (_CameraGBufferTexture1, i.uv[1]);
         half4 sample1A = tex2D (_CameraGBufferTexture1, i.uv[2]);
         half4 sample2B = tex2D (_CameraGBufferTexture1, i.uv[3]);
-        
-        half centershadow = tex2D(_ShadowMapTexture, i.uv[1]);
-        half shadowA = tex2D(_ShadowMapTexture, i.uv[2]);
-        half shadowB = tex2D(_ShadowMapTexture, i.uv[3]);
-		
+
 		// encoded normal
 		half2 centerNormal = center.xy;
 		// decoded depth
 		float centerDepth = DecodeFloatRG (center.zw);
         
-        float CEa = centerExtra.r;
+        //modify normnal sensitivity from material value
+        half modSensitivity = centerExtra.a;
+   
+        half2 pass1 = MyCheckSame(centerNormal, centerDepth, sample1, modSensitivity);
+        half2 pass2 = MyCheckSame(centerNormal, centerDepth, sample2, modSensitivity);
+        half passExtra = CheckSameExtra(centerExtra, sample1A, sample2B);
+      
+        half edge = pass1.x * pass2.x * passExtra;
+        half minDepth = min(pass1.y, pass2.y);
         
-		
-		half edge = 1.0;
-        half4 white = (1,1,1,1);
-        half4 black  = (0,0,0,0);
-		
-		edge *= CheckSame(centerNormal, centerDepth, sample1);
-		edge *= CheckSame(centerNormal, centerDepth, sample2);
-        edge *= CheckSameExtra(centerExtra, sample1A, sample2B);
-
-        
-         //return edge;
-        edge = 1-edge;
-
-        float f = ComputeDistance(centerDepth);
-        f = ComputeFog(f);
-        //step()
-        // f = 1 - f;
+        //Line opapcity depth fade
+        float f = ComputeFog(minDepth, 0.05);     
         if(centerDepth>0.999){
-        f = 1;
+            f = 1;
         }
 			
        
         _PauseMenu = saturate(_PauseMenu);
         
+        
+        edge = saturate(edge + ( 1 - f)) * _BgColor.a;
         //return center;
 
-        float4 pm = lerp(0,1,(edge*f));   
-		float4 sc = lerp(original, _BgColor, (edge*f*_BgColor.a));
+        float4 pm = lerp(1,0,edge);   
+		float4 sc = (original * edge);
         
         
         //return centerExtra;

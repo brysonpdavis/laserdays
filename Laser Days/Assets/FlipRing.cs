@@ -41,21 +41,17 @@ public class FlipRing : MonoBehaviour {
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / mySpeed;
-            float a = ratio * ratio;
-            float b = 1 - ratio;
-            b = b * b;
-            b = 1 - b;
-            float rr = (1 - ratio) * a + ratio * b;
+       
 
 
 
             //float value = Mathf.Lerp(startpoint, endpoint, ratio);
-            Vector3 value = Vector3.Lerp(startpoint, endpoint, b);
+            Vector3 value = Vector3.Lerp(startpoint, endpoint, TweeningFunctions.EaseOutCubic(ratio));
 
             transform.localScale = value;
 
 
-            float v = Mathf.Lerp(0f, 1f, b);
+            float v = Mathf.Lerp(0f, 1f, TweeningFunctions.EaseOutCubic(ratio));
 
             material.SetFloat("_TransitionState", v);
             //RendererExtensions.UpdateGIMaterials(mRenderer);

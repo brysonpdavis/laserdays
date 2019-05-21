@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Sphere Real
-  m_Shader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
+  m_Shader: {fileID: 4800000, guid: 664eff677580e453faaf42f802736470, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -18,6 +18,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AccentMap:
+        m_Texture: {fileID: 2800000, guid: 4539289b6e6e94c6fa8425ee042226cb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -66,11 +70,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ShadingMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _Clip: 1
     - _Cutoff: 0.5
@@ -82,10 +91,12 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LineA: 0.69
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Smoothness: 0.436
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -102,4 +113,8 @@ Material:
     - _ColorReal: {r: 0.4811321, g: 0.33889478, b: 0.27460837, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _InteractColor: {r: 0.24999955, g: 0.24999955, b: 0.24999955, a: 0.4}
+    - _LaserAccent: {r: 0, g: 0, b: 0, a: 0}
+    - _LaserBase: {r: 0, g: 0, b: 0, a: 0}
+    - _RealAccent: {r: 0.9056604, g: 0.06407974, b: 0.06407974, a: 0.16078432}
+    - _RealBase: {r: 0.5283019, g: 0.5004793, b: 0.37130654, a: 0}
     - _ShimmerColor: {r: 0.5019608, g: 4, b: 0, a: 1}

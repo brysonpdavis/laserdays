@@ -1739,100 +1739,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
   m_IsPrefabParent: 0
---- !u!21 &808611635
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: RealGlass (Instance)
-  m_Shader: {fileID: 4800000, guid: 525ae4166c71a4a09b3ff9b183ce736b, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TextureSample0:
-        m_Texture: {fileID: 2800000, guid: 5c271168c919b48e2b3734ca8421f024, type: 3}
-        m_Scale: {x: 2, y: 2}
-        m_Offset: {x: 0, y: 0}
-    - _TextureSample1:
-        m_Texture: {fileID: 2800000, guid: 1ce8744130c8d5542bb1f6e380e35a7e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _texcoord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _BumpScale: 1
-    - _ChromaticAberration: 0
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Opacity: 0.637
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _TransitionState: 0
-    - _UVSec: 0
-    - _ZWrite: 1
-    - __dirty: 0
-    m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Highlight: {r: 1, g: 1, b: 1, a: 0}
-    - _Real: {r: 0.21573514, g: 0.4396582, b: 0.4528302, a: 0}
-    - _hihlight: {r: 0, g: 0, b: 0, a: 0}
-    - _laser: {r: 0.3584906, g: 0.33791685, b: 0.23504807, a: 0}
 --- !u!1001 &808899650
 Prefab:
   m_ObjectHideFlags: 0
@@ -2047,7 +1953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replaceShader: {fileID: 0}
+  replaceShader: {fileID: 4800000, guid: c1acf754fc93f43248d45d7dba2bcac6, type: 3}
   m_Renderer: {fileID: 886437724}
 --- !u!23 &886437724 stripped
 MeshRenderer:
@@ -2682,13 +2588,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 23338567112957916, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 808611635}
+      objectReference: {fileID: 2100000, guid: 857d4fabbbea54ce291b7f4719eb8d45, type: 2}
     - target: {fileID: 1367334672899142, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_Name
       value: DOME (1)
@@ -3120,79 +3026,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1cb5859eb3614dd8a0e6ceab48df666, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &1629051212
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 464748516}
-    m_Modifications:
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_RootOrder
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 23338567112957916, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1f1873bdf205b42e59339e951718dec7, type: 2}
-    - target: {fileID: 1367334672899142, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_Name
-      value: DOME
-      objectReference: {fileID: 0}
-    - target: {fileID: 33388795567339502, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: d5e21640db3114be98ce265c19197307, type: 3}
-    - target: {fileID: 64978881467613234, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: d5e21640db3114be98ce265c19197307, type: 3}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1645892454 stripped
 Transform:

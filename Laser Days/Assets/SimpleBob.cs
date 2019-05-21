@@ -20,6 +20,7 @@ public class SimpleBob : MonoBehaviour {
 	void FixedUpdate () {
         if (bob)
         {
+            
             transform.position += new Vector3(0f, Mathf.Sin(Time.fixedTime) * 0.002f, 0f);
         }
         if (AnimTest)

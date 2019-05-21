@@ -15,7 +15,7 @@
         _LaserBase("Laser Base Color", Color) = (0,0,0,0)
         _LaserAccent("Laser Accent Color", Color) = (0,0,0,0)
         
-        _LineA ("Extra Outline", Range(0,3.99)) = 0
+        _LineA ("Extra Outline", Range(0,7.99)) = 0
         
         _Smoothness("Smoothness", Range(0,1)) = 0
         

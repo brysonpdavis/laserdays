@@ -96,7 +96,7 @@
             o.Emission += intensity * _ShimmerColor;
 
             o.Alpha = _RestingColor.a;
-            o.Alpha = lerp(_RestingColor.a, 1, 0.4 * intersect);
+            o.Alpha = lerp(_RestingColor.a, _ThirdColor.a, intersect);
                
             
         }

@@ -82,13 +82,12 @@ half4 BRDF_Unity_Toon (half3 diffColor, half3 specColor, half oneMinusReflectivi
     surfaceReduction = 1.0 - roughness*perceptualRoughness*surfaceReduction;
 
     half grazingTerm = saturate(smoothness + (1-oneMinusReflectivity));
-    half3 color =   (diffColor + 0.0 * specColor) * light.color * nl
-                    + gi.diffuse * diffColor
-                    + surfaceReduction * gi.specular * FresnelLerpFast ((specColor * 0), grazingTerm, nv);
+    //half3 color =   (diffColor + 0.0 * specColor) * light.color * nl
+                    //+ gi.diffuse * diffColor
+                   // + surfaceReduction * gi.specular * FresnelLerpFast ((specColor * 0), grazingTerm, nv);
                     
                     
-                      half3 color2 =   (diffColor) * light.color * nl
-                    + gi.diffuse * diffColor;
+    half3 color2 =   (diffColor) * light.color * nl + gi.diffuse * diffColor * half3(0,1,0) * (1 - nl);
 
     return half4(color2, 1);
 }

@@ -17,7 +17,7 @@ public class Toolbox : Singleton<Toolbox>
     RaycastManager raycastManager;
     MFPP.Modules.PickUpModule pickUp;
     flipScript flipScript;
-    public float globalFlipSpeed = .4f;
+    public float globalFlipSpeed = 2f;
     public float globalRealLaserFlipSpeed = .2f;
     public bool loadFromSave = false;
     public bool loadSelection = false;

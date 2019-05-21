@@ -99,9 +99,9 @@ float GetAlpha (Interpolators i) {
 
 float3 GetSpec (Interpolators i){
     
-    float rr = GetAccentMask(i) * 0.25; 
+    float rr = GetAccentMask(i) * 0.125; 
     
-    float gg = 0.25 * floor(_LineA);
+    float gg = 0.125 * floor(_LineA);
     
     return float3(rr,gg,0);
 }
@@ -349,9 +349,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
 
     float3 specularTint;
     float oneMinusReflectivity;
-    float3 albedo = DiffuseAndSpecularFromMetallic(
-        GetAlbedo(i), GetMetallic(i), specularTint, oneMinusReflectivity
-    );
+    float3 albedo = GetAlbedo(i);
     
     specularTint = float4(0.1, 0.1, 0.1, 0);
     oneMinusReflectivity = 1;

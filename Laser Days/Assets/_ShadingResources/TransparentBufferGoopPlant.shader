@@ -73,7 +73,7 @@
                 float mag = goopPlantVertexAnimation(v.vertex.xyz, _Elapsed, 1);       
                 temp.xyz += mag * v.normal;
                 
-                i.worldPos = v.vertex.xyz;
+                i.worldPos = temp.xyz;
                 i.pos = UnityObjectToClipPos(temp);
                 
                 i.uv.xy = v.uv;

@@ -71,7 +71,6 @@
                 newPos += movement;
                 
                 i.pos = UnityObjectToClipPos(newPos);
-                
                 i.uv.xy = v.uv;
                 
                 return i;
