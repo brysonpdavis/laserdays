@@ -75,6 +75,21 @@ public class flipScript : MonoBehaviour {
                     GetComponent<MFPP.Modules.PickUpModule>().PutDown();
                     heldObj = null;
                 }
+
+
+                //if the player is holding an object that can be flipped, make sure it is able to
+                FlippableObject flippable = null;
+                if (heldObj && heldObj.GetComponent<FlippableObject>())
+                {
+                    flippable = heldObj.GetComponent<FlippableObject>();
+                    if (!flippable.MaxFlipCheck(false))
+                    {
+                        GetComponent<MFPP.Modules.PickUpModule>().PutDown();
+                        heldObj = null;
+                    }
+                }
+
+                
             }
 
 			if (heldObj) {

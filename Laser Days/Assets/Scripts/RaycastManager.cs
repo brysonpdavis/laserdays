@@ -188,7 +188,7 @@ public class RaycastManager : MonoBehaviour {
                         }
                         else 
                         {
-                            if (!(GetComponent<MFPP.Modules.PickUpModule>().heldObject)) {
+                            if (!(GetComponent<MFPP.Modules.PickUpModule>().heldObject) && raycastedObj.GetComponent<FlippableObject>().MaxFlipCheck(false)) {
                                 selectedObjs.Add(raycastedObj);
                                 AddToList(raycastedObj);
 

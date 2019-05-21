@@ -4,9 +4,8 @@ using UnityEngine;
 
 abstract public class FlippableObject : InteractableObject
 {
-
-    [HideInInspector] public int timesFlipped = 0;
-    [HideInInspector] public int maxFlips;
+    public int timesFlipped = 0;
+    public int maxFlips;
     public float secondaryFlipDuration = 1f;
     private IEnumerator flipTransition;
     private float scaledDuration;
@@ -65,11 +64,13 @@ abstract public class FlippableObject : InteractableObject
 
     public virtual void OnFlip()
     {
-        MaxFlipCheck();
-        ParticleEffect();
-        ColorTransition();
-        LayerSwitch();
-        FlipCore(true);
+        if (MaxFlipCheck(true))
+        {
+            ParticleEffect();
+            ColorTransition();
+            LayerSwitch();
+            FlipCore(true);
+        }
     }
 
     public void Update()
@@ -83,12 +84,14 @@ abstract public class FlippableObject : InteractableObject
 
     }
 
+    protected bool AbleToFlip { get { return MaxFlipCheck(false); }} 
+
     public virtual int TimesFlipped { get { return timesFlipped; } }
 
     protected void LayerSwitch()
     {
-        InteractableObject.ObjectType type = objectType;
 
+        InteractableObject.ObjectType type = objectType;
         if (Toolbox.Instance.PlayerInLaser())
         {
             SetObjectToLaser(); //set object to laser layer
@@ -132,14 +135,27 @@ abstract public class FlippableObject : InteractableObject
         this.transform.parent = realTransform;  //Toolbox.Instance.GetRealWorldParent();
     }
 
-    void MaxFlipCheck()
+    public bool MaxFlipCheck(bool CurrentlyFlipping)
     {
-        timesFlipped += 1;
+        if (CurrentlyFlipping)
+            timesFlipped += 1;
 
-        if (timesFlipped == maxFlips + 1)
+        if (maxFlips == 0)
+            return true;
+
+        else if  ((maxFlips == timesFlipped) && CurrentlyFlipping)
         {
-            //this.gameObject.SetActive(false);
+            Debug.Log("LAST FLIP! Can do something here :)");
+             return true;
         }
+            
+        else if ((maxFlips != 0) && timesFlipped >= (maxFlips))
+        {
+            return false;
+        }
+
+        else
+            return true;
     }
 
     public override void LoadShader(bool real)

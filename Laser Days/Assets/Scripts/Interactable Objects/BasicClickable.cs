@@ -22,9 +22,15 @@ public class BasicClickable : FlippableObject {
             rigidbody.isKinematic = false;
             rigidbody.useGravity = false;
             rigidbody.freezeRotation = true;
-            Select();
-            renderer.material.SetFloat("_Shimmer", 1f);
-            renderer.material.SetInt("_onHover", 1);
+            
+        //verify if we should add shimmer effects while holding
+            if (MaxFlipCheck(false))
+            {
+                Select();
+                renderer.material.SetFloat("_Shimmer", 1f);
+                renderer.material.SetInt("_onHover", 1);
+            }
+                
             rigidbody.constraints = RigidbodyConstraints.None;
             transform.localRotation = Quaternion.Euler(Vector3.zero);
 
@@ -91,17 +97,28 @@ public class BasicClickable : FlippableObject {
 
     public override void DistantIconHover()
     {
-        iconContainer.SetSelectHover();
+        if (AbleToFlip)
+            iconContainer.SetSelectHover();
+        else 
+            iconContainer.SetInteractHover();
+
     }
 
     public override void CloseIconHover()
     {
-        iconContainer.SetOpenHandFill();
+        if (AbleToFlip)
+            iconContainer.SetOpenHandFill();
+        else
+            iconContainer.SetOpenHand();
+
     }
 
     public override void InteractingIconHover()
     {
-        iconContainer.SetHoldFill();
+        if (AbleToFlip)
+            iconContainer.SetHoldFill();
+        else
+            iconContainer.SetHold();
     }
 
 
