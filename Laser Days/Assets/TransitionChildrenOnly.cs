@@ -18,7 +18,11 @@ public class TransitionChildrenOnly : Transition {
         foreach (Transition transition in childrenTransitions)
         {
             if (!transition.gameObject.Equals(this.gameObject) && !Toolbox.Instance.EqualToHeld(transition.gameObject))
+            {
+                transition.StopAllCoroutines();
                 transition.Flip(end, duration);
+            }
+                
         }
     }
 
