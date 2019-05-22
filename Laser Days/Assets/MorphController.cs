@@ -181,8 +181,8 @@ public class MorphController : MonoBehaviour {
 
 
         Rigidbody rigidbody = GetComponent<Rigidbody>();
-        rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
-        rigidbody.isKinematic = false;
+        //rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
+        //rigidbody.isKinematic = false;
 
         this.tag = "NoTouch";
 
