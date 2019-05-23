@@ -1,28 +1,41 @@
-﻿Shader "Crosshatch/Shared-Standard" {
+﻿Shader "Crosshatch/Standard" {
 
     Properties {
         
         _MainTex("Material Map", 2D) = "white" {}
+        _MainTexContribution("Material Intensity", Range(0,1)) = 0.1 
     
         [NoScaleOffset] _AccentMap("Accent Map", 2D) = "black" {}
         [NoScaleOffset] _EffectMap("Effect Map", 2D) = "white" {}
         
-         _ShadingMap("Occlusion Deatil Map", 2D) = "white" {}
+         _ShadingMap("Hatching Map", 2D) = "white" {}
         
-        _RealBase("Real Base Color", Color) = (0,0,0,0)  
+        _RealBase("Real Base Color", Color) = (1,1,1,1)  
         _RealAccent("Real Accent Color", Color) = (0,0,0,0)
+        _RealGradient("Real Gradient Color", Color) = (0,0,0,0)
         
-        _LaserBase("Laser Base Color", Color) = (0,0,0,0)
+        _LaserBase("Laser Base Color", Color) = (1,1,1,1)
         _LaserAccent("Laser Accent Color", Color) = (0,0,0,0)
+        _LaserGradient("Laser Gradient Color", Color) = (0,0,0,0)
         
-        _LineA ("Extra Outline", Range(0,3.99)) = 0
+        _InteractColor("Interact Color", Color) = (0,0,0,0)
+        [HDR]_ShimmerColor("Shimmer Color", Color) = (0,0,0,0)
         
-        _Smoothness("Smoothness", Range(0,1)) = 0
+        _LineA ("Outline ID", Range(0,8)) = 0
+        _Smoothness("Outline Smoothing", Range(0,1)) = 0
+        
+        _GradientScale("Gradient Scale", Range(0, 3)) = 1
+        _GradientOffset("Gradient Offset", Range(-3,3)) = 0
         
         _TransitionState("Transition State", Range(0,1)) = 0
+        _TransitionStateB("Transition State B", Range( 0 , 1)) = 0
         
         _AlphaCutoff ("Alpha Cutoff", Range(0, 1)) = 0.5
         
+        [HideInInspector]_onHold("onHold", Range( 0 , 1)) = 0
+        [HideInInspector]_onHover("onHover", Range( 0 , 1)) = 0
+        [HideInInspector]_Flippable("Flippable", Int) = 1
+        [HideInInspector]_Elapsed("Elapsed", Float) = 0
 
         [HideInInspector] _SrcBlend ("_SrcBlend", Float) = 1
         [HideInInspector] _DstBlend ("_DstBlend", Float) = 0
@@ -48,25 +61,19 @@
 
             #pragma target 3.0
 
-            #pragma shader_feature _ _RENDERING_CUTOUT _RENDERING_FADE _RENDERING_TRANSPARENT
-            #pragma shader_feature _METALLIC_MAP
-            #pragma shader_feature _ _SMOOTHNESS_ALBEDO _SMOOTHNESS_METALLIC
-            #pragma shader_feature _NORMAL_MAP
-            #pragma shader_feature _OCCLUSION_MAP
-            #pragma shader_feature _EMISSION_MAP
-            #pragma shader_feature _DETAIL_MASK
-            #pragma shader_feature _DETAIL_ALBEDO_MAP
-            #pragma shader_feature _DETAIL_NORMAL_MAP
-            
-
             #pragma multi_compile _ SHADOWS_SCREEN
             #pragma multi_compile _ VERTEXLIGHT_ON
+            
+            #pragma multi_compile SHARED REAL LASER
+            #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
+            #pragma multi_compile _ ACCENT_ON
+            #pragma multi_compile STATIC INTERACTABLE
 
             #pragma vertex MyVertexProgram
             #pragma fragment MyFragmentProgram
 
             #define FORWARD_BASE_PASS
-            #define SHARED
+
 
             #include "CrosshatchStandardCG.cginc"
 
@@ -84,21 +91,17 @@
             CGPROGRAM
 
             #pragma target 3.0
-
-            #pragma shader_feature _ _RENDERING_CUTOUT _RENDERING_FADE _RENDERING_TRANSPARENT
-            #pragma shader_feature _METALLIC_MAP
-            #pragma shader_feature _ _SMOOTHNESS_ALBEDO _SMOOTHNESS_METALLIC
-            #pragma shader_feature _NORMAL_MAP
-            #pragma shader_feature _DETAIL_MASK
-            #pragma shader_feature _DETAIL_ALBEDO_MAP
-            #pragma shader_feature _DETAIL_NORMAL_MAP
-
+            
+            #pragma multi_compile SHARED REAL LASER
+            #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
+            #pragma multi_compile _ ACCENT_ON
+            #pragma multi_compile STATIC INTERACTABLE
+          
             #pragma multi_compile_fwdadd_fullshadows
             
             #pragma vertex MyVertexProgram
             #pragma fragment MyFragmentProgram
             
-            #define SHARED
 
             #include "CrosshatchStandardCG.cginc"
 
@@ -114,19 +117,11 @@
 
             #pragma target 3.0
             #pragma exclude_renderers nomrt
-
-            #pragma shader_feature _ _RENDERING_CUTOUT
-            #pragma shader_feature _METALLIC_MAP
-            #pragma shader_feature _ _SMOOTHNESS_ALBEDO _SMOOTHNESS_METALLIC
-            #pragma shader_feature _NORMAL_MAP
-            #pragma shader_feature _OCCLUSION_MAP
-            #pragma shader_feature _EMISSION_MAP
-            #pragma shader_feature _DETAIL_MASK
-            #pragma shader_feature _DETAIL_ALBEDO_MAP
-            #pragma shader_feature _DETAIL_NORMAL_MAP
             
-            #pragma shader_feature _ACCENT_MAP
-            
+            #pragma multi_compile SHARED REAL LASER
+            #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
+            #pragma multi_compile _ ACCENT_ON
+            #pragma multi_compile STATIC INTERACTABLE
             #pragma multi_compile _ UNITY_HDR_ON
 
             #pragma vertex MyVertexProgram
@@ -149,16 +144,14 @@
 
             #pragma target 3.0
 
-            #pragma shader_feature _ _RENDERING_CUTOUT _RENDERING_FADE _RENDERING_TRANSPARENT
-            #pragma shader_feature _SEMITRANSPARENT_SHADOWS
-            #pragma shader_feature _SMOOTHNESS_ALBEDO
+
 
             #pragma multi_compile_shadowcaster
+            #pragma multi_compile SHARED REAL LASER
 
             #pragma vertex MyShadowVertexProgram
             #pragma fragment MyShadowFragmentProgram
             
-            #define SHARED
 
             #include "My Shadows.cginc"
 
@@ -167,5 +160,5 @@
     }
     
     
-    //CustomEditor "MyLightingShaderGUI"
+    CustomEditor "CrosshatchStandardGUI"
 }

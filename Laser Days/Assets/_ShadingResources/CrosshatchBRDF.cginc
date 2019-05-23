@@ -94,8 +94,8 @@ half4 BRDF_Unity_Toon (half3 diffColor, half3 specColor, half oneMinusReflectivi
                     
      */               
       half banded = floor(clamp(nl, 0, 1) * 2);
-      half stepped = step(0.02, nl);
-      half lightAmount = lerp(banded, stepped, 0.65);
+      half stepped = step(0.1, nl);
+      half lightAmount = lerp(banded, stepped, 0.86);
 
       half3 color2 = diffColor * light.color * lightAmount + gi.diffuse * diffColor;
       return half4(color2, 1);

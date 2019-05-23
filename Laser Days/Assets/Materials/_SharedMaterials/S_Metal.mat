@@ -7,8 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: S_Metal
-  m_Shader: {fileID: 4800000, guid: c284815f8bda94710886db31bd115231, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
+  m_ShaderKeywords: NO_GRADIENT SHARED
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -83,7 +83,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadingMap:
-        m_Texture: {fileID: 2800000, guid: c81c3ffb858834812ba18a6b29450d09, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -103,10 +103,13 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LineA: 1.84
+    - _GradientOffset: -0.06
+    - _GradientScale: 1.21
+    - _LineA: 0
     - _LineB: 0
     - _LineC: 0
     - _LineD: 0
+    - _MainTexContribution: 0.1
     - _Metallic: 0
     - _Mode: 0
     - _NormalScale: 10
@@ -118,7 +121,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SteppedTransition: 0
-    - _TransitionState: 1
+    - _TransitionState: 0
     - _TransitionStateB: 1
     - _UVSec: 0
     - _ZWrite: 1
@@ -133,6 +136,8 @@ Material:
     - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
     - _LaserAccent: {r: 0.41031313, g: 0.4150943, b: 0.20950511, a: 0}
     - _LaserBase: {r: 0.46388888, g: 0.45588234, b: 0.49019608, a: 1}
+    - _LaserGradient: {r: 0.6339, g: 0.6412136, b: 0.7264151, a: 0.63529414}
     - _RealAccent: {r: 0.9433962, g: 0.5829083, b: 0.15574932, a: 0.02745098}
     - _RealBase: {r: 0.5, g: 0.3433223, b: 0.2712264, a: 1}
+    - _RealGradient: {r: 0.990566, g: 0.5982973, b: 0.032707386, a: 0.23921569}
     - _ShimmerColor: {r: 8, g: 8, b: 8, a: 0}

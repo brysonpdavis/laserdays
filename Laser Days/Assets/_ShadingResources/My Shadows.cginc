@@ -61,15 +61,12 @@ struct Interpolators {
 float GetAlpha (Interpolators i) {
 	float emv = tex2D(_EffectMap, i.uv.xy).r;
     
-    #if defined(SHARED)
-        return 1.0;
-    #endif
-    
     #if defined(REAL)
         emv -= _TransitionState;
         emv = step(0,emv);
         return emv;
-    #else
+    #endif
+    #if defined(LASER)
         emv += _TransitionState;
         emv = step(1,emv);
         return emv;
@@ -94,9 +91,10 @@ InterpolatorsVertex MyShadowVertexProgram (VertexData v) {
 }
 
 float4 MyShadowFragmentProgram (Interpolators i) : SV_TARGET {
-	float alpha = GetAlpha(i);
-	#if defined(USECLIP)
+	#if defined(REAL) || defined(LASER)
+        float alpha = GetAlpha(i);  
 		clip(alpha - _AlphaCutoff);
+        
 	#endif
 
 	#if SHADOWS_SEMITRANSPARENT
