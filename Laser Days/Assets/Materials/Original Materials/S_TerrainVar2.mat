@@ -7,8 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: S_TerrainVar2
-  m_Shader: {fileID: 4800000, guid: c284815f8bda94710886db31bd115231, type: 3}
-  m_ShaderKeywords: _SPECULARHIGHLIGHTS_OFF
+  m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
+  m_ShaderKeywords: NO_GRADIENT SHARED STATIC _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -112,13 +112,19 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Elapsed: 0
+    - _Flippable: 1
     - _GlossMapScale: 1
     - _Glossiness: 1
     - _GlossyReflections: 1
-    - _LineA: 3.99
+    - _GradientOffset: 0
+    - _GradientScale: 1
+    - _Highlights: 0
+    - _LineA: 3
     - _LineB: 1
     - _LineC: 0
     - _LineD: 0
+    - _MainTexContribution: 0.1
     - _Metallic: 0
     - _Mode: 0
     - _NormalScale: 0.3
@@ -130,15 +136,22 @@ Material:
     - _SrcBlend: 1
     - _SteppedTransition: 0
     - _TransitionState: 0
+    - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
+    - _onHold: 0
+    - _onHover: 0
     m_Colors:
     - _Color: {r: 0.6698113, g: 0.591614, b: 0.56554824, a: 1}
     - _ColorLaser: {r: 0.36376065, g: 0.34752133, b: 0.37999994, a: 1}
     - _ColorReal: {r: 0.76, g: 0.4771111, b: 0.39688885, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
     - _LaserAccent: {r: 0.36376065, g: 0.34752133, b: 0.37999994, a: 1}
     - _LaserBase: {r: 0.62352943, g: 0.5697859, b: 0.5686275, a: 1}
+    - _LaserGradient: {r: 0, g: 0, b: 0, a: 0}
     - _RealAccent: {r: 0.76, g: 0.4771111, b: 0.39688885, a: 1}
     - _RealBase: {r: 0.78, g: 0.50825804, b: 0.429, a: 1}
+    - _RealGradient: {r: 0, g: 0, b: 0, a: 0}
+    - _ShimmerColor: {r: 0, g: 0, b: 0, a: 0}

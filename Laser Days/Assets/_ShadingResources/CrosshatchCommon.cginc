@@ -378,7 +378,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
             color.rgb = exp2(-color.rgb);
         #endif
         output.gBuffer0.rgb = GetAlbedo(i);
-        output.gBuffer0.a = GetOcclusion(i);
+        output.gBuffer0.a = 1;
         output.gBuffer1.rgb = GetSpec(i);
         output.gBuffer1.a = GetSmoothness(i);
         output.gBuffer2 = float4(i.normal * 0.5 + 0.5, 1);

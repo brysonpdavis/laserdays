@@ -62,6 +62,8 @@ half4 CalculateLight (unity_v2f_deferred i)
 	half4 gbuffer1 = tex2D (_CameraGBufferTexture1, uv);
 	half4 gbuffer2 = tex2D (_CameraGBufferTexture2, uv);
 	UnityStandardData data = UnityStandardDataFromGbuffer(gbuffer0, gbuffer1, gbuffer2);
+    
+    half shininess = gbuffer0.a;
 
 	float3 eyeVec = normalize(wpos-_WorldSpaceCameraPos);
 	half oneMinusReflectivity = 1 - SpecularStrength(data.specularColor.rgb);
@@ -71,7 +73,7 @@ half4 CalculateLight (unity_v2f_deferred i)
 	ind.diffuse = 0;
 	ind.specular = 0;
 
-    half4 res = BRDF_Unity_Toon (data.diffuseColor, data.specularColor, oneMinusReflectivity, data.smoothness, data.normalWorld, -eyeVec, light, ind);
+    half4 res = BRDF_Unity_Toon (data.diffuseColor, data.specularColor, oneMinusReflectivity, shininess, data.normalWorld, -eyeVec, light, ind);
     //half4 res = UNITY_BRDF_PBS (data.diffuseColor, data.specularColor, oneMinusReflectivity, data.smoothness, data.normalWorld, -eyeVec, light, ind);
     
 	return res;

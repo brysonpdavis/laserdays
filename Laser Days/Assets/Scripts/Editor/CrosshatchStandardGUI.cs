@@ -40,7 +40,11 @@ public class CrosshatchStandardGUI : ShaderGUI {
         OutlinesModule();
         AccentModule();
         GradientModule();
-        InteractionModule();
+        if(IsKeywordEnabled("INTERACTABLE"))
+        {
+            InteractionModule();
+        }
+
 
         editor.RenderQueueField();
         //base.OnGUI(materialEditor, properties);
@@ -121,7 +125,9 @@ public class CrosshatchStandardGUI : ShaderGUI {
         TextureProperty("_MainTex", "Darkness map - Real (R), Laser (G)");
 
         SliderProperty("_MainTexContribution", "");
-      
+
+        SliderProperty("_Highlights", "");
+
         if (IsKeywordEnabled("REAL"))
         {
             ColorProperty("_RealBase");

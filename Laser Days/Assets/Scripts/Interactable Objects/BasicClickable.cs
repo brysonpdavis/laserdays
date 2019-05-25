@@ -50,7 +50,15 @@ public class BasicClickable : FlippableObject {
         //put the object down with the right shader
         if (player.GetComponent<flipScript>().space)
         {
-            renderer.material.shader = raycastManager.realWorldShader;
+            if (renderer.material.shader == Shader.Find("Crosshatch/Standard"))
+            {
+                renderer.material.DisableKeyword("LASER");
+                renderer.material.EnableKeyword("REAL");
+            }
+            else
+            {
+                renderer.material.shader = raycastManager.realWorldShader;
+            }
             GetComponent<Transition>().SetStart(0f);
             renderer.material.SetInt("_onHover", 1);
 
@@ -60,7 +68,15 @@ public class BasicClickable : FlippableObject {
 
         else
         {
-            renderer.material.shader = raycastManager.laserWorldShader;
+            if (renderer.material.shader == Shader.Find("Crosshatch/Standard"))
+            {
+                renderer.material.DisableKeyword("REAL");
+                renderer.material.EnableKeyword("LASER");
+            }
+            else
+            {
+                renderer.material.shader = raycastManager.laserWorldShader;
+            }
             GetComponent<Transition>().SetStart(1f);
             UnSelect();
             renderer.material.SetInt("_onHover", 1);

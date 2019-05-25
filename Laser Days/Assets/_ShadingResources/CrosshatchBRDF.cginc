@@ -13,7 +13,6 @@ half4 BRDF_Unity_Toon (half3 diffColor, half3 specColor, half oneMinusReflectivi
 {
     float3 halfDir = Unity_SafeNormalize (float3(light.dir) + viewDir);
     
-    //   normal.y *= 0.3;
     half nl = saturate(dot(normal, light.dir));
     float nh = saturate(dot(normal, halfDir));
     half nv = saturate(dot(normal, viewDir));
@@ -92,11 +91,26 @@ half4 BRDF_Unity_Toon (half3 diffColor, half3 specColor, half oneMinusReflectivi
                     + gi.diffuse * diffColor
                     + surfaceReduction * gi.specular * FresnelLerpFast ((specColor * 0), grazingTerm, nv);
                     
-     */               
-      half banded = floor(clamp(nl, 0, 1) * 2);
-      half stepped = step(0.1, nl);
-      half lightAmount = lerp(banded, stepped, 0.86);
+     */  
+      
+      
+    half shininess = saturate(smoothness);
+    shininess *= (1 - 0.9);
+    shininess += 0.9001;
+    //blinnphong = floor(blinnphong * 3)/3;
+    half blinnphong = step(shininess, nh);
+                
+    half banded = floor(clamp(nl, 0, 1) * 2);
+    half stepped = step(0.1, nl);
+    half lightAmount = lerp(banded, stepped, 0.86);
+      
 
-      half3 color2 = diffColor * light.color * lightAmount + gi.diffuse * diffColor;
-      return half4(color2, 1);
+    half3 diffuse = diffColor * light.color * lightAmount + gi.diffuse * diffColor;
+    half3 spec = blinnphong * light.color;
+    
+    half3 blend = saturate(diffColor * 1.5) * spec;
+      
+    half3 color2 = 1 - (1 - diffuse) * (1 - blend);
+    //color2 = diffuse + spec;
+    return half4(color2, 1);
 }

@@ -9,7 +9,7 @@ float4 _RealBase, _RealAccent, _LaserBase, _LaserAccent, _RealGradient, _LaserGr
 sampler2D _MainTex, _AccentMap, _EffectMap, _ShadingMap;
 float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST, _ShadingMap_ST;
 
-float _Smoothness, _GradientScale, _GradientOffset, _MainTexContribution;
+float _Smoothness, _Highlights, _GradientScale, _GradientOffset, _MainTexContribution;
 
 int _LineA;
 
@@ -66,24 +66,34 @@ inline half remapNewMin (float val, float newMin)
     return val;
 }
 
+float TransitionValue ()
+{
+    #if defined(INTERACTABLE)
+        return _TransitionStateB;
+    #else
+        return _TransitionState;
+    #endif
+}
+
 //Returns base color per fragment by blending MaterialMap with Real and Laser base colors.
 float3 GetBaseColor (Interpolators i) 
 {
     float3 tex = tex2D(_MainTex, i.uv.xy);
     float valMin = 1 - _MainTexContribution;
-    
-    #if defined(REAL)
+  
+    #if defined(REAL) && !defined(INTERACTABLE)
         return _RealBase.rgb * remapNewMin(tex.r, valMin);
     #endif
-    #if defined(LASER)
+    #if defined(LASER) && !defined(INTERACTABLE)
         return _LaserBase.rgb * remapNewMin(tex.g, valMin);
     #else
-        float val = lerp(tex.r, tex.g, _TransitionState);
+        float val = lerp(tex.r, tex.g, TransitionValue());
         val = remapNewMin(val, valMin);
-        float3 col = lerp(_RealBase, _LaserBase, _TransitionState).rgb;
+        float3 col = lerp(_RealBase, _LaserBase, TransitionValue()).rgb;
         return val * col;
     #endif  
 }
+
 
 //Returns 0 -> 1 gradient value at a fragment - based on fragment object position;
 float GetGradient (Interpolators i)
@@ -105,13 +115,13 @@ float GetGradient (Interpolators i)
 //Blends gradient colors with input color based on GetGradient result.
 float3 gradientBlend (float3 input, Interpolators i)
 {   
-    #if defined(REAL)
+    #if defined(REAL) && !defined(INTERACTABLE)
         return lerp(input, _RealGradient.rgb, GetGradient(i) *  _RealGradient.a); 
     #endif
-    #if defined(LASER)
+    #if defined(LASER) && !defined(INTERACTABLE)
         return lerp(input, _LaserGradient.rgb, GetGradient(i) *  _LaserGradient.a); 
     #else 
-        float4 blendCol = lerp(_RealGradient, _LaserGradient, _TransitionState);
+        float4 blendCol = lerp(_RealGradient, _LaserGradient, TransitionValue());
         return lerp(input, blendCol.rgb, GetGradient(i) * blendCol.a); 
     #endif
     
@@ -120,19 +130,16 @@ float3 gradientBlend (float3 input, Interpolators i)
 
 //Returns a 0 || 1 accent mask value per fragment. 
 float GetAccentMask (Interpolators i) {
-    float3 accTex = tex2D(_AccentMap, i.uv.xy); 
-    float accMask = 0;   
     
-    #if defined(REAL)
-        accMask = accTex.r;
-        return step(0.1, accMask);
+    float3 accTex = tex2D(_AccentMap, i.uv.xy); 
+
+    #if defined(REAL) && !defined(INTERACTABLE)
+        return step(0.1, accTex.r);
     #endif
-    #if defined(LASER) 
-        accMask = accTex.g;
-        return step(0.1, accMask);
-    #endif
-    #if defined(SHARED)
-        accMask = lerp(accTex.r, accTex.g, _TransitionState);
+    #if defined(LASER) && !defined(INTERACTABLE)
+        return step(0.1, accTex.g);
+    #else
+        float accMask = lerp(accTex.r, accTex.g, TransitionValue());
         return step(0.1, accMask); 
     #endif
 }
@@ -140,13 +147,13 @@ float GetAccentMask (Interpolators i) {
 //Blends accent colors with input color based on GetAccentMask result.
 float3 accentBlend (float3 input, Interpolators i)
 {
-    #if defined(REAL)
+    #if defined(REAL) && !defined(INTERACTABLE)
         return lerp(input, _RealAccent.rgb, GetAccentMask(i) * _RealAccent.a);
     #endif
-    #if defined(LASER)
+    #if defined(LASER) && !defined(INTERACTABLE)
         return lerp(input, _LaserAccent.rgb, GetAccentMask(i) * _LaserAccent.a);
     #else
-        float4 blendCol = lerp(_RealAccent, _LaserAccent, _TransitionState);
+        float4 blendCol = lerp(_RealAccent, _LaserAccent, TransitionValue());
         return lerp(input, blendCol.rgb, GetAccentMask(i) * blendCol.a);
     #endif
 }
@@ -185,11 +192,16 @@ float GetMetallic (Interpolators i) {
 }
 
 //Currently using smoothness to control outline smoothing 
-// TODO actual smoothness in the lighting model
 float GetSmoothness (Interpolators i) 
 {
     return _Smoothness;
 }
+
+float GetShininess (Interpolators i )
+{
+    return 1 - _Highlights;
+}
+
 
 //Currently not using occlusion. But could use unused chanels of MaterialMap.
 float GetOcclusion (Interpolators i) 
@@ -207,7 +219,7 @@ float GetGlowMask (Interpolators i)
     #if defined(FORWARD_BASE_PASS) || defined(DEFERRED_PASS)
         #if defined (INTERACTABLE)
             float tex = tex2D(_EffectMap, i.uv.xy).b;
-            float texOff = tex2D(_EffectMap, i.uv.xy + (0.1 * _Elapsed)).g;
+            float texOff = tex2D(_EffectMap, i.uv.xy + (0.04 * _Elapsed)).g;
             float glowMask = tex * texOff;
             glowMask *= _onHold * _Flippable;
             return step(0.3, glowMask);     
@@ -215,6 +227,24 @@ float GetGlowMask (Interpolators i)
     #endif
     return 0;
 }
+
+
+float3 BaseColorWrapper (Interpolators i)
+{
+    float3 albedo = GetBaseColor(i);
+    
+    #if defined(ACCENT_ON)
+        albedo = accentBlend(albedo, i);
+    #endif
+    
+    #if defined(HEIGHT_GRADIENT) || defined(RADIAL_GRADIENT)
+        albedo = gradientBlend(albedo, i);
+    #endif
+    
+    return albedo;
+}
+
+
 
 //Returns 0 -> 1 value for interaction amount
 float3 GetInteraction (Interpolators i)
@@ -411,22 +441,12 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
     float3 specularTint;
     float oneMinusReflectivity;
     
-    float3 albedo = GetBaseColor(i);
+    float3 albedo = BaseColorWrapper(i);
     
     #if defined(INTERACTABLE)
         albedo = lerp(albedo, _InteractColor, GetInteraction(i));
     #endif
-    
-    
-    #if defined(ACCENT_ON)
-        albedo = accentBlend(albedo, i);
-    #endif
-    
-    #if defined(HEIGHT_GRADIENT) || defined(RADIAL_GRADIENT)
-        albedo = gradientBlend(albedo, i);
-    #endif
-    
-  
+
     specularTint = float4(0.1, 0.1, 0.1, 0);
     oneMinusReflectivity = 1;
     
@@ -458,7 +478,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
             color.rgb = exp2(-color.rgb);
         #endif
         output.gBuffer0.rgb = albedo;
-        output.gBuffer0.a = GetOcclusion(i);
+        output.gBuffer0.a = GetShininess(i);
         output.gBuffer1.rgb = GetOutlineData(i);
         output.gBuffer1.a = GetSmoothness(i);
         output.gBuffer2 = float4(i.normal * 0.5 + 0.5, 1);

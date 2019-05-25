@@ -4,6 +4,7 @@
         
         _MainTex("Material Map", 2D) = "white" {}
         _MainTexContribution("Material Intensity", Range(0,1)) = 0.1 
+        _Highlights("Shininess", Range(0 , 1)) = 0
     
         [NoScaleOffset] _AccentMap("Accent Map", 2D) = "black" {}
         [NoScaleOffset] _EffectMap("Effect Map", 2D) = "white" {}

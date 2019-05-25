@@ -103,7 +103,16 @@ abstract public class FlippableObject : InteractableObject
             if (!AmHeldObj())
             {
                 //set the object to approperiate shader unless currently held
-                material.shader = raycastManager.laserWorldShader;
+                //if new shader - do new thing, else do old
+                if(material.shader == Shader.Find("Crosshatch/Standard"))
+                {
+                    material.DisableKeyword("REAL");
+                    material.EnableKeyword("LASER");
+                } else
+                {
+                    material.shader = raycastManager.laserWorldShader;
+                }
+
                 GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
             }
 
@@ -118,7 +127,15 @@ abstract public class FlippableObject : InteractableObject
 
             if (!AmHeldObj())
             {
-                material.shader = raycastManager.realWorldShader;
+                if (material.shader == Shader.Find("Crosshatch/Standard"))
+                {
+                    material.DisableKeyword("LASER");
+                    material.EnableKeyword("REAL");
+                }
+                else
+                {
+                    material.shader = raycastManager.realWorldShader;
+                }
                 GetComponent<Transition>().SetStart(0f); //set it fully on for real world
             }
         }
