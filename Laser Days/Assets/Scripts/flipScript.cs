@@ -11,6 +11,7 @@ public class flipScript : MonoBehaviour {
 	public bool space;
 	private PlayerCharge pc;
     private flipburst flipburst;
+    public IList<EyeThatSees> eyeThatSeesList;
 
     //sounds
     private AudioSource audioSource;
@@ -60,11 +61,12 @@ public class flipScript : MonoBehaviour {
         soundTrack = GetComponentInChildren<SoundTrackManager>();
         flipburst = GetComponentInChildren<flipburst>();
         transitionCollider = GetComponentInChildren<TransitionCollider>();
+        eyeThatSeesList = new List<EyeThatSees>();
 
 	}
 
 	void Update () {
-        if (Input.GetButtonDown("Switch") && Time.timeScale > 0.0f)
+        if (Input.GetButtonDown("Switch") && Time.timeScale > 0.0f && CheckEyes())
         {
             GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
 
@@ -245,4 +247,19 @@ public class flipScript : MonoBehaviour {
 		obj.layer = 11;
 		obj.transform.parent = Toolbox.Instance.GetRealWorldParent();
 	}
+
+    bool CheckEyes()
+    {
+        int check = 0;
+        foreach (EyeThatSees eye in eyeThatSeesList)
+        {
+            if (eye.blockingFlip)
+                check += 1;
+        }
+
+        if (check > 0)
+            return false;
+
+        else return true;
+    }
 }
