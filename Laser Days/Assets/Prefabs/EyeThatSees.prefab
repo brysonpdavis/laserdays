@@ -305,7 +305,7 @@ MonoBehaviour:
   isActive: 0
   player: {fileID: 0}
   blockingFlip: 0
-  beam: {fileID: 114900090537890478}
+  eyeParent: {fileID: 0}
 --- !u!114 &114259398438051276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -330,8 +330,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f564d3269b0d34c77b1de11b43158c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPoint: {x: 0, y: 0, z: 0}
+  hittingPlayer: 0
+  beam: {fileID: 0}
   waitTime: 0.6
   lerpTime: 0.125
+  focusedScale: 0.3
+  unfocusedScale: 1
 --- !u!114 &114602709091779598
 MonoBehaviour:
   m_ObjectHideFlags: 1
