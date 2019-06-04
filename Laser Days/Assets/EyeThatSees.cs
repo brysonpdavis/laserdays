@@ -18,8 +18,8 @@ public class EyeThatSees : MonoBehaviour {
     void Start () {
         player = Toolbox.Instance.GetPlayer().transform;
         flip = player.gameObject.GetComponent<flipScript>();
-        //lineRenderer = GetComponentInChildren<LineRenderer>();
-        //lineRenderer.positionCount = 2;
+
+        flipScript.OnFailedFlip += FailedFlip;
 
         eyeParent = GetComponent<SimpleEye>();
 
@@ -45,6 +45,12 @@ public class EyeThatSees : MonoBehaviour {
         }
     }
 
+    private void FailedFlip()
+    {
+        if (isActive)
+            Debug.Log("FLIPFAILED: called from eye");
+    }
+
     private void Update()
     {
         if (isActive)
@@ -53,7 +59,7 @@ public class EyeThatSees : MonoBehaviour {
             if (CheckForPlayer())
             {
                 blockingFlip = true;
-                Debug.Log("woohoo!");
+                //Debug.Log("woohoo!");
             }
 
             else
@@ -86,8 +92,6 @@ public class EyeThatSees : MonoBehaviour {
             {
                 eyeParent.hittingPlayer = true;
                 return true;
-
-
             }
                 
             else

@@ -14,7 +14,13 @@ public class EyeBeam : MonoBehaviour {
 
     public void SetLength (float len)
     {
-        Vector3 beam = new Vector3(1f, 1f, len);
+        Vector3 beam = new Vector3(transform.localScale.x, transform.localScale.y, len);
+        transform.localScale = beam;
+    }
+
+    public void SetWidth(float width)
+    {
+        Vector3 beam = new Vector3(width, width, transform.localScale.z);
         transform.localScale = beam;
     }
 }

@@ -29,6 +29,10 @@ public class flipScript : MonoBehaviour {
 	RaycastManager rm;
     private string SoundtrackButton = "Submit";
 
+    public delegate void FailedFlip();
+    public static event FailedFlip OnFailedFlip;
+
+
 
     private void Awake()
     {
@@ -64,6 +68,8 @@ public class flipScript : MonoBehaviour {
         eyeThatSeesList = new List<EyeThatSees>();
 
 	}
+
+
 
 	void Update () {
         if (Input.GetButtonDown("Switch") && Time.timeScale > 0.0f && CheckEyes())
@@ -258,8 +264,16 @@ public class flipScript : MonoBehaviour {
         }
 
         if (check > 0)
+        {
+            if (OnFailedFlip != null)
+            {
+                OnFailedFlip();
+            }
+
             return false;
 
+        }
+            
         else return true;
     }
 }

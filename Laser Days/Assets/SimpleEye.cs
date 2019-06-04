@@ -20,8 +20,12 @@ public class SimpleEye : MonoBehaviour {
     public float waitTime;
     public float lerpTime;
     private float timeCounter = 0;
+    public float focusedScale;
+    public float unfocusedScale;
+    private Vector3 previousPosition;
 
-    // Use this for initialization
+    private bool snapViewRunning = false;
+    private bool widenFocusRunning = false;
 
     void Start () {
         player = Toolbox.Instance.GetPlayer().transform;
@@ -29,56 +33,97 @@ public class SimpleEye : MonoBehaviour {
         beam = GetComponentInChildren<EyeBeam>();
 
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
 
-        if(eye.isActive)
-        {
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+
+        if (eye.isActive)
+            EyeActivate();
+    }
+
+
+    private void EyeActivate()
+    {
             Vector3 currentPlayer = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
             timeCounter += Time.deltaTime;
 
-            Debug.Log("time counter:" + timeCounter + ", wait time: " + waitTime);
-            
+            bool playerHasMoved = false;
+            if (((previousPosition - player.position).magnitude) > .1f)
+            {
+                playerHasMoved = true;
+            }
+
             if (timeCounter >= waitTime)
             {
-                StopAllCoroutines();
-                Debug.Log("tring to look");
-                StartCoroutine(SnapView(lastTarget, currentPlayer, lerpTime));
+                //StopAllCoroutines();
+
+                if (playerHasMoved)
+                    StartCoroutine(SnapView(lastTarget, currentPlayer, lerpTime, playerHasMoved));
+
                 timeCounter = 0f;
+                previousPosition = player.position;
 
             }
 
-
-            
-
-
-        }
-
+            if (!snapViewRunning && !playerHasMoved && !widenFocusRunning)
+                StartCoroutine(Focus(.4f));
+          
     }
 
-    private IEnumerator SnapView (Vector3 old, Vector3 current, float duration)
+    private IEnumerator SnapView (Vector3 old, Vector3 current, float duration, bool playerHasMoved)
     {
+        snapViewRunning = true;
         float elapsedTime = 0;
         float ratio = 0;
-        //int property = Shader.PropertyToID("_D7A8CF01");
 
         while (ratio < 1f)
         {
             ratio = elapsedTime / duration;
             Vector3 view = Vector3.Lerp(old, current, TweeningFunctions.EaseOutCubic(ratio));
-
             transform.LookAt(view);
-
             elapsedTime += Time.deltaTime;
-
             SetBeamLength(hitPoint);
+
+            if (playerHasMoved)
+            {
+                //doing lerp for focal scale
+                float start = beam.transform.localScale.x;
+                float width = Mathf.Lerp(start, unfocusedScale, ratio);
+                beam.SetWidth(width);
+    
+            }
 
             yield return null;
         }
 
         lastTarget = current;
-        //SetBeamLength(hitPoint);
+        snapViewRunning = false;
+    }
+
+    private IEnumerator Focus(float duration)
+    //for after it's looked at the player
+    {
+        //Debug.Log("widening focus");
+        widenFocusRunning = true;
+        float elapsedTime = 0;
+        float ratio = elapsedTime / duration;
+
+        while (ratio < 1f)
+        {
+            ratio = elapsedTime / duration;
+            elapsedTime += Time.deltaTime;
+
+            //doing lerp for focal scale
+            float start = beam.transform.localScale.x;
+            float width = Mathf.Lerp(start, focusedScale, TweeningFunctions.EaseOutCubic(ratio));
+            beam.SetWidth(width);
+
+            yield return null;
+        }
+
+        widenFocusRunning = false;
+
     }
 
 
