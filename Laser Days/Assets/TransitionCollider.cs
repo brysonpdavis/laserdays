@@ -40,7 +40,7 @@ public class TransitionCollider : MonoBehaviour
 
     private IEnumerator FlipTransitionRoutine()
     {
-
+        collider.isTrigger = true;
         float elapsedTime = 0;
         float ratio = elapsedTime / growthSpeed;
         //int property = Shader.PropertyToID("_D7A8CF01");
