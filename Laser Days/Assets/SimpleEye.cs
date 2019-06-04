@@ -31,8 +31,8 @@ public class SimpleEye : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        //if(eye.isActive)
-        //{
+        if(eye.isActive)
+        {
             Vector3 currentPlayer = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
             timeCounter += Time.deltaTime;
 
@@ -47,11 +47,13 @@ public class SimpleEye : MonoBehaviour {
 
             }
 
+
             
 
-        //}
 
-	}
+        }
+
+    }
 
     private IEnumerator SnapView (Vector3 old, Vector3 current, float duration)
     {
@@ -67,11 +69,14 @@ public class SimpleEye : MonoBehaviour {
             transform.LookAt(view);
 
             elapsedTime += Time.deltaTime;
+
+            SetBeamLength(hitPoint);
+
             yield return null;
         }
 
         lastTarget = current;
-        SetBeamLength(hitPoint);
+        //SetBeamLength(hitPoint);
     }
 
 
