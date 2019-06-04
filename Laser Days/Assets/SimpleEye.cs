@@ -7,6 +7,13 @@ public class SimpleEye : MonoBehaviour {
     private Transform player;
     private Vector3 currentTarget;
     private Vector3 lastTarget;
+
+    [HideInInspector]
+    public Vector3 hitPoint;
+
+    //[HideInInspector]
+    public EyeBeam beam;
+
     private EyeThatSees eye;
     public float waitTime;
     public float lerpTime;
@@ -17,6 +24,7 @@ public class SimpleEye : MonoBehaviour {
     void Start () {
         player = Toolbox.Instance.GetPlayer().transform;
         eye = GetComponent<EyeThatSees>();
+        beam = GetComponentInChildren<EyeBeam>();
 
 	}
 	
@@ -34,7 +42,7 @@ public class SimpleEye : MonoBehaviour {
             {
                 StopAllCoroutines();
                 Debug.Log("tring to look");
-                StartCoroutine(snapView(lastTarget, currentPlayer, lerpTime));
+                StartCoroutine(SnapView(lastTarget, currentPlayer, lerpTime));
                 timeCounter = 0f;
 
             }
@@ -45,7 +53,7 @@ public class SimpleEye : MonoBehaviour {
 
 	}
 
-    private IEnumerator snapView (Vector3 old, Vector3 current, float duration)
+    private IEnumerator SnapView (Vector3 old, Vector3 current, float duration)
     {
         float elapsedTime = 0;
         float ratio = 0;
@@ -63,6 +71,14 @@ public class SimpleEye : MonoBehaviour {
         }
 
         lastTarget = current;
+        SetBeamLength(hitPoint);
+    }
+
+
+    void SetBeamLength (Vector3 point)
+    {
+        float dist = Vector3.Distance(transform.position, point);
+        beam.SetLength(dist);
     }
 
 }

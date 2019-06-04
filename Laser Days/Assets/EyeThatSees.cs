@@ -6,17 +6,23 @@ public class EyeThatSees : MonoBehaviour {
 
     public bool isActive = false;
     [SerializeField] private Transform player;
-    LineRenderer lineRenderer;
+    //LineRenderer lineRenderer;
     flipScript flip;
     public bool blockingFlip;
+
+    [HideInInspector]
+    public SimpleEye eyeParent;
 
     private LayerMask currentLayerMask;
 
     void Start () {
         player = Toolbox.Instance.GetPlayer().transform;
         flip = player.gameObject.GetComponent<flipScript>();
-        lineRenderer = GetComponentInChildren<LineRenderer>();
-        lineRenderer.positionCount = 2;
+        //lineRenderer = GetComponentInChildren<LineRenderer>();
+        //lineRenderer.positionCount = 2;
+
+        eyeParent = GetComponent<SimpleEye>();
+
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -54,9 +60,11 @@ public class EyeThatSees : MonoBehaviour {
                 blockingFlip = false;
 
         }
-
         else
+        {
             blockingFlip = false;
+            //eyeParent.hitPoint = Vector3.zero;
+        }
     }
 
     private bool CheckForPlayer()
@@ -67,14 +75,13 @@ public class EyeThatSees : MonoBehaviour {
 
         currentLayerMask = LayerMaskController.GetLayerMaskForRaycast(player.gameObject.layer);
 
-        if (Physics.Linecast(transform.position, eyeLevel, out hit, currentLayerMask));
+        if (Physics.Linecast(transform.position, eyeLevel, out hit, currentLayerMask))
         {
+
+            eyeParent.hitPoint = hit.point;
+
             Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
 
-            Vector3 debug = new Vector3(hit.point.x, hit.point.y - .75f, hit.point.z);
-            Vector3[] points = new Vector3[]{transform.position, debug};
-            //lineRenderer.SetPositions(points);
-            //Debug.Log(hit.collider.gameObject.name);
             if (hit.collider.CompareTag("Player"))
             {
              return true;
