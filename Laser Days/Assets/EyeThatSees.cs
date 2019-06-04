@@ -84,10 +84,14 @@ public class EyeThatSees : MonoBehaviour {
 
             if (hit.collider.CompareTag("Player"))
             {
-             return true;
+                eyeParent.hittingPlayer = true;
+                return true;
+
+
             }
                 
             else
+                eyeParent.hittingPlayer = false;
                 return false;
         }
 

@@ -10,6 +10,8 @@ public class SimpleEye : MonoBehaviour {
 
     [HideInInspector]
     public Vector3 hitPoint;
+    [HideInInspector]
+    public bool hittingPlayer;
 
     //[HideInInspector]
     public EyeBeam beam;
@@ -83,7 +85,14 @@ public class SimpleEye : MonoBehaviour {
     void SetBeamLength (Vector3 point)
     {
         float dist = Vector3.Distance(transform.position, point);
-        beam.SetLength(dist);
+        if (hittingPlayer)
+        {
+            beam.SetLength(dist - 0.3f);
+        } else 
+        {
+            beam.SetLength(dist);
+        }
+
     }
 
 }
