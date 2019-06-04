@@ -14,6 +14,7 @@ public class PlatformTrigger : MonoBehaviour {
     private PlatformTrigger[] platformTriggers;
     public int totalTriggers;
     public float ScrollSpeed = 0.4f;
+    private Vector2 minMaxScrollSpeed;
     public bool on = false;
     public bool moving = false;
 
@@ -60,6 +61,8 @@ public class PlatformTrigger : MonoBehaviour {
         RenderMat.SetColor("_ActiveColor", platformContainer.GetComponent<PlatformController>().ActiveColor);
         RenderMat.SetColor("_ShimmerColor", platformContainer.GetComponent<PlatformController>().ShimmerColor);
         RenderMat.SetTexture("_TriggerMap", platformContainer.GetComponent<PlatformController>().ScrollText);
+
+        minMaxScrollSpeed = new Vector2(ScrollSpeed * -2, ScrollSpeed * 2);
 
 
         if (platformContainer){
@@ -203,7 +206,7 @@ public class PlatformTrigger : MonoBehaviour {
                 audioSource.clip = platformOn;
                 MovePlatformToEnd();
 
-                ScrollSpeed *= -2f;
+                ScrollSpeed = Mathf.Clamp((ScrollSpeed * -2), minMaxScrollSpeed.x, minMaxScrollSpeed.y);
 
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {

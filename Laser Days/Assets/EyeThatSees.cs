@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class EyeThatSees : MonoBehaviour {
 
-    private bool isActive = false;
+    public bool isActive = false;
     [SerializeField] private Transform player;
     LineRenderer lineRenderer;
     flipScript flip;
     public bool blockingFlip;
 
+    private LayerMask currentLayerMask;
+
     void Start () {
         player = Toolbox.Instance.GetPlayer().transform;
         flip = player.gameObject.GetComponent<flipScript>();
-        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer = GetComponentInChildren<LineRenderer>();
         lineRenderer.positionCount = 2;
 	}
 
@@ -63,13 +65,15 @@ public class EyeThatSees : MonoBehaviour {
 
         Vector3 eyeLevel = new Vector3 (player.position.x, player.position.y + 1.5f, player.position.z);
 
-        if (Physics.Linecast(transform.position, eyeLevel, out hit))
+        currentLayerMask = LayerMaskController.GetLayerMaskForRaycast(player.gameObject.layer);
+
+        if (Physics.Linecast(transform.position, eyeLevel, out hit, currentLayerMask));
         {
             Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
 
-            Vector3 debug = new Vector3(hit.point.x, hit.point.y - .1f, hit.point.z);
+            Vector3 debug = new Vector3(hit.point.x, hit.point.y - .75f, hit.point.z);
             Vector3[] points = new Vector3[]{transform.position, debug};
-            lineRenderer.SetPositions(points);
+            //lineRenderer.SetPositions(points);
             //Debug.Log(hit.collider.gameObject.name);
             if (hit.collider.CompareTag("Player"))
             {

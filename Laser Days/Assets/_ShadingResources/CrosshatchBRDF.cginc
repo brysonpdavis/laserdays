@@ -97,7 +97,7 @@ half4 BRDF_Unity_Toon (half3 diffColor, half3 specColor, half oneMinusReflectivi
     half shininess = saturate(smoothness);
     shininess *= (1 - 0.9);
     shininess += 0.9001;
-    //blinnphong = floor(blinnphong * 3)/3;
+    //half blinnphong = pow(nh, 16) * ( 1 - smoothness);
     half blinnphong = step(shininess, nh);
                 
     half banded = floor(clamp(nl, 0, 1) * 2);
@@ -111,6 +111,6 @@ half4 BRDF_Unity_Toon (half3 diffColor, half3 specColor, half oneMinusReflectivi
     half3 blend = saturate(diffColor * 1.5) * spec;
       
     half3 color2 = 1 - (1 - diffuse) * (1 - blend);
-    //color2 = diffuse + spec;
+    color2 = diffuse + blend;
     return half4(color2, 1);
 }

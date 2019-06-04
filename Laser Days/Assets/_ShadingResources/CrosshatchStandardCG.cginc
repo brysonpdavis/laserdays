@@ -481,7 +481,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         output.gBuffer0.a = GetShininess(i);
         output.gBuffer1.rgb = GetOutlineData(i);
         output.gBuffer1.a = GetSmoothness(i);
-        output.gBuffer2 = float4(i.normal * 0.5 + 0.5, 1);
+        output.gBuffer2 = float4(i.normal * 0.5 + 0.5, GetOcclusion(i));
         output.gBuffer3 = color;
     #else
         output.color = color;

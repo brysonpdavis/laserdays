@@ -1,0 +1,8 @@
+﻿using UnityEngine;
+using UnityEditor;
+
+public static class LayerMaskController 
+{
+    public static LayerMask RealLayerMask = 1 << 0 | 1 << 10 | 1 << 17;
+    public static LayerMask LaserLayerMask = 1 << 0 | 1 << 11 | 1 << 17;
+}

@@ -22,8 +22,8 @@ Shader "Hidden/Amplify Occlusion/Apply"
 		UNITY_DECLARE_SCREENSPACE_TEXTURE( _AO_ApplyOcclusionTexture );
         
         // Added to sample occlusion noise textures from albedo aplha channel
-        sampler2D _CameraGBufferTexture0;
-        float4 _CameraGBufferTexture0_ST;
+        sampler2D _CameraGBufferTexture2;
+        float4 _CameraGBufferTexture2_ST;
         
         
 
@@ -320,7 +320,7 @@ Shader "Hidden/Amplify Occlusion/Apply"
 
 				const half4 occlusionRGBA = CalcOcclusion( occlusion, occlusionDepth.y );
                 
-                half4 hatching = tex2D(_CameraGBufferTexture0, IN.uv);
+                half4 hatching = tex2D(_CameraGBufferTexture2, IN.uv);
                 
                 half4 occlusionHatching = occlusionRGBA + hatching.aaaa;
                 //half4 occlusionHatching = occlusionRGBA;

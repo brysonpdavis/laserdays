@@ -136,7 +136,7 @@ abstract public class FlippableObject : InteractableObject
                 {
                     material.shader = raycastManager.realWorldShader;
                 }
-                GetComponent<Transition>().SetStart(0f); //set it fully on for real world
+                GetComponent<Transition>().SetStart(0f); //set it fully on for real world]
             }
         }
     }

@@ -186,6 +186,7 @@ public class BasicClickable : FlippableObject {
         {
             audioSource.clip = Toolbox.Instance.testercubeSounds.main.GetRandomSoundClip();
 
+
             //Vector3 vel = rigidbody.velocity / 6f;
             //float value = Vector3.ClampMagnitude(vel, 1f).magnitude;
             //Debug.Log(value);
