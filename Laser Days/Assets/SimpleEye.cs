@@ -38,7 +38,7 @@ public class SimpleEye : MonoBehaviour {
     void FixedUpdate()
     {
 
-        if (eye.isActive)
+        if (eye.isActive && eye.WallCheck(eye.currentPlayerPoint))
             EyeActivate();
     }
 

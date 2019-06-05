@@ -13,6 +13,7 @@ public class EyeThatSees : MonoBehaviour {
     private float startingAngleY;
     private enum EyeDirection{Forward, Backward, Right, Left};
     private EyeDirection myDirection;
+    [HideInInspector] public Vector3 currentPlayerPoint;
 
     [HideInInspector]
     public SimpleEye eyeParent;
@@ -95,6 +96,9 @@ public class EyeThatSees : MonoBehaviour {
 
             Debug.Log(transform.position - hit.point);
 
+            //so the simpleEye can run WallCheck;
+            currentPlayerPoint = hit.point;
+
             if (hit.collider.CompareTag("Player") && (WallCheck(hit.point)))
             {
 
@@ -110,7 +114,7 @@ public class EyeThatSees : MonoBehaviour {
         return false;
     }
 
-    bool WallCheck(Vector3 hit)
+    public bool WallCheck(Vector3 hit)
     {
         if (!onWall)
             return true;
