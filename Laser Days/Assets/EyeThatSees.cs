@@ -163,18 +163,19 @@ public class EyeThatSees : MonoBehaviour {
     private void InitializeWallCheck()
     {
         Debug.Log(transform.rotation.eulerAngles.y);
-        //facing forward
+        //facing forward: looking for 0
         if (transform.rotation.eulerAngles.y >= 0f && transform.rotation.eulerAngles.y <= 10f)
             myDirection = EyeDirection.Forward;
-
+        //facing left: looking for 90
         if (transform.rotation.eulerAngles.y >= 80f && transform.rotation.eulerAngles.y <= 100f)
             myDirection = EyeDirection.Left;
         
-        //facing backward
+        //facing backward: looking for 180
         if (transform.rotation.eulerAngles.y >= 170f && transform.rotation.eulerAngles.y <= 190f)
             myDirection = EyeDirection.Backward;
 
-        if (transform.rotation.eulerAngles.y >= 160f && transform.rotation.eulerAngles.y <= 190f)
+        //facing right: looking for 270
+        if (transform.rotation.eulerAngles.y >= 260f && transform.rotation.eulerAngles.y <= 280f)
             myDirection = EyeDirection.Right;
 
     }
