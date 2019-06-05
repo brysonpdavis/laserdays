@@ -8,6 +8,7 @@ public class EyeThatSees : MonoBehaviour {
     [SerializeField] private Transform player;
     //LineRenderer lineRenderer;
     flipScript flip;
+    public bool onWall;
     public bool blockingFlip;
 
     [HideInInspector]
@@ -88,8 +89,12 @@ public class EyeThatSees : MonoBehaviour {
 
             Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
 
-            if (hit.collider.CompareTag("Player"))
+            float relativeZ = (transform.position - hit.point).z;
+
+            if (hit.collider.CompareTag("Player") && (!onWall || (onWall && (relativeZ>=0))))
             {
+
+                Debug.Log(transform.position - hit.point);
                 eyeParent.hittingPlayer = true;
                 return true;
             }
