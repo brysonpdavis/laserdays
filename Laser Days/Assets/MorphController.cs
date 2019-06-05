@@ -10,12 +10,12 @@ public class MorphController : MonoBehaviour {
 
     [Header("Internal Parts")]
     public GameObject realCollider;
-    private MaterialPropertyBlock realArmShader; 
+    private MaterialPropertyBlock realArmPropBlock; 
     public Renderer realPreview;
     private Material realPreviewMaterial;
 
     public GameObject laserCollider;
-    private MaterialPropertyBlock laserArmShader;
+    private MaterialPropertyBlock laserArmPropBlock;
     public Renderer laserPreview;
     private Material laserPreviewMaterial;
 
@@ -36,8 +36,8 @@ public class MorphController : MonoBehaviour {
         Physics.IgnoreCollision(laserCollider.GetComponent<BoxCollider>(), realCollider.GetComponent<BoxCollider>());
 
 
-        realArmShader = new MaterialPropertyBlock();
-        laserArmShader = new MaterialPropertyBlock();
+        realArmPropBlock = new MaterialPropertyBlock();
+        laserArmPropBlock = new MaterialPropertyBlock();
     }
 
     void Start () {
@@ -50,8 +50,8 @@ public class MorphController : MonoBehaviour {
         realPreviewMaterial.SetFloat("_Opacity", 0);
 
 
-        laserCollider.GetComponent<Renderer>().GetPropertyBlock(laserArmShader);
-        realCollider.GetComponent<Renderer>().GetPropertyBlock(realArmShader);
+        laserCollider.GetComponent<Renderer>().GetPropertyBlock(laserArmPropBlock);
+        realCollider.GetComponent<Renderer>().GetPropertyBlock(realArmPropBlock);
 
 
 
@@ -86,20 +86,25 @@ public class MorphController : MonoBehaviour {
             this.gameObject.layer = 10;
 
             laserCollider.layer = 10;
+            realCollider.layer = 10;
 
-            realCollider.GetComponent<Renderer>().material.shader = laserOnlyShader;
-            laserCollider.GetComponent<Renderer>().material.shader = laserOnlyShader;
+            Renderer realArm = realCollider.GetComponent<Renderer>();
+            Renderer laserArm = laserCollider.GetComponent<Renderer>();
+
+            // Arms Going to laser
+            ShaderUtility.ShaderWorldChange(realArm.material, true);
+            ShaderUtility.ShaderWorldChange(laserArm.material, true);
 
 
-            laserArmShader.SetFloat("_TransitionState", 1);
-            laserCollider.GetComponent<Renderer>().SetPropertyBlock(laserArmShader);
+            laserArmPropBlock.SetFloat("_TransitionState", 1);
+            laserCollider.GetComponent<Renderer>().SetPropertyBlock(laserArmPropBlock);
             //laserCollider.GetComponent<Transition>().StopAllCoroutines();
 
 
-            realCollider.layer = 10;
+
             //realArmShader.shader = laserOnlyShader;
-            realArmShader.SetFloat("_TransitionState", 1);
-            realCollider.GetComponent<Renderer>().SetPropertyBlock(realArmShader);
+            realArmPropBlock.SetFloat("_TransitionState", 1);
+            realCollider.GetComponent<Renderer>().SetPropertyBlock(realArmPropBlock);
 
 
             //start coroutine
@@ -121,17 +126,24 @@ public class MorphController : MonoBehaviour {
 
             this.gameObject.layer = 11;
 
-            realCollider.GetComponent<Renderer>().material.shader = realOnlyShader;
-            laserCollider.GetComponent<Renderer>().material.shader = realOnlyShader;
+
+            Renderer realArm = realCollider.GetComponent<Renderer>();
+            Renderer laserArm = laserCollider.GetComponent<Renderer>();
+
+            // Arms Going to real
+            ShaderUtility.ShaderWorldChange(realArm.material, false);
+            ShaderUtility.ShaderWorldChange(laserArm.material, false);
+
+
 
 
 
             laserCollider.layer = 11;
-            laserArmShader.SetFloat("_TransitionState", 0);
-            laserCollider.GetComponent<Renderer>().SetPropertyBlock(laserArmShader);
+            laserArmPropBlock.SetFloat("_TransitionState", 0);
+            laserCollider.GetComponent<Renderer>().SetPropertyBlock(laserArmPropBlock);
             realCollider.layer = 11;
-            realArmShader.SetFloat("_TransitionState", 0);
-            realCollider.GetComponent<Renderer>().SetPropertyBlock(realArmShader);
+            realArmPropBlock.SetFloat("_TransitionState", 0);
+            realCollider.GetComponent<Renderer>().SetPropertyBlock(realArmPropBlock);
 
 
             //if object is currently held

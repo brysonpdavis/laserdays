@@ -26,9 +26,13 @@ public class Morph : FlippableObject {
 
     public override void Drop()
     {
+        Renderer r = GetComponent<Renderer>();
+
         if (player.GetComponent<flipScript>().space)
         {
-            GetComponent<Renderer>().material.shader = raycastManager.realWorldShader;
+            //Going to real
+            ShaderUtility.ShaderWorldChange(r.material, false);
+
             this.gameObject.layer = 11;
             GetComponent<SelectionRenderChange>().OnDrop();
             GetComponent<Transition>().SetStart(0f);
@@ -37,7 +41,10 @@ public class Morph : FlippableObject {
 
         else
         {
-            GetComponent<Renderer>().material.shader = raycastManager.laserWorldShader;
+            //Going to laser
+            ShaderUtility.ShaderWorldChange(r.material, true);
+
+            //GetComponent<Renderer>().material.shader = raycastManager.laserWorldShader;
             this.gameObject.layer = 10;
             GetComponent<SelectionRenderChange>().OnDrop();
             GetComponent<Transition>().SetStart(1f);
