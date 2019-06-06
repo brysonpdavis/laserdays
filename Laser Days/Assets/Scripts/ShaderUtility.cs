@@ -158,6 +158,21 @@ public static class ShaderUtility
             }
         }
 
+        // Preview
+        if (mat.shader == Shader.Find("Transition/RealPreview") || mat.shader == Shader.Find("Transition/LaserPreview"))
+        {
+            if (toLaser)
+            {
+                //mat.shader = Shader.Find("Transition/LaserPreview");
+                return;
+            }
+            else
+            {
+                //mat.shader = Shader.Find("Transition/RealPreview");
+                return;
+            }
+        }
+
         // Transparent shaders use a float to determine world 
         if (mat.shader == Shader.Find("Crosshatch/Glass-Single"))
         {

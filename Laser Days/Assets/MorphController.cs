@@ -8,6 +8,8 @@ public class MorphController : MonoBehaviour {
     public float armScale = 1f;
     public bool morphRunning = false;
 
+    public float armScalingFactor = 11;
+
     [Header("Internal Parts")]
     public GameObject realCollider;
     private MaterialPropertyBlock realArmPropBlock; 
@@ -18,11 +20,17 @@ public class MorphController : MonoBehaviour {
     private MaterialPropertyBlock laserArmPropBlock;
     public Renderer laserPreview;
     private Material laserPreviewMaterial;
+    public Transition[] childrenTransitions;
 
+    public Renderer internalPart;
+    private MaterialPropertyBlock internalPartPropBlock;
 
-
-    public Shader laserOnlyShader;
-    public Shader realOnlyShader;
+    public struct renderersAndProps
+    {
+        public Renderer renderer;
+        public MaterialPropertyBlock propertyBlock;
+    }
+    private renderersAndProps[] internalParts;
 
 
 
@@ -35,9 +43,14 @@ public class MorphController : MonoBehaviour {
         Physics.IgnoreCollision(this.gameObject.GetComponent<BoxCollider>(), laserCollider.GetComponent<BoxCollider>());
         Physics.IgnoreCollision(laserCollider.GetComponent<BoxCollider>(), realCollider.GetComponent<BoxCollider>());
 
+        //renderers = GetTransitionRenderers();
 
-        realArmPropBlock = new MaterialPropertyBlock();
-        laserArmPropBlock = new MaterialPropertyBlock();
+        internalParts = GetInternalRenderers();
+        childrenTransitions = gameObject.GetComponentsInChildren<Transition>();
+        //realArmPropBlock = new MaterialPropertyBlock();
+        //laserArmPropBlock = new MaterialPropertyBlock();
+        //internalPartPropBlock = new MaterialPropertyBlock();
+
     }
 
     void Start () {
@@ -53,9 +66,10 @@ public class MorphController : MonoBehaviour {
         laserCollider.GetComponent<Renderer>().GetPropertyBlock(laserArmPropBlock);
         realCollider.GetComponent<Renderer>().GetPropertyBlock(realArmPropBlock);
 
+        //childrenTransitions = gameObject. GetComponentsInChildren<Transition>();
 
 
-        Vector3 startScaled = new Vector3(1, 3 * armScale, 1);
+        Vector3 startScaled = new Vector3(1, armScalingFactor * armScale, 1);
         Vector3 startUnscaled = new Vector3(1, 1, 1);
         if (this.gameObject.layer == 10)
         {
@@ -71,16 +85,30 @@ public class MorphController : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void FlipInternalRenderers(renderersAndProps[] internals, bool dir)
+    {
+
+        float currentTransitionState = internals[0].renderer.material.GetFloat("_TransitionState");
+
+        foreach (renderersAndProps r in internals)
+        {
+            ShaderUtility.ShaderWorldChange(r.renderer.material, dir);
+            if (dir)
+            {
+                r.propertyBlock.SetFloat("_TransitionState", 1f - currentTransitionState);
+            }
+            else 
+                r.propertyBlock.SetFloat("_TransitionState", currentTransitionState);
+            r.renderer.SetPropertyBlock(r.propertyBlock);
+
+        }
+    }
+
 
 
     public void OnFlip (bool dir) {
-
-       // Debug.Log("called");
-        //we're going to laser
+            //we're going to laser
         if (dir)
         {
             this.gameObject.layer = 10;
@@ -88,25 +116,8 @@ public class MorphController : MonoBehaviour {
             laserCollider.layer = 10;
             realCollider.layer = 10;
 
-            Renderer realArm = realCollider.GetComponent<Renderer>();
-            Renderer laserArm = laserCollider.GetComponent<Renderer>();
 
-            // Arms Going to laser
-            ShaderUtility.ShaderWorldChange(realArm.material, true);
-            ShaderUtility.ShaderWorldChange(laserArm.material, true);
-
-
-            laserArmPropBlock.SetFloat("_TransitionState", 1);
-            laserCollider.GetComponent<Renderer>().SetPropertyBlock(laserArmPropBlock);
-            //laserCollider.GetComponent<Transition>().StopAllCoroutines();
-
-
-
-            //realArmShader.shader = laserOnlyShader;
-            realArmPropBlock.SetFloat("_TransitionState", 1);
-            realCollider.GetComponent<Renderer>().SetPropertyBlock(realArmPropBlock);
-
-
+            FlipInternalRenderers(internalParts, dir);
             //start coroutine
 
 
@@ -125,25 +136,11 @@ public class MorphController : MonoBehaviour {
         else {
 
             this.gameObject.layer = 11;
-
-
-            Renderer realArm = realCollider.GetComponent<Renderer>();
-            Renderer laserArm = laserCollider.GetComponent<Renderer>();
-
-            // Arms Going to real
-            ShaderUtility.ShaderWorldChange(realArm.material, false);
-            ShaderUtility.ShaderWorldChange(laserArm.material, false);
-
-
-
-
-
             laserCollider.layer = 11;
-            laserArmPropBlock.SetFloat("_TransitionState", 0);
-            laserCollider.GetComponent<Renderer>().SetPropertyBlock(laserArmPropBlock);
             realCollider.layer = 11;
-            realArmPropBlock.SetFloat("_TransitionState", 0);
-            realCollider.GetComponent<Renderer>().SetPropertyBlock(realArmPropBlock);
+
+
+            FlipInternalRenderers(internalParts, dir);
 
 
             //if object is currently held
@@ -177,8 +174,35 @@ public class MorphController : MonoBehaviour {
         laserPreviewMaterial.SetFloat("_Opacity", 0);
     }
 
+    public renderersAndProps[] GetInternalRenderers()
+    {
+        Transition[] transitions = GetComponentsInChildren<Transition>();
+        renderersAndProps[] transitionInternalParts = new renderersAndProps[transitions.Length];
+
+
+        for (int i = 0; i < transitions.Length; i++)
+        {
+            transitionInternalParts[i].renderer = transitions[i].gameObject.GetComponent<Renderer>();
+            transitionInternalParts[i].propertyBlock = new MaterialPropertyBlock();
+
+            //transitions[i]. = false;
+        }
+
+
+        return transitionInternalParts;
+    }
+
     private IEnumerator MorphCoroutine(bool direction)
     {
+
+        //realCollider.GetComponent<Transition>().enabled = false;
+        //laserCollider.GetComponent<Transition>().enabled = false;
+
+        //foreach (Transition t in childrenTransitions)
+        //{
+        //    t.ignore = true;
+        //}
+
         morphRunning = true;
         //Debug.Log("moving again" + this.name);
         float elapsedTime = 0;
@@ -212,9 +236,11 @@ public class MorphController : MonoBehaviour {
 
                 realScale.y = Mathf.Lerp(realStart, 1, (elapsedTime/durationScale));
                 realCollider.transform.localScale = realScale;
-                laserScale.y = Mathf.Lerp(laserStart, 3*armScale, (elapsedTime / durationScale));
+                laserScale.y = Mathf.Lerp(laserStart, armScalingFactor * armScale, (elapsedTime / durationScale));
                 laserCollider.transform.localScale = laserScale;
-              
+
+
+                StopArmTransitions();
 
                 yield return null;
             }
@@ -234,11 +260,13 @@ public class MorphController : MonoBehaviour {
                 elapsedTime += Time.smoothDeltaTime;
                 ratio = elapsedTime / duration;
 
-                realScale.y = Mathf.Lerp(realStart, 3*armScale, (elapsedTime / durationScale));
+                realScale.y = Mathf.Lerp(realStart, armScalingFactor * armScale, (elapsedTime / durationScale));
                 realCollider.transform.localScale = realScale;
 
                 laserScale.y = Mathf.Lerp(laserStart, 1, (elapsedTime / durationScale));
                 laserCollider.transform.localScale = laserScale;
+
+                StopArmTransitions();
 
                 yield return null;
             }
@@ -257,10 +285,26 @@ public class MorphController : MonoBehaviour {
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 }
 
+        //realCollider.GetComponent<Transition>().enabled = true;
+        //laserCollider.GetComponent<Transition>().enabled = true;
+
+        //foreach (Transition t in childrenTransitions)
+        //{
+        //    t.ignore = false;
+        //}
+
         morphRunning = false;
 
         yield return null;
 
+    }
+
+    private void StopArmTransitions()
+    {
+        foreach (Transition t in childrenTransitions)
+        {
+            t.StopAllCoroutines();
+        }
     }
 
 }

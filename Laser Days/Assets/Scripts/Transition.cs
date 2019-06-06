@@ -141,22 +141,23 @@ public class Transition : MonoBehaviour
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {
 
-        float elapsedTime = 0;
-        float ratio = elapsedTime / duration;
-        //int property = Shader.PropertyToID("_D7A8CF01");
-      
-        while (ratio < 1f)
-        {
-            ratio = elapsedTime / duration;
-            float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.EaseInOut(ratio));
+            float elapsedTime = 0;
+            float ratio = elapsedTime / duration;
+            //int property = Shader.PropertyToID("_D7A8CF01");
 
-            _propBlock.SetFloat("_TransitionState", value);
-            mRenderer.SetPropertyBlock(_propBlock);
-            //material.SetFloat("_TransitionState", value);
-            //RendererExtensions.UpdateGIMaterials(mRenderer);
+            while (ratio < 1f)
+            {
+                ratio = elapsedTime / duration;
+                float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.EaseInOut(ratio));
 
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+                _propBlock.SetFloat("_TransitionState", value);
+                mRenderer.SetPropertyBlock(_propBlock);
+                //material.SetFloat("_TransitionState", value);
+                //RendererExtensions.UpdateGIMaterials(mRenderer);
+
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
     }
 }

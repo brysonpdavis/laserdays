@@ -114,6 +114,7 @@ abstract public class FlippableObject : InteractableObject
                 }
 
                 GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
+                //GetComponent<Transition>().SetStart(1f - (renderer.material.GetFloat("_TransitionState")));
             }
 
         }
@@ -137,6 +138,7 @@ abstract public class FlippableObject : InteractableObject
                     material.shader = raycastManager.realWorldShader;
                 }
                 GetComponent<Transition>().SetStart(0f); //set it fully on for real world]
+                //GetComponent<Transition>().SetStart((renderer.material.GetFloat("_TransitionState")));
             }
         }
     }
