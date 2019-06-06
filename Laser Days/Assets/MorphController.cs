@@ -241,6 +241,9 @@ public class MorphController : MonoBehaviour {
                 laserScale.y = Mathf.Lerp(laserStart, armScalingFactor * armScale, (elapsedTime / durationScale));
                 laserCollider.transform.localScale = laserScale;
 
+                float transitionB = (elapsedTime / durationScale);
+                SetMaterialProperty("_TransitionStateB", transitionB);
+
 
                 StopArmTransitions();
 
@@ -268,6 +271,9 @@ public class MorphController : MonoBehaviour {
 
                 laserScale.y = Mathf.Lerp(laserStart, 1, (elapsedTime / durationScale));
                 laserCollider.transform.localScale = laserScale;
+
+                float transitionB = (1 - (elapsedTime / durationScale));
+                SetMaterialProperty("_TransitionStateB", transitionB);
 
                 StopArmTransitions();
 
@@ -307,6 +313,16 @@ public class MorphController : MonoBehaviour {
         foreach (Transition t in childrenTransitions)
         {
             t.StopAllCoroutines();
+        }
+    }
+
+    private void SetMaterialProperty(string name, float value)
+    {
+
+        foreach (renderersAndProps rp in internalParts)
+        {
+            rp.propertyBlock.SetFloat(name, value);
+            rp.renderer.SetPropertyBlock(rp.propertyBlock);
         }
     }
 
