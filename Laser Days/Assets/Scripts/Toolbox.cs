@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
@@ -44,7 +46,12 @@ public class Toolbox : Singleton<Toolbox>
     private bool narrationActive;
     private int narrationIndex;
     private TextNarration currentNarration;
-
+    private string[] narrationWords;
+    private bool wording = false;
+    private int narrationWordsIndex = 0;
+    private string narrationCurrentWords = "";
+    private int frame_counter = 0;
+    private int frames_til_draw;
 
     //default fog settings
     public float fogDensityDefault;
@@ -53,7 +60,6 @@ public class Toolbox : Singleton<Toolbox>
 
     void Awake()
     {
-
         SetCustomValuesOnInstance();
 
         // Your initialization code here
@@ -65,11 +71,14 @@ public class Toolbox : Singleton<Toolbox>
         soundEffectsSlider.onValueChanged.AddListener(delegate { VolumeChangeCheck(); });
     }
 
-    private void Start()
+    private void Update()
     {
-
+        if (wording)
+        {
+            NarrationUpdate();
+        }
     }
-
+    
     void VolumeChangeCheck()
     {
         soundEffectsVolume = soundEffectsSlider.value;
@@ -214,8 +223,9 @@ public class Toolbox : Singleton<Toolbox>
     public void SetNarration(string text)
     {
         narrationActive = true;
-        narrationText.text = text;
+        // narrationText.text = text;
         narrationBackground.SetActive(true);
+        NarrateWords(text);
     }
 
     public void ClearNarration()
@@ -252,6 +262,34 @@ public class Toolbox : Singleton<Toolbox>
         SetNarration(cur.GetContent(0));
     }
 
+    private void NarrateWords(string text)
+    {
+        wording = true;
+        narrationWordsIndex = 0;
+        frame_counter = 0;
+        narrationWords = text.Split(new string[] {" "}, StringSplitOptions.None).ToArray();
+        narrationCurrentWords = "";
+    }
+
+    private void NarrationUpdate()
+    {
+        if (frame_counter == frames_til_draw)
+        {
+            if (narrationWordsIndex < narrationWords.Length)
+            {
+                narrationCurrentWords += narrationWords[narrationWordsIndex] + " ";
+                narrationText.text = narrationCurrentWords;
+                narrationWordsIndex += 1;
+                frames_til_draw = UnityEngine.Random.Range(2, 6);
+                frame_counter = 0;
+            }
+            else
+            {
+                wording = false;
+            }
+        }
+        frame_counter += 1;
+    }
 
     public void UpdateToolbox()
     {

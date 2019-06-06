@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,10 +16,12 @@ public class TextNarration : MonoBehaviour
     private GameObject background;
 	public TextAsset txtNarration;
     private string[] content;
+	private string[][] content_words;
 
     void Awake()
     {
         content = txtNarration.text.Split(new string[] {"****\n"}, StringSplitOptions.None);
+		content_words = content.Select(sentence => sentence.Split(new string[] {" "}, StringSplitOptions.None)).ToArray();
     }
 
     private void OnTriggerEnter(Collider other)
