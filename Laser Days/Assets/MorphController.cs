@@ -8,6 +8,8 @@ public class MorphController : MonoBehaviour {
     public float armScale = 1f;
     public bool morphRunning = false;
 
+    public float armScalingFactor = 11;
+
     [Header("Internal Parts")]
     public GameObject realCollider;
     private MaterialPropertyBlock realArmPropBlock; 
@@ -67,7 +69,7 @@ public class MorphController : MonoBehaviour {
         //childrenTransitions = gameObject. GetComponentsInChildren<Transition>();
 
 
-        Vector3 startScaled = new Vector3(1, 3 * armScale, 1);
+        Vector3 startScaled = new Vector3(1, armScalingFactor * armScale, 1);
         Vector3 startUnscaled = new Vector3(1, 1, 1);
         if (this.gameObject.layer == 10)
         {
@@ -234,7 +236,7 @@ public class MorphController : MonoBehaviour {
 
                 realScale.y = Mathf.Lerp(realStart, 1, (elapsedTime/durationScale));
                 realCollider.transform.localScale = realScale;
-                laserScale.y = Mathf.Lerp(laserStart, 3*armScale, (elapsedTime / durationScale));
+                laserScale.y = Mathf.Lerp(laserStart, armScalingFactor * armScale, (elapsedTime / durationScale));
                 laserCollider.transform.localScale = laserScale;
 
 
@@ -258,7 +260,7 @@ public class MorphController : MonoBehaviour {
                 elapsedTime += Time.smoothDeltaTime;
                 ratio = elapsedTime / duration;
 
-                realScale.y = Mathf.Lerp(realStart, 3*armScale, (elapsedTime / durationScale));
+                realScale.y = Mathf.Lerp(realStart, armScalingFactor * armScale, (elapsedTime / durationScale));
                 realCollider.transform.localScale = realScale;
 
                 laserScale.y = Mathf.Lerp(laserStart, 1, (elapsedTime / durationScale));
