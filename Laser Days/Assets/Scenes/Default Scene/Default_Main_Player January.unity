@@ -15170,6 +15170,8 @@ PlayableDirector:
     value: {fileID: 1198232336}
   - key: {fileID: 0}
     value: {fileID: 0}
+  - key: {fileID: 114998763600605802, guid: a8c2aba1fd4334a438a1a13c9ab7b41c, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1198232347
@@ -17316,6 +17318,7 @@ GameObject:
   - component: {fileID: 1634057799}
   - component: {fileID: 1634057798}
   - component: {fileID: 1634057800}
+  - component: {fileID: 1634057784}
   m_Layer: 16
   m_Name: Player
   m_TagString: Player
@@ -17323,6 +17326,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1634057784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1634057783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7ecbb12b2684bb0bb3f02dc3196091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1634057785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17349,7 +17363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastedObj: {fileID: 0}
-  shaderselected: {fileID: 13, guid: 0000000000000000f000000000000000, type: 0}
+  shaderselected: {fileID: 13, guid: 0000000000000000f000000000000000, type: 3}
   realWorldShader: {fileID: 4800000, guid: 171d869bd2fec4776bd99481c98a0d69, type: 3}
   laserWorldShader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
   coreLaser: {fileID: 4800000, guid: a39c5e86e389449c4a5e4c5e46bdb175, type: 3}

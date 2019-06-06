@@ -1,42 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
 public class TextNarration : MonoBehaviour
 {
 
-    public string text;
     GameObject container;
     private Text canvasText;
     public bool lore = false;
     public bool singleActivation;
     bool activated = false;
     private GameObject background;
+	public TextAsset txtNarration;
+    private string[] content;
 
-
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
-        //container = GameObject.Find("TextNarration");
-        //canvasText = container.GetComponentInChildren<Text>();
-        //background = container.gameObject.GetComponentInChildren<Image>().gameObject;
-
-        if (GetComponent<UnityEngine.UI.Text>())
-           text = GetComponent<UnityEngine.UI.Text>().text;
-
+        content = txtNarration.text.Split(new string[] {"****\n"}, StringSplitOptions.None);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            //canvasText.text = text;
-
             if (!singleActivation || (singleActivation && !activated))
             {
-                Toolbox.Instance.SetNarration(text);
+                Toolbox.Instance.NewNarration(this);
                 activated = true;
 
                 if (lore)
@@ -55,5 +46,22 @@ public class TextNarration : MonoBehaviour
             Toolbox.Instance.ClearNarration();
         }
     }
+
+    public string GetContent(int n)
+    {
+        if (n < content.Length)
+        {
+            return content[n];
+        }
+        else
+        {
+            return "Oops! No string here.";
+        }
+    }
+
+	public int GetContentLength()
+	{
+		return content.Length;
+	}
 
 }

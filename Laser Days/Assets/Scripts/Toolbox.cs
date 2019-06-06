@@ -39,8 +39,11 @@ public class Toolbox : Singleton<Toolbox>
     public AudioSource SoundEffectsAudio;
 
     public GameObject narrationContainer;
-    public Text narrationText;
+    private Text narrationText;
     public GameObject narrationBackground;
+    private bool narrationActive;
+    private int narrationIndex;
+    private TextNarration currentNarration;
 
 
     //default fog settings
@@ -210,14 +213,43 @@ public class Toolbox : Singleton<Toolbox>
 
     public void SetNarration(string text)
     {
+        narrationActive = true;
         narrationText.text = text;
         narrationBackground.SetActive(true);
     }
 
     public void ClearNarration()
     {
+        narrationActive = false;
         narrationText.text = null;
         narrationBackground.SetActive(false);
+        narrationIndex = 0;
+    }
+
+    public bool GetNarrationActive()
+    {
+        return narrationActive;
+    }
+
+    public void NextNarration()
+    {
+        if (currentNarration.GetContentLength() > narrationIndex + 1)
+        {
+            narrationIndex += 1;
+            SetNarration(currentNarration.GetContent(narrationIndex));
+        }
+        else
+        {
+            narrationIndex = 0;
+            ClearNarration();
+        }
+    }
+
+    public void NewNarration(TextNarration cur)
+    {
+        ClearNarration();
+        currentNarration = cur;
+        SetNarration(cur.GetContent(0));
     }
 
 
