@@ -215,17 +215,19 @@ public class MorphController : MonoBehaviour {
 
         float durationScale;
 
-
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
         rigidbody.isKinematic = false;
 
         this.tag = "NoTouch";
 
+        Debug.Log("morph coroutine started");
+
         if (direction)
         {
 
-            durationScale = (((3f - laserStart) / 2f)*duration);
+            durationScale = (((armScalingFactor - laserStart) / (armScalingFactor-1f))*duration);
+            Debug.Log("morph coroutine in loop");
 
 
             while (elapsedTime < durationScale)
@@ -251,7 +253,8 @@ public class MorphController : MonoBehaviour {
         else
         {
 
-            durationScale = (((3f - realStart) / 2f) * duration);
+            durationScale = (((armScalingFactor - realStart) / (armScalingFactor - 1f)) * duration);
+            Debug.Log("morph coroutine in loop");
 
 
             while (elapsedTime < durationScale)
