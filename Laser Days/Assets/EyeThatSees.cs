@@ -10,6 +10,10 @@ public class EyeThatSees : MonoBehaviour {
     flipScript flip;
     public bool onWall;
     public bool blockingFlip;
+    private float startingAngleY;
+    private enum EyeDirection{Forward, Backward, Right, Left};
+    private EyeDirection myDirection;
+    [HideInInspector] public Vector3 currentPlayerPoint;
 
     [HideInInspector]
     public SimpleEye eyeParent;
@@ -19,11 +23,11 @@ public class EyeThatSees : MonoBehaviour {
     void Start () {
         player = Toolbox.Instance.GetPlayer().transform;
         flip = player.gameObject.GetComponent<flipScript>();
-
         flipScript.OnFailedFlip += FailedFlip;
-
         eyeParent = GetComponent<SimpleEye>();
 
+        InitializeWallCheck();
+        Debug.Log(transform.rotation.eulerAngles.y);
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -89,12 +93,15 @@ public class EyeThatSees : MonoBehaviour {
 
             Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
 
-            float relativeZ = (transform.position - hit.point).z;
 
-            if (hit.collider.CompareTag("Player") && (!onWall || (onWall && (relativeZ>=0))))
+            Debug.Log(transform.position - hit.point);
+
+            //so the simpleEye can run WallCheck;
+            currentPlayerPoint = hit.point;
+
+            if (hit.collider.CompareTag("Player") && (WallCheck(hit.point)))
             {
 
-                Debug.Log(transform.position - hit.point);
                 eyeParent.hittingPlayer = true;
                 return true;
             }
@@ -105,6 +112,76 @@ public class EyeThatSees : MonoBehaviour {
         }
 
         return false;
+    }
+
+    public bool WallCheck(Vector3 hit)
+    {
+        if (!onWall)
+            return true;
+
+        else 
+        {
+            Vector3 relativePos = (transform.position - hit);
+
+
+            switch (myDirection)
+            {
+                case EyeDirection.Forward:
+                    {
+                        if (relativePos.z <= 0)
+                            return true;
+
+                        else return false;
+                    }
+
+                case EyeDirection.Backward:
+                    {
+                        if (relativePos.z >= 0)
+                            return true;
+                        else return false;
+                                            }
+
+                case EyeDirection.Right:
+                    {
+                        if (relativePos.x >= 0)
+                            return true;
+                        else return false;
+
+                    }
+
+                case EyeDirection.Left:
+                    {
+                        if (relativePos.x <= 0)
+                            return true;
+                        else return false;
+                    }
+
+                default:
+                    return false;
+            }
+
+        }
+
+    }
+
+    private void InitializeWallCheck()
+    {
+        Debug.Log(transform.rotation.eulerAngles.y);
+        //facing forward: looking for 0
+        if (transform.rotation.eulerAngles.y >= 0f && transform.rotation.eulerAngles.y <= 10f)
+            myDirection = EyeDirection.Forward;
+        //facing left: looking for 90
+        if (transform.rotation.eulerAngles.y >= 80f && transform.rotation.eulerAngles.y <= 100f)
+            myDirection = EyeDirection.Left;
+        
+        //facing backward: looking for 180
+        if (transform.rotation.eulerAngles.y >= 170f && transform.rotation.eulerAngles.y <= 190f)
+            myDirection = EyeDirection.Backward;
+
+        //facing right: looking for 270
+        if (transform.rotation.eulerAngles.y >= 260f && transform.rotation.eulerAngles.y <= 280f)
+            myDirection = EyeDirection.Right;
+
     }
 
 

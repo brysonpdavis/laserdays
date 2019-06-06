@@ -17,6 +17,7 @@ public class Transition : MonoBehaviour
     float offset;
     float speed;
     public bool shared;
+    public bool manualTransitionChildren;
     bool transitionAllChildren;
     protected Transition[] childrenTransitions;
 
@@ -67,7 +68,7 @@ public class Transition : MonoBehaviour
     {
         //set all objects to transition children to have bool setup
         //only happens on relevant objects
-        if (GetComponent<PlatformMover>() || GetComponent<InteractableObject>())
+        if (GetComponent<PlatformMover>() || GetComponent<InteractableObject>() || manualTransitionChildren)
         {
             transitionAllChildren = true;
             childrenTransitions = GetComponentsInChildren<Transition>();
