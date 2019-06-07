@@ -159,12 +159,14 @@ float3 accentBlend (float3 input, Interpolators i)
 }
 
 //Keeping this to be called, but just returning one.
-float GetAlpha (Interpolators i) {
+float GetAlpha (Interpolators i) 
+{
     return 1.0;
 }
 
 //Returns alpha at fragment to determine whether it gets clipped. 
-float GetAlphaSingle (Interpolators i){
+float GetAlphaSingle (Interpolators i)
+{
     float emv = tex2D(_EffectMap, i.uv.xy).r;
     
     #if defined(REAL)
@@ -176,12 +178,12 @@ float GetAlphaSingle (Interpolators i){
         emv += _TransitionState;
         emv = step(1,emv);
         return emv;
-    #endif 
-       
+    #endif      
 }
 
 // Return simple tangent normal
-float3 GetTangentSpaceNormal (Interpolators i) {
+float3 GetTangentSpaceNormal (Interpolators i) 
+{
     float3 normal = float3(0, 0, 1);
     return normal;
 }

@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Default_Prototype Laser Transparent
-  m_Shader: {fileID: 4800000, guid: db1a66fa839234c6bb7aa466c1cf40f5, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2ce7ad6531ac740ad96f40c3966463db, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -18,6 +18,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AccentMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Albedo:
         m_Texture: {fileID: 2800000, guid: 823e8f59cd24e40f0ab3d7a1074aa7e1, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -50,6 +54,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 3dccaab28b6f14a279bb0f791c815a1c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EffectMap:
+        m_Texture: {fileID: 2800000, guid: 0f9deff7cdfa54eb0ae31d1428c54bae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -63,7 +71,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9470468fda72f4773a90a0306decbf0f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -107,6 +115,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _AlphaTestRef: 0.5
     - _Amplitude: 0.33928573
     - _Angle: 0.46428573
@@ -114,6 +123,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.27
     - _DetailNormalMapScale: 1
+    - _Dirtiness: 0
     - _DstBlend: 0
     - _EdgeThickness: 0.01
     - _Elapsed: 0
@@ -128,9 +138,10 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 0.26
+    - _Opacity: 0.1
     - _Parallax: 0.02
     - _Phase: 1
+    - _Real: 0
     - _Size: 25
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -142,7 +153,9 @@ Material:
     - __dirty: 0
     - _isCollide: 0
     m_Colors:
+    - _Accent: {r: 0, g: 0, b: 0, a: 0}
     - _ActiveColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Base: {r: 0.7075472, g: 0.6841848, b: 0.6841848, a: 0.20392157}
     - _Color: {r: 1, g: 0.31499988, b: 0.042792678, a: 1}
     - _Color1: {r: 0.67910445, g: 0.67910445, b: 0.67910445, a: 1}
     - _Color2: {r: 0.14179105, g: 0.14179105, b: 0.14179105, a: 1}
