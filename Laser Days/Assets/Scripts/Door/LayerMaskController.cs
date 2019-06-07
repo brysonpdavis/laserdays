@@ -13,7 +13,7 @@ public static class LayerMaskController
 
     public static LayerMask Everything = 1 << 0 | 1 << 10 | 1 << 11 | 1 << 17 | 1 << 16 | 1 << 15;
 
-    public static LayerMask SharedOnly = 1 << 0 | 1 << 11 | 1 << 17;
+    public static LayerMask SharedOnly = 1 << 0 | 1 << 17;
 
 
     public static LayerMask GetLayerMaskForRaycast(int playerLayer)
