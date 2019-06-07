@@ -46,7 +46,7 @@ public class Toolbox : Singleton<Toolbox>
     private bool narrationActive;
     private int narrationIndex;
     private TextNarration currentNarration;
-    private string[] narrationWords;
+    private char[] narrationWords;
     private bool wording = false;
     private int narrationWordsIndex = 0;
     private string narrationCurrentWords = "";
@@ -232,8 +232,10 @@ public class Toolbox : Singleton<Toolbox>
     {
         narrationActive = false;
         narrationText.text = null;
+		narrationCurrentWords = "";
         narrationBackground.SetActive(false);
         narrationIndex = 0;
+		wording = false;
     }
 
     public bool GetNarrationActive()
@@ -267,7 +269,7 @@ public class Toolbox : Singleton<Toolbox>
         wording = true;
         narrationWordsIndex = 0;
         frame_counter = 0;
-        narrationWords = text.Split(new string[] {" "}, StringSplitOptions.None).ToArray();
+        narrationWords = text.ToCharArray(); //text.Split(new string[] {" "}, StringSplitOptions.None).ToArray(); // for words instead of letters
         narrationCurrentWords = "";
     }
 
@@ -277,10 +279,10 @@ public class Toolbox : Singleton<Toolbox>
         {
             if (narrationWordsIndex < narrationWords.Length)
             {
-                narrationCurrentWords += narrationWords[narrationWordsIndex] + " ";
+                narrationCurrentWords += narrationWords[narrationWordsIndex]; // + " ";
                 narrationText.text = narrationCurrentWords;
                 narrationWordsIndex += 1;
-                frames_til_draw = UnityEngine.Random.Range(2, 6);
+                frames_til_draw = 1; // UnityEngine.Random.Range(2, 6); // for randomized frame drawing
                 frame_counter = 0;
             }
             else

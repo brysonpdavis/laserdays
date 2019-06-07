@@ -10,7 +10,7 @@ public class NarrationControl : MonoBehaviour {
 	void Update () {
 		if (Toolbox.Instance.GetNarrationActive())
 		{
-			if (Input.GetKeyDown(KeyCode.R))
+			if (Input.GetKeyDown(KeyCode.Return))
 			{
 				Toolbox.Instance.NextNarration();
 			}
