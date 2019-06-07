@@ -195,16 +195,7 @@ public class MorphController : MonoBehaviour {
     private IEnumerator MorphCoroutine(bool direction)
     {
 
-        //realCollider.GetComponent<Transition>().enabled = false;
-        //laserCollider.GetComponent<Transition>().enabled = false;
-
-        //foreach (Transition t in childrenTransitions)
-        //{
-        //    t.ignore = true;
-        //}
-
         morphRunning = true;
-        //Debug.Log("moving again" + this.name);
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
         Vector3 realScale = realCollider.transform.localScale;
@@ -214,6 +205,7 @@ public class MorphController : MonoBehaviour {
         float laserStart = laserCollider.transform.localScale.y;
 
         float durationScale;
+        int currentFlipCount= 0;
 
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
@@ -227,15 +219,12 @@ public class MorphController : MonoBehaviour {
         {
 
             durationScale = (((armScalingFactor - laserStart) / (armScalingFactor-1f))*duration);
-            Debug.Log("morph coroutine in loop");
 
 
             while (elapsedTime < durationScale)
             {
 
                 elapsedTime += Time.smoothDeltaTime;
-               // ratio = elapsedTime / duration;
-
                 realScale.y = Mathf.Lerp(realStart, 1, (elapsedTime/durationScale));
                 realCollider.transform.localScale = realScale;
                 laserScale.y = Mathf.Lerp(laserStart, armScalingFactor * armScale, (elapsedTime / durationScale));
@@ -244,8 +233,7 @@ public class MorphController : MonoBehaviour {
                 float transitionB = (elapsedTime / durationScale);
                 SetMaterialProperty("_TransitionStateB", transitionB);
 
-
-                StopArmTransitions();
+                currentFlipCount = CheckFlipsForTransitions(currentFlipCount);
 
                 yield return null;
             }
@@ -272,10 +260,11 @@ public class MorphController : MonoBehaviour {
                 laserScale.y = Mathf.Lerp(laserStart, 1, (elapsedTime / durationScale));
                 laserCollider.transform.localScale = laserScale;
 
-                float transitionB = (1 - (elapsedTime / durationScale));
+                float transitionB = (1f - (elapsedTime / durationScale));
                 SetMaterialProperty("_TransitionStateB", transitionB);
 
-                StopArmTransitions();
+                currentFlipCount = CheckFlipsForTransitions(currentFlipCount);
+
 
                 yield return null;
             }
@@ -294,18 +283,24 @@ public class MorphController : MonoBehaviour {
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 }
 
-        //realCollider.GetComponent<Transition>().enabled = true;
-        //laserCollider.GetComponent<Transition>().enabled = true;
 
-        //foreach (Transition t in childrenTransitions)
-        //{
-        //    t.ignore = false;
-        //}
 
         morphRunning = false;
 
         yield return null;
 
+    }
+
+    private int CheckFlipsForTransitions(int count)
+    {
+        if (Toolbox.Instance.GetFlip().flippedThisFrame)
+        {
+            count += 1;
+        }
+        if (Toolbox.Instance.EqualToHeld(gameObject) || count <= 1)
+            StopArmTransitions();
+
+        return count;
     }
 
     private void StopArmTransitions()

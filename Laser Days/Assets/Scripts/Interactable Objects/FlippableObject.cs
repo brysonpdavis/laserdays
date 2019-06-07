@@ -14,6 +14,7 @@ abstract public class FlippableObject : InteractableObject
     public Transform sceneContainer;
     public Transform realTransform;
     public Transform laserTransform;
+    public float transitionStateB;
 
 
     protected override void AfterStart()
@@ -263,6 +264,7 @@ abstract public class FlippableObject : InteractableObject
             float value = Mathf.Lerp(startpoint, endpoint, ratio);
 
             material.SetFloat("_TransitionStateB", value);
+            transitionStateB = value;
 
 
             RendererExtensions.UpdateGIMaterials(mRenderer);

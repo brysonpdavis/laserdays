@@ -75,6 +75,7 @@ public class flipScript : MonoBehaviour {
         if (Input.GetButtonDown("Switch") && Time.timeScale > 0.0f && CheckEyes())
         {
             GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
+            flippedThisFrame = true;
 
             if (heldObj) //first check to make sure the object that's held is flippable
             {
@@ -97,37 +98,44 @@ public class flipScript : MonoBehaviour {
                     }
                 }
 
-                
+
             }
 
-			if (heldObj) {
-                
-				if (pc.Check(heldObj)) { // if the player and any held object can be flipped:
-					pc.ItemInteraction(heldObj); // subtract any charge required
-					FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
-					pc.UpdatePredictingSlider();
+            if (heldObj)
+            {
+
+                if (pc.Check(heldObj))
+                { // if the player and any held object can be flipped:
+                    pc.ItemInteraction(heldObj); // subtract any charge required
+                    FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
+                    pc.UpdatePredictingSlider();
                     flippedThisFrame = true;
-				}
-				else {
-					
+                }
+                else
+                {
+
                     // make a sound effect letting player
-					// know that they don't have enough charge
+                    // know that they don't have enough charge
                     Toolbox.Instance.SetVolume(audioSource);
                     audioSource.clip = flipFailClip;
                     audioSource.Play();
 
-				}
-			}
-			else {
-				if (pc.CheckPlayerCharge())
-				{
-					pc.PlayerInteraction();
-					FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
-					pc.UpdatePredictingSlider();
+                }
+            }
+            else
+            {
+                if (pc.CheckPlayerCharge())
+                {
+                    pc.PlayerInteraction();
+                    FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
+                    pc.UpdatePredictingSlider();
                     flippedThisFrame = true;
-				}
-			}
-		}
+                }
+            }
+        }
+
+        else
+            flippedThisFrame = false;
 
         if (Input.GetButtonDown(SoundtrackButton))
         {
