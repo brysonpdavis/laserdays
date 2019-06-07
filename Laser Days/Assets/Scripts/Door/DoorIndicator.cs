@@ -12,6 +12,7 @@ public class DoorIndicator : MonoBehaviour
     {
         RenderMat = GetComponent<Renderer>().material;
         RenderMat.SetInt("_Animated", 0);
+        RenderMat.SetInt("_Indicator", 1);
     }
 
 

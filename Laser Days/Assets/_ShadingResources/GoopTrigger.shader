@@ -13,6 +13,7 @@
         _FadeLength("_FadeLength", Range(0,3)) = 0.1
                 
         [HideInInspector]_Elapsed("Elapsed", Float) = 0
+        [HideInInspector]_Indicator("Is Indicator", Float) = 0
            
         _TransitionState("Transition State", Range( 0 , 1)) = 0
         
@@ -52,7 +53,7 @@
         sampler2D _CameraDepthTexture;
         uniform float _Real;
 	    uniform float4 _RestingColor, _ShimmerColor, _ActiveColor;  
-        uniform float _Animated, _Elapsed, _AlphaCutoff; 
+        uniform float _Animated, _Elapsed, _AlphaCutoff, _Indicator; 
         uniform float _TransitionState, _isActive, _isCollide, _isLineRender, _FadeLength;
             
         inline half4 LightingUnlit( SurfaceOutput s, half3 lightDir, half atten )
@@ -85,17 +86,20 @@
             
             float intensity = lerp(0.05, 1, activity);
         
-            float3 dark = _RestingColor.rgb * 0.4;
+            float3 dark = _RestingColor.rgb * max(0.4, _Indicator);
 
             o.Emission.rgb = lerp(_RestingColor.rgb, dark, intersect);
+            
             o.Emission = lerp(o.Emission.rgb, _ActiveColor, activity);
             
             shimmer = saturate(shimmer + _isLineRender);
             
             o.Emission += shimmer * _ShimmerColor * intensity;
 
-            o.Alpha = _RestingColor.a;
-            o.Alpha = lerp(_RestingColor.a, 1, 0.4 * intersect);
+            float baseAlpha = _RestingColor.a;
+            float fadeAlpha = lerp(baseAlpha, 1, 0.4 * intersect);
+            
+            o.Alpha = lerp(fadeAlpha, baseAlpha, _Indicator);
                
             
 		}

@@ -10,6 +10,8 @@ public class DoorTrigger : MonoBehaviour {
     public float ScrollSpeed = 0.4f;
     private Material RenderMat;
     private AudioSource audio;
+
+    private Vector2 minMaxScrollSpeed;
    
     private void Awake()
     {
@@ -29,6 +31,8 @@ public class DoorTrigger : MonoBehaviour {
         RenderMat.SetColor("_ActiveColor", controller.ActiveColor);
         RenderMat.SetColor("_ShimmerColor", controller.ShimmerColor);
         RenderMat.SetTexture("_TriggerMap", controller.ScrollText);
+
+        minMaxScrollSpeed = new Vector2(ScrollSpeed * -2, ScrollSpeed * 2);
     }
 
     private void Update()
@@ -49,7 +53,7 @@ public class DoorTrigger : MonoBehaviour {
             {
                 RenderMat.SetFloat("_isCollide", 1f);
                 RenderMat.SetFloat("_isActive", 1f);
-                ScrollSpeed *= -0.5f;
+                ScrollSpeed = Mathf.Clamp(ScrollSpeed * -2, minMaxScrollSpeed.x, minMaxScrollSpeed.y);
                 controller.OpenAll();
                 audio.clip = SoundBox.Instance.platformOn;
                 Toolbox.Instance.SetVolume(audio);
@@ -68,7 +72,7 @@ public class DoorTrigger : MonoBehaviour {
             {
                 RenderMat.SetFloat("_isCollide", 0f);
                 RenderMat.SetFloat("_isActive", 0f);
-                ScrollSpeed *= -2f;
+                ScrollSpeed *= -0.5f;
                 active = false;
 
                 audio.clip = SoundBox.Instance.platformOff;

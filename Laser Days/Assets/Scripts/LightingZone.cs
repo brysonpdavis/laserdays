@@ -47,8 +47,11 @@ public class LightingZone : MonoBehaviour {
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
 
-        skybox.ambientMultiplier = ambMult;
-        skybox.fogMultiplier = fogMult;
+        //skybox.ambientMultiplier = ambMult;
+        //skybox.fogMultiplier = fogMult;
+
+        float fogMultStart = skybox.fogMultiplier;
+        float ambientMultStart = skybox.ambientMultiplier;
 
         float densityStart = RenderSettings.fogDensity;
         float fogStartDistance = fog.startDistance;
@@ -62,6 +65,12 @@ public class LightingZone : MonoBehaviour {
 
             float distanceValue = Mathf.Lerp(fogStartDistance, fogDistance, ratio);
             fog.startDistance = distanceValue;
+
+            float fogMultVal = Mathf.Lerp(fogMultStart, fogMult, ratio);
+            skybox.fogMultiplier = fogMultVal;
+
+            float ambientMultVal = Mathf.Lerp(ambientMultStart, ambMult, ratio);
+            skybox.ambientMultiplier = ambientMultVal;
 
             yield return null;
         }
