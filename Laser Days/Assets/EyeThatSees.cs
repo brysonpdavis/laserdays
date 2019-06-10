@@ -53,7 +53,22 @@ public class EyeThatSees : MonoBehaviour {
     private void FailedFlip()
     {
         if (isActive)
-            Debug.Log("FLIPFAILED: called from eye");
+        {
+            CameraShake.Shake(0.15f, .2f);
+        }
+
+    }
+
+    void ParticleEffect()
+    {
+        //if (GetComponent<ParticleSystem>())
+        //{
+        //    ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 50f);
+        //    var main = particleSystem.main;
+        //    main.startLifetime = .75f;
+        //    particleSystem.emission.SetBurst(0, burst);
+        //    particleSystem.Play();
+        //}
     }
 
     private void Update()
@@ -93,8 +108,6 @@ public class EyeThatSees : MonoBehaviour {
 
             Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
 
-
-            Debug.Log(transform.position - hit.point);
 
             //so the simpleEye can run WallCheck;
             currentPlayerPoint = hit.point;
