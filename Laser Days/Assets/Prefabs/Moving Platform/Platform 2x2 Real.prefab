@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23798481302171792}
   - component: {fileID: 114832534915191478}
   - component: {fileID: 114787385276207638}
+  - component: {fileID: 114581041347657340}
   m_Layer: 11
   m_Name: Indicator
   m_TagString: Untagged
@@ -353,6 +354,7 @@ GameObject:
   - component: {fileID: 120842328692949334}
   - component: {fileID: 114861984400824438}
   - component: {fileID: 65059121319724472}
+  - component: {fileID: 114171947297242126}
   m_Layer: 11
   m_Name: Line
   m_TagString: Untagged
@@ -1426,7 +1428,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991578778593586}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21, y: 1, z: -56}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4237421582597656}
@@ -2501,6 +2503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114170230390184962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2520,6 +2523,19 @@ MonoBehaviour:
   motionCheck: 1
   objectsPosition: {x: 0, y: 0, z: 0}
   moverPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &114171947297242126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512460152388990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 4800000, guid: 89736994e789c4fd8968294097f7aae2, type: 3}
+  m_Renderer: {fileID: 120842328692949334}
 --- !u!114 &114196050163072544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2552,6 +2568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114246916853406464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2565,6 +2582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114274154447907422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2578,6 +2596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114293194677654450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2631,6 +2650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114348060975680386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2684,6 +2704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114575367464234716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2698,6 +2719,19 @@ MonoBehaviour:
   target: {fileID: 0}
   mainGuard: {fileID: 0}
   platformController: {fileID: 0}
+--- !u!114 &114581041347657340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1006742691471244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 4800000, guid: 89736994e789c4fd8968294097f7aae2, type: 3}
+  m_Renderer: {fileID: 23798481302171792}
 --- !u!114 &114600934776655212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2732,6 +2766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114684119301477514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2766,6 +2801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114704816368687448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2863,6 +2899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114832534915191478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2907,7 +2944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fe622a737e04596b4e86eaf43cf34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueId: Default_Main_Player January_f9ff584e-5679-4ca2-a0be-7c3c7ddd58ee
+  uniqueId: Platform prefab_03fce873-fca9-4c15-adb3-1f75ccc90472
 --- !u!114 &114850102594425614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2921,6 +2958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114861984400824438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2934,6 +2972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114891174014182508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2947,6 +2986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114971151719443384
 MonoBehaviour:
   m_ObjectHideFlags: 1

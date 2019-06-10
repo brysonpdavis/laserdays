@@ -742,6 +742,7 @@ GameObject:
   - component: {fileID: 33927769422196254}
   - component: {fileID: 114189369763628828}
   - component: {fileID: 114898016520895560}
+  - component: {fileID: 114827828113439202}
   m_Layer: 10
   m_Name: Indicator
   m_TagString: Untagged
@@ -1180,7 +1181,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000516491991032}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.37114, y: 55.68513, z: -26.074627}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4898578691392938}
@@ -1555,7 +1556,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 6b3828d3ee4714459a647ab1ed4853b2, type: 2}
+  - {fileID: 2100000, guid: a8c95e8c426374ef2bceb258f3baefff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2447,8 +2448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replaceShader: {fileID: 0}
-  m_Renderer: {fileID: 0}
+  replaceShader: {fileID: 4800000, guid: 89736994e789c4fd8968294097f7aae2, type: 3}
+  m_Renderer: {fileID: 120146366497256802}
 --- !u!114 &114051437546596576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2798,7 +2799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fe622a737e04596b4e86eaf43cf34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueId: Default_Main_Player January_269cca35-9bfe-4ae5-8469-a9572aeb49c2
+  uniqueId: Platform prefab_92f78bc1-4417-41fc-9902-fe8c54f5d43a
 --- !u!114 &114551217679073966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2921,6 +2922,19 @@ MonoBehaviour:
   ScaleSpeed: 1
   shared: 0
   manualTransitionChildren: 0
+--- !u!114 &114827828113439202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1736340705183098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 0}
+  m_Renderer: {fileID: 23128717604012096}
 --- !u!114 &114888731858613860
 MonoBehaviour:
   m_ObjectHideFlags: 1

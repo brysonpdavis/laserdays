@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114428480494326674}
   - component: {fileID: 82400466786723728}
   - component: {fileID: 65694328971470628}
+  - component: {fileID: 114366014291964994}
   m_Layer: 10
   m_Name: Trigger BasinSTD Laser
   m_TagString: Untagged
@@ -212,6 +213,19 @@ MonoBehaviour:
   ScrollSpeed: 0.4
   on: 0
   moving: 0
+--- !u!114 &114366014291964994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1768064615704052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 0}
+  m_Renderer: {fileID: 0}
 --- !u!114 &114428480494326674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,3 +239,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
