@@ -43,6 +43,7 @@ public class Toolbox : Singleton<Toolbox>
     public GameObject narrationContainer;
     private Text narrationText;
     public GameObject narrationBackground;
+    public GameObject narrationContinue;
     private bool narrationActive;
     private int narrationIndex;
     private TextNarration currentNarration;
@@ -234,6 +235,7 @@ public class Toolbox : Singleton<Toolbox>
         narrationText.text = null;
 		narrationCurrentWords = "";
         narrationBackground.SetActive(false);
+        narrationContinue.SetActive(false);
         narrationIndex = 0;
 		wording = false;
     }
@@ -245,6 +247,8 @@ public class Toolbox : Singleton<Toolbox>
 
     public void NextNarration()
     {
+        narrationContinue.SetActive(false);
+        
         if (currentNarration.GetContentLength() > narrationIndex + 1)
         {
             narrationIndex += 1;
@@ -288,6 +292,7 @@ public class Toolbox : Singleton<Toolbox>
             else
             {
                 wording = false;
+                narrationContinue.SetActive(true);
             }
         }
         frame_counter += 1;
@@ -310,7 +315,8 @@ public class Toolbox : Singleton<Toolbox>
         {
             narrationContainer = GameObject.Find("TextNarration");
             narrationText = narrationContainer.GetComponentInChildren<Text>();
-            narrationBackground = narrationContainer.gameObject.GetComponentInChildren<Image>().gameObject;
+            narrationBackground = narrationContainer.transform.Find("Background").gameObject;
+            narrationContinue = narrationContainer.transform.Find("Continue").gameObject;
             SoundEffectsAudio = GameObject.Find("SoundEffectsAudio").GetComponent<AudioSource>();
 
             ClearNarration();
