@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114643506085496988}
   - component: {fileID: 82880462079205932}
   - component: {fileID: 64630761543161854}
+  - component: {fileID: 114362435049578926}
   m_Layer: 11
   m_Name: Trigger CornerPuddle Real
   m_TagString: Untagged
@@ -196,6 +197,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114362435049578926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351012571074916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 0}
+  m_Renderer: {fileID: 0}
 --- !u!114 &114643506085496988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -209,6 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114650025539069566
 MonoBehaviour:
   m_ObjectHideFlags: 1

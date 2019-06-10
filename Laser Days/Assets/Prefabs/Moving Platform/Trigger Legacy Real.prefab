@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114432639774795996}
   - component: {fileID: 114222542201145754}
   - component: {fileID: 82854249874914052}
+  - component: {fileID: 114044515213876028}
   m_Layer: 11
   m_Name: Trigger Legacy Real
   m_TagString: Untagged
@@ -194,6 +195,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114044515213876028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1605490797620160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 0}
+  m_Renderer: {fileID: 0}
 --- !u!114 &114222542201145754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
+  manualTransitionChildren: 0
 --- !u!114 &114432639774795996
 MonoBehaviour:
   m_ObjectHideFlags: 1
