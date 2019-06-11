@@ -310,7 +310,7 @@ namespace MFPP
                 Physics.SphereCast(slopeRay, Radius, out slopeHit, Mathf.Infinity, CollisionLayers);
                 bool canJumpOnThisSlope = Vector3.Angle(Vector3.up, slopeHit.normal) < SlopeLimit;
 
-                return Movement.AllowMovement && Movement.Jump.AllowJump && canJumpOnThisSlope && !ceilingRaycast && (Movement.Jump.AutoJump ? GetButton(Controls.JumpButton) : GetButtonDown(Controls.JumpButton));
+                return Movement.AllowMovement && Movement.Jump.AllowJump && canJumpOnThisSlope && !ceilingRaycast && Controls.ControlsEnabled && (Movement.Jump.AutoJump ? Input.GetKey(ControlManager.CM.jump) : Input.GetKeyDown(ControlManager.CM.jump));
             }
         }
 
@@ -607,7 +607,7 @@ namespace MFPP
 
             if (Movement.AllowMouseMove)
             {
-                Vector2 rawDelta = new Vector2(GetCurrentAxis(Controls.MouseXAxis), GetCurrentAxis(Controls.MouseYAxis)) * Controls.MouseSensitivity; // Raw delta of the mouse.
+                Vector2 rawDelta = new Vector2(GetMouseCurrentAxis(Controls.MouseXAxis), GetMouseCurrentAxis(Controls.MouseYAxis)) * Controls.MouseSensitivity; // Raw delta of the mouse.
                 TargetLookAngles += rawDelta; // Apply raw delta to target look angles.
                 TargetLookAngles = new Vector2(TargetLookAngles.x, Mathf.Clamp(TargetLookAngles.y, -90f, 90f)); // Clamp target look angles Y values between -90...90 to avoid looking too much up or down.
 
@@ -1141,8 +1141,39 @@ namespace MFPP
         /// <returns>The value of the virtual axis identified by <see cref="axisName"/>.</returns>
         protected float GetCurrentAxis(string axisName)
         {
+            float ret = 0;
+            if (axisName == "Vertical")
+            {
+                if (Input.GetKey(ControlManager.CM.forward)) 
+                {
+                    ret += 1;
+                }
+                if (Input.GetKey(ControlManager.CM.backward)) 
+                {
+                    ret -= 1;
+                }
+            }
+            else if (axisName == "Horizontal")
+            {
+                if (Input.GetKey(ControlManager.CM.left))
+                {
+                    ret -= 1;
+                }
+
+                if (Input.GetKey(ControlManager.CM.right))
+                {
+                    ret += 1;
+                }
+            }
+
+            return ret;
+        }
+
+        float GetMouseCurrentAxis(string axisName)
+        {
             return Controls.RawInput ? GetAxisRaw(axisName) : GetAxis(axisName);
         }
+        
         /// <summary>
         /// Similar to <see cref="Input.GetButton(string)"/> but also taking into account <see cref="ControlSettings.ControlsEnabled"/>.
         /// </summary>

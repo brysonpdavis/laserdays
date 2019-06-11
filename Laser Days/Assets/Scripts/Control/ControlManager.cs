@@ -20,6 +20,18 @@ public class ControlManager : MonoBehaviour
 
     void Awake()
     {
+        //Singleton pattern
+        if(CM == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            CM = this;
+        }
+        else if(CM != this)
+        {
+            Destroy(gameObject);
+        }
+
+        
         forward = (KeyCode) System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("forwardKey", "W"));
         

@@ -72,7 +72,7 @@ public class flipScript : MonoBehaviour {
 
 
 	void Update () {
-        if (Input.GetButtonDown("Switch") && Time.timeScale > 0.0f && CheckEyes())
+        if (Input.GetKeyDown(ControlManager.CM.flip) && Time.timeScale > 0.0f && CheckEyes())
         {
             GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
             flippedThisFrame = true;

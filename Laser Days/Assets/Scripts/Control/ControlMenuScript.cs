@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ControlMenuScript : MonoBehaviour {
     
-    Transform menuPanel;
+    [SerializeField] Transform menuPanel;
 
     Event keyEvent;
 
@@ -25,9 +25,11 @@ public class ControlMenuScript : MonoBehaviour {
 
         //Make sure it's not active when the game starts
 
+/*
         menuPanel = transform.Find("Panel");
 
         menuPanel.gameObject.SetActive(false);
+*/
 
         waitingForKey = false;
 
@@ -53,45 +55,47 @@ public class ControlMenuScript : MonoBehaviour {
 
         {
 
-            if(menuPanel.GetChild(i).name == "ForwardKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.forward.ToString();
+            if (menuPanel.GetChild(i).name == "ForwardKey")
 
+            {
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.forward.ToString(); 
+            }
             else if(menuPanel.GetChild(i).name == "BackwardKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.backward.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.backward.ToString();
 
             else if(menuPanel.GetChild(i).name == "LeftKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.left.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.left.ToString();
 
             else if(menuPanel.GetChild(i).name == "RightKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.right.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.right.ToString();
 
             else if(menuPanel.GetChild(i).name == "JumpKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.jump.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.jump.ToString();
 
             else if (menuPanel.GetChild(i).name == "PickupKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.pickup.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.pickup.ToString();
             
             else if (menuPanel.GetChild(i).name == "FlipKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.flip.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.flip.ToString();
             
             else if (menuPanel.GetChild(i).name == "SelectKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.select.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.select.ToString();
 
             else if (menuPanel.GetChild(i).name == "PauseKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.pause.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.pause.ToString();
 
             else if (menuPanel.GetChild(i).name == "SubmitKey")
 
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = ControlManager.CM.submit.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.submit.ToString();
 
         }
 
@@ -110,15 +114,29 @@ public class ControlMenuScript : MonoBehaviour {
 
         //the user presses a key
 
-        if(keyEvent.isKey && waitingForKey)
-
+        if(waitingForKey)
         {
-            newKey = keyEvent.keyCode; //Assigns newKey to the key user presses
+            if (keyEvent.isKey)
+            {
+                newKey = keyEvent.keyCode; //Assigns newKey to the key user presses
 
-            waitingForKey = false;
+                waitingForKey = false;
+            }
+            else if (keyEvent.isMouse)
+            {
+                if (Input.GetMouseButtonDown(0))
+                    newKey = KeyCode.Mouse0;
+                
+                else if (Input.GetMouseButtonDown(1))
+                    newKey = KeyCode.Mouse1;
+
+                else if (Input.GetMouseButtonDown(2))
+                    newKey = KeyCode.Mouse2;
+
+                waitingForKey = false;
+
+            }
         }
-
-        
     }
     
     /*Buttons cannot call on Coroutines via OnClick().
@@ -160,7 +178,7 @@ public class ControlMenuScript : MonoBehaviour {
 
     {
 
-        while(!keyEvent.isKey)
+        while(!keyEvent.isKey && !(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
 
             yield return null;
 
