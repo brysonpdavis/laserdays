@@ -13,7 +13,12 @@ public class EyeThatSees : MonoBehaviour {
     private float startingAngleY;
     private enum EyeDirection{Forward, Backward, Right, Left};
     private EyeDirection myDirection;
+    private ParticleSystem particleSystem;
     [HideInInspector] public Vector3 currentPlayerPoint;
+
+    public int particleCount = 15;
+    public float radialSpeed = 0.0f;
+    public float lifeMultiplier = 1.0f;
 
     [HideInInspector]
     public SimpleEye eyeParent;
@@ -28,6 +33,7 @@ public class EyeThatSees : MonoBehaviour {
 
         InitializeWallCheck();
         Debug.Log(transform.rotation.eulerAngles.y);
+        particleSystem = GetComponentInChildren<ParticleSystem>();
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -54,21 +60,27 @@ public class EyeThatSees : MonoBehaviour {
     {
         if (isActive)
         {
-            CameraShake.Shake(0.15f, .2f);
+            CameraShake.Shake(0.15f, .05f);
+            ParticleEffect();
         }
 
     }
 
     void ParticleEffect()
     {
-        //if (GetComponent<ParticleSystem>())
-        //{
-        //    ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 50f);
-        //    var main = particleSystem.main;
-        //    main.startLifetime = .75f;
-        //    particleSystem.emission.SetBurst(0, burst);
-        //    particleSystem.Play();
-        //}
+        if (particleSystem)
+        {
+            var mainModule = particleSystem.main;
+
+            var emissionModule = particleSystem.emission;
+            var internalTime = particleSystem.time;
+            var thisBurst = new ParticleSystem.Burst(Time.fixedDeltaTime, (short)particleCount, (short)particleCount, 1, 0f);
+            emissionModule.burstCount = 1;
+            emissionModule.SetBurst(0, thisBurst);
+            //emissionModule.rateOverTime = 0.0f;
+
+            particleSystem.Play();
+        }
     }
 
     private void Update()
