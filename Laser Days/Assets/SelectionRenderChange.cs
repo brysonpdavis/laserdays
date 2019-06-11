@@ -21,7 +21,6 @@ public class SelectionRenderChange : MonoBehaviour {
     }
 
 
-
     public void SwitchRenderersOff()
     {
 
@@ -48,8 +47,6 @@ public class SelectionRenderChange : MonoBehaviour {
             }
         }
     }
-
-
 
     public void OnDrop()
     {

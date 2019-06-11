@@ -24,7 +24,8 @@ public class TransparentBufferObject : MonoBehaviour
                 //Add this object to the list of objects to be rendered in the tranparent outline buffer
                 replaceShader = temp;
                 TransparentBufferGroup.Instance.AddObject(this);
-            }  else 
+            }  
+            else 
             {
                 Debug.Log("No matching shader found. Object not added to buffer.");
                 Debug.Log(materialShader.name);

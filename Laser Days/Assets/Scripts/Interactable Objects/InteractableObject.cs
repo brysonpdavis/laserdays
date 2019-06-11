@@ -160,15 +160,16 @@ abstract public class InteractableObject : MonoBehaviour
         if (real)
         {
             //Debug.Log("real shader");
-            GetComponent<Renderer>().material.shader = Toolbox.Instance.GetRaycastManager().realWorldShader;
+            //GetComponent<Renderer>().material.shader = Toolbox.Instance.GetRaycastManager().realWorldShader;
+            ShaderUtility.ShaderToReal(material);
         }
-         
+
         else
         {
-           // Debug.Log("laser shader");
-            GetComponent<Renderer>().material.shader = Toolbox.Instance.GetRaycastManager().laserWorldShader;//raycastManager.laserWorldShader;
-        }
-           
+            // Debug.Log("laser shader");
+            //GetComponent<Renderer>().material.shader = Toolbox.Instance.GetRaycastManager().laserWorldShader;//raycastManager.laserWorldShader;
+            ShaderUtility.ShaderToLaser(material);
+        }  
     }
 
 

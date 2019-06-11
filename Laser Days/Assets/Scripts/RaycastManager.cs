@@ -164,16 +164,16 @@ public class RaycastManager : MonoBehaviour {
                             //unselect it
                             selectedObjs.Remove(raycastedObj);
 
-
-
                             //put the object back to its original shader
-                            if (this.gameObject.layer == 15) { 
+                            if (this.gameObject.layer == 15) {
 
-                                    raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
+                                ShaderUtility.ShaderToLaser(raycastedObj.GetComponent<Renderer>().material);
+                                    //raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
                                     //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                             }
-                            else if (this.gameObject.layer == 16) { 
-                                    raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader;
+                            else if (this.gameObject.layer == 16) {
+                                ShaderUtility.ShaderToReal(raycastedObj.GetComponent<Renderer>().material);
+                                //raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader;
                                     //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                             }
 

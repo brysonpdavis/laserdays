@@ -23,7 +23,7 @@ public class TransparentBufferGroup
     {
         get
         {
-            if (m_Instance == null || m_Instance.m_Objects.Count == 0)
+            if (m_Instance == null || m_Instance.shaderPairs.Count == 0)
                 m_Instance = new TransparentBufferGroup();
                 m_Instance.shaderPairs = m_Instance.BuildShaderPairsSafe();
             return m_Instance;
@@ -36,9 +36,8 @@ public class TransparentBufferGroup
     {
         RemoveObject(o);
         m_Objects.Add(o);
-        Debug.Log("Object added");
-
     }
+
     public void RemoveObject(TransparentBufferObject o)
     {
         m_Objects.Remove(o);
@@ -58,35 +57,21 @@ public class TransparentBufferGroup
         return contains;
     }
 
-
-
-    private Dictionary<Shader, Shader> BuildShaderPairs()
-    {
-        Dictionary<Shader, Shader> dict = new Dictionary<Shader, Shader>();
-        dict.Add(Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
-        dict.Add(Shader.Find("Crosshatch/CompletionCrystal"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
-        dict.Add(Shader.Find("Custom/CrystalCore"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
-        dict.Add(Shader.Find("Crosshatch/Glass-Shared"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Shared"));
-        dict.Add(Shader.Find("Crosshatch/Glass-Single"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Single"));
-        dict.Add(Shader.Find("Crosshatch/Goop-PlantVariant"), Shader.Find("Crosshatch/OutlineBuffer/Goop-PlantVariant"));
-        return dict;
-    }
-
     private Dictionary<Shader, Shader> BuildShaderPairsSafe()
     {
         Dictionary<Shader, Shader> dict = new Dictionary<Shader, Shader>();
 
-        tryAddShaderPair(dict, Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
-        tryAddShaderPair(dict, Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
-        tryAddShaderPair(dict, Shader.Find("Crosshatch/CompletionCrystal"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
-        tryAddShaderPair(dict, Shader.Find("Custom/CrystalCore"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
-        tryAddShaderPair(dict, Shader.Find("Crosshatch/Glass-Shared"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Shared"));
-        tryAddShaderPair(dict, Shader.Find("Crosshatch/Glass-Single"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Single"));
-        tryAddShaderPair(dict, Shader.Find("Crosshatch/Goop-PlantVariant"), Shader.Find("Crosshatch/OutlineBuffer/Goop-PlantVariant"));
+        AddShaderPair(dict, Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
+        AddShaderPair(dict, Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
+        AddShaderPair(dict, Shader.Find("Crosshatch/CompletionCrystal"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
+        AddShaderPair(dict, Shader.Find("Custom/CrystalCore"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
+        AddShaderPair(dict, Shader.Find("Crosshatch/Glass-Shared"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Shared"));
+        AddShaderPair(dict, Shader.Find("Crosshatch/Glass-Single"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Single"));
+        AddShaderPair(dict, Shader.Find("Crosshatch/Goop-PlantVariant"), Shader.Find("Crosshatch/OutlineBuffer/Goop-PlantVariant"));
         return dict;
     }
 
-    private void tryAddShaderPair(Dictionary<Shader,Shader> dict, Shader shade1, Shader shade2)
+    private void AddShaderPair(Dictionary<Shader,Shader> dict, Shader shade1, Shader shade2)
     {
         if(shade1 != null && shade2 != null && !dict.ContainsKey(shade1))
         {
