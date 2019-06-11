@@ -19,11 +19,11 @@ public class TransparentBufferObject : MonoBehaviour
             Shader temp = null;
 
             //Check if this object's shader has a match in the list of replacable shaders      
-            if (TransparentBufferGroup.instance.CheckForReplacment(materialShader, out temp))
+            if (TransparentBufferGroup.Instance.CheckForReplacment(materialShader, out temp))
             {
                 //Add this object to the list of objects to be rendered in the tranparent outline buffer
                 replaceShader = temp;
-                TransparentBufferGroup.instance.AddObject(this);
+                TransparentBufferGroup.Instance.AddObject(this);
             }  else 
             {
                 Debug.Log("No matching shader found. Object not added to buffer.");
@@ -48,7 +48,7 @@ public class TransparentBufferObject : MonoBehaviour
 
     public void OnDisable()
     {
-        TransparentBufferGroup.instance.RemoveObject(this);
+        TransparentBufferGroup.Instance.RemoveObject(this);
     }
 
 }

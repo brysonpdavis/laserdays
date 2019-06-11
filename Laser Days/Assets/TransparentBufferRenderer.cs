@@ -9,25 +9,25 @@ using System.Collections.Generic;
 public class TransparentBufferGroup
 {
     [HideInInspector] public Dictionary<Shader, Shader> shaderPairs;
+    
 
     private void Awake()
     {
-        shaderPairs = buildShaderPairs();
+        shaderPairs = BuildShaderPairsSafe();
+        Debug.Log("AWAKE");
     }
 
     static TransparentBufferGroup m_Instance;
 
-    static public TransparentBufferGroup instance
+    static public TransparentBufferGroup Instance
     {
         get
         {
-            if (m_Instance == null)
+            if (m_Instance == null || m_Instance.m_Objects.Count == 0)
                 m_Instance = new TransparentBufferGroup();
-                m_Instance.shaderPairs = m_Instance.buildShaderPairs();
+                m_Instance.shaderPairs = m_Instance.BuildShaderPairsSafe();
             return m_Instance;
         }
-         
-
     }
 
     internal HashSet<TransparentBufferObject> m_Objects = new HashSet<TransparentBufferObject>();
@@ -36,6 +36,7 @@ public class TransparentBufferGroup
     {
         RemoveObject(o);
         m_Objects.Add(o);
+        Debug.Log("Object added");
 
     }
     public void RemoveObject(TransparentBufferObject o)
@@ -58,7 +59,8 @@ public class TransparentBufferGroup
     }
 
 
-    private Dictionary<Shader, Shader> buildShaderPairs()
+
+    private Dictionary<Shader, Shader> BuildShaderPairs()
     {
         Dictionary<Shader, Shader> dict = new Dictionary<Shader, Shader>();
         dict.Add(Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
@@ -69,6 +71,30 @@ public class TransparentBufferGroup
         dict.Add(Shader.Find("Crosshatch/Goop-PlantVariant"), Shader.Find("Crosshatch/OutlineBuffer/Goop-PlantVariant"));
         return dict;
     }
+
+    private Dictionary<Shader, Shader> BuildShaderPairsSafe()
+    {
+        Dictionary<Shader, Shader> dict = new Dictionary<Shader, Shader>();
+
+        tryAddShaderPair(dict, Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
+        tryAddShaderPair(dict, Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
+        tryAddShaderPair(dict, Shader.Find("Crosshatch/CompletionCrystal"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
+        tryAddShaderPair(dict, Shader.Find("Custom/CrystalCore"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
+        tryAddShaderPair(dict, Shader.Find("Crosshatch/Glass-Shared"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Shared"));
+        tryAddShaderPair(dict, Shader.Find("Crosshatch/Glass-Single"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Single"));
+        tryAddShaderPair(dict, Shader.Find("Crosshatch/Goop-PlantVariant"), Shader.Find("Crosshatch/OutlineBuffer/Goop-PlantVariant"));
+        return dict;
+    }
+
+    private void tryAddShaderPair(Dictionary<Shader,Shader> dict, Shader shade1, Shader shade2)
+    {
+        if(shade1 != null && shade2 != null && !dict.ContainsKey(shade1))
+        {
+            dict.Add(shade1, shade2);
+        }
+    }
+
+
 }
 
 [RequireComponent(typeof(Camera))]
@@ -102,12 +128,13 @@ public class TransparentBufferRenderer : MonoBehaviour
             buff = new CommandBuffer();
             buff.name = "Transparent Buffer Object";
             m_Cameras[cam] = buff;
+            Debug.Log("Buffer Made");
 
             // Render right after opaque and alpha test 
             cam.AddCommandBuffer(CameraEvent.AfterGBuffer, buff);
         }
       
-        var group = TransparentBufferGroup.instance;
+        var group = TransparentBufferGroup.Instance;
 
         // Only seemed to work when writing to both Gbuffers, but only assigning value to GBuffer1
         RenderTargetIdentifier[] mrta = { BuiltinRenderTextureType.GBuffer0, BuiltinRenderTextureType.GBuffer1};

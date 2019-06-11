@@ -137,11 +137,11 @@ public class flipScript : MonoBehaviour {
         else
             flippedThisFrame = false;
 
-        if (Input.GetButtonDown(SoundtrackButton))
-        {
-            if (soundTrack.gameObject.activeSelf) { soundTrack.gameObject.SetActive(false); }
-            else { soundTrack.gameObject.SetActive(true); }
-        }
+        //if (Input.GetButtonDown(SoundtrackButton))
+        //{
+        //    if (soundTrack.gameObject.activeSelf) { soundTrack.gameObject.SetActive(false); }
+        //    else { soundTrack.gameObject.SetActive(true); }
+        //}
 
 	}
 
