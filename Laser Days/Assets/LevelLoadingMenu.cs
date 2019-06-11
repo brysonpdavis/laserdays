@@ -14,6 +14,10 @@ public class LevelLoadingMenu : MonoBehaviour {
     public GameObject buttonContainer;
     public GameObject sensitivitySlider;
     public GameObject saveButton;
+
+    public GameObject inputMenuButton;
+    public GameObject inputMenuUI;
+
     public string reset;
     [SerializeField] public static GameObject easyButtons;
     [SerializeField] public static GameObject mediumButtons;
@@ -126,6 +130,11 @@ public class LevelLoadingMenu : MonoBehaviour {
         Time.timeScale = 1f;
         TurnOffMenuItems();
         StartCoroutine(GoHome());
+    }
+
+    public void OpenInputMenu()
+    {
+        inputMenuUI.SetActive(true);
     }
 
 
