@@ -20,9 +20,6 @@ public class ControlManager : MonoBehaviour
 
     void Awake()
     {
-        jump = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("jumpKey", "Space"));
-        
         forward = (KeyCode) System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("forwardKey", "W"));
         
@@ -34,6 +31,9 @@ public class ControlManager : MonoBehaviour
         
         right = (KeyCode) System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("rightKey", "D"));
+        
+        jump = (KeyCode) System.Enum.Parse(typeof(KeyCode),
+            PlayerPrefs.GetString("jumpKey", "Space"));
         
         pickup = (KeyCode) System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("pickupKey", "E"));

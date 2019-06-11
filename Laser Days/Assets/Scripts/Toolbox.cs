@@ -348,10 +348,15 @@ public class Toolbox : Singleton<Toolbox>
 
         if (!Toolbox.Instance.narrationBackground)
         {
-            Toolbox.Instance.narrationBackground = GameObject.Find("TextNarration").GetComponentInChildren<Image>().gameObject;
+            Toolbox.Instance.narrationBackground = Toolbox.Instance.narrationContainer.transform.Find("Background").gameObject;
         }
 
-            
+        if (!Toolbox.Instance.narrationContinue)
+        {
+            Toolbox.Instance.narrationContinue = Toolbox.Instance.narrationContainer.transform.Find("Continue").gameObject;
+        }
+
+
     }
 
     public void UpdateTransforms()
