@@ -13,7 +13,12 @@ public class EyeThatSees : MonoBehaviour {
     private float startingAngleY;
     private enum EyeDirection{Forward, Backward, Right, Left};
     private EyeDirection myDirection;
+    private ParticleSystem particleSystem;
     [HideInInspector] public Vector3 currentPlayerPoint;
+
+    public int particleCount = 15;
+    public float radialSpeed = 0.0f;
+    public float lifeMultiplier = 1.0f;
 
     [HideInInspector]
     public SimpleEye eyeParent;
@@ -28,6 +33,7 @@ public class EyeThatSees : MonoBehaviour {
 
         InitializeWallCheck();
         Debug.Log(transform.rotation.eulerAngles.y);
+        particleSystem = GetComponentInChildren<ParticleSystem>();
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -54,21 +60,27 @@ public class EyeThatSees : MonoBehaviour {
     {
         if (isActive)
         {
-            CameraShake.Shake(0.15f, .2f);
+            CameraShake.Shake(0.15f, .05f);
+            ParticleEffect();
         }
 
     }
 
     void ParticleEffect()
     {
-        //if (GetComponent<ParticleSystem>())
-        //{
-        //    ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 50f);
-        //    var main = particleSystem.main;
-        //    main.startLifetime = .75f;
-        //    particleSystem.emission.SetBurst(0, burst);
-        //    particleSystem.Play();
-        //}
+        if (particleSystem)
+        {
+            var mainModule = particleSystem.main;
+
+            var emissionModule = particleSystem.emission;
+            var internalTime = particleSystem.time;
+            var thisBurst = new ParticleSystem.Burst(Time.fixedDeltaTime, (short)particleCount, (short)particleCount, 1, 0f);
+            emissionModule.burstCount = 1;
+            emissionModule.SetBurst(0, thisBurst);
+            //emissionModule.rateOverTime = 0.0f;
+
+            particleSystem.Play();
+        }
     }
 
     private void Update()
@@ -98,14 +110,17 @@ public class EyeThatSees : MonoBehaviour {
         RaycastHit hit;
 
         Vector3 eyeLevel = new Vector3 (player.position.x, player.position.y + 1.5f, player.position.z);
+        Vector3 footLevel = new Vector3(player.position.x, player.position.y + 0.15f, player.position.z);
 
         currentLayerMask = LayerMaskController.GetLayerMaskForRaycast(player.gameObject.layer);
+
+        bool checkEyeLevel = false;
+        bool checkFootLevel = false;
 
         if (Physics.Linecast(transform.position, eyeLevel, out hit, currentLayerMask))
         {
 
             eyeParent.hitPoint = hit.point;
-
             Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
 
 
@@ -113,18 +128,45 @@ public class EyeThatSees : MonoBehaviour {
             currentPlayerPoint = hit.point;
 
             if (hit.collider.CompareTag("Player") && (WallCheck(hit.point)))
-            {
+                checkEyeLevel = true;
 
-                eyeParent.hittingPlayer = true;
-                return true;
-            }
                 
             else
-                eyeParent.hittingPlayer = false;
-                return false;
+                checkEyeLevel = false;
         }
 
-        return false;
+        if (Physics.Linecast(transform.position, footLevel, out hit, currentLayerMask))
+        {
+
+            eyeParent.hitPoint = hit.point;
+            Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
+
+
+            //so the simpleEye can run WallCheck;
+            currentPlayerPoint = hit.point;
+
+            if (hit.collider.CompareTag("Player") && (WallCheck(hit.point)))
+                checkFootLevel = true;
+
+
+            else
+                checkFootLevel = false;
+        }
+
+        Debug.Log("eyelevel " + checkEyeLevel + " footlevel " + checkFootLevel);
+
+
+        if (checkEyeLevel || checkFootLevel)
+        {
+            eyeParent.hittingPlayer = true;
+            return true;
+        }
+
+        else
+        {
+            eyeParent.hittingPlayer = false;
+            return false;  
+        }
     }
 
     public bool WallCheck(Vector3 hit)
