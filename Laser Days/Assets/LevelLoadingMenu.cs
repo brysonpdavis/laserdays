@@ -62,7 +62,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     private void Start()
     {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Default_Main_Player January"));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Default_Main_Player_June"));
         GetComponent<CanvasScaler>().enabled = true;
         //Resume();
 
