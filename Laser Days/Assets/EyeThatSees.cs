@@ -110,14 +110,17 @@ public class EyeThatSees : MonoBehaviour {
         RaycastHit hit;
 
         Vector3 eyeLevel = new Vector3 (player.position.x, player.position.y + 1.5f, player.position.z);
+        Vector3 footLevel = new Vector3(player.position.x, player.position.y + 0.15f, player.position.z);
 
         currentLayerMask = LayerMaskController.GetLayerMaskForRaycast(player.gameObject.layer);
+
+        bool checkEyeLevel = false;
+        bool checkFootLevel = false;
 
         if (Physics.Linecast(transform.position, eyeLevel, out hit, currentLayerMask))
         {
 
             eyeParent.hitPoint = hit.point;
-
             Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
 
 
@@ -125,18 +128,45 @@ public class EyeThatSees : MonoBehaviour {
             currentPlayerPoint = hit.point;
 
             if (hit.collider.CompareTag("Player") && (WallCheck(hit.point)))
-            {
+                checkEyeLevel = true;
 
-                eyeParent.hittingPlayer = true;
-                return true;
-            }
                 
             else
-                eyeParent.hittingPlayer = false;
-                return false;
+                checkEyeLevel = false;
         }
 
-        return false;
+        if (Physics.Linecast(transform.position, footLevel, out hit, currentLayerMask))
+        {
+
+            eyeParent.hitPoint = hit.point;
+            Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
+
+
+            //so the simpleEye can run WallCheck;
+            currentPlayerPoint = hit.point;
+
+            if (hit.collider.CompareTag("Player") && (WallCheck(hit.point)))
+                checkFootLevel = true;
+
+
+            else
+                checkFootLevel = false;
+        }
+
+        Debug.Log("eyelevel " + checkEyeLevel + " footlevel " + checkFootLevel);
+
+
+        if (checkEyeLevel || checkFootLevel)
+        {
+            eyeParent.hittingPlayer = true;
+            return true;
+        }
+
+        else
+        {
+            eyeParent.hittingPlayer = false;
+            return false;  
+        }
     }
 
     public bool WallCheck(Vector3 hit)
