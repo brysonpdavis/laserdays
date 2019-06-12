@@ -329,9 +329,10 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(fadeDuration);
-  
+
         //reset all of the scene's save data before re-loading in the scene
-        GameObject.Find(spawnPoint).GetComponentInParent<SceneUniqueIds>().SceneResetSave();
+        GameObject spawn = GameObject.Find(spawnPoint);
+        spawn.GetComponentInParent<SceneUniqueIds>().SceneResetSave();
 
 
         AsyncOperation _async = new AsyncOperation();
@@ -368,12 +369,31 @@ public class LevelLoadingMenu : MonoBehaviour {
             Toolbox.Instance.GetPickUp().PutDown();
             Toolbox.Instance.GetPickUp().heldObject = null;
         }
+
+        MFPP.Player player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
+        spawn = GameObject.Find(spawnPoint);
+
+
+        //Look at correct angle
+        Camera.main.transform.LookAt(spawn.transform.Find("LookAt"));
+        Vector2 look = new Vector2(Camera.main.transform.eulerAngles.y, 90 - (Camera.main.transform.eulerAngles.x % 90));
+
+
+        //Debug.Log("Camera rotation " + )
+
+        player.TargetLookAngles = look;
+
+
+
+
         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = true;
         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().Movement.Speed = 3;
         Vector3 teleport = GameObject.Find(spawnPoint).transform.position;
-        MFPP.Player player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
         player.TeleportTo(teleport, true);
         player.GetComponent<CharacterController>().velocity.Set(0f, 0f, 0f);
+
+
+        //player.(spawn.transform.Find("LookAt"));
 
         Toolbox.Instance.UpdateTransforms();
         sceneIsLoading = false;
