@@ -135,28 +135,28 @@ public class EyeThatSees : MonoBehaviour {
                 checkEyeLevel = false;
         }
 
-        if (Physics.Linecast(transform.position, footLevel, out hit, currentLayerMask))
-        {
+        //if (Physics.Linecast(transform.position, footLevel, out hit, currentLayerMask))
+        //{
 
-            eyeParent.hitPoint = hit.point;
-            Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
-
-
-            //so the simpleEye can run WallCheck;
-            currentPlayerPoint = hit.point;
-
-            if (hit.collider.CompareTag("Player") && (WallCheck(hit.point)))
-                checkFootLevel = true;
+        //    eyeParent.hitPoint = hit.point;
+        //    Debug.DrawLine(transform.position, hit.point, Color.red, .1f);
 
 
-            else
-                checkFootLevel = false;
-        }
+        //    //so the simpleEye can run WallCheck;
+        //    currentPlayerPoint = hit.point;
 
-        Debug.Log("eyelevel " + checkEyeLevel + " footlevel " + checkFootLevel);
+        //    if (hit.collider.CompareTag("Player") && (WallCheck(hit.point)))
+        //        checkFootLevel = true;
 
 
-        if (checkEyeLevel || checkFootLevel)
+        //    else
+        //        checkFootLevel = false;
+        //}
+
+       // Debug.Log("eyelevel " + checkEyeLevel + " footlevel " + checkFootLevel);
+
+
+        if (checkEyeLevel)// || checkFootLevel)
         {
             eyeParent.hittingPlayer = true;
             return true;
