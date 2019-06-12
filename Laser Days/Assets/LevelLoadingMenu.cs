@@ -134,7 +134,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     public void OpenInputMenu()
     {
-        inputMenuUI.SetActive(true);
+        inputMenuUI.SetActive(!inputMenuUI.activeInHierarchy);
     }
 
 
