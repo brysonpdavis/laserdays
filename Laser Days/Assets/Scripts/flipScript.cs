@@ -224,22 +224,12 @@ public class flipScript : MonoBehaviour {
 			Flip(obj);
 		}
 
-		if (!Input.GetMouseButton(1))
-		{
 			foreach (GameObject obj in objs)
 			{
                 rm.RemoveFromList(obj, true, true);
 			}
 			objs.Clear();
-		}
 
-        else
-        {
-            foreach (GameObject obj in objs)
-            {
-                obj.GetComponent<Renderer>().material.SetInt("_IsSelected", 1);
-            }
-        }
 	}
 
 	bool PlayerInLaser ()
