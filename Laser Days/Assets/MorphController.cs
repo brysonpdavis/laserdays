@@ -57,10 +57,10 @@ public class MorphController : MonoBehaviour {
 
         pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
         laserPreviewMaterial = laserPreview.material;
-        laserPreviewMaterial.SetFloat("_Opacity", 0);
+        laserPreviewMaterial.SetFloat("_Opacity", opacity);
 
         realPreviewMaterial = realPreview.material;
-        realPreviewMaterial.SetFloat("_Opacity", 0);
+        realPreviewMaterial.SetFloat("_Opacity", opacity);
 
 
         laserCollider.GetComponent<Renderer>().GetPropertyBlock(laserArmPropBlock);
@@ -94,12 +94,17 @@ public class MorphController : MonoBehaviour {
         foreach (renderersAndProps r in internals)
         {
             ShaderUtility.ShaderWorldChange(r.renderer.material, dir);
+            r.renderer.GetPropertyBlock(r.propertyBlock);
+
             if (dir)
             {
                 r.propertyBlock.SetFloat("_TransitionState", 1f - currentTransitionState);
             }
             else 
+            {
                 r.propertyBlock.SetFloat("_TransitionState", currentTransitionState);
+            }
+
             r.renderer.SetPropertyBlock(r.propertyBlock);
 
         }
@@ -124,7 +129,7 @@ public class MorphController : MonoBehaviour {
             //if object is currently held
             if (pickUp.heldObject && pickUp.heldObject.Equals(this.gameObject))
             {
-                realPreviewMaterial.SetFloat("_Opacity", opacity);
+                realPreviewMaterial.SetFloat("_onHold", 1f);
             }
 
             StopAllCoroutines();
@@ -146,7 +151,7 @@ public class MorphController : MonoBehaviour {
             //if object is currently held
             if (pickUp.heldObject && pickUp.heldObject.Equals(this.gameObject))
             {
-                laserPreviewMaterial.SetFloat("_Opacity", opacity);
+                laserPreviewMaterial.SetFloat("_onHold", 1f);
             }
 
             StopAllCoroutines();
@@ -163,15 +168,15 @@ public class MorphController : MonoBehaviour {
         GetComponent<SelectionRenderChange>().SwitchRenderersOff();
         GetComponent<SelectionRenderChange>().OnHold();
 
-        realPreviewMaterial.SetFloat("_Opacity", opacity);
-        laserPreviewMaterial.SetFloat("_Opacity", opacity);
+        realPreviewMaterial.SetFloat("_onHold", 1f);
+        laserPreviewMaterial.SetFloat("_onHold", 1f);
     }
 
     public void OnDeselection()
     {
         GetComponent<SelectionRenderChange>().OnDrop();
-        realPreviewMaterial.SetFloat("_Opacity", 0);
-        laserPreviewMaterial.SetFloat("_Opacity", 0);
+        realPreviewMaterial.SetFloat("_onHold", 0f);
+        laserPreviewMaterial.SetFloat("_onHold", 0f);
     }
 
     public renderersAndProps[] GetInternalRenderers()
@@ -230,7 +235,7 @@ public class MorphController : MonoBehaviour {
                 laserScale.y = Mathf.Lerp(laserStart, armScalingFactor * armScale, (elapsedTime / durationScale));
                 laserCollider.transform.localScale = laserScale;
 
-                float transitionB = (elapsedTime / durationScale);
+                float transitionB = Mathf.Clamp01(elapsedTime / durationScale);
                 SetMaterialProperty("_TransitionStateB", transitionB);
 
                 currentFlipCount = CheckFlipsForTransitions(currentFlipCount);
@@ -311,12 +316,13 @@ public class MorphController : MonoBehaviour {
         }
     }
 
-    private void SetMaterialProperty(string name, float value)
+    private void SetMaterialProperty(string name2, float value)
     {
 
         foreach (renderersAndProps rp in internalParts)
         {
-            rp.propertyBlock.SetFloat(name, value);
+            rp.renderer.GetPropertyBlock(rp.propertyBlock);
+            rp.propertyBlock.SetFloat(name2, value);
             rp.renderer.SetPropertyBlock(rp.propertyBlock);
         }
     }
