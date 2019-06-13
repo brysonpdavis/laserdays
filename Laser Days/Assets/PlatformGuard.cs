@@ -111,6 +111,11 @@ public class PlatformGuard : MonoBehaviour
 
 
         }
+
+        if (string.Equals(collisionTag, "Morph"))
+        {
+            col.GetComponent<Morph>().canFlip = false;
+        }
     }
 
     void JamPlatform()
@@ -248,6 +253,12 @@ public class PlatformGuard : MonoBehaviour
                 }
             }
         }
+
+        if (string.Equals(collisionTag, "Morph"))
+        {
+            col.GetComponent<Morph>().canFlip = true;
+        }
+
         //otherwise the object has been riding on top, so remove it from list of objects that should move with the platform
         else if (string.Equals(collisionTag, "Sokoban1x1") || 
                  //string.Equals(collisionTag, "Sokoban2x2") || 

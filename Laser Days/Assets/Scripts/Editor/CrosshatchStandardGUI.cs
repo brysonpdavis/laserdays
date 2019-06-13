@@ -239,7 +239,9 @@ public class CrosshatchStandardGUI : ShaderGUI {
         ColorProperty("_InteractColor");
         ColorProperty("_ShimmerColor");
         SliderProperty("_TransitionStateB", "");
-        
+        SliderProperty("_onHover", "");
+        SliderProperty("_onHold", "");
+
     }
 
 

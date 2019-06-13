@@ -71,11 +71,17 @@ public class RaycastManager : MonoBehaviour {
         if (this.gameObject.layer == 15) { newLayerMask = 1 << 0 | 1 << 10 | 1 << 17; } // newLayerMask.value = 1024; } //layermask value of layer 10 is 1024 (2^10)  
         else if (this.gameObject.layer == 16) { newLayerMask = 1 << 0 | 1 << 11 | 1 << 17; }  //newLayerMask.value = 2048; } //layermask value of layer 11 is 2048   
 
+        MainRaycast();
+	}
+
+    void MainRaycast()
+    {
+
         RaycastHit hit;
         Vector3 fwd = mainCam.transform.TransformDirection(Vector3.forward);
 
 
-       if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
+        if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
             //makes sure no objects have the toggle indicating they're within range.
             //if something was previously in range on the last frame it'll deselect it
@@ -130,9 +136,10 @@ public class RaycastManager : MonoBehaviour {
                 itemNameText.text = ip.itemName + " [" + ip.value + "]";
 
                 //SHOW HOVER: 1: if there isn't a held object, 2: keep setting an object to hover as long as it's the held object
-                if (!pickUp.heldObject || (pickUp.heldObject && pickUp.heldObject.Equals(raycastedObj))){
+                if (!pickUp.heldObject || (pickUp.heldObject && pickUp.heldObject.Equals(raycastedObj)))
+                {
                     if (raycastedObj.GetComponent<SelectionRenderChange>())
-                    {                             
+                    {
                         raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
                         raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
                     }
@@ -148,7 +155,7 @@ public class RaycastManager : MonoBehaviour {
                 // SELECT ITEM: 
                 // if item boosts charge, add value to boost on right click
                 //only lets you select items that are flippable
-                if(Input.GetKeyDown(ControlManager.CM.select) && hit.collider.GetComponent<InteractableObject>().Flippable)
+                if (Input.GetKeyDown(ControlManager.CM.select) && hit.collider.GetComponent<InteractableObject>().Flippable)
                 {
 
                     if (ip.boost)
@@ -165,16 +172,18 @@ public class RaycastManager : MonoBehaviour {
                             selectedObjs.Remove(raycastedObj);
 
                             //put the object back to its original shader
-                            if (this.gameObject.layer == 15) {
+                            if (this.gameObject.layer == 15)
+                            {
 
                                 ShaderUtility.ShaderToLaser(raycastedObj.GetComponent<Renderer>().material);
-                                    //raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
-                                    //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+                                //raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
+                                //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                             }
-                            else if (this.gameObject.layer == 16) {
+                            else if (this.gameObject.layer == 16)
+                            {
                                 ShaderUtility.ShaderToReal(raycastedObj.GetComponent<Renderer>().material);
                                 //raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader;
-                                    //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+                                //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
                             }
 
                             //remove it from list
@@ -186,9 +195,10 @@ public class RaycastManager : MonoBehaviour {
 
 
                         }
-                        else 
+                        else
                         {
-                            if (!(GetComponent<MFPP.Modules.PickUpModule>().heldObject) && raycastedObj.GetComponent<FlippableObject>().MaxFlipCheck(false)) {
+                            if (!(GetComponent<MFPP.Modules.PickUpModule>().heldObject) && raycastedObj.GetComponent<FlippableObject>().MaxFlipCheck(false))
+                            {
                                 selectedObjs.Add(raycastedObj);
                                 AddToList(raycastedObj);
 
@@ -204,7 +214,7 @@ public class RaycastManager : MonoBehaviour {
             }
 
             //for objects on real/laser layers that aren't interactable
-            else 
+            else
             {
                 ClearRaycast();
             }
@@ -212,11 +222,12 @@ public class RaycastManager : MonoBehaviour {
         }
 
         //if the raycast hits nothing
-        else{
-            
+        else
+        {
+
             ClearRaycast();
         }
-	}
+    }
 
     void ClearRaycast()
     {

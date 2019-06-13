@@ -5,6 +5,7 @@ using UnityEngine;
 abstract public class FlippableObject : InteractableObject
 {
     public int timesFlipped = 0;
+    public bool canFlip = true;
     public int maxFlips;
     public float secondaryFlipDuration = 1f;
     private IEnumerator flipTransition;
@@ -143,25 +144,31 @@ abstract public class FlippableObject : InteractableObject
 
     public bool MaxFlipCheck(bool CurrentlyFlipping)
     {
-        if (CurrentlyFlipping)
-            timesFlipped += 1;
-
-        if (maxFlips == 0)
-            return true;
-
-        else if  ((maxFlips == timesFlipped) && CurrentlyFlipping)
+        if (canFlip)
         {
-            Debug.Log("LAST FLIP! Can do something here :)");
-             return true;
-        }
-            
-        else if ((maxFlips != 0) && timesFlipped >= (maxFlips))
-        {
-            return false;
-        }
 
+            if (CurrentlyFlipping)
+                timesFlipped += 1;
+
+            if (maxFlips == 0)
+                return true;
+
+            else if ((maxFlips == timesFlipped) && CurrentlyFlipping)
+            {
+                Debug.Log("LAST FLIP! Can do something here :)");
+                return true;
+            }
+
+            else if ((maxFlips != 0) && timesFlipped >= (maxFlips))
+            {
+                return false;
+            }
+
+            else
+                return true;
+        }
         else
-            return true;
+            return false;
     }
 
     public override void LoadShader(bool real)
@@ -253,7 +260,7 @@ abstract public class FlippableObject : InteractableObject
             transitionStateB = value;
 
 
-            RendererExtensions.UpdateGIMaterials(mRenderer);
+            //RendererExtensions.UpdateGIMaterials(mRenderer);
 
             yield return null;
         }

@@ -62,12 +62,13 @@ public class TransparentBufferGroup
         Dictionary<Shader, Shader> dict = new Dictionary<Shader, Shader>();
 
         AddShaderPair(dict, Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
-        AddShaderPair(dict, Shader.Find("Crosshatch/Goop-Trigger"), Shader.Find("Crosshatch/OutlineBuffer/Goop-Trigger"));
         AddShaderPair(dict, Shader.Find("Crosshatch/CompletionCrystal"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
         AddShaderPair(dict, Shader.Find("Custom/CrystalCore"), Shader.Find("Crosshatch/OutlineBuffer/Crystal"));
         AddShaderPair(dict, Shader.Find("Crosshatch/Glass-Shared"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Shared"));
         AddShaderPair(dict, Shader.Find("Crosshatch/Glass-Single"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Single"));
         AddShaderPair(dict, Shader.Find("Crosshatch/Goop-PlantVariant"), Shader.Find("Crosshatch/OutlineBuffer/Goop-PlantVariant"));
+        AddShaderPair(dict, Shader.Find("Crosshatch/MorphPreview"), Shader.Find("Crosshatch/OutlineBuffer/MorphPreview"));
+        AddShaderPair(dict, Shader.Find("Crosshatch/Glass-Blocker"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Blocker"));
         return dict;
     }
 
