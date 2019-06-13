@@ -528,6 +528,7 @@ namespace MFPP
                 //Velocity = Vector3.zero;
                 OldVelocity = Vector3.zero;
                 GetComponent<CharacterController>().Move(Vector3.zero);
+                LookAnglesDelta = Vector2.zero;
             }
         }
 

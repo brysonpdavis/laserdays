@@ -356,9 +356,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         //give new scene spawners reference to correct button
         GameObject[] sceneObjects = nextScene.GetRootGameObjects();
-
-        StartCoroutine(FadeIn());
-
+        
         Debug.Log(spawnPoint);
         GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton = myButton;
 
@@ -373,19 +371,6 @@ public class LevelLoadingMenu : MonoBehaviour {
         MFPP.Player player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
         spawn = GameObject.Find(spawnPoint);
 
-
-        //Look at correct angle
-        Camera.main.transform.LookAt(spawn.transform.Find("LookAt"));
-        Vector2 look = new Vector2(Camera.main.transform.eulerAngles.y, 90 - (Camera.main.transform.eulerAngles.x % 90));
-
-
-        //Debug.Log("Camera rotation " + )
-
-        player.TargetLookAngles = look;
-
-
-
-
         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = true;
         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().Movement.Speed = 3;
         Vector3 teleport = GameObject.Find(spawnPoint).transform.position;
@@ -393,7 +378,24 @@ public class LevelLoadingMenu : MonoBehaviour {
         player.GetComponent<CharacterController>().velocity.Set(0f, 0f, 0f);
 
 
-        //player.(spawn.transform.Find("LookAt"));
+        //Look at correct angle
+        Camera.main.transform.LookAt(spawn.transform.Find("LookAt"));
+        float lookY;
+        
+        if (Camera.main.transform.eulerAngles.x > 180)
+            lookY = 360 - Camera.main.transform.eulerAngles.x;
+        else 
+            lookY =  0 - Camera.main.transform.eulerAngles.x;
+
+
+
+        Vector2 look = new Vector2(Camera.main.transform.eulerAngles.y, lookY);
+
+        Debug.Log("Camera rotation " + look);
+
+        player.TargetLookAngles = look;
+
+        StartCoroutine(FadeIn());
 
         Toolbox.Instance.UpdateTransforms();
         sceneIsLoading = false;
