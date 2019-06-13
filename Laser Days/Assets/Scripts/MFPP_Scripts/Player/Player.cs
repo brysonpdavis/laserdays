@@ -179,6 +179,7 @@ namespace MFPP
             get { return CharacterController.stepOffset; }
             set { CharacterController.stepOffset = value; }
         }
+      
 
 
         /// <summary>
@@ -310,7 +311,7 @@ namespace MFPP
                 Physics.SphereCast(slopeRay, Radius, out slopeHit, Mathf.Infinity, CollisionLayers);
                 bool canJumpOnThisSlope = Vector3.Angle(Vector3.up, slopeHit.normal) < SlopeLimit;
 
-                return Movement.AllowMovement && Movement.Jump.AllowJump && canJumpOnThisSlope && !ceilingRaycast && Controls.ControlsEnabled && (Movement.Jump.AutoJump ? Input.GetKey(ControlManager.CM.jump) : Input.GetKeyDown(ControlManager.CM.jump));
+                return Movement.AllowMovement && Movement.Jump.AllowJump && canJumpOnThisSlope && !ceilingRaycast && Controls.ControlsEnabled && (Movement.Jump.AutoJump ? Input.GetKey(ControlManager.CM.jump) : CheckJumpPressed());
             }
         }
 
@@ -535,6 +536,7 @@ namespace MFPP
         private int overlappingCollidersCount;
         private Collider[] overlappingColliders;
         private List<Collider> ignoredColliders;
+        private bool jumpPressed = false;
 
 
         private void Start()
@@ -568,6 +570,7 @@ namespace MFPP
             {
                 BeforeUpdate(); // Call before update (along with its modules)
                 DoMouse(); // Mouse related
+                SetJumpPressed();
                 // DoMovement(); // Movement related
                 UpdateHeight(); // Update the height
                 DoFootsteps(); // Footsteps related
@@ -577,7 +580,11 @@ namespace MFPP
 
         private void FixedUpdate()
         {
-            DoMovement();
+            if (!LevelLoadingMenu.gameIsPaused)
+            {
+                DoMovement();
+                SetJumpPressedOff();
+            }
         }
 
         /// <summary>
@@ -1242,6 +1249,23 @@ namespace MFPP
             CurrentHeight = Main.Height;
             CurrentCameraHeight = Main.CameraHeight;
             UpdateHeight();
+        }
+
+        public bool CheckJumpPressed()
+        {
+            return jumpPressed;
+        }
+
+        public void SetJumpPressed()
+        {
+            if (Input.GetKeyDown(ControlManager.CM.jump)) {
+                jumpPressed = true;
+            }
+        }
+
+        public void SetJumpPressedOff()
+        {
+            jumpPressed = false;
         }
 
         /// <summary>
