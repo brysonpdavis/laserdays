@@ -133,7 +133,7 @@ public class Transition : MonoBehaviour
         //in case start has not occurred yet
         if (!mRenderer)
             Awake();
-        
+        mRenderer.GetPropertyBlock(_propBlock);
         _propBlock.SetFloat("_TransitionState",value);
         mRenderer.SetPropertyBlock(_propBlock);
     }

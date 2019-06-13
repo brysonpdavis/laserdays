@@ -88,6 +88,27 @@ inline float glassAccent (float2 uv, sampler2D tex, float4 ST, float trans)
     return acc;                   
 }
 
+inline float blockerAccent (float2 uv, sampler2D tex, float4 ST, float trans, float time)
+{
+    
+    float2 map_uv = uv * ST.xy + ST.zw;
+    float2 tex_a = tex2D(tex, map_uv).rg;
+    float tex_b = tex2D(tex, map_uv + time).b;
+    float acc = lerp(tex_a.r, tex_a.g, trans);
+    acc = step(0.1, acc * tex_b);
+    return acc;                   
+}
+
+inline float blockerPlayerHole (float2 uv, sampler2D tex, float4 ST, float3 camPos, float3 wPos)
+{
+    float2 map_uv = uv * ST.xy + ST.zw;
+    float tex_a = tex2D(tex, map_uv).b;
+    float3 diff = camPos - wPos;
+    float len = length(diff);
+    len = 1 - saturate(len);
+    return step(0.1, len * saturate(tex_a + 0.5));    
+}
+
 //Clip value for single world glass
 //TODO refactor all alpha functions - to use another world like clip
 inline float glassSingleAlpha (float2 uv, sampler2D tex, float4 ST, float trans, float real)
@@ -107,7 +128,6 @@ inline float goopPlantIntensity(float3 pos, float time)
     m = (m + 1) * 0.4;
     m *= m * m;
     return m;
-    
 }
 
 

@@ -253,7 +253,7 @@ abstract public class FlippableObject : InteractableObject
             transitionStateB = value;
 
 
-            RendererExtensions.UpdateGIMaterials(mRenderer);
+            //RendererExtensions.UpdateGIMaterials(mRenderer);
 
             yield return null;
         }

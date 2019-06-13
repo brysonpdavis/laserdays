@@ -345,6 +345,7 @@ Shader "Hidden/EdgeDetect" {
 		half2 centerNormal = center.xy;
 		// decoded depth
 		float centerDepth = DecodeFloatRG (center.zw);
+        //return half4(center.x, center.y, 1, 1);
         
         //modify normnal sensitivity from material value
         half modSensitivity = centerExtra.a;
@@ -358,10 +359,13 @@ Shader "Hidden/EdgeDetect" {
         
         //Line opapcity depth fade
         float f = ComputeFog(minDepth, 0.05);     
-        if(centerDepth>0.999){
+        
+        if(centerDepth>0.999)
+        {
             f = 1;
         }
 			
+        //return float4(edge, edge, edge, 1);
        
         _PauseMenu = saturate(_PauseMenu);
         
