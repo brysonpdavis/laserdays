@@ -17,6 +17,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     public GameObject inputMenuButton;
     public GameObject inputMenuUI;
+    public string playerScene;
 
     public string reset;
     [SerializeField] public static GameObject easyButtons;
@@ -62,7 +63,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     private void Start()
     {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Default_Main_Player_June"));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(playerScene));
         GetComponent<CanvasScaler>().enabled = true;
         //Resume();
 

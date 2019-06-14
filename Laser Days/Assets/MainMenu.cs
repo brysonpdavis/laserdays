@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour {
 
     public float fadeDuration = .5f;
     public string resetScene;
+    public string playerScene;
     public Image background;
     public GameObject container;
 
@@ -54,10 +55,12 @@ public class MainMenu : MonoBehaviour {
 
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(fadeDuration);
+        
+        Destroy(Toolbox.Instance.player);
 
         AsyncOperation _async = new AsyncOperation();
         _async = SceneManager.LoadSceneAsync(resetScene, LoadSceneMode.Single);
-        _async = SceneManager.LoadSceneAsync("Default_Main_Player January", LoadSceneMode.Additive);
+        _async = SceneManager.LoadSceneAsync(playerScene, LoadSceneMode.Additive);
         _async.allowSceneActivation = true;
         while (!_async.isDone)
         {
