@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Cinemachine;
 
 public class Toolbox : Singleton<Toolbox>
 {
@@ -16,6 +17,7 @@ public class Toolbox : Singleton<Toolbox>
     GameObject realWorldParentObject;
     GameObject laserWorldParentObject;
     public GameObject player;
+    public GameObject mainCanvas;
     RaycastManager raycastManager;
     MFPP.Modules.PickUpModule pickUp;
     flipScript flipScript;
@@ -301,6 +303,7 @@ public class Toolbox : Singleton<Toolbox>
     public void UpdateToolbox()
     {
         player  = GameObject.FindWithTag("Player");
+        mainCanvas = GameObject.FindWithTag("Main Canvas");
         raycastManager = player.GetComponent<RaycastManager>();
         pickUp = player.GetComponent<MFPP.Modules.PickUpModule>();
         flipScript = player.GetComponent<flipScript>();
@@ -433,5 +436,13 @@ public class Toolbox : Singleton<Toolbox>
             //
         }
     }
-
+    
+    public void LoadScene(string sceneName, string spawnPoint)
+    {
+        Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
+        Time.timeScale = 1f;
+       
+        
+        StartCoroutine(mainCanvas.GetComponent<LevelLoadingMenu>().loadNextScene(sceneName, spawnPoint, null));
+    }
 }

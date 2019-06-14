@@ -320,7 +320,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         Toolbox.Instance.UpdateToolbox();
     }
 
-    IEnumerator loadNextScene(string name, string spawnPoint, GameObject myButton)
+    public IEnumerator loadNextScene(string name, string spawnPoint, GameObject myButton)
     {
 
         sceneIsLoading = true;
@@ -359,7 +359,8 @@ public class LevelLoadingMenu : MonoBehaviour {
         GameObject[] sceneObjects = nextScene.GetRootGameObjects();
         
         Debug.Log(spawnPoint);
-        GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton = myButton;
+        if (myButton)
+            GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton = myButton;
 
         //resetting player
         Toolbox.Instance.GetRaycastManager().selectedObjs.Clear();
