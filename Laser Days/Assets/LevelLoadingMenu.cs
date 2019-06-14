@@ -49,8 +49,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-
-        background = pauseMenuUI.GetComponent<Image>();
+        
         backgroundColor = background.color;
         buttonContainer = pauseMenuUI.transform.GetChild(0).gameObject;
 
@@ -85,7 +84,6 @@ public class LevelLoadingMenu : MonoBehaviour {
     private void Pause()
     {
         buttonContainer.SetActive(true);
-        background.color = backgroundColor;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         gameIsPaused = true;
@@ -147,7 +145,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
         Time.timeScale = 1f;
 
-        StartCoroutine(loadNextScene(name, spawnPoint, myButton));
+        StartCoroutine(loadNextScene(name, spawnPoint, myButton, true));
 
 
         //set new scene button to orange
@@ -225,17 +223,21 @@ public class LevelLoadingMenu : MonoBehaviour {
         }
     }
 
-    IEnumerator FadeIn()
+    IEnumerator FadeIn(bool outlinesFade)
     {
+        float thisDuration = fadeDuration;
+        if (!outlinesFade)
+            thisDuration *= 2f;
+
         float elapsedTime = 0;
-        float ratio = elapsedTime / fadeDuration;
+        float ratio = elapsedTime / thisDuration;
         Color fader = background.color;
        
         //fade from black to balck with white outlines
         while (ratio < 1f)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            ratio = elapsedTime / fadeDuration;
+            ratio = elapsedTime / thisDuration;
 
             ratio *= 2;
             ratio = Mathf.Clamp(ratio, 0f, 1f);
@@ -249,19 +251,22 @@ public class LevelLoadingMenu : MonoBehaviour {
         }
 
         elapsedTime = 0f;
-        ratio = elapsedTime / fadeDuration;
+        ratio = elapsedTime / thisDuration;
 
-        //fade from white outlines to scene
-        while (ratio < 1f)
+        if (outlinesFade)//fade from white outlines to scene
         {
-            elapsedTime += Time.unscaledDeltaTime;
-            ratio = elapsedTime / fadeDuration;
+            while (ratio < 1f)
+            {
+                elapsedTime += Time.unscaledDeltaTime;
+                ratio = elapsedTime / thisDuration;
 
-          
-            edge.PauseMenu = 1f - ratio;
 
-            yield return null;
+                edge.PauseMenu = 1f - ratio;
+
+                yield return null;
+            }
         }
+
         transitionIsDone = true;
 
         Resume(false);
@@ -320,9 +325,9 @@ public class LevelLoadingMenu : MonoBehaviour {
         Toolbox.Instance.UpdateToolbox();
     }
 
-    public IEnumerator loadNextScene(string name, string spawnPoint, GameObject myButton)
+    public IEnumerator loadNextScene(string name, string spawnPoint, GameObject myButton, bool outlinesFade)
     {
-
+        Debug.Log("LOADING SCENE");
         sceneIsLoading = true;
         Cursor.visible = false;
 
@@ -397,7 +402,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         player.TargetLookAngles = look;
 
-        StartCoroutine(FadeIn());
+        StartCoroutine(FadeIn(outlinesFade));
 
         Toolbox.Instance.UpdateTransforms();
         sceneIsLoading = false;

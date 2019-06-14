@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour {
     void Awake()
     {
         scene = gameObject.scene;
-
+        SetupResets();
         //adding to button list here
         button = GameObject.Find("DefaultButton");
         if (button)
@@ -78,5 +78,16 @@ public class Spawner : MonoBehaviour {
         newBackground.a = .7f;
         myButton.GetComponent<Image>().color = newBackground;
         completed = true;
+    }
+
+
+    void SetupResets()
+    {
+        ResetScene[] resets = GetComponentsInChildren<ResetScene>();
+        foreach (ResetScene r in resets)
+        {
+            r.spawnName = gameObject.name;
+            r.sceneName = scene.name;
+        }
     }
 }

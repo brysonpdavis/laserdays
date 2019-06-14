@@ -38,8 +38,8 @@ public class RaycastManager : MonoBehaviour {
 
     [Header("References")]
     [SerializeField] private PlayerCharge playerCharge;
-    [SerializeField] public Image crossHair;
-    [SerializeField] private Text itemNameText;
+    public Image crossHair;
+    public Text itemNameText;
     private Camera mainCam;
     private PlayerCharge pc;
     private AudioSource audioSource;

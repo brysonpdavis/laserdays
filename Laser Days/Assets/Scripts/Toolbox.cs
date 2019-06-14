@@ -443,6 +443,6 @@ public class Toolbox : Singleton<Toolbox>
         Time.timeScale = 1f;
        
         
-        StartCoroutine(mainCanvas.GetComponent<LevelLoadingMenu>().loadNextScene(sceneName, spawnPoint, null));
+        StartCoroutine(mainCanvas.GetComponent<LevelLoadingMenu>().loadNextScene(sceneName, spawnPoint, null, false));
     }
 }
