@@ -11,6 +11,8 @@
         
         _TransitionState("Transition State", Range( 0 , 1)) = 0
         
+        [Toggle]_Animated("Use Vertex Animation", Float) = 0
+        
         [HideInInspector]_isActive("isActive", Range( 0 , 1)) = 0
         [HideInInspector]_isCollide("isCollide", Range( 0 , 1)) = 0
         
@@ -61,7 +63,7 @@
         
             uniform float _Real;
         
-            uniform float _Elapsed, _AlphaCutoff;
+            uniform float _Elapsed, _AlphaCutoff, _Animated;
         
             uniform float _TransitionState;
         
@@ -70,7 +72,7 @@
             {
                 Interpolators i;
                 float4 temp = v.vertex;
-                float mag = goopPlantVertexAnimation(v.vertex.xyz, _Elapsed, 1);       
+                float mag = goopPlantVertexAnimation(v.vertex.xyz, _Elapsed, _Animated);       
                 temp.xyz += mag * v.normal;
                 
                 i.worldPos = temp.xyz;

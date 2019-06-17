@@ -5,6 +5,8 @@ using UnityEngine;
 public class SimpleBob : MonoBehaviour {
 
     public bool AnimTest = false;
+    public float timeScale = 1f;
+    public float magnitude = 0.002f;
     public bool bob = true;
     private Material mat;
 	// Use this for initialization
@@ -21,7 +23,7 @@ public class SimpleBob : MonoBehaviour {
         if (bob)
         {
             
-            transform.position += new Vector3(0f, Mathf.Sin(Time.fixedTime) * 0.002f, 0f);
+            transform.position += new Vector3(0f, Mathf.Sin(Time.fixedTime * timeScale) * magnitude, 0f);
         }
         if (AnimTest)
         {

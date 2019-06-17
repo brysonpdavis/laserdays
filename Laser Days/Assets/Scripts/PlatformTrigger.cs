@@ -24,6 +24,7 @@ public class PlatformTrigger : MonoBehaviour {
     private AudioSource audioSource;
     private Material RenderMat;
 
+    private TriggerConnector connector;
     private BasinTriggerIndicator basinIndicator;
 
     private void OnEnable()
@@ -72,7 +73,16 @@ public class PlatformTrigger : MonoBehaviour {
             platform = transform.parent.GetComponentsInChildren<PlatformMover>();
         }
 
+
+        if(GetComponentInChildren<TriggerConnector>())
+        {
+            connector = GetComponentInChildren<TriggerConnector>();
+            connector.CreateConnector(platform);
+            connector.SetColors(platformContainer.GetComponent<PlatformController>().RestingColor, platformContainer.GetComponent<PlatformController>().ShimmerColor);
+        }
+
         basinIndicator = GetComponentInChildren<BasinTriggerIndicator>();
+
     }
 
 	private void FixedUpdate()
@@ -211,6 +221,10 @@ public class PlatformTrigger : MonoBehaviour {
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
                     trigger.RenderMat.SetFloat("_isActive", 1f);
+                    if(connector)
+                    {
+                        connector.SetState(TriggerConnector.State.Active);
+                    }
                     if (trigger.basinIndicator)
                     {
                         trigger.basinIndicator.Activate();
@@ -252,6 +266,10 @@ public class PlatformTrigger : MonoBehaviour {
                     if (trigger.basinIndicator)
                     {
                         trigger.basinIndicator.Deactivate();
+                    }
+                    if (connector)
+                    {
+                        connector.SetState(TriggerConnector.State.Waiting);
                     }
                 }
 

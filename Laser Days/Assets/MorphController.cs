@@ -216,7 +216,7 @@ public class MorphController : MonoBehaviour {
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
         rigidbody.isKinematic = false;
 
-        this.tag = "NoTouch";
+        //this.tag = "NoTouch";
 
         Debug.Log("morph coroutine started");
 

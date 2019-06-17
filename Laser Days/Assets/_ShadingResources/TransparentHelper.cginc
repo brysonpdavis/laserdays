@@ -26,7 +26,7 @@ inline float goopPlantVertexAnimation (float3 pos, float time, float animate)
     float m = pos.x * pos.z + 5 * pos.y + time;
     m = sin(m * 0.8) + 1;
     m *= 0.07;
-    return m; 
+    return m * animate; 
 }
 
 //Crystal vertex animation function - multiply result by vertex normal
@@ -103,10 +103,11 @@ inline float blockerPlayerHole (float2 uv, sampler2D tex, float4 ST, float3 camP
 {
     float2 map_uv = uv * ST.xy + ST.zw;
     float tex_a = tex2D(tex, map_uv).b;
-    float3 diff = camPos - wPos;
+    float3 bellPos = camPos - float3(0, 0.4, 0);
+    float3 diff = bellPos - wPos;
     float len = length(diff);
     len = 1 - saturate(len);
-    return step(0.1, len * saturate(tex_a + 0.5));    
+    return step(0.1, len * saturate(tex_a + 0.6));    
 }
 
 //Clip value for single world glass

@@ -31,7 +31,7 @@ public static class ShaderUtility
             return;
         }
 
-        // If using the slightly oldel shaders, swap to proper world
+        // If using the slightly oldel shaders, swap to proper worldst
         if (mat.shader == Shader.Find("Crosshatch/Real-Standard") || mat.shader == Shader.Find("Crosshatch/Laser-Standard"))
         {
             mat.shader = Shader.Find("Crosshatch/Real-Standard");
