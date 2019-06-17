@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.ImageEffects;
+
 
 [DisallowMultipleComponent]
 
@@ -50,6 +52,14 @@ public class RaycastManager : MonoBehaviour {
     private Transform playerCam;
     private float Radius;
 
+    [Header("Scene Reset")]
+    const float nSecond = 3f;
+
+    float timer = 0;
+    bool entered = false;
+    private EdgeDetection edge;
+
+
 
     void Start () {
         selectedObjs = new List<GameObject>();
@@ -62,6 +72,8 @@ public class RaycastManager : MonoBehaviour {
         iconContainer = Toolbox.Instance.GetIconContainer();
         playerCam = GetComponentInChildren<Camera>().transform;
         Radius = GetComponent<CharacterController>().radius;
+        edge = Camera.main.GetComponent<EdgeDetection>();
+
 
     }
 	
@@ -72,6 +84,7 @@ public class RaycastManager : MonoBehaviour {
         else if (this.gameObject.layer == 16) { newLayerMask = 1 << 0 | 1 << 11 | 1 << 17; }  //newLayerMask.value = 2048; } //layermask value of layer 11 is 2048   
 
         MainRaycast();
+        SceneResetCheck();
 	}
 
     void MainRaycast()
@@ -370,6 +383,75 @@ public class RaycastManager : MonoBehaviour {
                 interactable.DistantIconHover();
             }
         }
+    }
+
+    void SceneResetCheck()
+    {
+
+        RaycastHit hit;
+        Vector3 fwd = mainCam.transform.TransformDirection(Vector3.forward);
+
+        if (!LevelLoadingMenu.gameIsPaused && !(Time.timeScale < 1f) && !LevelLoadingMenu.sceneIsLoading)
+        {
+
+            if (Physics.Raycast(mainCam.transform.position, fwd, out hit, 60, newLayerMask)) //&& !LevelLoadingMenu.sceneIsLoading && !LevelLoadingMenu.gameIsPaused)
+            {
+                //Debug.Log("gameispaused " + LevelLoadingMenu.gameIsPaused);
+                if (hit.collider.CompareTag("SceneReset"))
+                {
+                    entered = true;
+                }
+
+                else
+                {
+                    edge.PauseMenu = 0;
+                    timer = 0;
+                }
+                    
+
+
+                //If pointer is pointing on the object, start the timer
+                if (entered)
+                {
+                    //Increment timer
+                    timer += Time.deltaTime;
+
+                    float value = Mathf.Clamp((timer / nSecond), 0f, .95f);
+                    Debug.Log(value);
+                    edge.PauseMenu = value;
+
+                    //Load scene if counter has reached the nSecond
+                    if (timer > nSecond)
+                    {
+                        timer = 0;
+                        hit.collider.gameObject.GetComponent<ResetScene>().Activate();
+                    }
+                }
+            }
+
+
+            else
+            {
+                edge.PauseMenu = 0;
+                timer = 0;
+            }
+        }
+
+        if (Time.timeScale < 1f)
+        {
+            timer = 0f;
+        }
+
+    }
+
+    public void PointerEnter()
+    {
+        entered = true;
+    }
+
+    public void PointerExit()
+    {
+        entered = false;
     }
 
 }
