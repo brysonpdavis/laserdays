@@ -45,7 +45,7 @@ public class LevelLoadingMenu : MonoBehaviour {
     private bool lastSceneCompleted;
     private GameObject lastSceneButton;
 
-    bool sceneIsLoading = false;
+    public static bool sceneIsLoading = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -95,7 +95,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         textNarration.SetActive(false);
 
-        edge.PauseMenu = 1f;
+        //edge.PauseMenu = 1f;
 
         StopAllCoroutines();
         StartCoroutine(PauseMenuIn());
@@ -276,13 +276,17 @@ public class LevelLoadingMenu : MonoBehaviour {
     {
         float elapsedTime = 0;
         float ratio = elapsedTime / fadeDuration;
-   
+        float start = edge.PauseMenu;
+        Debug.Log("START: " + edge.PauseMenu);
         while (ratio < 1f)
         {
             elapsedTime += Time.unscaledDeltaTime;
             ratio = elapsedTime / fadeDuration;
 
-            edge.PauseMenu = ratio;
+            float current = Mathf.Lerp(start, 1f, ratio);
+            Debug.Log(ratio);
+
+            edge.PauseMenu = current;
 
             yield return null;
         }
@@ -292,6 +296,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     IEnumerator PauseMenuOut()
     {
+        gameIsPaused = true;
         float elapsedTime = 0;
         float ratio = elapsedTime / fadeDuration;
 
@@ -304,7 +309,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
             yield return null;
         }
-       
+        gameIsPaused = false;
        
     }
 

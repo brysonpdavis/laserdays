@@ -12,15 +12,4 @@ public class ResetScene : MonoBehaviour {
     {
         Toolbox.Instance.LoadScene(sceneName, spawnName);
     }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("collide");
-            Activate();
-        } 
-    }
-
 }
