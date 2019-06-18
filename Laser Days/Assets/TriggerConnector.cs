@@ -1,68 +1,79 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.ShaderGraph;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public class TriggerConnector : MonoBehaviour {
 
+    // Speed at which the LineWalker object moves along the path
     public float speed = 0.2f;
+
+    // Transform data of platform, door, or other goop to connect to
+    public Transform ConnectionTarget;
+
+    // Array of control points that determine curve of the conncetor path
+    public Vector3 conrolPoint;
+
+    // Public vector is in local space for ease of use -> but the walker need world space
+    private Vector3 worldSpaceControlPoint;
+
+    // Where to start the path - usually transform position of this goop
+    private Vector3 origin;
+
+    // Internal time value used to loop the walker 
     private float internalTime;
 
-    private Vector3 start;
-    private Vector3 dest;
-    public Vector3 CenterConrolPoint;
+    // Object that walks along path - should be empty object with a particle system as its child
+    private GameObject walker;
 
-    private Transform[] platformTransforms;
+    // Particle system variables to update the look
+    private ParticleSystem particles;
+    private ParticleSystemRenderer particlesRenderer;
 
-    private LineRenderer lr;
-    private ParticleSystem ps;
-
-    private ParticleSystemRenderer psR;
-
-    private GameObject lineWalker;
+    // Materials to control colors
     private Material goopMat;
     private Material partMat;
 
+    // To store the colors
     private Color restColor;
     private Color activeColor;
 
+    // Determine if this has been initialized
     private bool created;
 
+    // The three states of the particle system
+    // Public so that the trigger itself can set state through public methods 
     public enum State {Waiting, Entered, Active}
 
+    // The current state
     private State currentState = State.Waiting;
 
 
-	// Use this for initialization
-	public void CreateConnector (PlatformMover[] platforms) {
+	// Ininiliaze a connector
+	public void CreateConnector() {
 
-        start = this.transform.parent.transform.position;
-        platformTransforms = new Transform[platforms.Length];
-
-        for (int i = 0; i < platforms.Length; i++)
+        if(ConnectionTarget) 
         {
-            platformTransforms[i] = platforms[i].transform;
+            origin = this.transform.parent.transform.position;
+
+            walker = transform.GetChild(0).gameObject;
+
+            particles = walker.GetComponent<ParticleSystem>();
+            particlesRenderer = walker.GetComponent<ParticleSystemRenderer>();
+
+            worldSpaceControlPoint = this.transform.TransformPoint(conrolPoint);
+
+            created = true;
+
+        } else 
+        {
+            Debug.Log("Not created because no target transform.");
         }
 
-        dest = platformTransforms[0].position;
-
-        lr = GetComponent<LineRenderer>();
-        ps = GetComponentInChildren<ParticleSystem>();
-        psR = GetComponentInChildren<ParticleSystemRenderer>();
-
-        changeColor(restColor);
-
-        lineWalker = transform.GetChild(0).gameObject;
-
-        created = true;
     }
 
-    [ExecuteInEditMode ]
-
-
-	// Update is called once per frame
-	void Update () {
+ 
+    // Handles the location of the particle emitter based on its state
+    private void FixedUpdate () {
 
         if(created)
         {
@@ -70,34 +81,38 @@ public class TriggerConnector : MonoBehaviour {
 
                 case State.Waiting :
 
-                    lineWalker.transform.position = start;
+                    walker.transform.position = origin;
                     break;
 
                 case State.Active :
 
-                    // Stop emmision -> move to start -> set loop time to 0 -> start emmision
+                    // End of loop -> Stop emmision -> move to start -> set loop time to 0 -> start emmision
                     if (internalTime >= 1f)
                     {
-                        ps.Stop();
-                        lineWalker.transform.position = start;
+                        particles.Stop();
+                        walker.transform.position = origin;
                         internalTime = 0f;
-                        ps.Play();
-
+                        particles.Play();
                     }
-                    // Get destination and center -> set position ->  
+
+                    // Get destination from target -> walk the walker along -> increment time  
                     else
                     {
-                        dest = platformTransforms[0].position;
-                        Vector3 center = this.transform.TransformPoint(CenterConrolPoint);
-                        lineWalker.transform.position = GetPoint(start, center, dest, internalTime);
+
+                        Vector3 destination = ConnectionTarget.position;
+                        Debug.Log(destination);
+                        walker.transform.position = GetPoint(origin, worldSpaceControlPoint, destination, internalTime);
                         internalTime += Time.fixedDeltaTime * speed;
                     }
 
                     break;
             }
+
+            Debug.LogWarning(currentState);
         }
 	}
 
+    // Gets point along a quadratic bezier curve
     public static Vector3 GetPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
     {
         t = Mathf.Clamp01(t);
@@ -108,51 +123,67 @@ public class TriggerConnector : MonoBehaviour {
             t * t * p2;
     }
 
-    Vector3 Walk(Vector3 origin, Vector3 mid, Vector3 destination, float t)
-    {
-        t = Mathf.Clamp01(t);
-        return Vector3.Lerp(origin, destination, t);
-    }
-
-
+    // Sets state for controlling the FixedUpdate and the look of the particle system
     public void SetState(State s)
     {
         currentState = s;
 
         switch (s){
             case State.Waiting :
-                changeColor(restColor);
+                ChangeColor(restColor);
                 break;
             case State.Active :
-                changeColor(activeColor);
+                ChangeColor(activeColor);
                 break;
 
         }  
     }
 
-    private void changeColor(Color col)
+    public Color MinColor(float a, Color b)
     {
-        psR.material.SetColor("_Color", col);
+        return new Color(Mathf.Min(a, b.r), Mathf.Min(a, b.g), Mathf.Min(a, b.b), 1f);
+    }
+
+    public Color MaxColor(float a, Color b)
+    {
+        return new Color(Mathf.Max(a, b.r), Mathf.Max(a, b.g), Mathf.Max(a, b.b), 1f);
+    }
+
+    public void ChangeColor(Color col)
+    {
+        particlesRenderer.material.SetColor("_Color", col);
+    }
+
+    public void SetWorld(bool isReal)
+    {
+        float val = isReal ? 1f : 0f;
+        particlesRenderer.material.SetFloat("_Real", val);
     }
 
     public void SetColors(Color colA, Color colB)
     {
-        restColor = colA;
-        activeColor = colB;
+        restColor = colA * 1.5f;
+        activeColor = colB * 0.5f;
     }
 
+    // Handles drawing gizmo to visualize the control point in scene view 
     private void DrawGizmo(bool selected)
     {
-        var col = new Color(0.2f, 0.2f, 0.7f, 1.0f);
-        col.a = selected ? 0.3f : 0.7f;
+        // Draw control point gizmo 
+        var blue = new Color(0.2f, 0.2f, 0.5f, 1.0f);
+        var purple = new Color(0.7f, 0.3f, 0.7f, 1.0f);
+        var col = selected ? purple : blue;
+        col.a = selected ? 1.0f : 0.25f;
         Gizmos.color = col;
         Gizmos.matrix = transform.localToWorldMatrix;
-        Vector3 newCenter = CenterConrolPoint;
+        Vector3 newCenter = conrolPoint;
+        Vector3 newEnd = this.transform.InverseTransformPoint(ConnectionTarget.position);
         Gizmos.DrawSphere(newCenter, 0.2f);
-        col.a = selected ? 1.0f : 0.5f;
-        Gizmos.color = col;
+        Gizmos.DrawSphere(newEnd, 0.2f);
         Gizmos.DrawWireSphere(newCenter, 0.2f);
+        Gizmos.DrawWireSphere(newEnd, 0.2f);
     }
+
 
     public void OnDrawGizmos()
     {

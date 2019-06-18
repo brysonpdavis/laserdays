@@ -1,13 +1,13 @@
 // Made with Amplify Shader Editor
 // Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader " Custom/CircleParticle"
+Shader "Crosshatch/CircleParticle"
 {
 	Properties
 	{
 		_Cutoff( "Mask Clip Value", Float ) = 0.5
 		_Color("Color", Color) = (0,0,0,0)
 		_TransitionState("Transition State", Range( 0 , 1)) = 0
-		_Real("Real", Float) = 1
+		[Toggle] _Real("Real", Float) = 1
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
 	}
