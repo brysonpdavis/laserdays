@@ -19,7 +19,7 @@ public class TextNarration : MonoBehaviour
 
     void Awake()
     {
-        content = txtNarration.text.Split(new string[] {"****\n"}, StringSplitOptions.None);
+        content = txtNarration.text.Split(new string[] {"****\n", "****\r\n"}, StringSplitOptions.None);
     }
 
     private void OnTriggerEnter(Collider other)
