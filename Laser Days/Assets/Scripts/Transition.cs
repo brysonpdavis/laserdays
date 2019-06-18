@@ -35,6 +35,11 @@ public class Transition : MonoBehaviour
             shared = true;
         }
 
+        if(!mRenderer && GetComponent<ParticleSystemRenderer>())
+        {
+            mRenderer = GetComponent<ParticleSystemRenderer>();
+        }
+
         if(GetComponent<Decal>()){
 
 

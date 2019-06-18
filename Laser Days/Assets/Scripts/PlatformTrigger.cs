@@ -24,7 +24,7 @@ public class PlatformTrigger : MonoBehaviour {
     private AudioSource audioSource;
     private Material RenderMat;
 
-    private TriggerConnector connector;
+    private TriggerConnector[] connectors;
     private BasinTriggerIndicator basinIndicator;
 
     private void OnEnable()
@@ -76,9 +76,14 @@ public class PlatformTrigger : MonoBehaviour {
 
         if(GetComponentInChildren<TriggerConnector>())
         {
-            connector = GetComponentInChildren<TriggerConnector>();
-            connector.CreateConnector(platform);
-            connector.SetColors(platformContainer.GetComponent<PlatformController>().RestingColor, platformContainer.GetComponent<PlatformController>().ShimmerColor);
+            connectors = GetComponentsInChildren<TriggerConnector>();
+            foreach (TriggerConnector conn in connectors)
+            {
+                conn.CreateConnector();
+                conn.SetColors(platformContainer.GetComponent<PlatformController>().RestingColor, platformContainer.GetComponent<PlatformController>().ShimmerColor);
+                conn.ChangeColor(platformContainer.GetComponent<PlatformController>().RestingColor);
+                conn.SetWorld(this.gameObject.layer == 11);
+            }
         }
 
         basinIndicator = GetComponentInChildren<BasinTriggerIndicator>();
@@ -221,10 +226,9 @@ public class PlatformTrigger : MonoBehaviour {
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
                     trigger.RenderMat.SetFloat("_isActive", 1f);
-                    if(connector)
-                    {
-                        connector.SetState(TriggerConnector.State.Active);
-                    }
+
+                    SetConnectorStates(TriggerConnector.State.Active);
+
                     if (trigger.basinIndicator)
                     {
                         trigger.basinIndicator.Activate();
@@ -240,6 +244,18 @@ public class PlatformTrigger : MonoBehaviour {
 
         }  
     }
+
+    private void SetConnectorStates(TriggerConnector.State s)
+    {
+        if(connectors.Length > 0)
+        {
+            foreach(TriggerConnector connector in connectors)
+            {
+                connector.SetState(s);
+            }
+        }
+    }
+
     public void TriggerOff(Collider other)
     {
         if (other.tag == "Clickable" || other.tag == "Player" || other.tag == "Platform" || other.tag == "MorphArm" || other.tag == "NoTouch")
@@ -267,10 +283,8 @@ public class PlatformTrigger : MonoBehaviour {
                     {
                         trigger.basinIndicator.Deactivate();
                     }
-                    if (connector)
-                    {
-                        connector.SetState(TriggerConnector.State.Waiting);
-                    }
+
+                    SetConnectorStates(TriggerConnector.State.Waiting);
                 }
 
                 foreach (PlatformTrigger trigger in platformTriggers)
