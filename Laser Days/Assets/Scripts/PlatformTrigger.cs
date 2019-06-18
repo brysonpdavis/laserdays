@@ -278,6 +278,7 @@ public class PlatformTrigger : MonoBehaviour {
 
                 foreach (PlatformTrigger trigger in platformTriggers)
                 {
+                    trigger.RenderMat.SetFloat("_isActive", 0);
 
                     if (trigger.basinIndicator)
                     {
@@ -285,13 +286,10 @@ public class PlatformTrigger : MonoBehaviour {
                     }
 
                     SetConnectorStates(TriggerConnector.State.Waiting);
+                    trigger.moving = false;
+
                 }
 
-                foreach (PlatformTrigger trigger in platformTriggers)
-                {
-                    trigger.moving = false;
-                    trigger.RenderMat.SetFloat("_isActive", 0);
-                }
 
                 on = false;
             }
