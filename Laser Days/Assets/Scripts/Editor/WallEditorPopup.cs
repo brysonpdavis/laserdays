@@ -58,6 +58,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("RotateY+90"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "RotateY+90");
             Vector3 rot = new Vector3(0f, 90f, 0f);
             current.GetComponent<Transform>().Rotate(rot);
             //ClampRotation(current.transform.rotation, current);
@@ -66,6 +67,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("RotateY+180"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "RotateY+180");
             Vector3 rot = new Vector3(0f, 180f, 0f);
             current.GetComponent<Transform>().Rotate(rot);
             //ClampRotation(current.transform.rotation, current);
@@ -74,6 +76,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("RotateX+90"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "RotateX+90");
             Vector3 rot = new Vector3(90f, 0f, 0f);
             current.GetComponent<Transform>().Rotate(rot);
             //ClampRotation(current.transform.rotation, current);
@@ -82,6 +85,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("RotateZ+90"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "RotateZ+90");
             Vector3 rot = new Vector3(0f, 0f, 90f);
             current.GetComponent<Transform>().Rotate(rot);
             //ClampRotation(current.transform.rotation, current);
@@ -91,6 +95,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("+X"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "+X");
             Vector3 mov = new Vector3(4f, 0f, 0f);
             current.GetComponent<Transform>().Translate(mov);
         }
@@ -98,6 +103,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("-X"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "-X");
             Vector3 mov = new Vector3(-4f, 0f, 0f);
             current.GetComponent<Transform>().Translate(mov);
         }
@@ -105,6 +111,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("+Y"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "+Y");
             Vector3 mov = new Vector3(0f, 4f, 0f);
             current.GetComponent<Transform>().Translate(mov);
         }
@@ -112,6 +119,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("-Y"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "-Y");
             Vector3 mov = new Vector3(0f, -4f, 0f);
             current.GetComponent<Transform>().Translate(mov);
         }
@@ -119,6 +127,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("+Z"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "+Z");
             Vector3 mov = new Vector3(0f, 0f, 4f);
             current.GetComponent<Transform>().Translate(mov);
         }
@@ -126,6 +135,7 @@ public class WallEditorPopup : EditorWindow
         if (GUILayout.Button("-Z"))
         {
             GameObject current = (GameObject)Selection.activeObject;
+            Undo.RecordObject(current.transform, "-Z");
             Vector3 mov = new Vector3(0f, 0f, -4f);
             current.GetComponent<Transform>().Translate(mov);
         }

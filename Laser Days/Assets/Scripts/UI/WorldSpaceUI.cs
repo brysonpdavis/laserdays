@@ -148,6 +148,9 @@ public class WorldSpaceUI : MonoBehaviour
 				}
 
 				break;
+			
+			default:
+				break;
 		}
 	}
 
@@ -231,6 +234,8 @@ public class WorldSpaceUI : MonoBehaviour
 					if (Input.GetKeyDown(ControlManager.CM.submit))
 						RestartDialogue();
 
+					break;
+				default:
 					break;
 			}
 		}	
