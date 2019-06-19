@@ -178,7 +178,7 @@ public class WallEditorPopup : EditorWindow
 
             if (names.Contains(currentName) && destroy)
             {
-                DestroyImmediate(Selection.activeGameObject);
+                Undo.DestroyObjectImmediate(Selection.activeGameObject);
             }
             Selection.activeObject = PrefabUtility.InstantiatePrefab(newGuy);// tempPosition, tempRotation, parent);
             Selection.activeGameObject.transform.position = tempPosition;
@@ -192,6 +192,10 @@ public class WallEditorPopup : EditorWindow
             Selection.activeGameObject.transform.position = tempPosition;
             Selection.activeGameObject.transform.rotation = tempRotation;
         }
+        
+        Undo.RegisterCreatedObjectUndo(Selection.activeGameObject, "Created New Object");
+        
+        
 
 
 
