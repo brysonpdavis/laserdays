@@ -284,7 +284,7 @@ public class LevelLoadingMenu : MonoBehaviour {
             ratio = elapsedTime / fadeDuration;
 
             float current = Mathf.Lerp(start, 1f, ratio);
-            Debug.Log(ratio);
+           // Debug.Log(ratio);
 
             edge.PauseMenu = current;
 

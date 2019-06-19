@@ -58,6 +58,7 @@ public class RaycastManager : MonoBehaviour {
     float timer = 0;
     bool entered = false;
     private EdgeDetection edge;
+    private ResetScene currentLevelReset;
 
 
 
@@ -400,12 +401,24 @@ public class RaycastManager : MonoBehaviour {
                 if (hit.collider.CompareTag("SceneReset"))
                 {
                     entered = true;
+                    if (!hit.collider.GetComponent<AudioSource>().isPlaying)
+                    {
+                        currentLevelReset = hit.collider.GetComponent<ResetScene>();
+                        hit.collider.gameObject.GetComponent<ResetScene>().Play();
+
+                    }
                 }
 
                 else
                 {
                     edge.PauseMenu = 0;
                     timer = 0;
+                    if (currentLevelReset)
+                    {
+                        currentLevelReset.Deactivate();
+                        currentLevelReset = null;
+                    }
+                        
                 }
                     
 
@@ -417,7 +430,6 @@ public class RaycastManager : MonoBehaviour {
                     timer += Time.deltaTime;
 
                     float value = Mathf.Clamp((timer / nSecond), 0f, .95f);
-                    Debug.Log(value);
                     edge.PauseMenu = value;
 
                     //Load scene if counter has reached the nSecond
@@ -434,6 +446,12 @@ public class RaycastManager : MonoBehaviour {
             {
                 edge.PauseMenu = 0;
                 timer = 0;
+                if (currentLevelReset)
+                {
+                    currentLevelReset.Deactivate();
+                    currentLevelReset = null;
+                }
+
             }
         }
 
