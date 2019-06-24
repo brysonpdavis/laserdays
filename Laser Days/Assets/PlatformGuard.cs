@@ -298,5 +298,4 @@ public class PlatformGuard : MonoBehaviour
 
         }
     }
-
 }

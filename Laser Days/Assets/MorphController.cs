@@ -240,7 +240,10 @@ public class MorphController : MonoBehaviour {
 
                 currentFlipCount = CheckFlipsForTransitions(currentFlipCount);
 
-                yield return null;
+                //yield return null;
+                
+                yield return new WaitForFixedUpdate();
+
             }
             this.tag = "Clickable";
 
@@ -271,7 +274,9 @@ public class MorphController : MonoBehaviour {
                 currentFlipCount = CheckFlipsForTransitions(currentFlipCount);
 
 
-                yield return null;
+                //yield return null;
+                
+                yield return new WaitForFixedUpdate();
             }
             this.tag = "Clickable";
         }

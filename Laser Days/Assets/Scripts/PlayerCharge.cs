@@ -135,6 +135,5 @@ public class PlayerCharge : MonoBehaviour {
             yield return null;
         }
     }
-
 }
 

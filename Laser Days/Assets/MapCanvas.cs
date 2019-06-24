@@ -12,7 +12,6 @@ public class MapCanvas : MonoBehaviour
 	{
 		foreach (Camera cam in Camera.allCameras )
 		{
-			Debug.LogError(cam.name);
 			if (cam.gameObject.name == "MapCamera")
 			{
 				mapCam = cam;

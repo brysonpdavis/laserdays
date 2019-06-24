@@ -6,6 +6,8 @@ using UnityEngine;
 // this script is meant to be put on the player gameobject and allows
 // the player to interact with narration on screen
 
+// also controls the map
+
 public class NarrationControl : MonoBehaviour
 {
 

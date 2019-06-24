@@ -109,8 +109,8 @@ namespace CodingJar.MultiScene
 #if UNITY_EDITOR
 				if ( !Application.isPlaying )
 				{
-                    GameObject gameObject = this.gameObject;
-					EditorApplication.delayCall += () => { if ( gameObject ) EditorSceneManager.MarkSceneDirty( gameObject.scene ); };
+                    GameObject gObject = this.gameObject;
+					EditorApplication.delayCall += () => { if ( gObject ) EditorSceneManager.MarkSceneDirty( gObject.scene ); };
 				}
 #endif
 			}

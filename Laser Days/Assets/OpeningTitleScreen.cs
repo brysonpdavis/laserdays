@@ -62,6 +62,7 @@ public class OpeningTitleScreen : MonoBehaviour {
 
         while (ratio <1f)
         {
+            Debug.LogError("FADE ON AWAKE");
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
 
@@ -71,9 +72,17 @@ public class OpeningTitleScreen : MonoBehaviour {
 
         }
 
-        this.gameObject.SetActive(false);
 
         Time.timeScale = 1f;
+        
+
+        // Invoke("Deactivate", 0.5f);
+    }
+
+    void Deactivate()
+    {
+        Debug.LogError("done with fadeonawake");
+        gameObject.SetActive(false);
     }
 
 }
