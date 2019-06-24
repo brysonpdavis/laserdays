@@ -188,6 +188,7 @@ public class PlatformGuard : MonoBehaviour
     {
         string collisionTag = "Null";
         if (col.CompareTag("Player")) { collisionTag = "Player"; }
+        if (col.CompareTag("MorphArm")) { collisionTag = "MorphArm"; }
         else if (col.GetComponent<InteractableObject>()) { collisionTag = col.GetComponent<InteractableObject>().objectType.ToString(); }
 
         string collisionTagParent = "";
@@ -254,11 +255,6 @@ public class PlatformGuard : MonoBehaviour
             }
         }
 
-        if (string.Equals(collisionTag, "Morph"))
-        {
-            col.GetComponent<Morph>().canFlip = true;
-        }
-
         //otherwise the object has been riding on top, so remove it from list of objects that should move with the platform
         else if (string.Equals(collisionTag, "Sokoban1x1") || 
                  //string.Equals(collisionTag, "Sokoban2x2") || 
@@ -272,6 +268,11 @@ public class PlatformGuard : MonoBehaviour
 
             if (stuckObjects.Count <= 1 && platformController.platformTriggers[0].moving)
                 ReturnPlatformAfterJam();
+        }
+
+        if (string.Equals(collisionTag, "Morph"))
+        {
+            col.GetComponent<Morph>().canFlip = true;
         }
 
         target = null;
