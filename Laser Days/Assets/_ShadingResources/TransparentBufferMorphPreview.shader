@@ -69,7 +69,7 @@
                 half worldClip = lerp(_TransitionState, 1 - _TransitionState, _Real);
                 clip(worldClip - _AlphaCutoff);
                 
-                return half4(0, 0, 0.5, 0.25);
+                return half4(0, 0, 0.5, 0.1);
                 
                 
             }

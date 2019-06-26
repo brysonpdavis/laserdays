@@ -28,8 +28,8 @@
         _GradientScale("Gradient Scale", Range(0, 3)) = 1
         _GradientOffset("Gradient Offset", Range(-3,3)) = 0
         
-        _TransitionState("Transition State", Range(0,1)) = 0
-        _TransitionStateB("Transition State B", Range( 0 , 1)) = 0
+        [PerRendererData] _TransitionState("Transition State", Range(0,1)) = 0
+        [PerRendererData] _TransitionStateB("Transition State B", Range( 0 , 1)) = 0
         
         _AlphaCutoff ("Alpha Cutoff", Range(0, 1)) = 0.5
         

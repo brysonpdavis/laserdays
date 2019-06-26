@@ -286,7 +286,7 @@ abstract public class FlippableObject : InteractableObject
                 recentlySelected = false;              
                 yield break;
             }
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.fixedDeltaTime;
             ratio = elapsedTime / duration;
 
             //shimmer stuff
@@ -302,7 +302,7 @@ abstract public class FlippableObject : InteractableObject
                 RendererExtensions.UpdateGIMaterials(mRenderer);
 
             }
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         this.recentlySelected = false;
@@ -312,6 +312,7 @@ abstract public class FlippableObject : InteractableObject
             material.SetFloat("_Shimmer", 1f);
         }
     }
+
 
     public virtual void FlipCore(bool onFlip)
     {

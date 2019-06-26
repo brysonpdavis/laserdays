@@ -108,7 +108,7 @@ public class TriggerConnector : MonoBehaviour {
                     break;
             }
 
-            Debug.LogWarning(currentState);
+            //Debug.LogWarning(currentState);
         }
 	}
 

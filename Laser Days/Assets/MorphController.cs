@@ -12,6 +12,7 @@ public class MorphController : MonoBehaviour {
 
     [Header("Internal Parts")]
     public GameObject realCollider;
+    public GameObject Hat;
     private MaterialPropertyBlock realArmPropBlock; 
     public Renderer realPreview;
     private Material realPreviewMaterial;
@@ -42,6 +43,12 @@ public class MorphController : MonoBehaviour {
         Physics.IgnoreCollision(this.gameObject.GetComponent<BoxCollider>(), realCollider.GetComponent<BoxCollider>());
         Physics.IgnoreCollision(this.gameObject.GetComponent<BoxCollider>(), laserCollider.GetComponent<BoxCollider>());
         Physics.IgnoreCollision(laserCollider.GetComponent<BoxCollider>(), realCollider.GetComponent<BoxCollider>());
+
+        Physics.IgnoreCollision(laserCollider.GetComponent<BoxCollider>(), Hat.GetComponent<BoxCollider>());
+        Physics.IgnoreCollision(this.GetComponent<BoxCollider>(), Hat.GetComponent<BoxCollider>());
+        Physics.IgnoreCollision(realCollider.GetComponent<BoxCollider>(), Hat.GetComponent<BoxCollider>());
+
+
 
         //renderers = GetTransitionRenderers();
 
@@ -120,6 +127,7 @@ public class MorphController : MonoBehaviour {
 
             laserCollider.layer = 10;
             realCollider.layer = 10;
+            Hat.layer = 10;
 
 
             FlipInternalRenderers(internalParts, dir);
@@ -143,6 +151,7 @@ public class MorphController : MonoBehaviour {
             this.gameObject.layer = 11;
             laserCollider.layer = 11;
             realCollider.layer = 11;
+            Hat.layer = 11;
 
 
             FlipInternalRenderers(internalParts, dir);
@@ -228,8 +237,9 @@ public class MorphController : MonoBehaviour {
 
             while (elapsedTime < durationScale)
             {
+                Debug.Log("smooth is " + Time.smoothDeltaTime + "Fixed is " + Time.fixedDeltaTime);
 
-                elapsedTime += Time.smoothDeltaTime;
+                elapsedTime += Time.fixedDeltaTime;
                 realScale.y = Mathf.Lerp(realStart, 1, (elapsedTime/durationScale));
                 realCollider.transform.localScale = realScale;
                 laserScale.y = Mathf.Lerp(laserStart, armScalingFactor * armScale, (elapsedTime / durationScale));
@@ -237,6 +247,8 @@ public class MorphController : MonoBehaviour {
 
                 float transitionB = Mathf.Clamp01(elapsedTime / durationScale);
                 SetMaterialProperty("_TransitionStateB", transitionB);
+
+                Debug.Log("trans is " + transitionB);
 
                 currentFlipCount = CheckFlipsForTransitions(currentFlipCount);
 
@@ -258,8 +270,9 @@ public class MorphController : MonoBehaviour {
 
             while (elapsedTime < durationScale)
             {
-
-                elapsedTime += Time.smoothDeltaTime;
+                Debug.Log("smooth is " + Time.smoothDeltaTime + "Fixed is " + Time.fixedDeltaTime);
+               
+                elapsedTime += Time.fixedDeltaTime;
                 ratio = elapsedTime / duration;
 
                 realScale.y = Mathf.Lerp(realStart, armScalingFactor * armScale, (elapsedTime / durationScale));
@@ -268,8 +281,10 @@ public class MorphController : MonoBehaviour {
                 laserScale.y = Mathf.Lerp(laserStart, 1, (elapsedTime / durationScale));
                 laserCollider.transform.localScale = laserScale;
 
-                float transitionB = (1f - (elapsedTime / durationScale));
+                float transitionB = Mathf.Clamp01((1f - (elapsedTime / durationScale)));
                 SetMaterialProperty("_TransitionStateB", transitionB);
+
+                Debug.Log("trans is " + transitionB);
 
                 currentFlipCount = CheckFlipsForTransitions(currentFlipCount);
 
@@ -326,9 +341,12 @@ public class MorphController : MonoBehaviour {
 
         foreach (renderersAndProps rp in internalParts)
         {
-            rp.renderer.GetPropertyBlock(rp.propertyBlock);
-            rp.propertyBlock.SetFloat(name2, value);
-            rp.renderer.SetPropertyBlock(rp.propertyBlock);
+            //rp.renderer.GetPropertyBlock(rp.propertyBlock);
+            //rp.propertyBlock.SetFloat(name2, value);
+            //rp.renderer.SetPropertyBlock(rp.propertyBlock);
+
+            rp.renderer.material.SetFloat(name2, value);
+
         }
     }
 

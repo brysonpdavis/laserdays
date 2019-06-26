@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.Text;
 
 namespace MFPP
 {
@@ -571,7 +572,7 @@ namespace MFPP
                 BeforeUpdate(); // Call before update (along with its modules)
                 DoMouse(); // Mouse related
                 SetJumpPressed();
-                // DoMovement(); // Movement related
+                //DoMovement(); // Movement related
                 UpdateHeight(); // Update the height
                 DoFootsteps(); // Footsteps related
                 AfterUpdate(); // Call after update (along with its modules)
@@ -682,6 +683,7 @@ namespace MFPP
                 {
                     FinalMovement += ForceBuffer;
                     FinalMovement += ImpulseBuffer;
+                    Debug.LogWarning("Impulse is " + ImpulseBuffer);
                 }
 
                 if (!IsJumping && KinematicMovement.sqrMagnitude <= 0 && (ImpulseBuffer.sqrMagnitude==0)) // Negative step offset for stairs and downwards slopes
@@ -862,6 +864,7 @@ namespace MFPP
                 ignoredColliders.Add(overlappingCollider);
                 Physics.IgnoreCollision(CharacterController, overlappingCollider, true);
             }
+
         }
 
         private void PostCharacterControllerUpdate () {
