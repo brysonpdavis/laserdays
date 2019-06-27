@@ -92,6 +92,8 @@ public class LevelLoadingMenu : MonoBehaviour {
         soundtrackSlider.SetActive(true);
         sensitivitySlider.SetActive(true);
         saveButton.SetActive(true);
+        inputMenuButton.SetActive(true);
+
 
         textNarration.SetActive(false);
 
@@ -196,6 +198,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         soundtrackSlider.SetActive(false);
         sensitivitySlider.SetActive(false);
         saveButton.SetActive(false);
+        inputMenuButton.SetActive(false);
     }
 
     IEnumerator FadeOut()
