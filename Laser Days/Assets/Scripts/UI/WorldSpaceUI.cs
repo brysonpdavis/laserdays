@@ -58,11 +58,12 @@ public class WorldSpaceUI : MonoBehaviour
 		textComponent = GetComponentInChildren<Text>();
 		originalFontSize = textComponent.fontSize;
 		textAndImage = transform.GetChild(0).gameObject;
-		fileText = textFile.text.Split(new string[] {"****\n", "****\r\n"}, StringSplitOptions.None);
+		fileText = textFile.text.Split(new string[] {"****\n", "****\r\n", "****"}, StringSplitOptions.None);
 		iLetter = 0;
 		iParagraph = 0;
 		dState = DistanceState.Inactive;
 		sState = SubState.Writing;
+        DisableTextAndImage();
 		InvokeRepeating("SetPlayerDistance", 0, refreshTime);
 	}
 	
