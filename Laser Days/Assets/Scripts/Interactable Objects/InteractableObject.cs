@@ -7,7 +7,7 @@ using UnityEngine;
 abstract public class InteractableObject : MonoBehaviour
 {
     //protected ItemProperties itemProperties;
-    public enum ObjectType { Clickable, SingleWorldClickable, Sokoban1x1, Sokoban2x2, Morph, Wall, WallSliderX, WallSliderZ, FloorBouncer, Null };
+    public enum ObjectType { Clickable, SingleWorldClickable, Sokoban1x1, Sokoban2x2, Morph, Wall, WallSliderX, WallSliderZ, FloorBouncer, LinkedPair, Null };
     [HideInInspector]public ObjectType objectType;
     [HideInInspector]public string itemName;
 
@@ -65,7 +65,7 @@ abstract public class InteractableObject : MonoBehaviour
     }
 
 
-    void Start()
+    public virtual void Start()
     {
         player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
         iconContainer = Toolbox.Instance.GetIconContainer();
