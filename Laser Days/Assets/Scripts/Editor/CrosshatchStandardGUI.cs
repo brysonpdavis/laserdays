@@ -40,7 +40,7 @@ public class CrosshatchStandardGUI : ShaderGUI {
         OutlinesModule();
         AccentModule();
         GradientModule();
-        if(IsKeywordEnabled("INTERACTABLE"))
+        if(IsKeywordEnabled("INTERACTABLE") || IsKeywordEnabled("INVERSE_INTERACTABLE"))
         {
             InteractionModule();
         }

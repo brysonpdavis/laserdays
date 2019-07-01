@@ -48,16 +48,12 @@ struct Interpolators {
     #endif
 };
 
-//triplanar texture coordinate structure 
+//Triplanar texture coordinate structure 
 struct TriplanarUV {
     float2 x, y, z;
 };
 
-inline float mod (float a, float b)
-{
-    return a - (b * floor(a/b));
-}
-
+//Triplaner UV return function
 TriplanarUV GetTriplanarUV (Interpolators i) {
     
     TriplanarUV triUV;
@@ -244,7 +240,7 @@ float GetAlphaSingle (Interpolators i)
         trans = _TransitionState;        
     #endif
     
-    #if defined(REAL)
+    #if defined(REAL) || defined(INVERSE_INTERACTABLE)
         emv -= trans;
         emv = step(0,emv);
         return emv;
@@ -253,7 +249,9 @@ float GetAlphaSingle (Interpolators i)
         emv += trans;
         emv = step(1,emv);
         return emv;
-    #endif      
+    #endif  
+    
+    return 1;    
 }
 
 // Return simple tangent normal
@@ -515,7 +513,7 @@ struct FragmentOutput {
 
 FragmentOutput MyFragmentProgram (Interpolators i) {
     
-    #if defined(REAL) || defined(LASER)
+    #if defined(REAL) || defined(LASER) || defined(INVERSE_INTERACTABLE)
         float alpha = GetAlpha(i);
         clip(GetAlphaSingle(i) - _AlphaCutoff);
     #endif
@@ -550,7 +548,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         CreateLight(i), CreateIndirectLight(i, viewDir)
     );
     
-    #if defined(INTERACTABLE)
+    #if defined(INTERACTABLE) || defined(INVERSE_INTERACTABLE)
         color.rgb += _InteractColor.rgb * GetInteraction(i);
         color.rgb += _ShimmerColor.rgb * GetGlowMask(i);
     #endif
