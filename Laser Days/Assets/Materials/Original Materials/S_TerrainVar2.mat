@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: S_TerrainVar2
   m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
-  m_ShaderKeywords: NO_GRADIENT SHARED STATIC _SPECULARHIGHLIGHTS_OFF
+  m_ShaderKeywords: ACCENT_ON NO_GRADIENT SHARED TERRAIN _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AccentMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8665e199a3277418f862e95932ca04fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoLaser:
@@ -108,6 +108,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaCutoff: 1
+    - _BlendOffset: 0.082
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -120,21 +121,23 @@ Material:
     - _GradientOffset: 0
     - _GradientScale: 1
     - _Highlights: 0
-    - _LineA: 3
+    - _LineA: 1
     - _LineB: 1
     - _LineC: 0
     - _LineD: 0
-    - _MainTexContribution: 0.1
+    - _MainTexContribution: 0.046
     - _Metallic: 0
     - _Mode: 0
     - _NormalScale: 0.3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Smoothness: 0
+    - _Smoothness: 1
+    - _Smoothness2: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 0
     - _SrcBlend: 1
     - _SteppedTransition: 0
+    - _TerrainScale: 0.02
     - _TransitionState: 0
     - _TransitionStateB: 0
     - _UVSec: 0
@@ -148,10 +151,10 @@ Material:
     - _ColorReal: {r: 0.76, g: 0.4771111, b: 0.39688885, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserAccent: {r: 0.36376065, g: 0.34752133, b: 0.37999994, a: 1}
+    - _LaserAccent: {r: 0.36376062, g: 0.3475213, b: 0.3799999, a: 0}
     - _LaserBase: {r: 0.62352943, g: 0.5697859, b: 0.5686275, a: 1}
     - _LaserGradient: {r: 0, g: 0, b: 0, a: 0}
-    - _RealAccent: {r: 0.76, g: 0.4771111, b: 0.39688885, a: 1}
-    - _RealBase: {r: 0.78, g: 0.50825804, b: 0.429, a: 1}
+    - _RealAccent: {r: 0.6509804, g: 0.31821743, b: 0.26274508, a: 0}
+    - _RealBase: {r: 0.7647059, g: 0.56114167, b: 0.47843137, a: 1}
     - _RealGradient: {r: 0, g: 0, b: 0, a: 0}
     - _ShimmerColor: {r: 0, g: 0, b: 0, a: 0}

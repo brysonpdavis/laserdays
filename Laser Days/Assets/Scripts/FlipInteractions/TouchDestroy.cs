@@ -14,14 +14,16 @@ public class TouchDestroy : FlipInteraction{
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         if (other.gameObject.CompareTag("Player"))
         {
 
             if (!touched)
             { 
-                _propBlock.SetFloat("_TransitionState", .5f);
-                mRenderer.SetPropertyBlock(_propBlock);//do something that lets you know you've activated it
+                //mRenderer.GetPropertyBlock(_propBlock);
+                //_propBlock.SetFloat("_OnHold", 1f);
+
+                material.SetFloat("_onHold", 1f);
+                //mRenderer.SetPropertyBlock(_propBlock);//do something that lets you know you've activated it
             }
 
             touched = true;
@@ -33,6 +35,7 @@ public class TouchDestroy : FlipInteraction{
         _propBlock = new MaterialPropertyBlock();
         mRenderer = GetComponent<Renderer>();
         duration = Toolbox.Instance.globalFlipSpeed;
+        material = mRenderer.material;
 
 
         mRenderer.GetPropertyBlock(_propBlock);
@@ -48,7 +51,14 @@ public class TouchDestroy : FlipInteraction{
         if (touched && !activated)
         {
             activated = true;
-            GetComponent<Collider>().enabled = false;
+
+            //foreach (MeshCollider m in GetComponents<MeshCollider>())
+            //{
+            //    m.isTrigger = true;
+            //}
+
+            GetComponent<MeshCollider>().isTrigger = true;
+            //GetComponent<Collider>().enabled = false;
             StartCoroutine(InteractionRoutine());
             //Toolbox.Instance.
             //Destroy(gameObject);
@@ -63,10 +73,15 @@ public class TouchDestroy : FlipInteraction{
         while (ratio < 1f)
         {
             ratio = elapsedTime / duration;
-            float value = Mathf.Lerp(.5f, 1f, TweeningFunctions.EaseInOut(ratio));
+            float value = Mathf.Lerp(0f, 1f, TweeningFunctions.EaseInOut(ratio));
 
-            _propBlock.SetFloat("_TransitionState", value);
-            mRenderer.SetPropertyBlock(_propBlock);
+            //mRenderer.GetPropertyBlock(_propBlock);
+
+            //_propBlock.SetFloat("_TransitionStateB", value);
+            //mRenderer.SetPropertyBlock(_propBlock);
+
+            material.SetFloat("_TransitionStateB", value);
+
 
 
             elapsedTime += Time.fixedDeltaTime;

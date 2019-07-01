@@ -11,7 +11,7 @@ public class CrosshatchStandardGUI : ShaderGUI {
 
     enum Type
     {
-        Static, Interactable
+        Static, Interactable, InverseInteractable, Terrain
     }
 
     enum GradientMode
@@ -40,7 +40,7 @@ public class CrosshatchStandardGUI : ShaderGUI {
         OutlinesModule();
         AccentModule();
         GradientModule();
-        if(IsKeywordEnabled("INTERACTABLE"))
+        if(IsKeywordEnabled("INTERACTABLE") || IsKeywordEnabled("INVERSE_INTERACTABLE"))
         {
             InteractionModule();
         }
@@ -84,6 +84,14 @@ public class CrosshatchStandardGUI : ShaderGUI {
         {
             t = Type.Interactable;
         }
+        if (IsKeywordEnabled("TERRAIN"))
+        {
+            t = Type.Terrain;
+        }
+        if (IsKeywordEnabled("INVERSE_INTERACTABLE"))
+        {
+            t = Type.InverseInteractable;
+        }
 
         EditorGUI.BeginChangeCheck();
         t = (Type)EditorGUILayout.EnumPopup("Type", t);
@@ -92,6 +100,8 @@ public class CrosshatchStandardGUI : ShaderGUI {
             editor.RegisterPropertyChangeUndo("Type");
             SetKeyword("STATIC", t == Type.Static);
             SetKeyword("INTERACTABLE", t == Type.Interactable);
+            SetKeyword("TERRAIN", t == Type.Terrain);
+            SetKeyword("INVERSE_INTERACTABLE", t == Type.InverseInteractable);
         }
     }
 
@@ -144,7 +154,17 @@ public class CrosshatchStandardGUI : ShaderGUI {
             ColorProperty("_LaserBase");
         }
 
-        editor.TextureScaleOffsetProperty(FindProperty("_MainTex"));
+        if(IsKeywordEnabled("TERRAIN"))
+        {
+            FloatProperty("_TerrainScale", "Texture scale");
+            FloatProperty("_BlendOffset", "Triplanar blending offset");
+        }
+        else 
+        {
+            editor.TextureScaleOffsetProperty(FindProperty("_MainTex"));
+        }
+
+  
     }
 
     void AccentModule()
@@ -225,11 +245,15 @@ public class CrosshatchStandardGUI : ShaderGUI {
 
         TextureProperty("_ShadingMap", "Occlusion hatching (R)");
 
-        SliderProperty("_Smoothness", "Outline sensititivity reduction");
+
 
         SliderProperty("_LineA", "Outline ID");
+        SliderProperty("_Smoothness", "Outline sensititivity reduction for normals");
+        //SliderProperty("_Smoothness2", "Outline sensititivity reduction for depth");
 
         target.SetFloat("_LineA", Mathf.Floor(target.GetFloat("_LineA")));
+        target.SetFloat("_Smoothness", Mathf.Floor(target.GetFloat("_Smoothness") * 10f) * 0.1f);
+        //target.SetFloat("_Smoothness2", Mathf.Floor(target.GetFloat("_Smoothness2") * 10f) * 0.1f);
 
     }
 
@@ -256,6 +280,14 @@ public class CrosshatchStandardGUI : ShaderGUI {
         GUIContent texLabel = new GUIContent(tex.displayName, tip);
         editor.TexturePropertySingleLine(texLabel, tex);
     }
+
+    void FloatProperty(string prop, string tip)
+    {
+        MaterialProperty num = FindProperty(prop);
+        GUIContent numLabel = new GUIContent(num.displayName, tip);
+        editor.ShaderProperty(num, numLabel);
+    }
+
 
     void ColorProperty(string prop)
     {

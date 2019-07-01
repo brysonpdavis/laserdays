@@ -9,7 +9,7 @@ float4 _RealBase, _RealAccent, _LaserBase, _LaserAccent, _RealGradient, _LaserGr
 sampler2D _MainTex, _AccentMap, _EffectMap, _ShadingMap;
 float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST, _ShadingMap_ST;
 
-float _Smoothness, _Highlights, _GradientScale, _GradientOffset, _MainTexContribution;
+float _Smoothness, _Smoothness2, _Highlights, _GradientScale, _GradientOffset, _MainTexContribution, _BlendOffset, _TerrainScale;
 
 int _LineA;
 
@@ -30,13 +30,14 @@ struct Interpolators {
     float4 pos : SV_POSITION;
     float4 uv : TEXCOORD0;
     float3 normal : TEXCOORD1;
-
-    #if defined(BINORMAL_PER_FRAGMENT)
-        float4 tangent : TEXCOORD2;
-    #else
-        float3 tangent : TEXCOORD2;
-        float3 binormal : TEXCOORD3;
-    #endif
+    
+        #if defined(BINORMAL_PER_FRAGMENT)
+            float4 tangent : TEXCOORD2;
+        #else
+            float3 tangent : TEXCOORD2;
+            float3 binormal : TEXCOORD3;
+        #endif
+    
 
     float3 worldPos : TEXCOORD4;
 
@@ -46,6 +47,48 @@ struct Interpolators {
         float3 vertexLightColor : TEXCOORD6;
     #endif
 };
+
+//Triplanar texture coordinate structure 
+struct TriplanarUV {
+    float2 x, y, z;
+};
+
+//Triplaner UV return function
+TriplanarUV GetTriplanarUV (Interpolators i) {
+    
+    TriplanarUV triUV;
+    
+    float3 p = i.worldPos;
+    triUV.x = p.zy;
+    triUV.y = p.xz;
+    triUV.z = p.xy;
+    
+    if (i.normal.x < 0) {
+        triUV.x.x = -triUV.x.x;
+    }
+    if (i.normal.y < 0) {
+        triUV.y.x = -triUV.y.x;
+    }
+    if (i.normal.z >= 0) {
+        triUV.z.x = -triUV.z.x;
+    }
+    
+    return triUV;
+}
+
+float3 GetTriplanarWeights (Interpolators i) {
+    float3 triW = abs(i.normal);
+    triW = triW - _BlendOffset;
+    return triW / (triW.x + triW.y + triW.z);
+}
+
+float4 GetDefaultUV (Interpolators i) {
+    #if defined(TERRAIN)
+        return float4(0, 0, 0, 0);
+    #else
+        return i.uv;
+    #endif
+}
 
 //Remaps (-scale + offset) -> (scale + offset) to 0 -> 1 range.
 //For building object space gradients.
@@ -66,6 +109,9 @@ inline half remapNewMin (float val, float newMin)
     return val;
 }
 
+//Gets which value should control color transition
+//For shared objects, _TransitionState controls color fade
+//For interactables the _TransitionStateB controls color
 float TransitionValue ()
 {
     #if defined(INTERACTABLE)
@@ -75,10 +121,28 @@ float TransitionValue ()
     #endif
 }
 
+float4 GetTextureValue (sampler2D tex, Interpolators i)
+{
+    float4 sample;
+    #if defined(TERRAIN)
+        TriplanarUV triplanarCoords = GetTriplanarUV(i);
+        float4 texX = tex2D(tex, triplanarCoords.x * _TerrainScale);
+        float4 texY = tex2D(tex, triplanarCoords.y * _TerrainScale);
+        float4 texZ = tex2D(tex, triplanarCoords.z * _TerrainScale);
+        
+        float3 triW = GetTriplanarWeights(i);
+    
+        sample = texX * triW.x + texY * triW.y + texZ * triW.z;      
+    #else 
+        sample = tex2D(tex, i.uv.xy);
+    #endif  
+    return sample;  
+}
+
 //Returns base color per fragment by blending MaterialMap with Real and Laser base colors.
 float3 GetBaseColor (Interpolators i) 
 {
-    float3 tex = tex2D(_MainTex, i.uv.xy);
+    float3 tex = GetTextureValue(_MainTex, i).rgb;
     float valMin = 1 - _MainTexContribution;
   
     #if defined(REAL) && !defined(INTERACTABLE)
@@ -131,7 +195,7 @@ float3 gradientBlend (float3 input, Interpolators i)
 //Returns a 0 || 1 accent mask value per fragment. 
 float GetAccentMask (Interpolators i) {
     
-    float3 accTex = tex2D(_AccentMap, i.uv.xy); 
+    float3 accTex = GetTextureValue(_AccentMap, i).rgb; 
 
     #if defined(REAL) && !defined(INTERACTABLE)
         return step(0.1, accTex.r);
@@ -167,18 +231,27 @@ float GetAlpha (Interpolators i)
 //Returns alpha at fragment to determine whether it gets clipped. 
 float GetAlphaSingle (Interpolators i)
 {
-    float emv = tex2D(_EffectMap, i.uv.xy).r;
+    float emv = GetTextureValue(_EffectMap, i).r;
+    float trans;
     
-    #if defined(REAL)
-        emv -= _TransitionState;
+    #if defined(INVERSE_INTERACTABLE)
+        trans = _TransitionStateB;
+    #else 
+        trans = _TransitionState;        
+    #endif
+    
+    #if defined(REAL) || defined(INVERSE_INTERACTABLE)
+        emv -= trans;
         emv = step(0,emv);
         return emv;
     #endif
     #if defined(LASER)
-        emv += _TransitionState;
+        emv += trans;
         emv = step(1,emv);
         return emv;
-    #endif      
+    #endif  
+    
+    return 1;    
 }
 
 // Return simple tangent normal
@@ -196,7 +269,15 @@ float GetMetallic (Interpolators i) {
 //Currently using smoothness to control outline smoothing 
 float GetSmoothness (Interpolators i) 
 {
+    
+    //Busted smoothness encoding attempy 
+    //float smoothnessA = (_Smoothness);
+    //float smoothnessB = (_Smoothness2 * 0.1);
+    
+    //return (smoothnessA + smoothnessB);
+    
     return _Smoothness;
+    
 }
 
 float GetShininess (Interpolators i )
@@ -247,7 +328,6 @@ float3 BaseColorWrapper (Interpolators i)
 }
 
 
-
 //Returns 0 -> 1 value for interaction amount
 float3 GetInteraction (Interpolators i)
 {
@@ -291,6 +371,7 @@ Interpolators MyVertexProgram (VertexData v) {
     i.pos = UnityObjectToClipPos(v.vertex);
     i.worldPos = mul(unity_ObjectToWorld, v.vertex);
     i.normal = UnityObjectToWorldNormal(v.normal);
+    
 
     #if defined(BINORMAL_PER_FRAGMENT)
         i.tangent = float4(UnityObjectToWorldDir(v.tangent.xyz), v.tangent.w);
@@ -298,11 +379,12 @@ Interpolators MyVertexProgram (VertexData v) {
         i.tangent = UnityObjectToWorldDir(v.tangent.xyz);
         i.binormal = CreateBinormal(i.normal, i.tangent, v.tangent.w);
     #endif
-
+    
+    
     i.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);
     i.uv.zw = TRANSFORM_TEX(v.uv, _ShadingMap);
-    //i.uv.zw = TRANSFORM_TEX(v.uv, _EffectMap);
-
+    
+    
     TRANSFER_SHADOW(i);
 
     ComputeVertexLightColor(i);
@@ -431,12 +513,14 @@ struct FragmentOutput {
 
 FragmentOutput MyFragmentProgram (Interpolators i) {
     
-    #if defined(REAL) || defined(LASER)
+    #if defined(REAL) || defined(LASER) || defined(INVERSE_INTERACTABLE)
         float alpha = GetAlpha(i);
         clip(GetAlphaSingle(i) - _AlphaCutoff);
     #endif
-
+    
+    #if !defined(TERRAIN)
     InitializeFragmentNormal(i);
+    #endif
 
     float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
 
@@ -464,7 +548,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         CreateLight(i), CreateIndirectLight(i, viewDir)
     );
     
-    #if defined(INTERACTABLE)
+    #if defined(INTERACTABLE) || defined(INVERSE_INTERACTABLE)
         color.rgb += _InteractColor.rgb * GetInteraction(i);
         color.rgb += _ShimmerColor.rgb * GetGlowMask(i);
     #endif

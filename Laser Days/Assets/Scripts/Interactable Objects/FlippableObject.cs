@@ -7,6 +7,7 @@ abstract public class FlippableObject : InteractableObject
     public int timesFlipped = 0;
     public bool canFlip = true;
     public int maxFlips;
+    public bool destroyOnLastFlip;
     public float secondaryFlipDuration = 1f;
     private IEnumerator flipTransition;
     private float scaledDuration;
@@ -153,13 +154,24 @@ abstract public class FlippableObject : InteractableObject
             if (maxFlips == 0)
                 return true;
 
-            else if ((maxFlips == timesFlipped) && CurrentlyFlipping)
+            else if ((maxFlips == (timesFlipped - 1)) && CurrentlyFlipping)
             {
+
+                if (destroyOnLastFlip)
+                {
+                    TurnOffSelf();
+                    return false;
+                }
+
+                else 
+                {
+                    //do some other animation here for it being unable to flip!
+                }
                 Debug.Log("LAST FLIP! Can do something here :)");
                 return true;
             }
 
-            else if ((maxFlips != 0) && timesFlipped >= (maxFlips))
+            else if ((maxFlips != 0) && timesFlipped > (maxFlips))
             {
                 return false;
             }
@@ -199,7 +211,7 @@ abstract public class FlippableObject : InteractableObject
             //Debug.Log("gromie!");
             scaledDuration = secondaryFlipDuration * (1f - start);
             StopAllCoroutines();
-            StartCoroutine(flipTransitionRoutine(start, 1, scaledDuration));
+            StartCoroutine(flipTransitionRoutine(start, 1, scaledDuration, "_TransitionStateB"));
             StartCoroutine(ShimmerRoutine(scaledDuration));
 
         }
@@ -208,7 +220,7 @@ abstract public class FlippableObject : InteractableObject
             //Debug.Log("homie!");
             float scaledDuration = secondaryFlipDuration * start;
             StopAllCoroutines();
-            StartCoroutine(flipTransitionRoutine(start, 0, scaledDuration));
+            StartCoroutine(flipTransitionRoutine(start, 0, scaledDuration, "_TransitionStateB"));
             StartCoroutine(ShimmerRoutine(scaledDuration));
 
         }
@@ -241,7 +253,7 @@ abstract public class FlippableObject : InteractableObject
     }
 
 
-    IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
+    IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration, string floatName)
     {
 
         float elapsedTime = 0;
@@ -256,7 +268,7 @@ abstract public class FlippableObject : InteractableObject
             ratio = elapsedTime / duration;
             float value = Mathf.Lerp(startpoint, endpoint, ratio);
 
-            material.SetFloat("_TransitionStateB", value);
+            material.SetFloat(floatName, value);
             transitionStateB = value;
 
 
@@ -333,5 +345,33 @@ abstract public class FlippableObject : InteractableObject
                 }
             }
         }
+
+    public void TurnOffSelf()
+    {
+        if (Toolbox.Instance.EqualToHeld(gameObject))
+            pickUp.PutDown();
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers)
+        {
+            r.enabled = false;
+        }
+
+        //float end;
+        //if (gameObject.layer == 10)
+        //    end = 1f;
+        //else
+            //end = 0f;
+
+        //StopAllCoroutines();
+        //Debug.Log(material.GetFloat("_TransitionState") + "end " + end);
+        //StartCoroutine(flipTransitionRoutine(material.GetFloat("_TransitionState"), end, scaledDuration, "_TransitionState"));
+
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+
+        foreach (Collider c in colliders)
+        {
+            c.enabled = false;
+        }
+    }
 }
 
