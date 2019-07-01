@@ -29,6 +29,12 @@ public class TransitionCollider : MonoBehaviour
                 other.GetComponent<Transition>().Flip(1f, speed);
 
         }
+
+        //if (other.GetComponent<Shifter>())
+        //other.GetComponent<Shifter>().Activate();
+
+        if (other.GetComponent<FlipInteraction>())
+            other.GetComponent<FlipInteraction>().Interact();
     }
 
     public void FlipTransitions(bool dir)
