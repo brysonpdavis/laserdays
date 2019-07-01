@@ -9,6 +9,10 @@ public class LinkedPair : StationaryWall {
     MaterialPropertyBlock _propBlock;
     Renderer partnerRenderer;
     LinkedPair partnerLinkedPair;
+    bool isRunning;
+
+    int cancelTransition = 0;
+
 
     public override void Start()
     {
@@ -27,10 +31,9 @@ public class LinkedPair : StationaryWall {
         if (playerInLaser) //player is going to laser with this object, so partner should be set to real
         {
             ShaderUtility.ShaderToReal(partnerMaterial);
-            //partner.GetComponent<Transition>().StopAllCoroutines();
-            //partnerMaterial.SetFloat("_TransitionState", 1f);
+
             partner.GetComponent<Transition>().SetStart(1f);
-            StopAllCoroutines();
+            //StopAllCoroutines();
 
             StartCoroutine(flipTransitionRoutine(1, 0f, 1f));
 
@@ -41,16 +44,31 @@ public class LinkedPair : StationaryWall {
         else //player is going to real, so the pair should go to laser
         {
             ShaderUtility.ShaderToLaser(partnerMaterial);
-            //partner.GetComponent<Transition>().StopAllCoroutines();
-            //partnerMaterial.SetFloat("_TransitionState", 0f);
+
             partner.GetComponent<Transition>().SetStart(0f);
-            StopAllCoroutines();
-            StartCoroutine(flipTransitionRoutine(0f, 1f, 1f));
+            //StopAllCoroutines();
+
 
 
             partner.layer = 10;
 
         }
+    }
+
+
+    public void CancelTransition()
+    {
+
+        if (isRunning)
+            cancelTransition += 1;
+
+        if (cancelTransition>1)
+        {
+            StopAllCoroutines();
+            //material.SetFloat("_onHold", 0f);
+            //material.SetFloat("_Shimmer", 0f);
+        }
+
     }
 
     public override void SetType()
@@ -60,7 +78,7 @@ public class LinkedPair : StationaryWall {
 
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {
-
+        isRunning = true;
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
         //int property = Shader.PropertyToID("_D7A8CF01");
@@ -80,6 +98,8 @@ public class LinkedPair : StationaryWall {
             yield return null;
         }
 
+        isRunning = false;
+        cancelTransition = 0;
     }
 
 

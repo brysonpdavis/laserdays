@@ -224,7 +224,7 @@ abstract public class FlippableObject : InteractableObject
         else
         {
             //Debug.Log("homie!");
-            float scaledDuration = secondaryFlipDuration * start;
+            scaledDuration = secondaryFlipDuration * start;
             StopAllCoroutines();
             StartCoroutine(flipTransitionRoutine(start, 0, scaledDuration, "_TransitionStateB"));
             StartCoroutine(ShimmerRoutine(scaledDuration));
