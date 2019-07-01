@@ -59,7 +59,11 @@ Shader "Hidden/EdgeDetect" {
 		o.uv[2] = UnityStereoScreenSpaceUVAdjust(uv + float2(+_MainTex_TexelSize.x, -_MainTex_TexelSize.y) * _SampleDistance, _MainTex_ST);
 		return o;
 	}
-
+    
+    inline float mod (float a, float b)
+    {
+        return a - (b * floor(a/b));
+    }
 
 	fixed4 fragLum (v2flum i) : SV_Target
 	{
@@ -79,6 +83,27 @@ Shader "Hidden/EdgeDetect" {
 
 		return len * lerp(original, _BgColor, _BgFade);			
 	}	
+    
+    float2 DecodeSmoothingValues(float doubleSmoothness)
+    {
+        float2 decodedValue;
+        
+        //float firstDigit = (float) floor(doubleSmoothness * 10);
+        float val = doubleSmoothness * 10;
+        
+        float integer = 0;
+        
+        float fractional = modf(val, integer);
+        
+        
+        decodedValue.x = integer * 0.1;
+        decodedValue.y = fractional;
+        //float secondDigit = mod(doubleSmoothness, 0.1) * 10;
+        //decodedValue.y = secondDigit * 0.1;
+        
+        return decodedValue;
+    }
+    
     
     inline float ComputeDistance(float depth)
     {
@@ -143,14 +168,15 @@ Shader "Hidden/EdgeDetect" {
         // do not bother decoding normals - there's no need here
 
         
-        float modSensitivity = saturate(_Sensitivity.y * (1 - mod));
+        float modSensitivityNormal = saturate(_Sensitivity.y * (1 - mod));
         
-        half2 diff = abs(centerNormal - theSample.xy) * modSensitivity;
-        int isSameNormal = (diff.x + diff.y) * modSensitivity < 0.1;
+        half2 diff = abs(centerNormal - theSample.xy) * modSensitivityNormal;
+        int isSameNormal = (diff.x + diff.y) * modSensitivityNormal < 0.1;
         // difference in depth
         float sampleDepth = DecodeFloatRG (theSample.zw);
         float zdiff = abs(centerDepth-sampleDepth);
         // scale the required threshold by the distance
+        
         int isSameDepth = zdiff * _Sensitivity.x < 0.09 * centerDepth;
     
         // return:
@@ -348,10 +374,10 @@ Shader "Hidden/EdgeDetect" {
         //return half4(center.x, center.y, 1, 1);
         
         //modify normnal sensitivity from material value
-        half modSensitivity = centerExtra.a;
+        //float2 modSensitivity = DecodeSmoothingValues(centerExtra.a);
    
-        half2 pass1 = MyCheckSame(centerNormal, centerDepth, sample1, modSensitivity);
-        half2 pass2 = MyCheckSame(centerNormal, centerDepth, sample2, modSensitivity);
+        half2 pass1 = MyCheckSame(centerNormal, centerDepth, sample1, centerExtra.a);
+        half2 pass2 = MyCheckSame(centerNormal, centerDepth, sample2, centerExtra.a);
         half passExtra = CheckSameExtra(centerExtra, sample1A, sample2B);
       
         half edge = pass1.x * pass2.x * passExtra;
@@ -364,9 +390,7 @@ Shader "Hidden/EdgeDetect" {
         {
             f = 1;
         }
-			
-        //return float4(edge, edge, edge, 1);
-       
+        
         _PauseMenu = saturate(_PauseMenu);
         
         

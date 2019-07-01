@@ -8,8 +8,10 @@
     
         [NoScaleOffset] _AccentMap("Accent Map", 2D) = "black" {}
         [NoScaleOffset] _EffectMap("Effect Map", 2D) = "white" {}
-        
-         _ShadingMap("Hatching Map", 2D) = "white" {}
+        [NoScaleOffset] _ShadingMap("Hatching Map", 2D) = "white" {}
+         
+         _BlendOffset("Triplanar Blend Offset", Range(0,1)) = 0
+         _TerrainScale("Triplanar Tex Scale", Float) = 1
         
         _RealBase("Real Base Color", Color) = (1,1,1,1)  
         _RealAccent("Real Accent Color", Color) = (0,0,0,0)
@@ -23,7 +25,8 @@
         [HDR]_ShimmerColor("Shimmer Color", Color) = (0,0,0,0)
         
         _LineA ("Outline ID", Range(0,8)) = 0
-        _Smoothness("Outline Smoothing", Range(0,1)) = 0
+        _Smoothness("Outline Smoothing Normals", Range(0,1)) = 0
+        _Smoothness2("Outline Smoothing Depth", Range(0,1)) = 0
         
         _GradientScale("Gradient Scale", Range(0, 3)) = 1
         _GradientOffset("Gradient Offset", Range(-3,3)) = 0
@@ -68,7 +71,7 @@
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
             #pragma multi_compile _ ACCENT_ON
-            #pragma multi_compile STATIC INTERACTABLE
+            #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
 
             #pragma vertex MyVertexProgram
             #pragma fragment MyFragmentProgram
@@ -96,7 +99,7 @@
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
             #pragma multi_compile _ ACCENT_ON
-            #pragma multi_compile STATIC INTERACTABLE
+            #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
           
             #pragma multi_compile_fwdadd_fullshadows
             
@@ -122,7 +125,7 @@
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
             #pragma multi_compile _ ACCENT_ON
-            #pragma multi_compile STATIC INTERACTABLE
+            #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
             #pragma multi_compile _ UNITY_HDR_ON
 
             #pragma vertex MyVertexProgram
