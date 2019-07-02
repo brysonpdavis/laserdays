@@ -252,7 +252,7 @@ public class CrosshatchStandardGUI : ShaderGUI {
         //SliderProperty("_Smoothness2", "Outline sensititivity reduction for depth");
 
         target.SetFloat("_LineA", Mathf.Floor(target.GetFloat("_LineA")));
-        target.SetFloat("_Smoothness", Mathf.Floor(target.GetFloat("_Smoothness") * 10f) * 0.1f);
+        //target.SetFloat("_Smoothness", Mathf.Floor(target.GetFloat("_Smoothness") * 10f) * 0.1f);
         //target.SetFloat("_Smoothness2", Mathf.Floor(target.GetFloat("_Smoothness2") * 10f) * 0.1f);
 
     }

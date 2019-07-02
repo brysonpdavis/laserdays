@@ -21,6 +21,7 @@ public class Transition : MonoBehaviour
     bool transitionAllChildren;
     protected Transition[] childrenTransitions;
 
+
     private bool amCore;
 
 
@@ -59,6 +60,7 @@ public class Transition : MonoBehaviour
         SetupChildrenTransitions();
 
     }
+
 
     protected virtual void Start()
     {
@@ -145,7 +147,7 @@ public class Transition : MonoBehaviour
 
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {
-
+        
             float elapsedTime = 0;
             float ratio = elapsedTime / duration;
             //int property = Shader.PropertyToID("_D7A8CF01");

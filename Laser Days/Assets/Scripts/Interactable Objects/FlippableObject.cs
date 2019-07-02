@@ -51,7 +51,7 @@ abstract public class FlippableObject : InteractableObject
         realTransform = sceneContainer.Find("Real");
         laserTransform = sceneContainer.Find("Laser");
 
-        if (!slowPickup && !(objectType==ObjectType.Wall))
+        if (!slowPickup && !(objectType==ObjectType.Wall || objectType == ObjectType.LinkedPair))
             rigidbody.isKinematic = false;
 
         //if(GetComponent<Rigidbody>()){
@@ -129,6 +129,12 @@ abstract public class FlippableObject : InteractableObject
                 GetComponent<Transition>().SetStart(0f); //set it fully on for real world]
                 //GetComponent<Transition>().SetStart((renderer.material.GetFloat("_TransitionState")));
             }
+        }
+
+        if (type == InteractableObject.ObjectType.LinkedPair)
+        {
+            //do the inverselayer switch on partner!
+            GetComponent<LinkedPair>().SwitchPartner(Toolbox.Instance.PlayerInLaser());
         }
     }
 
@@ -218,7 +224,7 @@ abstract public class FlippableObject : InteractableObject
         else
         {
             //Debug.Log("homie!");
-            float scaledDuration = secondaryFlipDuration * start;
+            scaledDuration = secondaryFlipDuration * start;
             StopAllCoroutines();
             StartCoroutine(flipTransitionRoutine(start, 0, scaledDuration, "_TransitionStateB"));
             StartCoroutine(ShimmerRoutine(scaledDuration));
@@ -255,7 +261,6 @@ abstract public class FlippableObject : InteractableObject
 
     IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration, string floatName)
     {
-
         float elapsedTime = 0;
         this.recentlySelected = true;
 
@@ -364,7 +369,7 @@ abstract public class FlippableObject : InteractableObject
 
         //StopAllCoroutines();
         //Debug.Log(material.GetFloat("_TransitionState") + "end " + end);
-        //StartCoroutine(flipTransitionRoutine(material.GetFloat("_TransitionState"), end, scaledDuration, "_TransitionState"));
+        //StartCoroutine(flipTransitionRoutine(material.GetFloat("_TransitionState"), end, 1f, "_TransitionState"));
 
         Collider[] colliders = GetComponentsInChildren<Collider>();
 

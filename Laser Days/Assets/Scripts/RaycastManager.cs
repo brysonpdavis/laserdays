@@ -297,6 +297,12 @@ public class RaycastManager : MonoBehaviour {
                 break;
             }
 
+            case InteractableObject.ObjectType.LinkedPair:
+                {
+                    obj.GetComponent<InteractableObject>().Select();
+                    break;
+                }
+
 
         case InteractableObject.ObjectType.Morph:
             {
