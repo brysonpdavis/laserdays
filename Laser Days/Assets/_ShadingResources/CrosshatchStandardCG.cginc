@@ -519,7 +519,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
     #endif
     
     #if !defined(TERRAIN)
-    InitializeFragmentNormal(i);
+        InitializeFragmentNormal(i);
     #endif
 
     float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
