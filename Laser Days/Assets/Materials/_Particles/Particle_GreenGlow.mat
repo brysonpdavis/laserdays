@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: S_Concrete_LightGrey-Beige
-  m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
-  m_ShaderKeywords: NO_GRADIENT SHARED
-  m_LightmapFlags: 4
+  m_Name: Particle_GreenGlow
+  m_Shader: {fileID: 4800000, guid: 5ada815f934e14f6988a0827a43414b4, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -18,8 +18,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AccentMap:
-        m_Texture: {fileID: 0}
+    - _ALPHA:
+        m_Texture: {fileID: 2800000, guid: 89185898bf02843d496513f0fb8f5783, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlphaMap:
+        m_Texture: {fileID: 2800000, guid: a2c928ca393434b84a1a34a0847cae77, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -38,31 +42,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EffectMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 06d05b9ce9b09437cb095f88a1886875, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MaterialMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalLaser:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalReal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -74,7 +62,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ShadingMap:
+    - _TextureSample0:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample3:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShade:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -83,51 +79,28 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaCutoff: 0.5
-    - _BlendOffset: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Elapsed: 0
-    - _Flippable: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GradientOffset: 0
-    - _GradientScale: 1
-    - _Highlights: 0
-    - _LineA: 0
-    - _MainTexContribution: 0.15
     - _Metallic: 0
     - _Mode: 0
-    - _NormalScale: 6.588235
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Smoothness: 0
-    - _Smoothness2: 0
+    - _Real: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SteppedTransition: 0
-    - _TerrainScale: 1
     - _TransitionState: 1
-    - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
-    - _onHold: 0
-    - _onHover: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorLaser: {r: 0.5, g: 0.4174528, b: 0.49893028, a: 0}
-    - _ColorReal: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 0}
+    - _Color: {r: 0.21782663, g: 0.8396226, b: 0.5113089, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserAccent: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserBase: {r: 0.769, g: 0.6850252, b: 0.62904197, a: 1}
-    - _LaserGradient: {r: 0, g: 0, b: 0, a: 0}
-    - _RealAccent: {r: 0, g: 0, b: 0, a: 0}
-    - _RealBase: {r: 0.7924528, g: 0.75881094, b: 0.75881094, a: 1}
-    - _RealGradient: {r: 0, g: 0, b: 0, a: 0}
-    - _ShimmerColor: {r: 0, g: 0, b: 0, a: 0}
+    - _LineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ParticleColor: {r: 0.33333334, g: 0.52156866, b: 0.4784314, a: 1}
+    - _linecolor: {r: 0, g: 0, b: 0, a: 1}
