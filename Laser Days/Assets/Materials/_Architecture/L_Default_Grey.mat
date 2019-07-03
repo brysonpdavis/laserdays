@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Default Transition Laser
+  m_Name: L_Default_Grey
   m_Shader: {fileID: 4800000, guid: 1c199604c804c4357abbe081fd3035ae, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -54,11 +54,19 @@ Material:
         m_Texture: {fileID: 2800000, guid: 667ae0b259a0d42ca882e292026397e2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EffectMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaterialMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -94,6 +102,8 @@ Material:
     - _DissolveEdgeThickness: 0.3560508
     - _DstBlend: 0
     - _EdgeThickness: 0.01
+    - _Elapsed: 0
+    - _Flippable: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -103,10 +113,12 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Shimmer: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TransitionState: 0
+    - _TransitionStateB: 1
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
@@ -114,11 +126,15 @@ Material:
     - _onHover: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorLaser: {r: 0.5, g: 0.5, b: 0.5, a: 0.2}
+    - _ColorReal: {r: 0.5, g: 0.5, b: 0.5, a: 0.2}
     - _DissolveEdgeColor: {r: 0, g: 0, b: 0, a: 0}
     - _EdgeColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HoldColor: {r: 0.24999997, g: 0.24999997, b: 0.24999997, a: 0.4}
     - _HoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.2}
+    - _InteractColor: {r: 0.24999997, g: 0.24999997, b: 0.24999997, a: 0.4}
     - _SelectedEffectColor: {r: 8, g: 8, b: 8, a: 0}
+    - _ShimmerColor: {r: 8, g: 8, b: 8, a: 0}
     - _TintA: {r: 1, g: 0.72638464, b: 0, a: 0}
     - _TintB: {r: 0.8679245, g: 0.29067284, b: 0.29067284, a: 0}

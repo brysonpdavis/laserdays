@@ -55,6 +55,7 @@ public class Toolbox : Singleton<Toolbox>
     private string narrationCurrentWords = "";
     private int frame_counter = 0;
     private int frames_til_draw;
+    public GameObject regionController;
 
     //default fog settings
     public float fogDensityDefault;

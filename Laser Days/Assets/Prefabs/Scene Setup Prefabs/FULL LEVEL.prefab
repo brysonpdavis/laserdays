@@ -27,6 +27,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1102079539705836
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4947786651033220}
+  - component: {fileID: 114636568559383336}
+  m_Layer: 0
+  m_Name: Optimizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1103060098149164
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +429,7 @@ Transform:
   - {fileID: 4772353815074556}
   - {fileID: 4978384008116886}
   - {fileID: 224564698421668188}
+  - {fileID: 4947786651033220}
   m_Father: {fileID: 4235742526931388}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -443,6 +460,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4772353815074556}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4947786651033220
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1102079539705836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4742952854233344}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4978384008116886
 Transform:
@@ -873,6 +903,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea442527bfda48a8a679061f6607ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114636568559383336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1102079539705836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb38f59f427564973af38b96149652bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkInterval: 2
+  activateDistance: 50
+  inactiveGeometry: {fileID: 0}
+  activeLevel: {fileID: 1704293226118198}
+  regionName: Default Region
 --- !u!114 &114702887856340204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -909,6 +955,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnName: 
   sceneName: 
+  audio: {fileID: 0}
+  fadeDuration: 0.3
 --- !u!114 &114846916888935960
 MonoBehaviour:
   m_ObjectHideFlags: 1

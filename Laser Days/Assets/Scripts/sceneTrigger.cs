@@ -60,8 +60,11 @@ public class sceneTrigger : MonoBehaviour
         realBackgroundContainer = GameObject.FindWithTag("RealBackgroundScene").transform;
         laserBackgroundContainer = GameObject.FindWithTag("LaserBackgroundScene").transform;
 
-
-        if (!linkedCollider.bounds.Contains(player.transform.position))
+    }
+    
+/*
+    
+    if (!linkedCollider.bounds.Contains(player.transform.position))
         {
             Interior.SetActive(false);
         }
@@ -182,5 +185,6 @@ public class sceneTrigger : MonoBehaviour
             flippable.laserTransform = laserBackgroundContainer; 
             flippable.realTransform = realBackgroundContainer; 
     }
+*/
 
 }

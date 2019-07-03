@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -9,26 +10,38 @@ public class RegionOptimization : MonoBehaviour
 	public float checkInterval = 2f; // interval between distance checks in seconds
 
 	public float activateDistance = 100f;
-
-	public bool isBase = false; // set to true if direct parent of children to set to far/near versions
 	
-	public RegionOptimization[] childrenRegions;
-
 	public GameObject inactiveGeometry;
 
 	public GameObject activeLevel;
 
+	public string regionName;
+
 	private GameObject player;
 
-	private bool active;
+	private bool active = true;
 
 	private float timeSinceCheck;
 
 	private bool childrenActive;
 
+	private GameObject root;
 
+	private GameObject parent;
+
+	private void Awake()
+	{
+		root = Toolbox.Instance.regionController;
+		
+		parent = root.transform.Find(regionName).gameObject;
+
+		if (parent)
+			parent.GetComponent<MajorRegions>().childrenRegions.Add(this);
+	}
+	
 	private void Start ()
 	{
+		active = true;
 		player = Toolbox.Instance.GetPlayer();
 		childrenActive = !(GetDistance2D() < activateDistance);
 		timeSinceCheck = 0;
@@ -58,39 +71,27 @@ public class RegionOptimization : MonoBehaviour
 	{
 		if (GetDistance2D() < activateDistance)
 		{
-			if (childrenActive)
-				DeactivateChildren();
+			if (!childrenActive)
+			{
+				Activate();
+			}
+
 		}
 		else
 		{
-			if (!childrenActive)
-				ActivateChildren();
+
+			if (childrenActive)
+			{
+				Deactivate();
+			}
+
 		}
 	}
 
-	private void DeactivateChildren()
-	{
-		childrenActive = false;
-
-		foreach (RegionOptimization child in childrenRegions)
-		{
-			child.SetToActive(false);
-		}
-	}
-	
-	private void ActivateChildren()
-	{
-		childrenActive = true;
-		
-		foreach (RegionOptimization child in childrenRegions)
-		{
-			child.SetToActive(true);
-		}
-	}
 
 	private float GetDistance2D()
 	{
-		Vector3 transformPosition =  transform.TransformPoint(GetComponent<BoxCollider>().center);
+		Vector3 transformPosition = transform.position;
 		Vector3 playerPosition = player.transform.position;
 		
 		return Vector2.Distance(
@@ -104,22 +105,34 @@ public class RegionOptimization : MonoBehaviour
 		return active;
 	}
 
+	public void Deactivate()
+	{
+		SetToActive(false);
+	}
+
+	public void Activate()
+	{
+		SetToActive(true);
+	}
+
 	public void SetToActive(bool setToStatus)
 	{
 		active = setToStatus;
 
-		if (isBase)
+		if (setToStatus)
 		{
-			if (setToStatus)
-			{
-				inactiveGeometry.SetActive(true);
-				activeLevel.SetActive(false);
-			}
-			else
-			{
-				inactiveGeometry.SetActive(false);
-				activeLevel.SetActive(true);
-			}
+			//inactiveGeometry.SetActive(false);
+			activeLevel.SetActive(true);
+			
+			Debug.LogError(gameObject.name + "Activating: ");
+		}
+		else
+		{
+			//inactiveGeometry.SetActive(true);
+			activeLevel.SetActive(false);
+			
+			Debug.LogError(gameObject.name + "Deactivating: ");
+
 		}
 	}
 }
