@@ -8,8 +8,9 @@ public class RotationOnFlip : FlipInteraction
 	public Vector3 endRotation;
     Vector3 startRotation;
     public float duration = 2f;
-    float ratio = 0;
+    float ratio = 0f;
     public bool startRotationInLaser = true;
+    public bool check;
 
     private void Start()
     {
@@ -22,19 +23,25 @@ public class RotationOnFlip : FlipInteraction
 
     public override void Interact()
     {
-
-
+        if (check)
+            Debug.Log("interacting with rotation");
         StopAllCoroutines();
-        StartCoroutine(RotateRoutine((1f-ratio)*duration));
+        //Debug.Log("clamped ratio: " + Mathf.Clamp(ratio, 0f, 1f));
+        //Debug.Log("ratio " + ratio);
+
+        if (ratio < .05f)
+            ratio = 1f;
+
+        StartCoroutine(RotateRoutine((ratio) * duration));
 
     }
 
 
 	IEnumerator RotateRoutine(float actualDuration)
     {
-        //Debug.Log("start rotation "+ startRotation + "end rotation " + endRotation);
-        float elapsedTime = 0;
-        ratio = 0;
+        //Debug.Log("start rotation "+ startRotation + "end rotation " + endRotation + "actualduration " + actualDuration);
+        float elapsedTime = 0f;
+        ratio = 0f;
         Vector3 start = transform.localEulerAngles;
         Vector3 end;
 
@@ -57,7 +64,7 @@ public class RotationOnFlip : FlipInteraction
             yield return new WaitForFixedUpdate();
         }
 
-
+        ratio = 0f;
 
     }
 }

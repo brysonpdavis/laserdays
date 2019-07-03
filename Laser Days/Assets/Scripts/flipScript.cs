@@ -74,6 +74,22 @@ public class flipScript : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(ControlManager.CM.flip) && Time.timeScale > 0.0f && CheckEyes())
         {
+            FlipAttempt();
+        }
+
+        else
+            flippedThisFrame = false;
+
+        //if (Input.GetButtonDown(SoundtrackButton))
+        //{
+        //    if (soundTrack.gameObject.activeSelf) { soundTrack.gameObject.SetActive(false); }
+        //    else { soundTrack.gameObject.SetActive(true); }
+        //}
+
+	}
+
+    public void FlipAttempt()
+    {
             GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
             flippedThisFrame = true;
 
@@ -132,18 +148,8 @@ public class flipScript : MonoBehaviour {
                     flippedThisFrame = true;
                 }
             }
-        }
-
-        else
-            flippedThisFrame = false;
-
-        //if (Input.GetButtonDown(SoundtrackButton))
-        //{
-        //    if (soundTrack.gameObject.activeSelf) { soundTrack.gameObject.SetActive(false); }
-        //    else { soundTrack.gameObject.SetActive(true); }
-        //}
-
-	}
+         
+    }
 
 	void FlipPlayerAndThings (GameObject player, GameObject held, IList<GameObject> things) {
 
