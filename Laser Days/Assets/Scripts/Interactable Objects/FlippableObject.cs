@@ -67,12 +67,28 @@ abstract public class FlippableObject : InteractableObject
 
     public virtual void OnFlip()
     {
+        Debug.Log("in onflip");
         if (MaxFlipCheck(true))
         {
+            Debug.Log("max flip check true");
+
             ParticleEffect();
             ColorTransition();
             LayerSwitch();
             FlipCore(true);
+        }
+    }
+
+    public virtual void ForcedFlip()
+    {
+        if (Toolbox.Instance.EqualToHeld(gameObject))
+            pickUp.PutDown();
+        
+        if (MaxFlipCheck(true))
+        {
+            ForcedTransitionEffect();
+            SelfLayerSwitch();
+            //FlipCore(false);
         }
     }
 
@@ -136,6 +152,122 @@ abstract public class FlippableObject : InteractableObject
             //do the inverselayer switch on partner!
             GetComponent<LinkedPair>().SwitchPartner(Toolbox.Instance.PlayerInLaser());
         }
+    }
+
+    protected void SelfLayerSwitch()
+    {
+        bool goingToReal;
+
+        if (gameObject.layer.Equals(10))
+
+        {
+            SetObjectToReal();
+            goingToReal = true;  
+        }
+
+        else
+        {
+            SetObjectToLaser();
+
+            goingToReal = false;
+        }
+
+        InteractableObject.ObjectType type = objectType;
+
+        if (type == InteractableObject.ObjectType.Morph)
+            {
+            
+            GetComponent<MorphController>().OnFlip(goingToReal);
+            }
+    }
+
+    protected void ForcedTransitionEffect()
+    {
+        Transition transition = GetComponent<Transition>();
+        Core core = GetComponentInChildren<Core>();
+            
+
+        float direction = 1f;
+        if (gameObject.layer == 11)
+        {
+            
+            if (Toolbox.Instance.PlayerInLaser())
+            {
+                Debug.Log("1");
+                transition.SetStart(material.GetFloat("_TransitionState"));
+                direction = 1f;
+                if (core)
+                {
+                    core.gameObject.GetComponent<Renderer>().material.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreLaser;
+                    core.gameObject.GetComponent<Transition>().StopAllCoroutines();
+                    core.gameObject.GetComponent<Transition>().SetStart(0f);
+                    core.gameObject.GetComponent<Transition>().Flip(1f, Toolbox.Instance.globalFlipSpeed);
+                }
+            }
+
+            else
+            {
+                Debug.Log("2");
+
+                transition.SetStart(1f - material.GetFloat("_TransitionState"));
+                direction = 0f;
+
+                if (core)
+                {
+                    core.gameObject.GetComponent<Renderer>().material.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreLaser;
+                    core.gameObject.GetComponent<Transition>().StopAllCoroutines();
+                    core.gameObject.GetComponent<Transition>().SetStart(1f);
+                    core.gameObject.GetComponent<Transition>().Flip(0f, Toolbox.Instance.globalFlipSpeed);
+                }
+            }
+
+            Debug.Log("going to laser");
+            ShaderUtility.ShaderToLaser(material);
+                
+        }
+        else
+        {
+
+            if (Toolbox.Instance.PlayerInLaser())
+            {
+                Debug.Log("3");
+
+                transition.SetStart(material.GetFloat("_TransitionState"));
+                direction = 1f;
+
+
+                if (core)
+                {
+                    core.gameObject.GetComponent<Renderer>().material.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreReal;
+                    core.gameObject.GetComponent<Transition>().StopAllCoroutines();
+                    core.gameObject.GetComponent<Transition>().SetStart(0f);
+                    core.gameObject.GetComponent<Transition>().Flip(1f, Toolbox.Instance.globalFlipSpeed);
+                }
+            }
+
+            else
+            {
+                Debug.Log("4");
+
+                transition.SetStart(1f - material.GetFloat("_TransitionState"));
+                direction = 0f;
+                if (core)
+                {
+                    core.gameObject.GetComponent<Renderer>().material.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreReal;
+                    core.gameObject.GetComponent<Transition>().StopAllCoroutines();
+                    core.gameObject.GetComponent<Transition>().SetStart(1f);
+                    core.gameObject.GetComponent<Transition>().Flip(0f, Toolbox.Instance.globalFlipSpeed);
+                }
+            }
+
+            Debug.Log("going to real");
+            ShaderUtility.ShaderToReal(material);
+
+                
+        }
+            
+        transition.Flip(direction, Toolbox.Instance.globalFlipSpeed);
+
     }
 
     void SetObjectToLaser()

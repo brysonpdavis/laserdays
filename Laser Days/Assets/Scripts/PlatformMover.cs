@@ -41,9 +41,11 @@ public class PlatformMover : MonoBehaviour {
             LR = gameObject.transform.parent.gameObject.GetComponentInChildren<LineRenderer>();
             LR.positionCount = 2;
             Vector3 begin = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.1f, gameObject.transform.position.z);
+            LR.useWorldSpace = true;
             LR.SetPosition(0, begin);
             Vector3 finish = new Vector3(end.position.x, end.position.y - 0.1f, end.position.z);
             LR.SetPosition(1, finish);
+
             LR.material.SetColor("_RestingColor", RC);
             LR.material.SetColor("_ActiveColor", AC);
             LR.material.SetColor("_ShimmerColor", SC);

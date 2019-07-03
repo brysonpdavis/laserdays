@@ -30,6 +30,16 @@ public class TransitionCollider : MonoBehaviour
 
         }
 
+        if(other.GetComponent<UI_Transition>())
+        {
+            other.GetComponent<UI_Transition>().StopAllCoroutines();
+
+            if (direction)
+                other.GetComponent<UI_Transition>().Flip(0f, speed);
+            else
+                other.GetComponent<UI_Transition>().Flip(1f, speed);
+        }
+
         //if (other.GetComponent<Shifter>())
         //other.GetComponent<Shifter>().Activate();
 
