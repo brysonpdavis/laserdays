@@ -33,9 +33,8 @@ public class LinkedPair : StationaryWall {
             ShaderUtility.ShaderToReal(partnerMaterial);
 
             partner.GetComponent<Transition>().SetStart(1f);
-            //StopAllCoroutines();
 
-            StartCoroutine(flipTransitionRoutine(1, 0f, 1f));
+            StartCoroutine(flipTransitionRoutine(1, 0f, 1f, false));
 
 
             partner.layer = 11;
@@ -46,8 +45,8 @@ public class LinkedPair : StationaryWall {
             ShaderUtility.ShaderToLaser(partnerMaterial);
 
             partner.GetComponent<Transition>().SetStart(0f);
-            //StopAllCoroutines();
 
+            StartCoroutine(flipTransitionRoutine(0f, 1f, 1f, true));
 
 
             partner.layer = 10;
@@ -76,7 +75,7 @@ public class LinkedPair : StationaryWall {
         objectType = ObjectType.LinkedPair;
     }
 
-    private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
+    private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration, bool goingToLaser)
     {
         isRunning = true;
         float elapsedTime = 0;
@@ -87,12 +86,25 @@ public class LinkedPair : StationaryWall {
         {
             ratio = elapsedTime / duration;
             float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.BackAndForth(ratio));
+            float transitionBValue;
 
+            if (!goingToLaser)
+            {
+                Debug.Log("partner going to real");
+                transitionBValue = Mathf.Lerp(1f, 0f, ratio);
+            }
+            else transitionBValue = Mathf.Lerp(0f, 1f, ratio);
+
+
+                //transitionBValue = 1f - transitionBValue;
 
             partnerRenderer.GetPropertyBlock(_propBlock);
-
             _propBlock.SetFloat("_TransitionState", value);
             partnerRenderer.SetPropertyBlock(_propBlock);
+
+            Debug.Log(transitionBValue);
+
+            partnerMaterial.SetFloat("_TransitionStateB", transitionBValue);
 
             elapsedTime += Time.deltaTime;
             yield return null;
