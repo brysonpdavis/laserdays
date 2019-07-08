@@ -20,20 +20,20 @@ public class SwitchOnCollisionBack : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        objCurrentlyInside = false;
-        if (switchParent.active)
-        {
-            if (!switchParent.objCurrentlyInside)
-                Attempt(other.gameObject);
-            active = false;
-            switchParent.active = false;
-        }
+        //objCurrentlyInside = false;
+        //if (switchParent.active)
+        //{
+            //if (!switchParent.objCurrentlyInside)
+            //    Attempt(other.gameObject);
+            //active = false;
+            //switchParent.active = false;
+        //}
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        objCurrentlyInside = true;
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    objCurrentlyInside = true;
+    //}
 
     private void Attempt(GameObject obj)
     {
