@@ -124,14 +124,14 @@ public class RegionOptimization : MonoBehaviour
 			//inactiveGeometry.SetActive(false);
 			activeLevel.SetActive(true);
 			
-			Debug.LogError(gameObject.name + "Activating: ");
+			// Debug.LogError(gameObject.name + "Activating: ");
 		}
 		else
 		{
 			//inactiveGeometry.SetActive(true);
 			activeLevel.SetActive(false);
 			
-			Debug.LogError(gameObject.name + "Deactivating: ");
+			// Debug.LogError(gameObject.name + "Deactivating: ");
 
 		}
 	}

@@ -322,6 +322,12 @@ public class LevelLoadingMenu : MonoBehaviour {
     {
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(fadeDuration);
+        
+        GameObject p = Toolbox.Instance.GetPlayer();
+        Destroy(p);
+        
+        Debug.LogError("Destroying Player");
+
 
         AsyncOperation _async = new AsyncOperation();
         _async = SceneManager.LoadSceneAsync("Home Menu", LoadSceneMode.Single);
@@ -330,7 +336,8 @@ public class LevelLoadingMenu : MonoBehaviour {
         {
             yield return null;
         }
-        Toolbox.Instance.UpdateToolbox();
+
+        //Toolbox.Instance.UpdateToolbox();
     }
 
     public IEnumerator loadNextScene(string name, string spawnPoint, GameObject myButton, bool outlinesFade)

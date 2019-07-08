@@ -136,6 +136,10 @@ public class ControlMenuScript : MonoBehaviour {
                 waitingForKey = false;
 
             }
+            else if (keyEvent.keyCode != KeyCode.None)
+            {
+                Debug.LogError(keyEvent.keyCode);
+            }
         }
     }
     

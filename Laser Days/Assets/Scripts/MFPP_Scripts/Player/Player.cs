@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Text;
 
 namespace MFPP
@@ -538,6 +539,31 @@ namespace MFPP
         private Collider[] overlappingColliders;
         private List<Collider> ignoredColliders;
         private bool jumpPressed = false;
+
+        private void Awake()
+        {
+            if (!Toolbox.Instance)
+                StartCoroutine(LoadToolbox());
+            else
+            {
+                Toolbox.Instance.UpdateToolbox();
+            }
+                
+        }
+
+        private IEnumerator LoadToolbox()
+        {
+            AsyncOperation _async = SceneManager.LoadSceneAsync("Toolbox", LoadSceneMode.Additive);
+            _async.allowSceneActivation = true;
+
+            while (!_async.isDone)
+            {
+                yield return null;
+            }
+            
+            Toolbox.Instance.UpdateToolbox();
+
+        }
 
 
         private void Start()

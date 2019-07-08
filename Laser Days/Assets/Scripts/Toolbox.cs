@@ -21,8 +21,10 @@ public class Toolbox : Singleton<Toolbox>
     RaycastManager raycastManager;
     MFPP.Modules.PickUpModule pickUp;
     flipScript flipScript;
-    public float globalFlipSpeed = 2f;
-    public float globalRealLaserFlipSpeed = .2f;
+    [SerializeField]
+    public float globalFlipSpeed = 1.1f;
+    [SerializeField]
+    public float globalRealLaserFlipSpeed = 1.1f;
     public bool loadFromSave = false;
     public bool loadSelection = false;
 
@@ -64,13 +66,17 @@ public class Toolbox : Singleton<Toolbox>
 
     void Awake()
     {
-        SetCustomValuesOnInstance();
+        //SetCustomValuesOnInstance();
 
         // Your initialization code here
-        UpdateToolbox();
+        // UpdateToolbox();
         sharedMaterials = new List<Material>();
         DontDestroyOnLoad(this.gameObject);
 
+    }
+
+    void Start()
+    {
         soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();
         soundEffectsSlider.onValueChanged.AddListener(delegate { VolumeChangeCheck(); });
     }

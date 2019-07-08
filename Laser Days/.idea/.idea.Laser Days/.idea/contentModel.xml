@@ -713,6 +713,7 @@
         <e p="BoostPulse.cs" t="Include" />
         <e p="Booster.cs" t="Include" />
         <e p="CameraTransition.cs" t="Include" />
+        <e p="CanvasAwake.cs" t="Include" />
         <e p="CanvasEnabler.cs" t="Include" />
         <e p="CanvasOff.cs" t="Include" />
         <e p="Cinemachine" t="Include">
@@ -925,6 +926,7 @@
               <e p="RealOnlyTransparentMorph.shader" t="Include" />
               <e p="portalcard.shader" t="Include" />
             </e>
+            <e p="UI_ComponentTransition.shader" t="Include" />
             <e p="WaterLaser.shader" t="Include" />
           </e>
         </e>
@@ -1173,7 +1175,188 @@
         <e p="PuzzleCompletion.cs" t="Include" />
         <e p="PuzzleCompletionCrystal.cs" t="Include" />
         <e p="PuzzleCompletionDup.cs" t="Include" />
+        <e p="RegionController.cs" t="Include" />
         <e p="ReloadScene.cs" t="Include" />
+        <e p="Rewired" t="Include">
+          <e p="Documentation" t="Include">
+            <e p="ReadMe.txt" t="Include" />
+            <e p="ReleaseNotes.txt" t="Include" />
+            <e p="licences.txt" t="Include" />
+          </e>
+          <e p="Examples" t="Include">
+            <e p="ControlRemapping1" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="ControlRemappingDemo1.cs" t="Include" />
+              </e>
+            </e>
+            <e p="CustomControllersTilt" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="CustomControllersTiltDemo.cs" t="Include" />
+              </e>
+            </e>
+            <e p="CustomControllersTouch" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="CustomControllerDemo.cs" t="Include" />
+                <e p="CustomControllerDemo_Player.cs" t="Include" />
+                <e p="TouchButtonExample.cs" t="Include" />
+                <e p="TouchJoystickExample.cs" t="Include" />
+              </e>
+            </e>
+            <e p="DualShock4SpecialFeatures" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="DualShock4SpecialFeaturesExample.cs" t="Include" />
+              </e>
+            </e>
+            <e p="EightPlayers" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="EightPlayersExample_Player.cs" t="Include" />
+              </e>
+            </e>
+            <e p="FallbackJoystickIdentification" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="FallbackJoystickIdentificationDemo.cs" t="Include" />
+              </e>
+            </e>
+            <e p="GamepadTemplateUI" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="ControllerUIEffect.cs" t="Include" />
+                <e p="ControllerUIElement.cs" t="Include" />
+                <e p="GamepadTemplateUI.cs" t="Include" />
+              </e>
+            </e>
+            <e p="PlayerMouseSprite" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="PlayerMouseSpriteExample.cs" t="Include" />
+              </e>
+            </e>
+            <e p="PlayerMouseUnityUI" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="PlayerPointerEventHandlerExample.cs" t="Include" />
+                <e p="UIPointer.cs" t="Include" />
+              </e>
+            </e>
+            <e p="PressAnyButtonToJoin" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="PressAnyButtonToJoinExample_Assigner.cs" t="Include" />
+                <e p="PressAnyButtonToJoinExample_GamePlayer.cs" t="Include" />
+              </e>
+            </e>
+            <e p="PressStartToJoin" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="PressStartToJoinExample_Assigner.cs" t="Include" />
+                <e p="PressStartToJoinExample_GamePlayer.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Shared" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Bullet.cs" t="Include" />
+              </e>
+            </e>
+            <e p="SimpleCombinedKeyboardMouseRemapping" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="SimpleCombinedKeyboardMouseRemapping.cs" t="Include" />
+              </e>
+            </e>
+            <e p="SimpleControlRemapping" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="SimpleControlRemapping.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Extras" t="Include">
+            <e p="ControlMapper" t="Include">
+              <e p="Examples" t="Include">
+                <e p="ControlMapperDemo" t="Include">
+                  <e p="Scripts" t="Include">
+                    <e p="ControlMapperDemoMessage.cs" t="Include" />
+                  </e>
+                </e>
+              </e>
+              <e p="Scripts" t="Include">
+                <e p="ButtonInfo.cs" t="Include" />
+                <e p="CalibrationWindow.cs" t="Include" />
+                <e p="CanvasScalerExt.cs" t="Include" />
+                <e p="CanvasScalerFitter.cs" t="Include" />
+                <e p="ControlMapper.cs" t="Include" />
+                <e p="ControlMapper_Classes.cs" t="Include" />
+                <e p="ControlMapper_Enums.cs" t="Include" />
+                <e p="ControlMapper_InputGrid.cs" t="Include" />
+                <e p="ControlMapper_WindowManager.cs" t="Include" />
+                <e p="CustomButton.cs" t="Include" />
+                <e p="CustomSlider.cs" t="Include" />
+                <e p="CustomToggle.cs" t="Include" />
+                <e p="Editor" t="Include">
+                  <e p="ControlMapperInspector.cs" t="Include" />
+                  <e p="CustomButtonInspector.cs" t="Include" />
+                  <e p="CustomSliderInspector.cs" t="Include" />
+                  <e p="CustomToggleInspector.cs" t="Include" />
+                </e>
+                <e p="ICustomSelectable.cs" t="Include" />
+                <e p="InputBehaviorWindow.cs" t="Include" />
+                <e p="InputFieldInfo.cs" t="Include" />
+                <e p="InputRow.cs" t="Include" />
+                <e p="LanguageData.cs" t="Include" />
+                <e p="ScrollRectSelectableChild.cs" t="Include" />
+                <e p="ScrollbarVisibilityHelper.cs" t="Include" />
+                <e p="ThemeSettings.cs" t="Include" />
+                <e p="ThemedElement.cs" t="Include" />
+                <e p="ToggleInfo.cs" t="Include" />
+                <e p="UIControl.cs" t="Include" />
+                <e p="UIControlSet.cs" t="Include" />
+                <e p="UIElementInfo.cs" t="Include" />
+                <e p="UIGroup.cs" t="Include" />
+                <e p="UIImageHelper.cs" t="Include" />
+                <e p="UISelectionUtility.cs" t="Include" />
+                <e p="UISliderControl.cs" t="Include" />
+                <e p="UITools.cs" t="Include" />
+                <e p="Window.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Integration" t="Include">
+            <e p="UnityUI" t="Include">
+              <e p="Editor" t="Include">
+                <e p="RewiredStandaloneInputModuleInspector.cs" t="Include" />
+              </e>
+              <e p="PlayerPointerEventData.cs" t="Include" />
+              <e p="RewiredPointerInputModule.cs" t="Include" />
+              <e p="RewiredStandaloneInputModule.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Internal" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="ControllerTemplates" t="Include">
+                <e p="ControllerTemplates.cs" t="Include" />
+              </e>
+              <e p="DataStorage" t="Include">
+                <e p="UserDataStore_PlayerPrefs.cs" t="Include" />
+              </e>
+              <e p="Editor" t="Include">
+                <e p="CustomInspectors" t="Include">
+                  <e p="ControllerDataFilesInspector.cs" t="Include" />
+                  <e p="CustomInspector_External.cs" t="Include" />
+                  <e p="HardwareJoystickMapInspector.cs" t="Include" />
+                  <e p="HardwareJoystickTemplateMapInspector.cs" t="Include" />
+                  <e p="InitializerInspector.cs" t="Include" />
+                  <e p="InputManagerInspector.cs" t="Include" />
+                  <e p="PlayerControllerInspector.cs" t="Include" />
+                  <e p="PlayerMouseInspector.cs" t="Include" />
+                  <e p="UserDataStore_PlayerPrefsInspector.cs" t="Include" />
+                </e>
+                <e p="UnityEditorBridge.cs" t="Include" />
+              </e>
+              <e p="InputManager.cs" t="Include" />
+              <e p="Misc" t="Include">
+                <e p="ExternalTools.cs" t="Include" />
+              </e>
+              <e p="Platforms" t="Include">
+                <e p="Ouya" t="Include">
+                  <e p="OuyaInputSource.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
         <e p="SceneUniqueIds.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="BuildingMoverScript.cs" t="Include" />
@@ -1308,6 +1491,7 @@
           <e p="Toolbox.cs" t="Include" />
           <e p="Transition.cs" t="Include" />
           <e p="TransitionController.cs" t="Include" />
+          <e p="TransitionMeshUpdate.cs" t="Include" />
           <e p="TweeningFunctions.cs" t="Include" />
           <e p="UI" t="Include">
             <e p="WorldSpaceUI.cs" t="Include" />
@@ -1548,13 +1732,17 @@
           </e>
         </e>
         <e p="StartCoroutine.cs" t="Include" />
+        <e p="SwitchOnCollision.cs" t="Include" />
+        <e p="SwitchOnCollisionBack.cs" t="Include" />
         <e p="TerrainTransition.cs" t="Include" />
         <e p="ThresholdTrigger.cs" t="Include" />
         <e p="TransitionChildrenOnly.cs" t="Include" />
         <e p="TransitionCollider.cs" t="Include" />
+        <e p="TransitionMeshUpdateChild.cs" t="Include" />
         <e p="TransparentBufferObject.cs" t="Include" />
         <e p="TransparentBufferRenderer.cs" t="Include" />
         <e p="TriggerConnector.cs" t="Include" />
+        <e p="UI_Transition.cs" t="Include" />
         <e p="UniqueIdPlatform.cs" t="Include" />
         <e p="Unity Technologies" t="Include">
           <e p="Recorder" t="Include">

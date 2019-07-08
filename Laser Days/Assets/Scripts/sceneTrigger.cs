@@ -57,8 +57,8 @@ public class sceneTrigger : MonoBehaviour
         linkedCollider = GetComponent<BoxCollider>();
         Interior = transform.Find("Interior").gameObject;
         transitionControllers = GetComponentsInChildren<TransitionController>();
-        realBackgroundContainer = GameObject.FindWithTag("RealBackgroundScene").transform;
-        laserBackgroundContainer = GameObject.FindWithTag("LaserBackgroundScene").transform;
+        //realBackgroundContainer = GameObject.FindWithTag("RealBackgroundScene").transform;
+        //laserBackgroundContainer = GameObject.FindWithTag("LaserBackgroundScene").transform;
 
     }
     
