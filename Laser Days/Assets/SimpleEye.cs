@@ -56,7 +56,6 @@ public class SimpleEye : MonoBehaviour {
 
             if (timeCounter >= waitTime)
             {
-                //StopAllCoroutines();
 
                 if (playerHasMoved)
                     StartCoroutine(SnapView(lastTarget, currentPlayer, lerpTime, playerHasMoved));
@@ -69,6 +68,12 @@ public class SimpleEye : MonoBehaviour {
             if (!snapViewRunning && !playerHasMoved && !widenFocusRunning)
                 StartCoroutine(Focus(.4f));
           
+    }
+
+    public void BeamReset()
+    {
+        StopAllCoroutines();
+        StartCoroutine(ResetBeamLength(lerpTime*2f));
     }
 
     private IEnumerator SnapView (Vector3 old, Vector3 current, float duration, bool playerHasMoved)
@@ -118,6 +123,31 @@ public class SimpleEye : MonoBehaviour {
             float start = beam.transform.localScale.x;
             float width = Mathf.Lerp(start, focusedScale, TweeningFunctions.EaseOutCubic(ratio));
             beam.SetWidth(width);
+
+            yield return null;
+        }
+
+        widenFocusRunning = false;
+
+    }
+
+
+    private IEnumerator ResetBeamLength(float duration)
+    //for after it's looked at the player
+    {
+        widenFocusRunning = true;
+        float elapsedTime = 0;
+        float ratio = elapsedTime / duration;
+
+        while (ratio < 1f)
+        {
+            ratio = elapsedTime / duration;
+            elapsedTime += Time.deltaTime;
+
+            //doing lerp for focal scale
+            float start = beam.transform.localScale.z;
+            float length = Mathf.Lerp(start, 0f, TweeningFunctions.EaseOutCubic(ratio));
+            beam.SetLength(length);
 
             yield return null;
         }

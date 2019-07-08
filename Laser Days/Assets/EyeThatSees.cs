@@ -53,6 +53,7 @@ public class EyeThatSees : MonoBehaviour {
             isActive = false;
             Debug.Log("exited");
             flip.eyeThatSeesList.Remove(this);
+            eyeParent.BeamReset();
         }
     }
 
