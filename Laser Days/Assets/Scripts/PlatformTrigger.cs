@@ -247,7 +247,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     private void SetConnectorStates(TriggerConnector.State s)
     {
-        if(connectors.Length > 0)
+        if((connectors != null) && connectors.Length > 0)
         {
             foreach(TriggerConnector connector in connectors)
             {
