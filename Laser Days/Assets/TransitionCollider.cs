@@ -45,8 +45,6 @@ public class TransitionCollider : MonoBehaviour
 
         if (other.GetComponent<FlipInteraction>())
             other.GetComponent<FlipInteraction>().Interact();
-        if (other.GetComponent<LinkedPair>())
-            other.GetComponent<LinkedPair>().CancelTransition();
     }
 
     public void FlipTransitions(bool dir)
