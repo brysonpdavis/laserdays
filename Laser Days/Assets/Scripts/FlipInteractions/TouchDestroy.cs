@@ -10,6 +10,7 @@ public class TouchDestroy : FlipInteraction{
     Renderer mRenderer;
     private MaterialPropertyBlock _propBlock;
     float duration;
+    float elapsedTime;
 
     ParticleTransitionBurst[] particleBursts;
 
@@ -48,7 +49,13 @@ public class TouchDestroy : FlipInteraction{
 
     // Update is called once per frame
     void Update () {
-		
+        if (touched && !activated)
+        {
+            elapsedTime += Time.deltaTime;
+            material.SetFloat("_TransitionStateB", ((Mathf.Sin(elapsedTime * 2f) + 1f) / 12f));
+        }
+            
+
 	}
 
     public override void Interact()
@@ -79,15 +86,17 @@ public class TouchDestroy : FlipInteraction{
         }
     }
 
+
     private IEnumerator InteractionRoutine()
     {
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
+        float start = material.GetFloat("_TransitionStateB");
 
         while (ratio < 1f)
         {
             ratio = elapsedTime / duration;
-            float value = Mathf.Lerp(0f, 1f, TweeningFunctions.EaseInOut(ratio));
+            float value = Mathf.Lerp(start, 1f, TweeningFunctions.EaseInOut(ratio));
 
             //mRenderer.GetPropertyBlock(_propBlock);
 
@@ -95,8 +104,6 @@ public class TouchDestroy : FlipInteraction{
             //mRenderer.SetPropertyBlock(_propBlock);
 
             material.SetFloat("_TransitionStateB", value);
-
-
 
             elapsedTime += Time.fixedDeltaTime;
             yield return new  WaitForFixedUpdate();
