@@ -19,9 +19,12 @@ public class CrosshatchStandardGUI : ShaderGUI {
         None, Radial, Height
     }
 
+
     struct WorldSettings {
         public RenderQueue queue;
     }
+
+    bool Emissive;
 
     Material target;
     MaterialEditor editor;
@@ -40,6 +43,8 @@ public class CrosshatchStandardGUI : ShaderGUI {
         OutlinesModule();
         AccentModule();
         GradientModule();
+        EmissionModule();
+
         if(IsKeywordEnabled("INTERACTABLE") || IsKeywordEnabled("INVERSE_INTERACTABLE"))
         {
             InteractionModule();
@@ -266,6 +271,32 @@ public class CrosshatchStandardGUI : ShaderGUI {
         SliderProperty("_onHover", "");
         SliderProperty("_onHold", "");
 
+    }
+
+    void EmissionModule()
+    {
+        GUILayout.Label("Emission", EditorStyles.boldLabel);
+        Emissive = EditorGUILayout.Toggle("Emissive", IsKeywordEnabled("EMISSIVE"));
+        SetKeyword("EMISSIVE", Emissive);
+
+        if(Emissive)
+        {
+            if (IsKeywordEnabled("REAL"))
+            {
+                ColorProperty("_RealEmission");
+            }
+
+            if (IsKeywordEnabled("LASER"))
+            {
+                ColorProperty("_LaserEmission");
+            }
+
+            if (IsKeywordEnabled("SHARED"))
+            {
+                ColorProperty("_RealEmission");
+                ColorProperty("_LaserEmission");
+            }
+        }
     }
 
 

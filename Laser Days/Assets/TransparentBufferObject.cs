@@ -30,10 +30,30 @@ public class TransparentBufferObject : MonoBehaviour
                 Debug.Log("No matching shader found. Object not added to buffer.");
                 Debug.Log(materialShader.name);
             }        
+        } 
+        else if (GetComponent<ParticleSystemRenderer>())
+        {
+            m_Renderer = GetComponent<ParticleSystemRenderer>();
+
+            Shader materialShader = m_Renderer.sharedMaterial.shader;
+            Shader temp = null;
+
+            //Check if this object's shader has a match in the list of replacable shaders      
+            if (TransparentBufferGroup.Instance.CheckForReplacment(materialShader, out temp))
+            {
+                //Add this object to the list of objects to be rendered in the tranparent outline buffer
+                replaceShader = temp;
+                TransparentBufferGroup.Instance.AddObject(this);
+            }
+            else
+            {
+                Debug.Log("No matching shader found. Object not added to buffer.");
+                Debug.Log(materialShader.name);
+            }
         }
         else
         {
-            Debug.Log("No renderer found. Object not added to buffer.");
+            Debug.Log("No renderer or particle renderer found. Object not added to buffer.");
         }
     }
 

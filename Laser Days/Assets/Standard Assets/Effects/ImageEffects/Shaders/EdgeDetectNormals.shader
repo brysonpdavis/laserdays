@@ -393,11 +393,13 @@ Shader "Hidden/EdgeDetect" {
         
         _PauseMenu = saturate(_PauseMenu);
         
+        float4 cream = float4(0.6, 0.45, 0.45, 1);
+        float4 black = (0,0,0,1);
         
         edge = saturate(edge + ( 1 - f)) * _BgColor.a;
         //return center;
 
-        float4 pm = lerp(1,0,edge);   
+        float4 pm = (cream * edge);   
 		float4 sc = (original * edge);
         
         

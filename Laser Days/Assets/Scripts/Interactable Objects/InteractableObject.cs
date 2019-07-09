@@ -8,6 +8,7 @@ abstract public class InteractableObject : MonoBehaviour
 {
     //protected ItemProperties itemProperties;
     public enum ObjectType { Clickable, SingleWorldClickable, Sokoban1x1, Sokoban2x2, Morph, Wall, WallSliderX, WallSliderZ, FloorBouncer, LinkedPair, Null };
+
     [HideInInspector]public ObjectType objectType;
     [HideInInspector]public string itemName;
 
@@ -21,7 +22,10 @@ abstract public class InteractableObject : MonoBehaviour
     protected MFPP.Modules.PickUpModule pickUp;
     protected float currentPositionVelocity = 10f;
     protected AudioSource audioSource;
-    protected ParticleSystem particleSystem;
+
+    protected ParticleTransitionBurst[] particleTransitionBursts;
+    protected bool hasTransitionParticles = false;
+
     protected SelectionRenderChange selectionRenderChange;
     [SerializeField] protected float pickupDistance = 2f;
     protected Vector3 latestPosition;
@@ -91,7 +95,8 @@ abstract public class InteractableObject : MonoBehaviour
         if (objectType == InteractableObject.ObjectType.Clickable || objectType == InteractableObject.ObjectType.SingleWorldClickable)
         {
             multiplier = 1f;
-            particleSystem = GetComponent<ParticleSystem>();
+            particleTransitionBursts = GetComponentsInChildren<ParticleTransitionBurst>();
+            hasTransitionParticles = true;
         }
         else { multiplier = .25f; }
     }

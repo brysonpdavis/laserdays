@@ -69,6 +69,7 @@ public class TransparentBufferGroup
         AddShaderPair(dict, Shader.Find("Crosshatch/Goop-PlantVariant"), Shader.Find("Crosshatch/OutlineBuffer/Goop-PlantVariant"));
         AddShaderPair(dict, Shader.Find("Crosshatch/MorphPreview"), Shader.Find("Crosshatch/OutlineBuffer/MorphPreview"));
         AddShaderPair(dict, Shader.Find("Crosshatch/Glass-Blocker"), Shader.Find("Crosshatch/OutlineBuffer/Glass-Blocker"));
+        AddShaderPair(dict, Shader.Find("Crosshatch/TransparentSmoke"), Shader.Find("Crosshatch/OutlineBuffer/Smoke"));
         return dict;
     }
 

@@ -37,10 +37,14 @@ public class BasicClickable : FlippableObject {
         if (slowPickup && !beenPickedUp)
             {StartCoroutine(SlowPickup());}
     }
+
+
     private void OnCollisionExit(Collision collision)
     {
         transform.position = transform.position + new Vector3(0f, 0.00001f, 0f);
     }
+
+
     public override void Drop()
     {
         StopAllCoroutines();
@@ -51,16 +55,8 @@ public class BasicClickable : FlippableObject {
         if (player.GetComponent<flipScript>().space)
         {
 
-            ShaderUtility.ShaderWorldChange(renderer.material, false);
-            //if (renderer.material.shader == Shader.Find("Crosshatch/Standard"))
-            //{
-            //    renderer.material.DisableKeyword("LASER");
-            //    renderer.material.EnableKeyword("REAL");
-            //}
-            //else
-            //{
-            //    renderer.material.shader = raycastManager.realWorldShader;
-            //}
+            ShaderUtility.ShaderToReal(renderer.material);
+
             GetComponent<Transition>().SetStart(0f);
             renderer.material.SetInt("_onHover", 1);
 
@@ -70,16 +66,8 @@ public class BasicClickable : FlippableObject {
 
         else
         {
-            ShaderUtility.ShaderWorldChange(renderer.material, true);
-            //if (renderer.material.shader == Shader.Find("Crosshatch/Standard"))
-            //{
-            //    renderer.material.DisableKeyword("REAL");
-            //    renderer.material.EnableKeyword("LASER");
-            //}
-            //else
-            //{
-            //    renderer.material.shader = raycastManager.laserWorldShader;
-            //}
+            ShaderUtility.ShaderToLaser(renderer.material);
+          
             GetComponent<Transition>().SetStart(1f);
             UnSelect();
             renderer.material.SetInt("_onHover", 1);
@@ -163,14 +151,6 @@ public class BasicClickable : FlippableObject {
         rigidbody.constraints = RigidbodyConstraints.None;
         rigidbody.useGravity = false;
         currentPositionVelocity = originalVelocity;
-
-        ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 100f);
-
-        var main = particleSystem.main;
-        main.startLifetime = 4f;
-        //particleSystem.main.startLifetime = .5f;
-        particleSystem.emission.SetBurst(0, burst);
-        particleSystem.Play();
 
         if (audioSource)
         {

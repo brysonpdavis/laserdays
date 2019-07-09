@@ -11,6 +11,8 @@ public class TouchDestroy : FlipInteraction{
     private MaterialPropertyBlock _propBlock;
     float duration;
 
+    ParticleTransitionBurst particleBurst;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -39,6 +41,9 @@ public class TouchDestroy : FlipInteraction{
 
 
         mRenderer.GetPropertyBlock(_propBlock);
+
+        particleBurst = GetComponentInChildren<ParticleTransitionBurst>();
+
     }
 
     // Update is called once per frame
@@ -52,6 +57,7 @@ public class TouchDestroy : FlipInteraction{
         {
             activated = true;
 
+
             //foreach (MeshCollider m in GetComponents<MeshCollider>())
             //{
             //    m.isTrigger = true;
@@ -59,7 +65,10 @@ public class TouchDestroy : FlipInteraction{
 
             GetComponent<MeshCollider>().isTrigger = true;
             //GetComponent<Collider>().enabled = false;
+
+
             StartCoroutine(InteractionRoutine());
+            particleBurst.TransitionBurst();
             //Toolbox.Instance.
             //Destroy(gameObject);
         }

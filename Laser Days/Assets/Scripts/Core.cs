@@ -22,12 +22,12 @@ public class Core : MonoBehaviour {
 
         if (dir)
         {
-            renderMat.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreLaser;
+            ShaderUtility.ShaderToLaser(renderMat);
             GetComponent<Transition>().SetStart(1f);
         }
         else
         {
-            renderMat.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreReal;
+            ShaderUtility.ShaderToReal(renderMat);
             GetComponent<Transition>().SetStart(0f);
         }
     }

@@ -16,10 +16,12 @@
         _RealBase("Real Base Color", Color) = (1,1,1,1)  
         _RealAccent("Real Accent Color", Color) = (0,0,0,0)
         _RealGradient("Real Gradient Color", Color) = (0,0,0,0)
+        [HDR]_RealEmission("Real Emission Color", Color) = (0,0,0,0)
         
         _LaserBase("Laser Base Color", Color) = (1,1,1,1)
         _LaserAccent("Laser Accent Color", Color) = (0,0,0,0)
         _LaserGradient("Laser Gradient Color", Color) = (0,0,0,0)
+        [HDR]_LaserEmission("Laser Emission Color", Color) = (0,0,0,0)
         
         _InteractColor("Interact Color", Color) = (0,0,0,0)
         [HDR]_ShimmerColor("Shimmer Color", Color) = (0,0,0,0)
@@ -71,6 +73,7 @@
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
             #pragma multi_compile _ ACCENT_ON
+            #pragma multi_compile _ EMISSIVE
             #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
 
             #pragma vertex MyVertexProgram
@@ -99,6 +102,7 @@
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
             #pragma multi_compile _ ACCENT_ON
+            #pragma multi_compile _ EMISSIVE
             #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
           
             #pragma multi_compile_fwdadd_fullshadows
@@ -125,6 +129,7 @@
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
             #pragma multi_compile _ ACCENT_ON
+            #pragma multi_compile _ EMISSIVE
             #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
             #pragma multi_compile _ UNITY_HDR_ON
 
@@ -132,7 +137,6 @@
             #pragma fragment MyFragmentProgram
 
             #define DEFERRED_PASS
-            #define SHARED
 
             #include "CrosshatchStandardCG.cginc"
 

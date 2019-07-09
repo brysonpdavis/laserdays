@@ -5,7 +5,7 @@
 #include "AutoLight.cginc"
 #include "CrosshatchBRDF.cginc"
 
-float4 _RealBase, _RealAccent, _LaserBase, _LaserAccent, _RealGradient, _LaserGradient, _ShimmerColor, _InteractColor;
+float4 _RealBase, _RealAccent, _LaserBase, _LaserAccent, _RealGradient, _LaserGradient, _RealEmission, _LaserEmission, _ShimmerColor, _InteractColor;
 sampler2D _MainTex, _AccentMap, _EffectMap, _ShadingMap;
 float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST, _ShadingMap_ST;
 
@@ -347,6 +347,11 @@ float3 GetOutlineData (Interpolators i)
     return float3(r,g,0);
 }
 
+float3 GetEmissive(Interpolators i)
+{
+    return lerp(_RealEmission, _LaserEmission, TransitionValue()).rgb;
+}
+
 
 //As it was.
 void ComputeVertexLightColor (inout Interpolators i) {
@@ -553,7 +558,10 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         color.rgb += _ShimmerColor.rgb * GetGlowMask(i);
     #endif
     
-    
+    #if defined(EMISSIVE)
+        color.rgb += GetEmissive(i);
+    #endif
+      
     #if defined(_RENDERING_FADE) || defined(_RENDERING_TRANSPARENT)
         color.a = alpha;
     #endif

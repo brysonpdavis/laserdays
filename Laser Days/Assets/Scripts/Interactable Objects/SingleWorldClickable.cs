@@ -37,7 +37,7 @@ public class SingleWorldClickable : InteractableObject {
         //put the object down with the right shader
         if (player.GetComponent<flipScript>().space)
         {
-            renderer.material.shader = raycastManager.realWorldShader;
+            ShaderUtility.ShaderToReal(renderer.material);
             GetComponent<Transition>().SetStart(0f);
             renderer.material.SetInt("_onHover", 1);
 
@@ -47,7 +47,7 @@ public class SingleWorldClickable : InteractableObject {
 
         else
         {
-            renderer.material.shader = raycastManager.laserWorldShader;
+            ShaderUtility.ShaderToLaser(renderer.material);
             GetComponent<Transition>().SetStart(1f);
             UnSelect();
             renderer.material.SetInt("_onHover", 1);
@@ -121,12 +121,12 @@ public class SingleWorldClickable : InteractableObject {
         rigidbody.useGravity = false;
         currentPositionVelocity = originalVelocity;
         
-        ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 100f);
+        //ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 100f);
 
-        var main = particleSystem.main;
-        main.startLifetime = 4f;
-        particleSystem.emission.SetBurst(0, burst);
-        particleSystem.Play();
+        //var main = particleSystem.main;
+        //main.startLifetime = 4f;
+        //particleSystem.emission.SetBurst(0, burst);
+        //particleSystem.Play();
 
         if (audioSource)
         {
