@@ -11,7 +11,7 @@ public class TouchDestroy : FlipInteraction{
     private MaterialPropertyBlock _propBlock;
     float duration;
 
-    ParticleTransitionBurst particleBurst;
+    ParticleTransitionBurst[] particleBursts;
 
 
     private void OnTriggerEnter(Collider other)
@@ -42,7 +42,7 @@ public class TouchDestroy : FlipInteraction{
 
         mRenderer.GetPropertyBlock(_propBlock);
 
-        particleBurst = GetComponentInChildren<ParticleTransitionBurst>();
+        particleBursts = GetComponentsInChildren<ParticleTransitionBurst>();
 
     }
 
@@ -68,7 +68,12 @@ public class TouchDestroy : FlipInteraction{
 
 
             StartCoroutine(InteractionRoutine());
-            particleBurst.TransitionBurst();
+
+            foreach (ParticleTransitionBurst burst in particleBursts)
+            {
+                burst.TransitionBurst();
+            }
+
             //Toolbox.Instance.
             //Destroy(gameObject);
         }
