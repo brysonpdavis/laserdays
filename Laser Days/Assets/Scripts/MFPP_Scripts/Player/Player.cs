@@ -546,8 +546,10 @@ namespace MFPP
                 StartCoroutine(LoadToolbox());
             else
             {
+                Toolbox.Instance.SetPlayer(gameObject);
                 Toolbox.Instance.UpdateToolbox();
             }
+            
                 
         }
 
@@ -561,6 +563,9 @@ namespace MFPP
                 yield return null;
             }
             
+            Toolbox.Instance.SetPlayer(gameObject);
+
+
             Toolbox.Instance.UpdateToolbox();
 
         }

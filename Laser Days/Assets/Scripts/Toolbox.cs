@@ -67,9 +67,8 @@ public class Toolbox : Singleton<Toolbox>
     void Awake()
     {
         //SetCustomValuesOnInstance();
-
-        // Your initialization code here
         // UpdateToolbox();
+        
         sharedMaterials = new List<Material>();
         DontDestroyOnLoad(this.gameObject);
 
@@ -168,6 +167,11 @@ public class Toolbox : Singleton<Toolbox>
     public GameObject GetPlayer()
     {
         return player;
+    }
+
+    public void SetPlayer(GameObject p)
+    {
+        player = p;
     }
 
     public IconContainer GetIconContainer()
@@ -309,8 +313,11 @@ public class Toolbox : Singleton<Toolbox>
 
     public void UpdateToolbox()
     {
-        player  = GameObject.FindWithTag("Player");
-        mainCanvas = GameObject.FindWithTag("Main Canvas");
+        if (!player)
+            player  = GameObject.FindWithTag("Player");
+        
+        if (!mainCanvas)
+            mainCanvas = GameObject.FindWithTag("Main Canvas");
         raycastManager = player.GetComponent<RaycastManager>();
         pickUp = player.GetComponent<MFPP.Modules.PickUpModule>();
         flipScript = player.GetComponent<flipScript>();
