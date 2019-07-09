@@ -34,13 +34,6 @@ abstract public class FlippableObject : InteractableObject
         material.SetFloat("_EdgeThickness", Toolbox.Instance.EdgeGlowThickness());
         shimmerColor = material.GetColor("_ShimmerColor");
 
-        if (GetComponent<ParticleSystem>())
-        {
-            Material particleMat = GetComponent<ParticleSystemRenderer>().material;
-            //shimmerColor
-            particleMat.SetColor("_ParticleColor", shimmerColor);
-        }
-
         if (GetComponentInChildren<Core>())
         {
             GetComponentInChildren<Core>().SetColor(shimmerColor);
@@ -330,13 +323,12 @@ abstract public class FlippableObject : InteractableObject
 
     void ParticleEffect()
     {
-        if (GetComponent<ParticleSystem>())
+        if (hasTransitionParticles)
         {
-            ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 50f);
-            var main = particleSystem.main;
-            main.startLifetime = .75f;
-            particleSystem.emission.SetBurst(0, burst);
-            particleSystem.Play();
+            foreach (ParticleTransitionBurst burst in particleTransitionBursts)
+            {
+                burst.TransitionBurst();
+            }
         }
     }
 

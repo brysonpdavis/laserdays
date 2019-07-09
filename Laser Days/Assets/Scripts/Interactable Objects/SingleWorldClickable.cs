@@ -121,12 +121,12 @@ public class SingleWorldClickable : InteractableObject {
         rigidbody.useGravity = false;
         currentPositionVelocity = originalVelocity;
         
-        ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 100f);
+        //ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 100f);
 
-        var main = particleSystem.main;
-        main.startLifetime = 4f;
-        particleSystem.emission.SetBurst(0, burst);
-        particleSystem.Play();
+        //var main = particleSystem.main;
+        //main.startLifetime = 4f;
+        //particleSystem.emission.SetBurst(0, burst);
+        //particleSystem.Play();
 
         if (audioSource)
         {
