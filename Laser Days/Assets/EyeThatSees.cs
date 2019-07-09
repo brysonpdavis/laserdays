@@ -57,6 +57,12 @@ public class EyeThatSees : MonoBehaviour {
         }
     }
 
+    private void OnDisable()
+    {
+        if (flip.eyeThatSeesList.Contains(this))
+            flip.eyeThatSeesList.Remove(this);
+    }
+
     private void FailedFlip()
     {
         if (isActive)
