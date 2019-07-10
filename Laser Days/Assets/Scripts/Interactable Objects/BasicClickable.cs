@@ -167,7 +167,7 @@ public class BasicClickable : FlippableObject {
     {
         if (!wait && gameObject.layer == Toolbox.Instance.GetPlayer().layer-5)
         {
-            audioSource.clip = Toolbox.Instance.testercubeSounds.main.GetRandomSoundClip();
+            audioSource.clip = SoundBox.Instance.testercubeSounds.main.GetRandomSoundClip();
 
 
             //Vector3 vel = rigidbody.velocity / 6f;

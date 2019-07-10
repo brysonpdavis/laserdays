@@ -60,6 +60,7 @@ public class TransitionController: MonoBehaviour
         if (player)
         {
             bool isFlipped = player.GetComponent<flipScript>().flippedThisFrame;
+
             bool direction = player.GetComponent<flipScript>().space;
             if (isFlipped)
             {

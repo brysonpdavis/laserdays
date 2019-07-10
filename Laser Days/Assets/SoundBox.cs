@@ -13,6 +13,8 @@ public class SoundBox : MonoBehaviour {
    // public AudioClip[] flipClips;
    // public AudioClip[] flipClipsSecondary;
     public MFPP.FlipClipAsset currentFlipPalette;
+    public MFPP.SoundContainerAsset testercubeSounds;
+
 
     //public AudioClip[,] audioClipsTest;
 
@@ -25,6 +27,8 @@ public class SoundBox : MonoBehaviour {
     public AudioClip pickup;
     public AudioClip selection;
     public AudioClip deselect;
+
+
 
 
     public AudioClip platformOn;

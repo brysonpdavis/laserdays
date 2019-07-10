@@ -29,6 +29,7 @@ public class SwitchOnCollision : MonoBehaviour {
         else if (obj.CompareTag("Player"))
         {
             Toolbox.Instance.GetFlip().FlipAttempt();
+            Toolbox.Instance.GetFlip().ForceFlip();
         }
     }
 

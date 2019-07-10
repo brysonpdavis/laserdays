@@ -12,6 +12,7 @@ public class flipScript : MonoBehaviour {
 	private PlayerCharge pc;
     private flipburst flipburst;
     public IList<EyeThatSees> eyeThatSeesList;
+    public bool forcedFlip;
 
     //sounds
     private AudioSource audioSource;
@@ -36,6 +37,9 @@ public class flipScript : MonoBehaviour {
 
     private void Awake()
     {
+        flippedThisFrame = false;
+        forcedFlip = false;
+
         if (this.gameObject.layer == 16)
         {space = true;}
 
@@ -72,27 +76,31 @@ public class flipScript : MonoBehaviour {
 
 
 	void Update () {
+        flippedThisFrame = false;
+
         if (ControlManager.Instance.GetButtonDown("Switch") && ! Toolbox.Instance.GetPauseMenu().activeSelf && CheckEyes())
         {
             FlipAttempt();
         }
 
-        else
-            flippedThisFrame = false;
-
-        //if (Input.GetButtonDown(SoundtrackButton))
-        //{
-        //    if (soundTrack.gameObject.activeSelf) { soundTrack.gameObject.SetActive(false); }
-        //    else { soundTrack.gameObject.SetActive(true); }
-        //}
-
+        if (forcedFlip) {
+            flippedThisFrame = true;
+            forcedFlip = false;
+        }
 	}
+
+    public void ForceFlip() {
+        forcedFlip = true;
+    }
+
+    public bool CanFlip() {
+        return ControlManager.Instance.GetButtonDown("Switch") && !Toolbox.Instance.GetPauseMenu().activeSelf && CheckEyes();
+    }
 
     public void FlipAttempt()
     {
             GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
             flippedThisFrame = true;
-
             if (heldObj) //first check to make sure the object that's held is flippable
             {
                 if (!heldObj.GetComponent<InteractableObject>().Flippable)
