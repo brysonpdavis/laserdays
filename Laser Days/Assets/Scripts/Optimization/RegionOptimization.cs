@@ -19,6 +19,7 @@ public class RegionOptimization : MonoBehaviour
 
 	private GameObject player;
 
+	[SerializeField]
 	private bool active = true;
 
 	private float timeSinceCheck;
@@ -28,6 +29,14 @@ public class RegionOptimization : MonoBehaviour
 	private GameObject root;
 
 	private GameObject parent;
+
+	[SerializeField]
+	private float playerDistance;
+	
+	Vector3 transformPosition;
+	
+	Vector3 playerPosition;
+
 
 	private void Awake()
 	{
@@ -43,7 +52,8 @@ public class RegionOptimization : MonoBehaviour
 	{
 		active = true;
 		player = Toolbox.Instance.GetPlayer();
-		childrenActive = !(GetDistance2D() < activateDistance);
+		playerDistance = GetDistance2D();
+		childrenActive = !(playerDistance < activateDistance);
 		timeSinceCheck = 0;
 		DistanceCheck();
 	}
@@ -64,35 +74,32 @@ public class RegionOptimization : MonoBehaviour
 			timeSinceCheck = 0;
 			DistanceCheck();
 		}
-
 	}
 
 	private void DistanceCheck()
 	{
-		if (GetDistance2D() < activateDistance)
+		playerDistance = GetDistance2D();
+		if (playerDistance < activateDistance)
 		{
 			if (!childrenActive)
 			{
-				Activate();
+				ActivateObjects();
 			}
-
 		}
 		else
 		{
-
 			if (childrenActive)
 			{
-				Deactivate();
+				DeactivateObjects();
 			}
-
 		}
 	}
 
 
 	private float GetDistance2D()
 	{
-		Vector3 transformPosition = transform.position;
-		Vector3 playerPosition = player.transform.position;
+		transformPosition = transform.position;
+		playerPosition = player.transform.position;
 		
 		return Vector2.Distance(
 			new Vector2(playerPosition.x, playerPosition.z),
@@ -110,29 +117,28 @@ public class RegionOptimization : MonoBehaviour
 		SetToActive(false);
 	}
 
+	public void DeactivateObjects()
+	{
+		activeLevel.SetActive(false);
+		childrenActive = false;
+	}
+
 	public void Activate()
 	{
 		SetToActive(true);
 	}
 
+	public void ActivateObjects()
+	{
+		activeLevel.SetActive(true);
+		childrenActive = true;
+	}
+
 	public void SetToActive(bool setToStatus)
 	{
 		active = setToStatus;
+		activeLevel.SetActive(setToStatus);
+		childrenActive = setToStatus;
 
-		if (setToStatus)
-		{
-			//inactiveGeometry.SetActive(false);
-			activeLevel.SetActive(true);
-			
-			// Debug.LogError(gameObject.name + "Activating: ");
-		}
-		else
-		{
-			//inactiveGeometry.SetActive(true);
-			activeLevel.SetActive(false);
-			
-			// Debug.LogError(gameObject.name + "Deactivating: ");
-
-		}
 	}
 }
