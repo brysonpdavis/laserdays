@@ -27,7 +27,6 @@ public class TransitionMeshUpdate : Transition {
             foreach (TransitionMeshUpdateChild c in children)
             {
                 c.Check();
-                Debug.Log("running check");
             }
                 
         }

@@ -48,6 +48,83 @@ public static class ShaderUtility
         //Debug.LogError("No shader found. Looking for " + mat.shader);
     }
 
+    public static bool ShaderIsLaser(Material mat)
+    {
+        Debug.Log("Looking for " + mat.shader);
+        // If using our standard shader, then use keyword swap approach
+        if (mat.shader == Shader.Find("Crosshatch/Standard"))
+        {
+            return mat.IsKeywordEnabled("LASER");;
+        }
+
+        // If using the old shaders, swap shader to real
+        if (mat.shader == Shader.Find("Transition/LaserOnly"))
+        {
+            return true;
+        }
+
+        // If using the Core shaders, swap Core shader to real
+        if ( mat.shader == Shader.Find("Transition/LaserCore"))
+        {
+            return true;
+        }
+
+        // If using the slightly oldel shaders, swap to proper worldst
+        if (mat.shader == Shader.Find("Crosshatch/Laser-Standard"))
+        {
+            return true;
+        }
+
+        // Transparent shaders use a float to determine world 
+        if (mat.shader == Shader.Find("Crosshatch/Glass-Single"))
+        {
+
+            return mat.GetFloat("_Real") < 0.01f;
+        }
+
+        else return false;
+
+    }
+
+    public static bool ShaderIsReal(Material mat)
+    {
+        Debug.Log("Looking for " + mat.shader);
+        // If using our standard shader, then use keyword swap approach
+        if (mat.shader == Shader.Find("Crosshatch/Standard"))
+        {
+            return mat.IsKeywordEnabled("REAL"); ;
+        }
+
+        // If using the old shaders, swap shader to real
+        if (mat.shader == Shader.Find("Transition/RealOnly"))
+        {
+            return true;
+        }
+
+        // If using the Core shaders, swap Core shader to real
+        if (mat.shader == Shader.Find("Transition/RealCore"))
+        {
+            return true;
+        }
+
+        // If using the slightly oldel shaders, swap to proper worldst
+        if (mat.shader == Shader.Find("Crosshatch/Real-Standard"))
+        {
+            return true;
+        }
+
+        // Transparent shaders use a float to determine world 
+        if (mat.shader == Shader.Find("Crosshatch/Glass-Single"))
+        {
+
+            return mat.GetFloat("_Real") > 0.99f;
+        }
+
+        else return false;
+
+    }
+
+
     // Set Shader to Laser 
     public static void ShaderToLaser(Material mat)
     {
