@@ -88,8 +88,13 @@ public class WorldSpaceUI : MonoBehaviour
 
 	void LookAtCamera()
 	{
-		transform.LookAt(mainCamera.transform);
-		transform.eulerAngles = new Vector3 (transform.eulerAngles.x < 180 ? transform.eulerAngles.x / 3 : (360 - ((360 - transform.eulerAngles.x) / 3)), transform.eulerAngles.y, transform.eulerAngles.z);
+		if (player)
+		{
+			transform.LookAt(mainCamera.transform);
+			transform.eulerAngles = new Vector3 (transform.eulerAngles.x < 180 ? transform.eulerAngles.x / 3 : (360 - ((360 - transform.eulerAngles.x) / 3)), 
+													transform.eulerAngles.y, 
+													transform.eulerAngles.z);
+		}
 	}
 	
 	void SetPlayerDistance()

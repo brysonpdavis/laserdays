@@ -58,6 +58,7 @@ public class Toolbox : Singleton<Toolbox>
     private int frame_counter = 0;
     private int frames_til_draw;
     public GameObject regionController;
+    public bool deleteUnusedAssets = true;
 
     //default fog settings
     public float fogDensityDefault;
@@ -72,6 +73,10 @@ public class Toolbox : Singleton<Toolbox>
         sharedMaterials = new List<Material>();
         DontDestroyOnLoad(this.gameObject);
 
+        if (deleteUnusedAssets)
+        {
+            InvokeRepeating("DeleteUnused", 10f, 10f);
+        } 
     }
     private void Update()
     {
@@ -79,6 +84,12 @@ public class Toolbox : Singleton<Toolbox>
         {
             NarrationUpdate();
         }
+    }
+
+    private void DeleteUnused()
+    {
+        //Debug.LogError("Deleting");
+        Resources.UnloadUnusedAssets();
     }
     
     void VolumeChangeCheck()
