@@ -9,10 +9,11 @@ public class LinkedPair : StationaryWall {
     MaterialPropertyBlock _propBlock;
     Renderer partnerRenderer;
     LinkedPair partnerLinkedPair;
-    bool isRunning;
+    public bool isRunning;
+    Renderer previewRenderer;
+    Renderer partnerPreviewRenderer;
 
     int cancelTransition = 0;
-
 
     public override void Start()
     {
@@ -20,11 +21,33 @@ public class LinkedPair : StationaryWall {
         partnerRenderer = partner.GetComponent<Renderer>();
         partnerMaterial = partnerRenderer.material;
         _propBlock = new MaterialPropertyBlock();
+
         partnerLinkedPair = partner.GetComponent<LinkedPair>();
+        previewRenderer = transform.Find("Activated Renderer").GetComponent<Renderer>();
+        partnerPreviewRenderer = partner.transform.Find("Activated Renderer").GetComponent<Renderer>();
     }
+
+    public override void Select()
+    {
+        base.Select();
+        partnerPreviewRenderer.enabled = true;
+        previewRenderer.enabled = true;
+    }
+
+    public override void UnSelect()
+    {
+        base.UnSelect();
+        partnerPreviewRenderer.enabled = false;
+        previewRenderer.enabled = false;
+    }
+    
 
     public void SwitchPartner(bool playerInLaser)
     {
+
+        partnerPreviewRenderer.enabled = false;
+        previewRenderer.enabled = false;
+
 
         partnerLinkedPair.timesFlipped += 1;
 
@@ -35,7 +58,6 @@ public class LinkedPair : StationaryWall {
             partner.GetComponent<Transition>().SetStart(1f);
 
             StartCoroutine(flipTransitionRoutine(1, 0f, 1f, false));
-
 
             partner.layer = 11;
         }
@@ -55,21 +77,6 @@ public class LinkedPair : StationaryWall {
     }
 
 
-    public void CancelTransition()
-    {
-
-        if (isRunning)
-            cancelTransition += 1;
-
-        if (cancelTransition>1)
-        {
-            StopAllCoroutines();
-            //material.SetFloat("_onHold", 0f);
-            //material.SetFloat("_Shimmer", 0f);
-        }
-
-    }
-
     public override void SetType()
     {
         objectType = ObjectType.LinkedPair;
@@ -77,11 +84,13 @@ public class LinkedPair : StationaryWall {
 
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration, bool goingToLaser)
     {
+        partner.GetComponent<Transition>().enabled = false; 
+        Debug.Log("duration " + duration);
         isRunning = true;
+        //.isRunning = true;
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
-        //int property = Shader.PropertyToID("_D7A8CF01");
-
+        int count = 0;
         while (ratio < 1f)
         {
             ratio = elapsedTime / duration;
@@ -90,28 +99,43 @@ public class LinkedPair : StationaryWall {
 
             if (!goingToLaser)
             {
-                Debug.Log("partner going to real");
                 transitionBValue = Mathf.Lerp(1f, 0f, ratio);
             }
             else transitionBValue = Mathf.Lerp(0f, 1f, ratio);
-
-
-                //transitionBValue = 1f - transitionBValue;
 
             partnerRenderer.GetPropertyBlock(_propBlock);
             _propBlock.SetFloat("_TransitionState", value);
             partnerRenderer.SetPropertyBlock(_propBlock);
 
-            Debug.Log(transitionBValue);
 
             partnerMaterial.SetFloat("_TransitionStateB", transitionBValue);
+
+
+            if (Toolbox.Instance.GetFlip().flippedThisFrame)
+            {
+                count += 1;
+                if (count > 1)
+                {
+                        recentlySelected = false;
+                        isRunning = false;
+                        material.SetFloat("_onHold", 0f);
+                        material.SetFloat("_Shimmer", 0f);
+                    yield break;
+                }
+            }
+                
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
+        //recentlySelected = false;
+
         isRunning = false;
+       // partnerLinkedPair.isRunning = false;
         cancelTransition = 0;
+
+        partner.GetComponent<Transition>().enabled = true;
     }
 
 

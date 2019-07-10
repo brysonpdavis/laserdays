@@ -9,6 +9,7 @@ public class TerrainTransition : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         terrain = GetComponent<Terrain>();
         terrainMat = terrain.materialTemplate;
 
@@ -16,6 +17,13 @@ public class TerrainTransition : MonoBehaviour {
         {
             Toolbox.Instance.sharedMaterials.Add(terrainMat);
         }
+
+        //set to correct transition state based on player
+        if (Toolbox.Instance.GetPlayer().layer == 16)
+            terrainMat.SetFloat("_TransitionState", 0f);
+        else
+            terrainMat.SetFloat("_TransitionState", 1f);
+
                 
     }
 

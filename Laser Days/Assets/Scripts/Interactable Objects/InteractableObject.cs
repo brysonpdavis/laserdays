@@ -118,7 +118,7 @@ abstract public class InteractableObject : MonoBehaviour
         rigidbody.velocity = ((floatingPosition - rigidbody.transform.position) * (currentPositionVelocity*multiplier));
     }
 
-    public void Select()
+    public virtual void Select()
     {
         if (selectionRenderChange){
             selectionRenderChange.OnHold();

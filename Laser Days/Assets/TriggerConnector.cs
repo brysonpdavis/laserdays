@@ -100,7 +100,7 @@ public class TriggerConnector : MonoBehaviour {
                     {
 
                         Vector3 destination = ConnectionTarget.position;
-                        Debug.Log(destination);
+                        //Debug.Log(destination);
                         walker.transform.position = GetPoint(origin, worldSpaceControlPoint, destination, internalTime);
                         internalTime += Time.fixedDeltaTime * speed;
                     }
