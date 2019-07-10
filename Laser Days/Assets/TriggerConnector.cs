@@ -10,6 +10,10 @@ public class TriggerConnector : MonoBehaviour {
     // Transform data of platform, door, or other goop to connect to
     public Transform ConnectionTarget;
 
+    // Number of particles to emit while waiting and while active 
+    public float waitingNumParticles = 3;
+    public float activeNumParticles = 20;
+
     // Array of control points that determine curve of the conncetor path
     public Vector3 conrolPoint;
 
@@ -62,6 +66,8 @@ public class TriggerConnector : MonoBehaviour {
 
             worldSpaceControlPoint = this.transform.TransformPoint(conrolPoint);
 
+            SetEmission(waitingNumParticles);
+
             created = true;
 
         } else 
@@ -81,7 +87,24 @@ public class TriggerConnector : MonoBehaviour {
 
                 case State.Waiting :
 
-                    walker.transform.position = origin;
+                    if (internalTime >= 1f)
+                    {
+                        particles.Stop();
+                        walker.transform.position = origin;
+                        internalTime = 0f;
+                        particles.Play();
+                    }
+
+                    // Get destination from target -> walk the walker along -> increment time  
+                    else
+                    {
+
+                        Vector3 destination = ConnectionTarget.position;
+                        //Debug.Log(destination);
+                        walker.transform.position = GetPoint(origin, worldSpaceControlPoint, destination, internalTime);
+                        internalTime += Time.fixedDeltaTime * speed;
+                    }
+
                     break;
 
                 case State.Active :
@@ -131,9 +154,12 @@ public class TriggerConnector : MonoBehaviour {
         switch (s){
             case State.Waiting :
                 ChangeColor(restColor);
+                SetEmission(waitingNumParticles);
                 break;
+            
             case State.Active :
                 ChangeColor(activeColor);
+                SetEmission(activeNumParticles);
                 break;
 
         }  
@@ -164,6 +190,12 @@ public class TriggerConnector : MonoBehaviour {
     {
         restColor = colA * 1.5f;
         activeColor = colB * 0.5f;
+    }
+
+    private void SetEmission(float num)
+    {
+        var emiss = particles.emission;
+        emiss.rateOverTime = num;
     }
 
     // Handles drawing gizmo to visualize the control point in scene view 
