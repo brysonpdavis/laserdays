@@ -21,12 +21,12 @@ public class NarrationControl : MonoBehaviour
 	void Update () {
 		if (Toolbox.Instance.GetNarrationActive())
 		{
-			if (Input.GetKeyDown(ControlManager.CM.submit))
+			if (ControlManager.Instance.GetButtonDown("Submit"))
 			{
 				Toolbox.Instance.NextNarration();
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.M))
+		if (ControlManager.Instance.GetButtonDown("Map"))
 		{
 			if (map.activeSelf)
 			{

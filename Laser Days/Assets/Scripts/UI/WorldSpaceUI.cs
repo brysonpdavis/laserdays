@@ -213,7 +213,7 @@ public class WorldSpaceUI : MonoBehaviour
 					{
 						sState = SubState.WaitingForNext;
 					}
-					else if (Input.GetKeyDown(ControlManager.CM.submit))
+					else if (ControlManager.Instance.GetButtonDown("Submit"))
 					{
 						iLetter = fileText[iParagraph].Length;
 						sState = SubState.WaitingForNext;
@@ -225,14 +225,14 @@ public class WorldSpaceUI : MonoBehaviour
 
 				case SubState.WaitingForNext:
 
-					if (Input.GetKeyDown(ControlManager.CM.submit))
+					if (ControlManager.Instance.GetButtonDown("Submit"))
 						NextDialogue();
 
 					break;
 
 				case SubState.WaitingForReactivation:
 
-					if (Input.GetKeyDown(ControlManager.CM.submit))
+					if (ControlManager.Instance.GetButtonDown("Submit"))
 						RestartDialogue();
 
 					break;

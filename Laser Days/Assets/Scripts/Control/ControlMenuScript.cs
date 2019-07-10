@@ -59,43 +59,43 @@ public class ControlMenuScript : MonoBehaviour {
             if (menuPanel.GetChild(i).name == "ForwardKey")
 
             {
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.forward.ToString(); 
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.forward.ToString(); 
             }
             else if(menuPanel.GetChild(i).name == "BackwardKey")
 
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.backward.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.backward.ToString();
 
             else if(menuPanel.GetChild(i).name == "LeftKey")
 
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.left.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.left.ToString();
 
             else if(menuPanel.GetChild(i).name == "RightKey")
 
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.right.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.right.ToString();
 
             else if(menuPanel.GetChild(i).name == "JumpKey")
 
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.jump.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.jump.ToString();
 
             else if (menuPanel.GetChild(i).name == "PickupKey")
 
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.pickup.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.pickup.ToString();
             
             else if (menuPanel.GetChild(i).name == "FlipKey")
 
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.flip.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.flip.ToString();
             
             else if (menuPanel.GetChild(i).name == "SelectKey")
 
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.select.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.select.ToString();
 
             else if (menuPanel.GetChild(i).name == "PauseKey")
 
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.pause.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.pause.ToString();
 
             else if (menuPanel.GetChild(i).name == "SubmitKey")
 
-                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.CM.submit.ToString();
+                menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.submit.ToString();
 
         }
 
@@ -220,101 +220,101 @@ public class ControlMenuScript : MonoBehaviour {
 
         case "forward":
 
-            ControlManager.CM.forward = newKey; //Set forward to new keycode
+            ControlManager.Instance.forward = newKey; //Set forward to new keycode
 
-            buttonText.text = ControlManager.CM.forward.ToString(); //Set button text to new key
+            buttonText.text = ControlManager.Instance.forward.ToString(); //Set button text to new key
 
-            PlayerPrefs.SetString("forwardKey", ControlManager.CM.forward.ToString()); //save new key to PlayerPrefs
+            PlayerPrefs.SetString("forwardKey", ControlManager.Instance.forward.ToString()); //save new key to PlayerPrefs
 
             break;
 
         case "backward":
 
-            ControlManager.CM.backward = newKey; //set backward to new keycode
+            ControlManager.Instance.backward = newKey; //set backward to new keycode
 
-            buttonText.text = ControlManager.CM.backward.ToString(); //set button text to new key
+            buttonText.text = ControlManager.Instance.backward.ToString(); //set button text to new key
 
-            PlayerPrefs.SetString("backwardKey", ControlManager.CM.backward.ToString()); //save new key to PlayerPrefs
+            PlayerPrefs.SetString("backwardKey", ControlManager.Instance.backward.ToString()); //save new key to PlayerPrefs
 
             break;
 
         case "left":
 
-            ControlManager.CM.left = newKey; //set left to new keycode
+            ControlManager.Instance.left = newKey; //set left to new keycode
 
-            buttonText.text = ControlManager.CM.left.ToString(); //set button text to new key
+            buttonText.text = ControlManager.Instance.left.ToString(); //set button text to new key
 
-            PlayerPrefs.SetString("leftKey", ControlManager.CM.left.ToString()); //save new key to playerprefs
+            PlayerPrefs.SetString("leftKey", ControlManager.Instance.left.ToString()); //save new key to playerprefs
 
             break;
 
         case "right":
 
-            ControlManager.CM.right = newKey; //set right to new keycode
+            ControlManager.Instance.right = newKey; //set right to new keycode
 
-            buttonText.text = ControlManager.CM.right.ToString(); //set button text to new key
+            buttonText.text = ControlManager.Instance.right.ToString(); //set button text to new key
 
-            PlayerPrefs.SetString("rightKey", ControlManager.CM.right.ToString()); //save new key to playerprefs
+            PlayerPrefs.SetString("rightKey", ControlManager.Instance.right.ToString()); //save new key to playerprefs
 
             break;
 
         case "jump":
 
-            ControlManager.CM.jump = newKey; //set jump to new keycode
+            ControlManager.Instance.jump = newKey; //set jump to new keycode
 
-            buttonText.text = ControlManager.CM.jump.ToString(); //set button text to new key
+            buttonText.text = ControlManager.Instance.jump.ToString(); //set button text to new key
 
-            PlayerPrefs.SetString("jumpKey", ControlManager.CM.jump.ToString()); //save new key to playerprefs
+            PlayerPrefs.SetString("jumpKey", ControlManager.Instance.jump.ToString()); //save new key to playerprefs
 
             break;
         
         case "pickup":
 
-            ControlManager.CM.pickup = newKey; //Set pickup to new keycode
+            ControlManager.Instance.pickup = newKey; //Set pickup to new keycode
 
-            buttonText.text = ControlManager.CM.pickup.ToString(); //Set button text to new key
+            buttonText.text = ControlManager.Instance.pickup.ToString(); //Set button text to new key
 
-            PlayerPrefs.SetString("pickupKey", ControlManager.CM.pickup.ToString()); //save new key to PlayerPrefs
+            PlayerPrefs.SetString("pickupKey", ControlManager.Instance.pickup.ToString()); //save new key to PlayerPrefs
 
             break;
 
         case "flip":
 
-            ControlManager.CM.flip = newKey; //Set flip to new keycode
+            ControlManager.Instance.flip = newKey; //Set flip to new keycode
 
-            buttonText.text = ControlManager.CM.flip.ToString(); //Set button text to new key
+            buttonText.text = ControlManager.Instance.flip.ToString(); //Set button text to new key
 
-            PlayerPrefs.SetString("flipKey", ControlManager.CM.flip.ToString()); //save new key to PlayerPrefs
+            PlayerPrefs.SetString("flipKey", ControlManager.Instance.flip.ToString()); //save new key to PlayerPrefs
 
             break;
 
         case "select":
 
-            ControlManager.CM.select = newKey; //Set select to new keycode
+            ControlManager.Instance.select = newKey; //Set select to new keycode
 
-            buttonText.text = ControlManager.CM.select.ToString(); //Set button text to new key
+            buttonText.text = ControlManager.Instance.select.ToString(); //Set button text to new key
 
-            PlayerPrefs.SetString("selectKey", ControlManager.CM.select.ToString()); //save new key to PlayerPrefs
+            PlayerPrefs.SetString("selectKey", ControlManager.Instance.select.ToString()); //save new key to PlayerPrefs
 
             break;
 
         case "pause":
 
-            ControlManager.CM.pause = newKey; //Set pause to new keycode
+            ControlManager.Instance.pause = newKey; //Set pause to new keycode
 
-            buttonText.text = ControlManager.CM.pause.ToString(); //Set button text to new key
+            buttonText.text = ControlManager.Instance.pause.ToString(); //Set button text to new key
 
-            PlayerPrefs.SetString("pauseKey", ControlManager.CM.pause.ToString()); //save new key to PlayerPrefs
+            PlayerPrefs.SetString("pauseKey", ControlManager.Instance.pause.ToString()); //save new key to PlayerPrefs
 
             break;
 
         case "submit":
 
-            ControlManager.CM.submit = newKey; //Set submit to new keycode
+            ControlManager.Instance.submit = newKey; //Set submit to new keycode
 
-            buttonText.text = ControlManager.CM.submit.ToString(); //Set button text to new key
+            buttonText.text = ControlManager.Instance.submit.ToString(); //Set button text to new key
 
-            PlayerPrefs.SetString("submitKey", ControlManager.CM.submit.ToString()); //save new key to PlayerPrefs
+            PlayerPrefs.SetString("submitKey", ControlManager.Instance.submit.ToString()); //save new key to PlayerPrefs
 
             break;
 

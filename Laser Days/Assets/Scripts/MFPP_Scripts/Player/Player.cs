@@ -295,7 +295,7 @@ namespace MFPP
         /// </summary>
         public bool IsSprinting
         {
-            get { return Movement.Sprint.AllowSprint && GetButton(Controls.SprintButton); }
+            get { return Movement.Sprint.AllowSprint && ControlManager.Instance.GetButton("Sprint"); }
         }
         /// <summary>
         /// Is this <see cref="Player"/> jumping?
@@ -313,7 +313,7 @@ namespace MFPP
                 Physics.SphereCast(slopeRay, Radius, out slopeHit, Mathf.Infinity, CollisionLayers);
                 bool canJumpOnThisSlope = Vector3.Angle(Vector3.up, slopeHit.normal) < SlopeLimit;
 
-                return Movement.AllowMovement && Movement.Jump.AllowJump && canJumpOnThisSlope && !ceilingRaycast && Controls.ControlsEnabled && (Movement.Jump.AutoJump ? Input.GetKey(ControlManager.CM.jump) : CheckJumpPressed());
+                return Movement.AllowMovement && Movement.Jump.AllowJump && canJumpOnThisSlope && !ceilingRaycast && Controls.ControlsEnabled && (Movement.Jump.AutoJump ? ControlManager.Instance.GetButton("Jump") : CheckJumpPressed());
             }
         }
 
@@ -647,7 +647,7 @@ namespace MFPP
 
             if (Movement.AllowMouseMove)
             {
-                Vector2 rawDelta = new Vector2(GetMouseCurrentAxis(Controls.MouseXAxis), GetMouseCurrentAxis(Controls.MouseYAxis)) * Controls.MouseSensitivity; // Raw delta of the mouse.
+                Vector2 rawDelta = new Vector2(GetMouseCurrentAxis(Controls.MouseXAxis), GetMouseCurrentAxis(Controls.MouseYAxis)) * Controls.MouseSensitivity * 5; // Raw delta of the mouse.
                 TargetLookAngles += rawDelta; // Apply raw delta to target look angles.
                 TargetLookAngles = new Vector2(TargetLookAngles.x, Mathf.Clamp(TargetLookAngles.y, -90f, 90f)); // Clamp target look angles Y values between -90...90 to avoid looking too much up or down.
 
@@ -669,12 +669,12 @@ namespace MFPP
 
             if (IsGrounded) // If grounded
             {
-                Vector3 targetNormalizedDesiredMovement = new Vector3(GetCurrentAxis(Controls.HorizontalAxis), 0, GetCurrentAxis(Controls.VerticalAxis)); // Raw axis input
+                Vector3 targetNormalizedDesiredMovement = new Vector3(GetAxis(Controls.HorizontalAxis), 0, GetAxis(Controls.VerticalAxis)); // Raw axis input
 
                 if (!Movement.AllowMovement) // If we don't allow movement, nullify axis input
                     targetNormalizedDesiredMovement = Vector3.zero;
 
-                bool accelerate = Math.Abs(GetCurrentAxis(Controls.HorizontalAxis)) > 0f || Math.Abs(GetCurrentAxis(Controls.VerticalAxis)) > 0f; // Are we accelerating, or decelerating?
+                bool accelerate = Math.Abs(GetAxis(Controls.HorizontalAxis)) > 0f || Math.Abs(GetAxis(Controls.VerticalAxis)) > 0f; // Are we accelerating, or decelerating?
                 float speedRate = accelerate ? Movement.Acceleration : Movement.Deceleration; // Choose speed rate depending on acceleration or deceleration
 
                 if (targetNormalizedDesiredMovement.magnitude > 1f) // If the magnitude of our raw axis input is bigger than 1, normalize it (This avoids extra speed when moving diagonally)
@@ -748,7 +748,7 @@ namespace MFPP
                 {
                     if (Movement.SmartStrafing) // Smart strafing
                     {
-                        Vector3 wishDir = transform.TransformVector(GetCurrentAxis("Horizontal"), 0, GetCurrentAxis("Vertical"));
+                        Vector3 wishDir = transform.TransformVector(GetAxis("MoveX"), 0, GetAxis("MoveY"));
                         if (wishDir.magnitude > 1f)
                             wishDir.Normalize();
 
@@ -759,13 +759,13 @@ namespace MFPP
 
                     if (Movement.VerticalStrafing) // Vertical strafing
                     {
-                        Vector3 vertical = transform.TransformVector(0, 0, GetCurrentAxis("Vertical")) * Movement.StrafingSpeed;
+                        Vector3 vertical = transform.TransformVector(0, 0, GetAxis("MoveY")) * Movement.StrafingSpeed;
                         FinalMovement += vertical * Time.fixedDeltaTime;
                     }
 
                     if (Movement.HorizontalStrafing) // Horizontal strafing
                     {
-                        Vector3 horizontal = transform.TransformVector(GetCurrentAxis("Horizontal"), 0, 0) * Movement.StrafingSpeed;
+                        Vector3 horizontal = transform.TransformVector(GetAxis("Movex"), 0, 0) * Movement.StrafingSpeed;
                         FinalMovement += horizontal * Time.fixedDeltaTime;
                     }
                 }
@@ -1165,7 +1165,7 @@ namespace MFPP
         /// <returns>The value of the virtual axis identified by <see cref="axisName"/>.</returns>
         protected float GetAxis(string axisName)
         {
-            return Controls.ControlsEnabled ? Input.GetAxis(axisName) : 0f;
+            return Controls.ControlsEnabled ? ControlManager.Instance.GetAxis(axisName) : 0f;
         }
         /// <summary>
         /// Similar to <see cref="Input.GetAxisRaw(string)"/> but also taking into account <see cref="ControlSettings.ControlsEnabled"/>.
@@ -1174,8 +1174,9 @@ namespace MFPP
         /// <returns>The value of the virtual axis identified by <see cref="axisName"/>.</returns>
         protected float GetAxisRaw(string axisName)
         {
-            return Controls.ControlsEnabled ? Input.GetAxisRaw(axisName) : 0f;
+            return Controls.ControlsEnabled ? ControlManager.Instance.GetAxis(axisName) : 0f;
         }
+/*
         /// <summary>
         /// Returns the current axis value, based on whetever we use <see cref="ControlSettings.RawInput"/> and also taking into account <see cref="ControlSettings.ControlsEnabled"/>.
         /// </summary>
@@ -1186,23 +1187,23 @@ namespace MFPP
             float ret = 0;
             if (axisName == "Vertical")
             {
-                if (Input.GetKey(ControlManager.CM.forward)) 
+                if (Input.GetKey(ControlManager.Instance.forward)) 
                 {
                     ret += 1;
                 }
-                if (Input.GetKey(ControlManager.CM.backward)) 
+                if (Input.GetKey(ControlManager.Instance.backward)) 
                 {
                     ret -= 1;
                 }
             }
             else if (axisName == "Horizontal")
             {
-                if (Input.GetKey(ControlManager.CM.left))
+                if (Input.GetKey(ControlManager.Instance.left))
                 {
                     ret -= 1;
                 }
 
-                if (Input.GetKey(ControlManager.CM.right))
+                if (Input.GetKey(ControlManager.Instance.right))
                 {
                     ret += 1;
                 }
@@ -1210,6 +1211,7 @@ namespace MFPP
 
             return ret;
         }
+*/
 
         float GetMouseCurrentAxis(string axisName)
         {
@@ -1292,7 +1294,7 @@ namespace MFPP
 
         public void SetJumpPressed()
         {
-            if (Input.GetKeyDown(ControlManager.CM.jump)) {
+            if (ControlManager.Instance.GetButtonDown("Jump")){ // Input.GetKeyDown(ControlManager.Instance.jump)) {
                 jumpPressed = true;
             }
         }

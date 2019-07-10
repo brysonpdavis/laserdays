@@ -72,7 +72,7 @@ public class flipScript : MonoBehaviour {
 
 
 	void Update () {
-        if (Input.GetKeyDown(ControlManager.CM.flip) && Time.timeScale > 0.0f && CheckEyes())
+        if (ControlManager.Instance.GetButtonDown("Switch") && ! Toolbox.Instance.GetPauseMenu().activeSelf && CheckEyes())
         {
             FlipAttempt();
         }

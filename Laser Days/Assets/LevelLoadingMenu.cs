@@ -72,7 +72,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetKeyDown(KeyCode.Escape))) && !sceneIsLoading)
+        if (ControlManager.Instance.GetButtonDown("Pause") && !sceneIsLoading)
         {
             if (gameIsPaused && transitionIsDone)
                 Resume(true);
