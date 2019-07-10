@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundBox : Singleton<SoundBox> {
+public class SoundBox : MonoBehaviour {
 
     protected SoundBox() { } // guarantee this will be always a singleton only - can't use the constructor!
 
     public AudioSource thisSource;
-    public static SoundBox instance = null; 
+    public static SoundBox instance = null;
+    public static SoundBox Instance = null;
 
    // public AudioClip[] flipClips;
    // public AudioClip[] flipClipsSecondary;
@@ -46,10 +47,13 @@ public class SoundBox : Singleton<SoundBox> {
     public AudioClip doorActive;
 
     public AudioClip narrationSound;
+    
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        // DontDestroyOnLoad(this.gameObject);
+
+        Instance = this;
 
 
         //Todo: have it delete the old instance, earlier this was breaking it for some reason
@@ -70,8 +74,8 @@ public class SoundBox : Singleton<SoundBox> {
         //        //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
         //        Destroy(gameObject);
         //}
-            
-            
+
+
     }
 
     public void Start()

@@ -92,9 +92,12 @@ public class PlatformTrigger : MonoBehaviour {
 
 	private void FixedUpdate()
 	{
-        var temp = RenderMat.GetFloat("_Elapsed");
-        temp += (Time.deltaTime * ScrollSpeed);
-        RenderMat.SetFloat("_Elapsed", temp);
+        if (RenderMat)
+        {
+            var temp = RenderMat.GetFloat("_Elapsed");
+            temp += (Time.deltaTime * ScrollSpeed);
+            RenderMat.SetFloat("_Elapsed", temp);
+        }
 	}
 
 

@@ -80,7 +80,6 @@ public class ControlManager : MonoBehaviour
 
     public float GetAxis(string axis)
     {
-        Debug.Log(axis);
         return controllerPlayer.GetAxis(axis);
     }
     
