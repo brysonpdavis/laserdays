@@ -10,6 +10,8 @@ public class DoorTrigger : MonoBehaviour {
     public float ScrollSpeed = 0.4f;
     private Material RenderMat;
     private AudioSource audio;
+    private TriggerConnector[] connectors;
+
 
     private Vector2 minMaxScrollSpeed;
    
@@ -33,6 +35,18 @@ public class DoorTrigger : MonoBehaviour {
         RenderMat.SetTexture("_TriggerMap", controller.ScrollText);
 
         minMaxScrollSpeed = new Vector2(ScrollSpeed * -2, ScrollSpeed * 2);
+
+        if (GetComponentInChildren<TriggerConnector>())
+        {
+            connectors = GetComponentsInChildren<TriggerConnector>();
+            foreach (TriggerConnector conn in connectors)
+            {
+                conn.CreateConnector();
+                conn.SetColors(controller.RestingColor, controller.ShimmerColor);
+                conn.ChangeColor(controller.RestingColor);
+                conn.SetWorld(this.gameObject.layer == 11);
+            }
+        }
     }
 
     private void Update()
@@ -51,6 +65,8 @@ public class DoorTrigger : MonoBehaviour {
 
             if (counter == 1)
             {
+                SetConnectorStates(TriggerConnector.State.Active);
+
                 RenderMat.SetFloat("_isCollide", 1f);
                 RenderMat.SetFloat("_isActive", 1f);
                 ScrollSpeed = Mathf.Clamp(ScrollSpeed * -2, minMaxScrollSpeed.x, minMaxScrollSpeed.y);
@@ -74,6 +90,8 @@ public class DoorTrigger : MonoBehaviour {
                 RenderMat.SetFloat("_isActive", 0f);
                 ScrollSpeed *= -0.5f;
                 active = false;
+
+                SetConnectorStates(TriggerConnector.State.Waiting);
 
                 audio.clip = SoundBox.Instance.platformOff;
                 Toolbox.Instance.SetVolume(audio);
@@ -101,6 +119,17 @@ public class DoorTrigger : MonoBehaviour {
 
         else return false;
             
+    }
+
+    private void SetConnectorStates(TriggerConnector.State s)
+    {
+        if ((connectors != null) && connectors.Length > 0)
+        {
+            foreach (TriggerConnector connector in connectors)
+            {
+                connector.SetState(s);
+            }
+        }
     }
 
 
