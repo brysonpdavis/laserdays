@@ -56,7 +56,7 @@ public class RotationOnFlip : FlipInteraction
         while (ratio < 1f)
         {
             ratio = elapsedTime / actualDuration;
-            Vector3 value = Vector3.Lerp(start, end, TweeningFunctions.EaseInOut(ratio));
+            Vector3 value = Vector3.Lerp(start, end, TweeningFunctions.EaseOutCubic(ratio));
 
             transform.localEulerAngles = value;
 

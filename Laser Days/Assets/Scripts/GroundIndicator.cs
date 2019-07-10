@@ -28,8 +28,8 @@ public class GroundIndicator : MonoBehaviour {
 
     Color checkBelow()
     {
-        if (transform.parent.gameObject.layer == 15) { CurrentLayerMask = LayerMaskController.Real; } // newLayerMask.value = 1024; } //layermask value of layer 10 is 1024 (2^10)  
-        else if (transform.parent.gameObject.layer == 16) { CurrentLayerMask = LayerMaskController.Laser; }
+        if (transform.parent.gameObject.layer == 15) { CurrentLayerMask = LayerMaskController.Laser; } // newLayerMask.value = 1024; } //layermask value of layer 10 is 1024 (2^10)  
+        else if (transform.parent.gameObject.layer == 16) { CurrentLayerMask = LayerMaskController.Real; }
 
         RaycastHit firsthit;
         RaycastHit sharedHit;

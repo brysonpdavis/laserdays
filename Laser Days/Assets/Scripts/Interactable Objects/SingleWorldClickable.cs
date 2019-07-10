@@ -26,7 +26,9 @@ public class SingleWorldClickable : InteractableObject {
         transform.localRotation = Quaternion.Euler(Vector3.zero);
 
         if (!beenPickedUp)
-        { StartCoroutine(SlowPickup()); }
+        { 
+            //StartCoroutine(SlowPickup()); 
+        }
     }
 
     public override void Drop()
