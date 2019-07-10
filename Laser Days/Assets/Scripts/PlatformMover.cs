@@ -18,6 +18,7 @@ public class PlatformMover : MonoBehaviour {
     private MFPP.Modules.PickUpModule pickUp;
     private LineRenderer LR;
     private AudioSource audio;
+    private GameObject player;
     private bool playerLayer;
     public bool platformIsMoving = false;
     public bool TweenControl = false;
@@ -153,7 +154,8 @@ public class PlatformMover : MonoBehaviour {
 
     private void Update()
     {
-        if (Toolbox.Instance.GetPlayer().layer == (gameObject.layer + 5))
+        player = Toolbox.Instance.GetPlayer();
+        if (player && player.layer == (gameObject.layer + 5))
             playerLayer = true;
         else
             playerLayer = false;

@@ -57,15 +57,18 @@ public class TransitionController: MonoBehaviour
 
     void LateUpdate() //check to make sure the switch is possible (just as player is doing at the same time)
     {
-        bool isFlipped = player.GetComponent<flipScript>().flippedThisFrame;
-        bool direction = player.GetComponent<flipScript>().space;
-        if (isFlipped)
+        if (player)
         {
-            FlipSurrounding(direction);
-           // FlipSharedMaterials(direction);
-        }
+            bool isFlipped = player.GetComponent<flipScript>().flippedThisFrame;
+            bool direction = player.GetComponent<flipScript>().space;
+            if (isFlipped)
+            {
+                FlipSurrounding(direction);
+                // FlipSharedMaterials(direction);
+            }
 
-        isFlipped = false;
+            isFlipped = false;
+        }    
     }
 
     void FlipSurrounding(bool direction)

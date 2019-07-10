@@ -73,13 +73,6 @@ public class Toolbox : Singleton<Toolbox>
         DontDestroyOnLoad(this.gameObject);
 
     }
-
-    void Start()
-    {
-        soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();
-        soundEffectsSlider.onValueChanged.AddListener(delegate { VolumeChangeCheck(); });
-    }
-
     private void Update()
     {
         if (wording)
@@ -372,7 +365,6 @@ public class Toolbox : Singleton<Toolbox>
         {
             Toolbox.Instance.narrationContinue = Toolbox.Instance.narrationContainer.transform.Find("Continue").gameObject;
         }
-
 
     }
 

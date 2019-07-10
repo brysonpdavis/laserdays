@@ -14,9 +14,11 @@ public class SimpleHead : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (player)
+		{
+			transform.LookAt(player.position);
+			transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
 
-        transform.LookAt(player.position);
-        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
- 
-    }
+		}
+	}
 }
