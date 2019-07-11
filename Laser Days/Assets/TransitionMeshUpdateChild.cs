@@ -39,10 +39,10 @@ public class TransitionMeshUpdateChild : MonoBehaviour {
 
         if (visibleInlaser && player.layer == 16)
         {
+            //float current = GetComponent<Renderer>().material.GetFloat("_TransitionState");
             GetComponent<Transition>().SetStart(0f);
             //set it to off
             //Debug.Log("should set to off: i'm in laser player is real");
-
         }
 
         else if (!visibleInlaser && player.layer == 15)

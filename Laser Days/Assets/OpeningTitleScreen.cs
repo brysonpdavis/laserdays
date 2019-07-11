@@ -62,7 +62,6 @@ public class OpeningTitleScreen : MonoBehaviour {
 
         while (ratio <1f)
         {
-            Debug.LogError("FADE ON AWAKE");
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
 

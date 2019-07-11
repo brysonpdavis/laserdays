@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 23556638541782708}
   - component: {fileID: 114266124987169264}
   - component: {fileID: 114197416248486598}
+  - component: {fileID: 114795314729904580}
   m_Layer: 0
   m_Name: DoorIndicator (2)
   m_TagString: Untagged
@@ -192,6 +193,7 @@ GameObject:
   - component: {fileID: 23456899880645270}
   - component: {fileID: 114505126703663154}
   - component: {fileID: 114596803467544578}
+  - component: {fileID: 114837303061794172}
   m_Layer: 0
   m_Name: DoorIndicator (1)
   m_TagString: Untagged
@@ -213,6 +215,7 @@ GameObject:
   - component: {fileID: 82929596564683296}
   - component: {fileID: 114608939529449272}
   - component: {fileID: 64472544903996154}
+  - component: {fileID: 114487489788316106}
   m_Layer: 10
   m_Name: Main Trigger
   m_TagString: Untagged
@@ -1053,10 +1056,10 @@ MonoBehaviour:
   duration: 2
   doorIndicators: []
   active: 0
-  RestingColor: {r: 0.083659664, g: 0.112628356, b: 0.3773585, a: 0.8}
-  ActiveColor: {r: 0.03529412, g: 0.27450982, b: 0.54901963, a: 0}
-  ShimmerColor: {r: 0.100176014, g: 1.3607242, b: 1.5944682, a: 0}
-  ScrollText: {fileID: 2800000, guid: 3b7e16ba77998431581f2ffd2f5a036b, type: 3}
+  RestingColor: {r: 0.30313277, g: 0.49056602, b: 0.3224274, a: 0.23921569}
+  ActiveColor: {r: 0.36847216, g: 0.7830189, b: 0.31394625, a: 0}
+  ShimmerColor: {r: 0.06827848, g: 2.6082377, b: 0.35504806, a: 0}
+  ScrollText: {fileID: 2800000, guid: a78bf3a6cceb64fdbb8c1c5d11311be9, type: 3}
 --- !u!114 &114473819149413240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1071,6 +1074,19 @@ MonoBehaviour:
   ScaleSpeed: 1
   shared: 0
   manualTransitionChildren: 0
+--- !u!114 &114487489788316106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1992989459997706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 4800000, guid: 89736994e789c4fd8968294097f7aae2, type: 3}
+  m_Renderer: {fileID: 23866675222916440}
 --- !u!114 &114505126703663154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1151,6 +1167,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentMover: {fileID: 0}
   counter: 0
+--- !u!114 &114795314729904580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1370087584865978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 4800000, guid: 89736994e789c4fd8968294097f7aae2, type: 3}
+  m_Renderer: {fileID: 23556638541782708}
+--- !u!114 &114837303061794172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1803643609580806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fc05da9d5c244469752615601c1fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceShader: {fileID: 4800000, guid: 89736994e789c4fd8968294097f7aae2, type: 3}
+  m_Renderer: {fileID: 23456899880645270}
 --- !u!114 &114876131081192768
 MonoBehaviour:
   m_ObjectHideFlags: 1

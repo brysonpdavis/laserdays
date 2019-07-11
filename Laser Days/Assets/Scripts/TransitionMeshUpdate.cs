@@ -20,7 +20,7 @@ public class TransitionMeshUpdate : Transition {
     public override void Flip(float end, float duration)
     {
         float value = Vector3.Distance(Toolbox.Instance.GetPlayer().transform.position, this.transform.position);
-        Debug.Log("distance from player " + value);
+       // Debug.Log("distance from player " + value);
 
         if (value <= distance)
         {

@@ -1457,7 +1457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &169070392
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3188,7 +3188,7 @@ MonoBehaviour:
   thisSource: {fileID: 0}
   currentFlipPalette: {fileID: 11400000, guid: d90633685e95741c2a19832f4d034f26, type: 2}
   testercubeSounds: {fileID: 11400000, guid: c806353e8dd0c4c06a2f18426172b6eb, type: 2}
-  flipFail: {fileID: 0}
+  flipFail: {fileID: 8300000, guid: 265a42cf0de5d4150b8ffa84c7a388b9, type: 3}
   sokobanClickOn: {fileID: 8300000, guid: 59d2c2fc947174385a10ee241cf55e2a, type: 3}
   sokobanClickOff: {fileID: 8300000, guid: 84f2f8f1564e34535882a03492e26246, type: 3}
   sokobanShift: {fileID: 8300000, guid: 59d2c2fc947174385a10ee241cf55e2a, type: 3}
@@ -19516,8 +19516,8 @@ MonoBehaviour:
       assignJoysticksToPlayingPlayersOnly: 0
       distributeJoysticksEvenly: 0
       reassignJoystickToPreviousOwnerOnReconnect: 1
-      defaultJoystickAxis2DDeadZoneType: 1
-      defaultJoystickAxis2DSensitivityType: 0
+      defaultJoystickAxis2DDeadZoneType: 2
+      defaultJoystickAxis2DSensitivityType: 1
       defaultAxisSensitivityType: 0
       force4WayHats: 0
       throttleCalibrationMode: 0
@@ -19632,7 +19632,7 @@ MonoBehaviour:
       _descriptiveName: LookY
       _positiveDescriptiveName: LookUp
       _negativeDescriptiveName: LookDown
-      _behaviorId: 2
+      _behaviorId: 3
       _userAssignable: 1
       _categoryId: 0
     - _id: 4
@@ -19743,7 +19743,30 @@ MonoBehaviour:
       _buttonRepeatDelay: 0
     - _id: 2
       _name: SensitiveSticks
-      _joystickAxisSensitivity: 10
+      _joystickAxisSensitivity: 1
+      _digitalAxisSimulation: 1
+      _digitalAxisSnap: 1
+      _digitalAxisInstantReverse: 0
+      _digitalAxisGravity: 3
+      _digitalAxisSensitivity: 1
+      _mouseXYAxisMode: 0
+      _mouseOtherAxisMode: 0
+      _mouseXYAxisSensitivity: 0.1
+      _mouseXYAxisDeltaCalc: 0
+      _mouseOtherAxisSensitivity: 0.5
+      _customControllerAxisSensitivity: 1
+      _buttonDoublePressSpeed: 0.3
+      _buttonShortPressTime: 0.25
+      _buttonShortPressExpiresIn: 0
+      _buttonLongPressTime: 1
+      _buttonLongPressExpiresIn: 0
+      _buttonDeadZone: 0.15
+      _buttonDownBuffer: 0
+      _buttonRepeatRate: 30
+      _buttonRepeatDelay: 0
+    - _id: 3
+      _name: SensitiveSticks0
+      _joystickAxisSensitivity: 0.5
       _digitalAxisSimulation: 1
       _digitalAxisSnap: 1
       _digitalAxisInstantReverse: 0
@@ -20156,7 +20179,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 9
+        _actionId: -1
         _elementType: 0
         _elementIdentifierId: 4
         _axisRange: 0
@@ -20170,6 +20193,17 @@ MonoBehaviour:
         _actionId: 5
         _elementType: 1
         _elementIdentifierId: 11
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 0
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 9
+        _elementType: 0
+        _elementIdentifierId: 5
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
@@ -20713,7 +20747,7 @@ MonoBehaviour:
     playerIdCounter: 2
     actionIdCounter: 12
     actionCategoryIdCounter: 2
-    inputBehaviorIdCounter: 3
+    inputBehaviorIdCounter: 4
     mapCategoryIdCounter: 1
     joystickLayoutIdCounter: 1
     keyboardLayoutIdCounter: 1
@@ -22066,7 +22100,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1634057783}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -2, y: 10, z: -13.25}
+  m_LocalPosition: {x: -2, y: 0.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1198232337}
@@ -33237,7 +33271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1987081465
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33281,7 +33315,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1987081468
 MonoBehaviour:
