@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: S_ClassicTex_Red-Gray
+  m_Name: L_Plaster_Rust
   m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
-  m_ShaderKeywords: NO_GRADIENT SHARED _EMISSION
-  m_LightmapFlags: 5
+  m_ShaderKeywords: ACCENT_ON LASER NO_GRADIENT STATIC _EMISSION
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -19,26 +19,22 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AccentMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 667ae0b259a0d42ca882e292026397e2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _AlbedoLaser:
         m_Texture: {fileID: 2800000, guid: b88ad88c9fe2a45a2ae52d7f4bc9ada6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _AlbedoLaser:
+        m_Texture: {fileID: 2800000, guid: 2bc11ffdb946b41458b9dc99c2bc57c2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AlbedoReal:
-        m_Texture: {fileID: 2800000, guid: 9eb0c797d10a44d419d36c8f396f77ad, type: 3}
+        m_Texture: {fileID: 2800000, guid: 823e8f59cd24e40f0ab3d7a1074aa7e1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Deatil:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -54,12 +50,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Diffuse:
+        m_Texture: {fileID: 2800000, guid: 9eb0c797d10a44d419d36c8f396f77ad, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DissolveMap:
-        m_Texture: {fileID: 2800000, guid: 4213667ef65704f73b4663308f4e1b31, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Texture: {fileID: 2800000, guid: 07790774372b74051bf1de269ee0443a, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EffectMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0f9deff7cdfa54eb0ae31d1428c54bae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -75,11 +75,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4723a1b8994b844b98b31120ebf5f1e7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 862e8f8026a6a40d3a8f997637514f94, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaterialMap:
-        m_Texture: {fileID: 2800000, guid: 4723a1b8994b844b98b31120ebf5f1e7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 862e8f8026a6a40d3a8f997637514f94, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -87,14 +87,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalLaser:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalReal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -112,6 +104,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SecondTex:
         m_Texture: {fileID: 2800000, guid: 20fa208453803ab41b65dfe6fe92c848, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SelectedEffectMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadingMap:
@@ -137,8 +133,10 @@ Material:
     - _Angle: 0.46428573
     - _BlendOffset: 0
     - _BumpScale: 1
+    - _Clip: 1
     - _Cutoff: 0.27
     - _DetailNormalMapScale: 1
+    - _DissolveEdgeThickness: 0.3560508
     - _DstBlend: 0
     - _EdgeThickness: 0.01
     - _Elapsed: 0
@@ -151,12 +149,16 @@ Material:
     - _GradientOffset: 0
     - _GradientScale: 1
     - _Highlights: 0
+    - _IsFlippable: 0
+    - _IsSelected: 0
     - _Lightmapping: 1
-    - _LineA: 0
-    - _MainTexContribution: 0.4
+    - _LineA: 1
+    - _LineB: 1
+    - _LineC: 1
+    - _LineD: 1
+    - _MainTexContribution: 0.1
     - _Metallic: 0
     - _Mode: 0
-    - _NormalScale: 6.588235
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Phase: 1
@@ -166,7 +168,6 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SteppedTransition: 0
     - _TerrainScale: 1
     - _TransitionState: 1
     - _TransitionStateB: 0
@@ -180,21 +181,28 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.67910445, g: 0.67910445, b: 0.67910445, a: 1}
     - _Color2: {r: 0.14179105, g: 0.14179105, b: 0.14179105, a: 1}
-    - _ColorLaser: {r: 0.737255, g: 0.7647059, b: 0.7647059, a: 1}
-    - _ColorReal: {r: 0.77254903, g: 0.32549015, b: 0.27843136, a: 1}
+    - _ColorLaser: {r: 0.8679245, g: 0.41349235, b: 0.41349235, a: 0}
+    - _ColorReal: {r: 0.6509434, g: 0.32591033, b: 0.29169634, a: 0}
+    - _DissolveEdgeColor: {r: 1, g: 1, b: 1, a: 0}
     - _EdgeColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
+    - _HoldColor: {r: 0, g: 0, b: 0, a: 0}
+    - _HoverColor: {r: 0, g: 0, b: 0, a: 0}
     - _Indicator: {r: 1, g: 0, b: 0, a: 1}
-    - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserAccent: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserBase: {r: 0.7647059, g: 0.73901314, b: 0.7176471, a: 1}
+    - _InteractColor: {r: 0.6698113, g: 0.23064253, b: 0.23064253, a: 0}
+    - _LaserAccent: {r: 0.64046025, g: 0.735849, b: 0.20478818, a: 0.6862745}
+    - _LaserBase: {r: 0.6886792, g: 0.6364153, b: 0.62695795, a: 0}
     - _LaserEmission: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserGradient: {r: 0, g: 0, b: 0, a: 0}
-    - _RealAccent: {r: 0, g: 0, b: 0, a: 0}
-    - _RealBase: {r: 0.6981132, g: 0.41409308, b: 0.38527945, a: 1}
+    - _LaserGradient: {r: 0.4970002, g: 0.6698113, b: 0.47076362, a: 0}
+    - _RealAccent: {r: 0.9150943, g: 0.4994921, b: 0.4704966, a: 1}
+    - _RealBase: {r: 0.62264144, g: 0.404505, b: 0.27901384, a: 1}
     - _RealEmission: {r: 0, g: 0, b: 0, a: 0}
     - _RealGradient: {r: 0, g: 0, b: 0, a: 0}
-    - _ShimmerColor: {r: 0, g: 0, b: 0, a: 0}
+    - _SecondaryEffectColor: {r: 8, g: 8, b: 8, a: 0}
+    - _SelectedEffectColor: {r: 8, g: 8, b: 8, a: 0}
+    - _ShimmerColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}
     - _SpecularColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _TintA: {r: 0, g: 0, b: 0, a: 0}
+    - _TintB: {r: 0, g: 0, b: 0, a: 0}
