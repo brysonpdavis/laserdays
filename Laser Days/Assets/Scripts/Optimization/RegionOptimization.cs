@@ -37,6 +37,8 @@ public class RegionOptimization : MonoBehaviour
 	
 	Vector3 playerPosition;
 
+	private static List<RegionOptimization> allRegions;
+
 
 	private void Awake()
 	{
@@ -47,9 +49,12 @@ public class RegionOptimization : MonoBehaviour
 		if (parent)
 			parent.GetComponent<MajorRegions>().childrenRegions.Add(this);
 	}
-	
+
 	private void Start ()
 	{
+		
+		MakeListAndAdd();
+
 		active = true;
 		player = Toolbox.Instance.GetPlayer();
 		playerDistance = GetDistance2D();
@@ -141,4 +146,30 @@ public class RegionOptimization : MonoBehaviour
 		childrenActive = setToStatus;
 
 	}
+
+	public static void AllRegionsDistanceCheck()
+	{
+		foreach (RegionOptimization region in allRegions)
+		{
+			if (region.active)
+				region.DistanceCheck();
+		}
+	}
+
+	private void OnDestroy()
+	{
+		allRegions.Remove(this);
+	}
+	
+	private void MakeListAndAdd()
+	{
+		if (allRegions == null)
+		{
+			allRegions = new List<RegionOptimization>();
+		}
+		
+		allRegions.Add(this);
+
+	}
+
 }

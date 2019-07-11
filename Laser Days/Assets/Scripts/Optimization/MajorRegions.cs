@@ -20,8 +20,16 @@ public class MajorRegions : MonoBehaviour
 
 	private GameObject player;
 
+	private static List<MajorRegions> allRegions;
+
+	private void Awake()
+	{
+		MakeListAndAdd();
+	}
+
 	private void Start()
 	{
+		
 		player = Toolbox.Instance.GetPlayer();
 	}
 
@@ -100,4 +108,32 @@ public class MajorRegions : MonoBehaviour
 	{
 		return active;
 	}
+	
+	public static void AllRegionsDistanceCheck()
+	{
+		foreach (MajorRegions region in allRegions)
+		{
+			if (region.active)
+				region.DistanceCheck();
+		}
+	}
+	
+	private void OnDestroy()
+	{
+		allRegions.Remove(this);
+	}
+
+	private void MakeListAndAdd()
+	{
+		if (allRegions == null)
+		{
+			allRegions = new List<MajorRegions>();
+		}
+		
+		allRegions.Add(this);
+		
+		
+
+	}
+
 }

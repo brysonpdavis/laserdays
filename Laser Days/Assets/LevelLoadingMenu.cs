@@ -416,6 +416,9 @@ public class LevelLoadingMenu : MonoBehaviour {
         Debug.Log("Camera rotation " + look);
 
         player.TargetLookAngles = look;
+        
+        MajorRegions.AllRegionsDistanceCheck();
+        RegionOptimization.AllRegionsDistanceCheck();
 
         StartCoroutine(FadeIn(outlinesFade));
 
