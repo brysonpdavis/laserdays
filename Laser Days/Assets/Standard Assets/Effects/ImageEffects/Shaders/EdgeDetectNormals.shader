@@ -399,7 +399,7 @@ Shader "Hidden/EdgeDetect" {
         edge = saturate(edge + ( 1 - f)) * _BgColor.a;
         //return center;
 
-        float4 pm = (cream * edge);   
+        float4 pm = 1 - edge;
 		float4 sc = (original * edge);
         
         
