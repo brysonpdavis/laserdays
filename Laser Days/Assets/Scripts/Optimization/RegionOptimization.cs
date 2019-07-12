@@ -142,9 +142,11 @@ public class RegionOptimization : MonoBehaviour
 	public void SetToActive(bool setToStatus)
 	{
 		active = setToStatus;
-		activeLevel.SetActive(setToStatus);
-		childrenActive = setToStatus;
-
+        if (activeLevel)
+        {
+            activeLevel.SetActive(setToStatus);
+            childrenActive = setToStatus;
+        }
 	}
 
 	public static void AllRegionsDistanceCheck()
