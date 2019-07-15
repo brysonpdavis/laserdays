@@ -42,7 +42,6 @@ public class SimpleEye : MonoBehaviour {
             EyeActivate();
     }
 
-
     private void EyeActivate()
     {
             Vector3 currentPlayer = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
@@ -106,6 +105,16 @@ public class SimpleEye : MonoBehaviour {
 
         lastTarget = current;
         snapViewRunning = false;
+    }
+
+    public void BeamActivate()
+    {
+        beam.UnmuteBeam();
+    }
+
+    public void BeamDeactivate()
+    {
+        beam.MuteBeam();
     }
 
     private IEnumerator Focus(float duration)

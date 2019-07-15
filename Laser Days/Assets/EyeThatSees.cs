@@ -50,6 +50,8 @@ public class EyeThatSees : MonoBehaviour {
             Toolbox.Instance.SetVolume(audio);
             if (audio)
                 audio.mute = false;
+
+            eyeParent.BeamActivate();
         }
     }
 
@@ -63,6 +65,8 @@ public class EyeThatSees : MonoBehaviour {
             eyeParent.BeamReset();
             if (audio)
                 audio.mute = true;
+
+            eyeParent.BeamDeactivate();
         }
     }
 
@@ -147,7 +151,7 @@ public class EyeThatSees : MonoBehaviour {
             //so the simpleEye can run WallCheck;
             currentPlayerPoint = hit.point;
 
-            if (hit.collider.CompareTag("Player") && (WallCheck(hit.point)))
+            if ((hit.collider.CompareTag("Player") || hit.collider.CompareTag("Clickable")) && (WallCheck(hit.point)))
                 checkEyeLevel = true;
 
                 

@@ -16,6 +16,16 @@ public class EyeBeam : MonoBehaviour {
         Toolbox.Instance.SetVolume(audio);
     }
 
+    public void MuteBeam()
+    {
+        audio.Stop();
+    }
+
+    public void UnmuteBeam()
+    {
+        audio.Play();
+    }
+
     public void SetLength (float len)
     {
         Vector3 beam = new Vector3(transform.localScale.x, transform.localScale.y, len);
