@@ -15,6 +15,7 @@ public class EyeThatSees : MonoBehaviour {
     private EyeDirection myDirection;
     private ParticleSystem particleSystem;
     [HideInInspector] public Vector3 currentPlayerPoint;
+    AudioSource audio;
 
     public int particleCount = 15;
     public float radialSpeed = 0.0f;
@@ -34,6 +35,8 @@ public class EyeThatSees : MonoBehaviour {
         InitializeWallCheck();
         Debug.Log(transform.rotation.eulerAngles.y);
         particleSystem = GetComponentInChildren<ParticleSystem>();
+        audio = GetComponent<AudioSource>();
+        audio.maxDistance = GetComponent<SphereCollider>().radius;
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -43,6 +46,10 @@ public class EyeThatSees : MonoBehaviour {
             isActive = true;
             Debug.Log("entered");
             flip.eyeThatSeesList.Add(this);
+
+            Toolbox.Instance.SetVolume(audio);
+            if (audio)
+                audio.mute = false;
         }
     }
 
@@ -54,6 +61,8 @@ public class EyeThatSees : MonoBehaviour {
             Debug.Log("exited");
             flip.eyeThatSeesList.Remove(this);
             eyeParent.BeamReset();
+            if (audio)
+                audio.mute = true;
         }
     }
 

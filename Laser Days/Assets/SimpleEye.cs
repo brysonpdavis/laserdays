@@ -48,6 +48,8 @@ public class SimpleEye : MonoBehaviour {
             Vector3 currentPlayer = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
             timeCounter += Time.deltaTime;
 
+            beam.SetAudioVolume();
+
             bool playerHasMoved = false;
             if (((previousPosition - player.position).magnitude) > .1f)
             {
