@@ -4,13 +4,17 @@ using UnityEngine;
 
 public static class TweeningFunctions {
 
-    public enum TweenType { EaseIn, EaseOut, EaseInOut, EaseInCubic, EaseOutCubic, BackAndForth };
+    public enum TweenType { Linear, EaseIn, EaseOut, EaseInOut, EaseInCubic, EaseOutCubic, BackAndForth };
 
     public static float Tween(TweenType type, float R)
     {
         switch (type)
 
         {
+            case TweenType.Linear:
+                return Linear(R);
+                break;
+
             case TweenType.EaseIn:
                     return EaseIn(R);
                     break;
@@ -46,6 +50,12 @@ public static class TweeningFunctions {
         }
     }
 
+
+    //Quad ease in
+    public static float Linear(float R)
+    {
+        return R;
+    }
 
     //Quad ease in
     public static float EaseIn(float R)

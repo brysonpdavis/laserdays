@@ -162,15 +162,20 @@ float3 GetBaseColor (Interpolators i)
 //Returns 0 -> 1 gradient value at a fragment - based on fragment object position;
 float GetGradient (Interpolators i)
 { 
-    float3 objectPos = mul (unity_WorldToObject, float4(i.worldPos, 1)).xyz;
+    float3 pos = i.worldPos.xyz;
     
+    #if !defined(WORLD_POS_GRADIENT)
+        pos = mul (unity_WorldToObject, float4(pos, 1)).xyz;
+    #endif
+    
+
     #if defined(HEIGHT_GRADIENT)
-        float a = remap01(objectPos.y, _GradientScale, _GradientOffset);
+        float a = remap01(pos.y, _GradientScale, _GradientOffset);
         return a;
         return floor(a*4)/4;
     #endif
     #if defined(RADIAL_GRADIENT)
-        float a = remap01(length(objectPos), _GradientScale, _GradientOffset);
+        float a = remap01(length(pos), _GradientScale, _GradientOffset);
         return a;
         return floor(a*4)/4;
     #endif

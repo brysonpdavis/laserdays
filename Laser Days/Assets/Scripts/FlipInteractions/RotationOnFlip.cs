@@ -11,7 +11,7 @@ public class RotationOnFlip : FlipInteraction
     float ratio = 0f;
     public bool startRotationInLaser = true;
     public bool check;
-    public TweeningFunctions.TweenType tween;
+    public TweeningFunctions.TweenType tween = TweeningFunctions.TweenType.EaseInOut;
 
     private void Start()
     {
