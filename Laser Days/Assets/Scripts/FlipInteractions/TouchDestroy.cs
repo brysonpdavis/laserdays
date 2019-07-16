@@ -11,6 +11,7 @@ public class TouchDestroy : FlipInteraction{
     private MaterialPropertyBlock _propBlock;
     float duration;
     float elapsedTime;
+    AudioSource audio;
 
     ParticleTransitionBurst[] particleBursts;
 
@@ -19,14 +20,12 @@ public class TouchDestroy : FlipInteraction{
     {
         if (other.gameObject.CompareTag("Player"))
         {
-
+            Toolbox.Instance.SetVolume(audio);
+            audio.Play();
+            Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.selection);
             if (!touched)
             { 
-                //mRenderer.GetPropertyBlock(_propBlock);
-                //_propBlock.SetFloat("_OnHold", 1f);
-
                 material.SetFloat("_onHold", 1f);
-                //mRenderer.SetPropertyBlock(_propBlock);//do something that lets you know you've activated it
             }
 
             touched = true;
@@ -39,7 +38,7 @@ public class TouchDestroy : FlipInteraction{
         mRenderer = GetComponent<Renderer>();
         duration = Toolbox.Instance.globalFlipSpeed;
         material = mRenderer.material;
-
+        audio = GetComponent<AudioSource>();
 
         mRenderer.GetPropertyBlock(_propBlock);
 
@@ -64,11 +63,9 @@ public class TouchDestroy : FlipInteraction{
         {
             activated = true;
 
-
-            //foreach (MeshCollider m in GetComponents<MeshCollider>())
-            //{
-            //    m.isTrigger = true;
-            //}
+            audio.clip = SoundBox.Instance.flipFail;
+            audio.Play();
+            audio.loop = false;
 
             GetComponent<MeshCollider>().isTrigger = true;
             //GetComponent<Collider>().enabled = false;

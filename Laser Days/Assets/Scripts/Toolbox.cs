@@ -43,6 +43,7 @@ public class Toolbox : Singleton<Toolbox>
     public MFPP.SoundContainerAsset testercubeSounds;
     public IList<UniqueId> allIds = new List<UniqueId>();
     public AudioSource SoundEffectsAudio;
+    private AudioSource SoundtrackAudio;
 
     public GameObject narrationContainer;
     private Text narrationText;
@@ -57,6 +58,7 @@ public class Toolbox : Singleton<Toolbox>
     private string narrationCurrentWords = "";
     private int frame_counter = 0;
     private int frames_til_draw;
+
     public GameObject regionController;
     public bool deleteUnusedAssets = true;
 
@@ -238,6 +240,11 @@ public class Toolbox : Singleton<Toolbox>
         return pauseMenu;
     }
 
+    public AudioSource GetSoundTrackAudio()
+    {
+        return SoundtrackAudio;
+    }
+
     public void SetNarration(string text)
     {
         narrationActive = true;
@@ -362,6 +369,7 @@ public class Toolbox : Singleton<Toolbox>
 
 
         Toolbox.Instance.SoundEffectsAudio = GameObject.Find("SoundEffectsAudio").GetComponent<AudioSource>();
+        Toolbox.Instance.SoundtrackAudio = GameObject.Find("SecondaryAudioSource").GetComponent<AudioSource>();
 
 
         Toolbox.Instance.soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();

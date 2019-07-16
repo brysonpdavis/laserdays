@@ -20,6 +20,7 @@ public class Transition : MonoBehaviour
     public bool manualTransitionChildren;
     bool transitionAllChildren;
     protected Transition[] childrenTransitions;
+    public TweeningFunctions.TweenType tween = TweeningFunctions.TweenType.EaseInOut;
 
 
     private bool amCore;
@@ -155,7 +156,7 @@ public class Transition : MonoBehaviour
             while (ratio < 1f)
             {
                 ratio = elapsedTime / duration;
-                float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.EaseInOut(ratio));
+            float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.Tween(tween, ratio));
 
                 _propBlock.SetFloat("_TransitionState", value);
                 mRenderer.SetPropertyBlock(_propBlock);

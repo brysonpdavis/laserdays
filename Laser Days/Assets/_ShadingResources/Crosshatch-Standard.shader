@@ -72,6 +72,7 @@
             
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
+            #pragma multi_complie _ WORLD_POS_GRADIENT
             #pragma multi_compile _ ACCENT_ON
             #pragma multi_compile _ EMISSIVE
             #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
@@ -101,6 +102,7 @@
             
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
+            #pragma multi_complie _ WORLD_POS_GRADIENT
             #pragma multi_compile _ ACCENT_ON
             #pragma multi_compile _ EMISSIVE
             #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
@@ -128,6 +130,7 @@
             
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
+            #pragma multi_complie _ WORLD_POS_GRADIENT
             #pragma multi_compile _ ACCENT_ON
             #pragma multi_compile _ EMISSIVE
             #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE

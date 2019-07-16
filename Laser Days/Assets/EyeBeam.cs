@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class EyeBeam : MonoBehaviour {
 
+    AudioSource audio;
 
-    //public float length;
+    private void Start()
+    {
+        audio = GetComponentInChildren<AudioSource>();
+    }
 
-    //private void Update()
-    //{
-    //    transform.localScale = new Vector3(1f, 1f, length);
-    //}
+    public void SetAudioVolume()
+    {
+        Toolbox.Instance.SetVolume(audio);
+    }
+
+    public void MuteBeam()
+    {
+        audio.Stop();
+    }
+
+    public void UnmuteBeam()
+    {
+        audio.Play();
+    }
 
     public void SetLength (float len)
     {

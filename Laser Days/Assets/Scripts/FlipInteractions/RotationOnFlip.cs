@@ -11,6 +11,7 @@ public class RotationOnFlip : FlipInteraction
     float ratio = 0f;
     public bool startRotationInLaser = true;
     public bool check;
+    public TweeningFunctions.TweenType tween = TweeningFunctions.TweenType.EaseInOut;
 
     private void Start()
     {
@@ -56,7 +57,7 @@ public class RotationOnFlip : FlipInteraction
         while (ratio < 1f)
         {
             ratio = elapsedTime / actualDuration;
-            Vector3 value = Vector3.Lerp(start, end, TweeningFunctions.EaseOutCubic(ratio));
+            Vector3 value = Vector3.Lerp(start, end, TweeningFunctions.Tween(tween, ratio));
 
             transform.localEulerAngles = value;
 

@@ -25,6 +25,7 @@ public class CrosshatchStandardGUI : ShaderGUI {
     }
 
     bool Emissive;
+    bool WorldPosGradient;
 
     Material target;
     MaterialEditor editor;
@@ -226,7 +227,12 @@ public class CrosshatchStandardGUI : ShaderGUI {
                 ColorProperty("_RealGradient");
                 ColorProperty("_LaserGradient");
             }
+
+            WorldPosGradient = EditorGUILayout.Toggle("Use world position", IsKeywordEnabled("WORLD_POS_GRADIENT"));
+            SetKeyword("WORLD_POS_GRADIENT", WorldPosGradient);
         }
+
+
     }
 
     void TransitionModule()
