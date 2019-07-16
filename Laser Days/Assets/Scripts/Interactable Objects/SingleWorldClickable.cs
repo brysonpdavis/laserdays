@@ -29,6 +29,8 @@ public class SingleWorldClickable : InteractableObject {
         { 
             //StartCoroutine(SlowPickup()); 
         }
+        
+        OnPickup();
     }
 
     public override void Drop()

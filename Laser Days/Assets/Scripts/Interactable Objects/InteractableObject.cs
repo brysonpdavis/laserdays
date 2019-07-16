@@ -177,6 +177,16 @@ abstract public class InteractableObject : MonoBehaviour
         }  
     }
 
+    public void OnPickup()
+    {
+        TakeActionOnAction actionScript = GetComponent<TakeActionOnAction>();
+
+        if (actionScript)
+        {
+            actionScript.PickedUp();
+        }
+    }
+
 
 
     protected virtual bool AmHeldObj()
