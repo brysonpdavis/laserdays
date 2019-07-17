@@ -51,6 +51,7 @@ public class ControlMenuScript : MonoBehaviour {
 
          */
 
+/*
         for(int i = 0; i < menuPanel.childCount; i++)
 
         {
@@ -98,6 +99,7 @@ public class ControlMenuScript : MonoBehaviour {
                 menuPanel.GetChild(i).Find("PlayerInput").GetComponent<Text>().text = ControlManager.Instance.submit.ToString();
 
         }
+*/
 
     }
 
@@ -214,6 +216,7 @@ public class ControlMenuScript : MonoBehaviour {
 
  
 
+/*
         switch(keyName)
 
         {
@@ -321,6 +324,7 @@ public class ControlMenuScript : MonoBehaviour {
 
 
         }
+*/
 
  
 

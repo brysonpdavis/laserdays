@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using Rewired;
 using UnityEngine;
 
 public class ControlManager : MonoBehaviour
@@ -7,8 +8,11 @@ public class ControlManager : MonoBehaviour
 
     public static ControlManager Instance;
 
-    private Rewired.Player controllerPlayer;
+    private static ControllerState controllerState;
 
+    private Player controllerPlayer;
+
+/*
     public KeyCode jump { get; set; }
     public KeyCode forward { get; set; }
     public KeyCode backward { get; set; }
@@ -19,6 +23,13 @@ public class ControlManager : MonoBehaviour
     public KeyCode select { get; set; }
     public KeyCode pause { get; set; }
     public KeyCode submit { get; set; }
+*/
+
+    public enum ControllerState
+    {
+        KeyboardAndMouse,
+        JoystickPS4
+    }
 
     void Awake()
     {
@@ -33,41 +44,12 @@ public class ControlManager : MonoBehaviour
             Destroy(gameObject);
         }
         
-        controllerPlayer = Rewired.ReInput.players.GetPlayer(0);
-
-
-        forward = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("forwardKey", "W"));
+        controllerPlayer = ReInput.players.GetPlayer(0);
         
-        backward = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("backwardKey", "S"));
         
-        left = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("leftKey", "A"));
-        
-        right = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("rightKey", "D"));
-        
-        jump = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("jumpKey", "Space"));
-        
-        pickup = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("pickupKey", "E"));
-        
-        flip = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("flipKey", "Mouse0"));
-        
-        select = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("selectKey", "Mouse1"));
-        
-        pause = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("pauseKey", "Escape"));
-        
-        submit = (KeyCode) System.Enum.Parse(typeof(KeyCode),
-            PlayerPrefs.GetString("submitKey", "Return"));
-
+        OnStartup();
     }
-
+    
     public bool GetButton(string action)
     {
         return controllerPlayer.GetButton(action);
@@ -83,9 +65,77 @@ public class ControlManager : MonoBehaviour
         return controllerPlayer.GetAxis(axis);
     }
     
-    public bool GetJumpDown()
+    private void OnControllerConnected(ControllerStatusChangedEventArgs args)
     {
-        return controllerPlayer.GetButtonDown("Jump");
+        //Debug.LogError("Controller Connected: " + args.name);
+        
+        if (args.controllerType == ControllerType.Joystick)
+        {
+            controllerPlayer.controllers.AddController(ReInput.controllers.GetController(args.controllerType, args.controllerId), true);
+            
+            RemoveKeyboard();
+        }
+
     }
     
+    private void OnControllerDisconnect(ControllerStatusChangedEventArgs args)
+    {
+        //Debug.LogError("Controller Disconnected: " + args.name);
+
+        if (args.controllerType == ControllerType.Joystick)
+        {
+            ReInput.controllers.RemoveControllerFromAllPlayers(ReInput.controllers.GetController(args.controllerType ,args.controllerId));
+        }
+
+        if (controllerPlayer.controllers.joystickCount == 0)
+        {
+            AddKeyboard();
+        }
+    }
+
+    public static ControllerState GetControllerState()
+    {
+        return controllerState;
+    }
+    
+    private void AddKeyboard()
+    {
+        controllerPlayer.controllers.hasKeyboard = true;
+        controllerPlayer.controllers.hasMouse = true;
+
+        controllerState = ControllerState.KeyboardAndMouse;
+        
+        //Debug.LogError("Adding keyboard, joysticks: " + ReInput.controllers.joystickCount);
+    }
+
+    private void RemoveKeyboard()
+    {
+        controllerPlayer.controllers.hasKeyboard = false;
+        controllerPlayer.controllers.hasMouse = false;
+
+        controllerState = ControllerState.JoystickPS4;
+        
+        //Debug.LogError("Removing keyboard, joysticks: " + ReInput.controllers.joystickCount);
+
+    }
+
+    private void OnStartup()
+    {
+        ReInput.ControllerConnectedEvent += OnControllerConnected;
+        ReInput.ControllerDisconnectedEvent += OnControllerDisconnect;
+        
+        if (controllerPlayer.controllers.joystickCount > 0)
+        {
+            RemoveKeyboard();
+
+            foreach (Joystick stick in controllerPlayer.controllers.Joysticks)
+            {
+                controllerPlayer.controllers.AddController(stick,true);
+            }
+        }
+        else
+        {
+            AddKeyboard();
+        }
+    }
 }

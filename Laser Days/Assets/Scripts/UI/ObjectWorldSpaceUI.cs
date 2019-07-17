@@ -14,9 +14,9 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 
 	public float activeDistance = 10;
 
-	public Image joystickSprite;
+	public Sprite joystickSprite;
 
-	public Image keyboardSprite;
+	public Sprite keyboardSprite;
 	
 	public float refreshTime = 1f;
 
@@ -27,8 +27,6 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 	private GameObject keyboardImage;
 
 	private State dState;
-
-	private static ControlState cState;
 	
 	private enum State
 	{
@@ -37,23 +35,23 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 		Active,
 		Done
 	};
-
-	private enum ControlState
-	{
-		Keyboard,
-		Controller
-	}
 	
 	void Start ()
 	{
-		cState = ControlState.Controller;
-		
 		player = Toolbox.Instance.GetPlayer();
 		mainCamera = Camera.main;
 		textAndImage = transform.GetChild(0).gameObject;
 		dState = State.Waiting;
 		keyboardImage = textAndImage.transform.Find("Keyboard").gameObject;
 		joystickImage = textAndImage.transform.Find("Controller").gameObject;
+
+		if (keyboardSprite && keyboardImage.GetComponent<Image>())
+			keyboardImage.GetComponent<Image>().sprite = keyboardSprite;
+
+		if (joystickSprite && joystickImage.GetComponent<Image>())
+			joystickImage.GetComponent<Image>().sprite = joystickSprite;
+		
+		
 		DisableTextAndImage();
 		InvokeRepeating("SetPlayerDistance", 0, refreshTime);
 	}
@@ -61,7 +59,7 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 	void Update ()
 	{
 		UpdateStates();
-		UpdateText();
+		UpdateContent();
 		if (dState == State.Active) 
 			LookAtCamera();
 	}
@@ -101,19 +99,19 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 			textAndImage.SetActive(true);
 		}
 		
-		if (cState == ControlState.Controller)
+		if (ControlManager.GetControllerState() == ControlManager.ControllerState.JoystickPS4)
 		{
-			joystickImage.SetActive(true);
+			ActivateControllerImage();
 		}
 
-		if (cState == ControlState.Keyboard)
+		if (ControlManager.GetControllerState() == ControlManager.ControllerState.KeyboardAndMouse)
 		{
-			keyboardImage.SetActive(true);
+			ActivateKeyboardImage();
 		}
-
+		
 	}
 
-	void UpdateText()
+	void UpdateContent()
 	{
 		switch (dState)
 		{
@@ -132,6 +130,16 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 				break;
 			
 			case State.Active:
+				
+				if (ControlManager.GetControllerState() == ControlManager.ControllerState.JoystickPS4)
+				{
+					ActivateControllerImage();
+				}
+
+				if (ControlManager.GetControllerState() == ControlManager.ControllerState.KeyboardAndMouse)
+				{
+					ActivateKeyboardImage();
+				}
 
 				break;
 			
@@ -184,5 +192,17 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 	public void TurnOff()
 	{
 		dState = State.Done;
+	}
+
+	private void ActivateControllerImage()
+	{
+		joystickImage.SetActive(true);
+		keyboardImage.SetActive(false);
+	}
+
+	private void ActivateKeyboardImage()
+	{
+		joystickImage.SetActive(false);
+		keyboardImage.SetActive(true);
 	}
 }
