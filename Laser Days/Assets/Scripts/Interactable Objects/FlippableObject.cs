@@ -191,7 +191,7 @@ abstract public class FlippableObject : InteractableObject
                 direction = 1f;
                 if (core)
                 {
-                    core.gameObject.GetComponent<Renderer>().material.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreLaser;
+                    ShaderUtility.ShaderToLaser(core.gameObject.GetComponent<Renderer>().material);
                     core.gameObject.GetComponent<Transition>().StopAllCoroutines();
                     core.gameObject.GetComponent<Transition>().SetStart(0f);
                     core.gameObject.GetComponent<Transition>().Flip(1f, Toolbox.Instance.globalFlipSpeed);
@@ -207,7 +207,7 @@ abstract public class FlippableObject : InteractableObject
 
                 if (core)
                 {
-                    core.gameObject.GetComponent<Renderer>().material.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreLaser;
+                    ShaderUtility.ShaderToLaser(core.gameObject.GetComponent<Renderer>().material);
                     core.gameObject.GetComponent<Transition>().StopAllCoroutines();
                     core.gameObject.GetComponent<Transition>().SetStart(1f);
                     core.gameObject.GetComponent<Transition>().Flip(0f, Toolbox.Instance.globalFlipSpeed);
@@ -231,7 +231,7 @@ abstract public class FlippableObject : InteractableObject
 
                 if (core)
                 {
-                    core.gameObject.GetComponent<Renderer>().material.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreReal;
+                    ShaderUtility.ShaderToReal(core.gameObject.GetComponent<Renderer>().material);
                     core.gameObject.GetComponent<Transition>().StopAllCoroutines();
                     core.gameObject.GetComponent<Transition>().SetStart(0f);
                     core.gameObject.GetComponent<Transition>().Flip(1f, Toolbox.Instance.globalFlipSpeed);
@@ -246,7 +246,7 @@ abstract public class FlippableObject : InteractableObject
                 direction = 0f;
                 if (core)
                 {
-                    core.gameObject.GetComponent<Renderer>().material.shader = Toolbox.Instance.GetPlayer().GetComponent<RaycastManager>().coreReal;
+                    ShaderUtility.ShaderToReal(core.gameObject.GetComponent<Renderer>().material);
                     core.gameObject.GetComponent<Transition>().StopAllCoroutines();
                     core.gameObject.GetComponent<Transition>().SetStart(1f);
                     core.gameObject.GetComponent<Transition>().Flip(0f, Toolbox.Instance.globalFlipSpeed);
