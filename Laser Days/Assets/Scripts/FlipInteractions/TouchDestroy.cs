@@ -20,9 +20,14 @@ public class TouchDestroy : FlipInteraction{
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Toolbox.Instance.SetVolume(audio);
-            audio.Play();
-            Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.selection);
+
+            if (!activated)
+            {
+                Toolbox.Instance.SetVolume(audio);
+                audio.Play();
+                Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.selection);
+            }
+
             if (!touched)
             { 
                 material.SetFloat("_onHold", 1f);
@@ -62,7 +67,7 @@ public class TouchDestroy : FlipInteraction{
         if (touched && !activated)
         {
             activated = true;
-
+                            
             audio.clip = SoundBox.Instance.flipFail;
             audio.Play();
             audio.loop = false;
