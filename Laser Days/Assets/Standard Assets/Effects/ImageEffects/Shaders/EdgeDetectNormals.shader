@@ -400,7 +400,7 @@ Shader "Hidden/EdgeDetect" {
         //return center;
 
         float4 pm = 1 - edge;
-		float4 sc = (original * edge);
+		float4 sc = (edge * original);
         
         
         //return centerExtra;

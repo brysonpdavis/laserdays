@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: L_Mouth
-  m_Shader: {fileID: 4800000, guid: 2ce7ad6531ac740ad96f40c3966463db, type: 3}
+  m_Shader: {fileID: 4800000, guid: 28a8a0da47e324d7b8159c496728ed34, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AccentMap:
-        m_Texture: {fileID: 2800000, guid: 461300a8d05b148029e3b82c96ff855c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6c63390b4540a455f8cf97a7e83dd6df, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -39,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EffectMap:
-        m_Texture: {fileID: 2800000, guid: b9cac84a6ed1148c18f4d66b7bdfa25b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5a9e4ec13b33b448db47548d04579598, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -70,21 +70,33 @@ Material:
         m_Texture: {fileID: 2800000, guid: 1ce8744130c8d5542bb1f6e380e35a7e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TriggerMap:
+        m_Texture: {fileID: 2800000, guid: 3b7e16ba77998431581f2ffd2f5a036b, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaCutoff: 0.5
+    - _AlphaCutoff: 0.419
+    - _Animated: 0
+    - _Blocked: 0
     - _BumpScale: 1
+    - _CamFade: 7.1
+    - _CamFadeOffset: 8.8
     - _ChromaticAberration: 0
     - _Cutoff: 0.5
+    - _DepthFade: 32.5
     - _DetailNormalMapScale: 1
     - _Dirtiness: 0
     - _DstBlend: 0
+    - _Elapsed: 204.65196
+    - _FadeLength: 0.8
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Indicator: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -98,16 +110,25 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
+    - _isActive: 0
+    - _isCollide: 0
+    - _isLineRender: 0
     m_Colors:
     - _Accent: {r: 0, g: 0, b: 0, a: 0.18039216}
+    - _ActiveColor: {r: 0.8773585, g: 0.6087155, b: 0.09518514, a: 0.7764706}
     - _Base: {r: 0.9137255, g: 0.13593777, b: 0, a: 0.5019608}
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _BlockColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.8627059, g: 0.9150943, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Highlight: {r: 1, g: 1, b: 1, a: 0}
+    - _Hit: {r: 0, g: 0, b: 0, a: 0}
     - _LaserAccent: {r: 0, g: 0.0037371768, b: 0.03773582, a: 0}
-    - _LaserBase: {r: 0.4716981, g: 0.39097247, b: 0.15352438, a: 0}
+    - _LaserBase: {r: 0.4716981, g: 0.3909724, b: 0.15352431, a: 0}
     - _Real: {r: 0.21573514, g: 0.4396582, b: 0.4528302, a: 0}
-    - _RealAccent: {r: 0.2830189, g: 0.21760415, b: 0.21760415, a: 0}
-    - _RealBase: {r: 0.09189214, g: 0.25488472, b: 0.3301887, a: 0}
+    - _RealAccent: {r: 1, g: 0, b: 0.16531083, a: 1}
+    - _RealBase: {r: 0.11271804, g: 0.14940771, b: 0.16037735, a: 0.34117648}
+    - _RestingColor: {r: 0.7735849, g: 0.21529014, b: 0.21529014, a: 0.5882353}
+    - _ShimmerColor: {r: 0.5188679, g: 0.25744417, b: 0.05139729, a: 0.5372549}
+    - _ThirdColor: {r: 0, g: 0, b: 0, a: 0}
     - _hihlight: {r: 0, g: 0, b: 0, a: 0}
     - _laser: {r: 0.3584906, g: 0.33791685, b: 0.23504807, a: 0}

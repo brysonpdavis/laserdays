@@ -3,6 +3,7 @@ Shader "Crosshatch/UI/Component-Transition"
     Properties
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+        [Toggle(REAL)] _UseUIAlphaClip ("Real World", Float) = 0
         _EffectMap("Effect Map", 2D) = "white" {}
         _TransitionState("Transition State", Range(0,1)) = 0
         _Color ("Tint", Color) = (1,1,1,1)
@@ -16,6 +17,7 @@ Shader "Crosshatch/UI/Component-Transition"
         _ColorMask ("Color Mask", Float) = 15
 
         [Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
+        
     }
 
     SubShader
@@ -55,7 +57,8 @@ Shader "Crosshatch/UI/Component-Transition"
 
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
-
+            
+            #pragma multi_compile _ REAL
             #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
@@ -96,14 +99,30 @@ Shader "Crosshatch/UI/Component-Transition"
                 OUT.color = v.color * _Color;
                 return OUT;
             }
+            
+            float GetAlphaSingle (v2f IN)
+            {
+                float emv = tex2D(_EffectMap, IN.texcoord);
+                float trans = _TransitionState;
+                
+                #if defined(REAL)
+                    emv -= trans;
+                    emv = step(0,emv);
+                    return emv;
+                #else
+                    emv += trans;
+                    emv = step(1,emv);
+                    return emv;
+                #endif  
+                
+                return 1;    
+            }
 
             fixed4 frag(v2f IN) : SV_Target
             {
                 half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
-                half emv = tex2D(_EffectMap, IN.texcoord).r;
-                emv += _TransitionState;
-                emv = step(1,emv);
-                clip(emv - 0.5);
+           
+                clip(GetAlphaSingle(IN) - 0.5);
                 
                 #ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
