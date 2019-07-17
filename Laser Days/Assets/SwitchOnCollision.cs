@@ -6,6 +6,12 @@ public class SwitchOnCollision : MonoBehaviour {
 
     public bool onTriggerEnter = true;
     public bool onCollisionEnter;
+    AudioSource audio;
+
+    private void Start()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -30,6 +36,8 @@ public class SwitchOnCollision : MonoBehaviour {
         {
             Toolbox.Instance.GetFlip().FlipAttempt();
             Toolbox.Instance.GetFlip().ForceFlip();
+            Toolbox.Instance.SetVolume(audio);
+            audio.Play();
         }
     }
 

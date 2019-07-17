@@ -391,6 +391,17 @@ public class RaycastManager : MonoBehaviour {
         }
     }
 
+    void SceneResetOff()
+    {
+        edge.PauseMenu = 0;
+        timer = 0;
+        if (currentLevelReset)
+        {
+            currentLevelReset.Deactivate();
+            currentLevelReset = null;
+        }
+    }
+
     void SceneResetCheck()
     {
 
@@ -405,25 +416,27 @@ public class RaycastManager : MonoBehaviour {
                 //Debug.Log("gameispaused " + LevelLoadingMenu.gameIsPaused);
                 if (hit.collider.CompareTag("SceneReset"))
                 {
-                    entered = true;
-                    if (!hit.collider.GetComponent<AudioSource>().isPlaying)
-                    {
-                        currentLevelReset = hit.collider.GetComponent<ResetScene>();
-                        hit.collider.gameObject.GetComponent<ResetScene>().Play();
+                    //show the crosshair
+                    iconContainer.SetReset();
 
+                    //if you're actually selecting it while looking at it
+                    if (ControlManager.Instance.GetButton("Select"))
+                    {
+                        entered = true;
+                        if (!hit.collider.GetComponent<AudioSource>().isPlaying)
+                        {
+                            currentLevelReset = hit.collider.GetComponent<ResetScene>();
+                            hit.collider.gameObject.GetComponent<ResetScene>().Play();
+                        }
                     }
+                    else
+                        SceneResetOff();
                 }
 
                 else
                 {
-                    edge.PauseMenu = 0;
-                    timer = 0;
-                    if (currentLevelReset)
-                    {
-                        currentLevelReset.Deactivate();
-                        currentLevelReset = null;
-                    }
-                        
+                    SceneResetOff();
+                    CrosshairNormal();
                 }
                     
 
@@ -449,14 +462,8 @@ public class RaycastManager : MonoBehaviour {
 
             else
             {
-                edge.PauseMenu = 0;
-                timer = 0;
-                if (currentLevelReset)
-                {
-                    currentLevelReset.Deactivate();
-                    currentLevelReset = null;
-                }
-
+                SceneResetOff();
+                CrosshairNormal();
             }
         }
 

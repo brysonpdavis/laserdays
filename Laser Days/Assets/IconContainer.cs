@@ -18,6 +18,7 @@ public class IconContainer : MonoBehaviour {
     public Sprite objectBounce;
     public Sprite playerBounce;
     public Sprite bothBounce;
+    public Sprite resetPuzzle;
 
     public Image canvasSprite;
 
@@ -25,6 +26,11 @@ public class IconContainer : MonoBehaviour {
     public void SetDefault()
     {
         canvasSprite.sprite = defaultSprite;
+    }
+
+    public void SetReset()
+    {
+        canvasSprite.sprite = resetPuzzle;
     }
 
     public void SetInteractHover()
