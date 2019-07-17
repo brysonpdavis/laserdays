@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Rewired.UI.ControlMapper;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -93,9 +94,9 @@ public class LevelLoadingMenu : MonoBehaviour {
         sensitivitySlider.SetActive(true);
         saveButton.SetActive(true);
         inputMenuButton.SetActive(true);
-
-
         textNarration.SetActive(false);
+        
+        FirstSelectedFix.OpenMenu();
 
         //edge.PauseMenu = 1f;
 
@@ -117,8 +118,9 @@ public class LevelLoadingMenu : MonoBehaviour {
         edge.PauseMenu = 0f;
        
 
-        if (exitPause) 
+        if (exitPause)
         {
+            //ControlMapper.Close(true);
             StopAllCoroutines();
             StartCoroutine(PauseMenuOut());
         }
