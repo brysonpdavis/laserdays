@@ -120,6 +120,11 @@ public class Toolbox : Singleton<Toolbox>
         Directory.CreateDirectory(path);
     }
 
+    public void Resume(bool exitPause)
+    {
+        mainCanvas.GetComponent<LevelLoadingMenu>().Resume(exitPause);
+    }
+
 
     public void LoadFromSave()
     {

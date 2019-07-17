@@ -12,6 +12,7 @@ public class OpeningTitleScreen : MonoBehaviour {
     private void Awake()
     {
         canvas = GetComponent<CanvasGroup>();
+        GetComponentInParent<CanvasScaler>().enabled = true;
         //Time.timeScale = 0f;
 
     }
@@ -53,7 +54,7 @@ public class OpeningTitleScreen : MonoBehaviour {
         if (pause)
         {
             Debug.Log("turning off menu");
-            GetComponentInParent<LevelLoadingMenu>().Resume(true);
+            Toolbox.Instance.Resume(true);
         }
         yield return new WaitForSeconds(1f);
 
