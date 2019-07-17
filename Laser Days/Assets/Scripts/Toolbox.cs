@@ -461,13 +461,13 @@ public class Toolbox : Singleton<Toolbox>
             //
         }
     }
-    
+
     public void LoadScene(string sceneName, string spawnPoint)
     {
         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
         Time.timeScale = 1f;
-       
-        
-        StartCoroutine(mainCanvas.GetComponent<LevelLoadingMenu>().loadNextScene(sceneName, spawnPoint, null, false));
+
+        GameObject button = GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton;
+        StartCoroutine(mainCanvas.GetComponent<LevelLoadingMenu>().loadNextScene(sceneName, spawnPoint, button, false));
     }
 }
