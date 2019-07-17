@@ -25,12 +25,19 @@ public class SingleWorldClickable : InteractableObject {
 
         transform.localRotation = Quaternion.Euler(Vector3.zero);
 
-        if (!beenPickedUp)
-        { 
-            //StartCoroutine(SlowPickup()); 
-        }
+        //if (!beenPickedUp)
+        //{ 
+        //    //StartCoroutine(SlowPickup()); 
+        //}
         
         OnPickup();
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        GetComponent<Rigidbody>().isKinematic = false;
+
     }
 
     public override void Drop()
