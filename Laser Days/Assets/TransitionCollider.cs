@@ -77,7 +77,7 @@ public class TransitionCollider : MonoBehaviour
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / growthSpeed;
             //float value = Mathf.Lerp(startpoint, endpoint, ratio);
-            Vector3 value = Vector3.Lerp(startpoint, endpoint, ratio);
+            Vector3 value = Vector3.Lerp(startpoint, endpoint, (ratio));
 
             float radialValue = Mathf.Lerp(start, end, ratio);
             collider.transform.localScale = value;

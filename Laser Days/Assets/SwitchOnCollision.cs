@@ -6,11 +6,20 @@ public class SwitchOnCollision : MonoBehaviour {
 
     public bool onTriggerEnter = true;
     public bool onCollisionEnter;
+    public float scrollspeed;
+
+    Material rendermat;
     AudioSource audio;
 
     private void Start()
     {
         audio = GetComponent<AudioSource>();
+        rendermat = GetComponent<Renderer>().material;
+    }
+
+    private void FixedUpdate()
+    {
+        rendermat.SetFloat("_Elapsed", rendermat.GetFloat("_Elapsed") + scrollspeed);
     }
 
     private void OnCollisionEnter(Collision collision)
