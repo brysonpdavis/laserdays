@@ -436,7 +436,6 @@ public class RaycastManager : MonoBehaviour {
                 else
                 {
                     SceneResetOff();
-                    CrosshairNormal();
                 }
                     
 
@@ -463,7 +462,6 @@ public class RaycastManager : MonoBehaviour {
             else
             {
                 SceneResetOff();
-                CrosshairNormal();
             }
         }
 
