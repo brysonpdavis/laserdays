@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114528474502005980}
   - component: {fileID: 114905736747849796}
   - component: {fileID: 64708663434690370}
+  - component: {fileID: 114543308557780958}
   m_Layer: 27
   m_Name: mossa
   m_TagString: Untagged
@@ -111,6 +112,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98c3a920a5384677aff4ac0ed1f61eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114543308557780958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641882883595654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bea4c010b684720a24c8646da392e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minScale: 1
+  maxScale: 1.6
+  gameObjects:
+  - {fileID: 1463524858319990, guid: b5db82aa8930c470a91c88155253db9d, type: 2}
 --- !u!114 &114905736747849796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,3 +141,4 @@ MonoBehaviour:
   ScaleSpeed: 1
   shared: 0
   manualTransitionChildren: 0
+  tween: 3
