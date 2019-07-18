@@ -35,6 +35,14 @@ public class TakeActionOnAction : MonoBehaviour
         }
     }
 
+    public void Selected()
+    {
+        if (activationAction == ActivationActionType.Select)
+        {
+            TakeAction();
+        }
+    }
+
     private void TakeAction()
     {
         switch (resultAction)
