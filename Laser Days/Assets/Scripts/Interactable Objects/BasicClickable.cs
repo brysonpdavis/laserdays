@@ -36,6 +36,8 @@ public class BasicClickable : FlippableObject {
 
         if (slowPickup && !beenPickedUp)
             {StartCoroutine(SlowPickup());}
+
+        OnPickup();
     }
 
 
