@@ -126,6 +126,8 @@ abstract public class InteractableObject : MonoBehaviour
             material.SetFloat("_onHold", 1f);
         material.SetFloat("_Elpapsed", 0f);
         selected = true;
+        
+        OnSelect();
     }
 
     public virtual void UnSelect()
@@ -184,6 +186,16 @@ abstract public class InteractableObject : MonoBehaviour
         if (actionScript)
         {
             actionScript.PickedUp();
+        }
+    }
+
+    public void OnSelect()
+    {
+        TakeActionOnAction actionScript = GetComponent<TakeActionOnAction>();
+
+        if (actionScript)
+        {
+            actionScript.Selected();
         }
     }
 
