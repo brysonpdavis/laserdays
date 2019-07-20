@@ -12,6 +12,11 @@ public class TouchDestroy : FlipInteraction{
     float duration;
     float elapsedTime;
     AudioSource audio;
+    public GameObject destroyedPrefab;
+    private GameObject currentDestroyedPrefab;
+    Rigidbody[] rb;
+    public float explosionIntensity;
+
 
     ParticleTransitionBurst[] particleBursts;
 
@@ -20,21 +25,31 @@ public class TouchDestroy : FlipInteraction{
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if (!touched && !activated)
+            { 
 
-            if (!activated)
-            {
+                //material.SetFloat("_onHold", 1f);
+                currentDestroyedPrefab = Instantiate(destroyedPrefab, transform.position, transform.rotation, gameObject.transform);
+                DeactivateSelf();
+                rb = currentDestroyedPrefab.GetComponentsInChildren<Rigidbody>();
+
                 Toolbox.Instance.SetVolume(audio);
                 audio.Play();
                 Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.selection);
-            }
 
-            if (!touched)
-            { 
-                material.SetFloat("_onHold", 1f);
+
             }
 
             touched = true;
         }
+    }
+
+    private void DeactivateSelf()
+    {
+        GetComponent<Transition>().enabled = false;
+        GetComponent<MeshCollider>().isTrigger = true;
+        GetComponent<Renderer>().enabled = false;
+        //GetComponent<MeshCollider>().enabled = false;
     }
 
     private void Awake()
@@ -72,11 +87,18 @@ public class TouchDestroy : FlipInteraction{
             audio.Play();
             audio.loop = false;
 
-            GetComponent<MeshCollider>().isTrigger = true;
-            //GetComponent<Collider>().enabled = false;
+
+            foreach (Rigidbody r in rb)
+            {
+                r.isKinematic = false;
+                r.useGravity = true;
+                r.gameObject.GetComponent<ExplodeOnAwake>().Explode(explosionIntensity);
+                r.gameObject.GetComponent<Vibration>().enabled = false;
+            }
 
 
-            StartCoroutine(InteractionRoutine());
+
+            //StartCoroutine(InteractionRoutine());
 
             foreach (ParticleTransitionBurst burst in particleBursts)
             {
