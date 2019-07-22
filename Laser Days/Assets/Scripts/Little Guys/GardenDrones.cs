@@ -47,6 +47,9 @@ public class GardenDrones : MonoBehaviour
 	
 	public static void AddMutationToDrones(SpawnableMutation mut)
 	{
+		if (allDrones == null)
+			allDrones = new List<GardenDrones>();
+		
 		foreach (GardenDrones drone in allDrones)
 		{
 			// for each drone, if the mutation is in its patrol area, add that mutation to its list of mutations
