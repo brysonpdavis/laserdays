@@ -178,17 +178,8 @@ float3 GetOutlineData (Interpolators i)
 {
     //AccentMask is 0 || 1, multuplying by 0.25 leaves room for transparent object outlines
     float r = GetAccentMask(i) * 0.25;
-    #if defined(INTERACTABLE)
-        r += GetGlowMask(i) * 0.25;
-    #endif
-    //Allows 8 different values for getting outlines between materials with similar depth/normals 
     float g = 0.125 * floor(_LineA);
     return float3(r,g,0);
-}
-
-float3 GetEmissive(Interpolators i)
-{
-    return lerp(_RealEmission, _LaserEmission, TransitionValue()).rgb;
 }
 
 //As it was.
@@ -356,15 +347,14 @@ struct FragmentOutput {
 
 FragmentOutput MyFragmentProgram (Interpolators i) {
     
-    #if defined(REAL) || defined(LASER) || defined(INVERSE_INTERACTABLE)
+    #if defined(REAL) || defined(LASER) 
+        float alpha = GetAlpha(i) * GetAlphaSingle(i);
+    #else
         float alpha = GetAlpha(i);
-        clip(GetAlphaSingle(i) - _AlphaCutoff);
     #endif
     
-    #if !defined(TERRAIN)
-        InitializeFragmentNormal(i);
-    #endif
-
+    clip(GetAlphaSingle(i) - _AlphaCutoff);
+   
     float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
 
     float3 specularTint;
@@ -372,10 +362,6 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
     
     float3 albedo = BaseColorWrapper(i);
     
-    #if defined(INTERACTABLE)
-        albedo = lerp(albedo, _InteractColor, GetInteraction(i));
-    #endif
-
     specularTint = float4(0.1, 0.1, 0.1, 0);
     oneMinusReflectivity = 1;
     
@@ -386,19 +372,12 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
 
     float4 color = BRDF_Unity_Toon(
         albedo, float4(0,0,0,0),
-        1.0, GetSmoothness(i),
+        1.0, 0,
         i.normal, viewDir,
         CreateLight(i), CreateIndirectLight(i, viewDir)
     );
     
-    #if defined(INTERACTABLE) || defined(INVERSE_INTERACTABLE)
-        color.rgb += _InteractColor.rgb * GetInteraction(i);
-        color.rgb += _ShimmerColor.rgb * GetGlowMask(i);
-    #endif
-    
-    #if defined(EMISSIVE)
-        color.rgb += GetEmissive(i);
-    #endif
+
       
     #if defined(_RENDERING_FADE) || defined(_RENDERING_TRANSPARENT)
         color.a = alpha;
