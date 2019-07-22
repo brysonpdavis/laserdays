@@ -1,38 +1,67 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using System.Security.Cryptography;
 
 public class SpawnableMutation : MonoBehaviour {
 
     public enum LifeCycle {Growth, Life, Death, Kill, Waiting}
     public LifeCycle lifePhase;
 
-    public float waitLength = 0.1f;
-    public float growthLength = 1f;
-    public float lifeLength = 5f;
-    public float deathLength = 1f;
-    public float killLength = 0.5f;
+    public Vector2 minMaxWaitTime = new Vector2(0f, 1f);
+    public Vector2 minMaxGrowLength = new Vector2(0f, 1f);
+    public Vector2 minMaxLifeLength = new Vector2(0f, 1f);
+    public Vector2 minMaxDeathLength = new Vector2(0f, 1f);
+    public float startScale;
+    public Vector2 minMaxScale = new Vector2(0f, 1f);
 
-    public float startScale = 0f;
-    public float endScale = 1f;
+    public Color tintA;
+    public Color tintB;
 
     private Renderer mRenderer;
     private MaterialPropertyBlock propBlock;
+    private Collider coll;
 
+    private Color tint;
+    private float waitLength, growthLength, lifeLength, killLength, targetScale;
     private float growthProgess, lifeProgress, deathProgress, killProgress, waitingProgress;
 
-	// Use this for initialization
-	void Start () {
+    [HideInInspector] public float deathLength;
+
+    // Use this for initialization
+    void Start () {
         mRenderer = GetComponent<Renderer>();
         propBlock = new MaterialPropertyBlock();
-        mRenderer.GetPropertyBlock(propBlock);
-        propBlock.SetFloat("_TransitionStateB", 1f);
-        mRenderer.SetPropertyBlock(propBlock);
+        coll = GetComponent<SphereCollider>();
+        coll.enabled = false;
 
-        lifePhase = LifeCycle.Growth;
-        transform.localScale = new Vector3(startScale, startScale, startScale);
+        InitRandom();
+        scale(0f);
+
+        mRenderer.GetPropertyBlock(propBlock);
+        propBlock.SetFloat("_BeginToBase", 0f);
+        propBlock.SetFloat("_BaseToDeath", 0f);
+        propBlock.SetColor("_TintColor", tint);
+        mRenderer.SetPropertyBlock(propBlock);
 	}
 	
+    void InitRandom ()
+    {
+        waitLength = Random.Range(minMaxWaitTime.x, minMaxWaitTime.y);
+        growthLength = Random.Range(minMaxGrowLength.x, minMaxGrowLength.y);
+        lifeLength = Random.Range(minMaxLifeLength.x, minMaxLifeLength.y);
+        deathLength = Random.Range(minMaxDeathLength.x, minMaxDeathLength.y);
+
+        targetScale = Random.Range(minMaxScale.x, minMaxScale.y);
+        tint = Color.Lerp(tintA, tintB, Random.Range(0f, 1f));
+    }
+
+    void scale(float s)
+    {
+        transform.localScale = new Vector3(s, s, s);
+    }
+
 	// Update is called once per frame
 	void Update () {
     
@@ -46,6 +75,7 @@ public class SpawnableMutation : MonoBehaviour {
                 else 
                 {
                     lifePhase = LifeCycle.Growth;
+                    scale(startScale);
                 }
 
                 break;
@@ -54,20 +84,21 @@ public class SpawnableMutation : MonoBehaviour {
                 if(growthProgess < growthLength)
                 {
                     float ratio = growthProgess / growthLength;
-                    float scale = Mathf.Lerp(startScale, endScale, TweeningFunctions.EaseOut(ratio));
-                    transform.localScale = new Vector3(scale, scale, scale);
+                    scale(Mathf.Lerp(startScale, targetScale, TweeningFunctions.EaseOut(ratio)));
 
                     //using transition state b to change color over grown phase
                     //using one minus to go from satring in laser color to landing in real
                     mRenderer.GetPropertyBlock(propBlock);
-                    propBlock.SetFloat("_TransitionStateB", 1f - TweeningFunctions.EaseOut(ratio));
+                    propBlock.SetFloat("_BeginToBase", TweeningFunctions.EaseOut(ratio));
                     mRenderer.SetPropertyBlock(propBlock);
 
                     growthProgess += Time.deltaTime;
+
                 } else 
                 {
                     //move to next phase
                     lifePhase = LifeCycle.Life;
+                    coll.enabled = true;
                 }
                 break;
 
@@ -86,9 +117,14 @@ public class SpawnableMutation : MonoBehaviour {
                 if(deathProgress < deathLength)
                 {
                     float ratio = deathProgress / deathLength;
-                    float scale = Mathf.Lerp(endScale, 0f, TweeningFunctions.EaseOut(ratio));
+                    float scale = Mathf.Lerp(targetScale, 0f, TweeningFunctions.EaseOut(ratio));
               
                     transform.localScale = new Vector3(scale, scale, scale);
+
+                    mRenderer.GetPropertyBlock(propBlock);
+                    propBlock.SetFloat("_BaseToDeath", TweeningFunctions.EaseOut(ratio));
+                    mRenderer.SetPropertyBlock(propBlock);
+
 
                     deathProgress += Time.deltaTime;      
                 } else 
