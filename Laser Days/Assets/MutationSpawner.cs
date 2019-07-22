@@ -20,7 +20,9 @@ public class MutationSpawner : MonoBehaviour {
 
 
     public void SpawnMutations()
-    {   
+    {
+        GameObject newGuy;
+        
         for (int i = 0; i < numSpawnAttempts; i++)
         {
             Vector3 vec = Random.insideUnitSphere;
@@ -31,13 +33,12 @@ public class MutationSpawner : MonoBehaviour {
             {
                 if(hit.collider.CompareTag("SpawnableSurface"))
                 {
-                    Instantiate(mutation, hit.point, Quaternion.identity);
+                    newGuy = Instantiate(mutation, hit.point, Quaternion.identity);
+                    
+                    if (newGuy)
+                        GardenDrones.AddMutationToDrones(newGuy.GetComponent<SpawnableMutation>());
                 }
             }
-
         }
     }
-
-
-	
 }
