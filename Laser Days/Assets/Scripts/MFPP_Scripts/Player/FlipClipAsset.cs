@@ -75,7 +75,7 @@ namespace MFPP
             {
                 if (flips == null || flips.Count <= 0)
                     return null;
-
+                Debug.Log("random flip");
                 return flips[Random.Range(0, flips.Count)];
             }
 
@@ -83,7 +83,7 @@ namespace MFPP
             {
                 if (flipsSecondary == null || flipsSecondary.Count <= 0)
                     return null;
-
+                Debug.Log("random secondary flip");
                 return flipsSecondary[Random.Range(0, flipsSecondary.Count)];
             }
 
@@ -94,12 +94,6 @@ namespace MFPP
 
                 return bass[Random.Range(0, bass.Count)];
             }
-
-
-            /// <summary>
-            /// Gets a random jumping sound from this <see cref="Data"/>.
-            /// </summary>
-            /// <returns>A random jumping sound from this <see cref="Data"/>.</returns>
         }
     }
 }

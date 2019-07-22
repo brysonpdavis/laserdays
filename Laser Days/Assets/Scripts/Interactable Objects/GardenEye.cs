@@ -7,7 +7,6 @@ public class GardenEye : MonoBehaviour
 
     public bool isActive = false;
     [SerializeField] private Transform player;
-    public bool blockingFlip;
     private float startingAngleY;
     private ParticleSystem particleSystem;
     [HideInInspector] public Vector3 currentPlayerPoint;

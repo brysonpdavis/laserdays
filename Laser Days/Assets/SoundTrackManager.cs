@@ -12,7 +12,7 @@ public class SoundTrackManager : MonoBehaviour {
     public MFPP.FlipClipAsset flipClip;
     public bool play;
     private int currentChord;
-    private int counter = 0;
+    public int counter = 0;
     public Slider mainSlider;
 
 	// Use this for initialization
