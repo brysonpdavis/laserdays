@@ -16,33 +16,32 @@ public static class TweeningFunctions {
                 break;
 
             case TweenType.EaseIn:
-                    return EaseIn(R);
-                    break;
+                return EaseIn(R);
+                break;
 
 
             case TweenType.EaseOut:
-                    return EaseOut(R);
-                    break;
+                return EaseOut(R);
+                break;
 
 
             case TweenType.EaseInOut:
-                    return EaseInOut(R);
-                    break;
+                return EaseInOut(R);
+                break;
 
 
             case TweenType.EaseInCubic:
-                    return EaseInCubic(R);
-                    break;
+                return EaseInCubic(R);
+                break;
 
 
             case TweenType.EaseOutCubic:
-
-                    return EaseOutCubic(R);
-                    break;
+                return EaseOutCubic(R);
+                break;
 
             case TweenType.BackAndForth:
-                    return BackAndForth(R);
-                    break;
+                return BackAndForth(R);
+                break;
               
             default :
                 return R;
@@ -50,8 +49,6 @@ public static class TweeningFunctions {
         }
     }
 
-
-    //Quad ease in
     public static float Linear(float R)
     {
         return R;

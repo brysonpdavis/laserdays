@@ -6,6 +6,8 @@ public class SingleWorldClickable : InteractableObject {
 
     public int maxVelocity = 8;
 
+    public bool NoConstraintsOnDrop = true;
+
     private float originalVelocity = 10f;
     public AudioClip overridePop;
 
@@ -80,9 +82,11 @@ public class SingleWorldClickable : InteractableObject {
         iconContainer.SetOpenHand();
         selected = false;
         UnSelect();
+
         rigidbody.freezeRotation = false;
-        beenPickedUp = true;
         rigidbody.constraints = RigidbodyConstraints.None;
+    
+        beenPickedUp = true;
         rigidbody.useGravity = true;
         ResetWalk();
 

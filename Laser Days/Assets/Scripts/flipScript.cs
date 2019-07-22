@@ -33,7 +33,7 @@ public class flipScript : MonoBehaviour {
     public delegate void FailedFlip();
     public static event FailedFlip OnFailedFlip;
 
-
+    private MutationSpawner mutationSpawner;
 
     private void Awake()
     {
@@ -59,7 +59,7 @@ public class flipScript : MonoBehaviour {
 
         //Debug.Log(Camera.main.fieldOfView);
 
-
+        mutationSpawner = GetComponent<MutationSpawner>();
 		pc = GetComponent<PlayerCharge>();
         audioSource = GetComponent<AudioSource>();
 		rm = GetComponent<RaycastManager>();
@@ -177,7 +177,7 @@ public class flipScript : MonoBehaviour {
             GetComponent<SkyboxTransition>().Flip(true);
             transitionCollider.FlipTransitions(true);
 
-
+            mutationSpawner.SpawnMutations();
 
         } 
         else { player.layer = 15; //set player to laser world

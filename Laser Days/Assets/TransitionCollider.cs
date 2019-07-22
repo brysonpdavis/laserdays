@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class TransitionCollider : MonoBehaviour
 {
-    public float growthSpeed = 1f;
-    public float speed = .4f;
-    public float endSize = 500000f;
+    private float growthSpeed = 1f;
+    public float initialGrowthSpeed = 1f;
+    public float growthAcceleration = 8f;
+    public float setCoroutineSpeed = .4f;
+    public float maxSize = 250;
+
+
+
     SphereCollider collider;
     bool direction;
 
@@ -24,9 +29,9 @@ public class TransitionCollider : MonoBehaviour
             other.GetComponent<Transition>().StopAllCoroutines();
 
             if (direction)
-                other.GetComponent<Transition>().Flip(0f, speed);
+                other.GetComponent<Transition>().Flip(0f, setCoroutineSpeed);
             else
-                other.GetComponent<Transition>().Flip(1f, speed);
+                other.GetComponent<Transition>().Flip(1f, setCoroutineSpeed);
 
         }
 
@@ -35,13 +40,10 @@ public class TransitionCollider : MonoBehaviour
             other.GetComponent<UI_Transition>().StopAllCoroutines();
 
             if (direction)
-                other.GetComponent<UI_Transition>().Flip(0f, speed);
+                other.GetComponent<UI_Transition>().Flip(0f, setCoroutineSpeed);
             else
-                other.GetComponent<UI_Transition>().Flip(1f, speed);
+                other.GetComponent<UI_Transition>().Flip(1f, setCoroutineSpeed);
         }
-
-        //if (other.GetComponent<Shifter>())
-        //other.GetComponent<Shifter>().Activate();
 
         if (other.GetComponent<FlipInteraction>())
             other.GetComponent<FlipInteraction>().Interact();
@@ -56,33 +58,32 @@ public class TransitionCollider : MonoBehaviour
 
     private IEnumerator FlipTransitionRoutine()
     {
+        // Create scale value
+        // init it to zero 
+        // and set collider to zero scale 
+        float scale = 0f;
+        collider.transform.localScale = new Vector3(scale, scale, scale);
+
+        // Set init growth speed
+        growthSpeed = initialGrowthSpeed;
+
         collider.isTrigger = true;
-        float elapsedTime = 0;
-        float ratio = elapsedTime / growthSpeed;
-        //int property = Shader.PropertyToID("_D7A8CF01");
-        Vector3 startpoint;
-        Vector3 endpoint;
 
-        startpoint = new Vector3(0.000001f, 0.000001f, 0.000001f);
-        endpoint = new Vector3(endSize, endSize, endSize);
-
-        float start = .00001f;
-        float end = 500f;
         collider.enabled = false;
+
         yield return new WaitForEndOfFrame();
 
         collider.enabled = true;
-        while (ratio < 1f)
-        {
-            elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / growthSpeed;
-            //float value = Mathf.Lerp(startpoint, endpoint, ratio);
-            Vector3 value = Vector3.Lerp(startpoint, endpoint, (ratio));
 
-            float radialValue = Mathf.Lerp(start, end, ratio);
-            collider.transform.localScale = value;
-            //collider.radius = radialValue;
-            yield return null;
+        while (scale < maxSize)
+        {
+            scale += growthSpeed;
+
+            growthSpeed *= growthAcceleration;
+
+            collider.transform.localScale = new Vector3(scale, scale,scale);
+
+            yield return new WaitForFixedUpdate();
         }
 
         //collider.transform.localScale = new Vector3(500000f, 500000f, 500000f);;
