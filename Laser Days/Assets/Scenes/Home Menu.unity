@@ -912,6 +912,7 @@ MonoBehaviour:
   objectBounce: {fileID: 21300000, guid: f17535c0a3aea43e3af637ef191b4908, type: 3}
   playerBounce: {fileID: 21300000, guid: f17535c0a3aea43e3af637ef191b4908, type: 3}
   bothBounce: {fileID: 21300000, guid: f17535c0a3aea43e3af637ef191b4908, type: 3}
+  resetPuzzle: {fileID: 0}
   canvasSprite: {fileID: 0}
 --- !u!1 &453954616
 GameObject:
@@ -2466,7 +2467,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1938533673}
   - component: {fileID: 1938533672}
-  - component: {fileID: 1938533671}
   - component: {fileID: 1938533670}
   m_Layer: 0
   m_Name: Rewired Input Manager
@@ -2486,23 +2486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326beba49b381429fa9c2afcc16efb09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1938533671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1938533669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 307e2fe016d34e8438488ad3bf56abd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnabled: 1
-  loadDataOnStart: 1
-  loadJoystickAssignments: 1
-  loadKeyboardAssignments: 1
-  loadMouseAssignments: 1
-  playerPrefsKeyPrefix: RewiredSaveData
 --- !u!114 &1938533672
 MonoBehaviour:
   m_ObjectHideFlags: 0
