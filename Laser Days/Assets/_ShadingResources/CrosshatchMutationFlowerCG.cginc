@@ -387,12 +387,12 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         #if !defined(UNITY_HDR_ON)
             color.rgb = exp2(-color.rgb);
         #endif
-        output.gBuffer0.rgb = BaseColorWrapper(i);
+        output.gBuffer0.rgb = float3(0,0,0);
         output.gBuffer0.a = GetShininess(i);
         output.gBuffer1.rgb = GetOutlineData(i);
         output.gBuffer1.a = GetSmoothness(i);
         output.gBuffer2 = float4(i.normal * 0.5 + 0.5, GetOcclusion(i));
-        output.gBuffer3 = color;
+        output.gBuffer3 = float4(BaseColorWrapper(i), 1);
     #else
         output.color = color;
     #endif
