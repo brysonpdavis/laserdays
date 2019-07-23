@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: S_Plaster_Red-Gray
-  m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
-  m_ShaderKeywords: NO_GRADIENT SHARED
+  m_Name: L_Glass_Rose
+  m_Shader: {fileID: 4800000, guid: 2ce7ad6531ac740ad96f40c3966463db, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -26,10 +26,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Deatil:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -43,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EffectMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b5845c5d766114a3e948231773312b48, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -51,22 +47,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: bb8e477bfe9f2473db1c481eac668ea9, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MaterialMap:
-        m_Texture: {fileID: 2800000, guid: 862e8f8026a6a40d3a8f997637514f94, type: 3}
+        m_Texture: {fileID: 2800000, guid: 03d43b0e72fea455babbc73736233758, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalLaser:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalReal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -78,8 +62,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ShadingMap:
-        m_Texture: {fileID: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: 5c271168c919b48e2b3734ca8421f024, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: 1ce8744130c8d5542bb1f6e380e35a7e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -88,54 +76,38 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaCutoff: 0.5
-    - _BlendOffset: 0
     - _BumpScale: 1
+    - _ChromaticAberration: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _Dirtiness: 0.249
     - _DstBlend: 0
-    - _Elapsed: 0
-    - _Flippable: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GradientOffset: 0
-    - _GradientScale: 1
-    - _Highlights: 0
-    - _LineA: 0
-    - _LineB: 0
-    - _LineC: 0
-    - _MainTexContribution: 0.1
     - _Metallic: 0
     - _Mode: 0
-    - _NormalScale: 6.588235
     - _OcclusionStrength: 1
+    - _Opacity: 0.233
     - _Parallax: 0.02
-    - _Smoothness: 0
-    - _Smoothness2: 0
+    - _Real: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SteppedTransition: 0
-    - _TerrainScale: 1
     - _TransitionState: 1
-    - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
-    - _onHold: 0
-    - _onHover: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorLaser: {r: 0.5660378, g: 0.5144584, b: 0.49928796, a: 1}
-    - _ColorReal: {r: 0.764151, g: 0.37129083, b: 0.29196334, a: 1}
+    - _Accent: {r: 0, g: 0, b: 0, a: 0.18039216}
+    - _Base: {r: 0.990566, g: 0.6868548, b: 0.8206955, a: 0.5019608}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserAccent: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 0}
-    - _LaserBase: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
-    - _LaserEmission: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserGradient: {r: 0, g: 0, b: 0, a: 0}
-    - _RealAccent: {r: 0.764151, g: 0.37129083, b: 0.29196334, a: 1}
-    - _RealBase: {r: 0.764151, g: 0.37129083, b: 0.29196334, a: 1}
-    - _RealEmission: {r: 0, g: 0, b: 0, a: 0}
-    - _RealGradient: {r: 0, g: 0, b: 0, a: 0}
-    - _ShimmerColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Highlight: {r: 1, g: 1, b: 1, a: 0}
+    - _LaserAccent: {r: 0, g: 0.0037371768, b: 0.03773582, a: 0}
+    - _LaserBase: {r: 0.4716981, g: 0.39097247, b: 0.15352438, a: 0}
+    - _Real: {r: 0.21573514, g: 0.4396582, b: 0.4528302, a: 0}
+    - _RealAccent: {r: 0.2830189, g: 0.21760415, b: 0.21760415, a: 0}
+    - _RealBase: {r: 0.09189214, g: 0.25488472, b: 0.3301887, a: 0}
+    - _hihlight: {r: 0, g: 0, b: 0, a: 0}
+    - _laser: {r: 0.3584906, g: 0.33791685, b: 0.23504807, a: 0}
