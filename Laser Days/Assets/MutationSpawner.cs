@@ -36,9 +36,6 @@ public class MutationSpawner : MonoBehaviour {
                     newGuy = Instantiate(mutation, hit.point, Quaternion.identity);
                     newGuy.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
                     newGuy.transform.eulerAngles = new Vector3(newGuy.transform.eulerAngles.x, Random.Range(0f, 180f), newGuy.transform.eulerAngles.z);
-
-                    if (newGuy)
-                        GardenDrones.AddMutationToDrones(newGuy.GetComponent<SpawnableMutation>());
                 }
             }
         }

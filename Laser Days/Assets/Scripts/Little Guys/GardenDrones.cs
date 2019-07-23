@@ -35,6 +35,9 @@ public class GardenDrones : MonoBehaviour
 
 	private int waypointIndex;
 
+	[SerializeField]
+	private GameObject beam;
+
 	
 	public enum DroneState
 	{
@@ -88,6 +91,8 @@ public class GardenDrones : MonoBehaviour
 		state = DroneState.Patrolling;
 
 		timePassed = 0;
+		
+		BeamOff();
 
 	}
 	
@@ -104,6 +109,7 @@ public class GardenDrones : MonoBehaviour
 				{
 					state = DroneState.Patrolling;
 					timePassed = 0;
+					BeamOff();
 				}
 
 				break;
@@ -118,6 +124,7 @@ public class GardenDrones : MonoBehaviour
 					timePassed = 0;
 					RemoveMutationFromDrones(target);
 					NewTarget();
+					BeamOff();
 				}
 
 				break;
@@ -143,6 +150,7 @@ public class GardenDrones : MonoBehaviour
 				{
 					state = DroneState.Destroying;
 					target.lifePhase = SpawnableMutation.LifeCycle.Death;
+					BeamOn();
 				}
 				
 				break;
@@ -198,5 +206,67 @@ public class GardenDrones : MonoBehaviour
 		Vector3 pos2 = thing2.position;
 		
 		return Vector2.Distance(new Vector2(pos1.x, pos1.z), new Vector2(pos2.x, pos2.z));
+	}
+
+	void BeamOn()
+	{
+		beam.SetActive(true);
+		StartCoroutine(BeamGrow());
+	}
+
+	IEnumerator BeamGrow()
+	{
+		float end_scale = 10;
+		float duration = 1;
+		float elapsed = 0;
+		float ratio = 0;
+		
+		beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, 0);
+
+		while (elapsed < duration)
+		{
+			yield return null;
+
+			elapsed += Time.deltaTime;
+			ratio = elapsed / duration;
+			
+			beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, ratio * end_scale);
+
+		}
+
+		beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale);
+
+		
+	}
+
+	void BeamOff()
+	{
+		StartCoroutine(BeamShrink());
+	}
+
+	IEnumerator BeamShrink()
+	{
+		float end_scale = 10;
+		float duration = 1;
+		float elapsed = 0;
+		float ratio = 0;
+		
+		beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale);
+
+		while (elapsed < duration)
+		{
+			yield return null;
+
+			elapsed += Time.deltaTime;
+			ratio = elapsed / duration;
+			
+			beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale - (ratio * end_scale));
+
+		}
+
+		beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, 0);
+		
+		beam.SetActive(false);
+
 	}
 }

@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Security.Cryptography;
+using Random = UnityEngine.Random;
 
 public class SpawnableMutation : MonoBehaviour {
 
@@ -135,4 +137,14 @@ public class SpawnableMutation : MonoBehaviour {
                 break;
         } 
 	}
+
+    private void OnEnable()
+    {
+        GardenDrones.AddMutationToDrones(this);
+    }
+
+    private void OnDisable()
+    {
+        GardenDrones.RemoveMutationFromDrones(this);
+    }
 }
