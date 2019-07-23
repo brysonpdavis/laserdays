@@ -47,6 +47,24 @@ public class SpawnableMutation : MonoBehaviour {
         propBlock.SetColor("_TintColor", tint);
         mRenderer.SetPropertyBlock(propBlock);
 	}
+
+    void PrepareAudioLife(AudioSource audio)
+    {
+        float pitchMultiplier = targetScale / (minMaxScale[1] - minMaxScale[0]);
+        float actualPitch = (pitchMultiplier * 6f) - 6f; //scale between -3 and 3
+        audio.pitch = actualPitch;
+        Toolbox.Instance.SetVolume(audio);
+        audio.Play();
+    }
+
+    void PrepareAudioDeath(AudioSource audio)
+    {
+        audio.clip = SoundBox.Instance.completionZone;
+        Toolbox.Instance.SetVolume(audio);
+        audio.pitch = 0;
+        audio.Play();
+
+    }
 	
     void InitRandom ()
     {
@@ -77,6 +95,7 @@ public class SpawnableMutation : MonoBehaviour {
                 else 
                 {
                     lifePhase = LifeCycle.Growth;
+                    PrepareAudioLife(GetComponent<AudioSource>());
                     scale(startScale);
                 }
 
@@ -118,6 +137,7 @@ public class SpawnableMutation : MonoBehaviour {
                 break;
 
             case LifeCycle.Death :
+                PrepareAudioDeath(GetComponent<AudioSource>());
                 if(deathProgress < deathLength)
                 {
                     float ratio = deathProgress / deathLength;

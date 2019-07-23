@@ -39,6 +39,7 @@ public class GardenDrones : MonoBehaviour
 
 	[SerializeField]
 	private GameObject beam;
+    private AudioSource beamAudio;
 
 	[SerializeField]
 	private float beamTime;
@@ -105,12 +106,12 @@ public class GardenDrones : MonoBehaviour
 		BeamOff();
 		
 		audio = GetComponent<AudioSource>();
+        beamAudio = beam.GetComponent<AudioSource>();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.LogError("DroneState: " + state);
 		
 		switch (state)
 		{
@@ -150,7 +151,8 @@ public class GardenDrones : MonoBehaviour
 
 		if (Toolbox.Instance.PlayerInReal())
 			audio.mute = false;
-		else
+		
+        else
 			audio.mute = true;
 
 	}

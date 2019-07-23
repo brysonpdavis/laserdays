@@ -45,6 +45,7 @@ public class CrabWalk : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         renderChild = transform.GetChild(0).transform;
         lastCheckPos = transform.position;
+        currentSpeed = speed;
 	}
 
     public void OnHold()
