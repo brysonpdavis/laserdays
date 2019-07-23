@@ -41,22 +41,22 @@ public class LightTransitionController : MonoBehaviour {
     {
 
 
-        if (direction) //means player has switched to 'real world': material should transition from current value to zero
-        {
+        //if (direction) //means player has switched to 'real world': material should transition from current value to zero
+        //{
 
-            foreach (LightTransition albo in components)
-            {
-                albo.Flip(true, speed);
+        //    foreach (LightTransition albo in components)
+        //    {
+        //        albo.Flip(true, speed);
 
-            }
-        }
-        else
-        {
-            foreach (LightTransition albo in components)
-            {
-                albo.Flip(false, speed);
+        //    }
+        //}
+        //else
+        //{
+        //    foreach (LightTransition albo in components)
+        //    {
+        //        albo.Flip(false, speed);
 
-            }
-        }   
+        //    }
+        //}   
     }
 }

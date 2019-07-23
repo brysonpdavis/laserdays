@@ -116,10 +116,14 @@ public class RaycastManager : MonoBehaviour {
             {
                 if (raycastedObj && !pickUp.heldObject)
                 {
-                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                    if (raycastedObj.GetComponent<SelectionRenderChange>())
+
+                    if (!raycastedObj.GetComponent<CrabHold>())
                     {
-                        raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
+                        raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+                        if (raycastedObj.GetComponent<SelectionRenderChange>())
+                        {
+                            raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
+                        }
                     }
                 }
                 CrosshairNormal();
@@ -136,10 +140,13 @@ public class RaycastManager : MonoBehaviour {
                 //2: Turn off if we hit a new interactable object while not holding anything
                 if (raycastedObj && !Toolbox.Instance.EqualToHeld(raycastedObj))
                 {
-                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                    if (raycastedObj.GetComponent<SelectionRenderChange>())
+                    if (!raycastedObj.GetComponent<CrabHold>())
                     {
-                        raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
+                        raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+                        if (raycastedObj.GetComponent<SelectionRenderChange>())
+                        {
+                            raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
+                        }
                     }
                 }
 
@@ -151,15 +158,18 @@ public class RaycastManager : MonoBehaviour {
                 //SHOW HOVER: 1: if there isn't a held object, 2: keep setting an object to hover as long as it's the held object
                 if (!pickUp.heldObject || (pickUp.heldObject && pickUp.heldObject.Equals(raycastedObj)))
                 {
-                    if (raycastedObj.GetComponent<SelectionRenderChange>())
+                    if (!raycastedObj.GetComponent<CrabHold>())
                     {
-                        raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
-                        raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
-                    }
+                        if (raycastedObj.GetComponent<SelectionRenderChange>())
+                        {
+                            raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                            raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
+                        }
 
-                    else
-                    {
-                        raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                        else
+                        {
+                            raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                        }
                     }
                 }
 
@@ -179,7 +189,7 @@ public class RaycastManager : MonoBehaviour {
                     {
                         InteractableObject.ObjectType type = raycastedObj.GetComponent<InteractableObject>().objectType;
                         //if the object is already a selected object:
-                        if (raycastedObj.GetComponent<InteractableObject>().selected)
+                        if (raycastedObj.GetComponent<InteractableObject>().selected && !GetComponent<CrabHold>())
                         {
                             //unselect it
                             selectedObjs.Remove(raycastedObj);
@@ -250,7 +260,8 @@ public class RaycastManager : MonoBehaviour {
 
         if (raycastedObj && !pickUp.heldObject)
         {
-            raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
+            if (!GetComponent<CrabWalk>())
+                raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
         }
 
         //turns off the rest of the selection indicator

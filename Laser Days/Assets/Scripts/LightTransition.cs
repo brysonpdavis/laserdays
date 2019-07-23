@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightTransition : MonoBehaviour {
+public class LightTransition : Transition {
 
     private IEnumerator flipTransition;
     public float LaserIntensity;
@@ -14,7 +14,12 @@ public class LightTransition : MonoBehaviour {
     public float realShadowStrength;
     private Light light;
 
-    private void Start()
+    protected override void Awake()
+    {
+        
+    }
+
+    protected override void Start()
     {
         light = GetComponent<Light>();
         GameObject Player = Toolbox.Instance.GetPlayer();
@@ -32,9 +37,9 @@ public class LightTransition : MonoBehaviour {
     }
 
 
-    public void Flip(bool direction, float duration)
+    public override void Flip(float end, float duration)
     {
-        if (direction) {
+        if (end < 0.01f) {
             flipTransition = flipTransitionRoutine(RealIntensity, realColor, realShadowStrength,  duration);
         }
 

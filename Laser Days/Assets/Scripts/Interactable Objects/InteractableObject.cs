@@ -56,7 +56,7 @@ abstract public class InteractableObject : MonoBehaviour
 
 
 
-    private void Awake()
+    public virtual void Awake()
     {
         SetType();
 

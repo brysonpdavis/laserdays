@@ -10,6 +10,7 @@ public class CrabWalk : MonoBehaviour {
     Transform renderChild;
 
     public float speed = 1f;
+    public float currentSpeed;
     public float speedLimit = 10f;
 
     public float stuckChecktime = 1f;
@@ -25,6 +26,7 @@ public class CrabWalk : MonoBehaviour {
     float elapsedTimeStuck;
 
     float elapsedTimeWalking;
+    public bool held = false;
 
     [SerializeField]
     private bool stuck;
@@ -45,65 +47,83 @@ public class CrabWalk : MonoBehaviour {
         lastCheckPos = transform.position;
 	}
 
+    public void OnHold()
+    {
+        held = true;
+        currentSpeed = 0;
+        transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+
+    public void OnDrop()
+    {
+        held = false;
+        currentSpeed = speed;
+        rb.constraints = RigidbodyConstraints.None;
+    }
+
     void FixedUpdate()
     {
-        // Rotating takes priority and walking will not happen in rotation mode 
-        if (rotating)
+        if (!held)
         {
-            rb.velocity = Vector3.zero;
-
-            if (completedRotation < targetRotation)
+            // Rotating takes priority and walking will not happen in rotation mode 
+            if (rotating)
             {
-                completedRotation += rotationStep;
-                Vector3 newEuler = transform.eulerAngles + new Vector3(0, rotationStep, 0);
-                rb.MoveRotation(Quaternion.Euler(newEuler));
+                rb.velocity = Vector3.zero;
+
+                if (completedRotation < targetRotation)
+                {
+                    completedRotation += rotationStep;
+                    Vector3 newEuler = transform.eulerAngles + new Vector3(0, rotationStep, 0);
+                    rb.MoveRotation(Quaternion.Euler(newEuler));
+                }
+                else
+                {
+                    rotating = false;
+                }
             }
             else
             {
-                rotating = false;
+                // Walk along the forward vector
+                rb.AddForce(transform.forward * currentSpeed, ForceMode.VelocityChange);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, speedLimit);
+
+                MoveToGround();
+
+                if (elapsedTimeWalking > walkingCheckTime)
+                {
+                    completedRotation = 0f;
+                    targetRotation = Random.Range(minRotation, maxRotation);
+
+                    rotationStep = (targetRotation * Time.fixedDeltaTime) / rotationDuration;
+                    rotating = true;
+                    elapsedTimeWalking = 0f;
+                }
+
+                // Check if the crab is stuck every time the elapsed time exceeds the check timer
+                if (elapsedTimeStuck > stuckChecktime)
+                {
+                    CheckStuck();
+                    elapsedTimeStuck = 0f;
+                }
+
+                elapsedTimeStuck += Time.fixedDeltaTime;
+                elapsedTimeWalking += Time.fixedDeltaTime;
+
+                // If stuck put the crab into rotation mode with a random target rotation
+                if (stuck)
+                {
+                    completedRotation = 0f;
+                    targetRotation = Random.Range(minRotation, maxRotation);
+
+                    rotationStep = (targetRotation * Time.fixedDeltaTime) / rotationDuration;
+
+                    rotating = true;
+                    stuck = false;
+                }
+
+
             }
-        }
-        else
-        {
-            // Walk along the forward vector
-            rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, speedLimit);
-           
-            MoveToGround();
-
-            if (elapsedTimeWalking > walkingCheckTime)
-            {
-                completedRotation = 0f;
-                targetRotation = Random.Range(minRotation, maxRotation);
-
-                rotationStep = (targetRotation * Time.fixedDeltaTime) / rotationDuration;
-                rotating = true;
-                elapsedTimeWalking = 0f;
-            }
-
-            // Check if the crab is stuck every time the elapsed time exceeds the check timer
-            if (elapsedTimeStuck > stuckChecktime)
-            {
-                CheckStuck();
-                elapsedTimeStuck = 0f;
-            }
-
-            elapsedTimeStuck += Time.fixedDeltaTime;
-            elapsedTimeWalking += Time.fixedDeltaTime;
-
-            // If stuck put the crab into rotation mode with a random target rotation
-            if (stuck)
-            {
-                completedRotation = 0f;
-                targetRotation = Random.Range(minRotation, maxRotation);
-
-                rotationStep = (targetRotation * Time.fixedDeltaTime) / rotationDuration;
-
-                rotating = true;
-                stuck = false;
-            }
-
-
         }
     }
 

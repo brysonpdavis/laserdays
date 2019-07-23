@@ -55,7 +55,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4686426473208028}
-  - component: {fileID: 114227439412945984}
   m_Layer: 27
   m_Name: Light Transition
   m_TagString: Untagged
@@ -72,8 +71,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4589350738638700}
   - component: {fileID: 135726099313974152}
-  - component: {fileID: 114778451245578874}
   - component: {fileID: 114446080939801802}
+  - component: {fileID: 114062276495317190}
   m_Layer: 27
   m_Name: Light Fixture Round
   m_TagString: Untagged
@@ -120,7 +119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1347291304551998}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -49.04, y: 2.58, z: -23.120695}
+  m_LocalPosition: {x: -49.04001, y: 2.58, z: -23.120728}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4686426473208028}
@@ -289,18 +288,21 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114227439412945984
+--- !u!114 &114062276495317190
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1345676188105476}
+  m_GameObject: {fileID: 1347291304551998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b947d5971bbce43d2adc373d42642d93, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e952bfcaf2544705ad71b7cb6ecbab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.4
+  ScaleSpeed: 1
+  shared: 0
+  manualTransitionChildren: 0
+  tween: 3
 --- !u!114 &114446080939801802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -327,27 +329,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff5d5cd479f9488db173382c09ff8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScaleSpeed: 1
+  shared: 0
+  manualTransitionChildren: 0
+  tween: 3
   LaserIntensity: 2
   LaserColor: {r: 0.8584906, g: 0.58717513, b: 0.75476557, a: 0}
   laserShadowStrength: 0
   RealIntensity: 0
   realColor: {r: 0, g: 0, b: 0, a: 0}
   realShadowStrength: 0
---- !u!114 &114778451245578874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1347291304551998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScaleSpeed: 1
-  shared: 0
-  manualTransitionChildren: 1
-  tween: 3
 --- !u!114 &114780432413947822
 MonoBehaviour:
   m_ObjectHideFlags: 1
