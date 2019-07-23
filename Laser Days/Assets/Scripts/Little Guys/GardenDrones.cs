@@ -101,6 +101,7 @@ public class GardenDrones : MonoBehaviour
 		switch (state)
 		{
 			case DroneState.Waiting:
+/*
 				if (timePassed < waitDuration)
 				{
 					timePassed += Time.deltaTime;
@@ -111,6 +112,7 @@ public class GardenDrones : MonoBehaviour
 					timePassed = 0;
 					BeamOff();
 				}
+*/
 
 				break;
 			
@@ -123,7 +125,6 @@ public class GardenDrones : MonoBehaviour
 				{
 					timePassed = 0;
 					RemoveMutationFromDrones(target);
-					NewTarget();
 					BeamOff();
 				}
 
@@ -148,8 +149,7 @@ public class GardenDrones : MonoBehaviour
 
 				if (CalcDistance2D(transform, target.transform) < 0.1)
 				{
-					state = DroneState.Destroying;
-					target.lifePhase = SpawnableMutation.LifeCycle.Death;
+					state = DroneState.Waiting;
 					BeamOn();
 				}
 				
@@ -157,8 +157,10 @@ public class GardenDrones : MonoBehaviour
 			
 			case DroneState.Patrolling:
 
+/*
 				transform.LookAt(waypoints[waypointIndex]);
 				transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+*/
 
 				transform.position += transform.forward * Time.deltaTime * speed;
 
@@ -167,6 +169,8 @@ public class GardenDrones : MonoBehaviour
 				{
 					waypointIndex++;
 					if (waypointIndex == waypoints.Length) waypointIndex = 0;
+
+					StartCoroutine(TurnToLook(waypoints[waypointIndex].gameObject));
 				}
 				
 				break;
@@ -195,9 +199,16 @@ public class GardenDrones : MonoBehaviour
 		target = tempObject;
 
 		if (target)
+		{
+			//approach the new target
 			state = DroneState.Approaching;
+			StartCoroutine(TurnToLook(target.gameObject));
+		}
 		else
-			state = DroneState.Patrolling;
+		{
+			//start patrolling
+			StartCoroutine(TurnToLook(waypoints[waypointIndex].gameObject));
+		}	
 	}
 
 	static float CalcDistance2D(Transform thing1, Transform thing2)
@@ -235,8 +246,8 @@ public class GardenDrones : MonoBehaviour
 		}
 
 		beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale);
-
-		
+		target.lifePhase = SpawnableMutation.LifeCycle.Death;
+		state = DroneState.Destroying;
 	}
 
 	void BeamOff()
@@ -267,6 +278,45 @@ public class GardenDrones : MonoBehaviour
 		beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, 0);
 		
 		beam.SetActive(false);
+		NewTarget();
 
 	}
+
+	IEnumerator TurnToLook(GameObject targetObject)
+	{
+		state = DroneState.Waiting;
+		
+		float ratio = 0;
+		float duration = waitDuration;
+		float elapsed = 0;
+		Quaternion begin = transform.rotation;
+		
+		transform.LookAt(targetObject.transform);
+		transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+
+		Quaternion end = transform.rotation;
+
+		transform.rotation = begin;
+		
+		while (ratio < 1)
+		{
+			yield return null;
+
+			elapsed += Time.deltaTime;
+			ratio = elapsed / duration;
+
+			transform.rotation = Quaternion.Slerp(begin, end,TweeningFunctions.EaseInOut(ratio));
+		}
+
+		if (targetObject.GetComponent<SpawnableMutation>())
+		{
+			state = DroneState.Approaching;
+
+			target = targetObject.GetComponent<SpawnableMutation>();
+		}
+		else
+		{
+			state = DroneState.Patrolling;
+		}
+	} 
 }
