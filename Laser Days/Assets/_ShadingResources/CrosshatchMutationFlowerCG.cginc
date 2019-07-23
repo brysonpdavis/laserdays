@@ -61,7 +61,7 @@ float TransitionValue ()
 
 float4 GetTextureValue (sampler2D tex, Interpolators i)
 {
-    return = tex2D(tex, i.uv.xy);
+    return tex2D(tex, i.uv.xy);
 }
 
 //Returns base color per fragment by blending MaterialMap with Real and Laser base colors.
@@ -93,13 +93,12 @@ float GetAccentMask (Interpolators i) {
 float3 accentBlend (float3 input, Interpolators i)
 {
     #if defined(REAL)
-        return lerp(input, _RealAccent.rgb, GetAccentMask(i) * _AccentColor.a);
+        return lerp(input, _AccentColor.rgb, GetAccentMask(i) * _AccentColor.a);
     #endif
     #if defined(LASER)
-        return lerp(input, _LaserAccent.rgb, GetAccentMask(i) * _AccentColor.a);
+        return lerp(input, _AccentColor.rgb, GetAccentMask(i) * _AccentColor.a);
     #else
-        float4 blendCol = lerp(_RealAccent, _LaserAccent, TransitionValue());
-        return lerp(input, blendCol.rgb, GetAccentMask(i) * blendCol.a);
+        return lerp(input, _AccentColor.rgb, GetAccentMask(i) * _AccentColor.a);
     #endif
 }
 
@@ -109,14 +108,14 @@ float GetAlpha (Interpolators i)
     float4 mutationMap = GetTextureValue(_MainTex, i);
     float vitality = saturate(_BeginToBase - _BaseToDeath);
     
-    return step(0.5, mutationMap.r * (mutationMap.b + vitality));
+    return step(0.3, mutationMap.r * (mutationMap.b + vitality));
 }
 
 //Returns alpha at fragment to determine whether it gets clipped. 
 float GetAlphaSingle (Interpolators i)
 {
     float emv = GetTextureValue(_EffectMap, i).r;
-    float trans;
+    float trans = TransitionValue();
     
     #if defined(REAL)
         emv -= trans;
@@ -216,7 +215,7 @@ Interpolators MyVertexProgram (VertexData v) {
     
     
     i.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);
-    i.uv.zw = TRANSFORM_TEX(v.uv, _ShadingMap);
+    i.uv.zw = TRANSFORM_TEX(v.uv, _EffectMap);
     
     
     TRANSFER_SHADOW(i);
@@ -353,7 +352,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         float alpha = GetAlpha(i);
     #endif
     
-    clip(GetAlphaSingle(i) - _AlphaCutoff);
+    clip(alpha - _AlphaCutoff);
    
     float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
 
@@ -388,7 +387,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         #if !defined(UNITY_HDR_ON)
             color.rgb = exp2(-color.rgb);
         #endif
-        output.gBuffer0.rgb = albedo;
+        output.gBuffer0.rgb = BaseColorWrapper(i);
         output.gBuffer0.a = GetShininess(i);
         output.gBuffer1.rgb = GetOutlineData(i);
         output.gBuffer1.a = GetSmoothness(i);
@@ -397,6 +396,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
     #else
         output.color = color;
     #endif
+    
     return output;
 }
 

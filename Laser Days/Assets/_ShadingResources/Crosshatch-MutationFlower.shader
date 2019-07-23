@@ -20,8 +20,8 @@
         _Smoothness("Outline Smoothing Normals", Range(0,1)) = 0
         _Smoothness2("Outline Smoothing Depth", Range(0,1)) = 0
         
-        _BeginToBase("Begginning to Base", Range(0,1)) = 0;
-        _BaseToDeath("_BaseToDeath", Range(0,1)) = 0;
+        [PerRendererData]_BeginToBase("Begginning to Base", Range(0,1)) = 0
+        [PerRendererData]_BaseToDeath("_BaseToDeath", Range(0,1)) = 0
         
         [PerRendererData] _TransitionState("Transition State", Range(0,1)) = 0
         [PerRendererData] _TransitionStateB("Transition State B", Range( 0 , 1)) = 0
@@ -59,14 +59,13 @@
             
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile _ ACCENT_ON
-            #pragma multi_compile _ EMISSIVE
 
             #pragma vertex MyVertexProgram
             #pragma fragment MyFragmentProgram
 
             #define FORWARD_BASE_PASS
             
-            #include "CrosshatchStandardCG.cginc"
+            #include "CrosshatchMutationFlowerCG.cginc"
 
             ENDCG
         }
@@ -85,7 +84,6 @@
             
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile _ ACCENT_ON
-            #pragma multi_compile _ EMISSIVE
           
             #pragma multi_compile_fwdadd_fullshadows
             
@@ -93,7 +91,7 @@
             #pragma fragment MyFragmentProgram
             
 
-            #include "CrosshatchStandardCG.cginc"
+            #include "CrosshatchMutationFlowerCG.cginc"
 
             ENDCG
         }
@@ -110,7 +108,6 @@
             
             #pragma multi_compile SHARED REAL LASER
             #pragma multi_compile _ ACCENT_ON
-            #pragma multi_compile _ EMISSIVE
             #pragma multi_compile _ UNITY_HDR_ON
 
             #pragma vertex MyVertexProgram
@@ -118,7 +115,7 @@
 
             #define DEFERRED_PASS
 
-            #include "CrosshatchStandardCG.cginc"
+            #include "CrosshatchMutationFlowerCG.cginc"
 
             ENDCG
         }
@@ -141,12 +138,12 @@
             #pragma fragment MyShadowFragmentProgram
             
 
-            #include "My Shadows.cginc"
+            #include "My ShadowsAlpha.cginc"
 
             ENDCG
         }
     }
     
     
-    CustomEditor "CrosshatchStandardGUI"
+    CustomEditor "CrosshatchMutationFlowerGUI"
 }
