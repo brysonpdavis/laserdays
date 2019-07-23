@@ -105,6 +105,7 @@ public class SpawnableMutation : MonoBehaviour {
                 break;
 
             case LifeCycle.Life :
+/*
                 if(lifeProgress < lifeLength)
                 {
                     lifeProgress += Time.deltaTime;
@@ -113,6 +114,7 @@ public class SpawnableMutation : MonoBehaviour {
                     //move to next phase
                     lifePhase = LifeCycle.Death;
                 }
+*/
                 break;
 
             case LifeCycle.Death :

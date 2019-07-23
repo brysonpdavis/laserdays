@@ -35,8 +35,13 @@ public class GardenDrones : MonoBehaviour
 
 	private int waypointIndex;
 
+	private AudioSource audio;
+
 	[SerializeField]
 	private GameObject beam;
+
+	[SerializeField]
+	private float beamTime;
 
 	
 	public enum DroneState
@@ -72,6 +77,11 @@ public class GardenDrones : MonoBehaviour
 		foreach (GardenDrones drone in allDrones)
 		{
 			drone.mutations.Remove(mut);
+
+			if (drone.target == mut && drone.state == DroneState.Approaching)
+			{
+				drone.NewTarget();
+			}
 		}
 	}
 	
@@ -93,11 +103,15 @@ public class GardenDrones : MonoBehaviour
 		timePassed = 0;
 		
 		BeamOff();
+		
+		audio = GetComponent<AudioSource>();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.LogError("DroneState: " + state);
+		
 		switch (state)
 		{
 			case DroneState.Waiting:
@@ -133,7 +147,12 @@ public class GardenDrones : MonoBehaviour
 			default:
 				break;
 		}
-		
+
+		if (Toolbox.Instance.PlayerInReal())
+			audio.mute = false;
+		else
+			audio.mute = true;
+
 	}
 
 	private void FixedUpdate()
@@ -169,7 +188,7 @@ public class GardenDrones : MonoBehaviour
 				{
 					waypointIndex++;
 					if (waypointIndex == waypoints.Length) waypointIndex = 0;
-
+					
 					StartCoroutine(TurnToLook(waypoints[waypointIndex].gameObject));
 				}
 				
@@ -197,11 +216,10 @@ public class GardenDrones : MonoBehaviour
 		}
 
 		target = tempObject;
-
+		
 		if (target)
 		{
 			//approach the new target
-			state = DroneState.Approaching;
 			StartCoroutine(TurnToLook(target.gameObject));
 		}
 		else
@@ -221,14 +239,14 @@ public class GardenDrones : MonoBehaviour
 
 	void BeamOn()
 	{
-		beam.SetActive(true);
+		//beam.SetActive(true);
 		StartCoroutine(BeamGrow());
 	}
 
 	IEnumerator BeamGrow()
 	{
-		float end_scale = 10;
-		float duration = 1;
+		float end_scale = Mathf.Abs(transform.position.y - target.transform.position.y);
+		float duration = beamTime;
 		float elapsed = 0;
 		float ratio = 0;
 		
@@ -241,7 +259,7 @@ public class GardenDrones : MonoBehaviour
 			elapsed += Time.deltaTime;
 			ratio = elapsed / duration;
 			
-			beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, ratio * end_scale);
+			beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y,  end_scale * TweeningFunctions.EaseIn(ratio));
 
 		}
 
@@ -257,8 +275,8 @@ public class GardenDrones : MonoBehaviour
 
 	IEnumerator BeamShrink()
 	{
-		float end_scale = 10;
-		float duration = 1;
+		float end_scale = beam.transform.localScale.z;
+		float duration = beamTime;
 		float elapsed = 0;
 		float ratio = 0;
 		
@@ -271,13 +289,13 @@ public class GardenDrones : MonoBehaviour
 			elapsed += Time.deltaTime;
 			ratio = elapsed / duration;
 			
-			beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale - (ratio * end_scale));
+			beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale - (TweeningFunctions.EaseIn(ratio) * end_scale));
 
 		}
 
 		beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, 0);
 		
-		beam.SetActive(false);
+		//beam.SetActive(false);
 		NewTarget();
 
 	}
@@ -305,7 +323,7 @@ public class GardenDrones : MonoBehaviour
 			elapsed += Time.deltaTime;
 			ratio = elapsed / duration;
 
-			transform.rotation = Quaternion.Slerp(begin, end,TweeningFunctions.EaseInOut(ratio));
+			transform.rotation = Quaternion.Slerp(begin, end,TweeningFunctions.EaseOut(ratio));
 		}
 
 		if (targetObject.GetComponent<SpawnableMutation>())
@@ -318,5 +336,12 @@ public class GardenDrones : MonoBehaviour
 		{
 			state = DroneState.Patrolling;
 		}
-	} 
+	}
+
+	void StopLocalCoroutines()
+	{
+		StopCoroutine("TurnToLook");
+		StopCoroutine("BeamGrow");
+		StopCoroutine("BeamShrink");
+	}
 }
