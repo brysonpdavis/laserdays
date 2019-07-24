@@ -107,7 +107,11 @@ public class TransitionController: MonoBehaviour
             
             foreach (Transition albo in currentTransitions)
             {
-                albo.SetStart(0f);
+                if (albo.shared)
+                    albo.MaterialSetStart(0f);
+                else
+                    albo.SetStart(0f);
+                Debug.Log("setting to 0f");
             }
         }
 
@@ -116,7 +120,11 @@ public class TransitionController: MonoBehaviour
             //player is in LW
             foreach (Transition albo in currentTransitions)
             {
-                albo.SetStart(1f);
+                if (albo.shared)
+                    albo.MaterialSetStart(1f);
+                else
+                    albo.SetStart(1f);
+                Debug.Log("setting to 1f");
 
             }
 

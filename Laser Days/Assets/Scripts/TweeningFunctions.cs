@@ -109,6 +109,12 @@ public static class TweeningFunctions {
         var s = Mathf.Sin(cycle);
         return s;
     }
-
-
+    
+    //Fast at beginning and end
+    public static float EaseMiddle(float R)
+    {
+        float r = Mathf.Clamp01(R);
+        return (EaseOut(r) * (1f - r)) + (EaseIn(r) * r);
+        ;
+    }
 }
