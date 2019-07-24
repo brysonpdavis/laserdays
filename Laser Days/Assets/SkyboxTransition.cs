@@ -7,7 +7,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class SkyboxTransition : MonoBehaviour {
 
-    Material material;
+    public Material material;
 
     private IEnumerator flipTransition;
     float offset;

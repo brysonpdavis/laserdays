@@ -1374,6 +1374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f21f001c1b2b4220a5a9df3912d498a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  material: {fileID: 0}
   duration: 1
   transitionFog: 1
   fogMultiplier: 1
@@ -1382,8 +1383,12 @@ MonoBehaviour:
   laserAmbient: {r: 0.8, g: 0.80784315, b: 0.87058824, a: 1}
   realFog: {r: 0.32293522, g: 0.46038735, b: 0.5566038, a: 0}
   realAbmient: {r: 0.87, g: 0.83868, b: 0.8178, a: 1}
+  currentFog: {r: 0, g: 0, b: 0, a: 0}
+  currentAmbient: {r: 0, g: 0, b: 0, a: 0}
   realGlobalParticle: {fileID: 2100000, guid: 4e9ad4c3b8dbd4c3fa9e9473e3cac3f2, type: 2}
   laserGlobalParticle: {fileID: 2100000, guid: 2608400738c2a43a5908c9d64ee0e0de, type: 2}
+  transitionProgress: 0
+  transitionDirection: 0
 --- !u!114 &114344019653657700
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4316527538448394}
   - component: {fileID: 33970935215437718}
   - component: {fileID: 23949727442458244}
-  - component: {fileID: 114395158185919310}
   - component: {fileID: 114290420547548162}
   - component: {fileID: 64925423714687648}
+  - component: {fileID: 114734320718690278}
   m_Layer: 11
   m_Name: mossb
   m_TagString: Untagged
@@ -59,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 8b71c611926eb4406927a79596e6f34e, type: 2}
+  - {fileID: 2100000, guid: 099674b23920a4e7e86f2146216ac8f8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,7 +113,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleSpeed: 1
   shared: 0
---- !u!114 &114395158185919310
+  manualTransitionChildren: 0
+  tween: 3
+--- !u!114 &114734320718690278
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -121,6 +123,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763210828631710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98c3a920a5384677aff4ac0ed1f61eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 71bea4c010b684720a24c8646da392e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minScale: 0.5
+  maxScale: 1.6
+  gameObjects:
+  - {fileID: 1763210828631710}

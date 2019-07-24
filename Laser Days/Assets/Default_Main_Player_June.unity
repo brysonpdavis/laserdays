@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 976b1e78c8594488794abfcddbdfd3a2, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 59f87ebc49c094e95bef87162edaefea, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -19411,7 +19411,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 1198232337}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 4608
+    m_Bits: 135680
   stopNaNPropagation: 1
   antialiasingMode: 1
   temporalAntialiasing:
@@ -22919,7 +22919,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1634057783}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -44.1, y: 4.8, z: -14.94}
+  m_LocalPosition: {x: -35, y: 3, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1198232337}
@@ -26060,16 +26060,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f21f001c1b2b4220a5a9df3912d498a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 59f87ebc49c094e95bef87162edaefea, type: 2}
   duration: 1
   transitionFog: 1
   fogMultiplier: 1
   ambientMultiplier: 1
   laserFog: {r: 0.45882353, g: 0.43529412, b: 0.48235294, a: 0}
   laserAmbient: {r: 0.8, g: 0.80784315, b: 0.87058824, a: 1}
-  realFog: {r: 0.32293522, g: 0.46038735, b: 0.5566038, a: 0}
+  realFog: {r: 0.5882353, g: 0.5372549, b: 0.5058824, a: 0}
   realAbmient: {r: 0.87, g: 0.83868, b: 0.8178, a: 1}
+  currentFog: {r: 0, g: 0, b: 0, a: 0}
+  currentAmbient: {r: 0, g: 0, b: 0, a: 1}
   realGlobalParticle: {fileID: 2100000, guid: 4e9ad4c3b8dbd4c3fa9e9473e3cac3f2, type: 2}
   laserGlobalParticle: {fileID: 2100000, guid: 2608400738c2a43a5908c9d64ee0e0de, type: 2}
+  transitionProgress: 1.030151
+  transitionDirection: 1
 --- !u!114 &1634057800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36243,6 +36248,7 @@ MonoBehaviour:
   bass: {fileID: 1401403024}
   flipClip: {fileID: 11400000, guid: d90633685e95741c2a19832f4d034f26, type: 2}
   play: 0
+  counter: 0
   mainSlider: {fileID: 531874573}
 --- !u!4 &2134396831
 Transform:

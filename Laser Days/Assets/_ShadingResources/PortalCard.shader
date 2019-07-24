@@ -9,7 +9,7 @@
 	}
 	SubShader {
 		Tags { "RenderType"="Transparent" "Queue"="Transparent" "IgnoreProjector" = "True" "IsEmissive" = "true" }
-        Cull Off
+        Cull Back
         Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
 

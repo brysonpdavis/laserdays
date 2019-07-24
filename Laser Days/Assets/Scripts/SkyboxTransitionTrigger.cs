@@ -33,11 +33,16 @@ public class SkyboxTransitionTrigger : MonoBehaviour {
         sky.realFog = realFog;
         sky.realAbmient = realAbmient;
 
-        RenderSettings.skybox = newSkyboxMaterial;
+
 
         float transitionProgress = sky.transitionProgress;
         Color currentFog;
         Color currentAmb;
+
+        sky.material = newSkyboxMaterial;
+        sky.material.SetFloat("_TransitionState", transitionProgress);
+
+        RenderSettings.skybox = newSkyboxMaterial;
 
         if (sky.transitionDirection)
         {
