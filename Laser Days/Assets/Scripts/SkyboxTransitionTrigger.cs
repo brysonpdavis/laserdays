@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkyboxTransitionTrigger : MonoBehaviour {
 
     SkyboxTransition sky;
+    public Material newSkyboxMaterial;
     public Color laserFog;
     public Color laserAmbient;
     public Color realFog;
@@ -31,6 +32,8 @@ public class SkyboxTransitionTrigger : MonoBehaviour {
         sky.laserAmbient = laserAmbient;
         sky.realFog = realFog;
         sky.realAbmient = realAbmient;
+
+        RenderSettings.skybox = newSkyboxMaterial;
 
         float transitionProgress = sky.transitionProgress;
         Color currentFog;
