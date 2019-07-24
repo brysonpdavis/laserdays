@@ -145,9 +145,19 @@ public class Transition : MonoBehaviour
         //in case start has not occurred yet
         if (!mRenderer)
             Awake();
-        mRenderer.GetPropertyBlock(_propBlock);
-        _propBlock.SetFloat("_TransitionState",value);
-        mRenderer.SetPropertyBlock(_propBlock);
+        if (mRenderer)
+        {
+            mRenderer.GetPropertyBlock(_propBlock);
+            _propBlock.SetFloat("_TransitionState", value);
+            mRenderer.SetPropertyBlock(_propBlock);
+        }
+
+    }
+
+
+    public void MaterialSetStart (float value)
+    {
+        mRenderer.sharedMaterial.SetFloat("_TransitionState", value);
     }
 
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)

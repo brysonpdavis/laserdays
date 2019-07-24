@@ -7,10 +7,11 @@ public class TriggeredAudio : MonoBehaviour {
     AudioSource audio;
     public AudioSource whisperTone;
 
-    private void Awake()
+    private void Start()
     {
         audio = GetComponent<AudioSource>();
-        Toolbox.Instance.GetPlayer().GetComponent<SoundTrackManager>().mute = true;
+        Toolbox.Instance.GetPlayer().GetComponentInChildren<SoundTrackManager>().mute = true;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,7 +42,6 @@ public class TriggeredAudio : MonoBehaviour {
         }
 
         if (_EndVolume == 0f) { _AudioSource.Stop(); }
-
     }
 
 
