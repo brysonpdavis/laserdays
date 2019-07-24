@@ -13,7 +13,7 @@ public class MutationSpawner : MonoBehaviour {
 
     private Vector3 eyeLevel = new Vector3(0f, 1.5f, 0f);
 
-    private GameObject[] pool;
+    private ObjectPool pool;
 
     [SerializeField] 
     private int numberToPool = 255;
@@ -23,7 +23,7 @@ public class MutationSpawner : MonoBehaviour {
     private void Start()
     {
         playerTransform = gameObject.transform;
-        InitializeMutationPool();
+        pool = ObjectPool.InitializePool(mutation, numberToPool);
     }
 
 
@@ -43,49 +43,18 @@ public class MutationSpawner : MonoBehaviour {
             {
                 vec = Random.insideUnitSphere;
             }
+            
             RaycastHit hit;
 
             if(Physics.Raycast(playerTransform.position + eyeLevel, vec, out hit, maxSpawnDistance, LayerMaskController.SharedOnly))
             {
                 if(hit.collider.CompareTag("SpawnableSurface"))
                 {
-                    newGuy = GetAndPlaceNextMutation(hit.point);
+                    newGuy = pool.GetAndPlaceNextMutation(hit.point);
                     newGuy.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
                     newGuy.transform.eulerAngles = new Vector3(newGuy.transform.eulerAngles.x, Random.Range(0f, 180f), newGuy.transform.eulerAngles.z);
                 }
             }
         }
-    }
-
-    private void InitializeMutationPool()
-    {
-        pool = new GameObject[255];
-        poolIndex = 0;
-    }
-
-    private GameObject GetAndPlaceNextMutation(Vector3 position)
-    {
-        GameObject temp = pool[poolIndex];
-        if (! temp)
-        {
-            pool[poolIndex] = (Instantiate(mutation, position, Quaternion.identity));
-        }
-        else
-        {
-            temp.SetActive(false);
-            temp.transform.position = position;
-            temp.SetActive(true);
-        }
-
-        int retIndex = poolIndex;
-
-            poolIndex++;
-
-        if (poolIndex == numberToPool)
-        {
-            poolIndex = 0;
-        }
-        
-        return pool[retIndex];
     }
 }
