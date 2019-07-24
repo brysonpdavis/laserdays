@@ -5,14 +5,14 @@ using UnityEngine;
 [DisallowMultipleComponent]
 
 public class flipScript : MonoBehaviour {
-	private Vector3 pos;
+    public bool forcedFlip = true;
+    private Vector3 pos;
 	private float newX;
 	[SerializeField] private int envSize = 100;
 	public bool space;
 	private PlayerCharge pc;
     private flipburst flipburst;
     public IList<EyeThatSees> eyeThatSeesList;
-    public bool forcedFlip;
 
     //sounds
     private AudioSource audioSource;
@@ -20,7 +20,7 @@ public class flipScript : MonoBehaviour {
 
     private MFPP.FlipClipAsset flipSounds;
     private SoundTrackManager soundTrack;
-
+    public bool canFlip;
     public AudioClip flipFailClip;
     public bool flippedThisFrame = false;
     public GameObject ring;
@@ -78,7 +78,7 @@ public class flipScript : MonoBehaviour {
 	void Update () {
         flippedThisFrame = false;
 
-        if (ControlManager.Instance.GetButtonDown("Switch") && ! Toolbox.Instance.GetPauseMenu().activeSelf && CheckEyes())
+        if (ControlManager.Instance.GetButtonDown("Switch") && ! Toolbox.Instance.GetPauseMenu().activeSelf && CheckEyes() && canFlip)
         {
             FlipAttempt();
         }
