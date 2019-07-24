@@ -31,6 +31,7 @@ public class SkyboxTransition : MonoBehaviour {
 
     public Material realGlobalParticle;
     public Material laserGlobalParticle;
+    private float transitionProgress;
 
 
     // Use this for initialization
@@ -126,7 +127,7 @@ public class SkyboxTransition : MonoBehaviour {
 
         float elapsedTime = 0;
         float actualDuration = duration * (1 - (material.GetFloat("_TransitionState") / endpoint));
-        float ratio = elapsedTime / actualDuration;
+        transitionProgress = elapsedTime / actualDuration;
         float start = material.GetFloat("_TransitionState");
         //int property = Shader.PropertyToID("_D7A8CF01");
         Color endFog;
@@ -148,11 +149,11 @@ public class SkyboxTransition : MonoBehaviour {
             
 
 
-        while (ratio < 1f)
+        while (transitionProgress < 1f)
         {
             elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / duration;
-            float value = Mathf.Lerp(start, endpoint, ratio);
+            transitionProgress = elapsedTime / duration;
+            float value = Mathf.Lerp(start, endpoint, transitionProgress);
 
             material.SetFloat("_TransitionState", value);
             realGlobalParticle.SetFloat("_TransitionState", value);
@@ -160,8 +161,8 @@ public class SkyboxTransition : MonoBehaviour {
 
             if (transitionFog)
             {
-                Color lerpFog = Color.Lerp(startFog, endFog, ratio);
-                Color lerpAmbient = Color.Lerp(startAmbient, endAmbient, ratio);
+                Color lerpFog = Color.Lerp(startFog, endFog, transitionProgress);
+                Color lerpAmbient = Color.Lerp(startAmbient, endAmbient, transitionProgress);
                 currentFog = lerpFog;
                 currentAmbient = lerpAmbient;
             }   

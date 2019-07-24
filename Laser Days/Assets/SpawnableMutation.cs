@@ -51,7 +51,7 @@ public class SpawnableMutation : MonoBehaviour {
     void PrepareAudioLife(AudioSource audio)
     {
         float pitchMultiplier = targetScale / (minMaxScale[1] - minMaxScale[0]);
-        float actualPitch = (pitchMultiplier * 6f) - 6f; //scale between -3 and 3
+        float actualPitch = (6f / pitchMultiplier) - 4f; 
         audio.pitch = actualPitch;
         Toolbox.Instance.SetVolume(audio);
         audio.Play();

@@ -31,7 +31,7 @@ public class MutationSpawner : MonoBehaviour {
             
             if (i < 2)
             {
-                vec = (transform.forward / 2) - (transform.up / 2) + (0.5f * Random.insideUnitSphere);
+                vec = (transform.forward) - (transform.up / 2) + (0.5f * Random.insideUnitSphere);
             }
             else
             {

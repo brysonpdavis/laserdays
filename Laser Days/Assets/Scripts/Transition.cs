@@ -20,6 +20,7 @@ public class Transition : MonoBehaviour
     public bool manualTransitionChildren;
     bool transitionAllChildren;
     protected Transition[] childrenTransitions;
+    public bool forceRadial;
     public TweeningFunctions.TweenType tween = TweeningFunctions.TweenType.EaseInOut;
 
 
@@ -50,9 +51,12 @@ public class Transition : MonoBehaviour
 
         if (!(gameObject.layer == 10 || gameObject.layer == 11 || gameObject.layer == 27) || shared)
         {
-            material = mRenderer.sharedMaterial;
-            sharedMaterial = true;
-            shared = true;
+            if (!forceRadial)
+            {
+                material = mRenderer.sharedMaterial;
+                sharedMaterial = true;
+                shared = true;   
+            }
         }
 
 
