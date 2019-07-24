@@ -26,12 +26,13 @@ public class SkyboxTransition : MonoBehaviour {
     public Color realAbmient;
 
 
-    private Color currentFog;
-    private Color currentAmbient;
+    public Color currentFog;
+    public Color currentAmbient;
 
     public Material realGlobalParticle;
     public Material laserGlobalParticle;
-    private float transitionProgress;
+    public float transitionProgress;
+    public bool transitionDirection;
 
 
     // Use this for initialization
@@ -137,14 +138,17 @@ public class SkyboxTransition : MonoBehaviour {
 
         if (endpoint <= 0.0001f)
         {
+            
             endFog = realFog;
             endAmbient = realAbmient;
+            transitionDirection = true;
 
         }
         else
         {
             endFog = laserFog;
             endAmbient = laserAmbient;
+            transitionDirection = false;
         }
             
 
