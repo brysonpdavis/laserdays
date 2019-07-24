@@ -11,9 +11,11 @@ public class SoundTrackManager : MonoBehaviour {
     public AudioSource bass;
     public MFPP.FlipClipAsset flipClip;
     public bool play;
+    public bool mute;
     private int currentChord;
     public int counter = 0;
     public Slider mainSlider;
+
 
 	// Use this for initialization
 	void Start () {
@@ -38,8 +40,10 @@ public class SoundTrackManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (!play) { StartCoroutine(Soundtrack()); }
-        play = true;
+        if (!mute && !play) { StartCoroutine(Soundtrack()); 
+            play = true;
+        }
+
 	}
 
     public void SetVolume()
