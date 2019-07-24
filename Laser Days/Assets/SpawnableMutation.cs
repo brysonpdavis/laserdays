@@ -32,21 +32,10 @@ public class SpawnableMutation : MonoBehaviour {
     [HideInInspector] public float deathLength;
 
     // Use this for initialization
-    void Start () {
+    void Awake() {
         mRenderer = GetComponent<Renderer>();
-        propBlock = new MaterialPropertyBlock();
         coll = GetComponent<SphereCollider>();
-        coll.enabled = false;
-
-        InitRandom();
-        scale(0f);
-
-        mRenderer.GetPropertyBlock(propBlock);
-        propBlock.SetFloat("_BeginToBase", 0f);
-        propBlock.SetFloat("_BaseToDeath", 0f);
-        propBlock.SetColor("_TintColor", tint);
-        mRenderer.SetPropertyBlock(propBlock);
-	}
+    }
 
     void PrepareAudioLife(AudioSource audio)
     {
@@ -75,6 +64,24 @@ public class SpawnableMutation : MonoBehaviour {
 
         targetScale = Random.Range(minMaxScale.x, minMaxScale.y);
         tint = Color.Lerp(tintA, tintB, Random.Range(0f, 1f));
+        
+        propBlock = new MaterialPropertyBlock();
+        
+        mRenderer.GetPropertyBlock(propBlock);
+        propBlock.SetFloat("_BeginToBase", 0f);
+        propBlock.SetFloat("_BaseToDeath", 0f);
+        propBlock.SetColor("_TintColor", tint);
+        mRenderer.SetPropertyBlock(propBlock);
+        
+        scale(0f);
+
+        growthProgess = 0;
+        lifeProgress = 0;
+        deathProgress = 0;
+        killProgress = 0; 
+        waitingProgress = 0;
+        
+        lifePhase = LifeCycle.Waiting;
     }
 
     void scale(float s)
@@ -153,7 +160,7 @@ public class SpawnableMutation : MonoBehaviour {
                     deathProgress += Time.deltaTime;      
                 } else 
                 {
-                    Destroy(this.gameObject);
+                    this.gameObject.SetActive(false);
                 }
                     
                 break;
@@ -163,6 +170,10 @@ public class SpawnableMutation : MonoBehaviour {
     private void OnEnable()
     {
         GardenDrones.AddMutationToDrones(this);
+     
+        coll.enabled = false;
+
+        InitRandom();
     }
 
     private void OnDisable()
