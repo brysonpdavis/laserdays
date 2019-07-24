@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 64959464678513930}
   - component: {fileID: 114672902904624190}
   - component: {fileID: 54415768326505778}
+  - component: {fileID: 114094841698707270}
   m_Layer: 10
   m_Name: Little tree
   m_TagString: Untagged
@@ -192,6 +193,21 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: e97334b230d024db088d40e7a6ec9a79, type: 3}
+--- !u!114 &114094841698707270
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292732579150714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bea4c010b684720a24c8646da392e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minScale: 2
+  maxScale: 3
+  gameObjects:
+  - {fileID: 1292732579150714}
 --- !u!114 &114138508076014504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,6 +219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6922054a7b44867b9a55812b4a0bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xMag: 0.0003
+  yMag: 0.0001
+  zMag: 0.0005
 --- !u!114 &114485760148989132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,6 +236,8 @@ MonoBehaviour:
   ScaleSpeed: 0.8
   shared: 0
   manualTransitionChildren: 0
+  forceRadial: 0
+  tween: 3
 --- !u!114 &114672902904624190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,6 +252,8 @@ MonoBehaviour:
   ScaleSpeed: 0.6
   shared: 0
   manualTransitionChildren: 0
+  forceRadial: 0
+  tween: 3
 --- !u!114 &114929433547588156
 MonoBehaviour:
   m_ObjectHideFlags: 1
