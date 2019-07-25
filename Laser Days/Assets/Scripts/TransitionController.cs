@@ -111,7 +111,6 @@ public class TransitionController: MonoBehaviour
                     albo.MaterialSetStart(0f);
                 else
                     albo.SetStart(0f);
-                Debug.Log("setting to 0f");
             }
         }
 
@@ -124,8 +123,6 @@ public class TransitionController: MonoBehaviour
                     albo.MaterialSetStart(1f);
                 else
                     albo.SetStart(1f);
-                Debug.Log("setting to 1f");
-
             }
 
         }
