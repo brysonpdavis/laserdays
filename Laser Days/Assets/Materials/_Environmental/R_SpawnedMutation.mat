@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: R_SpawnedMutation
   m_Shader: {fileID: 4800000, guid: 85c990811e84845d0be0c2ff50b42515, type: 3}
-  m_ShaderKeywords: ACCENT_ON EMISSIVE INTERACTABLE NO_GRADIENT REAL
+  m_ShaderKeywords: EMISSIVE INTERACTABLE NO_GRADIENT REAL
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AccentMap:
-        m_Texture: {fileID: 2800000, guid: a78bf3a6cceb64fdbb8c1c5d11311be9, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -83,6 +83,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlbedoContribution: 1
     - _AlphaCutoff: 0.5
     - _BaseToDeath: 0
     - _BeginToBase: 0
@@ -101,14 +102,14 @@ Material:
     - _GradientOffset: -0.26
     - _GradientScale: 1
     - _Highlights: 1
-    - _LineA: 6
+    - _LineA: 8
     - _MainTexContribution: 0.1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Shimmer: 0
-    - _Smoothness: 0.9
+    - _Smoothness: 0.656
     - _Smoothness2: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -124,9 +125,9 @@ Material:
     - _onHold: 0
     - _onHover: 0
     m_Colors:
-    - _AccentColor: {r: 0, g: 0, b: 0, a: 0.18039216}
-    - _BaseColor: {r: 0.26677686, g: 0.20185119, b: 0.6792453, a: 1}
-    - _BeginColor: {r: 0.34464875, g: 0.23326837, b: 0.03152275, a: 1}
+    - _AccentColor: {r: 1, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0.24145108, g: 0.17372729, b: 0.6037736, a: 1}
+    - _BeginColor: {r: 1.4980392, g: 0.59607846, b: 0.05490196, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DeathColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

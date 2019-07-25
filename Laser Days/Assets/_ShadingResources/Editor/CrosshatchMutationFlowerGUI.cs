@@ -66,10 +66,11 @@ public class CrosshatchMutationFlowerGUI : ShaderGUI {
         TextureProperty("_MainTex", "Mutation map - Mask (R), Growth shape (B)");
 
         SliderProperty("_Highlights", "");
+        SliderProperty("_AlbedoContribution", "");
 
         editor.TextureScaleOffsetProperty(FindProperty("_MainTex"));
 
-        GUILayout.Label("Base", EditorStyles.boldLabel);
+        GUILayout.Label("Color", EditorStyles.boldLabel);
 
         ColorProperty("_BeginColor");
         ColorProperty("_BaseColor");

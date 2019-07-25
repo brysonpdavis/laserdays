@@ -13,7 +13,7 @@ float _Smoothness, _Smoothness2, _Highlights, _MainTexContribution;
 
 int _LineA;
 
-float _TransitionState, _TransitionStateB, _AlphaCutoff, _Elapsed, _BeginToBase, _BaseToDeath;  
+float _TransitionState, _TransitionStateB, _AlphaCutoff, _Elapsed, _BeginToBase, _BaseToDeath, _AlbedoContribution;
 
 //Vertex Structure
 struct VertexData {
@@ -376,7 +376,7 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         CreateLight(i), CreateIndirectLight(i, viewDir)
     );
     
-
+    float4 finalCol = float4((color + albedo * (1 - _AlbedoContribution)), 1);
       
     #if defined(_RENDERING_FADE) || defined(_RENDERING_TRANSPARENT)
         color.a = alpha;
@@ -387,12 +387,12 @@ FragmentOutput MyFragmentProgram (Interpolators i) {
         #if !defined(UNITY_HDR_ON)
             color.rgb = exp2(-color.rgb);
         #endif
-        output.gBuffer0.rgb = float3(0,0,0);
+        output.gBuffer0.rgb = albedo * _AlbedoContribution;
         output.gBuffer0.a = GetShininess(i);
         output.gBuffer1.rgb = GetOutlineData(i);
         output.gBuffer1.a = GetSmoothness(i);
         output.gBuffer2 = float4(i.normal * 0.5 + 0.5, GetOcclusion(i));
-        output.gBuffer3 = float4(BaseColorWrapper(i), 1);
+        output.gBuffer3 = finalCol;
     #else
         output.color = color;
     #endif

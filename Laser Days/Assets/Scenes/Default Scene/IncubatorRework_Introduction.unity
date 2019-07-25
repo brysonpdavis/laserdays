@@ -9807,7 +9807,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4235742526931388, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -500
       objectReference: {fileID: 0}
     - target: {fileID: 4235742526931388, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_LocalRotation.x
@@ -11417,7 +11417,7 @@ Transform:
   - {fileID: 1082505741}
   - {fileID: 1387292480}
   m_Father: {fileID: 1337962248}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &450560926
 MonoBehaviour:
@@ -14591,6 +14591,73 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a773b176b2ecb44ac93d42fae06ab537, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &554930787
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1337962248}
+    m_Modifications:
+    - target: {fileID: 4690832406770176, guid: 8ab439466a9af40fea182ddb16a6cea5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690832406770176, guid: 8ab439466a9af40fea182ddb16a6cea5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690832406770176, guid: 8ab439466a9af40fea182ddb16a6cea5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 101.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690832406770176, guid: 8ab439466a9af40fea182ddb16a6cea5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690832406770176, guid: 8ab439466a9af40fea182ddb16a6cea5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690832406770176, guid: 8ab439466a9af40fea182ddb16a6cea5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690832406770176, guid: 8ab439466a9af40fea182ddb16a6cea5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690832406770176, guid: 8ab439466a9af40fea182ddb16a6cea5, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 65796390656629038, guid: 8ab439466a9af40fea182ddb16a6cea5,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 65796390656629038, guid: 8ab439466a9af40fea182ddb16a6cea5,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114933320727626394, guid: 8ab439466a9af40fea182ddb16a6cea5,
+        type: 2}
+      propertyPath: lowAudio
+      value: 
+      objectReference: {fileID: 1073481651}
+    - target: {fileID: 114933320727626394, guid: 8ab439466a9af40fea182ddb16a6cea5,
+        type: 2}
+      propertyPath: highAudio
+      value: 
+      objectReference: {fileID: 1512583378}
+    - target: {fileID: 114933320727626394, guid: 8ab439466a9af40fea182ddb16a6cea5,
+        type: 2}
+      propertyPath: teleportPosition
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8ab439466a9af40fea182ddb16a6cea5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &556050503
 Prefab:
@@ -19618,7 +19685,7 @@ Transform:
   - {fileID: 551248912}
   - {fileID: 761250852}
   m_Father: {fileID: 1337962248}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &732879024
 MonoBehaviour:
@@ -19777,9 +19844,63 @@ MonoBehaviour:
   _isMainScene: 1
   _sceneSetup:
   - scene:
+      editorAssetGUID: 698b6db253dd04e5398051c36d4151d0
+      name: IncubatorRework_OpeningPlayer
+      _path: Assets/IncubatorRework_OpeningPlayer.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: bf8a014d255e046e0a33b44a7b35c42f
+      name: IncubatorRework_BackgroundGeometry
+      _path: Assets/Scenes/Default Scene/IncubatorRework_BackgroundGeometry.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 647dbcc76c06648d88da44305450dd2a
+      name: IncubatorRework_Narration
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/IncubatorRework_Narration.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 34696257e30c544aa82422104d70b3a7
+      name: IncubatorRework_JumpingRotator
+      _path: Assets/Scenes/Default Scene/IncubatorRework_JumpingRotator.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: cc6812b4df8f54bfe8d712da69237019
+      name: IncubatorRework_TinyTutorialCompound
+      _path: Assets/Scenes/Default Scene/IncubatorRework_TinyTutorialCompound.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: d2ffd0bc80d494ed78a3a4071dbc9823
+      name: IncubatorRework_Garden
+      _path: Assets/Scenes/Default Scene/IncubatorRework_Garden.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 19d220f32db2a476da1501856a991cab
+      name: IncubatorRework_FirstPuzzleCompound
+      _path: Assets/Resources/Plants/IncubatorRework_FirstPuzzleCompound.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 2348963f9da35414e8ee077b7e26a149
+      name: IncubatorRework_SecondPuzzleCompound
+      _path: Assets/Scenes/Default Scene/IncubatorRework_SecondPuzzleCompound.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
       editorAssetGUID: d58469632502741ddb961b9a3dc65446
       name: IncubatorRework_Introduction
       _path: Assets/Scenes/Default Scene/IncubatorRework_Introduction.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 1bb2cd3c57e344a5fae600884156b9a9
+      name: Crosshatch_Hometown
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Crosshatch_Hometown.unity
     loadInEditor: 1
     loadMethod: 1
   _thisScenePath: Assets/Scenes/Default Scene/IncubatorRework_Introduction.unity
@@ -20063,7 +20184,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 23338567112957916, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4,
         type: 2}
@@ -22819,63 +22940,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4648680758296294, guid: 4543fd02ab05c4491a69d9b56fe6f4ca,
     type: 2}
   m_PrefabInternal: {fileID: 200148493}
---- !u!1001 &899484912
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1337962248}
-    m_Modifications:
-    - target: {fileID: 4778925355574750, guid: f6abf4257c7514d3bab0cb68c169b089, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -23
-      objectReference: {fileID: 0}
-    - target: {fileID: 4778925355574750, guid: f6abf4257c7514d3bab0cb68c169b089, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4778925355574750, guid: f6abf4257c7514d3bab0cb68c169b089, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 101.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4778925355574750, guid: f6abf4257c7514d3bab0cb68c169b089, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4778925355574750, guid: f6abf4257c7514d3bab0cb68c169b089, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4778925355574750, guid: f6abf4257c7514d3bab0cb68c169b089, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4778925355574750, guid: f6abf4257c7514d3bab0cb68c169b089, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4778925355574750, guid: f6abf4257c7514d3bab0cb68c169b089, type: 2}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 65729349211138406, guid: f6abf4257c7514d3bab0cb68c169b089,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 65729349211138406, guid: f6abf4257c7514d3bab0cb68c169b089,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 65729349211138406, guid: f6abf4257c7514d3bab0cb68c169b089,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: f6abf4257c7514d3bab0cb68c169b089, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &900053125
 Prefab:
   m_ObjectHideFlags: 0
@@ -27589,6 +27653,11 @@ Prefab:
     - {fileID: 114543308557780958, guid: 8fe0f863e22434153972ad671378e728, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8fe0f863e22434153972ad671378e728, type: 2}
   m_IsPrefabParent: 0
+--- !u!82 &1073481651 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82487438115481026, guid: f2c1c80e5713b41c2919313ce488d684,
+    type: 2}
+  m_PrefabInternal: {fileID: 902081097}
 --- !u!4 &1073605419 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4678059754797142, guid: 1105cd87c77444727ad19802c00282e9,
@@ -31205,7 +31274,7 @@ GameObject:
   - component: {fileID: 1245893923}
   m_Layer: 17
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: SpawnableSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -37700,6 +37769,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b8cd4a95fb1543f8afda17f235732b7, type: 2}
   m_IsPrefabParent: 0
+--- !u!82 &1512583378 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82367819781980842, guid: f2c1c80e5713b41c2919313ce488d684,
+    type: 2}
+  m_PrefabInternal: {fileID: 902081097}
 --- !u!1 &1513233190
 GameObject:
   m_ObjectHideFlags: 0
@@ -53260,7 +53334,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4739265270704674, guid: 2b8cd4a95fb1543f8afda17f235732b7, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 23119998508539290, guid: 2b8cd4a95fb1543f8afda17f235732b7,
         type: 2}
