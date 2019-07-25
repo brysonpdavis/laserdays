@@ -28,6 +28,7 @@ public class SpawnableMutation : MonoBehaviour {
     private Color tint;
     private float waitLength, growthLength, lifeLength, killLength, targetScale;
     private float growthProgess, lifeProgress, deathProgress, killProgress, waitingProgress;
+    PlantMovement movement;
 
     [HideInInspector] public float deathLength;
 
@@ -35,6 +36,7 @@ public class SpawnableMutation : MonoBehaviour {
     void Awake() {
         mRenderer = GetComponent<Renderer>();
         coll = GetComponent<SphereCollider>();
+        movement = GetComponent<PlantMovement>();
     }
 
     void PrepareAudioLife(AudioSource audio)
@@ -89,6 +91,14 @@ public class SpawnableMutation : MonoBehaviour {
         transform.localScale = new Vector3(s, s, s);
     }
 
+    public void ColorShift(string property, float value)
+    {
+        mRenderer.GetPropertyBlock(propBlock);
+        propBlock.SetFloat(property, value);
+        mRenderer.SetPropertyBlock(propBlock);
+
+    }
+
 	// Update is called once per frame
 	void Update () {
     
@@ -127,6 +137,7 @@ public class SpawnableMutation : MonoBehaviour {
                     //move to next phase
                     lifePhase = LifeCycle.Life;
                     coll.enabled = true;
+                    movement.Activate();
                 }
                 break;
 
@@ -145,6 +156,7 @@ public class SpawnableMutation : MonoBehaviour {
 
             case LifeCycle.Death :
                 PrepareAudioDeath(GetComponent<AudioSource>());
+                movement.Deactivate();
                 if(deathProgress < deathLength)
                 {
                     float ratio = deathProgress / deathLength;
