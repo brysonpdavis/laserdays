@@ -13,20 +13,19 @@ public class MainMenu : MonoBehaviour {
     public Image background;
     public GameObject container;
 
+    [SerializeField] private GameObject listener;
+
 
 	// Use this for initialization
 	void Start () {
 
         OpeningSongSingleton.Instance.mute = false;
         OpeningSongSingleton.Instance.Play();
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+        DontDestroyOnLoad(listener);
+        listener.SetActive(false);
+    }
+    
     IEnumerator FadeOut()
     {
         float elapsedTime = 0;
@@ -40,6 +39,9 @@ public class MainMenu : MonoBehaviour {
             background.color = newColor;
             yield return null;
         }
+        
+        listener.SetActive(true);
+        listener.GetComponent<TemporaryListener>().StartWaitingForPlayer();
     }
 
     public void RestartScene()
@@ -54,6 +56,7 @@ public class MainMenu : MonoBehaviour {
 
     IEnumerator Restart()
     {
+        
         container.SetActive(false);
 
         StartCoroutine(FadeOut());
