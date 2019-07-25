@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GardenDrones : MonoBehaviour
 {
@@ -99,11 +100,12 @@ public class GardenDrones : MonoBehaviour
 		
 		allDrones.Add(this);
 
-		state = DroneState.Patrolling;
+        //state = DroneState.Patrolling;
 
+        StartCoroutine(TurnToLook(waypoints[waypointIndex].gameObject));
 		timePassed = 0;
 		
-		BeamOff();
+		//BeamOff();
 		
 		audio = GetComponent<AudioSource>();
         beamAudio = beam.GetComponent<AudioSource>();
@@ -233,6 +235,9 @@ public class GardenDrones : MonoBehaviour
 
 	static float CalcDistance2D(Transform thing1, Transform thing2)
 	{
+        if (!thing1 || !thing2)
+            return float.MaxValue;
+
 		Vector3 pos1 = thing1.position;
 		Vector3 pos2 = thing2.position;
 		
@@ -340,7 +345,12 @@ public class GardenDrones : MonoBehaviour
 		}
 	}
 
-	void StopLocalCoroutines()
+    private void OnEnable()
+    {
+        BeamOff();
+    }
+
+    void StopLocalCoroutines()
 	{
 		StopCoroutine("TurnToLook");
 		StopCoroutine("BeamGrow");

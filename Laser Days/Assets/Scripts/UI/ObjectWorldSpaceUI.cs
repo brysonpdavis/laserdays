@@ -20,7 +20,7 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 	
 	public float refreshTime = 1f;
 
-	private GameObject textAndImage;
+	// private GameObject textAndImage;
 
 	private GameObject joystickImage;
 
@@ -40,10 +40,10 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 	{
 		player = Toolbox.Instance.GetPlayer();
 		mainCamera = Camera.main;
-		textAndImage = transform.GetChild(0).gameObject;
+		//textAndImage = transform.GetChild(0).gameObject;
 		dState = State.Waiting;
-		keyboardImage = textAndImage.transform.Find("Keyboard").gameObject;
-		joystickImage = textAndImage.transform.Find("Controller").gameObject;
+		keyboardImage = transform.Find("Keyboard").gameObject;
+		joystickImage = transform.Find("Controller").gameObject;
 
 		if (keyboardSprite && keyboardImage.GetComponent<Image>())
 			keyboardImage.GetComponent<Image>().sprite = keyboardSprite;
@@ -82,8 +82,8 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 
 	void DisableTextAndImage()
 	{
-		if (textAndImage.activeSelf)
-			textAndImage.SetActive(false);
+		//if (textAndImage.activeSelf)
+			//textAndImage.SetActive(false);
 		
 		if (keyboardImage)
 			keyboardImage.SetActive(false);
@@ -94,10 +94,10 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 
 	void EnableImageAndIcon()
 	{
-		if (!textAndImage.activeSelf)
-		{
-			textAndImage.SetActive(true);
-		}
+		//if (!textAndImage.activeSelf)
+		//{
+		//	textAndImage.SetActive(true);
+		//}
 		
 		if (ControlManager.GetControllerState() == ControlManager.ControllerState.JoystickPS4)
 		{
@@ -204,5 +204,23 @@ public class ObjectWorldSpaceUI : MonoBehaviour
 	{
 		joystickImage.SetActive(false);
 		keyboardImage.SetActive(true);
-	}
+    }
+
+    private void ActiveImageSetTransition(GameObject image)
+    {
+        Transition trans = image.GetComponent<Transition>();
+        if (trans)
+        {
+            trans.StopAllCoroutines();
+            if(Toolbox.Instance.PlayerInReal())
+            {
+                trans.SetStart(0f);
+            }
+            else
+            {
+                trans.SetStart(1f);
+            }
+
+        }
+    }
 }
