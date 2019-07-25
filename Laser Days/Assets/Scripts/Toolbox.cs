@@ -511,6 +511,23 @@ public class Toolbox : Singleton<Toolbox>
         {
             soundtrack.flipClip = settingsObject.GetFlipClip();
             soundtrack.mute = !settingsObject.GetSoundtrackEnabled();
-        }    
+        }
+
+        if (settingsObject.MuteOpeningSoundtrack())
+        {
+            if (TriggeredAudio.Instance)
+                TriggeredAudio.Instance.mute = true;
+            if (OpeningSongSingleton.Instance)
+                OpeningSongSingleton.Instance.mute = true;
+        }
+
+        else
+        {
+            if (TriggeredAudio.Instance)
+                TriggeredAudio.Instance.mute = false;
+            if (OpeningSongSingleton.Instance)
+                OpeningSongSingleton.Instance.mute = false;
+        }
+
     }
 }

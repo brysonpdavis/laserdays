@@ -9,7 +9,7 @@ public class SceneChangeTeleport : MonoBehaviour {
     float fadeDuration;
     AudioSource audio;
 
-    [SerializeField] private AudioSource[] audioSources;
+    //[SerializeField] private AudioSource[] audioSources;
     [SerializeField] private string sceneName;
     [SerializeField] private string spawnName;
 
@@ -49,10 +49,8 @@ public class SceneChangeTeleport : MonoBehaviour {
             // audio fadeout
             float volumeFade = Mathf.Lerp(audioStart, 0f, ratio);
 
-            foreach (var audio in audioSources)
-            {
-                audio.volume = volumeFade;
-            }
+            OpeningSongSingleton.Instance.volume = volumeFade;
+            TriggeredAudio.Instance.volume = volumeFade;
 
             Toolbox.Instance.GetPlayer().GetComponentInChildren<SoundTrackManager>().mute = false;
             

@@ -16,6 +16,9 @@ public class MainMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        OpeningSongSingleton.Instance.mute = false;
+        OpeningSongSingleton.Instance.Play();
 		
 	}
 	

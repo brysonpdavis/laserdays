@@ -6,12 +6,24 @@ public class TriggeredAudio : MonoBehaviour {
 
     AudioSource audio;
     public AudioSource whisperTone;
+    private AudioSource highFreq;
+    public static AudioSource Instance;
+
 
     private void Start()
     {
         audio = GetComponent<AudioSource>();
+
+        if (Instance != null && Instance != audio)
+        {
+            Destroy(gameObject);
+        }
+
+        else Instance = audio;
+
+
         Toolbox.Instance.GetPlayer().GetComponentInChildren<SoundTrackManager>().mute = true;
-        DontDestroyOnLoad(gameObject);
+        highFreq = OpeningSongSingleton.Instance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +36,9 @@ public class TriggeredAudio : MonoBehaviour {
 
             StartCoroutine(VolumeFade(whisperTone, 0f, 1f, 0f));
             StartCoroutine(VolumeFade(audio, 1f, 3f, 1f));
+
+            audio.time = highFreq.time;
+            audio.Play();
         }
     }
 

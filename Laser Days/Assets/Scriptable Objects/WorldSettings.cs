@@ -23,6 +23,9 @@ public class WorldSettings : ScriptableObject
 
     [SerializeField] private bool soundtrackEnabled = true;
 
+    [SerializeField] private bool muteOpeningSoundtrack = true;
+
+
     public Material GetSkyBoxMaterial()
     {
         return skyBoxMaterial;
@@ -71,5 +74,10 @@ public class WorldSettings : ScriptableObject
     public bool GetSoundtrackEnabled()
     {
         return soundtrackEnabled;
+    }
+
+    public bool MuteOpeningSoundtrack()
+    {
+        return muteOpeningSoundtrack;
     }
 }
