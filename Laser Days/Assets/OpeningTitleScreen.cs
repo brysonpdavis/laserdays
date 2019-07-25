@@ -12,7 +12,7 @@ public class OpeningTitleScreen : MonoBehaviour {
     private void Awake()
     {
         canvas = GetComponent<CanvasGroup>();
-        GetComponentInParent<CanvasScaler>().enabled = true;
+        //GetComponentInParent<CanvasScaler>().enabled = true;
         //Time.timeScale = 0f;
 
     }
