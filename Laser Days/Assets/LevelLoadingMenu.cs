@@ -421,6 +421,8 @@ public class LevelLoadingMenu : MonoBehaviour {
         
         MajorRegions.AllRegionsDistanceCheck();
         RegionOptimization.AllRegionsDistanceCheck();
+        
+        Toolbox.Instance.SetSettings(spawn.GetComponent<Spawner>().WorldSettings);
 
         StartCoroutine(FadeIn(outlinesFade));
 

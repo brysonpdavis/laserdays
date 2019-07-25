@@ -7,12 +7,11 @@ using UnityEngine.UI;
 public class SceneChangeTeleport : MonoBehaviour {
 
     float fadeDuration;
-    [SerializeField] Image background;
     AudioSource audio;
-    public AudioSource highAudio;
-    public AudioSource lowAudio;
-    public MFPP.FlipClipAsset nextFlipClip;
-    public Transform teleportPosition;
+
+    [SerializeField] private AudioSource[] audioSources;
+    [SerializeField] private string sceneName;
+    [SerializeField] private string spawnName;
 
 
     private void OnTriggerEnter(Collider other)
@@ -23,19 +22,18 @@ public class SceneChangeTeleport : MonoBehaviour {
 
     private void Start()
     {
-        background = GameObject.Find("Fade").GetComponent<Image>();
         audio = GetComponent<AudioSource>();
         fadeDuration = audio.clip.length;
-
     }
 
     private void LoadScene()
     {
         audio.Play();
-        StartCoroutine(FadeOut());
+        Toolbox.Instance.LoadScene(sceneName, spawnName);
+        StartCoroutine(FadeOutVolume());
     }
 
-    IEnumerator FadeOut()
+    IEnumerator FadeOutVolume()
     {
         AudioSource playerAudio = Toolbox.Instance.GetSoundTrackAudio();
 
@@ -43,51 +41,24 @@ public class SceneChangeTeleport : MonoBehaviour {
 
         float elapsedTime = 0;
         float ratio = elapsedTime / fadeDuration;
-        Color fader = background.color;
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / fadeDuration;
-            Color newColor = Color.Lerp(fader, Color.black, ratio);
-            background.color = newColor;
 
             // audio fadeout
             float volumeFade = Mathf.Lerp(audioStart, 0f, ratio);
-            highAudio.volume = volumeFade;
-            lowAudio.volume = volumeFade;
 
+            foreach (var audio in audioSources)
+            {
+                audio.volume = volumeFade;
+            }
+
+            Toolbox.Instance.GetPlayer().GetComponentInChildren<SoundTrackManager>().mute = false;
+            
             yield return null;
         }
-
-        GameObject player = Toolbox.Instance.GetPlayer();
-        SoundTrackManager soundTrack = player.GetComponentInChildren<SoundTrackManager>();
-
-        //teleport player
-        player.GetComponent<MFPP.Player>().TeleportTo(teleportPosition.position, true);
-
-        //unmute soundtrack
-        soundTrack.mute = false;
-
-        //switch flip sound
-        soundTrack.flipClip = nextFlipClip;
-
-        //fade in
-
-        elapsedTime = 0;
-        ratio = 0;
-
-        fader = background.color;
-        while (ratio < 1f)
-        {
-            elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / fadeDuration;
-            Color newColor = Color.Lerp(fader, Color.clear, ratio);
-            background.color = newColor;
-
-            yield return null;
-        }
-
-
+        
     }
 
 

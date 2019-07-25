@@ -475,4 +475,42 @@ public class Toolbox : Singleton<Toolbox>
         GameObject button = GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton;
         StartCoroutine(mainCanvas.GetComponent<LevelLoadingMenu>().loadNextScene(sceneName, spawnPoint, button, false));
     }
+
+    public void SetSettings(WorldSettings settingsObject)
+    {
+        SkyboxTransition skyboxSettings = player.GetComponent<SkyboxTransition>();
+
+        if (skyboxSettings)
+        {
+            if (settingsObject.GetSkyBoxMaterial())
+            {
+                RenderSettings.skybox = settingsObject.GetSkyBoxMaterial();
+                skyboxSettings.material = settingsObject.GetSkyBoxMaterial();
+            }
+            
+            skyboxSettings.laserFog = settingsObject.GetLaserFog();
+            skyboxSettings.laserAmbient = settingsObject.GetLaserAmbient();
+            skyboxSettings.realFog = settingsObject.GetRealFog();
+            skyboxSettings.realAbmient = settingsObject.GetRealAmbient();
+            
+            if (settingsObject.GetRealGlobalParticle())
+                skyboxSettings.realGlobalParticle = settingsObject.GetRealGlobalParticle();
+            
+            if (settingsObject.GetLaserGlobalParticle())
+                skyboxSettings.laserGlobalParticle = settingsObject.GetLaserGlobalParticle();
+        }
+        
+        if (flipScript) 
+            flipScript.canFlip = settingsObject.GetPlayerCanSwitch();
+
+        SoundTrackManager soundtrack = player.GetComponentInChildren<SoundTrackManager>();
+        
+        
+        
+        if (soundtrack)
+        {
+            soundtrack.flipClip = settingsObject.GetFlipClip();
+            soundtrack.mute = !settingsObject.GetSoundtrackEnabled();
+        }    
+    }
 }

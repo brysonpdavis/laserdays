@@ -11,6 +11,9 @@ public class Spawner : MonoBehaviour {
     public GameObject button;
     public GameObject myButton;
     public bool completed = false;
+
+    [SerializeField] 
+    private WorldSettings worldSettings;
     // Use this for initialization
 
 
@@ -89,5 +92,10 @@ public class Spawner : MonoBehaviour {
             r.spawnName = gameObject.name;
             r.sceneName = scene.name;
         }
+    }
+
+    public WorldSettings WorldSettings
+    {
+        get { return worldSettings; }
     }
 }
