@@ -109,6 +109,25 @@ public class RaycastManager : MonoBehaviour {
                 IconCheck(hit.distance, hit.collider.gameObject);
             }
 
+            if (hit.collider.CompareTag("Robot"))
+            {
+                //raycastedObj = hit.collider.gameObject;
+                IconCheck(hit.distance, hit.collider.gameObject);
+
+                if (hit.collider.gameObject.GetComponent<SelectionRenderChange>())
+                {
+                    raycastedObj = hit.collider.gameObject;
+                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
+                    raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
+                }
+
+                if (ControlManager.Instance.GetButtonDown("Select"))
+                {
+                    raycastedObj.GetComponent<RobotInteraction>().RobotActivate();
+                    Debug.Log("selected AT ROBOT!");
+                }
+            }
+
 
             //1: objects on the default/shared layers are included in the layermask to block raycasts,
             //if we were previously raycasting something OTHER than the held object, turn that off
@@ -235,6 +254,7 @@ public class RaycastManager : MonoBehaviour {
                     }
                 }
             }
+
 
             //for objects on real/laser layers that aren't interactable
             else
@@ -376,6 +396,11 @@ public class RaycastManager : MonoBehaviour {
                 iconContainer.SetOpenHand();
 
             //can have an else with another icon
+        }
+
+        if (raycastedObj.CompareTag("Robot"))
+        {
+                iconContainer.SetRobotInteraction();
         }
 
         else if (!pickUp.heldObject)

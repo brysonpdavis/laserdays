@@ -12,7 +12,9 @@ public class GardenEye : MonoBehaviour
     [HideInInspector] public Vector3 currentPlayerPoint;
     AudioSource audio;
     public GameObject plantContainer;
+    public float plantCheckRadius;
     IList<GameObject> plantList;
+
 
     //public int particleCount = 15;
     //public float radialSpeed = 0.0f;
@@ -34,6 +36,7 @@ public class GardenEye : MonoBehaviour
     private bool plantRoutineRunning = false;
     private bool snapViewRunning = false;
     private bool widenFocusRunning = false;
+    bool lookingAtPlayer = false;
 
     [HideInInspector]
     private LayerMask currentLayerMask;
@@ -56,7 +59,7 @@ public class GardenEye : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        BuildPlantList();
+        //BuildPlantList();
         if (other.CompareTag("Player"))
         {
             isActive = true;
@@ -85,30 +88,54 @@ public class GardenEye : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isActive && !plantRoutineRunning && (plantList.Count>0))
+        if (isActive && !plantRoutineRunning && !lookingAtPlayer)// && (plantList.Count>0))
             StartCoroutine(PlantRoutine());
 
-        
+    }
 
+    public void PlayerInteraction()
+    {
+        StopAllCoroutines();
+        plantRoutineRunning = false;
+        Vector3 position = Toolbox.Instance.GetPlayer().transform.position + new Vector3 (0f, 1.5f, 0f);
+        StartCoroutine(SnapView(transform.position, position, 1f));
+        StartCoroutine(ResetBeamLength(1.5f));
+        lookingAtPlayer = true;
+    }
+
+    public void PlayerDeactivate()
+    {
+        StopAllCoroutines();
+        lookingAtPlayer = false;  
     }
 
     void BuildPlantList()
     {
         plantList.Clear();
-        foreach (Transform child in plantContainer.transform)
+
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, plantCheckRadius);
+
+        foreach (Collider child in hitColliders)
         {
             if (child.gameObject.CompareTag("Plant"))
             {
                 plantList.Add(child.gameObject);
             }
         }
+
+        Debug.Log("PLANT LIST LENGTH!!!  " + plantList.Count);
     }
 
 
     private IEnumerator PlantRoutine()
     {
 
-        plantRoutineRunning = true;
+            plantRoutineRunning = true;
+            BuildPlantList();
+
+            if (plantList.Count == 0)
+                yield return null;
 
 
             GameObject nextPlant = plantList[(int)Random.Range(0, plantList.Count)];
@@ -124,19 +151,26 @@ public class GardenEye : MonoBehaviour
 
             while (ratio < 1f)
             {
-                ratio = elapsedTime / shrinkTime;
-                Vector3 scaleDown = Vector3.Lerp(startingScale, Vector3.zero, TweeningFunctions.EaseOutCubic(ratio));
-                nextPlant.transform.localScale = scaleDown;
-                elapsedTime += Time.deltaTime;
-                transform.LookAt(nextPlant.transform.position);
-                SetBeamLength(nextPlant.transform.position);
+                if (nextPlant)
+                {
 
-                float beamWidth = Mathf.Lerp(unfocusedScale, focusedScale, ratio);
-                beam.SetWidth(beamWidth);
+
+                    ratio = elapsedTime / shrinkTime;
+                    Vector3 scaleDown = Vector3.Lerp(startingScale, new Vector3(.05f, .05f, .05f), TweeningFunctions.EaseOutCubic(ratio));
+                    nextPlant.transform.localScale = scaleDown;
+                    elapsedTime += Time.deltaTime;
+                    transform.LookAt(nextPlant.transform.position);
+                    SetBeamLength(nextPlant.transform.position);
+
+                    float beamWidth = Mathf.Lerp(unfocusedScale, focusedScale, ratio);
+                    beam.SetWidth(beamWidth);
+                }
                 
 
                 yield return null;
             }
+
+        Destroy(nextPlant);
 
         if (plantList.Count == 0)
         {

@@ -27,6 +27,7 @@ public class CrabWalk : MonoBehaviour {
 
     float elapsedTimeWalking;
     public bool held = false;
+    AudioSource audio;
 
     [SerializeField]
     private bool stuck;
@@ -46,6 +47,7 @@ public class CrabWalk : MonoBehaviour {
         renderChild = transform.GetChild(0).transform;
         lastCheckPos = transform.position;
         currentSpeed = speed;
+        audio = GetComponent<AudioSource>();
 	}
 
     public void OnHold()
@@ -65,6 +67,7 @@ public class CrabWalk : MonoBehaviour {
 
     void FixedUpdate()
     {
+        CheckAudio();
         if (!held)
         {
             // Rotating takes priority and walking will not happen in rotation mode 
@@ -126,6 +129,14 @@ public class CrabWalk : MonoBehaviour {
 
             }
         }
+    }
+
+    void CheckAudio()
+    {
+        if (Toolbox.Instance.PlayerInLaser())
+            audio.mute = false;
+        else
+            audio.mute = true;
     }
 
     // Check if the object has not moved within the past check period

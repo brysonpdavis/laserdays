@@ -26,25 +26,39 @@ public class TextNarration : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!singleActivation || (singleActivation && !activated))
-            {
-                Toolbox.Instance.NewNarration(this);
-                activated = true;
-
-                if (lore)
-                    Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
-                else
-                    Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
-            }
-
+            Activate();
         }
+    }
+
+    public void Activate()
+    {
+
+
+
+        if (!singleActivation || (singleActivation && !activated))
+        {
+            Toolbox.Instance.NewNarration(this);
+            activated = true;
+
+            if (lore)
+                Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
+            else
+                Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
+        }
+
+    }
+
+    public void Deactivate()
+    {
+        Toolbox.Instance.ClearNarration();
+ 
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Toolbox.Instance.ClearNarration();
+            Deactivate();
         }
     }
 

@@ -162,6 +162,11 @@ public class PlayerFlipAbilityTrigger : MonoBehaviour
         player.Movement.AllowMovement = true;
         player.Movement.AllowMouseMove = true;
 
+        if (allowFlip)
+            Toolbox.Instance.GetFlip().canFlip = true;
+        else
+            Toolbox.Instance.GetFlip().canFlip = false;
+
         Destroy(_uiObject);
 
     }
@@ -170,14 +175,13 @@ public class PlayerFlipAbilityTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (allowFlip)
-                Toolbox.Instance.GetFlip().canFlip = true;
-            else
-                Toolbox.Instance.GetFlip().canFlip = false;
             
             StartCoroutine(FadeRoutine());
 
             GetComponent<Collider>().enabled = false;
+            AudioSource audio = GetComponent<AudioSource>();
+            Toolbox.Instance.SetVolume(audio);
+            audio.Play();
         }
             
     }

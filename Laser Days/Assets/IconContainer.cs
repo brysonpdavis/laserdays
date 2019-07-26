@@ -68,6 +68,11 @@ public class IconContainer : MonoBehaviour {
         canvasSprite.sprite = openHand;
     }
 
+    public void SetRobotInteraction()
+    {
+        canvasSprite.sprite = resetPuzzle;
+    }
+
     public void SetOpenHandFill()
     {
         canvasSprite.sprite = openHandFill;
