@@ -174,4 +174,26 @@ public class RegionOptimization : MonoBehaviour
 
 	}
 
+    private void DrawGizmo(bool selected)
+    {
+        if (selected)
+        {
+            var green = new Color(0.1f, 0.8f, 0.4f, 0.2f);
+            Gizmos.color = green;
+            Gizmos.matrix = transform.localToWorldMatrix;
+            Gizmos.DrawSphere(Vector3.zero, activateDistance);
+            Gizmos.DrawWireSphere(Vector3.zero, activateDistance);
+        }
+    }
+
+
+    public void OnDrawGizmos()
+    {
+        DrawGizmo(false);
+    }
+    public void OnDrawGizmosSelected()
+    {
+        DrawGizmo(true);
+    }
+
 }

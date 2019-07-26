@@ -53,7 +53,7 @@ public class RaycastManager : MonoBehaviour {
     private float Radius;
 
     [Header("Scene Reset")]
-    const float nSecond = 3f;
+    const float nSecond = 1f;
 
     float timer = 0;
     bool entered = false;

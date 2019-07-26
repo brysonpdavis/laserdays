@@ -12,6 +12,8 @@ public class SceneChangeTeleport : MonoBehaviour {
     //[SerializeField] private AudioSource[] audioSources;
     [SerializeField] private string sceneName;
     [SerializeField] private string spawnName;
+    [SerializeField] AudioSource openingSong;
+    [SerializeField] AudioSource bassAudio;
 
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +26,8 @@ public class SceneChangeTeleport : MonoBehaviour {
     {
         audio = GetComponent<AudioSource>();
         fadeDuration = audio.clip.length;
+        openingSong = OpeningSongSingleton.Instance;
+        bassAudio = TriggeredAudio.Instance;
     }
 
     private void LoadScene()
@@ -49,13 +53,14 @@ public class SceneChangeTeleport : MonoBehaviour {
             // audio fadeout
             float volumeFade = Mathf.Lerp(audioStart, 0f, ratio);
 
-            OpeningSongSingleton.Instance.volume = volumeFade;
-            TriggeredAudio.Instance.volume = volumeFade;
+            openingSong.volume = volumeFade;
+            bassAudio.volume = volumeFade;
 
-            Toolbox.Instance.GetPlayer().GetComponentInChildren<SoundTrackManager>().mute = false;
-            
             yield return null;
         }
+
+        Toolbox.Instance.GetPlayer().GetComponentInChildren<SoundTrackManager>().mute = false;
+
         
     }
 

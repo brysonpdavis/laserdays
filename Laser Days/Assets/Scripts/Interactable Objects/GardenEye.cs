@@ -45,7 +45,6 @@ public class GardenEye : MonoBehaviour
     {
         player = Toolbox.Instance.GetPlayer().transform;
         plantList = new List<GameObject>();
-        BuildPlantList();
         Debug.Log(plantList.Count);
 
         particleSystem = GetComponentInChildren<ParticleSystem>();
@@ -57,6 +56,7 @@ public class GardenEye : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        BuildPlantList();
         if (other.CompareTag("Player"))
         {
             isActive = true;
@@ -79,6 +79,7 @@ public class GardenEye : MonoBehaviour
                 audio.mute = true;
 
             BeamDeactivate();
+            plantRoutineRunning = false;
         }
     }
 
@@ -93,6 +94,7 @@ public class GardenEye : MonoBehaviour
 
     void BuildPlantList()
     {
+        plantList.Clear();
         foreach (Transform child in plantContainer.transform)
         {
             if (child.gameObject.CompareTag("Plant"))
