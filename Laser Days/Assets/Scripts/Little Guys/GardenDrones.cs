@@ -152,10 +152,18 @@ public class GardenDrones : MonoBehaviour
 		}
 
 		if (Toolbox.Instance.PlayerInReal())
-			audio.mute = false;
+        {
+            audio.mute = false;
+            beamAudio.mute = false;
+        }
+			
 		
         else
-			audio.mute = true;
+        {
+            audio.mute = true;
+            beamAudio.mute = true;
+        }
+			
 
 	}
 
