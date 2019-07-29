@@ -10,7 +10,6 @@ public class flipScript : MonoBehaviour {
 	private float newX;
 	[SerializeField] private int envSize = 100;
 	public bool space;
-	private PlayerCharge pc;
     private flipburst flipburst;
     public IList<EyeThatSees> eyeThatSeesList;
 
@@ -60,7 +59,6 @@ public class flipScript : MonoBehaviour {
         //Debug.Log(Camera.main.fieldOfView);
 
         mutationSpawner = GetComponent<MutationSpawner>();
-		pc = GetComponent<PlayerCharge>();
         audioSource = GetComponent<AudioSource>();
 		rm = GetComponent<RaycastManager>();
         SoundBox box = SoundBox.Instance;
@@ -99,63 +97,32 @@ public class flipScript : MonoBehaviour {
 
     public void FlipAttempt()
     {
-            GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
-            flippedThisFrame = true;
-            if (heldObj) //first check to make sure the object that's held is flippable
+        GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
+        flippedThisFrame = true;
+        if (heldObj) //first check to make sure the object that's held is flippable
+        {
+            if (!heldObj.GetComponent<HoldableObject>().Flippable)
             {
-                if (!heldObj.GetComponent<InteractableObject>().Flippable)
+                GetComponent<MFPP.Modules.PickUpModule>().PutDown();
+                heldObj = null;
+            }
+
+
+            //if the player is holding an object that can be flipped, make sure it is able to
+            FlippableObject flippable = null;
+            if (heldObj && heldObj.GetComponent<FlippableObject>())
+            {
+                flippable = heldObj.GetComponent<FlippableObject>();
+                if (!flippable.MaxFlipCheck(false))
                 {
                     GetComponent<MFPP.Modules.PickUpModule>().PutDown();
                     heldObj = null;
                 }
-
-
-                //if the player is holding an object that can be flipped, make sure it is able to
-                FlippableObject flippable = null;
-                if (heldObj && heldObj.GetComponent<FlippableObject>())
-                {
-                    flippable = heldObj.GetComponent<FlippableObject>();
-                    if (!flippable.MaxFlipCheck(false))
-                    {
-                        GetComponent<MFPP.Modules.PickUpModule>().PutDown();
-                        heldObj = null;
-                    }
-                }
-
-
             }
-
-            if (heldObj)
-            {
-
-                if (pc.Check(heldObj))
-                { // if the player and any held object can be flipped:
-                    pc.ItemInteraction(heldObj); // subtract any charge required
-                    FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
-                    pc.UpdatePredictingSlider();
-                    flippedThisFrame = true;
-                }
-                else
-                {
-
-                    // make a sound effect letting player
-                    // know that they don't have enough charge
-                    Toolbox.Instance.SetVolume(audioSource);
-                    audioSource.clip = flipFailClip;
-                    audioSource.Play();
-
-                }
-            }
-            else
-            {
-                if (pc.CheckPlayerCharge())
-                {
-                    pc.PlayerInteraction();
-                    FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
-                    pc.UpdatePredictingSlider();
-                    flippedThisFrame = true;
-                }
-            }
+        }
+        
+        FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
+        flippedThisFrame = true;
          
     }
 

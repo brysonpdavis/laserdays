@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sokoban1x1 : InteractableObject {
+public class Sokoban1x1 : HoldableObject {
 
     public override void Pickup()
     {
-        pickupDistance = 2.3f;
+        _activateDistance = 2.3f;
         InteractingIconHover();
         rigidbody.isKinematic = false;
         rigidbody.constraints = RigidbodyConstraints.None;
@@ -47,7 +47,7 @@ public class Sokoban1x1 : InteractableObject {
             GetComponent<Transition>().SetStart(1f);
         }
 
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
         selected = false;
         rigidbody.freezeRotation = false;
         rigidbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -55,30 +55,20 @@ public class Sokoban1x1 : InteractableObject {
         ResetWalk();
         audio.Stop();
     }
-
-    public override void SetType()
-    {
-        objectType = ObjectType.Sokoban1x1;
-
-        if (audio)
-        {
-            audio.clip = SoundBox.Instance.sokobanDrag;
-        }
-    }
-
+    
     public override void DistantIconHover()
     {
-        iconContainer.SetInteractHover();
+        _iconContainer.SetInteractHover();
     }
 
     public override void CloseIconHover()
     {
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
     }
 
     public override void InteractingIconHover()
     {
-        iconContainer.SetDrag();
+        _iconContainer.SetDrag();
     }
 
     private void LateUpdate()

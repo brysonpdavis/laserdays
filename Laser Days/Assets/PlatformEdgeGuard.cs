@@ -25,9 +25,9 @@ public class PlatformEdgeGuard : MonoBehaviour {
         //Debug.Log(check.name);
 
         //checks to see if is part of a sokoban or not
-        if (check.GetComponent<InteractableObject>() && 
-            (check.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban1x1 ||
-             check.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban2x2))
+        if (check.GetComponent<HoldableObject>() && 
+            (check.GetComponent<Sokoban1x1>() ||
+             check.GetComponent<Sokoban2x2>()))
         {
             parent = check;
             isMoveable = true;

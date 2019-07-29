@@ -15,9 +15,6 @@ public class BasicClickable : FlippableObject {
 
     public override void Pickup () 
     {
-        if (raycastManager.selectedObjs.Contains(this.gameObject))
-        { raycastManager.selectedObjs.Remove(this.gameObject); }
-
             InteractingIconHover();
             rigidbody.isKinematic = false;
             rigidbody.useGravity = false;
@@ -26,9 +23,9 @@ public class BasicClickable : FlippableObject {
         //verify if we should add shimmer effects while holding
             if (MaxFlipCheck(false))
             {
-                Select();
-                renderer.material.SetFloat("_Shimmer", 1f);
-                renderer.material.SetInt("_onHover", 1);
+                OnSelect();
+                SetMaterialFloatProp("_Shimmer", 1f);
+                SetMaterialFloatProp("_onHover", 1);
             }
                 
             rigidbody.constraints = RigidbodyConstraints.None;
@@ -36,8 +33,6 @@ public class BasicClickable : FlippableObject {
 
         if (slowPickup && !beenPickedUp)
             {StartCoroutine(SlowPickup());}
-
-        OnPickup();
     }
 
 
@@ -71,7 +66,7 @@ public class BasicClickable : FlippableObject {
             ShaderUtility.ShaderToLaser(renderer.material);
           
             GetComponent<Transition>().SetStart(1f);
-            UnSelect();
+            OffSelect();
             renderer.material.SetInt("_onHover", 1);
 
             //renderer.material.SetInt("_onHold", 0);
@@ -88,9 +83,9 @@ public class BasicClickable : FlippableObject {
         }
 
         FlipCore(false);
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
         selected = false;
-        UnSelect();
+        OffSelect();
         rigidbody.freezeRotation = false;
         beenPickedUp = true;
         rigidbody.constraints = RigidbodyConstraints.None;
@@ -99,35 +94,30 @@ public class BasicClickable : FlippableObject {
 
     }
 
-    public override void SetType()
-    {
-        objectType = ObjectType.Clickable;
-    }
-
     public override void DistantIconHover()
     {
         if (AbleToFlip)
-            iconContainer.SetSelectHover();
+            _iconContainer.SetSelectHover();
         else 
-            iconContainer.SetInteractHover();
+            _iconContainer.SetInteractHover();
 
     }
 
     public override void CloseIconHover()
     {
         if (AbleToFlip)
-            iconContainer.SetOpenHandFill();
+            _iconContainer.SetOpenHandFill();
         else
-            iconContainer.SetOpenHand();
+            _iconContainer.SetOpenHand();
 
     }
 
     public override void InteractingIconHover()
     {
         if (AbleToFlip)
-            iconContainer.SetHoldFill();
+            _iconContainer.SetHoldFill();
         else
-            iconContainer.SetHold();
+            _iconContainer.SetHold();
     }
 
 
@@ -154,12 +144,12 @@ public class BasicClickable : FlippableObject {
         rigidbody.useGravity = false;
         currentPositionVelocity = originalVelocity;
 
-        if (audioSource)
+        if (audio)
         {
-            if (overridePop) { audioSource.clip = overridePop; }
-            else { audioSource.clip = player.gameObject.GetComponent<SoundBox>().pop; }
+            if (overridePop) { audio.clip = overridePop; }
+            else { audio.clip = player.gameObject.GetComponent<SoundBox>().pop; }
 
-            audioSource.Play();
+            audio.Play();
         }
     }
 
@@ -169,14 +159,14 @@ public class BasicClickable : FlippableObject {
     {
         if (!wait && gameObject.layer == Toolbox.Instance.GetPlayer().layer-5)
         {
-            audioSource.clip = SoundBox.Instance.testercubeSounds.main.GetRandomSoundClip();
+            audio.clip = SoundBox.Instance.testercubeSounds.main.GetRandomSoundClip();
 
 
             //Vector3 vel = rigidbody.velocity / 6f;
             //float value = Vector3.ClampMagnitude(vel, 1f).magnitude;
             //Debug.Log(value);
-            audioSource.volume = Toolbox.Instance.soundEffectsVolume; //* value;
-            audioSource.Play();
+            audio.volume = Toolbox.Instance.soundEffectsVolume; //* value;
+            audio.Play();
             StartCoroutine(WaitTime());
                    
         }

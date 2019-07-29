@@ -27,16 +27,16 @@ public class LinkedPair : StationaryWall {
         partnerPreviewRenderer = partner.transform.Find("Activated Renderer").GetComponent<Renderer>();
     }
 
-    public override void Select()
+    public override void OnSelect()
     {
-        base.Select();
+        base.OnSelect();
         partnerPreviewRenderer.enabled = true;
         previewRenderer.enabled = true;
     }
 
-    public override void UnSelect()
+    public override void OffSelect()
     {
-        base.UnSelect();
+        base.OffSelect();
         partnerPreviewRenderer.enabled = false;
         previewRenderer.enabled = false;
     }
@@ -76,12 +76,7 @@ public class LinkedPair : StationaryWall {
         }
     }
 
-
-    public override void SetType()
-    {
-        objectType = ObjectType.LinkedPair;
-    }
-
+    
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration, bool goingToLaser)
     {
         partner.GetComponent<Transition>().enabled = false; 
@@ -118,8 +113,8 @@ public class LinkedPair : StationaryWall {
                 {
                         recentlySelected = false;
                         isRunning = false;
-                        material.SetFloat("_onHold", 0f);
-                        material.SetFloat("_Shimmer", 0f);
+                        SetMaterialFloatProp("_onHold", 0f);
+                        SetMaterialFloatProp("_Shimmer", 0f);
                     yield break;
                 }
             }

@@ -42,7 +42,7 @@ using System.Runtime.Serialization.Formatters.Binary;
     static Dictionary<string, UniqueId> allGuids = new Dictionary<string, UniqueId> ();
  
     public string uniqueId;
-    protected InteractableObject interactable;
+    protected HoldableObject Holdable;
 
     private void Start()
     {
@@ -108,7 +108,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
     public virtual void Awake()
     {
-        interactable = GetComponent<InteractableObject>();
+        Holdable = GetComponent<HoldableObject>();
 
 
         if (Application.isPlaying)
@@ -138,7 +138,7 @@ using System.Runtime.Serialization.Formatters.Binary;
         string path = Application.persistentDataPath + "/" + uniqueId;
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        InteractableObjectData data = new InteractableObjectData(interactable) ;
+        InteractableObjectData data = new InteractableObjectData(Holdable) ;
         formatter.Serialize(stream, data);
         stream.Close();
     }
@@ -199,13 +199,13 @@ using System.Runtime.Serialization.Formatters.Binary;
             gameObject.layer = objectData.layer;
             gameObject.name = objectData.name;
 
-            interactable = GetComponent<InteractableObject>();
+            Holdable = GetComponent<HoldableObject>();
             //Debug.Log(gameObject.name);
 
             if (objectData.layer == 11)
-                interactable.LoadShader(true);
+                Holdable.LoadShader(true);
             if (objectData.layer == 10)
-                interactable.LoadShader(false);
+                Holdable.LoadShader(false);
 
         }
     }

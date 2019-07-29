@@ -55,7 +55,7 @@ public class PlatformGuard : MonoBehaviour
     {
         string collisionTag = "Null";
             if (col.CompareTag("Player")) { collisionTag = "Player"; }
-            else if (col.GetComponent<InteractableObject>()) { collisionTag = col.GetComponent<InteractableObject>().objectType.ToString(); }
+            else if (col.GetComponent<HoldableObject>()) { collisionTag = col.GetComponent<HoldableObject>().objectType.ToString(); }
         //string collisionTagParent = "";
 
 
@@ -143,7 +143,7 @@ public class PlatformGuard : MonoBehaviour
     {
         string collisionTag = "Null";
         if (col.CompareTag("Player")) { collisionTag = "Player"; }
-        else if (col.GetComponent<InteractableObject>()) {collisionTag = col.GetComponent<InteractableObject>().objectType.ToString();}
+        else if (col.GetComponent<HoldableObject>()) {collisionTag = col.GetComponent<HoldableObject>().objectType.ToString();}
 
         string collisionTagParent = "";
         if (col.transform.parent)
@@ -162,7 +162,7 @@ public class PlatformGuard : MonoBehaviour
             if (!(col.gameObject.layer == 23 || col.gameObject.layer == 24))
             {
 
-                if (!col.GetComponent<InteractableObject>() && !string.Equals(collisionTag, "Player"))
+                if (!col.GetComponent<HoldableObject>() && !string.Equals(collisionTag, "Player"))
                 {
                    // not using player on trigger stay
                 }
@@ -189,7 +189,7 @@ public class PlatformGuard : MonoBehaviour
         string collisionTag = "Null";
         if (col.CompareTag("Player")) { collisionTag = "Player"; }
         if (col.CompareTag("MorphArm")) { collisionTag = "MorphArm"; }
-        else if (col.GetComponent<InteractableObject>()) { collisionTag = col.GetComponent<InteractableObject>().objectType.ToString(); }
+        else if (col.GetComponent<HoldableObject>()) { collisionTag = col.GetComponent<HoldableObject>().objectType.ToString(); }
 
         string collisionTagParent = "";
 

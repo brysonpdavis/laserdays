@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleWorldClickable : InteractableObject {
+public class SingleWorldClickable : HoldableObject {
 
     public int maxVelocity = 8;
 
@@ -13,16 +13,13 @@ public class SingleWorldClickable : InteractableObject {
 
     public override void Pickup()
     {
-        if (raycastManager.selectedObjs.Contains(this.gameObject))
-        { raycastManager.selectedObjs.Remove(this.gameObject); }
-
         InteractingIconHover();
         rigidbody.isKinematic = false;
         rigidbody.useGravity = false;
         rigidbody.freezeRotation = true;
-        Select();
-        renderer.material.SetFloat("_Shimmer", 0f);
-        renderer.material.SetInt("_onHover", 1);
+        OnSelect();
+        SetMaterialFloatProp("_Shimmer", 0f);
+        SetMaterialFloatProp("_onHover", 1);
         rigidbody.constraints = RigidbodyConstraints.None;
 
         transform.localRotation = Quaternion.Euler(Vector3.zero);
@@ -31,15 +28,12 @@ public class SingleWorldClickable : InteractableObject {
         //{ 
         //    //StartCoroutine(SlowPickup()); 
         //}
-        
-        OnPickup();
     }
 
     public override void Start()
     {
         base.Start();
         GetComponent<Rigidbody>().isKinematic = false;
-
     }
 
     public override void Drop()
@@ -50,9 +44,9 @@ public class SingleWorldClickable : InteractableObject {
         //put the object down with the right shader
         if (player.GetComponent<flipScript>().space)
         {
-            ShaderUtility.ShaderToReal(renderer.material);
+            ShaderUtility.ShaderToReal(_material);
             GetComponent<Transition>().SetStart(0f);
-            renderer.material.SetInt("_onHover", 1);
+            SetMaterialFloatProp("_onHover", 1f);
 
             //renderer.material.SetInt("_onHold", 0);
             this.gameObject.layer = 11;
@@ -62,8 +56,8 @@ public class SingleWorldClickable : InteractableObject {
         {
             ShaderUtility.ShaderToLaser(renderer.material);
             GetComponent<Transition>().SetStart(1f);
-            UnSelect();
-            renderer.material.SetInt("_onHover", 1);
+            OffSelect();
+            SetMaterialFloatProp("_onHover", 1f);
 
             //renderer.material.SetInt("_onHold", 0);
             this.gameObject.layer = 10;
@@ -79,9 +73,9 @@ public class SingleWorldClickable : InteractableObject {
         }
 
        
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
         selected = false;
-        UnSelect();
+        OffSelect();
 
         rigidbody.freezeRotation = false;
         rigidbody.constraints = RigidbodyConstraints.None;
@@ -92,24 +86,19 @@ public class SingleWorldClickable : InteractableObject {
 
     }
 
-    public override void SetType()
-    {
-        objectType = ObjectType.SingleWorldClickable;
-    }
-
     public override void DistantIconHover()
     {
-        iconContainer.SetInteractHover();
+        _iconContainer.SetInteractHover();
     }
 
     public override void CloseIconHover()
     {
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
     }
 
     public override void InteractingIconHover()
     {
-        iconContainer.SetHold();
+        _iconContainer.SetHold();
     }
 
 
@@ -143,14 +132,13 @@ public class SingleWorldClickable : InteractableObject {
         //particleSystem.emission.SetBurst(0, burst);
         //particleSystem.Play();
 
-        if (audioSource)
+        if (audio)
         {
-            if (overridePop) { audioSource.clip = overridePop; }
-            else { audioSource.clip = player.gameObject.GetComponent<SoundBox>().pop; }
+            if (overridePop) { audio.clip = overridePop; }
+            else { audio.clip = player.gameObject.GetComponent<SoundBox>().pop; }
 
-            audioSource.Play();
+            audio.Play();
         }
-        
     }
 
     public override bool Flippable { get { return false; } }

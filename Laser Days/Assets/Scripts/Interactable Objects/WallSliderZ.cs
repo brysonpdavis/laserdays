@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallSliderZ : InteractableObject {
+public class WallSliderZ : HoldableObject {
     
     [SerializeField]
     private bool secondaryLock;
@@ -28,7 +28,6 @@ public class WallSliderZ : InteractableObject {
     {
         if (player.GetComponent<flipScript>().space)
         {
-            GetComponent<Renderer>().material.shader = raycastManager.realWorldShader;
             this.gameObject.layer = 11;
             GetComponent<SelectionRenderChange>().OnDrop();
             GetComponent<Transition>().SetStart(0f);
@@ -36,25 +35,19 @@ public class WallSliderZ : InteractableObject {
 
         else
         {
-            GetComponent<Renderer>().material.shader = raycastManager.laserWorldShader;
             this.gameObject.layer = 10;
             GetComponent<SelectionRenderChange>().OnDrop();
             GetComponent<Transition>().SetStart(1f);
         }
 
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
         selected = false;
         rigidbody.freezeRotation = false;
         rigidbody.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         rigidbody.isKinematic = true;
         ResetWalk();
     }
-
-    public override void SetType()
-    {
-        objectType = ObjectType.Clickable;
-    }
-
+    
     public override void DistantIconHover()
     {
         CheckBouncer();
@@ -62,12 +55,12 @@ public class WallSliderZ : InteractableObject {
 
     public override void CloseIconHover()
     {
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
     }
 
     public override void InteractingIconHover()
     {
-        iconContainer.SetDrag();
+        _iconContainer.SetDrag();
     }
 
 }

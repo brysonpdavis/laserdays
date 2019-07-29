@@ -25,15 +25,4 @@ public class PlayerBuilderScript : MonoBehaviour
 
 
     }
-    public void ResetCharge()
-    {
-
-        if (Player.tag == "Player")
-        {
-            int resetCharge = Player.GetComponentInParent<PlayerCharge>().maxCharge;
-            Player.GetComponent<PlayerCharge>().currentCharge = resetCharge;
-            Player.GetComponent<PlayerCharge>().chargeValue.text = resetCharge.ToString();
-            Player.GetComponent<PlayerCharge>().potentialCharge = resetCharge;
-        }
-    }
 }

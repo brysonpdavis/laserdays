@@ -80,7 +80,7 @@ public class Transition : MonoBehaviour
     {
         //set all objects to transition children to have bool setup
         //only happens on relevant objects
-        if (GetComponent<PlatformMover>() || GetComponent<InteractableObject>() || manualTransitionChildren)
+        if (GetComponent<PlatformMover>() || GetComponent<HoldableObject>() || manualTransitionChildren)
         {
             transitionAllChildren = true;
             childrenTransitions = GetComponentsInChildren<Transition>();
