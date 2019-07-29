@@ -107,16 +107,7 @@ public class SoundTrackManager : MonoBehaviour {
 
     public void PlayPrimary(){
 
-        if (counter <= 8)
-        {
-            audioSource.clip = flipClip.defaultFlipClips[currentChord].GetRandomFlipClip();
-        }
-
-        else
-        { audioSource.clip = flipClip.section2[currentChord].GetRandomFlipClip(); }
-
-        Toolbox.Instance.SetVolume(audioSource);
-        audioSource.Play();
+        MFPP.Audio.Play(flipClip.defaultFlipClips[currentChord].GetRandomFlipClip(), Toolbox.Instance.soundEffectsVolume, 1f);
     }
 
 
@@ -124,14 +115,13 @@ public class SoundTrackManager : MonoBehaviour {
     {
         if (counter <= 8)
         {
-            audioSource.clip = flipClip.defaultFlipClips[currentChord].GetRandomFlipSecondary();
+            MFPP.Audio.Play(flipClip.defaultFlipClips[currentChord].GetRandomFlipSecondary(), Toolbox.Instance.soundEffectsVolume, 1f);
 
         }
         else
-        { audioSource.clip = flipClip.section2[currentChord].GetRandomFlipSecondary(); }
-
-        Toolbox.Instance.SetVolume(audioSource);
-        audioSource.Play();
+        { 
+            MFPP.Audio.Play(flipClip.section2[currentChord].GetRandomFlipSecondary(), Toolbox.Instance.soundEffectsVolume, 1f);
+         }
 
     }
 
