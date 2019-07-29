@@ -400,7 +400,7 @@ public class RaycastManager : MonoBehaviour {
 
         if (raycastedObj.CompareTag("Robot"))
         {
-                iconContainer.SetRobotInteraction();
+            iconContainer.SetCharacterInteract();
         }
 
         else if (!pickUp.heldObject)

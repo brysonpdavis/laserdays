@@ -19,6 +19,8 @@ public class IconContainer : MonoBehaviour {
     public Sprite playerBounce;
     public Sprite bothBounce;
     public Sprite resetPuzzle;
+    public Sprite characterInteract;
+
 
     public Image canvasSprite;
 
@@ -68,11 +70,6 @@ public class IconContainer : MonoBehaviour {
         canvasSprite.sprite = openHand;
     }
 
-    public void SetRobotInteraction()
-    {
-        canvasSprite.sprite = resetPuzzle;
-    }
-
     public void SetOpenHandFill()
     {
         canvasSprite.sprite = openHandFill;
@@ -91,6 +88,11 @@ public class IconContainer : MonoBehaviour {
     public void SetBothBounce()
     {
         canvasSprite.sprite = bothBounce;
+    }
+
+    public void SetCharacterInteract()
+    {
+        canvasSprite.sprite = characterInteract;
     }
 
 
