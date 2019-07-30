@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleWorldClickable : HoldableObject {
+public class SingleWorldClickable : ReticleObject, IHoldable {
 
     public int maxVelocity = 8;
 
@@ -10,14 +10,40 @@ public class SingleWorldClickable : HoldableObject {
 
     private float originalVelocity = 10f;
     public AudioClip overridePop;
+    Rigidbody rigidbody;
+    bool beenPickedUp;
+    float currentPositionVelocity;
+    GameObject player;
+    AudioSource audio;
+    Camera mainCamera;
 
-    public override void Pickup()
+    public override void Start()
+
+    {
+        base.Start();
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.isKinematic = false;
+        player = Toolbox.Instance.GetPlayer();
+        audio = GetComponent<AudioSource>();
+        mainCamera = Camera.main;
+        currentPositionVelocity = 10f;
+
+    }
+
+    public void DoPickup() {
+        if (_action) {
+            _action.PickedUp();
+        }
+
+        Pickup();
+    }
+
+    public void Pickup()
     {
         InteractingIconHover();
         rigidbody.isKinematic = false;
         rigidbody.useGravity = false;
         rigidbody.freezeRotation = true;
-        OnSelect();
         SetMaterialFloatProp("_Shimmer", 0f);
         SetMaterialFloatProp("_onHover", 1);
         rigidbody.constraints = RigidbodyConstraints.None;
@@ -30,13 +56,7 @@ public class SingleWorldClickable : HoldableObject {
         //}
     }
 
-    public override void Start()
-    {
-        base.Start();
-        GetComponent<Rigidbody>().isKinematic = false;
-    }
-
-    public override void Drop()
+    public void Drop()
     {
         StopAllCoroutines();
         currentPositionVelocity = originalVelocity;
@@ -54,9 +74,9 @@ public class SingleWorldClickable : HoldableObject {
 
         else
         {
-            ShaderUtility.ShaderToLaser(renderer.material);
+            ShaderUtility.ShaderToLaser(_renderer.material);
             GetComponent<Transition>().SetStart(1f);
-            OffSelect();
+            //OffSelect();
             SetMaterialFloatProp("_onHover", 1f);
 
             //renderer.material.SetInt("_onHold", 0);
@@ -74,17 +94,25 @@ public class SingleWorldClickable : HoldableObject {
 
        
         _iconContainer.SetOpenHand();
-        selected = false;
-        OffSelect();
+        //selected = false;
+        //OffSelect();
 
         rigidbody.freezeRotation = false;
         rigidbody.constraints = RigidbodyConstraints.None;
     
         beenPickedUp = true;
         rigidbody.useGravity = true;
-        ResetWalk();
+        //ResetWalk();
 
     }
+
+    public void HoldPosition()
+    {
+        Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * _activateDistance; //pickUp.MaxPickupDistance;
+        rigidbody.angularVelocity *= 0.5f;
+        rigidbody.velocity = ((floatingPosition - rigidbody.transform.position) * (currentPositionVelocity * 1f));
+    }
+
 
     public override void DistantIconHover()
     {
@@ -96,7 +124,7 @@ public class SingleWorldClickable : HoldableObject {
         _iconContainer.SetOpenHand();
     }
 
-    public override void InteractingIconHover()
+    public void InteractingIconHover()
     {
         _iconContainer.SetHold();
     }
@@ -140,9 +168,6 @@ public class SingleWorldClickable : HoldableObject {
             audio.Play();
         }
     }
-
-    public override bool Flippable { get { return false; } }
-
 
 
 }

@@ -112,11 +112,15 @@ abstract public class FlippableObject : HoldableObject, IFlippable
             {
                 ShaderUtility.ShaderToReal(_material);
                 GetComponent<Transition>().SetStart(0f); //set it fully on for laser world
+                SetObjectToReal(); //set object to real layer
+
             }
             else
             {
                 ShaderUtility.ShaderToLaser(_material);
                 GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
+                SetObjectToLaser(); //set object to laser layer
+
             }
 
         }

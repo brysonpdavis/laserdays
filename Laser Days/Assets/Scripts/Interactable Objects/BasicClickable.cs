@@ -52,10 +52,10 @@ public class BasicClickable : FlippableObject {
         if (player.GetComponent<flipScript>().space)
         {
 
-            ShaderUtility.ShaderToReal(renderer.material);
+            ShaderUtility.ShaderToReal(_renderer.material);
 
             GetComponent<Transition>().SetStart(0f);
-            renderer.material.SetInt("_onHover", 1);
+            SetMaterialFloatProp("_onHover", 1);
 
             //renderer.material.SetInt("_onHold", 0);
             this.gameObject.layer = 11;
@@ -63,11 +63,11 @@ public class BasicClickable : FlippableObject {
 
         else
         {
-            ShaderUtility.ShaderToLaser(renderer.material);
+            ShaderUtility.ShaderToLaser(_renderer.material);
           
             GetComponent<Transition>().SetStart(1f);
             OffSelect();
-            renderer.material.SetInt("_onHover", 1);
+            SetMaterialFloatProp("_onHover", 1);
 
             //renderer.material.SetInt("_onHold", 0);
             this.gameObject.layer = 10;

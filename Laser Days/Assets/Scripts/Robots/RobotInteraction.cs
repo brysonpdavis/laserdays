@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotInteraction : MonoBehaviour {
-    
+public class RobotInteraction : SelectableObject {
 
-    public virtual void RobotActivate()
+    public override void OnSelect()
     {
         TakeActionOnAction actionScript = GetComponent<TakeActionOnAction>();
 

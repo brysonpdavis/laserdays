@@ -28,7 +28,7 @@ public abstract class ReticleObject : MonoBehaviour
 
 	public virtual void OnHover()
 	{
-		_material.SetInt("_onHover", 1);
+        SetMaterialFloatProp("_onHover", 1);
 
 		if (_selectionRenderChange)
 			_selectionRenderChange.SwitchRenderersOn();

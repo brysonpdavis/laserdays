@@ -12,7 +12,6 @@ abstract public class HoldableObject : SelectableObject, IHoldable
     
     protected Rigidbody rigidbody;
     protected MFPP.Player player;
-    protected Renderer renderer;
     protected Camera mainCamera;
     protected MFPP.Modules.PickUpModule pickUp;
     protected float currentPositionVelocity = 10f;
@@ -27,7 +26,7 @@ abstract public class HoldableObject : SelectableObject, IHoldable
     public ObjectType objectType;
     public bool inMotion;
 
-    private float multiplier;
+    private float multiplier = 1f;
     public bool recentlySelected = false;
     [HideInInspector] public bool beenPickedUp = false;
     
@@ -40,10 +39,10 @@ abstract public class HoldableObject : SelectableObject, IHoldable
         audio = GetComponent<AudioSource>();
         mainCamera = Camera.main;
         rigidbody = GetComponent<Rigidbody>();
-        if (rigidbody)
-        {
-            rigidbody.isKinematic = true;
-        }
+        //if (rigidbody)
+        //{
+        //    rigidbody.isKinematic = true;
+        //}
 
         inMotion = false;
     }
@@ -60,6 +59,8 @@ abstract public class HoldableObject : SelectableObject, IHoldable
 
     public void HoldPosition()
     {
+        Debug.Log("holding position!");
+
         Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * _activateDistance; //pickUp.MaxPickupDistance;
         rigidbody.angularVelocity *= 0.5f;
         rigidbody.velocity = ((floatingPosition - rigidbody.transform.position) * (currentPositionVelocity*multiplier));
