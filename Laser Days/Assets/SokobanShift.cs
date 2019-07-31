@@ -28,14 +28,14 @@ public class SokobanShift : MonoBehaviour {
         //checks to be sure the object triggering the movement is a soko 1x1, what's being triggered is not this trigger's parent sokoban obj
         //and checking to be sure the object being moved in the correct world
         if (other.CompareTag("Clickable") && 
-            (other.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban1x1) &&
+            (other.GetComponent<HoldableObject>().objectType == HoldableObject.ObjectType.Sokoban1x1) &&
             (!other.gameObject.Equals(parent)) && 
             (other.gameObject.layer == parent.layer || other.gameObject.layer + 13 == parent.layer))
 
            // !((other.gameObject.layer == (parent.layer+1)) || (other.gameObject.layer == (parent.layer - 1))))
         {
             if (Vector3.Distance(other.gameObject.transform.position, parent.transform.position)<=1.52f){
-                if (!other.gameObject.GetComponent<InteractableObject>().inMotion)
+                if (!other.gameObject.GetComponent<HoldableObject>().inMotion)
                 {
                     objectToMove = other.gameObject;
                     positionObject = (CenterObjectRoutine());
@@ -50,7 +50,7 @@ public class SokobanShift : MonoBehaviour {
         //moves the sokoban into place
 
 
-            objectToMove.GetComponent<InteractableObject>().inMotion = true;
+            objectToMove.GetComponent<HoldableObject>().inMotion = true;
             float elapsedTime = 0;
             float ratio = elapsedTime / duration;
             MFPP.Modules.PickUpModule pickUp = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Modules.PickUpModule>();
@@ -61,7 +61,7 @@ public class SokobanShift : MonoBehaviour {
 
 
         //if the parent object has item properties it means that it is a sokoban
-        if (parent.GetComponent<InteractableObject>()){
+        if (parent.GetComponent<HoldableObject>()){
          //   Debug.Log("Sokoban");
             objectToMove.transform.parent = parent.transform;
             objectToMove.GetComponent<BoxCollider>().enabled = false;
@@ -80,7 +80,7 @@ public class SokobanShift : MonoBehaviour {
                 yield return null;
             }
 
-            objectToMove.GetComponent<InteractableObject>().inMotion = false;
+            objectToMove.GetComponent<HoldableObject>().inMotion = false;
             objectToMove.GetComponent<BoxCollider>().enabled = true;
          //   Debug.Log("done!" + parent.name);
 
@@ -108,7 +108,7 @@ public class SokobanShift : MonoBehaviour {
                 objectToMove.transform.localPosition = Vector3.Slerp(objectsPosition, moverPosition, ratio);
                 yield return null;
             }
-            objectToMove.GetComponent<InteractableObject>().inMotion = false;
+            objectToMove.GetComponent<HoldableObject>().inMotion = false;
             objectToMove.GetComponent<BoxCollider>().enabled = true;
 
 

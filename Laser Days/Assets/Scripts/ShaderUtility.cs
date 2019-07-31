@@ -8,7 +8,6 @@ public static class ShaderUtility
     // Set Shader to the Real 
     public static void ShaderToReal(Material mat)
     {
-        Debug.Log("Looking for " + mat.shader);
         // If using our standard shader, then use keyword swap approach
         if (mat.shader == Shader.Find("Crosshatch/Standard"))
         {

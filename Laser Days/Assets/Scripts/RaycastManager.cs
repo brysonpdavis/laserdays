@@ -11,25 +11,10 @@ using UnityStandardAssets.ImageEffects;
 public class RaycastManager : MonoBehaviour {
 
     public GameObject raycastedObj;
+    private GameObject previousRaycastedObj;
     public IList<GameObject> selectedObjs;
-
-    //public Shader shaderoriginal;
-
-    //shaders
-    public Shader shaderselected;
-    public Shader realWorldShader;
-    public Shader laserWorldShader;
-    public Shader coreLaser;
-    public Shader coreReal;
-
-
-    public Shader morphShaderselected;
-    public Shader morphRealWorldShader;
-    public Shader morphLaserWorldShader;
-
-
+    
     private Color32 reticleColor = new Color32(255,222,77,255); //new Vector4(255, 222, 77, 1);
-
 
     [Header("Raycast Settings")]
 
@@ -39,41 +24,32 @@ public class RaycastManager : MonoBehaviour {
 
 
     [Header("References")]
-    [SerializeField] private PlayerCharge playerCharge;
     public Image crossHair;
-    public Text itemNameText;
     private Camera mainCam;
-    private PlayerCharge pc;
     private AudioSource audioSource;
     private AudioClip selectClip; 
     private AudioClip deselectClip;
     private MFPP.Modules.PickUpModule pickUp;
     private IconContainer iconContainer;
-    private Transform playerCam;
     private float Radius;
-
-    [Header("Scene Reset")]
-    const float nSecond = 1f;
-
-    float timer = 0;
-    bool entered = false;
-    private EdgeDetection edge;
-    private ResetScene currentLevelReset;
+    
+    private ReticleObject raycastedReticleObj;
+    private ISelectable raycastedSelectable;
+    private IHoldable raycastedHoldable;
+    private IFlippable raycastedFlippable;
+    private Transition _transition;
 
 
 
     void Start () {
         selectedObjs = new List<GameObject>();
         mainCam = Camera.main;
-        pc = GetComponent<PlayerCharge>();
         audioSource = GetComponent<AudioSource>();
         selectClip = SoundBox.Instance.selection;
         deselectClip = SoundBox.Instance.deselect;
         pickUp = GetComponent<MFPP.Modules.PickUpModule>();
         iconContainer = Toolbox.Instance.GetIconContainer();
-        playerCam = GetComponentInChildren<Camera>().transform;
         Radius = GetComponent<CharacterController>().radius;
-        edge = Camera.main.GetComponent<EdgeDetection>();
 
 
     }
@@ -81,12 +57,12 @@ public class RaycastManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (this.gameObject.layer == 15) { newLayerMask = 1 << 0 | 1 << 10 | 1 << 17; } // newLayerMask.value = 1024; } //layermask value of layer 10 is 1024 (2^10)  
-        else if (this.gameObject.layer == 16) { newLayerMask = 1 << 0 | 1 << 11 | 1 << 17; }  //newLayerMask.value = 2048; } //layermask value of layer 11 is 2048   
+        if (this.gameObject.layer == 15) { newLayerMask = LayerMaskController.Laser; } // newLayerMask.value = 1024; } //layermask value of layer 10 is 1024 (2^10)  
+        else if (this.gameObject.layer == 16) { newLayerMask = LayerMaskController.Real; }  //newLayerMask.value = 2048; } //layermask value of layer 11 is 2048   
 
         MainRaycast();
-        SceneResetCheck();
-	}
+        //SceneResetCheck();
+    }
 
     void MainRaycast()
     {
@@ -97,178 +73,96 @@ public class RaycastManager : MonoBehaviour {
 
         if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
-            //makes sure no objects have the toggle indicating they're within range.
-            //if something was previously in range on the last frame it'll deselect it
+            raycastedReticleObj = hit.collider.GetComponent<ReticleObject>();
 
-            //CASES TO TURN THINGS OFF:
-            //if (!Toolbox.Instance.GetPickUp().heldObject){
-
-            if (hit.collider.CompareTag("Completion"))
+            //if we hit something!
+            if (raycastedReticleObj)
             {
-                raycastedObj = hit.collider.gameObject;
-                IconCheck(hit.distance, hit.collider.gameObject);
-            }
-
-            if (hit.collider.CompareTag("Robot"))
-            {
-                //raycastedObj = hit.collider.gameObject;
-                IconCheck(hit.distance, hit.collider.gameObject);
-
-                if (hit.collider.gameObject.GetComponent<SelectionRenderChange>())
-                {
-                    raycastedObj = hit.collider.gameObject;
-                    raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
-                    raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
-                }
-
-                if (ControlManager.Instance.GetButtonDown("Select"))
-                {
-                    raycastedObj.GetComponent<RobotInteraction>().RobotActivate();
-                    Debug.Log("selected AT ROBOT!");
-                }
-            }
-
-
-            //1: objects on the default/shared layers are included in the layermask to block raycasts,
-            //if we were previously raycasting something OTHER than the held object, turn that off
-            else if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 17)
-            {
-                if (raycastedObj && !pickUp.heldObject)
-                {
-
-                    if (!raycastedObj.GetComponent<CrabHold>())
-                    {
-                        raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                        if (raycastedObj.GetComponent<SelectionRenderChange>())
-                        {
-                            raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
-                        }
-                    }
-                }
-                CrosshairNormal();
-                itemNameText.text = null;
-                raycastedObj = null;
-            }
-
-
-
-            else if (hit.collider.CompareTag("Clickable"))
-            {
-                IconCheck(hit.distance, hit.collider.gameObject);
-
-                //2: Turn off if we hit a new interactable object while not holding anything
-                if (raycastedObj && !Toolbox.Instance.EqualToHeld(raycastedObj))
-                {
-                    if (!raycastedObj.GetComponent<CrabHold>())
-                    {
-                        raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                        if (raycastedObj.GetComponent<SelectionRenderChange>())
-                        {
-                            raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOff();
-                        }
-                    }
-                }
-
-                CrosshairActive();
-                raycastedObj = hit.collider.gameObject;
-                InteractableObject ip = raycastedObj.GetComponent<InteractableObject>();
-                itemNameText.text = ip.itemName + " [" + ip.value + "]";
-
-                //SHOW HOVER: 1: if there isn't a held object, 2: keep setting an object to hover as long as it's the held object
-                if (!pickUp.heldObject || (pickUp.heldObject && pickUp.heldObject.Equals(raycastedObj)))
-                {
-                    if (!raycastedObj.GetComponent<CrabHold>())
-                    {
-                        if (raycastedObj.GetComponent<SelectionRenderChange>())
-                        {
-                            raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
-                            raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
-                        }
-
-                        else
-                        {
-                            raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
-                        }
-                    }
-                }
-
-
-
+                LookAtRaycastedObj(hit);
+                _transition = hit.collider.GetComponent<Transition>();
+                raycastedSelectable = raycastedReticleObj as ISelectable;
+            
                 // SELECT ITEM: 
-                // if item boosts charge, add value to boost on right click
-                //only lets you select items that are flippable
-                if (ControlManager.Instance.GetButtonDown("Select") && hit.collider.GetComponent<InteractableObject>().Flippable)
+                if (_transition && ! _transition.GetTransitioning() && 
+                    ControlManager.Instance.GetButtonDown("Select") && raycastedSelectable != null )
                 {
-
-                    if (ip.boost)
-                    {
-                        pc.ItemInteraction(raycastedObj);
-                    }
-                    if (ip.objectCharge && !Toolbox.Instance.EqualToHeld(raycastedObj))
-                    {
-                        InteractableObject.ObjectType type = raycastedObj.GetComponent<InteractableObject>().objectType;
-                        //if the object is already a selected object:
-                        if (raycastedObj.GetComponent<InteractableObject>().selected && !GetComponent<CrabHold>())
-                        {
-                            //unselect it
-                            selectedObjs.Remove(raycastedObj);
-
-                            //put the object back to its original shader
-                            if (this.gameObject.layer == 15)
-                            {
-
-                                ShaderUtility.ShaderToLaser(raycastedObj.GetComponent<Renderer>().material);
-                                //raycastedObj.GetComponent<Renderer>().material.shader = laserWorldShader; 
-                                //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                            }
-                            else if (this.gameObject.layer == 16)
-                            {
-                                ShaderUtility.ShaderToReal(raycastedObj.GetComponent<Renderer>().material);
-                                //raycastedObj.GetComponent<Renderer>().material.shader = realWorldShader;
-                                //raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-                            }
-
-                            //remove it from list
-                            RemoveFromList(raycastedObj, false, false);
-
-                            //play deselect sound effect
-                            audioSource.clip = deselectClip;
-                            audioSource.Play();
-
-
-                        }
-                        else
-                        {
-                            if (!(GetComponent<MFPP.Modules.PickUpModule>().heldObject) && raycastedObj.GetComponent<FlippableObject>().MaxFlipCheck(false))
-                            {
-                                selectedObjs.Add(raycastedObj);
-                                AddToList(raycastedObj);
-
-                                //play the sound effect
-                                audioSource.clip = selectClip;
-                                audioSource.Play();
-
-
-                            }
-                        }
-                    }
+                    SelectObject();
                 }
             }
-
-
-            //for objects on real/laser layers that aren't interactable
-            else
+            //if we hit something that can't be interacted with
+            else 
             {
                 ClearRaycast();
             }
-
         }
 
         //if the raycast hits nothing
         else
         {
-
             ClearRaycast();
+        }
+        
+        previousRaycastedObj = raycastedObj;
+        raycastedObj = null;
+    }
+
+    void LookAtRaycastedObj(RaycastHit hit)
+    {
+        IconCheck(hit.distance, hit.collider.gameObject);
+
+        CrosshairActive();
+        raycastedObj = hit.collider.gameObject;
+
+        //Turn off if we hit a new interactable object while not holding anything
+        if (previousRaycastedObj && !previousRaycastedObj.Equals(raycastedObj) && !Toolbox.Instance.EqualToHeld(raycastedObj))
+        {
+            previousRaycastedObj.GetComponent<ReticleObject>().OffHover();
+            //Debug.Log(previousRaycastedObj.name + "  " + raycastedObj.name);
+        }
+
+        //HOVER: 1: if there isn't a held object, 2: keep setting an object to hover as long as it's the held object
+        if (!pickUp.heldObject || (pickUp.heldObject && pickUp.heldObject.Equals(raycastedObj)))
+        {
+            raycastedReticleObj.OnHover();
+        }
+    }
+
+    void SelectObject()
+    {
+        if (!Toolbox.Instance.EqualToHeld(raycastedObj))
+        {
+            //if the object is already a selected object:
+            if (raycastedSelectable.GetSelected())
+            {
+                //unselect it
+                selectedObjs.Remove(raycastedObj);
+                raycastedSelectable.OffSelect();
+
+                //play deselect sound effect
+                audioSource.clip = deselectClip;
+                audioSource.Play();
+            }
+            else
+            {
+                FlippableObject flippableRaycastedObj = raycastedReticleObj as FlippableObject;
+
+
+                if (flippableRaycastedObj == null) {
+                    raycastedSelectable.OnSelect();
+                }
+                else {
+                    if (!(pickUp.heldObject) && flippableRaycastedObj &&
+                        flippableRaycastedObj.MaxFlipCheck(false))
+                    {
+                        selectedObjs.Add(raycastedObj);
+                        flippableRaycastedObj.OnSelect();
+                    }
+                }
+
+                //play the sound effect
+                audioSource.clip = selectClip;
+                audioSource.Play();
+            }
         }
     }
 
@@ -278,15 +172,12 @@ public class RaycastManager : MonoBehaviour {
         //same idea for when hitting non-interactable objects on real/laser layers
         //works unless player is holding something
 
-        if (raycastedObj && !pickUp.heldObject)
-        {
-            if (!GetComponent<CrabWalk>())
-                raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 0);
-        }
+
+        if (previousRaycastedObj)
+            previousRaycastedObj.GetComponent<ReticleObject>().OffHover();
 
         //turns off the rest of the selection indicator
         CrosshairNormal();
-        itemNameText.text = null;
         raycastedObj = null;
     }
 
@@ -309,101 +200,62 @@ public class RaycastManager : MonoBehaviour {
 
     public void AddToList(GameObject obj) 
     {
-        InteractableObject ip = obj.GetComponent<InteractableObject>();
+        HoldableObject ip = obj.GetComponent<HoldableObject>();
         ip.selected = true;
 
-        switch (obj.GetComponent<InteractableObject>().objectType)
+        switch (obj.GetComponent<HoldableObject>().objectType)
 
         {
-        case InteractableObject.ObjectType.Clickable:
+        case HoldableObject.ObjectType.Clickable:
             {
                 // obj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
-                obj.GetComponent<InteractableObject>().Select();
+                obj.GetComponent<HoldableObject>().OnSelect();
                 break;
             }
 
-        case InteractableObject.ObjectType.Wall:
+        case HoldableObject.ObjectType.Wall:
             {
-                obj.GetComponent<InteractableObject>().Select();
+                obj.GetComponent<HoldableObject>().OnSelect();
                 break;
             }
 
-            case InteractableObject.ObjectType.LinkedPair:
+            case HoldableObject.ObjectType.LinkedPair:
                 {
-                    obj.GetComponent<InteractableObject>().Select();
+                    obj.GetComponent<HoldableObject>().OnSelect();
                     break;
                 }
 
 
-        case InteractableObject.ObjectType.Morph:
+        case HoldableObject.ObjectType.Morph:
             {
                     obj.GetComponent<MorphController>().OnSelection();
                     break;
             }
-
-
         }
-
-        // change shader back
-        pc.UpdatePredictingSlider();
     }
 
     public void RemoveFromList(GameObject obj, bool asGroup, bool duringFlip) 
     {
-
         //added asGroup bool to check if player is removing single objects or multiple
         //removing multiple at once shouldn't update the predicting slider at all, it's done separately on the flip
 
-        obj.GetComponent<InteractableObject>().selected = false;
+        obj.GetComponent<HoldableObject>().selected = false;
         if (!duringFlip)
         {
-            obj.GetComponent<InteractableObject>().UnSelect();
+            obj.GetComponent<HoldableObject>().OffSelect();
         }
 
-        if (obj.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Morph)
+        if (obj.GetComponent<HoldableObject>().objectType == HoldableObject.ObjectType.Morph)
         {
             obj.GetComponent<MorphController>().OnDeselection();
         }
-
-        //shader change is now happening in flip script
-
-        if (!asGroup)
-        {
-            pc.UpdatePredictingSlider();
-        }
     } 
-
-    int SumList(IList<GameObject> objs)
-    {
-        int i = 0;
-        foreach (GameObject obj in objs) {
-            i += obj.GetComponent<InteractableObject>().value;
-        }
-        return i;
-    }
-
-    public int SumSelectedObjects() {
-        return SumList(selectedObjs);
-    }
-
+    
     public void IconCheck(float distance, GameObject raycastedObj)
     {
-        InteractableObject interactable = raycastedObj.GetComponent<InteractableObject>();
+        ReticleObject reticleObject = raycastedObj.GetComponent<ReticleObject>();
 
-        if (raycastedObj.CompareTag("Completion"))
-        {
-            if (distance <= pickUp.MaxPickupDistance)
-                iconContainer.SetOpenHand();
-
-            //can have an else with another icon
-        }
-
-        if (raycastedObj.CompareTag("Robot"))
-        {
-            iconContainer.SetCharacterInteract();
-        }
-
-        else if (!pickUp.heldObject)
+        if (!pickUp.heldObject)
         {
             if (distance <= pickUp.MaxPickupDistance)
             {
@@ -413,109 +265,17 @@ public class RaycastManager : MonoBehaviour {
 
                 if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity) && hit.collider.gameObject.Equals(raycastedObj))
                 {
-                        interactable.DistantIconHover();
+                    reticleObject.DistantIconHover();
                 }
 
                 else {
-                    interactable.CloseIconHover();
+                    reticleObject.CloseIconHover();
                 }
             }
 
             else {
-                interactable.DistantIconHover();
+                reticleObject.DistantIconHover();
             }
         }
     }
-
-    void SceneResetOff()
-    {
-        edge.PauseMenu = 0;
-        timer = 0;
-        if (currentLevelReset)
-        {
-            currentLevelReset.Deactivate();
-            currentLevelReset = null;
-        }
-    }
-
-    void SceneResetCheck()
-    {
-
-        RaycastHit hit;
-        Vector3 fwd = mainCam.transform.TransformDirection(Vector3.forward);
-
-        if (!LevelLoadingMenu.gameIsPaused && !(Time.timeScale < 1f) && !LevelLoadingMenu.sceneIsLoading)
-        {
-
-            if (Physics.Raycast(mainCam.transform.position, fwd, out hit, 60, newLayerMask)) //&& !LevelLoadingMenu.sceneIsLoading && !LevelLoadingMenu.gameIsPaused)
-            {
-                //Debug.Log("gameispaused " + LevelLoadingMenu.gameIsPaused);
-                if (hit.collider.CompareTag("SceneReset"))
-                {
-                    //show the crosshair
-                    iconContainer.SetReset();
-
-                    //if you're actually selecting it while looking at it
-                    if (ControlManager.Instance.GetButton("Select"))
-                    {
-                        entered = true;
-                        if (!hit.collider.GetComponent<AudioSource>().isPlaying)
-                        {
-                            currentLevelReset = hit.collider.GetComponent<ResetScene>();
-                            hit.collider.gameObject.GetComponent<ResetScene>().Play();
-                        }
-                    }
-                    else
-                        SceneResetOff();
-                }
-
-                else
-                {
-                    SceneResetOff();
-                }
-                    
-
-
-                //If pointer is pointing on the object, start the timer
-                if (entered)
-                {
-                    //Increment timer
-                    timer += Time.deltaTime;
-
-                    float value = Mathf.Clamp((timer / nSecond), 0f, .95f);
-                    edge.PauseMenu = value;
-
-                    //Load scene if counter has reached the nSecond
-                    if (timer > nSecond)
-                    {
-                        timer = 0;
-                        hit.collider.gameObject.GetComponent<ResetScene>().Activate();
-                    }
-                }
-            }
-
-
-            else
-            {
-                SceneResetOff();
-            }
-        }
-
-        if (Time.timeScale < 1f)
-        {
-            timer = 0f;
-        }
-
-    }
-
-    public void PointerEnter()
-    {
-        entered = true;
-    }
-
-    public void PointerExit()
-    {
-        entered = false;
-    }
-
 }

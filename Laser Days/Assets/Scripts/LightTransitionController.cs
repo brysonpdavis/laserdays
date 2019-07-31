@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LightTransitionController : MonoBehaviour {
 
-    private PlayerCharge pc;
     private GameObject player;
     public float speed = .4f;
     private Component[] components;
@@ -15,7 +14,6 @@ public class LightTransitionController : MonoBehaviour {
         //automatically set up the player and charge that script will be checking
 
         player = Toolbox.Instance.GetPlayer();
-        pc = player.GetComponent<PlayerCharge>();
         components = GetComponentsInChildren<LightTransition>();
     }
 

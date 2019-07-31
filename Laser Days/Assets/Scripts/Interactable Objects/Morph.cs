@@ -52,7 +52,7 @@ public class Morph : FlippableObject {
 
         }
 
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
         selected = false;
         rigidbody.freezeRotation = false;
         rigidbody.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -62,22 +62,17 @@ public class Morph : FlippableObject {
 
     public override void DistantIconHover()
     {
-        iconContainer.SetSelectHover();
-    }
-
-    public override void SetType()
-    {
-        objectType = ObjectType.Morph;
+        _iconContainer.SetSelectHover();
     }
 
     public override void CloseIconHover()
     {
-        iconContainer.SetOpenHandFill();
+        _iconContainer.SetOpenHandFill();
     }
 
     public override void InteractingIconHover()
     {
-        iconContainer.SetDragFill();
+        _iconContainer.SetDragFill();
     }
 
     public override bool Flippable { get { return true; } }

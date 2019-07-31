@@ -10,7 +10,6 @@ public class flipScript : MonoBehaviour {
 	private float newX;
 	[SerializeField] private int envSize = 100;
 	public bool space;
-	private PlayerCharge pc;
     private flipburst flipburst;
     public IList<EyeThatSees> eyeThatSeesList;
 
@@ -26,6 +25,7 @@ public class flipScript : MonoBehaviour {
     public GameObject ring;
     private GameObject currentRing;
     TransitionCollider transitionCollider;
+    MFPP.Modules.PickUpModule _pickupModule;
 
 	RaycastManager rm;
     private string SoundtrackButton = "Submit";
@@ -60,7 +60,6 @@ public class flipScript : MonoBehaviour {
         //Debug.Log(Camera.main.fieldOfView);
 
         mutationSpawner = GetComponent<MutationSpawner>();
-		pc = GetComponent<PlayerCharge>();
         audioSource = GetComponent<AudioSource>();
 		rm = GetComponent<RaycastManager>();
         SoundBox box = SoundBox.Instance;
@@ -70,6 +69,7 @@ public class flipScript : MonoBehaviour {
         flipburst = GetComponentInChildren<flipburst>();
         transitionCollider = GetComponentInChildren<TransitionCollider>();
         eyeThatSeesList = new List<EyeThatSees>();
+        _pickupModule = GetComponent<MFPP.Modules.PickUpModule>();
 
 	}
 
@@ -99,64 +99,22 @@ public class flipScript : MonoBehaviour {
 
     public void FlipAttempt()
     {
-            GameObject heldObj = GetComponent<MFPP.Modules.PickUpModule>().heldObject;
-            flippedThisFrame = true;
-            if (heldObj) //first check to make sure the object that's held is flippable
+        GameObject heldObj = _pickupModule.heldObject;
+        flippedThisFrame = true;
+
+        if (heldObj)
+        {
+            IFlippable _flippable = heldObj.GetComponent<ReticleObject>() as IFlippable;
+
+            if (_flippable == null || !_flippable.MaxFlipCheck(false))
             {
-                if (!heldObj.GetComponent<InteractableObject>().Flippable)
-                {
-                    GetComponent<MFPP.Modules.PickUpModule>().PutDown();
-                    heldObj = null;
-                }
-
-
-                //if the player is holding an object that can be flipped, make sure it is able to
-                FlippableObject flippable = null;
-                if (heldObj && heldObj.GetComponent<FlippableObject>())
-                {
-                    flippable = heldObj.GetComponent<FlippableObject>();
-                    if (!flippable.MaxFlipCheck(false))
-                    {
-                        GetComponent<MFPP.Modules.PickUpModule>().PutDown();
-                        heldObj = null;
-                    }
-                }
-
-
+                _pickupModule.PutDown();
+                heldObj = null;
             }
-
-            if (heldObj)
-            {
-
-                if (pc.Check(heldObj))
-                { // if the player and any held object can be flipped:
-                    pc.ItemInteraction(heldObj); // subtract any charge required
-                    FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
-                    pc.UpdatePredictingSlider();
-                    flippedThisFrame = true;
-                }
-                else
-                {
-
-                    // make a sound effect letting player
-                    // know that they don't have enough charge
-                    Toolbox.Instance.SetVolume(audioSource);
-                    audioSource.clip = flipFailClip;
-                    audioSource.Play();
-
-                }
-            }
-            else
-            {
-                if (pc.CheckPlayerCharge())
-                {
-                    pc.PlayerInteraction();
-                    FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
-                    pc.UpdatePredictingSlider();
-                    flippedThisFrame = true;
-                }
-            }
-         
+        }
+        
+        FlipPlayerAndThings(gameObject, heldObj, rm.selectedObjs);
+        flippedThisFrame = true;
     }
 
 	void FlipPlayerAndThings (GameObject player, GameObject held, IList<GameObject> things) {
@@ -172,7 +130,6 @@ public class flipScript : MonoBehaviour {
         //change the layer that the player is on, for changing its collision detection
         if (space)
         { player.layer = 16;  //set player to real world
-                GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 262144; //only see ladders in real world
            // Camera.main.GetComponent<CameraTransition>().Flip(true);
             GetComponent<SkyboxTransition>().Flip(true);
             transitionCollider.FlipTransitions(true);
@@ -181,16 +138,9 @@ public class flipScript : MonoBehaviour {
 
         } 
         else { player.layer = 15; //set player to laser world
-            GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
-                                                                                      //   Camera.main.GetComponent<CameraTransition>().Flip(false);
             GetComponent<SkyboxTransition>().Flip(false);
             transitionCollider.FlipTransitions(false);
-
-
         } 
-
-
-
 
         if (held)
 			Flip(held);

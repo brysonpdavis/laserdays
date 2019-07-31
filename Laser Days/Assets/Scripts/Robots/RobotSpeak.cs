@@ -6,11 +6,7 @@ public class RobotSpeak : RobotInteraction {
 
     public AudioSource audio;
     bool active;
-    // Use this for initialization
-	void Start () {
-        
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -25,11 +21,11 @@ public class RobotSpeak : RobotInteraction {
 
 	}
 
-    public override void RobotActivate()
+    public override void OnSelect()
     {
         active = true;
 
-        base.RobotActivate();
+        base.OnSelect();
 
         MFPP.Player player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
         player.Movement.AllowMovement = false;
@@ -40,6 +36,7 @@ public class RobotSpeak : RobotInteraction {
         GetComponentInChildren<GardenEye>().PlayerInteraction();
         Toolbox.Instance.GetFlip().canFlip = false;
     }
+
 
     public override void RobotDeactivate()
     {
@@ -54,5 +51,15 @@ public class RobotSpeak : RobotInteraction {
 
         active = false;
         Toolbox.Instance.GetFlip().canFlip = true;
+    }
+
+    public override void DistantIconHover()
+    {
+        _iconContainer.SetCharacterInteract();
+    }
+
+    public override void CloseIconHover()
+    {
+        _iconContainer.SetCharacterInteract();
     }
 }

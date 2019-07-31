@@ -23,26 +23,29 @@ public class TransitionCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Transition>() && !other.GetComponent<Transition>().shared)
+        Transition transition = other.GetComponent<Transition>();
+
+        if (transition && !transition.shared)
         {
 
-            other.GetComponent<Transition>().StopAllCoroutines();
+            transition.StopAllCoroutines();
 
             if (direction)
-                other.GetComponent<Transition>().Flip(0f, setCoroutineSpeed);
+                transition.Flip(0f, setCoroutineSpeed);
             else
-                other.GetComponent<Transition>().Flip(1f, setCoroutineSpeed);
+                transition.Flip(1f, setCoroutineSpeed);
 
         }
 
-        if(other.GetComponent<UI_Transition>())
+        UI_Transition uI_Transition = other.GetComponent<UI_Transition>();
+        if(uI_Transition)
         {
-            other.GetComponent<UI_Transition>().StopAllCoroutines();
+            uI_Transition.StopAllCoroutines();
 
             if (direction)
-                other.GetComponent<UI_Transition>().Flip(0f, setCoroutineSpeed);
+                uI_Transition.Flip(0f, setCoroutineSpeed);
             else
-                other.GetComponent<UI_Transition>().Flip(1f, setCoroutineSpeed);
+                uI_Transition.Flip(1f, setCoroutineSpeed);
         }
 
         if (other.GetComponent<FlipInteraction>())

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrabHold : InteractableObject
+public class CrabHold : HoldableObject
 {
 
     public int maxVelocity = 8;
@@ -14,14 +14,10 @@ public class CrabHold : InteractableObject
 
     public override void Pickup()
     {
-        if (raycastManager.selectedObjs.Contains(this.gameObject))
-        { raycastManager.selectedObjs.Remove(this.gameObject); }
-
         InteractingIconHover();
         rigidbody.isKinematic = false;
         rigidbody.useGravity = false;
         rigidbody.freezeRotation = true;
-        Select();
 
         rigidbody.constraints = RigidbodyConstraints.None;
 
@@ -32,7 +28,6 @@ public class CrabHold : InteractableObject
         //    //StartCoroutine(SlowPickup()); 
         //}
 
-        OnPickup();
         GetComponent<CrabWalk>().OnHold();
     }
 
@@ -43,50 +38,13 @@ public class CrabHold : InteractableObject
 
     }
 
-    public override void Awake()
-    {
-        SetType();
-    }
-
     public override void Drop()
     {
         StopAllCoroutines();
         currentPositionVelocity = originalVelocity;
         GetComponent<CrabWalk>().OnDrop();
-
-        ////put the object down with the right shader
-        //if (player.GetComponent<flipScript>().space)
-        //{
-        //    ShaderUtility.ShaderToReal(renderer.material);
-        //    GetComponent<Transition>().SetStart(0f);
-        //    renderer.material.SetInt("_onHover", 1);
-
-        //    //renderer.material.SetInt("_onHold", 0);
-        //    this.gameObject.layer = 11;
-        //}
-
-        //else
-        //{
-        //    ShaderUtility.ShaderToLaser(renderer.material);
-        //    GetComponent<Transition>().SetStart(1f);
-        //    UnSelect();
-        //    renderer.material.SetInt("_onHover", 1);
-
-        //    //renderer.material.SetInt("_onHold", 0);
-        //    this.gameObject.layer = 10;
-        //}
-
-        //Vector3 currentVelocity = rigidbody.velocity;
-
-        //if (currentVelocity.magnitude > maxVelocity)
-        //{
-        //    //.Log("before " + currentVelocity);
-        //    rigidbody.velocity = Vector3.ClampMagnitude(currentVelocity, maxVelocity);
-        //    //Debug.Log(rigidbody.velocity + ", " + rigidbody.velocity.magnitude);
-        //}
-
-
-        iconContainer.SetOpenHand();
+        
+        CloseIconHover();
         selected = false;
         //UnSelect();
 
@@ -99,77 +57,26 @@ public class CrabHold : InteractableObject
 
     }
 
-    public override void SetType()
-    {
-        objectType = ObjectType.SingleWorldClickable;
-    }
-
     public override void DistantIconHover()
     {
-        iconContainer.SetInteractHover();
+        _iconContainer.SetInteractHover();
     }
 
     public override void CloseIconHover()
     {
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
     }
 
     public override void InteractingIconHover()
     {
-        iconContainer.SetHold();
+        _iconContainer.SetHold();
     }
 
-    public override void Select()
+    public override void OnSelect()
     {
-        //base.Select();
+        return;
     }
-
-    public override void UnSelect()
-    {
-        //base.UnSelect();
-    }
-
-
-
-    private IEnumerator SlowPickup()
-    {
-        float duration = .5f;
-        float elapsedTime = 0f;
-        float ratio = elapsedTime / duration;
-        originalVelocity = currentPositionVelocity;
-
-        while (ratio < 1f)
-        {
-
-            elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / duration;
-            rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
-            float value = Mathf.Lerp(0, 1, ratio);
-            currentPositionVelocity = value;
-            yield return null;
-        }
-
-        rigidbody.constraints = RigidbodyConstraints.None;
-        rigidbody.useGravity = false;
-        currentPositionVelocity = originalVelocity;
-
-        //ParticleSystem.Burst burst = new ParticleSystem.Burst(.025f, 100f);
-
-        //var main = particleSystem.main;
-        //main.startLifetime = 4f;
-        //particleSystem.emission.SetBurst(0, burst);
-        //particleSystem.Play();
-
-        if (audioSource)
-        {
-            if (overridePop) { audioSource.clip = overridePop; }
-            else { audioSource.clip = player.gameObject.GetComponent<SoundBox>().pop; }
-
-            audioSource.Play();
-        }
-
-    }
-
+    
     public override bool Flippable { get { return false; } }
 
 

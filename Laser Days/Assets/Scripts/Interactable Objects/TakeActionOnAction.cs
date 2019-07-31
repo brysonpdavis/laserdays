@@ -20,7 +20,8 @@ public class TakeActionOnAction : MonoBehaviour
     {
         PickUp,
         PutDown,
-        Select
+        Select,
+        Hover
     }
 
     private enum ResultActionType
@@ -56,6 +57,14 @@ public class TakeActionOnAction : MonoBehaviour
             default:
                 
                 break;
+        }
+    }
+
+    public void Hovered()
+    {
+        if (activationAction == ActivationActionType.Hover)
+        {
+            TakeAction();
         }
     }
 }

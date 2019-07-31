@@ -22,13 +22,14 @@ public class Transition : MonoBehaviour
     protected Transition[] childrenTransitions;
     public bool forceRadial;
     public TweeningFunctions.TweenType tween = TweeningFunctions.TweenType.EaseInOut;
-
-
+    private bool transitioning;
     private bool amCore;
 
 
     protected virtual void Awake()
     {
+        transitioning = false;
+        
         _propBlock = new MaterialPropertyBlock();
         mRenderer = GetComponent<Renderer>();
 
@@ -38,7 +39,7 @@ public class Transition : MonoBehaviour
             shared = true;
         }
 
-        if(!mRenderer && GetComponent<ParticleSystemRenderer>())
+        if(!mRenderer)
         {
             mRenderer = GetComponent<ParticleSystemRenderer>();
         }
@@ -80,7 +81,7 @@ public class Transition : MonoBehaviour
     {
         //set all objects to transition children to have bool setup
         //only happens on relevant objects
-        if (GetComponent<PlatformMover>() || GetComponent<InteractableObject>() || manualTransitionChildren)
+        if (GetComponent<PlatformMover>() || GetComponent<HoldableObject>() || manualTransitionChildren)
         {
             transitionAllChildren = true;
             childrenTransitions = GetComponentsInChildren<Transition>();
@@ -122,7 +123,7 @@ public class Transition : MonoBehaviour
             if (transitionAllChildren)
                 foreach (Transition transition in childrenTransitions)
                 {
-                if (!transition.gameObject.Equals(this.gameObject) && !Toolbox.Instance.EqualToHeld(transition.gameObject))
+                    if (!transition.gameObject.Equals(this.gameObject) && !Toolbox.Instance.EqualToHeld(transition.gameObject))
                     {
                         transition.StopAllCoroutines();
                         transition.Flip(end, duration);
@@ -148,10 +149,9 @@ public class Transition : MonoBehaviour
         if (mRenderer)
         {
             mRenderer.GetPropertyBlock(_propBlock);
-            _propBlock.SetFloat("_TransitionState", value);
+            _propBlock.SetFloat("_TransitionState", Mathf.Clamp(value, 0, 1));
             mRenderer.SetPropertyBlock(_propBlock);
         }
-
     }
 
 
@@ -162,24 +162,41 @@ public class Transition : MonoBehaviour
 
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {
+        SetTransitionOn();
         
-            float elapsedTime = 0;
-            float ratio = elapsedTime / duration;
-            //int property = Shader.PropertyToID("_D7A8CF01");
+        float elapsedTime = 0;
+        float ratio = elapsedTime / duration;
+        //int property = Shader.PropertyToID("_D7A8CF01");
 
-            while (ratio < 1f)
-            {
-                ratio = elapsedTime / duration;
-            float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.Tween(tween, ratio));
+        while (ratio < 1f)
+        {
+            ratio = elapsedTime / duration;
+        float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.Tween(tween, ratio));
 
-                _propBlock.SetFloat("_TransitionState", value);
-                mRenderer.SetPropertyBlock(_propBlock);
-                //material.SetFloat("_TransitionState", value);
-                //RendererExtensions.UpdateGIMaterials(mRenderer);
+            _propBlock.SetFloat("_TransitionState", value);
+            mRenderer.SetPropertyBlock(_propBlock);
+            //material.SetFloat("_TransitionState", value);
+            //RendererExtensions.UpdateGIMaterials(mRenderer);
 
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        SetTransitionOff();
+    }
 
+    public void SetTransitionOn()
+    {
+        transitioning = true;
+    }
+
+    public void SetTransitionOff()
+    {
+        transitioning = false;
+    }
+
+    public bool GetTransitioning()
+    {
+        return transitioning;
     }
 }

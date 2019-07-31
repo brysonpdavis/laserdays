@@ -5,7 +5,6 @@ using UnityEngine;
 public class TransitionController: MonoBehaviour
 {
     
-    private PlayerCharge pc;
     private GameObject player;
     private float speed;
     private Component[] components;
@@ -29,7 +28,6 @@ public class TransitionController: MonoBehaviour
         PlayerCheck();
 
         player = Toolbox.Instance.GetPlayer();
-        pc = player.GetComponent<PlayerCharge>();
 
         //make sure all materials are starting on correct transition material based on player
         if (player.layer == 16){ //if player is starting in RW
@@ -78,7 +76,7 @@ public class TransitionController: MonoBehaviour
 
             foreach (Transition albo in transitions)
             {
-                if ((!albo.GetComponentInParent<InteractableObject>()) || !albo.GetComponentInParent<InteractableObject>().selected)
+                if ((!albo.GetComponentInParent<HoldableObject>()) || !albo.GetComponentInParent<HoldableObject>().selected)
                 {
                     //makes sure it doesn't transition the held object either!
                     if (!Toolbox.Instance.EqualToHeld(this.gameObject))

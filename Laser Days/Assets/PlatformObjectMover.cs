@@ -25,13 +25,13 @@ public class PlatformObjectMover : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        InteractableObject.ObjectType type = InteractableObject.ObjectType.Null;
-        if (other.GetComponent<InteractableObject>()) { type = other.GetComponent<InteractableObject>().objectType; } 
+        HoldableObject.ObjectType type = HoldableObject.ObjectType.Null;
+        if (other.GetComponent<HoldableObject>()) { type = other.GetComponent<HoldableObject>().objectType; } 
 
-        if ((type == InteractableObject.ObjectType.Sokoban1x1 || 
-             type == InteractableObject.ObjectType.Sokoban2x2 || 
-             type == InteractableObject.ObjectType.FloorBouncer ||
-             type == InteractableObject.ObjectType.Morph)
+        if ((type == HoldableObject.ObjectType.Sokoban1x1 || 
+             type == HoldableObject.ObjectType.Sokoban2x2 || 
+             type == HoldableObject.ObjectType.FloorBouncer ||
+             type == HoldableObject.ObjectType.Morph)
              && (other.gameObject.layer == mainGuard.layer)
             && mainGuard.GetComponent<PlatformGuard>().stuckObjects.Contains(other.gameObject))
         {
@@ -54,13 +54,13 @@ public class PlatformObjectMover : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        InteractableObject.ObjectType type = InteractableObject.ObjectType.Null;
-        if (other.GetComponent<InteractableObject>()) { type = other.GetComponent<InteractableObject>().objectType; } 
+        HoldableObject.ObjectType type = HoldableObject.ObjectType.Null;
+        if (other.GetComponent<HoldableObject>()) { type = other.GetComponent<HoldableObject>().objectType; } 
 
-        if (type == InteractableObject.ObjectType.Sokoban1x1 ||
-            type == InteractableObject.ObjectType.Sokoban2x2 ||
-            type == InteractableObject.ObjectType.FloorBouncer ||
-            type == InteractableObject.ObjectType.Morph)
+        if (type == HoldableObject.ObjectType.Sokoban1x1 ||
+            type == HoldableObject.ObjectType.Sokoban2x2 ||
+            type == HoldableObject.ObjectType.FloorBouncer ||
+            type == HoldableObject.ObjectType.Morph)
         {
             incorrect = false;
             //objectToMove = null;
@@ -84,7 +84,7 @@ public class PlatformObjectMover : MonoBehaviour {
             mainGuard.GetComponent<PlatformGuard>().stuckObjects.Add(objectToMove);
         }
 
-        if (objectToMove.GetComponent<InteractableObject>().objectType == InteractableObject.ObjectType.Sokoban2x2)
+        if (objectToMove.GetComponent<HoldableObject>().objectType == HoldableObject.ObjectType.Sokoban2x2)
         {
 
             yield return new WaitForFixedUpdate();

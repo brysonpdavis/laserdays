@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloorBouncer : InteractableObject
+public class FloorBouncer : HoldableObject
 {
 
 
     public override void Pickup()
     {
-        pickupDistance = 2.3f;
+        _activateDistance = 2.3f;
         InteractingIconHover();
         rigidbody.constraints = RigidbodyConstraints.None;
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
@@ -28,7 +28,6 @@ public class FloorBouncer : InteractableObject
     {
         if (player.GetComponent<flipScript>().space)
         {
-            renderer.material.shader = raycastManager.realWorldShader;
             this.gameObject.layer = 11;
             GetComponent<SelectionRenderChange>().OnDrop();
             GetComponent<Transition>().SetStart(0f);
@@ -36,23 +35,17 @@ public class FloorBouncer : InteractableObject
 
         else
         {
-            renderer.material.shader = raycastManager.laserWorldShader;
             this.gameObject.layer = 10;
             GetComponent<SelectionRenderChange>().OnDrop();
             GetComponent<Transition>().SetStart(1f);
         }
 
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
         selected = false;
         rigidbody.freezeRotation = false;
         rigidbody.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         rigidbody.isKinematic = true;
         ResetWalk();
-    }
-
-    public override void SetType()
-    {
-        objectType = ObjectType.FloorBouncer;
     }
 
     public override void DistantIconHover()
@@ -62,11 +55,11 @@ public class FloorBouncer : InteractableObject
 
     public override void CloseIconHover()
     {
-        iconContainer.SetOpenHand();
+        _iconContainer.SetOpenHand();
     }
 
     public override void InteractingIconHover()
     {
-        iconContainer.SetDrag();
+        _iconContainer.SetDrag();
     }
 }

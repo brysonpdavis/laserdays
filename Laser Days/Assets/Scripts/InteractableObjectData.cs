@@ -11,7 +11,7 @@ public class InteractableObjectData {
     public string name;
     //public float[] rotation; //will do this later
 
-    public InteractableObjectData(InteractableObject obj)
+    public InteractableObjectData(HoldableObject obj)
     {
         layer = obj.gameObject.layer;
         name = obj.gameObject.name;
