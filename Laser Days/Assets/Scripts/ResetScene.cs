@@ -31,11 +31,11 @@ public class ResetScene : SelectableObject {
 
     public override void OnHover()
     {
-        //base.OnHover();
-        _iconContainer.SetReset();
-        entered = true;
-        if (!audio.isPlaying)
-            Play();
+        ////base.OnHover();
+        //_iconContainer.SetReset();
+        //entered = true;
+        //if (!audio.isPlaying)
+            //Play();
     }
 
     public override void OffHover()
@@ -48,15 +48,15 @@ public class ResetScene : SelectableObject {
 
     private void Update()
     {
-        if (entered)
-        {
-            //Increment timer
-            timer += Time.deltaTime;
+        //if (entered)
+        //{
+        //    //Increment timer
+        //    timer += Time.deltaTime;
 
-            float value = Mathf.Clamp((timer / nSecond), 0f, .95f);
-            Debug.Log(value);
-            edge.PauseMenu = value;
-        }
+        //    float value = Mathf.Clamp((timer / nSecond), 0f, .95f);
+        //    Debug.Log(value);
+        //    edge.PauseMenu = value;
+        //}
     }
 
     public override void Start()

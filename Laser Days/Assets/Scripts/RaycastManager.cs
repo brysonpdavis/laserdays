@@ -110,9 +110,6 @@ public class RaycastManager : MonoBehaviour {
             //if we hit something!
             else 
             {
-                //will be legacy
-                CheckForLookObjects(hit);
-
                 LookAtRaycastedObj(hit);
                 raycastedSelectable = raycastedReticleObj as ISelectable;
                 
@@ -158,8 +155,6 @@ public class RaycastManager : MonoBehaviour {
     {
         if (!Toolbox.Instance.EqualToHeld(raycastedObj))
         {
-
-
             //if the object is already a selected object:
             if (raycastedSelectable.GetSelected())
             {
@@ -192,15 +187,6 @@ public class RaycastManager : MonoBehaviour {
                 audioSource.clip = selectClip;
                 audioSource.Play();
             }
-        }
-    }
-
-    void CheckForLookObjects(RaycastHit hit)
-    {
-        if (hit.collider.CompareTag("Completion"))
-        {
-            raycastedObj = hit.collider.gameObject;
-            IconCheck(hit.distance, hit.collider.gameObject);
         }
     }
 
