@@ -13,24 +13,8 @@ public class RaycastManager : MonoBehaviour {
     public GameObject raycastedObj;
     private GameObject previousRaycastedObj;
     public IList<GameObject> selectedObjs;
-
-    //public Shader shaderoriginal;
-
-    //shaders
-    public Shader shaderselected;
-    public Shader realWorldShader;
-    public Shader laserWorldShader;
-    public Shader coreLaser;
-    public Shader coreReal;
-
-
-    public Shader morphShaderselected;
-    public Shader morphRealWorldShader;
-    public Shader morphLaserWorldShader;
-
-
+    
     private Color32 reticleColor = new Color32(255,222,77,255); //new Vector4(255, 222, 77, 1);
-
 
     [Header("Raycast Settings")]
 
@@ -41,27 +25,19 @@ public class RaycastManager : MonoBehaviour {
 
     [Header("References")]
     public Image crossHair;
-    public Text itemNameText;
     private Camera mainCam;
     private AudioSource audioSource;
     private AudioClip selectClip; 
     private AudioClip deselectClip;
     private MFPP.Modules.PickUpModule pickUp;
     private IconContainer iconContainer;
-    private Transform playerCam;
     private float Radius;
-
-    [Header("Scene Reset")]
-    const float nSecond = 1f;
-
-    float timer = 0;
-    bool entered = false;
-    private EdgeDetection edge;
-    private ResetScene currentLevelReset;
+    
     private ReticleObject raycastedReticleObj;
     private ISelectable raycastedSelectable;
     private IHoldable raycastedHoldable;
     private IFlippable raycastedFlippable;
+    private Transition _transition;
 
 
 
@@ -73,9 +49,7 @@ public class RaycastManager : MonoBehaviour {
         deselectClip = SoundBox.Instance.deselect;
         pickUp = GetComponent<MFPP.Modules.PickUpModule>();
         iconContainer = Toolbox.Instance.GetIconContainer();
-        playerCam = GetComponentInChildren<Camera>().transform;
         Radius = GetComponent<CharacterController>().radius;
-        edge = Camera.main.GetComponent<EdgeDetection>();
 
 
     }
@@ -101,22 +75,24 @@ public class RaycastManager : MonoBehaviour {
         {
             raycastedReticleObj = hit.collider.GetComponent<ReticleObject>();
 
-            //if we hit something that can't be interacted with
-            if (!raycastedReticleObj)
-            {
-                ClearRaycast();
-            }
-
             //if we hit something!
-            else 
+            if (raycastedReticleObj)
             {
                 LookAtRaycastedObj(hit);
+                _transition = hit.collider.GetComponent<Transition>();
                 raycastedSelectable = raycastedReticleObj as ISelectable;
-                
+            
                 // SELECT ITEM: 
-                if (ControlManager.Instance.GetButtonDown("Select") && raycastedSelectable != null)
+                if (_transition && ! _transition.GetTransitioning() && 
+                    ControlManager.Instance.GetButtonDown("Select") && raycastedSelectable != null )
+                {
                     SelectObject();
-
+                }
+            }
+            //if we hit something that can't be interacted with
+            else 
+            {
+                ClearRaycast();
             }
         }
 
@@ -255,14 +231,11 @@ public class RaycastManager : MonoBehaviour {
                     obj.GetComponent<MorphController>().OnSelection();
                     break;
             }
-
-
         }
     }
 
     public void RemoveFromList(GameObject obj, bool asGroup, bool duringFlip) 
     {
-
         //added asGroup bool to check if player is removing single objects or multiple
         //removing multiple at once shouldn't update the predicting slider at all, it's done separately on the flip
 
@@ -305,15 +278,4 @@ public class RaycastManager : MonoBehaviour {
             }
         }
     }
-
-    public void PointerEnter()
-    {
-        entered = true;
-    }
-
-    public void PointerExit()
-    {
-        entered = false;
-    }
-
 }

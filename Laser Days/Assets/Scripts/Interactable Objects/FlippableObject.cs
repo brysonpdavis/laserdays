@@ -17,6 +17,9 @@ abstract public class FlippableObject : HoldableObject, IFlippable
     public Transform realTransform;
     public Transform laserTransform;
     public float transitionStateB;
+    private Core _core;
+    private Transition _transition;
+    private Transition _coreTransition;
 
 
     public override void Start()
@@ -36,12 +39,17 @@ abstract public class FlippableObject : HoldableObject, IFlippable
         SetMaterialFloatProp("_EdgeThickness", Toolbox.Instance.EdgeGlowThickness());
         shimmerColor = _material.GetColor("_ShimmerColor");
 
-        if (GetComponentInChildren<Core>())
+        _core = GetComponentInChildren<Core>();
+        
+        if (_core)
         {
             GetComponentInChildren<Core>().SetColor(shimmerColor);
+            _coreTransition = _core.GetComponent<Transition>();
         }
 
         RendererExtensions.UpdateGIMaterials(_renderer);
+
+        _transition = GetComponent<Transition>();
 
         realTransform = sceneContainer.Find("Real");
         laserTransform = sceneContainer.Find("Laser");
@@ -64,10 +72,10 @@ abstract public class FlippableObject : HoldableObject, IFlippable
 
     public virtual void OnFlip()
     {
-        Debug.Log("in onflip");
+        // Debug.Log("in onflip");
         if (MaxFlipCheck(true))
         {
-            Debug.Log("max flip check true");
+            // Debug.Log("max flip check true");
 
             ParticleEffect();
             ColorTransition();
@@ -111,14 +119,14 @@ abstract public class FlippableObject : HoldableObject, IFlippable
             if (Toolbox.Instance.PlayerInReal())
             {
                 ShaderUtility.ShaderToReal(_material);
-                GetComponent<Transition>().SetStart(0f); //set it fully on for laser world
+                _transition.SetStart(0f); //set it fully on for laser world
                 SetObjectToReal(); //set object to real layer
 
             }
             else
             {
                 ShaderUtility.ShaderToLaser(_material);
-                GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
+                _transition.SetStart(1f); //set it fully on for laser world
                 SetObjectToLaser(); //set object to laser layer
 
             }
@@ -142,8 +150,8 @@ abstract public class FlippableObject : HoldableObject, IFlippable
 
                 ShaderUtility.ShaderToLaser(material);
 
-                GetComponent<Transition>().SetStart(1f); //set it fully on for laser world
-                //GetComponent<Transition>().SetStart(1f - (renderer.material.GetFloat("_TransitionState")));
+                _transition.SetStart(1f); //set it fully on for laser world
+                //_transition.SetStart(1f - (renderer.material.GetFloat("_TransitionState")));
             }
 
         }
@@ -158,8 +166,8 @@ abstract public class FlippableObject : HoldableObject, IFlippable
             if (!AmHeldObj())
             {
                 ShaderUtility.ShaderToReal(material);
-                GetComponent<Transition>().SetStart(0f); //set it fully on for real world]
-                //GetComponent<Transition>().SetStart((renderer.material.GetFloat("_TransitionState")));
+                _transition.SetStart(0f); //set it fully on for real world]
+                //_transition.SetStart((renderer.material.GetFloat("_TransitionState")));
             }
         }
 
@@ -202,8 +210,7 @@ abstract public class FlippableObject : HoldableObject, IFlippable
 
     protected void ForcedTransitionEffect()
     {
-        Transition transition = GetComponent<Transition>();
-        Core core = GetComponentInChildren<Core>();
+        Transition transition = _transition;
             
 
         float direction = 1f;
@@ -215,12 +222,13 @@ abstract public class FlippableObject : HoldableObject, IFlippable
                 Debug.Log("1");
                 transition.SetStart(_material.GetFloat("_TransitionState"));
                 direction = 1f;
-                if (core)
+                if (_core)
                 {
-                    ShaderUtility.ShaderToLaser(core.gameObject.GetComponent<Renderer>().material);
-                    core.gameObject.GetComponent<Transition>().StopAllCoroutines();
-                    core.gameObject.GetComponent<Transition>().SetStart(0f);
-                    core.gameObject.GetComponent<Transition>().Flip(1f, Toolbox.Instance.globalFlipSpeed);
+                    ShaderUtility.ShaderToLaser(_core.gameObject.GetComponent<Renderer>().material);
+                    
+                    _coreTransition.StopAllCoroutines();
+                    _coreTransition.SetStart(0f);
+                    _coreTransition.Flip(1f, Toolbox.Instance.globalFlipSpeed);
                 }
             }
 
@@ -231,12 +239,13 @@ abstract public class FlippableObject : HoldableObject, IFlippable
                 transition.SetStart(1f - _material.GetFloat("_TransitionState"));
                 direction = 0f;
 
-                if (core)
+                if (_core)
                 {
-                    ShaderUtility.ShaderToLaser(core.gameObject.GetComponent<Renderer>().material);
-                    core.gameObject.GetComponent<Transition>().StopAllCoroutines();
-                    core.gameObject.GetComponent<Transition>().SetStart(1f);
-                    core.gameObject.GetComponent<Transition>().Flip(0f, Toolbox.Instance.globalFlipSpeed);
+                    ShaderUtility.ShaderToLaser(_core.gameObject.GetComponent<Renderer>().material);
+
+                    _coreTransition.StopAllCoroutines();
+                    _coreTransition.SetStart(1f);
+                    _coreTransition.Flip(0f, Toolbox.Instance.globalFlipSpeed);
                 }
             }
 
@@ -255,12 +264,13 @@ abstract public class FlippableObject : HoldableObject, IFlippable
                 direction = 1f;
 
 
-                if (core)
+                if (_core)
                 {
-                    ShaderUtility.ShaderToReal(core.gameObject.GetComponent<Renderer>().material);
-                    core.gameObject.GetComponent<Transition>().StopAllCoroutines();
-                    core.gameObject.GetComponent<Transition>().SetStart(0f);
-                    core.gameObject.GetComponent<Transition>().Flip(1f, Toolbox.Instance.globalFlipSpeed);
+                    ShaderUtility.ShaderToReal(_core.gameObject.GetComponent<Renderer>().material);
+                    
+                    _coreTransition.StopAllCoroutines();
+                    _coreTransition.SetStart(0f);
+                    _coreTransition.Flip(1f, Toolbox.Instance.globalFlipSpeed);
                 }
             }
 
@@ -270,12 +280,13 @@ abstract public class FlippableObject : HoldableObject, IFlippable
 
                 transition.SetStart(1f - _material.GetFloat("_TransitionState"));
                 direction = 0f;
-                if (core)
+                if (_core)
                 {
-                    ShaderUtility.ShaderToReal(core.gameObject.GetComponent<Renderer>().material);
-                    core.gameObject.GetComponent<Transition>().StopAllCoroutines();
-                    core.gameObject.GetComponent<Transition>().SetStart(1f);
-                    core.gameObject.GetComponent<Transition>().Flip(0f, Toolbox.Instance.globalFlipSpeed);
+                    ShaderUtility.ShaderToReal(_core.gameObject.GetComponent<Renderer>().material);
+                    
+                    _coreTransition.StopAllCoroutines();
+                    _coreTransition.SetStart(1f);
+                    _coreTransition.Flip(0f, Toolbox.Instance.globalFlipSpeed);
                 }
             }
 
@@ -384,8 +395,8 @@ abstract public class FlippableObject : HoldableObject, IFlippable
 
     public void AddToTransitionList(TransitionController controller)
     {
-        if (!controller.transitions.Contains(GetComponent<Transition>()))
-            controller.transitions.Add(GetComponent<Transition>());
+        if (!controller.transitions.Contains(_transition))
+            controller.transitions.Add(_transition);
 
         if (GetComponentInChildren<Core>())
         {
@@ -397,8 +408,8 @@ abstract public class FlippableObject : HoldableObject, IFlippable
 
     public void RemoveFromTransitionList(TransitionController controller)
     {
-        if (controller.transitions.Contains(GetComponent<Transition>()))
-            controller.transitions.Remove(GetComponent<Transition>());
+        if (controller.transitions.Contains(_transition))
+            controller.transitions.Remove(_transition);
 
         if (GetComponentInChildren<Core>())
         {
@@ -488,18 +499,18 @@ abstract public class FlippableObject : HoldableObject, IFlippable
         //Debug.Log("called");
 
         if (GetComponentInChildren<Core>() && (!AmHeldObj()|| !onFlip))
-            {
+        {
             //Debug.Log("going!");
-                if (Toolbox.Instance.PlayerInLaser())
-                {
-                    GetComponentInChildren<Core>().Flip(true);
-                }
-                else if (Toolbox.Instance.PlayerInReal())
-                {
-                    GetComponentInChildren<Core>().Flip(false);
-                }
+            if (Toolbox.Instance.PlayerInLaser())
+            {
+                GetComponentInChildren<Core>().Flip(true);
+            }
+            else if (Toolbox.Instance.PlayerInReal())
+            {
+                GetComponentInChildren<Core>().Flip(false);
             }
         }
+    }
 
     public void TurnOffSelf()
     {

@@ -84,10 +84,6 @@ abstract public class HoldableObject : SelectableObject, IHoldable
 
     public abstract void Drop();
 
-    public abstract void DistantIconHover();
-
-    public abstract void CloseIconHover();
-
     public abstract void InteractingIconHover();
 
     public virtual void SetType()
