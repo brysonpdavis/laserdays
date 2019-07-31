@@ -87,7 +87,7 @@ public class RaycastManager : MonoBehaviour {
         else if (this.gameObject.layer == 16) { newLayerMask = LayerMaskController.Real; }  //newLayerMask.value = 2048; } //layermask value of layer 11 is 2048   
 
         MainRaycast();
-        SceneResetCheck();
+        //SceneResetCheck();
     }
 
     void MainRaycast()
@@ -99,9 +99,10 @@ public class RaycastManager : MonoBehaviour {
 
         if (Physics.Raycast(mainCam.transform.position, fwd, out hit, rayLength, newLayerMask.value))
         {
-            
-            //if we hit a background object
-            if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 17)
+            raycastedReticleObj = hit.collider.GetComponent<ReticleObject>();
+
+            //if we hit something that can't be interacted with
+            if (!raycastedReticleObj)
             {
                 ClearRaycast();
             }
@@ -109,24 +110,16 @@ public class RaycastManager : MonoBehaviour {
             //if we hit something!
             else 
             {
-                    //will be legacy
-                    CheckForLookObjects(hit);
-                    raycastedReticleObj = hit.collider.GetComponent<ReticleObject>();
-                    
-                    //what to do if it inherits from reticle object:
-                    if (raycastedReticleObj) 
-                    {
-                        LookAtRaycastedObj(hit);
-                        raycastedSelectable = raycastedReticleObj as ISelectable;
-                        
-                        // SELECT ITEM: 
-                        if (ControlManager.Instance.GetButtonDown("Select") && raycastedSelectable != null)
-                            SelectObject();
-                    }
-                    
-                    //clear reticle for objects on real/laser layers that aren't interactable
-                    else
-                        ClearRaycast();
+                //will be legacy
+                CheckForLookObjects(hit);
+
+                LookAtRaycastedObj(hit);
+                raycastedSelectable = raycastedReticleObj as ISelectable;
+                
+                // SELECT ITEM: 
+                if (ControlManager.Instance.GetButtonDown("Select") && raycastedSelectable != null)
+                    SelectObject();
+
             }
         }
 
@@ -144,14 +137,15 @@ public class RaycastManager : MonoBehaviour {
     {
         IconCheck(hit.distance, hit.collider.gameObject);
 
-        //Turn off if we hit a new interactable object while not holding anything
-        if (previousRaycastedObj && !Toolbox.Instance.EqualToHeld(raycastedObj))
-        {
-            previousRaycastedObj.GetComponent<ReticleObject>().OffHover();
-        }
-
         CrosshairActive();
         raycastedObj = hit.collider.gameObject;
+
+        //Turn off if we hit a new interactable object while not holding anything
+        if (previousRaycastedObj && !previousRaycastedObj.Equals(raycastedObj) && !Toolbox.Instance.EqualToHeld(raycastedObj))
+        {
+            previousRaycastedObj.GetComponent<ReticleObject>().OffHover();
+            //Debug.Log(previousRaycastedObj.name + "  " + raycastedObj.name);
+        }
 
         //HOVER: 1: if there isn't a held object, 2: keep setting an object to hover as long as it's the held object
         if (!pickUp.heldObject || (pickUp.heldObject && pickUp.heldObject.Equals(raycastedObj)))
@@ -208,25 +202,6 @@ public class RaycastManager : MonoBehaviour {
             raycastedObj = hit.collider.gameObject;
             IconCheck(hit.distance, hit.collider.gameObject);
         }
-
-        //if (hit.collider.CompareTag("Robot"))
-        //{
-        //    //raycastedObj = hit.collider.gameObject;
-        //    IconCheck(hit.distance, hit.collider.gameObject);
-
-        //    if (hit.collider.gameObject.GetComponent<SelectionRenderChange>())
-        //    {
-        //        raycastedObj = hit.collider.gameObject;
-        //        raycastedObj.GetComponent<Renderer>().material.SetInt("_onHover", 1);
-        //        raycastedObj.GetComponent<SelectionRenderChange>().SwitchRenderersOn();
-        //    }
-
-        //    if (ControlManager.Instance.GetButtonDown("Select"))
-        //    {
-        //        raycastedObj.GetComponent<RobotInteraction>().RobotActivate();
-        //        Debug.Log("selected AT ROBOT!");
-        //    }
-        //}
     }
 
     void ClearRaycast()
@@ -235,10 +210,6 @@ public class RaycastManager : MonoBehaviour {
         //same idea for when hitting non-interactable objects on real/laser layers
         //works unless player is holding something
 
-        //if (raycastedObj && !pickUp.heldObject)
-        //{
-        //    raycastedReticleObj.OffHover();
-        //}
 
         if (previousRaycastedObj)
             previousRaycastedObj.GetComponent<ReticleObject>().OffHover();
@@ -325,20 +296,7 @@ public class RaycastManager : MonoBehaviour {
     {
         ReticleObject reticleObject = raycastedObj.GetComponent<ReticleObject>();
 
-        if (raycastedObj.CompareTag("Completion"))
-        {
-            if (distance <= pickUp.MaxPickupDistance)
-                iconContainer.SetOpenHand();
-
-            //can have an else with another icon
-        }
-
-        if (raycastedObj.CompareTag("Robot"))
-        {
-            iconContainer.SetCharacterInteract();
-        }
-
-        else if (!pickUp.heldObject)
+        if (!pickUp.heldObject)
         {
             if (distance <= pickUp.MaxPickupDistance)
             {
@@ -360,87 +318,6 @@ public class RaycastManager : MonoBehaviour {
                 reticleObject.DistantIconHover();
             }
         }
-    }
-
-    void SceneResetOff()
-    {
-        edge.PauseMenu = 0;
-        timer = 0;
-        if (currentLevelReset)
-        {
-            currentLevelReset.Deactivate();
-            currentLevelReset = null;
-        }
-    }
-
-    void SceneResetCheck()
-    {
-
-        RaycastHit hit;
-        Vector3 fwd = mainCam.transform.TransformDirection(Vector3.forward);
-
-        if (!LevelLoadingMenu.gameIsPaused && !(Time.timeScale < 1f) && !LevelLoadingMenu.sceneIsLoading)
-        {
-
-            if (Physics.Raycast(mainCam.transform.position, fwd, out hit, 60, newLayerMask)) //&& !LevelLoadingMenu.sceneIsLoading && !LevelLoadingMenu.gameIsPaused)
-            {
-                //Debug.Log("gameispaused " + LevelLoadingMenu.gameIsPaused);
-                if (hit.collider.CompareTag("SceneReset"))
-                {
-                    //show the crosshair
-                    iconContainer.SetReset();
-
-                    //if you're actually selecting it while looking at it
-                    if (ControlManager.Instance.GetButton("Select"))
-                    {
-                        entered = true;
-                        if (!hit.collider.GetComponent<AudioSource>().isPlaying)
-                        {
-                            currentLevelReset = hit.collider.GetComponent<ResetScene>();
-                            hit.collider.gameObject.GetComponent<ResetScene>().Play();
-                        }
-                    }
-                    else
-                        SceneResetOff();
-                }
-
-                else
-                {
-                    SceneResetOff();
-                }
-                    
-
-
-                //If pointer is pointing on the object, start the timer
-                if (entered)
-                {
-                    //Increment timer
-                    timer += Time.deltaTime;
-
-                    float value = Mathf.Clamp((timer / nSecond), 0f, .95f);
-                    edge.PauseMenu = value;
-
-                    //Load scene if counter has reached the nSecond
-                    if (timer > nSecond)
-                    {
-                        timer = 0;
-                        hit.collider.gameObject.GetComponent<ResetScene>().Activate();
-                    }
-                }
-            }
-
-
-            else
-            {
-                SceneResetOff();
-            }
-        }
-
-        if (Time.timeScale < 1f)
-        {
-            timer = 0f;
-        }
-
     }
 
     public void PointerEnter()

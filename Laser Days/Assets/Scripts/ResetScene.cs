@@ -2,19 +2,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.ImageEffects;
 
-public class ResetScene : MonoBehaviour {
+
+public class ResetScene : SelectableObject {
 
 	public string spawnName;
 	public string sceneName;
 
     public AudioSource audio;
     public float fadeDuration = .3f;
+    bool entered = false;
+    private EdgeDetection edge;
+    private float timer = 0f;
+    const float nSecond = 1f;
 
-    private void Start()
+
+    public override void OnSelect()
     {
+        base.OnSelect();
+        Activate();
+    }
+
+    public override void OffSelect()
+    {
+        base.OffSelect();
+    }
+
+    public override void OnHover()
+    {
+        //base.OnHover();
+        _iconContainer.SetReset();
+        entered = true;
+        if (!audio.isPlaying)
+            Play();
+    }
+
+    public override void OffHover()
+    {
+        base.OffHover();
+        entered = false;
+        timer = 0f;
+        edge.PauseMenu = 0;
+    }
+
+    private void Update()
+    {
+        if (entered)
+        {
+            //Increment timer
+            timer += Time.deltaTime;
+
+            float value = Mathf.Clamp((timer / nSecond), 0f, .95f);
+            Debug.Log(value);
+            edge.PauseMenu = value;
+        }
+    }
+
+    public override void Start()
+    {
+        base.Start();
         audio = GetComponent<AudioSource>();
         audio.volume = Toolbox.Instance.soundEffectsVolume;
+        edge = Camera.main.GetComponent<EdgeDetection>();
     }
 
     public void Activate()
@@ -33,6 +83,13 @@ public class ResetScene : MonoBehaviour {
     {
         //audio.Stop();
         StartCoroutine(VolumeFade(audio, 0f, fadeDuration));
+    }
+
+    void SceneResetOff()
+    {
+        edge.PauseMenu = 0;
+        timer = 0;
+        Deactivate();
     }
 
 

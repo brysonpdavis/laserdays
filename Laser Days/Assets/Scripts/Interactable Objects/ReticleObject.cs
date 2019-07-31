@@ -18,7 +18,8 @@ public abstract class ReticleObject : MonoBehaviour
 	{
 		_iconContainer = Toolbox.Instance.GetIconContainer();
 		_renderer = GetComponent<Renderer>();
-		_material = _renderer.material;
+        if (_renderer)
+		    _material = _renderer.material;
 		SetMaterialFloatProp("_Flippable", 0);
 		SetMaterialFloatProp("_onHold", 0f);
 
@@ -39,7 +40,7 @@ public abstract class ReticleObject : MonoBehaviour
 
 	public virtual void OffHover()
 	{
-		_material.SetInt("_onHover", 0);
+        SetMaterialFloatProp("_onHover", 0);
 
 		if (_selectionRenderChange)
 			_selectionRenderChange.SwitchRenderersOff();
@@ -58,6 +59,7 @@ public abstract class ReticleObject : MonoBehaviour
 
 	public virtual void SetMaterialFloatProp(string property, float value)
 	{
-		_material.SetFloat(property, value);
+        if (_material)
+            _material.SetFloat(property, value);
 	}
 }
