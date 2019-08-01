@@ -96,28 +96,41 @@ public class BasicClickable : FlippableObject {
 
     public override void DistantIconHover()
     {
-        if (AbleToFlip)
-            _iconContainer.SetSelectHover();
-        else 
-            _iconContainer.SetInteractHover();
+        if (!_transition.GetTransitioning())
+        {
+            if (AbleToFlip && !_transition.GetTransitioning())
+                _iconContainer.SetSelectHover();
+            else
+                _iconContainer.SetInteractHover();
+        }
+        else _iconContainer.SetDefault();
 
     }
 
     public override void CloseIconHover()
     {
-        if (AbleToFlip)
-            _iconContainer.SetOpenHandFill();
-        else
-            _iconContainer.SetOpenHand();
+        if (!_transition.GetTransitioning())
+        {
+            if (AbleToFlip)
+                _iconContainer.SetOpenHandFill();
+            else
+                _iconContainer.SetOpenHand();
+        }
 
+        else _iconContainer.SetDefault();
     }
 
     public override void InteractingIconHover()
     {
-        if (AbleToFlip)
-            _iconContainer.SetHoldFill();
-        else
-            _iconContainer.SetHold();
+        if (!_transition.GetTransitioning())
+        {
+            if (AbleToFlip)
+                _iconContainer.SetHoldFill();
+            else
+                _iconContainer.SetHold();
+        }
+        else _iconContainer.SetDefault();
+
     }
 
 

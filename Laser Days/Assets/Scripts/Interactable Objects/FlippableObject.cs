@@ -18,7 +18,7 @@ abstract public class FlippableObject : HoldableObject, IFlippable
     public Transform laserTransform;
     public float transitionStateB;
     private Core _core;
-    private Transition _transition;
+    protected Transition _transition;
     private Transition _coreTransition;
 
 

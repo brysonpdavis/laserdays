@@ -49,7 +49,7 @@ public static class ShaderUtility
 
     public static bool ShaderIsLaser(Material mat)
     {
-        Debug.Log("Looking for " + mat.shader);
+        //Debug.Log("Looking for " + mat.shader);
         // If using our standard shader, then use keyword swap approach
         if (mat.shader == Shader.Find("Crosshatch/Standard"))
         {
@@ -87,7 +87,7 @@ public static class ShaderUtility
 
     public static bool ShaderIsReal(Material mat)
     {
-        Debug.Log("Looking for " + mat.shader);
+        //Debug.Log("Looking for " + mat.shader);
         // If using our standard shader, then use keyword swap approach
         if (mat.shader == Shader.Find("Crosshatch/Standard"))
         {

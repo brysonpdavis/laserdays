@@ -78,15 +78,19 @@ public class RaycastManager : MonoBehaviour {
             //if we hit something!
             if (raycastedReticleObj)
             {
-                LookAtRaycastedObj(hit);
                 _transition = hit.collider.GetComponent<Transition>();
                 raycastedSelectable = raycastedReticleObj as ISelectable;
-            
-                // SELECT ITEM: 
-                if (_transition && ! _transition.GetTransitioning() && 
-                    ControlManager.Instance.GetButtonDown("Select") && raycastedSelectable != null )
+
+                if (_transition && !_transition.GetTransitioning())
                 {
-                    SelectObject();
+
+                    LookAtRaycastedObj(hit);
+
+                    // SELECT ITEM: 
+                    if (ControlManager.Instance.GetButtonDown("Select") && raycastedSelectable != null)
+                    {
+                        SelectObject();
+                    }
                 }
             }
             //if we hit something that can't be interacted with

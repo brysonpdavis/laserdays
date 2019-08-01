@@ -22,14 +22,11 @@ public class Transition : MonoBehaviour
     protected Transition[] childrenTransitions;
     public bool forceRadial;
     public TweeningFunctions.TweenType tween = TweeningFunctions.TweenType.EaseInOut;
-    private bool transitioning;
     private bool amCore;
 
 
     protected virtual void Awake()
-    {
-        transitioning = false;
-        
+    {        
         _propBlock = new MaterialPropertyBlock();
         mRenderer = GetComponent<Renderer>();
 
@@ -58,6 +55,11 @@ public class Transition : MonoBehaviour
                 sharedMaterial = true;
                 shared = true;   
             }
+        }
+
+        else if (mRenderer && !material)
+        {
+            material = mRenderer.material;
         }
 
 
@@ -161,9 +163,7 @@ public class Transition : MonoBehaviour
     }
 
     private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
-    {
-        SetTransitionOn();
-        
+    {        
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
         //int property = Shader.PropertyToID("_D7A8CF01");
@@ -182,21 +182,16 @@ public class Transition : MonoBehaviour
             yield return null;
         }
         
-        SetTransitionOff();
     }
-
-    public void SetTransitionOn()
-    {
-        transitioning = true;
-    }
-
-    public void SetTransitionOff()
-    {
-        transitioning = false;
-    }
-
     public bool GetTransitioning()
     {
-        return transitioning;
+        mRenderer.GetPropertyBlock(_propBlock);
+        float currentTransitionState = _propBlock.GetFloat("_TransitionState");
+
+        if (Toolbox.Instance.PlayerInReal() && ShaderUtility.ShaderIsReal(material) && (currentTransitionState < .001f) ||
+            Toolbox.Instance.PlayerInLaser() && ShaderUtility.ShaderIsLaser(material) && (currentTransitionState > .999f))
+            return false;
+
+        else return true;
     }
 }
