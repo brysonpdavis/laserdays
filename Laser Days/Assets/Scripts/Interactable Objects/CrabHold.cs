@@ -48,8 +48,9 @@ public class CrabHold : HoldableObject
         selected = false;
         //UnSelect();
 
-        rigidbody.freezeRotation = false;
+        
         rigidbody.constraints = RigidbodyConstraints.None;
+        rigidbody.freezeRotation = true;
 
         beenPickedUp = true;
         rigidbody.useGravity = true;

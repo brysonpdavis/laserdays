@@ -29,6 +29,8 @@ public class CrabWalk : MonoBehaviour {
     public bool held = false;
     AudioSource audio;
 
+    public ParticleSystem dustTrail;
+
     [SerializeField]
     private bool stuck;
     [SerializeField]
@@ -47,7 +49,7 @@ public class CrabWalk : MonoBehaviour {
         renderChild = transform.GetChild(0).transform;
         lastCheckPos = transform.position;
         currentSpeed = speed;
-        audio = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>(); 
 	}
 
     public void OnHold()
@@ -56,6 +58,7 @@ public class CrabWalk : MonoBehaviour {
         currentSpeed = 0;
         transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+        dustTrail.Stop();
     }
 
     public void OnDrop()
@@ -63,6 +66,8 @@ public class CrabWalk : MonoBehaviour {
         held = false;
         currentSpeed = speed;
         rb.constraints = RigidbodyConstraints.None;
+        rb.freezeRotation = true;
+        dustTrail.Play();
     }
 
     void FixedUpdate()

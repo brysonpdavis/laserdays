@@ -8,8 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: L_Flora_Purple_StretchingStalks
   m_Shader: {fileID: 4800000, guid: 480e2ec02051d4242ad8ab3dcf4b683f, type: 3}
-  m_ShaderKeywords: ACCENT_ON LASER NO_GRADIENT STATIC SWAYING WORLD_POS_GRADIENT
-    W_POS_SWAYING
+  m_ShaderKeywords: LASER NO_GRADIENT STATIC SWAYING V_COLOR_SWAYING WORLD_POS_GRADIENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AccentMap:
-        m_Texture: {fileID: 2800000, guid: 1c60e47b035ee44faabf6ea03e162c7d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -48,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: aa8035a6a1f2544788de60c5b05bbec9, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -69,9 +68,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaCutoff: 0.5
-    - _AnimationMagnitude: 0.1
-    - _AnimationSpeed: 2
-    - _AnimationWaveSize: 2
+    - _AnimationMagnitude: 0.2
+    - _AnimationSpeed: 1
+    - _AnimationTimeStep: 1
+    - _AnimationWaveSize: 8
     - _BlendOffset: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -84,9 +84,9 @@ Material:
     - _GlossyReflections: 1
     - _GradientOffset: 0.31
     - _GradientScale: 0.91
-    - _Highlights: 0.185
+    - _Highlights: 0.131
     - _LineA: 5
-    - _MainTexContribution: 0.113
+    - _MainTexContribution: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -108,7 +108,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserAccent: {r: 0.18838447, g: 0.06354573, b: 0.26415092, a: 0.16078432}
+    - _LaserAccent: {r: 0.77095944, g: 0.9234508, b: 0.9339623, a: 1}
     - _LaserBase: {r: 0.53425723, g: 0.47076362, b: 0.6698113, a: 1}
     - _LaserEmission: {r: 0.017521603, g: 0, b: 0.14150941, a: 0}
     - _LaserGradient: {r: 0, g: 0, b: 0, a: 0}
