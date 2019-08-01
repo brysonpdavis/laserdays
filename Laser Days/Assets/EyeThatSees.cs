@@ -26,6 +26,8 @@ public class EyeThatSees : MonoBehaviour {
 
     private LayerMask currentLayerMask;
 
+    private Transition transition;
+
     void Start () {
         player = Toolbox.Instance.GetPlayer().transform;
         flip = player.gameObject.GetComponent<flipScript>();
@@ -37,6 +39,8 @@ public class EyeThatSees : MonoBehaviour {
         particleSystem = GetComponentInChildren<ParticleSystem>();
         audio = GetComponent<AudioSource>();
         audio.maxDistance = GetComponent<SphereCollider>().radius;
+
+        transition = GetComponentInChildren<Transition>();
 	}
 
     private void OnTriggerEnter(Collider other)
