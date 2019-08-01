@@ -27,6 +27,7 @@
         [PerRendererData] _TransitionStateB("Transition State B", Range( 0 , 1)) = 0
         
         _AlphaCutoff ("Alpha Cutoff", Range(0, 1)) = 0.5
+        _ZFightOffset ("Z Planing Offset", Range(0.0001, 0.1)) = 0.0001
 
         [HideInInspector] _Elapsed("Elapsed", Float) = 0
 
@@ -58,7 +59,8 @@
             #pragma multi_compile _ VERTEXLIGHT_ON
             
             #pragma multi_compile SHARED REAL LASER
-            #pragma multi_compile _ ACCENT_ON
+            #pragma shader_feature _ ACCENT_ON
+            #pragma shader_feature _ DECAL_MODE
 
             #pragma vertex MyVertexProgram
             #pragma fragment MyFragmentProgram
@@ -83,7 +85,8 @@
             #pragma target 3.0
             
             #pragma multi_compile SHARED REAL LASER
-            #pragma multi_compile _ ACCENT_ON
+            #pragma shader_feature _ ACCENT_ON
+            #pragma shader_feature _ DECAL_MODE
           
             #pragma multi_compile_fwdadd_fullshadows
             
@@ -107,7 +110,8 @@
             #pragma exclude_renderers nomrt
             
             #pragma multi_compile SHARED REAL LASER
-            #pragma multi_compile _ ACCENT_ON
+            #pragma shader_feature _ ACCENT_ON
+            #pragma shader_feature _ DECAL_MODE
             #pragma multi_compile _ UNITY_HDR_ON
 
             #pragma vertex MyVertexProgram

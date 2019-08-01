@@ -9,7 +9,7 @@ float4 _BeginColor, _BaseColor, _DeathColor, _AccentColor, _TintColor;
 sampler2D _MainTex, _AccentMap, _EffectMap;
 float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST;
 
-float _Smoothness, _Smoothness2, _Highlights, _MainTexContribution;
+float _Smoothness, _Smoothness2, _Highlights, _MainTexContribution, _ZFightOffset;
 
 int _LineA;
 
@@ -201,6 +201,11 @@ float3 CreateBinormal (float3 normal, float3 tangent, float binormalSign) {
 
 Interpolators MyVertexProgram (VertexData v) {
     Interpolators i;
+    
+    #if defined(DECAL_MODE)
+        v.vertex += float4((_ZFightOffset * v.normal), 0);
+    #endif
+    
     i.pos = UnityObjectToClipPos(v.vertex);
     i.worldPos = mul(unity_ObjectToWorld, v.vertex);
     i.normal = UnityObjectToWorldNormal(v.normal);

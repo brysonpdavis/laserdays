@@ -11,6 +11,8 @@ float4 _MainTex_ST, _AccentMap_ST, _EffectMap_ST, _ShadingMap_ST;
 
 float _Smoothness, _Smoothness2, _Highlights, _GradientScale, _GradientOffset, _MainTexContribution, _BlendOffset, _TerrainScale;
 
+float _AnimationMagnitude, _AnimationSpeed, _AnimationWaveSize, _AnimationTimeStep;
+float4 _AnimationSway;
 int _LineA;
 
 float _TransitionState, _TransitionStateB, _AlphaCutoff;
@@ -23,6 +25,9 @@ struct VertexData {
     float3 normal : NORMAL;
     float4 tangent : TANGENT;
     float2 uv : TEXCOORD0;
+    #if defined(FOLIAGE)
+        float4 color : COLOR;
+    #endif
 };
 
 //v2f Structure
@@ -357,6 +362,45 @@ float3 GetEmissive(Interpolators i)
     return lerp(_RealEmission, _LaserEmission, TransitionValue()).rgb;
 }
 
+float3 GetVertexMovement(VertexData v, float3 wPos)
+{
+
+    float offset = _AnimationWaveSize * (wPos.x + wPos.z);
+    offset += _Time.y * _AnimationSpeed;
+    
+    #if defined (W_POS_SWAYING)
+        float magnitude = _AnimationMagnitude * sin(offset) * v.color.r;
+        return magnitude * _AnimationSway.xyz;
+    #endif
+    #if defined (W_POS_SWELLING)
+        float magnitude = _AnimationMagnitude * ((sin(offset) + 1) * 0.5) * v.color.r;
+        return magnitude * v.normal.xyz;
+    #endif
+    #if defined (V_COLOR_SWAYING)
+        float altOffset = _AnimationWaveSize * (v.color.g + v.color.b);
+        altOffset += _Time.y * _AnimationSpeed;
+        float magnitude = _AnimationMagnitude * (sin(altOffset)) * v.color.r;
+        return magnitude * _AnimationSway.xyz;
+    #endif
+    #if defined (V_COLOR_GLITCHY)
+        float altOffset = _AnimationWaveSize * (v.color.g + v.color.b);
+        altOffset += ((floor(_Time.y * _AnimationTimeStep)) / _AnimationTimeStep) * _AnimationSpeed;
+        float magnitude = _AnimationMagnitude * ((sin(altOffset) + 1) * 0.5) * v.color.r;
+        return magnitude * _AnimationSway.xyz;
+    #endif
+    #if defined (V_COLOR_CIRCLE)
+        float offA = _AnimationWaveSize * (v.color.g) + _AnimationSpeed * _Time.y;
+        float offB = _AnimationWaveSize * (v.color.b) + _AnimationSpeed * _Time.y;
+        float magA = _AnimationMagnitude * sin(offA) * v.color.r;
+        float magB = _AnimationMagnitude * cos(offB) * v.color.r;
+        float3 newDirection = _AnimationMagnitude * float3(magA, magB, 0);
+        return newDirection;
+    #endif
+   
+    
+    return float3(0,0,0);
+}
+
 
 //As it was.
 void ComputeVertexLightColor (inout Interpolators i) {
@@ -394,6 +438,39 @@ Interpolators MyVertexProgram (VertexData v) {
     i.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);
     i.uv.zw = TRANSFORM_TEX(v.uv, _ShadingMap);
     
+    
+    TRANSFER_SHADOW(i);
+
+    ComputeVertexLightColor(i);
+    return i;
+}
+
+Interpolators MyVertexProgramFoliage (VertexData v) {
+  
+    Interpolators i;
+    
+    float3 vWorldPos = mul(unity_ObjectToWorld, v.vertex);
+    
+    #if defined(FOLIAGE) && !defined(NO_ANIMATION)
+        float3 movement = GetVertexMovement(v, vWorldPos);
+        i.pos = UnityObjectToClipPos(v.vertex + movement);
+        i.worldPos = vWorldPos + movement;
+        i.normal = UnityObjectToWorldNormal(v.normal);
+    #else
+        i.pos = UnityObjectToClipPos(v.vertex);
+        i.worldPos = vWorldPos;
+        i.normal = UnityObjectToWorldNormal(v.normal);
+    #endif    
+    
+    #if defined(BINORMAL_PER_FRAGMENT)
+        i.tangent = float4(UnityObjectToWorldDir(v.tangent.xyz), v.tangent.w);
+    #else
+        i.tangent = UnityObjectToWorldDir(v.tangent.xyz);
+        i.binormal = CreateBinormal(i.normal, i.tangent, v.tangent.w);
+    #endif
+    
+    i.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);
+    i.uv.zw = TRANSFORM_TEX(v.uv, _ShadingMap);
     
     TRANSFER_SHADOW(i);
 

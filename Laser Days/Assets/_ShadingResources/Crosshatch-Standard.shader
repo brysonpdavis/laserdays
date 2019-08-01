@@ -71,11 +71,11 @@
             #pragma multi_compile _ VERTEXLIGHT_ON
             
             #pragma multi_compile SHARED REAL LASER
-            #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
-            #pragma multi_compile _ WORLD_POS_GRADIENT
-            #pragma multi_compile _ ACCENT_ON
-            #pragma multi_compile _ EMISSIVE
-            #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
+            #pragma shader_feature NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
+            #pragma shader_feature _ WORLD_POS_GRADIENT
+            #pragma shader_feature _ ACCENT_ON
+            #pragma shader_feature _ EMISSIVE
+            #pragma shader_feature STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
 
             #pragma vertex MyVertexProgram
             #pragma fragment MyFragmentProgram
@@ -101,11 +101,11 @@
             #pragma target 3.0
             
             #pragma multi_compile SHARED REAL LASER
-            #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
-            #pragma multi_compile _ WORLD_POS_GRADIENT
-            #pragma multi_compile _ ACCENT_ON
-            #pragma multi_compile _ EMISSIVE
-            #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
+            #pragma shader_feature NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
+            #pragma shader_feature _ WORLD_POS_GRADIENT
+            #pragma shader_feature _ ACCENT_ON
+            #pragma shader_feature _ EMISSIVE
+            #pragma shader_feature STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
           
             #pragma multi_compile_fwdadd_fullshadows
             
@@ -129,11 +129,11 @@
             #pragma exclude_renderers nomrt
             
             #pragma multi_compile SHARED REAL LASER
-            #pragma multi_compile NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
-            #pragma multi_compile _ WORLD_POS_GRADIENT
-            #pragma multi_compile _ ACCENT_ON
-            #pragma multi_compile _ EMISSIVE
-            #pragma multi_compile STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
+            #pragma shader_feature NO_GRADIENT HEIGHT_GRADIENT RADIAL_GRADIENT
+            #pragma shader_feature _ WORLD_POS_GRADIENT
+            #pragma shader_feature _ ACCENT_ON
+            #pragma shader_feature _ EMISSIVE
+            #pragma shader_feature STATIC INTERACTABLE TERRAIN INVERSE_INTERACTABLE
             #pragma multi_compile _ UNITY_HDR_ON
 
             #pragma vertex MyVertexProgram

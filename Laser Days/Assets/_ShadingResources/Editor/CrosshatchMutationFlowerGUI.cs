@@ -14,6 +14,8 @@ public class CrosshatchMutationFlowerGUI : ShaderGUI {
     }
 
     bool Emissive;
+    bool DecalMode;
+    bool UseLifeCycle;
 
     Material target;
     MaterialEditor editor;
@@ -57,6 +59,13 @@ public class CrosshatchMutationFlowerGUI : ShaderGUI {
             SetKeyword("LASER", w == World.Laser);
             SetKeyword("SHARED", w == World.Shared);
         }
+
+        DecalMode = EditorGUILayout.Toggle("Decal Mode", IsKeywordEnabled("DECAL_MODE"));
+        SetKeyword("DECAL_MODE", DecalMode);
+
+        UseLifeCycle = EditorGUILayout.Toggle("Use Life Cycle", UseLifeCycle);
+
+
     }
 
     void BaseModule()
@@ -71,15 +80,24 @@ public class CrosshatchMutationFlowerGUI : ShaderGUI {
         editor.TextureScaleOffsetProperty(FindProperty("_MainTex"));
 
         GUILayout.Label("Color", EditorStyles.boldLabel);
+        if(UseLifeCycle)
+        {
+            ColorProperty("_BeginColor");
+            ColorProperty("_BaseColor");
+            ColorProperty("_DeathColor");
+            //ColorProperty("_TintColor");
 
-        ColorProperty("_BeginColor");
-        ColorProperty("_BaseColor");
-        ColorProperty("_DeathColor");
-        ColorProperty("_TintColor");
+            GUILayout.Label("LifeCycle", EditorStyles.boldLabel);
+            FloatProperty("_BeginToBase", "");
+            FloatProperty("_BaseToDeath", "");
 
-        GUILayout.Label("LifeCycle", EditorStyles.boldLabel);
-        FloatProperty("_BeginToBase", "");
-        FloatProperty("_BaseToDeath", "");
+        }
+        else
+        {
+            ColorProperty("_BaseColor");
+            target.SetFloat("_BeginToBase", 1f);
+            target.SetFloat("_BaseToDeath", 0f);
+        }
 
     }
 
@@ -121,6 +139,11 @@ public class CrosshatchMutationFlowerGUI : ShaderGUI {
         target.SetFloat("_LineA", Mathf.Floor(target.GetFloat("_LineA")));
         //target.SetFloat("_Smoothness", Mathf.Floor(target.GetFloat("_Smoothness") * 10f) * 0.1f);
         //target.SetFloat("_Smoothness2", Mathf.Floor(target.GetFloat("_Smoothness2") * 10f) * 0.1f);
+
+        if (IsKeywordEnabled("DECAL_MODE"))
+        {
+            SliderProperty("_ZFightOffset", "");
+        }
 
     }
 

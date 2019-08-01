@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: L_Flora_WhiteAndPink
-  m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
-  m_ShaderKeywords: HEIGHT_GRADIENT LASER STATIC
+  m_Name: L_Flora_White_Bubbling
+  m_Shader: {fileID: 4800000, guid: 480e2ec02051d4242ad8ab3dcf4b683f, type: 3}
+  m_ShaderKeywords: HEIGHT_GRADIENT LASER STATIC SWELLING W_POS_SWELLING
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -97,6 +97,10 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _Animated: 0
+    - _AnimationMagnitude: 0.02
+    - _AnimationSpeed: 4
+    - _AnimationTimeStep: 1
+    - _AnimationWaveSize: 8
     - _BlendOffset: 0
     - _BumpScale: 1
     - _Clip: 1
@@ -126,7 +130,7 @@ Material:
     - _Parallax: 0.02
     - _Real: 0
     - _Shimmer: 0
-    - _Smoothness: 0.225
+    - _Smoothness: 0.3
     - _Smoothness2: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -141,6 +145,7 @@ Material:
     - _onHover: 0
     m_Colors:
     - _Accent: {r: 0.811, g: 0.266819, b: 0.266819, a: 0.43529412}
+    - _AnimationSway: {r: 1, g: 0, b: 0, a: 0}
     - _Base: {r: 0.764151, g: 0.35684407, b: 0.35684407, a: 0.49019608}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorLaser: {r: 0.754717, g: 0.4554409, b: 0.40939838, a: 1}
@@ -152,10 +157,10 @@ Material:
     - _HoverColor: {r: 0.59138, g: 0.8509804, b: 0.5803922, a: 0.21960784}
     - _InteractColor: {r: 0.7735849, g: 0.1788003, b: 0.22759633, a: 0.57254905}
     - _LaserAccent: {r: 0.94509804, g: 0.4683467, b: 0.45882356, a: 0.827451}
-    - _LaserBase: {r: 0.6974523, g: 0.6850303, b: 0.8113208, a: 1}
+    - _LaserBase: {r: 0.9433962, g: 0.8421934, b: 0.7253471, a: 1}
     - _LaserColor: {r: 0, g: 0, b: 0, a: 0}
     - _LaserEmission: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserGradient: {r: 0.6886792, g: 0.60746706, b: 0.62194043, a: 0.2509804}
+    - _LaserGradient: {r: 0.4712976, g: 0.81465137, b: 0.8396226, a: 0.48235294}
     - _RealAccent: {r: 0, g: 0, b: 0, a: 0}
     - _RealBase: {r: 0, g: 0, b: 0, a: 0}
     - _RealColor: {r: 0, g: 0, b: 0, a: 0}

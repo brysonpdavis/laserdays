@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: L_Moss_ShinyBlack
-  m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
-  m_ShaderKeywords: LASER NO_GRADIENT STATIC
+  m_Name: L_Flora_PaleYellow
+  m_Shader: {fileID: 4800000, guid: 480e2ec02051d4242ad8ab3dcf4b683f, type: 3}
+  m_ShaderKeywords: ACCENT_ON LASER NO_GRADIENT STATIC SWELLING W_POS_SWELLING
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AccentMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 5108244ed256e4ff28da4fa0ecd75576, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo:
@@ -51,7 +51,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EffectMap:
-        m_Texture: {fileID: 2800000, guid: ffb255ea18f53453fa4f9ca75591787b, type: 3}
+        m_Texture: {fileID: 2800000, guid: b5845c5d766114a3e948231773312b48, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -97,6 +97,10 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _Animated: 0
+    - _AnimationMagnitude: 0.1
+    - _AnimationSpeed: 2
+    - _AnimationTimeStep: 1
+    - _AnimationWaveSize: 4
     - _BlendOffset: 0
     - _BumpScale: 1
     - _Clip: 1
@@ -114,7 +118,7 @@ Material:
     - _GlossyReflections: 1
     - _GradientOffset: -0.26
     - _GradientScale: 1
-    - _Highlights: 0.076
+    - _Highlights: 0.087
     - _IsFlippable: 0
     - _IsSelected: 0
     - _LineA: 5
@@ -141,6 +145,7 @@ Material:
     - _onHover: 0
     m_Colors:
     - _Accent: {r: 0.811, g: 0.266819, b: 0.266819, a: 0.43529412}
+    - _AnimationSway: {r: 0, g: 1, b: 0, a: 0}
     - _Base: {r: 0.764151, g: 0.35684407, b: 0.35684407, a: 0.49019608}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorLaser: {r: 0.754717, g: 0.4554409, b: 0.40939838, a: 1}
@@ -151,15 +156,15 @@ Material:
     - _HoldColor: {r: 0.31132078, g: 0.3098523, b: 0.3098523, a: 0.43529412}
     - _HoverColor: {r: 0.59138, g: 0.8509804, b: 0.5803922, a: 0.21960784}
     - _InteractColor: {r: 0.7735849, g: 0.1788003, b: 0.22759633, a: 0.57254905}
-    - _LaserAccent: {r: 0.9716981, g: 0.7719782, b: 0, a: 0.4392157}
-    - _LaserBase: {r: 0.5, g: 0.3938679, b: 0.40801886, a: 1}
+    - _LaserAccent: {r: 0.5471698, g: 0.36391956, b: 0.52028954, a: 0.41960785}
+    - _LaserBase: {r: 0.9433962, g: 0.8421934, b: 0.7253471, a: 1}
     - _LaserColor: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserEmission: {r: 0, g: 0, b: 0, a: 0}
+    - _LaserEmission: {r: 0.03200199, g: 0.0039215684, b: 0.06666667, a: 0}
     - _LaserGradient: {r: 0.8867924, g: 0.7553705, b: 0, a: 0.9529412}
     - _RealAccent: {r: 0, g: 0, b: 0, a: 0}
     - _RealBase: {r: 0, g: 0, b: 0, a: 0}
     - _RealColor: {r: 0, g: 0, b: 0, a: 0}
-    - _RealEmission: {r: 0, g: 0, b: 0, a: 0}
+    - _RealEmission: {r: 0.16037738, g: 0.04174999, b: 0.005295483, a: 0}
     - _RealGradient: {r: 0, g: 0, b: 0, a: 0}
     - _RestingColor: {r: 0.745283, g: 0.13710396, b: 0.13710396, a: 1}
     - _SecondaryEffectColor: {r: 3.403922, g: 1.772549, b: 0, a: 0}
