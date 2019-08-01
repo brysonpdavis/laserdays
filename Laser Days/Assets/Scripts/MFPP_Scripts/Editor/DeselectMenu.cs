@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityStandardAssets.ImageEffects;
 
 public class DeselectMenu : MonoBehaviour
 {
@@ -55,5 +56,26 @@ public class DeselectMenu : MonoBehaviour
         }
                                         
     }
+    
+    [MenuItem("RustForms/RobbyCross %r")]
+    static void RobbyCross()
+    {
+        EdgeDetection ed = Camera.main.GetComponent<EdgeDetection>();
+        if (ed)
+        {
+            ed.mode = EdgeDetection.EdgeDetectMode.RobertsCrossDepthNormals;
+        }
+    }
+
+    [MenuItem("RustForms/NormalNormals %t")]
+    static void NormalNormals()
+    {
+        EdgeDetection ed = Camera.main.GetComponent<EdgeDetection>();
+        if (ed)
+        {
+            ed.mode = EdgeDetection.EdgeDetectMode.TriangleDepthNormals;
+        }
+    }
+
 
 }
