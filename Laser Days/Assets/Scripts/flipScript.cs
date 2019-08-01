@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 [DisallowMultipleComponent]
 
@@ -34,6 +35,8 @@ public class flipScript : MonoBehaviour {
     public static event FailedFlip OnFailedFlip;
 
     private MutationSpawner mutationSpawner;
+
+    private ImageEffectEyes eyesEffect;
 
     private void Awake()
     {
@@ -71,6 +74,8 @@ public class flipScript : MonoBehaviour {
         eyeThatSeesList = new List<EyeThatSees>();
         _pickupModule = GetComponent<MFPP.Modules.PickUpModule>();
 
+        eyesEffect = Camera.main.GetComponent<ImageEffectEyes>();  
+
 	}
 
 
@@ -87,6 +92,12 @@ public class flipScript : MonoBehaviour {
             flippedThisFrame = true;
             forcedFlip = false;
         }
+
+        if (IsSeenByEyes())
+        {
+            eyesEffect.isSeen = true;
+        }
+        else eyesEffect.isSeen = false;
 	}
 
     public void ForceFlip() {
