@@ -233,4 +233,24 @@ public class flipScript : MonoBehaviour {
             
         else return true;
     }
+
+    public bool IsSeenByEyes()
+    {
+        int check = 0;
+        foreach (EyeThatSees eye in eyeThatSeesList)
+        {
+            if (eye.blockingFlip)
+                check += 1;
+
+        }
+
+        if (check > 0)
+        {
+
+            return true;
+
+        }
+
+        else return false;
+    }
 }
