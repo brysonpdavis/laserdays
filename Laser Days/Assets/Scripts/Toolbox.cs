@@ -374,7 +374,7 @@ public class Toolbox : Singleton<Toolbox>
 
 
         Toolbox.Instance.SoundEffectsAudio = GameObject.Find("SoundEffectsAudio").GetComponent<AudioSource>();
-        Toolbox.Instance.SoundtrackAudio = GameObject.Find("SecondaryAudioSource").GetComponent<AudioSource>();
+        Toolbox.Instance.SoundtrackAudio = GameObject.Find("LaserChords").GetComponent<AudioSource>();
 
 
         Toolbox.Instance.soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();

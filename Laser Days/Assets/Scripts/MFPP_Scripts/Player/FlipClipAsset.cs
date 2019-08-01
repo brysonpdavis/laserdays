@@ -53,6 +53,7 @@ namespace MFPP
             /// </summary>
 
             public AudioClip backgroundSound;
+            public AudioClip backgroundSoundAlt;
             public List<UnityEngine.AudioClip> flips;
             public List<UnityEngine.AudioClip> flipsSecondary;
             public List<UnityEngine.AudioClip> bass;

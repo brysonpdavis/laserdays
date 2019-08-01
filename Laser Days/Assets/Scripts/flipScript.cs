@@ -150,27 +150,22 @@ public class flipScript : MonoBehaviour {
         currentRing.transform.position = transform.position;
 
 
-
-        //play secondary sound when there is a held object or are selected objects
-        if (held || (selectedObjects) ){
-            // audioSourceSecondary.clip = GetComponent<SoundBox>().currentFlipPalette.defaultFlipClips.GetRandomFlipSecondary();
-            //audioSourceSecondary.Play();
-
-            if (soundTrack)
+        if (soundTrack)
+        {
+            //play secondary sound when there is a held object or are selected objects
+            if (held || (selectedObjects))
             {
-                soundTrack.PlaySecondary();
+                    soundTrack.PlaySecondary();
             }
-        }
 
-        else {
-            //play random flip sound!
-            //  audioSource.clip = GetComponent<SoundBox>().currentFlipPalette.defaultFlipClips.GetRandomFlipClip();
-            // audioSource.Play();
-            if (soundTrack)
+            else
             {
                 soundTrack.PlayPrimary();
             }
+
+            soundTrack.FadeBetween(space);
         }
+
 
 
 

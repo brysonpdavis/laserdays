@@ -7,14 +7,18 @@ using UnityEngine.UI;
 public class SoundTrackManager : MonoBehaviour {
 
     public AudioSource audioSource;
-    public AudioSource secondarySource;
+    public AudioSource LaserChords;
+    public AudioSource RealChords;
     public AudioSource bass;
     public MFPP.FlipClipAsset flipClip;
+    public float chordFadeDuration = 3f;
     public bool play;
     public bool mute;
     private int currentChord;
     public int counter = 0;
     public Slider mainSlider;
+    private IEnumerator chordFade;
+
 
 
 	// Use this for initialization
@@ -29,7 +33,7 @@ public class SoundTrackManager : MonoBehaviour {
     public void ValueChangeCheck()
     {
         audioSource.volume = mainSlider.value;
-        secondarySource.volume = mainSlider.value;
+        LaserChords.volume = mainSlider.value;
         bass.volume = mainSlider.value;
     }
 
@@ -50,7 +54,7 @@ public class SoundTrackManager : MonoBehaviour {
     {
         float value = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>().value;
         audioSource.volume = value;
-        secondarySource.volume = value;
+        LaserChords.volume = value;
         bass.volume = value;
     }
 
@@ -61,8 +65,10 @@ public class SoundTrackManager : MonoBehaviour {
         {
             //play random set chord tones
             currentChord = Random.Range(0, flipClip.defaultFlipClips.Count);
-            secondarySource.clip = flipClip.defaultFlipClips[currentChord].backgroundSound;
-            secondarySource.Play();
+            LaserChords.clip = flipClip.defaultFlipClips[currentChord].backgroundSound;
+            RealChords.clip = flipClip.defaultFlipClips[currentChord].backgroundSoundAlt;
+            LaserChords.Play();
+            RealChords.Play();
             counter += 1;
 
             if (counter > 4)
@@ -82,8 +88,10 @@ public class SoundTrackManager : MonoBehaviour {
     else {
         //play random set chord tones
             currentChord = Random.Range(0, flipClip.section2.Count);
-            secondarySource.clip = flipClip.section2[currentChord].backgroundSound;
-            secondarySource.Play();
+            LaserChords.clip = flipClip.section2[currentChord].backgroundSound;
+            RealChords.clip = flipClip.section2[currentChord].backgroundSoundAlt;
+            LaserChords.Play();
+            RealChords.Play();
             counter += 1;
 
             if (counter > 12)
@@ -125,7 +133,48 @@ public class SoundTrackManager : MonoBehaviour {
 
     }
 
+    public void FadeBetween(bool direction)
+    {
+        if (chordFade != null)
+            StopCoroutine(chordFade);
+        chordFade = ChordFade(direction);
+        StartCoroutine(chordFade);
+    }
 
+    private IEnumerator ChordFade(bool direction)
+    {
+        float elapsedTime = 0;
+        float ratio = 0;
+
+        float realChordStart = RealChords.volume;
+        float laserChordStart = LaserChords.volume;
+        float realEnd;
+        float laserEnd;
+
+        if (direction)
+        {
+            realEnd = 1f;
+            laserEnd = 0f;
+        }
+        else
+        {
+            laserEnd = 1f;
+            realEnd = 0f;
+        }
+
+        while (ratio < 1f)
+        {
+            ratio = elapsedTime / chordFadeDuration;
+            float realValue = Mathf.Lerp(realChordStart, realEnd, ratio);
+            float laserValue = Mathf.Lerp(laserChordStart, laserEnd, ratio);
+
+            RealChords.volume = realValue;
+            LaserChords.volume = laserValue;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
 
 
 
