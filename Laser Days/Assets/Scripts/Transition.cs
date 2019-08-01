@@ -25,7 +25,6 @@ public class Transition : MonoBehaviour
     private bool transitioning;
     private bool amCore;
 
-
     protected virtual void Awake()
     {
         transitioning = false;
@@ -106,30 +105,33 @@ public class Transition : MonoBehaviour
         //first need to make sure the object isn't already selected before starting any transition
         //objects that are selected will be flipped and shouldn't have any animation, but should change their parent gameobject
 
-            mRenderer.GetPropertyBlock(_propBlock);
-            
-            float start = _propBlock.GetFloat("_TransitionState");  //material.GetFloat("_TransitionState");
-            
+        mRenderer.GetPropertyBlock(_propBlock);
+        
+        float start = _propBlock.GetFloat("_TransitionState");  //material.GetFloat("_TransitionState");
+        
 
 
-            //start new direction from where we've left off but in the direction we've specified with "end"
-            if (!Toolbox.Instance.EqualToHeld(this.gameObject) && CoreParentHeldCheck())
+        //start new direction from where we've left off but in the direction we've specified with "end"
+        if (!Toolbox.Instance.EqualToHeld(this.gameObject) && CoreParentHeldCheck())
+        {
+            flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);
+            StartCoroutine(flipTransition);
+
+        }
+        
+        if (transitionAllChildren)
+        {
+            foreach (Transition transition in childrenTransitions)
             {
-                flipTransition = flipTransitionRoutine(start, end, duration / ScaleSpeed);
-                StartCoroutine(flipTransition);
-
-            }
-            
-            if (transitionAllChildren)
-                foreach (Transition transition in childrenTransitions)
+                if (!transition.gameObject.Equals(this.gameObject) &&
+                    !Toolbox.Instance.EqualToHeld(transition.gameObject))
                 {
-                    if (!transition.gameObject.Equals(this.gameObject) && !Toolbox.Instance.EqualToHeld(transition.gameObject))
-                    {
-                        transition.StopAllCoroutines();
-                        transition.Flip(end, duration);
+                    transition.StopAllCoroutines();
+                    transition.Flip(end, duration);
 
-                    }
                 }
+            }
+        }    
     }
 
 

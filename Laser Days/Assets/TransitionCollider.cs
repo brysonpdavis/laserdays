@@ -34,7 +34,6 @@ public class TransitionCollider : MonoBehaviour
                 transition.Flip(0f, setCoroutineSpeed);
             else
                 transition.Flip(1f, setCoroutineSpeed);
-
         }
 
         UI_Transition uI_Transition = other.GetComponent<UI_Transition>();
