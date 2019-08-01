@@ -114,24 +114,30 @@ abstract public class FlippableObject : HoldableObject, IFlippable
 
     protected void LayerSwitch()
     {
-        if (!AmHeldObj())
-        {
+
             if (Toolbox.Instance.PlayerInReal())
             {
-                ShaderUtility.ShaderToReal(_material);
-                _transition.SetStart(0f); //set it fully on for laser world
+                if (!AmHeldObj())
+                {
+                    ShaderUtility.ShaderToReal(_material);
+                    _transition.SetStart(0f); //set it fully on for laser world
+                }
+
                 SetObjectToReal(); //set object to real layer
 
             }
             else
             {
-                ShaderUtility.ShaderToLaser(_material);
-                _transition.SetStart(1f); //set it fully on for laser world
+                if (!AmHeldObj())
+                {
+                    ShaderUtility.ShaderToLaser(_material);
+                    _transition.SetStart(1f); //set it fully on for laser world
+                }
+
                 SetObjectToLaser(); //set object to laser layer
 
             }
 
-        }
 
 /*
         HoldableObject.ObjectType type = objectType;
@@ -230,6 +236,7 @@ abstract public class FlippableObject : HoldableObject, IFlippable
                     _coreTransition.SetStart(0f);
                     _coreTransition.Flip(1f, Toolbox.Instance.globalFlipSpeed);
                 }
+
             }
 
             else
@@ -251,6 +258,8 @@ abstract public class FlippableObject : HoldableObject, IFlippable
 
             Debug.Log("going to laser");
             ShaderUtility.ShaderToLaser(_material);
+            SetObjectToLaser();
+
                 
         }
         else
@@ -272,6 +281,7 @@ abstract public class FlippableObject : HoldableObject, IFlippable
                     _coreTransition.SetStart(0f);
                     _coreTransition.Flip(1f, Toolbox.Instance.globalFlipSpeed);
                 }
+
             }
 
             else
@@ -292,6 +302,7 @@ abstract public class FlippableObject : HoldableObject, IFlippable
 
             Debug.Log("going to real");
             ShaderUtility.ShaderToReal(_material);
+            SetObjectToReal();
 
                 
         }

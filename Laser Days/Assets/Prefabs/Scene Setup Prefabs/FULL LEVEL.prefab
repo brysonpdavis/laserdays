@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 23121187521120756}
   - component: {fileID: 135054277029997748}
   - component: {fileID: 82481101506921568}
+  - component: {fileID: 114427668507763130}
   m_Layer: 0
   m_Name: ResetObject
   m_TagString: SceneReset
@@ -864,6 +865,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allIds: []
+--- !u!114 &114427668507763130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1712074026672630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScaleSpeed: 1
+  shared: 0
+  manualTransitionChildren: 0
+  forceRadial: 0
+  tween: 3
 --- !u!114 &114449202525363534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -942,6 +959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594a209ffce974ed388d05f6ccfc0fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: 
+  selected: 0
   spawnName: 
   sceneName: 
   audio: {fileID: 0}

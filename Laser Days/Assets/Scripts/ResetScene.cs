@@ -32,7 +32,7 @@ public class ResetScene : SelectableObject {
     public override void OnHover()
     {
         ////base.OnHover();
-        //_iconContainer.SetReset();
+        _iconContainer.SetReset();
         //entered = true;
         //if (!audio.isPlaying)
             //Play();
