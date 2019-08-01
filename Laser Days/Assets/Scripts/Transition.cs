@@ -189,7 +189,8 @@ public class Transition : MonoBehaviour
         float currentTransitionState = _propBlock.GetFloat("_TransitionState");
 
         if (Toolbox.Instance.PlayerInReal() && ShaderUtility.ShaderIsReal(material) && (currentTransitionState < .001f) ||
-            Toolbox.Instance.PlayerInLaser() && ShaderUtility.ShaderIsLaser(material) && (currentTransitionState > .999f))
+            Toolbox.Instance.PlayerInLaser() && ShaderUtility.ShaderIsLaser(material) && (currentTransitionState > .999f) ||
+            (!ShaderUtility.ShaderIsReal(material) && !ShaderUtility.ShaderIsLaser(material)))
             return false;
 
         else return true;

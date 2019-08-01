@@ -38,7 +38,7 @@ public class Toolbox : Singleton<Toolbox>
     public Shader realCore;
     public GameObject pauseMenu;
     public Slider soundEffectsSlider;
-    public float soundEffectsVolume;
+    public float soundEffectsVolume = 1f;
     public IList<Material> sharedMaterials;
     public MFPP.SoundContainerAsset testercubeSounds;
     public IList<UniqueId> allIds = new List<UniqueId>();
