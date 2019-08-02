@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23103479906367558}
   - component: {fileID: 135499136305655920}
   - component: {fileID: 114613448081902522}
-  m_Layer: 27
+  m_Layer: 11
   m_Name: Pupil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4657526671972628}
   - component: {fileID: 82592850734306318}
-  m_Layer: 27
+  m_Layer: 17
   m_Name: Beam Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,9 +203,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1467107322213568}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 38.5, y: 1.5, z: 227.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.0000012, y: 4.5, z: 10.500001}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 4169853999825042}
   - {fileID: 4462489849870032}
@@ -695,9 +695,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScaleSpeed: 1
+  ScaleSpeed: 1.5
   shared: 0
   manualTransitionChildren: 0
+  forceRadial: 0
+  forceInstant: 1
   tween: 3
 --- !u!114 &114239475032579092
 MonoBehaviour:
@@ -712,7 +714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 0
   player: {fileID: 0}
-  onWall: 0
+  onWall: 1
   blockingFlip: 0
   currentPlayerPoint: {x: 0, y: 0, z: 0}
   particleCount: 15
@@ -761,9 +763,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScaleSpeed: 1
+  ScaleSpeed: 1.5
   shared: 0
   manualTransitionChildren: 1
+  forceRadial: 0
+  forceInstant: 1
   tween: 3
 --- !u!114 &114864018531278796
 MonoBehaviour:
@@ -800,9 +804,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScaleSpeed: 1
+  ScaleSpeed: 1.5
   shared: 0
   manualTransitionChildren: 0
+  forceRadial: 0
+  forceInstant: 1
   tween: 3
 --- !u!120 &120358406575885732
 LineRenderer:
@@ -930,7 +936,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 11
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198066757728271690
 ParticleSystem:

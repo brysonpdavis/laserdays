@@ -21,6 +21,7 @@ public class Transition : MonoBehaviour
     bool transitionAllChildren;
     protected Transition[] childrenTransitions;
     public bool forceRadial;
+    public bool forceInstant;
     public TweeningFunctions.TweenType tween = TweeningFunctions.TweenType.EaseInOut;
     private bool amCore;
 
@@ -28,45 +29,54 @@ public class Transition : MonoBehaviour
     protected virtual void Awake()
     {        
         _propBlock = new MaterialPropertyBlock();
+
+        //Get the renderer
         mRenderer = GetComponent<Renderer>();
 
+        //If it's a line renderer, get that
         if (GetComponent<LineRenderer>())
         {
             mRenderer = GetComponent<LineRenderer>();
             shared = true;
         }
 
-        if(!mRenderer)
+        //If it's neither, assume its a particle renderer
+        if (!mRenderer)
         {
             mRenderer = GetComponent<ParticleSystemRenderer>();
         }
 
-        if(GetComponent<Decal>()){
-
-
-        }
-            
-
+        //If the gameobject is NOT on Real, Laser, or TransitionOnly or if it has been marked shared 
+        //Then the material should be the sharedMaterial and mark it to be added to list of material to transition instantly
         if (!(gameObject.layer == 10 || gameObject.layer == 11 || gameObject.layer == 27) || shared)
         {
+            //forceRadial tells objects which would transition istantly becuase of their layer to wait until they are hit by transitionCollider
             if (!forceRadial)
             {
                 material = mRenderer.sharedMaterial;
                 sharedMaterial = true;
                 shared = true;   
             }
+
         }
 
-        else if (mRenderer && !material)
+        //forceInstant tells objects which would transition on transitionCollider to transition instantly - but keeps the material as an instance
+        if(forceInstant)
+        {
+            material = mRenderer.material;
+            sharedMaterial = true;
+            shared = true;
+        }
+
+        //If all checks have failed, get the instances matrial;
+        if (mRenderer && !material)
         {
             material = mRenderer.material;
         }
 
-
         offset = Random.value;
         speed = Random.Range(1f, 2f);
         SetupChildrenTransitions();
-
     }
 
 
@@ -171,8 +181,9 @@ public class Transition : MonoBehaviour
         while (ratio < 1f)
         {
             ratio = elapsedTime / duration;
-        float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.Tween(tween, ratio));
+            float value = Mathf.Lerp(startpoint, endpoint, TweeningFunctions.Tween(tween, ratio));
 
+            mRenderer.GetPropertyBlock(_propBlock);
             _propBlock.SetFloat("_TransitionState", value);
             mRenderer.SetPropertyBlock(_propBlock);
             //material.SetFloat("_TransitionState", value);

@@ -37,6 +37,7 @@ public class SpawnableMutation : MonoBehaviour {
         mRenderer = GetComponent<Renderer>();
         coll = GetComponent<SphereCollider>();
         movement = GetComponent<PlantMovement>();
+        coll.enabled = true;
     }
 
     void PrepareAudioLife(AudioSource audio)
@@ -183,7 +184,7 @@ public class SpawnableMutation : MonoBehaviour {
     {
         GardenDrones.AddMutationToDrones(this);
      
-        coll.enabled = false;
+        coll.enabled = true;
 
         InitRandom();
     }
