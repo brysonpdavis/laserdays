@@ -146,11 +146,15 @@ public class flipScript : MonoBehaviour {
             transitionCollider.FlipTransitions(true);
 
             mutationSpawner.SpawnMutations();
+            
+            AmbientSound.CrossfadeAllToReal();
 
         } 
         else { player.layer = 15; //set player to laser world
             GetComponent<SkyboxTransition>().Flip(false);
             transitionCollider.FlipTransitions(false);
+            
+            AmbientSound.CrossfadeAllToLaser();
         } 
 
         if (held)
