@@ -119,17 +119,23 @@ public class EyeThatSees : MonoBehaviour {
             if (CheckForPlayer())
             {
                 blockingFlip = true;
+                eyeParent.BeamActivate();
                 //Debug.Log("woohoo!");
             }
 
             else
+            {
+                eyeParent.BeamDeactivate();
                 blockingFlip = false;
+            }
+                
+            
 
         }
         else
         {
             blockingFlip = false;
-            //eyeParent.hitPoint = Vector3.zero;
+            eyeParent.BeamDeactivate();
         }
     }
 

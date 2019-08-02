@@ -108,7 +108,7 @@ public class GardenDrones : MonoBehaviour
 		//BeamOff();
 		
 		audio = GetComponent<AudioSource>();
-        beamAudio = beam.GetComponent<AudioSource>();
+        beamAudio = beam.GetComponentInChildren<AudioSource>();
 
 	}
 	
