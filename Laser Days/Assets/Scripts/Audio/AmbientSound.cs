@@ -36,12 +36,10 @@ public class AmbientSound : MonoBehaviour
         if (Toolbox.Instance.PlayerInReal())
         {
             SetToRealImmediate();
-            _realToLaser = 0;
         }        
         else
         {
             SetToLaserImmediate();
-            _realToLaser = 1;
         }
 
         _realSource.volume = 0;
@@ -74,20 +72,22 @@ public class AmbientSound : MonoBehaviour
 
     private IEnumerator CrossfadeToReal()
     {
-        float start = 1 - _realToLaser;
+        float start = _realToLaser;
         float end = 0f;
         float elapsed = 0f;
         float ratio = 0f;
 
         while (ratio < 1)
         {
-            _realToLaser = Mathf.Lerp(TweeningFunctions.Linear(ratio), start, end);
+            _realToLaser = Mathf.Lerp(start, end, TweeningFunctions.Linear(ratio));
             
             yield return null;
 
             elapsed += Time.deltaTime;
             ratio = elapsed / crossfadeTime;
         }
+        
+        _realToLaser = end;
     }
 
     private IEnumerator CrossfadeToLaser()
@@ -99,13 +99,15 @@ public class AmbientSound : MonoBehaviour
 
         while (ratio < 1)
         {
-            _realToLaser = Mathf.Lerp(TweeningFunctions.Linear(ratio), start, end);
+            _realToLaser = Mathf.Lerp(start, end, TweeningFunctions.Linear(ratio));
             
             yield return null;
 
             elapsed += Time.deltaTime;
             ratio = elapsed / crossfadeTime;
         }
+
+        _realToLaser = end;
 
     }
 
@@ -148,6 +150,16 @@ public class AmbientSound : MonoBehaviour
     {
         _ambientSources.Add(this);
         EnableSources();
+        if (Toolbox.Instance.PlayerInReal())
+        {
+            _realToLaser = 0;
+        }
+        else
+        {
+            _realToLaser = 1;
+        }
+        
+        // Debug.LogError("playerInReal: " + Toolbox.Instance.PlayerInReal());
     }
 
     private void OnTriggerExit(Collider other)
@@ -163,9 +175,10 @@ public class AmbientSound : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _edgeFade =  Mathf.Clamp(Vector3.Distance(_collider.ClosestPoint(_player.position), _player.position) / fadeDist, 0f, 1f);
+            _edgeFade = 1f; // Mathf.Clamp(Vector3.Distance(_collider.ClosestPointOnBounds(_player.position), _player.position) / fadeDist, 0f, 1f);
             _realSource.volume = _edgeFade * (1 - _realToLaser);
             _laserSource.volume = _edgeFade * _realToLaser;
+            // Debug.LogError("edgeFade: " + _edgeFade + " realToLaser: " + _realToLaser);
         }    
     }
 
