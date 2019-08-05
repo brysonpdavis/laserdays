@@ -87,9 +87,11 @@ public class EyeThatSees : MonoBehaviour {
             CameraShake.Shake(0.15f, .05f);
             ParticleEffect();
             AudioSource audio = SoundBox.Instance.thisSource;
-            audio.clip = SoundBox.Instance.flipFail;
-            Toolbox.Instance.SetVolume(audio);
-            audio.Play();
+            //audio.clip = SoundBox.Instance.flipFail;
+            //Toolbox.Instance.SetVolume(audio);
+            //audio.Play();
+
+            MFPP.Audio.Play(SoundBox.Instance.flipFail, Toolbox.Instance.soundEffectsVolume, 1f);
         }
 
     }

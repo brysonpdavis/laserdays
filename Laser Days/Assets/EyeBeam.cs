@@ -18,12 +18,12 @@ public class EyeBeam : MonoBehaviour {
 
     public void MuteBeam()
     {
-        audio.Stop();
+        audio.mute = true;
     }
 
     public void UnmuteBeam()
     {
-        audio.Play();
+        audio.mute = false;
     }
 
     public void SetLength (float len)
