@@ -9,7 +9,7 @@ public class Transition : MonoBehaviour
 {
     Renderer mRenderer;
     private MaterialPropertyBlock _propBlock;
-    Material material;
+    Material material = null;
     public float ScaleSpeed = 1f;
     private bool sharedMaterial = false;
     //public IList<Material> sharedmaterials;
@@ -30,48 +30,63 @@ public class Transition : MonoBehaviour
     {        
         _propBlock = new MaterialPropertyBlock();
 
-        //Get the renderer
+        // Get the renderer
         mRenderer = GetComponent<Renderer>();
 
-        //If it's a line renderer, get that
+        // If it's a line renderer, get that
         if (GetComponent<LineRenderer>())
         {
             mRenderer = GetComponent<LineRenderer>();
             shared = true;
         }
 
-        //If it's neither, assume its a particle renderer
-        if (!mRenderer)
+        // If it's particle, get that instead
+        if (GetComponent<ParticleSystemRenderer>())
         {
             mRenderer = GetComponent<ParticleSystemRenderer>();
         }
 
-        //If the gameobject is NOT on Real, Laser, or TransitionOnly or if it has been marked shared 
-        //Then the material should be the sharedMaterial and mark it to be added to list of material to transition instantly
-        if (!(gameObject.layer == 10 || gameObject.layer == 11 || gameObject.layer == 27) || shared)
+        // If the gameobject is on Real, Laser, or TransitionOnly
+        // Check if it is interactable to see if the material should be its own instance
+        // In any other case, the material should be shared
+        if (gameObject.layer == 10 || gameObject.layer == 11 || gameObject.layer == 27)
         {
-            //forceRadial tells objects which would transition istantly becuase of their layer to wait until they are hit by transitionCollider
-            if (!forceRadial)
+            if (GetComponent<ReticleObject>())
+            {
+                material = mRenderer.material;
+            }
+            else
             {
                 material = mRenderer.sharedMaterial;
-                sharedMaterial = true;
-                shared = true;   
             }
+        } 
 
-        }
-
-        //forceInstant tells objects which would transition on transitionCollider to transition instantly - but keeps the material as an instance
-        if(forceInstant)
+        // If it is marked shared, then make it shared 
+        // For now, do the same if its not marked shared, but not on shared layers
+        else if (shared)
         {
-            material = mRenderer.material;
+            material = mRenderer.sharedMaterial;
+            sharedMaterial = true;
+            shared = true;
+        } else 
+        {
+            material = mRenderer.sharedMaterial;
             sharedMaterial = true;
             shared = true;
         }
 
-        //If all checks have failed, get the instances matrial;
-        if (mRenderer && !material)
+        // forceInstant is a manual option to have single-world materials transition instantly with shared materials
+        if (forceInstant)
         {
-            material = mRenderer.material;
+            sharedMaterial = true;
+            shared = true;
+        }
+
+        // forceRadial is a manual option to have shared materials transition radially with single-world materials
+        if (forceRadial)
+        {
+            sharedMaterial = false;
+            shared = false;
         }
 
         offset = Random.value;
