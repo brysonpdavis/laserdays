@@ -10,6 +10,7 @@ public class AmbientSound : MonoBehaviour
     [SerializeField] private float fadeDist;
     [SerializeField] private float activeDist;
     [SerializeField] private float crossfadeTime;
+    [SerializeField] private bool fadesSoundtrack = false;
     private AudioSource _realSource;
     private AudioSource _laserSource;
     private static List<AmbientSound> _ambientSources;
@@ -155,20 +156,44 @@ public class AmbientSound : MonoBehaviour
 
     public static void CrossfadeAllToReal()
     {
-        foreach (var source in _ambientSources)
+        if (_ambientSources != null)
         {
-            source.StopLocalCoroutines();
-            source._crossfading = source.StartCoroutine(source.CrossfadeToReal());
-        }
+            foreach (var source in _ambientSources)
+            {
+                source.StopLocalCoroutines();
+                source._crossfading = source.StartCoroutine(source.CrossfadeToReal());
+            }
+        }    
     }
 
     public static void CrossfadeAllToLaser()
     {
-        foreach (var source in _ambientSources)
+        if (_ambientSources != null)
         {
-            source.StopLocalCoroutines();
-            source._crossfading = source.StartCoroutine(source.CrossfadeToLaser());
+            foreach (var source in _ambientSources)
+            {
+                source.StopLocalCoroutines();
+                source._crossfading = source.StartCoroutine(source.CrossfadeToLaser());
+            }
+        }    
+    }
+
+    public static float AmbientPercentage()
+    {
+        float ret = 0;
+
+        if (_ambientSources != null)
+        {
+            foreach (var source in _ambientSources)
+            {
+                if (source.fadesSoundtrack)
+                {
+                    ret = Mathf.Max(ret, source._edgeFade);
+                }
+            }
         }
+        
+        return ret;
     }
     
     private void AddToList()

@@ -18,6 +18,10 @@ public class SoundTrackManager : MonoBehaviour {
     public int counter = 0;
     public Slider mainSlider;
     private IEnumerator chordFade;
+    private float globalVolume;
+    private float ambientPercentage;
+    private float realLevel;
+    private float laserLevel;
 
 
 
@@ -27,14 +31,23 @@ public class SoundTrackManager : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         mainSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
         //secondarySource = GetComponentInChildren<AudioSource>();
-
-	}
-
+        globalVolume = mainSlider.value;
+        ambientPercentage = AmbientSound.AmbientPercentage();
+        if (Toolbox.Instance.PlayerInLaser())
+        {
+            laserLevel = 1;
+            realLevel = 0;
+        }
+        else
+        {
+            laserLevel = 0;
+            realLevel = 1;
+        }
+    }
+    
     public void ValueChangeCheck()
     {
-        audioSource.volume = mainSlider.value;
-        LaserChords.volume = mainSlider.value;
-        bass.volume = mainSlider.value;
+        SetVolume();   
     }
 
     private void OnDisable()
@@ -48,14 +61,22 @@ public class SoundTrackManager : MonoBehaviour {
             play = true;
         }
 
+        if (!mute && play)
+        {
+            SetVolume();
+        }
+
 	}
 
     public void SetVolume()
     {
-        float value = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>().value;
-        audioSource.volume = value;
-        LaserChords.volume = value;
-        bass.volume = value;
+        globalVolume = mainSlider.value;
+        ambientPercentage =  0.5f * AmbientSound.AmbientPercentage();
+
+        audioSource.volume = globalVolume * (1 - ambientPercentage);
+        LaserChords.volume = globalVolume * (1 - ambientPercentage) * laserLevel;
+        RealChords.volume = globalVolume * (1 - ambientPercentage) * realLevel;
+        bass.volume = globalVolume * (1 - ambientPercentage);
     }
 
     private IEnumerator Soundtrack()
@@ -140,14 +161,14 @@ public class SoundTrackManager : MonoBehaviour {
         chordFade = ChordFade(direction);
         StartCoroutine(chordFade);
     }
-
+    
     private IEnumerator ChordFade(bool direction)
     {
         float elapsedTime = 0;
         float ratio = 0;
 
-        float realChordStart = RealChords.volume;
-        float laserChordStart = LaserChords.volume;
+        float realChordStart = realLevel;
+        float laserChordStart = laserLevel;
         float realEnd;
         float laserEnd;
 
@@ -168,8 +189,8 @@ public class SoundTrackManager : MonoBehaviour {
             float realValue = Mathf.Lerp(realChordStart, realEnd, ratio);
             float laserValue = Mathf.Lerp(laserChordStart, laserEnd, ratio);
 
-            RealChords.volume = realValue;
-            LaserChords.volume = laserValue;
+            realLevel = realValue;
+            laserLevel = laserValue;
 
             elapsedTime += Time.deltaTime;
             yield return null;
