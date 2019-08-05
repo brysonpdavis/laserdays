@@ -30,23 +30,13 @@ public class MutationSpawner : MonoBehaviour {
     public void SpawnMutations()
     {
         GameObject newGuy;
-        
         for (int i = 0; i < numSpawnAttempts; i++)
         {
-            Vector3 vec;
-            
-            if (i < 2)
-            {
-                vec = (transform.forward) - (transform.up / 2) + (0.5f * Random.insideUnitSphere);
-            }
-            else
-            {
-                vec = Random.insideUnitSphere;
-            }
-            
+            Vector3 vec = (transform.forward) - (transform.up / 2) + (0.5f * Random.insideUnitSphere);
+
             RaycastHit hit;
 
-            if(Physics.Raycast(playerTransform.position + eyeLevel, vec, out hit, maxSpawnDistance, LayerMaskController.SharedOnly))
+            if(Physics.Raycast(playerTransform.position + eyeLevel, vec, out hit, maxSpawnDistance, LayerMaskController.SpawnCast))
             {
                 if(hit.collider.CompareTag("SpawnableSurface"))
                 {
