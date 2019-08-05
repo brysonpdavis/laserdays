@@ -539,6 +539,7 @@ namespace MFPP
         private Collider[] overlappingColliders;
         private List<Collider> ignoredColliders;
         private bool jumpPressed = false;
+        private static float boundarySpeedMultiplier = 1f;
 
         private void Awake()
         {
@@ -549,8 +550,8 @@ namespace MFPP
                 Toolbox.Instance.SetPlayer(gameObject);
                 Toolbox.Instance.UpdateToolbox();
             }
-            
-                
+
+            boundarySpeedMultiplier = 1f;
         }
 
         private IEnumerator LoadToolbox()
@@ -706,7 +707,7 @@ namespace MFPP
                     CurrentSlopeSpeedMultiplier = Mathf.Lerp(CurrentSlopeSpeedMultiplier, Movement.SlopeSpeedMultiplierCurve.Evaluate(0f), Time.fixedDeltaTime * Movement.Acceleration);
                 }
 
-                DesiredMovement *= CurrentSpeedMultiplier * CurrentSlopeSpeedMultiplier; // Apply speed multiplier to desired movement
+                DesiredMovement *= CurrentSpeedMultiplier * CurrentSlopeSpeedMultiplier * boundarySpeedMultiplier; // Apply speed multiplier to desired movement
                 DesiredWorldMovement = transform.TransformVector(DesiredMovement); // Convert from local space to world space
 
                 FinalMovement = DesiredWorldMovement; // Apply desired world movement to final movement
@@ -738,6 +739,7 @@ namespace MFPP
             {
                 NormalizedDesiredMovement = transform.InverseTransformVector(PlanarVelocity) / (Movement.Speed * CurrentSpeedMultiplier);
                 FinalMovement = JustAired ? Velocity + OldKinematicMovement : Velocity;
+                FinalMovement *= boundarySpeedMultiplier;
 
                 if (JustAired && !IsJumping && KinematicMovement.sqrMagnitude <= 0 && OldKinematicMovement.sqrMagnitude <= 0)
                 {
@@ -1973,6 +1975,11 @@ namespace MFPP
                 get { return range; }
                 set { range = value; }
             }
+        }
+
+        public static void SetBoundaryMultiplier(float multiplier)
+        {
+            boundarySpeedMultiplier = multiplier;
         }
     }
 }
