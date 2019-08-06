@@ -14,6 +14,18 @@ public class GardenEye : MonoBehaviour
     public GameObject plantContainer;
     public float plantCheckRadius;
     IList<GameObject> plantList;
+    private List<SpawnableMutation> mutations;
+    private SpawnableMutation target; 
+    private static List<GardenEye> allBots;
+    private Transform patrolPoint;
+    private float timePassed;
+    public Transform beamEnd;
+
+
+
+    private float patrolDistance = 10f;
+
+
 
 
     //public int particleCount = 15;
@@ -27,25 +39,48 @@ public class GardenEye : MonoBehaviour
 
 
     public float waitTime;
-    public float lerpTime;
+    public float turnTime;
     private float timeCounter = 0;
     public float focusedScale;
     public float unfocusedScale;
     private Vector3 previousPosition;
+    private Vector3 playerAdditionValue = new Vector3 (0f, 1.5f, 0f);
+
 
     private bool plantRoutineRunning = false;
     private bool snapViewRunning = false;
     private bool widenFocusRunning = false;
     bool lookingAtPlayer = false;
+    SimpleBob bob;
 
     [HideInInspector]
     private LayerMask currentLayerMask;
 
     public EyeBeam beam;
 
+    public enum BotState
+    {
+        Following,
+        Speaking,
+        Destroying,
+        Turning
+    }
+
+    public BotState state;
 
     void Start()
     {
+        if (allBots == null)
+        {
+            allBots= new List<GardenEye>();
+        }
+
+        mutations = new List<SpawnableMutation>();
+
+        allBots.Add(this);
+        patrolPoint = gameObject.transform;
+
+
         player = Toolbox.Instance.GetPlayer().transform;
         plantList = new List<GameObject>();
         Debug.Log(plantList.Count);
@@ -54,6 +89,10 @@ public class GardenEye : MonoBehaviour
         audio = GetComponent<AudioSource>();
         audio.maxDistance = GetComponent<SphereCollider>().radius;
         beam = GetComponentInChildren<EyeBeam>();
+
+        mutations = new List<SpawnableMutation>();
+        bob = GetComponent<SimpleBob>();
+
 
     }
 
@@ -72,12 +111,90 @@ public class GardenEye : MonoBehaviour
         }
     }
 
+    public static void AddMutationToBots(SpawnableMutation mut)
+    {
+        if (allBots == null)
+            allBots = new List<GardenEye>();
+
+        foreach (GardenEye bot in allBots)
+        {
+            // for each drone, if the mutation is in its patrol area, add that mutation to its list of mutations
+            if (CalcDistance2D(bot.patrolPoint, mut.transform) < bot.patrolDistance)
+            {
+                bot.mutations.Add(mut);
+                if (bot.state == BotState.Following)
+                {
+                    bot.NewTarget();
+                }
+            }
+        }
+    }
+
+    public static void RemoveMutationFromBots(SpawnableMutation mut)
+    {
+        foreach (GardenEye bot in allBots)
+        {
+            bot.mutations.Remove(mut);
+
+            if (bot.target == mut && bot.state == BotState.Following)
+            {
+                bot.NewTarget();
+            }
+        }
+    }
+
+    void NewTarget()
+    {
+        float minDist = float.MaxValue;
+        SpawnableMutation tempObject = null;
+        float tempDist;
+
+        foreach (SpawnableMutation guy in mutations)
+        {
+            tempDist = CalcDistance2D(guy.transform, transform);
+            if (tempDist < minDist) //&& Vector3.Distance(guy.transform.position, patrolPoint) < patrolDistance)
+            {
+                minDist = tempDist;
+                tempObject = guy;
+            }
+        }
+
+        target = tempObject;
+
+        if (target)
+        {
+            //approach the new target
+            StartCoroutine(PlantRoutine(target.gameObject));
+        }
+        else
+        {
+            //look to the player again
+            if (state != BotState.Following || state != BotState.Destroying)
+            {
+                state = BotState.Turning;
+                StartCoroutine(SnapView(player.position + playerAdditionValue, turnTime, true));
+            }
+
+        }
+    }
+
+    static float CalcDistance2D(Transform thing1, Transform thing2)
+    {
+        if (!thing1 || !thing2)
+            return float.MaxValue;
+
+        Vector3 pos1 = thing1.position;
+        Vector3 pos2 = thing2.position;
+
+        return Vector2.Distance(new Vector2(pos1.x, pos1.z), new Vector2(pos2.x, pos2.z));
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isActive = false;
-            BeamReset();
+            //BeamReset();
             if (audio)
                 audio.mute = true;
 
@@ -86,27 +203,60 @@ public class GardenEye : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    void Update()
     {
-        if (isActive && !plantRoutineRunning && !lookingAtPlayer)// && (plantList.Count>0))
-            StartCoroutine(PlantRoutine());
 
+        switch (state)
+        {
+            case BotState.Following:
+                transform.LookAt(player.position + playerAdditionValue);
+                break;
+
+            case BotState.Speaking:
+                break;
+
+            case BotState.Destroying:
+                if (timePassed < target.deathLength)
+                {
+                    timePassed += Time.deltaTime;
+                }
+                else
+                {
+                    timePassed = 0;
+                    RemoveMutationFromBots(target);
+                    NewTarget();
+                }
+
+                break;
+
+            case BotState.Turning:
+                break;
+
+            default:
+                break;
+                
+        }
     }
 
     public void PlayerInteraction()
     {
         StopAllCoroutines();
         plantRoutineRunning = false;
-        Vector3 position = Toolbox.Instance.GetPlayer().transform.position + new Vector3 (0f, 1.5f, 0f);
-        StartCoroutine(SnapView(transform.position, position, 1f));
-        StartCoroutine(ResetBeamLength(1.5f));
+        state = BotState.Speaking;
+        Vector3 position = Toolbox.Instance.GetPlayer().transform.position + playerAdditionValue;
+        StartCoroutine(SnapView(position, turnTime, true));
+        bob.bob = true;
         lookingAtPlayer = true;
     }
+
 
     public void PlayerDeactivate()
     {
         StopAllCoroutines();
-        lookingAtPlayer = false;  
+        lookingAtPlayer = false;
+        state = BotState.Following;
+        bob.bob = false;
+        NewTarget();
     }
 
     void BuildPlantList()
@@ -127,84 +277,85 @@ public class GardenEye : MonoBehaviour
         Debug.Log("PLANT LIST LENGTH!!!  " + plantList.Count);
     }
 
-
-    private IEnumerator PlantRoutine()
+    void BeamOff()
     {
+        StartCoroutine(BeamShrink());
+    }
 
-            plantRoutineRunning = true;
-            BuildPlantList();
+    IEnumerator BeamShrink()
+    {
+        float end_scale = beam.transform.localScale.z;
+        float duration = turnTime;
+        float elapsed = 0;
+        float ratio = 0;
 
-            if (plantList.Count == 0)
-                yield return null;
+        beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale);
 
-
-            GameObject nextPlant = plantList[(int)Random.Range(0, plantList.Count)];
-            plantList.Remove(nextPlant);
-
-            StartCoroutine(SnapView(lastTarget, nextPlant.transform.position, lerpTime));
-
-            yield return new WaitForSeconds(lerpTime);
-
-            float elapsedTime = 0;
-            float ratio = 0;
-            Vector3 startingScale = nextPlant.transform.localScale;
-
-            while (ratio < 1f)
-            {
-                if (nextPlant)
-                {
-
-
-                    ratio = elapsedTime / shrinkTime;
-                    Vector3 scaleDown = Vector3.Lerp(startingScale, new Vector3(.05f, .05f, .05f), TweeningFunctions.EaseOutCubic(ratio));
-                    nextPlant.transform.localScale = scaleDown;
-                    elapsedTime += Time.deltaTime;
-                    transform.LookAt(nextPlant.transform.position);
-                    SetBeamLength(nextPlant.transform.position);
-
-                    float beamWidth = Mathf.Lerp(unfocusedScale, focusedScale, ratio);
-                    beam.SetWidth(beamWidth);
-                }
-                
-
-                yield return null;
-            }
-
-        Destroy(nextPlant);
-
-        if (plantList.Count == 0)
+        while (elapsed < duration)
         {
-            BeamReset();
+            yield return null;
+
+            elapsed += Time.deltaTime;
+            ratio = elapsed / duration;
+
+            beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale - (TweeningFunctions.EaseIn(ratio) * end_scale));
+
         }
 
+        beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, 0);
+
+        NewTarget();
+
+    }
+
+
+    private IEnumerator PlantRoutine(GameObject nextPlant)
+    {
+            //yield return new WaitForSeconds(nextPlant.GetComponent<SpawnableMutation>().growthLength);    
+            StartCoroutine(SnapView(nextPlant.transform.position, turnTime, false));
+            state = BotState.Turning;
+            yield return new WaitForSeconds(turnTime);
+            state = BotState.Destroying;
+            nextPlant.GetComponent<SpawnableMutation>().lifePhase = SpawnableMutation.LifeCycle.Death;
             plantRoutineRunning = false;
+            yield return null;
     }
 
 
 
 
-    private IEnumerator SnapView(Vector3 old, Vector3 current, float duration)
+    private IEnumerator SnapView(Vector3 current, float duration, bool toPlayer)
     {
         snapViewRunning = true;
         float elapsedTime = 0;
         float ratio = 0;
+        Vector3 start = transform.position + transform.forward;//beamEnd.position;//= new Vector3(transform.position.x, transform.position.y, transform.position.z + beam.transform.localScale.z);
+        Vector3 end = current;
+        float beamStart = beam.transform.localScale.z;
+
 
         while (ratio < 1f)
         {
             ratio = elapsedTime / duration;
-            Vector3 view = Vector3.Lerp(old, current, TweeningFunctions.EaseOutCubic(ratio));
+            Vector3 view = Vector3.Lerp(start, end, TweeningFunctions.EaseOutCubic(ratio));
             transform.LookAt(view);
             elapsedTime += Time.deltaTime;
-            SetBeamLength(hitPoint);
+            SetBeamLength(current);
 
-            float beamWidth = Mathf.Lerp(focusedScale, unfocusedScale, ratio);
-            beam.SetWidth(beamWidth);
+            if (toPlayer)
+            {
+                float length = Mathf.Lerp(beamStart, 0f, TweeningFunctions.EaseOutCubic(ratio));
+                beam.SetLength(length);   
+            }
 
             yield return null;
         }
 
         lastTarget = current;
         snapViewRunning = false;
+
+        if (toPlayer && state != BotState.Speaking)
+            state = BotState.Following;
     }
 
     private IEnumerator ResetBeamLength(float duration)
@@ -254,11 +405,6 @@ public class GardenEye : MonoBehaviour
         beam.MuteBeam();
     }
 
-    public void BeamReset()
-    {
-        StopAllCoroutines();
-        StartCoroutine(ResetBeamLength(lerpTime * 2f));
-    }
 
 
 

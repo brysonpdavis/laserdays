@@ -26,7 +26,8 @@ public class SpawnableMutation : MonoBehaviour {
     private Collider coll;
 
     private Color tint;
-    private float waitLength, growthLength, lifeLength, killLength, targetScale;
+    private float waitLength, lifeLength, killLength, targetScale;
+    public float growthLength;
     private float growthProgess, lifeProgress, deathProgress, killProgress, waitingProgress;
     PlantMovement movement;
 
@@ -183,6 +184,7 @@ public class SpawnableMutation : MonoBehaviour {
     private void OnEnable()
     {
         GardenDrones.AddMutationToDrones(this);
+        GardenEye.AddMutationToBots(this);
      
         coll.enabled = true;
 
@@ -192,5 +194,6 @@ public class SpawnableMutation : MonoBehaviour {
     private void OnDisable()
     {
         GardenDrones.RemoveMutationFromDrones(this);
+        GardenEye.RemoveMutationFromBots(this);
     }
 }
