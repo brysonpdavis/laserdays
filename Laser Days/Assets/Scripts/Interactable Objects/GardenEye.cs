@@ -213,6 +213,8 @@ public class GardenEye : MonoBehaviour
     public void PlayerInteraction()
     {
         StopAllCoroutines();
+        if (state == BotState.Destroying && target)
+            RemoveMutationFromBots(target);
         plantRoutineRunning = false;
         state = BotState.Speaking;
         Vector3 position = Toolbox.Instance.GetPlayer().transform.position + playerAdditionValue;
