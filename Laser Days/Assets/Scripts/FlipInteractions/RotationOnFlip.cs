@@ -12,9 +12,11 @@ public class RotationOnFlip : FlipInteraction
     public bool startRotationInLaser = true;
     public bool check;
     public TweeningFunctions.TweenType tween = TweeningFunctions.TweenType.EaseInOut;
+    AudioSource audio;
 
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
         startRotation = transform.localEulerAngles;
 
         if ((Toolbox.Instance.PlayerInReal() && startRotationInLaser) || (Toolbox.Instance.PlayerInLaser() && (!startRotationInLaser)))
@@ -60,6 +62,9 @@ public class RotationOnFlip : FlipInteraction
             Vector3 value = Vector3.Lerp(start, end, TweeningFunctions.Tween(tween, ratio));
 
             transform.localEulerAngles = value;
+
+            if (audio)
+                audio.volume = TweeningFunctions.BackAndForth(ratio);
 
             elapsedTime += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
