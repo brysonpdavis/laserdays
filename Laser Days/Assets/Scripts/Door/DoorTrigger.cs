@@ -11,6 +11,7 @@ public class DoorTrigger : MonoBehaviour {
     private Material RenderMat;
     private AudioSource audio;
     private TriggerConnector[] connectors;
+    GameObject player;
 
 
     private Vector2 minMaxScrollSpeed;
@@ -27,6 +28,7 @@ public class DoorTrigger : MonoBehaviour {
 
     private void Start()
     {
+        player = Toolbox.Instance.GetPlayer();
         RenderMat = GetComponent<Renderer>().material;
         RenderMat.SetInt("_Animated", 1);
         RenderMat.SetColor("_RestingColor", controller.RestingColor);
@@ -54,6 +56,14 @@ public class DoorTrigger : MonoBehaviour {
         var temp = RenderMat.GetFloat("_Elapsed");
         temp += (Time.deltaTime * ScrollSpeed);
         RenderMat.SetFloat("_Elapsed", temp);
+
+        if (player)
+        {
+            if (gameObject.layer + 5 == player.layer)
+                audio.mute = false;
+            else
+                audio.mute = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -71,9 +81,10 @@ public class DoorTrigger : MonoBehaviour {
                 RenderMat.SetFloat("_isActive", 1f);
                 ScrollSpeed = Mathf.Clamp(ScrollSpeed * -2, minMaxScrollSpeed.x, minMaxScrollSpeed.y);
                 controller.OpenAll();
-                audio.clip = SoundBox.Instance.platformOn;
-                Toolbox.Instance.SetVolume(audio);
-                audio.Play();
+
+                if (gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer)
+                    MFPP.Audio.Play(SoundBox.Instance.platformOn, Toolbox.Instance.soundEffectsVolume, 1f);
+
             }
         }
 
@@ -93,9 +104,8 @@ public class DoorTrigger : MonoBehaviour {
 
                 SetConnectorStates(TriggerConnector.State.Waiting);
 
-                audio.clip = SoundBox.Instance.platformOff;
-                Toolbox.Instance.SetVolume(audio);
-                audio.Play();
+                if (gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer)
+                    MFPP.Audio.Play(SoundBox.Instance.platformOff, Toolbox.Instance.soundEffectsVolume, 1f);
 
 
                 if (CheckOtherTriggers())

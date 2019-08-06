@@ -26,6 +26,7 @@ public class PlatformTrigger : MonoBehaviour {
 
     private TriggerConnector[] connectors;
     private BasinTriggerIndicator basinIndicator;
+    GameObject player;
 
     private void OnEnable()
     {
@@ -35,6 +36,7 @@ public class PlatformTrigger : MonoBehaviour {
     {
         audioSource = GetComponent<AudioSource>();
         //SoundBox box = SoundBox.Instance;//Toolbox.Instance.GetPlayer().GetComponent<SoundBox>();
+        player = Toolbox.Instance.GetPlayer();
         Debug.Log(SoundBox.Instance.GetInstanceID());
         platformOn = SoundBox.Instance.platformOn;
         platformOff = SoundBox.Instance.platformOff;
@@ -100,8 +102,21 @@ public class PlatformTrigger : MonoBehaviour {
         }
 	}
 
+    private void Update()
+    {
+        if (player)
+        {
+            if (gameObject.layer + 5 == player.layer)
+                audioSource.mute = false;
+            else
+                audioSource.mute = true;
+        }
+            
+            
+    }
 
-	private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         TriggerOn(other);
     }
@@ -183,10 +198,11 @@ public class PlatformTrigger : MonoBehaviour {
 
         }
 
-        Toolbox.Instance.SetVolume(audioSource);
-        audioSource.clip = platformOff;
+        //Toolbox.Instance.SetVolume(audioSource);
+        //audioSource.clip = platformOff;
         if (gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer)
-            audioSource.Play();
+            MFPP.Audio.Play(platformOff, Toolbox.Instance.soundEffectsVolume, 1f);
+            //audioSource.Play();
     }
 
     public void TriggerOn(Collider other)
@@ -221,7 +237,7 @@ public class PlatformTrigger : MonoBehaviour {
             //make sure all necessary triggers are selected. 
             if (checkNumber == totalTriggers)
             {
-                audioSource.clip = platformOn;
+                //audioSource.clip = platformOn;
                 MovePlatformToEnd();
 
                 ScrollSpeed = Mathf.Clamp((ScrollSpeed * -2), minMaxScrollSpeed.x, minMaxScrollSpeed.y);
@@ -238,12 +254,13 @@ public class PlatformTrigger : MonoBehaviour {
                     }
                 }
             }
-            else 
-                audioSource.clip = platformTriggered;
+            //else 
+                //audioSource.clip = platformTriggered;
 
-            Toolbox.Instance.SetVolume(audioSource);
+            //Toolbox.Instance.SetVolume(audioSource);
             if (counter == 1 && gameObject.layer + 5 == Toolbox.Instance.GetPlayer().layer)
-                audioSource.Play();
+                MFPP.Audio.Play(platformOn, Toolbox.Instance.soundEffectsVolume, 1f);
+                //audioSource.Play();
 
         }  
     }
