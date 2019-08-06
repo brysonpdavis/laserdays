@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 135821267866233270}
   - component: {fileID: 114464417590231738}
   - component: {fileID: 82820382175919950}
+  - component: {fileID: 114405773475434452}
   m_Layer: 11
   m_Name: GardenEye
   m_TagString: Untagged
@@ -1515,6 +1516,21 @@ MonoBehaviour:
   forceRadial: 0
   forceInstant: 0
   tween: 3
+--- !u!114 &114405773475434452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1069303858524728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ad98e17ff184865a22150926505124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimTest: 0
+  timeScale: 5
+  magnitude: 0.002
+  bob: 0
 --- !u!114 &114431917736228618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1579,15 +1595,11 @@ MonoBehaviour:
   isActive: 0
   player: {fileID: 0}
   currentPlayerPoint: {x: 0, y: 0, z: 0}
-  plantContainer: {fileID: 0}
   plantCheckRadius: 5
-  hitPoint: {x: 0, y: 0, z: 0}
   shrinkTime: 4
-  waitTime: 0.6
-  lerpTime: 0.125
-  focusedScale: 0.4
-  unfocusedScale: 2
+  turnTime: 1
   beam: {fileID: 0}
+  state: 0
 --- !u!114 &114519101734511172
 MonoBehaviour:
   m_ObjectHideFlags: 1

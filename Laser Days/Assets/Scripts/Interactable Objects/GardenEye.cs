@@ -11,51 +11,25 @@ public class GardenEye : MonoBehaviour
     private ParticleSystem particleSystem;
     [HideInInspector] public Vector3 currentPlayerPoint;
     AudioSource audio;
-    public GameObject plantContainer;
     public float plantCheckRadius;
-    IList<GameObject> plantList;
     private List<SpawnableMutation> mutations;
     private SpawnableMutation target; 
     private static List<GardenEye> allBots;
     private Transform patrolPoint;
     private float timePassed;
-    public Transform beamEnd;
-
-
 
     private float patrolDistance = 10f;
-
-
-
-
-    //public int particleCount = 15;
-    //public float radialSpeed = 0.0f;
-    //public float lifeMultiplier = 1.0f;
-
-    private Vector3 lastTarget;
-    public Vector3 hitPoint;
-
     public float shrinkTime;
 
-
-    public float waitTime;
     public float turnTime;
     private float timeCounter = 0;
-    public float focusedScale;
-    public float unfocusedScale;
-    private Vector3 previousPosition;
     private Vector3 playerAdditionValue = new Vector3 (0f, 1.5f, 0f);
 
 
     private bool plantRoutineRunning = false;
     private bool snapViewRunning = false;
-    private bool widenFocusRunning = false;
     bool lookingAtPlayer = false;
     SimpleBob bob;
-
-    [HideInInspector]
-    private LayerMask currentLayerMask;
-
     public EyeBeam beam;
 
     public enum BotState
@@ -82,8 +56,6 @@ public class GardenEye : MonoBehaviour
 
 
         player = Toolbox.Instance.GetPlayer().transform;
-        plantList = new List<GameObject>();
-        Debug.Log(plantList.Count);
 
         particleSystem = GetComponentInChildren<ParticleSystem>();
         audio = GetComponent<AudioSource>();
@@ -259,56 +231,6 @@ public class GardenEye : MonoBehaviour
         NewTarget();
     }
 
-    void BuildPlantList()
-    {
-        plantList.Clear();
-
-
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, plantCheckRadius);
-
-        foreach (Collider child in hitColliders)
-        {
-            if (child.gameObject.CompareTag("Plant"))
-            {
-                plantList.Add(child.gameObject);
-            }
-        }
-
-        Debug.Log("PLANT LIST LENGTH!!!  " + plantList.Count);
-    }
-
-    void BeamOff()
-    {
-        StartCoroutine(BeamShrink());
-    }
-
-    IEnumerator BeamShrink()
-    {
-        float end_scale = beam.transform.localScale.z;
-        float duration = turnTime;
-        float elapsed = 0;
-        float ratio = 0;
-
-        beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale);
-
-        while (elapsed < duration)
-        {
-            yield return null;
-
-            elapsed += Time.deltaTime;
-            ratio = elapsed / duration;
-
-            beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, end_scale - (TweeningFunctions.EaseIn(ratio) * end_scale));
-
-        }
-
-        beam.transform.localScale = new Vector3(beam.transform.localScale.x, beam.transform.localScale.y, 0);
-
-        NewTarget();
-
-    }
-
-
     private IEnumerator PlantRoutine(GameObject nextPlant)
     {
             //yield return new WaitForSeconds(nextPlant.GetComponent<SpawnableMutation>().growthLength);    
@@ -351,7 +273,6 @@ public class GardenEye : MonoBehaviour
             yield return null;
         }
 
-        lastTarget = current;
         snapViewRunning = false;
 
         if (toPlayer && state != BotState.Speaking)
@@ -361,7 +282,6 @@ public class GardenEye : MonoBehaviour
     private IEnumerator ResetBeamLength(float duration)
     //for after it's looked at the player
     {
-        widenFocusRunning = true;
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
 
@@ -377,9 +297,6 @@ public class GardenEye : MonoBehaviour
 
             yield return null;
         }
-
-        widenFocusRunning = false;
-
     }
 
     void SetBeamLength(Vector3 point)
