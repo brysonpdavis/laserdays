@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrabHold : HoldableObject
+public class CrabHold : ReticleObject, IHoldable
 {
 
     public int maxVelocity = 8;
@@ -11,8 +11,23 @@ public class CrabHold : HoldableObject
 
     private float originalVelocity = 10f;
     public AudioClip overridePop;
+    Rigidbody rigidbody;
+    Camera mainCamera;
+    float currentPositionVelocity;
 
-    public override void Pickup()
+
+
+    public void DoPickup()
+    {
+        if (_action)
+        {
+            _action.PickedUp();
+        }
+
+        Pickup();
+    }
+
+    public void Pickup()
     {
         InteractingIconHover();
         rigidbody.isKinematic = false;
@@ -23,38 +38,43 @@ public class CrabHold : HoldableObject
 
         transform.localRotation = Quaternion.Euler(Vector3.zero);
 
-        //if (!beenPickedUp)
-        //{ 
-        //    //StartCoroutine(SlowPickup()); 
-        //}
-
         GetComponent<CrabWalk>().OnHold();
     }
 
     public override void Start()
     {
         base.Start();
-        GetComponent<Rigidbody>().isKinematic = false;
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.isKinematic = false;
+        mainCamera = Camera.main;
+        currentPositionVelocity = 10f;
 
     }
 
-    public override void Drop()
+    public void HoldPosition()
+    {
+        Vector3 floatingPosition = mainCamera.transform.position + mainCamera.transform.forward * _activateDistance; //pickUp.MaxPickupDistance;
+        rigidbody.angularVelocity *= 0.5f;
+        rigidbody.velocity = ((floatingPosition - rigidbody.transform.position) * (currentPositionVelocity * 1f));
+    }
+
+    public void Drop()
     {
         StopAllCoroutines();
         currentPositionVelocity = originalVelocity;
         GetComponent<CrabWalk>().OnDrop();
         
         CloseIconHover();
-        selected = false;
+        //selected = false;
         //UnSelect();
 
         
         rigidbody.constraints = RigidbodyConstraints.None;
         rigidbody.freezeRotation = true;
 
-        beenPickedUp = true;
+        //beenPickedUp = true;
         rigidbody.useGravity = true;
-        ResetWalk();
+        //ResetWalk();
 
     }
 
@@ -68,17 +88,11 @@ public class CrabHold : HoldableObject
         _iconContainer.SetOpenHand();
     }
 
-    public override void InteractingIconHover()
+    public void InteractingIconHover()
     {
         _iconContainer.SetHold();
     }
 
-    public override void OnSelect()
-    {
-        return;
-    }
-    
-    public override bool Flippable { get { return false; } }
 
 
 

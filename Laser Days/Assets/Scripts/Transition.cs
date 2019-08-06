@@ -211,6 +211,9 @@ public class Transition : MonoBehaviour
     }
     public bool GetTransitioning()
     {
+        if (!mRenderer)
+            return false;
+        
         mRenderer.GetPropertyBlock(_propBlock);
         float currentTransitionState = _propBlock.GetFloat("_TransitionState");
 

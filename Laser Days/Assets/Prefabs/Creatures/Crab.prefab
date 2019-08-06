@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 135522052157067114}
   - component: {fileID: 114040628077568772}
   - component: {fileID: 82709693290226942}
+  - component: {fileID: 114393552776392204}
   m_Layer: 10
   m_Name: Crab
   m_TagString: Clickable
@@ -824,21 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf61ad8b59e7a473fb9155a10d9efc0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectType: 0
   itemName: 
-  pickupDistance: 2
-  selected: 0
-  recentlySelected: 0
-  selectedShader: {fileID: 0}
-  realShader: {fileID: 0}
-  laserShader: {fileID: 0}
-  inMotion: 0
-  isKey: 0
-  key: 
-  value: 0
-  objectCharge: 1
-  beenPickedUp: 0
-  boost: 0
   maxVelocity: 8
   NoConstraintsOnDrop: 1
   overridePop: {fileID: 0}
@@ -857,6 +844,7 @@ MonoBehaviour:
   shared: 0
   manualTransitionChildren: 0
   forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114107711442184812
 MonoBehaviour:
@@ -873,6 +861,7 @@ MonoBehaviour:
   shared: 0
   manualTransitionChildren: 0
   forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114126740639160022
 MonoBehaviour:
@@ -889,6 +878,7 @@ MonoBehaviour:
   shared: 0
   manualTransitionChildren: 0
   forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114179604061341462
 MonoBehaviour:
@@ -905,6 +895,7 @@ MonoBehaviour:
   shared: 0
   manualTransitionChildren: 0
   forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114187167057617720
 MonoBehaviour:
@@ -936,6 +927,7 @@ MonoBehaviour:
   shared: 0
   manualTransitionChildren: 0
   forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114200739084636552
 MonoBehaviour:
@@ -952,6 +944,7 @@ MonoBehaviour:
   shared: 0
   manualTransitionChildren: 0
   forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114268527125203818
 MonoBehaviour:
@@ -983,6 +976,23 @@ MonoBehaviour:
   rotationScale: 8
   timeoffset: 2.512
   timescale: 24
+--- !u!114 &114393552776392204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1545158524391776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e952bfcaf2544705ad71b7cb6ecbab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScaleSpeed: 1
+  shared: 0
+  manualTransitionChildren: 0
+  forceRadial: 0
+  forceInstant: 0
+  tween: 3
 --- !u!114 &114521194819629444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1004,6 +1014,7 @@ MonoBehaviour:
   maxRotation: 180
   rotationDuration: 0.3
   held: 0
+  dustTrail: {fileID: 198317037102688814}
   stuck: 0
   rotating: 0
   targetRotation: 0
@@ -1024,6 +1035,7 @@ MonoBehaviour:
   shared: 0
   manualTransitionChildren: 0
   forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114606708498970344
 MonoBehaviour:
@@ -1070,6 +1082,7 @@ MonoBehaviour:
   shared: 0
   manualTransitionChildren: 0
   forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114898129215823028
 MonoBehaviour:
@@ -1086,6 +1099,7 @@ MonoBehaviour:
   shared: 0
   manualTransitionChildren: 1
   forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!135 &135522052157067114
 SphereCollider:
