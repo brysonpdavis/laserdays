@@ -6,6 +6,9 @@ public class RobotSpeak : RobotInteraction {
 
     public AudioSource audio;
     bool active;
+    private int _contentLength;
+    private TextNarration _textNarration;
+    private int _narrationIndex;
 
 	// Update is called once per frame
 	void Update () {
@@ -14,16 +17,17 @@ public class RobotSpeak : RobotInteraction {
         {
             if (ControlManager.Instance.GetButtonDown("Submit"))
             {
-                RobotDeactivate(); 
+                _narrationIndex++;
+                if (_narrationIndex + 1 > _contentLength )
+                    RobotDeactivate();
             }
-
-            }
-
-	}
+        }
+    }
 
     public override void OnSelect()
     {
         active = true;
+        _narrationIndex = 0;
 
         base.OnSelect();
 
@@ -31,7 +35,10 @@ public class RobotSpeak : RobotInteraction {
         player.Movement.AllowMovement = false;
         player.Movement.AllowMouseMove = false;
 
-        GetComponentInChildren<TextNarration>().Activate();
+        _textNarration = GetComponentInChildren<TextNarration>();
+        _textNarration.Activate();
+        _contentLength = _textNarration.GetContentLength();
+        
         audio.Play();
         GetComponentInChildren<GardenEye>().PlayerInteraction();
         Toolbox.Instance.GetFlip().canFlip = false;
