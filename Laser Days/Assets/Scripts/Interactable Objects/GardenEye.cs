@@ -102,6 +102,26 @@ public class GardenEye : MonoBehaviour
         }
     }
 
+    bool MutationCanBeSeen(GameObject mut)
+    {
+        RaycastHit hit;
+
+        Vector3 smallForward = new Vector3(0f, 0f, -.5f);
+
+        if (Physics.Raycast(transform.position + smallForward, mut.transform.position - (transform.position + smallForward), out hit, patrolDistance, LayerMaskController.RealWithTransOnly))
+        {
+            //Debug.DrawRay(transform.position + smallForward, mut.transform.position - (transform.position + smallForward), Color.red, 10f);
+            //Debug.LogError(hit.collider.gameObject.name);
+            if (hit.collider.gameObject.Equals(mut))
+                return true;
+            else 
+                return false;
+            
+        }
+        else
+            return false;
+    }
+
     public static void RemoveMutationFromBots(SpawnableMutation mut)
     {
         foreach (GardenEye bot in allBots)
@@ -124,7 +144,7 @@ public class GardenEye : MonoBehaviour
         foreach (SpawnableMutation guy in mutations)
         {
             tempDist = CalcDistance2D(guy.transform, transform);
-            if (tempDist < minDist) //&& Vector3.Distance(guy.transform.position, patrolPoint) < patrolDistance)
+            if (tempDist < minDist && MutationCanBeSeen(guy.gameObject)) //&& Vector3.Distance(guy.transform.position, patrolPoint) < patrolDistance)
             {
                 minDist = tempDist;
                 tempObject = guy;
@@ -236,11 +256,16 @@ public class GardenEye : MonoBehaviour
     private IEnumerator PlantRoutine(GameObject nextPlant)
     {
             //yield return new WaitForSeconds(nextPlant.GetComponent<SpawnableMutation>().growthLength);    
+            SpawnableMutation mutation = nextPlant.GetComponent<SpawnableMutation>();
+            //if (mutation.lifePhase == SpawnableMutation.LifeCycle.Growth)
+                    //yield return new WaitForSeconds(mutation.growthLength);
+
+
             StartCoroutine(SnapView(nextPlant.transform.position, turnTime, false));
             state = BotState.Turning;
             yield return new WaitForSeconds(turnTime);
             state = BotState.Destroying;
-            nextPlant.GetComponent<SpawnableMutation>().lifePhase = SpawnableMutation.LifeCycle.Death;
+            mutation.lifePhase = SpawnableMutation.LifeCycle.Death;
             plantRoutineRunning = false;
             yield return null;
     }

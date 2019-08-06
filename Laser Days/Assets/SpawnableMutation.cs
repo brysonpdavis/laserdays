@@ -183,12 +183,19 @@ public class SpawnableMutation : MonoBehaviour {
 
     private void OnEnable()
     {
-        GardenDrones.AddMutationToDrones(this);
-        GardenEye.AddMutationToBots(this);
-     
+        StartCoroutine(OnEnableRoutine());
+    }
+
+    IEnumerator OnEnableRoutine()
+    {
+        InitRandom();
         coll.enabled = true;
 
-        InitRandom();
+        yield return new WaitForSeconds(waitLength + growthLength);
+
+        GardenDrones.AddMutationToDrones(this);
+        GardenEye.AddMutationToBots(this);
+
     }
 
     private void OnDisable()

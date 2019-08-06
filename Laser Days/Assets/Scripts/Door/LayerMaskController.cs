@@ -41,6 +41,8 @@ public static class LayerMaskController
 
     public static LayerMask RealWithPlayer = 1 << 0 | 1 << 11 | 1 << 17 | 1 << 16;
 
+    public static LayerMask RealWithTransOnly = 1 << 0 | 1 << 11 | 1 << 17 | 1<<27;
+
     public static LayerMask Laser = 1 << 0 | 1 << 10 | 1 << 17;
 
     public static LayerMask LaserWithPlayer = 1 << 0 | 1 << 10 | 1 << 17 | 1 << 15;
