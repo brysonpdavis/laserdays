@@ -26,8 +26,12 @@ public class TakeActionOnAction : MonoBehaviour
 
     private enum ResultActionType
     {
-        Deactivate
+        Deactivate,
+        ActivateOnScreen,
+        DeactivateOnScreen
     }
+    
+    
     public void PickedUp()
     {
         if (activationAction == ActivationActionType.PickUp)
@@ -52,6 +56,16 @@ public class TakeActionOnAction : MonoBehaviour
 
                 victim.GetComponent<ObjectWorldSpaceUI>().TurnOff();
                 
+                break;
+            
+            case ResultActionType.ActivateOnScreen:
+
+                break;
+            
+            case ResultActionType.DeactivateOnScreen:
+                
+                Toolbox.Instance.ClearNarration();
+
                 break;
             
             default:

@@ -16,6 +16,7 @@ public class TextNarration : MonoBehaviour
     private GameObject background;
 	public TextAsset txtNarration;
     private string[] content;
+    [SerializeField] private bool persistent = true;
 
     void Awake()
     {
@@ -56,10 +57,8 @@ public class TextNarration : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
+        if (!persistent && other.CompareTag("Player")) 
             Deactivate();
-        }
     }
 
     public string GetContent(int n)
