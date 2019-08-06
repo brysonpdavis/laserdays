@@ -20,7 +20,6 @@ public class SoundTrackManager : MonoBehaviour {
 
     private IEnumerator chordFade;
     private float globalVolume;
-    [SerializeField] private float maxAmbientPercentage = 1f;
     private float ambientPercentage;
     private float realLevel;
     private float laserLevel;
@@ -73,7 +72,7 @@ public class SoundTrackManager : MonoBehaviour {
     public void SetVolume()
     {
         globalVolume = mainSlider.value;
-        ambientPercentage =  maxAmbientPercentage * AmbientSound.AmbientPercentage();
+        ambientPercentage =  AmbientSound.AmbientPercentage();
 
         audioSource.volume = globalVolume * (1 - ambientPercentage);
         LaserChords.volume = globalVolume * (1 - ambientPercentage) * laserLevel;
