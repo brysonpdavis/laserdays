@@ -46,6 +46,8 @@ public class Toolbox : Singleton<Toolbox>
     private AudioSource SoundtrackAudio;
 
     public GameObject narrationContainer;
+    private Animator narrationAnimator;
+    public bool isNarrationAnimating;
     private Text narrationText;
     public GameObject narrationBackground;
     public GameObject narrationContinue;
@@ -297,6 +299,20 @@ public class Toolbox : Singleton<Toolbox>
         SetNarration(cur.GetContent(0));
     }
 
+    public void NewNarrationAnimated(TextNarration cur)
+    {
+        narrationAnimator.Play("Popup_Dialog");
+        ClearNarration();
+        narrationBackground.SetActive(true);
+        currentNarration = cur;
+    }
+
+
+    public void SetNarrationAfterAnimation()
+    {
+        SetNarration(currentNarration.GetContent(0));
+    }
+
     private void NarrateWords(string text)
     {
         wording = true;
@@ -348,6 +364,7 @@ public class Toolbox : Singleton<Toolbox>
         {
             narrationContainer = GameObject.Find("TextNarration");
             narrationText = narrationContainer.GetComponentInChildren<Text>();
+            narrationAnimator = narrationContainer.GetComponent<Animator>();
             narrationBackground = narrationContainer.transform.Find("Background").gameObject;
             narrationContinue = narrationContainer.transform.Find("Continue").gameObject;
             SoundEffectsAudio = GameObject.Find("SoundEffectsAudio").GetComponent<AudioSource>();
@@ -367,6 +384,7 @@ public class Toolbox : Singleton<Toolbox>
         if (!Toolbox.Instance.narrationContainer)
         {
             Toolbox.Instance.narrationContainer = GameObject.Find("TextNarration");
+            Toolbox.Instance.narrationAnimator = narrationContainer.GetComponent<Animator>();
         }
 
         if (!Toolbox.Instance.narrationText)

@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class TextNarration : MonoBehaviour
 {
+    enum PopUpType { Static, Animated };
+
+    [SerializeField]
+    private PopUpType type = PopUpType.Static;
 
     GameObject container;
     private Text canvasText;
@@ -60,7 +64,14 @@ public class TextNarration : MonoBehaviour
 
     private void StartNarration()
     {
-        Toolbox.Instance.NewNarration(this);
+        if(type == PopUpType.Static)
+        {
+            Toolbox.Instance.NewNarration(this);
+        } 
+        else if (type == PopUpType.Animated)
+        {
+            Toolbox.Instance.NewNarrationAnimated(this);
+        }
 
         if (lore)
             Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
