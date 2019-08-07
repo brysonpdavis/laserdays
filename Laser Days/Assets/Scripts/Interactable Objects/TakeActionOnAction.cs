@@ -59,6 +59,8 @@ public class TakeActionOnAction : MonoBehaviour
                 break;
             
             case ResultActionType.ActivateOnScreen:
+                
+                victim.GetComponent<TextNarration>().Activate();
 
                 break;
             

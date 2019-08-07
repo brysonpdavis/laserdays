@@ -346,4 +346,9 @@ public class AmbientSound : MonoBehaviour
         _ambientSources.Remove(this);
     }
 
+    private void OnDisable()
+    {
+        RemoveFromList();
+        _state = State.Inactive;
+    }
 }

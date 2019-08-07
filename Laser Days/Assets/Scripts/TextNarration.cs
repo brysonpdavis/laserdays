@@ -16,7 +16,10 @@ public class TextNarration : MonoBehaviour
     private GameObject background;
 	public TextAsset txtNarration;
     private string[] content;
+    private Coroutine _coroutine;
     [SerializeField] private bool persistent = true;
+    [SerializeField] private bool delayedHint;
+    [SerializeField] private float hintDelay;
 
     void Awake()
     {
@@ -33,26 +36,48 @@ public class TextNarration : MonoBehaviour
 
     public void Activate()
     {
-
-
-
         if (!singleActivation || (singleActivation && !activated))
         {
-            Toolbox.Instance.NewNarration(this);
             activated = true;
 
-            if (lore)
-                Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
+            if (delayedHint)
+            {
+                StartCoroutine(HintCoroutine());
+            }
             else
-                Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
+            {
+                StartNarration();
+            }
         }
+    }
+
+    private IEnumerator HintCoroutine()
+    {
+        yield return new WaitForSeconds(hintDelay);
+        
+        StartNarration();
+    }
+
+    private void StartNarration()
+    {
+        Toolbox.Instance.NewNarration(this);
+
+        if (lore)
+            Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
+        else
+            Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
 
     }
 
+    public void CancelHint()
+    {
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+    }
+    
     public void Deactivate()
     {
         Toolbox.Instance.ClearNarration();
- 
     }
 
     private void OnTriggerExit(Collider other)
