@@ -7,8 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Spirit_ResetTarget
-  m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
-  m_ShaderKeywords: NO_GRADIENT SHARED STATIC
+  m_Shader: {fileID: 4800000, guid: 480e2ec02051d4242ad8ab3dcf4b683f, type: 3}
+  m_ShaderKeywords: ACCENT_ON NO_GRADIENT SHARED STATIC W_POS_SWELLING
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AccentMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 67c3ebcfdec2a4418b557336abeac4fd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -68,6 +68,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaCutoff: 0.5
+    - _AnimationMagnitude: 0.05
+    - _AnimationSpeed: 1
+    - _AnimationTimeStep: 1
+    - _AnimationWaveSize: 2
     - _BlendOffset: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -93,22 +97,23 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TerrainScale: 1
-    - _TransitionState: 0
+    - _TransitionState: 1
     - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
     - _onHold: 0
     - _onHover: 0
     m_Colors:
+    - _AnimationSway: {r: 0, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserAccent: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserBase: {r: 0.7407885, g: 0.8773585, b: 0.864797, a: 1}
+    - _LaserAccent: {r: 0.9686275, g: 0.7490196, b: 0.19607845, a: 1}
+    - _LaserBase: {r: 0.9622642, g: 0.7807049, b: 0.39489147, a: 1}
     - _LaserEmission: {r: 0, g: 0, b: 0, a: 0}
     - _LaserGradient: {r: 0.38665593, g: 0, b: 0.5660378, a: 0.7607843}
-    - _RealAccent: {r: 0, g: 0, b: 0, a: 0}
-    - _RealBase: {r: 0.8679245, g: 0.67611915, b: 0.24973297, a: 1}
+    - _RealAccent: {r: 0.9716981, g: 0.75154877, b: 0.0779192, a: 1}
+    - _RealBase: {r: 0.9568628, g: 0.77647066, b: 0.42352945, a: 1}
     - _RealEmission: {r: 0, g: 0, b: 0, a: 0}
     - _RealGradient: {r: 0, g: 0, b: 0, a: 0}
     - _ShimmerColor: {r: 0, g: 0, b: 0, a: 0}

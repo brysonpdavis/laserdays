@@ -1,14 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
+using UnityEditor.Media;
 
 public class Hoppers : MonoBehaviour
 {
 	[SerializeField]
-	private float checkInterval = 0.25f;
+    private float distanceCheckInterval = 0.25f;
 
-	[SerializeField]
+    [SerializeField]
+    private float rotationLookInterval = 0.25f;
+
+    public float rotationDuration = 0.2f;
+
+    [SerializeField]
 	private GameObject[] waypoints;
+
+    private Vector3[] waypointsOnGround;
 
 	[SerializeField]
 	private float activateDistance = 3f;
@@ -16,7 +25,12 @@ public class Hoppers : MonoBehaviour
 	[SerializeField]
 	private float jumpDuration = 1f;
 
-	[SerializeField]
+    [SerializeField]
+    private float squashDuration = 1f;
+
+    private float halfHeight;
+
+    [SerializeField]
 	private float jumpHeight = 2f;
 
 	[SerializeField] 
@@ -31,66 +45,103 @@ public class Hoppers : MonoBehaviour
 	[SerializeField]
 	private bool active;
 
+    private Animator anim;
+
+    public ParticleSystem hopParticles;
+
+    Vector3 lastLookTarget;
+    Vector3 currentLookTarget;
+    float rotationTimer;
+
 	void Start ()
 	{
 		player = Toolbox.Instance.GetPlayer().transform;
 		elapsed = 0;
+        rotationTimer = 0;
 		waypointIndex = 0;
+        halfHeight = GetComponent<Renderer>().bounds.extents.y;
 		active = true;
-	}
+        anim = GetComponent<Animator>();
+        waypointsOnGround = InitWayPoints(waypoints);
+
+    }
 	
 	void Update ()
 	{
-		if (active) 
-		{
-			if (elapsed > checkInterval)
-			{
-				elapsed = 0;
+        if (active)
+        {
+            //FrogLook(player.position);
 
-				if (Toolbox.Instance.PlayerInLaser() && Vector3.Distance(player.position, transform.position) < activateDistance)
-				{
-					Hop();
-				}
-			}
-			else
-			{
-				elapsed += Time.deltaTime;
-			}
-		}		
-	}
+            if (elapsed > distanceCheckInterval)
+            {
+                elapsed = 0;
 
-	void Hop()
+                if (Toolbox.Instance.PlayerInLaser() && Vector3.Distance(player.position, transform.position) < activateDistance)
+                {
+                    anim.Play("PreJump");
+                }
+            }
+            else
+            {
+                elapsed += Time.deltaTime;
+            }
+
+            if (rotationTimer > rotationLookInterval)
+            {
+                rotationTimer = 0;
+                StartCoroutine(LookAtTarget(lastLookTarget, player.position, rotationDuration));
+            }
+            else
+            {
+                rotationTimer += Time.deltaTime;
+            }
+
+        }
+
+    }
+
+	public void Hop()
 	{
-		StartCoroutine(BeginJump(waypoints[waypointIndex].transform.position));
-	}
+        int index = waypointIndex;
+        StartCoroutine(BeginJump(waypointsOnGround[index]));
 
-	IEnumerator BeginJump(Vector3 endPos)
+        StartCoroutine(LookAtTarget(lastLookTarget, waypointsOnGround[index], rotationDuration));
+
+        hopParticles.Play();
+    }
+
+    IEnumerator BeginJump(Vector3 endPos)
 	{
 		Vector3 beginPos = transform.position;
 		
-		float elapsed = 0;
+		float jumpElapsed = 0;
 
-		float ratio = 0;
+        float ratio = 0;
 		
 		active = false;
 
-		while (elapsed < jumpDuration)
+        while (jumpElapsed < jumpDuration)
 		{
-			yield return null;
 
-			elapsed += Time.deltaTime;
+			jumpElapsed += Time.deltaTime;
 
-			ratio = elapsed / jumpDuration;
+			ratio = jumpElapsed / jumpDuration;
 
-			transform.position = MathParabola.Parabola(beginPos, endPos, jumpHeight,(TweeningFunctions.EaseMiddle(ratio) + ratio) / 2f); 
-			//Vector3.Lerp(beginPos, endPos, TweeningFunctions.EaseInOutCubic(elapsed/jumpDuration));
-		}
+			transform.position = MathParabola.Parabola(beginPos, endPos, jumpHeight,(TweeningFunctions.EaseMiddle(ratio) + ratio) / 2f);
+            //Vector3.Lerp(beginPos, endPos, TweeningFunctions.EaseInOutCubic(elapsed/jumpDuration));
+
+            yield return null;
+        }
 
 		transform.position = endPos;
+        hopParticles.Play();
 
-		waypointIndex++;
+        waypointIndex++;
 
-		if (repeat && waypointIndex == waypoints.Length)
+        rotationTimer = 0f;
+
+
+        if (repeat && waypointIndex == waypoints.Length)
 		{
 			waypointIndex = 0;
 		}
@@ -101,4 +152,56 @@ public class Hoppers : MonoBehaviour
 			active = true;
 		}
 	}
+
+    IEnumerator LookAtTarget(Vector3 old, Vector3 target, float duration)
+    {
+        float elapsedTime = 0f;
+        float ratio = 0f;
+
+        while(elapsedTime < duration)
+        {
+            ratio = elapsedTime / duration;
+            elapsedTime += Time.deltaTime;
+            Vector3 view = Vector3.Lerp(old, target, ratio);
+            FrogLook(view);
+            yield return null;
+
+        }
+
+        lastLookTarget = target;
+
+    }
+
+    void FrogLook (Vector3 target)
+    {
+        transform.LookAt(target);
+        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+    }
+
+
+    // Snaps all the way points to the ground - so that if we can place the gameobject waypoint in the scene loosely 
+    Vector3[] InitWayPoints(GameObject[] gameobjects)
+    {
+        Vector3[] hopTargets = new Vector3[gameobjects.Length];
+        for (int i = 0; i < gameobjects.Length; i++)
+        {
+            hopTargets[i] = SnapWaypointToGround(gameobjects[i]);
+        }
+        return hopTargets;
+    }
+
+    // Snaps a waypoints gameobject to the ground - so that if we can place the gameobject waypoint in the scene loosely 
+    Vector3 SnapWaypointToGround(GameObject waypoint)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(waypoint.transform.position, Vector3.down, out hit, 2f, LayerMaskController.Everything))
+        {
+            return hit.point; //+ new Vector3(0f, halfHeight, 0f);
+        }
+        else
+        {
+            return waypoint.transform.position;
+        }
+    }
+
 }
