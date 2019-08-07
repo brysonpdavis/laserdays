@@ -24,7 +24,7 @@ public class TakeActionOnAction : MonoBehaviour
         Hover
     }
 
-    private enum ResultActionType
+    protected enum ResultActionType
     {
         Deactivate,
         ActivateOnScreen,
@@ -48,7 +48,7 @@ public class TakeActionOnAction : MonoBehaviour
         }
     }
 
-    private void TakeAction()
+    protected virtual void TakeAction()
     {
         switch (resultAction)
         {
