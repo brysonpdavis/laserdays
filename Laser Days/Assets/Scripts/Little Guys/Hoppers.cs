@@ -35,6 +35,8 @@ public class Hoppers : MonoBehaviour
 
 	[SerializeField] 
 	private bool repeat = true;
+    private bool rotating = false;
+
 
 	private int waypointIndex;
 
@@ -89,7 +91,8 @@ public class Hoppers : MonoBehaviour
             if (rotationTimer > rotationLookInterval)
             {
                 rotationTimer = 0;
-                StartCoroutine(LookAtTarget(lastLookTarget, player.position, rotationDuration));
+                if (!rotating)
+                    StartCoroutine(LookAtTarget(player.position, rotationDuration));
             }
             else
             {
@@ -104,8 +107,8 @@ public class Hoppers : MonoBehaviour
 	{
         int index = waypointIndex;
         StartCoroutine(BeginJump(waypointsOnGround[index]));
-
-        StartCoroutine(LookAtTarget(lastLookTarget, waypointsOnGround[index], rotationDuration));
+        StopCoroutine("LookAtTarget");
+            StartCoroutine(LookAtTarget(waypointsOnGround[index], rotationDuration));
 
         hopParticles.Play();
     }
@@ -129,7 +132,6 @@ public class Hoppers : MonoBehaviour
 
 			transform.position = MathParabola.Parabola(beginPos, endPos, jumpHeight,(TweeningFunctions.EaseMiddle(ratio) + ratio) / 2f);
             //Vector3.Lerp(beginPos, endPos, TweeningFunctions.EaseInOutCubic(elapsed/jumpDuration));
-
             yield return null;
         }
 
@@ -153,22 +155,26 @@ public class Hoppers : MonoBehaviour
 		}
 	}
 
-    IEnumerator LookAtTarget(Vector3 old, Vector3 target, float duration)
+    IEnumerator LookAtTarget(Vector3 target, float duration)
     {
+        rotating = true;
         float elapsedTime = 0f;
         float ratio = 0f;
+
+        lastLookTarget = target;
+
+        Vector3 begin = transform.position + transform.forward;
 
         while(elapsedTime < duration)
         {
             ratio = elapsedTime / duration;
             elapsedTime += Time.deltaTime;
-            Vector3 view = Vector3.Lerp(old, target, ratio);
+            Vector3 view = Vector3.Lerp(begin, target, ratio);
             FrogLook(view);
             yield return null;
 
         }
-
-        lastLookTarget = target;
+        rotating = false;
 
     }
 
