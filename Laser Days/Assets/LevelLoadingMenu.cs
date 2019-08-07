@@ -65,7 +65,6 @@ public class LevelLoadingMenu : MonoBehaviour {
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(playerScene));
         GetComponent<CanvasScaler>().enabled = true;
-        //Resume();
 
         edge = Camera.main.GetComponent<EdgeDetection>();
 
@@ -115,7 +114,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         textNarration.SetActive(true);
 
-        edge.PauseMenu = 0f;
+        //edge.PauseMenu = 0f;
        
 
         if (exitPause)
@@ -424,7 +423,10 @@ public class LevelLoadingMenu : MonoBehaviour {
         
         Toolbox.Instance.SetSettings(spawn.GetComponent<Spawner>().WorldSettings);
 
+        //Resume(true);
+
         StartCoroutine(FadeIn(outlinesFade));
+        Resume(false);
 
         Toolbox.Instance.UpdateTransforms();
         sceneIsLoading = false;
