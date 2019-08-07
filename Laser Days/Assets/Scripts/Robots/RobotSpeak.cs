@@ -17,7 +17,7 @@ public class RobotSpeak : RobotInteraction {
 		
         if (active)
         {
-            if (ControlManager.Instance.GetButtonDown("Submit"))
+            if (ControlManager.Instance.GetButtonDown("Submit") && !Toolbox.Instance.isNarrationAnimating)
             {
                 _narrationIndex++;
                 if (_narrationIndex + 1 > _contentLength )
