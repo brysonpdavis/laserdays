@@ -12,8 +12,12 @@ public class SceneChangeTeleport : MonoBehaviour {
     //[SerializeField] private AudioSource[] audioSources;
     [SerializeField] private string sceneName;
     [SerializeField] private string spawnName;
-    [SerializeField] AudioSource openingSong;
-    [SerializeField] AudioSource bassAudio;
+    [SerializeField] OpeningSongSingleton openingSong;
+    [SerializeField] TriggeredAudio bassAudio;
+    [SerializeField] MFPP.FlipClipAsset mainFlip;
+    [SerializeField] AmbientSound ambient;
+    [SerializeField] AudioSource ambientReal;
+    [SerializeField] AudioSource ambientLaser;
 
 
     private void OnTriggerEnter(Collider other)
@@ -26,8 +30,8 @@ public class SceneChangeTeleport : MonoBehaviour {
     {
         audio = GetComponent<AudioSource>();
         fadeDuration = audio.clip.length;
-        openingSong = OpeningSongSingleton.Instance;
-        bassAudio = TriggeredAudio.Instance;
+        //openingSong = OpeningSongSingleton.Instance;
+        //bassAudio = TriggeredAudio.Instance;
     }
 
     private void LoadScene()
@@ -39,29 +43,44 @@ public class SceneChangeTeleport : MonoBehaviour {
 
     IEnumerator FadeOutVolume()
     {
+        SoundTrackManager soundTrack = Toolbox.Instance.GetPlayer().GetComponentInChildren<SoundTrackManager>();
+        soundTrack.dynamicVolume = 0f;
+        soundTrack.flipClip = mainFlip;
         AudioSource playerAudio = Toolbox.Instance.GetSoundTrackAudio();
+        //soundTrack.mute = false;
+        soundTrack.SetVolume();
+        openingSong.GetComponent<AudioSource>().enabled = false;
+        bassAudio.GetComponent<AudioSource>().enabled = false;
+
+        ambient.percentageOfSoundtrack = 0f;
+        ambient.enabled = false;
 
         float audioStart = playerAudio.volume;
 
         float elapsedTime = 0;
         float ratio = elapsedTime / fadeDuration;
+
+        float ambRealStart = ambientReal.volume;
+        float ambLaserStart = ambientLaser.volume;
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / fadeDuration;
 
             // audio fadeout
-            float volumeFade = Mathf.Lerp(audioStart, 0f, ratio);
+            float fadeOutReal = Mathf.Lerp(ambRealStart, 0f, ratio);
+            float fadeOutLaser = Mathf.Lerp(ambLaserStart, 0f, ratio);
 
-            openingSong.volume = volumeFade;
-            bassAudio.volume = volumeFade;
+            ambientReal.volume = fadeOutReal;
+            ambientLaser.volume = fadeOutLaser;
+
+            float fadeIn = Mathf.Lerp(0f, 1f, TweeningFunctions.EaseIn(ratio));
+            soundTrack.dynamicVolume = fadeIn;
 
             yield return null;
         }
 
-        Toolbox.Instance.GetPlayer().GetComponentInChildren<SoundTrackManager>().mute = false;
 
-        
     }
 
 

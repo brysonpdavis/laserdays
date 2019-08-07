@@ -515,19 +515,21 @@ public class Toolbox : Singleton<Toolbox>
 
         if (settingsObject.MuteOpeningSoundtrack())
         {
+            if (soundtrack)
+                soundtrack.dynamicVolume = 1f;
             if (TriggeredAudio.Instance)
                 TriggeredAudio.Instance.mute = true;
             if (OpeningSongSingleton.Instance)
                 OpeningSongSingleton.Instance.mute = true;
         }
 
-        else
-        {
-            if (TriggeredAudio.Instance)
-                TriggeredAudio.Instance.mute = false;
-            if (OpeningSongSingleton.Instance)
-                OpeningSongSingleton.Instance.mute = false;
-        }
+        //else
+        //{
+        //    if (TriggeredAudio.Instance)
+        //        TriggeredAudio.Instance.mute = false;
+        //    if (OpeningSongSingleton.Instance)
+        //        OpeningSongSingleton.Instance.mute = false;
+        //}
 
     }
 }

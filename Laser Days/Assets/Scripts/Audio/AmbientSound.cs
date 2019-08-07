@@ -13,7 +13,7 @@ public class AmbientSound : MonoBehaviour
     [SerializeField] private bool fadesSoundtrack = false;
     // if fades soundtrack, the amount that this ambient source will take up of the aural space,
     // 0 => no fading of soundtrack, 1 => fades soundtrack entirely
-    [SerializeField] private float percentageOfSoundtrack = 0.5f; 
+    public float percentageOfSoundtrack = 0.5f; 
     private AudioSource _realSource;
     private AudioSource _laserSource;
     private static List<AmbientSound> _ambientSources;

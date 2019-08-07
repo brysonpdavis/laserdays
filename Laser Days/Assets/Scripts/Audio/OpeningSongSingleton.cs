@@ -6,6 +6,8 @@ public class OpeningSongSingleton : MonoBehaviour {
 
     public static AudioSource Instance;
     AudioSource audio;
+    float ambientPercentage;
+    public float volume = 1f;
 	// Use this for initialization
 	void Awake () {
         audio = GetComponent<AudioSource>();
@@ -24,5 +26,12 @@ public class OpeningSongSingleton : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
 	}
-	
+
+    private void Update()
+    {
+        ambientPercentage = 1 - AmbientSound.AmbientPercentage();
+        audio.volume = volume * ambientPercentage;
+
+    }
+
 }

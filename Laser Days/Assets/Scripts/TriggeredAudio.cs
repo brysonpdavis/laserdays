@@ -8,6 +8,8 @@ public class TriggeredAudio : MonoBehaviour {
     public AudioSource whisperTone;
     private AudioSource highFreq;
     public static AudioSource Instance;
+    public float volume = 1f;
+    public float ambientPercentage;
 
 
     private void Start()
@@ -34,15 +36,22 @@ public class TriggeredAudio : MonoBehaviour {
             audio.spatialBlend = 0f;
             audio.rolloffMode = AudioRolloffMode.Custom;
 
-            StartCoroutine(VolumeFade(whisperTone, 0f, 1f, 0f));
-            StartCoroutine(VolumeFade(audio, 1f, 3f, 1f));
+            StartCoroutine(VolumeFadeOther(whisperTone, 0f, 1f, 0f));
+            StartCoroutine(VolumeFadeSelf(1f, 3f, 1f));
 
             audio.time = highFreq.time;
             audio.Play();
         }
     }
 
-    IEnumerator VolumeFade(AudioSource _AudioSource, float _EndVolume, float _FadeLength, float waitTime)
+    private void Update()
+    {
+        ambientPercentage = 1- AmbientSound.AmbientPercentage();
+        audio.volume = volume * ambientPercentage;
+
+    }
+
+    IEnumerator VolumeFadeOther(AudioSource _AudioSource, float _EndVolume, float _FadeLength, float waitTime)
     {
 
         float _StartVolume = _AudioSource.volume;
@@ -57,6 +66,24 @@ public class TriggeredAudio : MonoBehaviour {
         }
 
         if (_EndVolume == 0f) { _AudioSource.Stop(); }
+    }
+
+    IEnumerator VolumeFadeSelf(float _EndVolume, float _FadeLength, float waitTime)
+    {
+
+        float _StartVolume = volume;
+        float _StartTime = Time.time;
+
+        while (Time.time < (_StartTime + _FadeLength))
+        {
+
+            float value = _StartVolume + ((_EndVolume - _StartVolume) * ((Time.time - _StartTime) / _FadeLength));
+            volume = value;
+            Debug.Log("FADE " + volume);
+            yield return null;
+        }
+
+        //if (_EndVolume == 0f) { _AudioSource.Stop(); }
     }
 
 

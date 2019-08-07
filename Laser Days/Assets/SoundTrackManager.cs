@@ -23,6 +23,7 @@ public class SoundTrackManager : MonoBehaviour {
     private float ambientPercentage;
     private float realLevel;
     private float laserLevel;
+    public float dynamicVolume = 0f;
 
 
 
@@ -71,7 +72,7 @@ public class SoundTrackManager : MonoBehaviour {
 
     public void SetVolume()
     {
-        globalVolume = mainSlider.value;
+        globalVolume = mainSlider.value * dynamicVolume;
         ambientPercentage =  AmbientSound.AmbientPercentage();
 
         audioSource.volume = globalVolume * (1 - ambientPercentage);
