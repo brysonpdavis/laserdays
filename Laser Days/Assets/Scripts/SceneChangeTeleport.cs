@@ -43,19 +43,21 @@ public class SceneChangeTeleport : MonoBehaviour {
 
     IEnumerator FadeOutVolume()
     {
+        //turn the soundtrack on with default flip clip- make sure it's audio is set to zero
         SoundTrackManager soundTrack = Toolbox.Instance.GetPlayer().GetComponentInChildren<SoundTrackManager>();
         soundTrack.dynamicVolume = 0f;
         soundTrack.flipClip = mainFlip;
-        AudioSource playerAudio = Toolbox.Instance.GetSoundTrackAudio();
-        //soundTrack.mute = false;
         soundTrack.SetVolume();
+
+        //turn off opening and bass audio completely - volume should be at zero from ambient zone
+        //doing this so that they don't turn back on when teleporting to a new location
         openingSong.GetComponent<AudioSource>().enabled = false;
         bassAudio.GetComponent<AudioSource>().enabled = false;
 
+        //turning off the ambient script so that we can set its real and laser volume manually for this fade
         ambient.percentageOfSoundtrack = 0f;
         ambient.enabled = false;
 
-        float audioStart = playerAudio.volume;
 
         float elapsedTime = 0;
         float ratio = elapsedTime / fadeDuration;
@@ -67,7 +69,7 @@ public class SceneChangeTeleport : MonoBehaviour {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / fadeDuration;
 
-            // audio fadeout
+            // audio fade out/in
             float fadeOutReal = Mathf.Lerp(ambRealStart, 0f, ratio);
             float fadeOutLaser = Mathf.Lerp(ambLaserStart, 0f, ratio);
 
