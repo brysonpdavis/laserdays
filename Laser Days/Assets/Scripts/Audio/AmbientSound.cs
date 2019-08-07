@@ -342,4 +342,9 @@ public class AmbientSound : MonoBehaviour
         DrawGizmo(true);
     }
 
+    private void OnDisable()
+    {
+        RemoveFromList();
+        _state = State.Inactive;
+    }
 }
