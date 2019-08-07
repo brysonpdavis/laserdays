@@ -5,10 +5,12 @@ using UnityEngine;
 public class RobotSpeak : RobotInteraction {
 
     public AudioSource audio;
+    [SerializeField] AudioClip[] speechClips;
     bool active;
     private int _contentLength;
     private TextNarration _textNarration;
     private int _narrationIndex;
+    private int _currentClip = 0;
 
 	// Update is called once per frame
 	void Update () {
@@ -19,7 +21,24 @@ public class RobotSpeak : RobotInteraction {
             {
                 _narrationIndex++;
                 if (_narrationIndex + 1 > _contentLength )
+                {
                     RobotDeactivate();
+                    _currentClip = 0;
+                }
+
+                else
+                {
+                    //if you hit enter when it's not the end of the narration index, play the next clip
+                    //loop around if we have more lines in narration than clips
+                    _currentClip++;
+                    if (_currentClip > speechClips.Length - 1)
+                        _currentClip = 0;
+
+                    audio.clip = speechClips[_currentClip];
+                    audio.Play();
+                }
+
+
             }
         }
     }
@@ -38,7 +57,9 @@ public class RobotSpeak : RobotInteraction {
         _textNarration = GetComponentInChildren<TextNarration>();
         _textNarration.Activate();
         _contentLength = _textNarration.GetContentLength();
-        
+
+        //on first select play first clip
+        audio.clip = speechClips[0];
         audio.Play();
         GetComponentInChildren<GardenEye>().PlayerInteraction();
         Toolbox.Instance.GetFlip().canFlip = false;
