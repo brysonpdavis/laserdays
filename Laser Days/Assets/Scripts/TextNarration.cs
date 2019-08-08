@@ -91,6 +91,11 @@ public class TextNarration : MonoBehaviour
         Toolbox.Instance.ClearNarration();
     }
 
+    private void OnDisable()
+    {
+        Deactivate();
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (!persistent && other.CompareTag("Player")) 

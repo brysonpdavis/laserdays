@@ -487,7 +487,8 @@ public class Toolbox : Singleton<Toolbox>
 
     public void LoadScene(string sceneName, string spawnPoint)
     {
-        Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
+        Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
+        Instance.ClearNarration();
         Time.timeScale = 1f;
 
         GameObject button = GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton;
