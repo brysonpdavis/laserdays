@@ -2,32 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnOffNarrationOnFlip : FlipInteraction {
+public class TurnOffNarrationOnDoorTrigger : MonoBehaviour {
 
-    FlippableObject flippable;
+    public DoorTrigger trigger;
     bool activated = false;
     TakeMultipleActionsOnAction actionsOnAction;
 
+
 	// Use this for initialization
-	void Start () {
-        flippable = GetComponent<FlippableObject>();
+	void Start () 
+    {
         actionsOnAction = GetComponent<TakeMultipleActionsOnAction>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-	}
-
-    public override void Interact()
-    {
-        if (!activated && flippable.timesFlipped > 0)
+        if (!activated && trigger.active)
         {
             activated = true;
             Toolbox.Instance.ClearNarration();
-            //textNarration.SetActive(false);
             Destroy(actionsOnAction);
-        }
 
-    }
+        }
+	}
 }
