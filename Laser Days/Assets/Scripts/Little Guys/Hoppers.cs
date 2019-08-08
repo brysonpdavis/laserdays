@@ -50,10 +50,13 @@ public class Hoppers : MonoBehaviour
     private Animator anim;
 
     public ParticleSystem hopParticles;
+    [SerializeField]
+    private AudioClip hopSound;
 
-    Vector3 lastLookTarget;
+    Vector3 previousPlayerPosition;
     Vector3 currentLookTarget;
     float rotationTimer;
+    AudioSource audio;
 
 	void Start ()
 	{
@@ -65,6 +68,7 @@ public class Hoppers : MonoBehaviour
 		active = true;
         anim = GetComponent<Animator>();
         waypointsOnGround = InitWayPoints(waypoints);
+        audio = GetComponent<AudioSource>();
 
     }
 	
@@ -123,6 +127,8 @@ public class Hoppers : MonoBehaviour
 		
 		active = false;
 
+        MFPP.Audio.Play3D(hopSound, gameObject.transform, Toolbox.Instance.soundEffectsVolume, 1f);
+
         while (jumpElapsed < jumpDuration)
 		{
 
@@ -155,15 +161,24 @@ public class Hoppers : MonoBehaviour
 		}
 	}
 
+    bool PlayerHasMoved()
+    {
+        if (((previousPlayerPosition - player.position).magnitude) > .1f)
+        {
+            return true;
+        }
+
+        else return false;
+    }
+
     IEnumerator LookAtTarget(Vector3 target, float duration)
     {
         rotating = true;
         float elapsedTime = 0f;
         float ratio = 0f;
 
-        lastLookTarget = target;
-
         Vector3 begin = transform.position + transform.forward;
+        bool playerMoved = PlayerHasMoved();
 
         while(elapsedTime < duration)
         {
@@ -171,10 +186,16 @@ public class Hoppers : MonoBehaviour
             elapsedTime += Time.deltaTime;
             Vector3 view = Vector3.Lerp(begin, target, ratio);
             FrogLook(view);
+
+            if (audio && playerMoved)
+                audio.volume = Toolbox.Instance.soundEffectsVolume * TweeningFunctions.BackAndForth(ratio);
+
             yield return null;
 
         }
+        audio.volume = 0f;
         rotating = false;
+        previousPlayerPosition = player.position;
 
     }
 
