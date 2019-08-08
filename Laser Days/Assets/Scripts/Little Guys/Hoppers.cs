@@ -35,6 +35,7 @@ public class Hoppers : MonoBehaviour
 
 	[SerializeField] 
 	private bool repeat = true;
+
     private bool rotating = false;
 
 
@@ -52,6 +53,8 @@ public class Hoppers : MonoBehaviour
     public ParticleSystem hopParticles;
     [SerializeField]
     private AudioClip hopSound;
+    [SerializeField]
+    private AudioClip thudSound;
 
     Vector3 previousPlayerPosition;
     Vector3 currentLookTarget;
@@ -143,6 +146,8 @@ public class Hoppers : MonoBehaviour
 
 		transform.position = endPos;
         hopParticles.Play();
+        if (Toolbox.Instance.PlayerInLaser())
+            MFPP.Audio.Play3D(thudSound, transform, Toolbox.Instance.soundEffectsVolume, 1f);
 
         waypointIndex++;
 
