@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class Transition : MonoBehaviour
 {
-    Renderer mRenderer;
+    protected Renderer mRenderer;
     private MaterialPropertyBlock _propBlock;
     Material material = null;
     public float ScaleSpeed = 1f;
-    private bool sharedMaterial = false;
+    protected bool sharedMaterial = false;
     //public IList<Material> sharedmaterials;
     private IEnumerator flipTransition;
     float offset;
@@ -45,35 +45,9 @@ public class Transition : MonoBehaviour
         {
             mRenderer = GetComponent<ParticleSystemRenderer>();
         }
+        
+        CheckForInstance();
 
-        // If the gameobject is on Real, Laser, or TransitionOnly
-        // Check if it is interactable to see if the material should be its own instance
-        // In any other case, the material should be shared
-        if (gameObject.layer == 10 || gameObject.layer == 11 || gameObject.layer == 27)
-        {
-            if (GetComponent<ReticleObject>())
-            {
-                material = mRenderer.material;
-            }
-            else
-            {
-                material = mRenderer.sharedMaterial;
-            }
-        } 
-
-        // If it is marked shared, then make it shared 
-        // For now, do the same if its not marked shared, but not on shared layers
-        else if (shared)
-        {
-            material = mRenderer.sharedMaterial;
-            sharedMaterial = true;
-            shared = true;
-        } else 
-        {
-            material = mRenderer.sharedMaterial;
-            sharedMaterial = true;
-            shared = true;
-        }
 
         // forceInstant is a manual option to have single-world materials transition instantly with shared materials
         if (forceInstant)
@@ -92,6 +66,40 @@ public class Transition : MonoBehaviour
         offset = Random.value;
         speed = Random.Range(1f, 2f);
         SetupChildrenTransitions();
+    }
+
+    protected virtual void CheckForInstance()
+    {
+        // If the gameobject is on Real, Laser, or TransitionOnly
+        // Check if it is interactable to see if the material should be its own instance
+        // In any other case, the material should be shared
+
+        if (gameObject.layer == 10 || gameObject.layer == 11 || gameObject.layer == 27)
+        {
+            if (GetComponent<ReticleObject>())
+            {
+                material = mRenderer.material;
+            }
+            else
+            {
+                material = mRenderer.sharedMaterial;
+            }
+        } 
+        // If it is marked shared, then make it shared 
+        // For now, do the same if its not marked shared, but not on shared layers
+        else if (shared)
+        {
+            material = mRenderer.sharedMaterial;
+            sharedMaterial = true;
+            shared = true;
+        } else 
+        {
+            material = mRenderer.sharedMaterial;
+            sharedMaterial = true;
+            shared = true;
+        }
+
+
     }
 
 
@@ -173,6 +181,7 @@ public class Transition : MonoBehaviour
         //in case start has not occurred yet
         if (!mRenderer)
             Awake();
+        
         if (mRenderer)
         {
             mRenderer.GetPropertyBlock(_propBlock);
@@ -182,12 +191,12 @@ public class Transition : MonoBehaviour
     }
 
 
-    public void MaterialSetStart (float value)
+    public virtual void MaterialSetStart (float value)
     {
         mRenderer.sharedMaterial.SetFloat("_TransitionState", value);
     }
 
-    private IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
+    protected virtual IEnumerator flipTransitionRoutine(float startpoint, float endpoint, float duration)
     {        
         float elapsedTime = 0;
         float ratio = elapsedTime / duration;
@@ -221,7 +230,7 @@ public class Transition : MonoBehaviour
             Toolbox.Instance.PlayerInLaser() && ShaderUtility.ShaderIsLaser(material) && (currentTransitionState > .999f) ||
             (!ShaderUtility.ShaderIsReal(material) && !ShaderUtility.ShaderIsLaser(material)))
             return false;
-
-        else return true;
+        
+        return true;
     }
 }
