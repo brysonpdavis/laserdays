@@ -384,7 +384,7 @@ Shader "Hidden/EdgeDetect" {
         half minDepth = min(pass1.y, pass2.y);
         
         //Line opapcity depth fade
-        float f = ComputeFog(minDepth, 0.05);     
+        float f = ComputeFog(minDepth, 0.01);     
         
         if(centerDepth>0.999)
         {
@@ -402,7 +402,7 @@ Shader "Hidden/EdgeDetect" {
         float4 pm = 1 - edge;
 		float4 sc = (edge * original);
         
-        
+        //return edge;
         //return centerExtra;
         
         //return lerp(white,black, edge * 1);

@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114663494369940888}
   - component: {fileID: 54760417482633902}
   - component: {fileID: 114204763400372712}
+  - component: {fileID: 114191079291832144}
   m_Layer: 10
   m_Name: LaserTree
   m_TagString: Untagged
@@ -193,6 +194,21 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 5a1ecdc8839e74e628744377c83f4084, type: 3}
+--- !u!114 &114191079291832144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1113203675768714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bea4c010b684720a24c8646da392e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minScale: 0.5
+  maxScale: 1.5
+  gameObjects:
+  - {fileID: 1113203675768714}
 --- !u!114 &114204763400372712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -222,6 +238,8 @@ MonoBehaviour:
   ScaleSpeed: 0.8
   shared: 0
   manualTransitionChildren: 0
+  forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114570097180287158
 MonoBehaviour:
@@ -250,6 +268,8 @@ MonoBehaviour:
   ScaleSpeed: 0.6
   shared: 0
   manualTransitionChildren: 0
+  forceRadial: 0
+  forceInstant: 0
   tween: 3
 --- !u!114 &114960549213899908
 MonoBehaviour:

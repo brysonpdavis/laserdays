@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class TweeningFunctions {
 
-    public enum TweenType { Linear, EaseIn, EaseOut, EaseInOut, EaseInCubic, EaseOutCubic, BackAndForth };
+    public enum TweenType { Linear, EaseIn, EaseOut, EaseInOut, EaseInCubic, EaseOutCubic, BackAndForth, FiveStep };
 
     public static float Tween(TweenType type, float R)
     {
@@ -41,6 +41,10 @@ public static class TweeningFunctions {
 
             case TweenType.BackAndForth:
                 return BackAndForth(R);
+                break;
+
+            case TweenType.FiveStep:
+                return FiveStep(R);
                 break;
               
             default :
@@ -115,6 +119,12 @@ public static class TweeningFunctions {
     {
         float r = Mathf.Clamp01(R);
         return (EaseOut(r) * (1f - r)) + (EaseIn(r) * r);
-        ;
+    }
+
+    public static float FiveStep(float R)
+    {
+        float r = Mathf.Clamp01(R);
+        return Mathf.Floor(r * 5) / 5;
+        
     }
 }

@@ -98,7 +98,7 @@ public class TransparentBufferRenderer : MonoBehaviour
 
     private void Update()
     {
-        cam = Camera.main;
+        cam = GetComponent<Camera>();
 
         if(!cam){
             return;

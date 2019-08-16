@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: R_Leaf_Green
-  m_Shader: {fileID: 4800000, guid: 748553c7d04b94d04829710a227656fb, type: 3}
+  m_Shader: {fileID: 4800000, guid: 85c990811e84845d0be0c2ff50b42515, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -18,6 +18,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AccentMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -35,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EffectMap:
-        m_Texture: {fileID: 2800000, guid: 9923cd53423e6459ba29f6a488f208bf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5bf2f068aeed04dc488c92b51cd747a4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -43,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d94beaf6969a14e16a82392ea1f5db5b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaterialMap:
@@ -75,6 +79,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlbedoContribution: 0
+    - _AlphaCutoff: 0.5
+    - _BaseToDeath: 0
+    - _BeginToBase: 1
     - _BumpScale: 1
     - _Clip: 1
     - _Cutoff: 0.5
@@ -86,24 +94,35 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Highlights: 0
+    - _LineA: 0
+    - _MainTexContribution: 0.1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Smoothness: 0
+    - _Smoothness2: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TransitionState: 0
     - _TransitionStateB: 0
     - _UVSec: 0
+    - _ZFightOffset: 0.0001
     - _ZWrite: 1
     - __dirty: 0
     - _onHold: 0
     - _onHover: 0
     m_Colors:
+    - _AccentColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.9433962, g: 0.14684942, b: 0.14684942, a: 1}
+    - _BeginColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorLaser: {r: 0, g: 0, b: 0, a: 0}
     - _ColorReal: {r: 1, g: 0.3951035, b: 0.27830186, a: 0}
+    - _DeathColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
     - _ShimmerColor: {r: 0.0075776875, g: 0.028301895, b: 0.006541476, a: 0.4627451}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 1}
