@@ -17,6 +17,7 @@ public class Toolbox : Singleton<Toolbox>
     GameObject realWorldParentObject;
     GameObject laserWorldParentObject;
     public GameObject player;
+    public Camera playerCam;
     public GameObject mainCanvas;
     RaycastManager raycastManager;
     MFPP.Modules.PickUpModule pickUp;
@@ -347,9 +348,13 @@ public class Toolbox : Singleton<Toolbox>
     {
         if (!player)
             player  = GameObject.FindWithTag("Player");
-        
+
+
+
         if (!mainCanvas)
             mainCanvas = GameObject.FindWithTag("Main Canvas");
+
+        playerCam = player.GetComponentInChildren<Camera>();
         raycastManager = player.GetComponent<RaycastManager>();
         pickUp = player.GetComponent<MFPP.Modules.PickUpModule>();
         flipScript = player.GetComponent<flipScript>();
@@ -375,6 +380,7 @@ public class Toolbox : Singleton<Toolbox>
 
         Debug.Log("adding player info!");
         Toolbox.Instance.player = player;
+        Toolbox.Instance.playerCam = playerCam;
         Toolbox.Instance.pickUp = pickUp;
         Toolbox.Instance.raycastManager = raycastManager;
         Toolbox.Instance.flipScript = flipScript;

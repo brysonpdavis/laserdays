@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class SoftBoundary : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class SoftBoundary : MonoBehaviour
     private float speedMultiplier;
     [SerializeField]
     private float routineDuration = 2f;
-    
+
     private static Coroutine _coroutine;
     private static float _volume = 0f;
     private static List<SoftBoundary> _boundariesWithPlayerInside;
+
+    private ImageEffectBoundary boundaryEffect;
 
     private void Start()
     {
@@ -20,12 +23,23 @@ public class SoftBoundary : MonoBehaviour
         {
             _boundariesWithPlayerInside = new List<SoftBoundary>();
         }
+
+        GetComponent<Renderer>().enabled = false;
+
+
+        boundaryEffect = Toolbox.Instance.playerCam.GetComponent<ImageEffectBoundary>();
+
     }
 
     private void Update()
     {
         if (Input.GetKey(KeyCode.K))
             Debug.LogError("volume: " + _volume);
+
+        if (boundaryEffect)
+        {
+            boundaryEffect.instensityMultiplier = _volume;
+        }
     }
 
     private IEnumerator OutputVolumeRoutineOn()
@@ -37,7 +51,7 @@ public class SoftBoundary : MonoBehaviour
 
         while (elapsed < routineDuration)
         {
-            yield return null; 
+            yield return null;
             elapsed += Time.deltaTime;
             ratio = elapsed / routineDuration;
 
@@ -47,7 +61,7 @@ public class SoftBoundary : MonoBehaviour
         _volume = end;
         _coroutine = null;
     }
-    
+
     private IEnumerator OutputVolumeRoutineOff()
     {
         var start = _volume;
@@ -57,10 +71,10 @@ public class SoftBoundary : MonoBehaviour
 
         while (elapsed < routineDuration)
         {
-            yield return null; 
+            yield return null;
             elapsed += Time.deltaTime;
             ratio = elapsed / routineDuration;
-            
+
             _volume = TweeningFunctions.EaseOut(Mathf.Lerp(start, end, ratio));
         }
 
@@ -86,9 +100,9 @@ public class SoftBoundary : MonoBehaviour
                 StopLocalCoroutine();
                 _coroutine = StartCoroutine(OutputVolumeRoutineOn());
             }
-            
+
             _boundariesWithPlayerInside.Add(this);
-        }    
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -102,12 +116,13 @@ public class SoftBoundary : MonoBehaviour
                 MFPP.Player.SetBoundaryMultiplier(1f);
                 StopLocalCoroutine();
                 _coroutine = StartCoroutine(OutputVolumeRoutineOff());
-            }        
+            }
         }
     }
 
     public static float GetVolume()
     {
         return _volume;
-    } 
+    }
 }
+
