@@ -21,7 +21,7 @@ public class NarrationControl : MonoBehaviour
 	void Update () {
 		if (Toolbox.Instance.GetNarrationActive())
 		{
-			if (ControlManager.Instance.GetButtonDown("Submit"))
+			if (ControlManager.Instance.GetButtonDown("Select"))
 			{
 				Toolbox.Instance.NextNarration();
 			}

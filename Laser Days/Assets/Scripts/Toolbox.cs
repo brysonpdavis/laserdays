@@ -266,8 +266,10 @@ public class Toolbox : Singleton<Toolbox>
         narrationActive = false;
         narrationText.text = null;
 		narrationCurrentWords = "";
-        narrationBackground.SetActive(false);
-        narrationContinue.SetActive(false);
+        if (narrationBackground)
+            narrationBackground.SetActive(false);
+        if (narrationContinue)
+            narrationContinue.SetActive(false);
         narrationIndex = 0;
 		wording = false;
     }
