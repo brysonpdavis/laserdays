@@ -2697,6 +2697,7 @@ MonoBehaviour:
   sokobanDrag: {fileID: 8300000, guid: 234d813c0b35c42da8048935df84909a, type: 3}
   doorActive: {fileID: 8300000, guid: bb8b5c9970920471e8b29488251db21e, type: 3}
   narrationSound: {fileID: 8300000, guid: 8f55c1529f08549b1945a6bf8e34b6a0, type: 3}
+  touchDestroy: {fileID: 0}
 --- !u!4 &361469376
 Transform:
   m_ObjectHideFlags: 0
@@ -22924,7 +22925,7 @@ MonoBehaviour:
   envSize: 0
   space: 1
   audioSourceSecondary: {fileID: 2134396829}
-  canFlip: 1
+  canFlip: 0
   flipFailClip: {fileID: 0}
   flippedThisFrame: 1
   ring: {fileID: 1533002151840832, guid: 4fd7b176b88b04bda99dd6b6240322bb, type: 2}
@@ -29378,7 +29379,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -32396,13 +32397,14 @@ MonoBehaviour:
   LaserChords: {fileID: 594674470}
   RealChords: {fileID: 1821008374}
   bass: {fileID: 1401403024}
-  flipClip: {fileID: 11400000, guid: 9211237189e7b425a83e364176920aea, type: 2}
+  flipClip: {fileID: 11400000, guid: d90633685e95741c2a19832f4d034f26, type: 2}
   chordFadeDuration: 1
   play: 0
-  mute: 1
-  counter: 0
+  mute: 0
+  counter: 6
   mainSlider: {fileID: 531874573}
-  dynamicVolume: 0
+  ambientPercentage: 1
+  dynamicVolume: 1
 --- !u!4 &2134396831
 Transform:
   m_ObjectHideFlags: 0
@@ -32411,7 +32413,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2134396828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 594674469}

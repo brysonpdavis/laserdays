@@ -20,21 +20,24 @@ public class SoundTrackManager : MonoBehaviour {
 
     private IEnumerator chordFade;
     private float globalVolume;
-    private float ambientPercentage;
+    [SerializeField] private float ambientPercentage;
     private float realLevel;
     private float laserLevel;
     public float dynamicVolume = 0f;
 
 
+    private void Awake()
+    {
+        ambientPercentage = AmbientSound.AmbientPercentage();
 
-	// Use this for initialization
-	void Start () {
+    }
+    // Use this for initialization
+    void Start () {
 
         audioSource = GetComponent<AudioSource>();
         mainSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
         //secondarySource = GetComponentInChildren<AudioSource>();
         globalVolume = mainSlider.value;
-        ambientPercentage = AmbientSound.AmbientPercentage();
         if (Toolbox.Instance.PlayerInLaser())
         {
             laserLevel = 1;
