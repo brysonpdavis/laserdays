@@ -82,10 +82,12 @@ public class TouchDestroy : FlipInteraction{
         if (touched && !activated)
         {
             activated = true;
-                            
-            audio.clip = SoundBox.Instance.flipFail;
-            audio.Play();
-            audio.loop = false;
+
+
+            MFPP.Audio.Play3D(SoundBox.Instance.touchDestroy, this.transform, Toolbox.Instance.soundEffectsVolume);
+            //MFPP.Audio.Play(SoundBox.Instance.touchDestroy, Toolbox.Instance.soundEffectsVolume);
+
+            audio.Stop();
 
 
             foreach (Rigidbody r in rb)

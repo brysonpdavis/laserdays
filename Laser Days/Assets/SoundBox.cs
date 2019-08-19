@@ -51,6 +51,8 @@ public class SoundBox : MonoBehaviour {
     public AudioClip doorActive;
 
     public AudioClip narrationSound;
+
+    public AudioClip touchDestroy;
     
 
     private void Awake()
