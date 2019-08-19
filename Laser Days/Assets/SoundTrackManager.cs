@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SoundTrackManager : MonoBehaviour {
+public class SoundTrackManager : Singleton<SoundTrackManager> {
 
     public AudioSource audioSource;
     public AudioSource LaserChords;
@@ -24,6 +24,8 @@ public class SoundTrackManager : MonoBehaviour {
     private float realLevel;
     private float laserLevel;
     public float dynamicVolume = 0f;
+    public bool loopMode;
+    public int loopChord = 3;
 
 
     private void Awake()
@@ -90,12 +92,16 @@ public class SoundTrackManager : MonoBehaviour {
         if (counter <= 8)
         {
             //play random set chord tones
-            currentChord = Random.Range(0, flipClip.defaultFlipClips.Count);
+            if (loopMode)
+                currentChord = loopChord;
+            else
+                currentChord = Random.Range(0, flipClip.defaultFlipClips.Count);
             LaserChords.clip = flipClip.defaultFlipClips[currentChord].backgroundSound;
             RealChords.clip = flipClip.defaultFlipClips[currentChord].backgroundSoundAlt;
             LaserChords.Play();
             RealChords.Play();
-            counter += 1;
+            if (!loopMode)
+                counter += 1;
 
             if (counter > 4)
             {
@@ -113,12 +119,16 @@ public class SoundTrackManager : MonoBehaviour {
     //second section
     else {
         //play random set chord tones
-            currentChord = Random.Range(0, flipClip.section2.Count);
+            if (loopMode)
+                currentChord = loopChord;
+            else
+                currentChord = Random.Range(0, flipClip.section2.Count);
             LaserChords.clip = flipClip.section2[currentChord].backgroundSound;
             RealChords.clip = flipClip.section2[currentChord].backgroundSoundAlt;
             LaserChords.Play();
             RealChords.Play();
-            counter += 1;
+            if (!loopMode)
+                counter += 1;
 
             if (counter > 12)
             {
