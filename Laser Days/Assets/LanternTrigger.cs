@@ -6,7 +6,7 @@ public class LanternTrigger : MonoBehaviour {
 
     bool done = false;
     public Light light;
-    public AudioClip[] clips;
+    public AudioClip clip;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,7 +15,7 @@ public class LanternTrigger : MonoBehaviour {
             done = true;
             AudioSource audio = GetComponent<AudioSource>();
 
-            audio.clip = clips[Random.Range(0, clips.Length)];
+            audio.clip = clip;
             audio.Play();
             light.intensity += .5f;
         }

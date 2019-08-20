@@ -26,16 +26,13 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
     public float dynamicVolume = 0f;
     public bool loopMode;
     public int loopChord = 3;
+    private float timeBeforeStart = 3f;
+    private float currentTime;
 
 
-    private void Awake()
-    {
-        ambientPercentage = AmbientSound.AmbientPercentage();
-
-    }
     // Use this for initialization
-    void Start () {
-
+    void Awake () {
+        ambientPercentage = AmbientSound.AmbientPercentage();
         audioSource = GetComponent<AudioSource>();
         mainSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
         //secondarySource = GetComponentInChildren<AudioSource>();
@@ -51,7 +48,7 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
             realLevel = 1;
         }
     }
-    
+
     public void ValueChangeCheck()
     {
         SetVolume();   
@@ -64,6 +61,9 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
 
     // Update is called once per frame
     void Update () {
+
+        WaitToStart();
+
         if (!mute && !play) { StartCoroutine(Soundtrack()); 
             play = true;
         }
@@ -212,6 +212,12 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
         }
     }
 
+    void WaitToStart()
+    {
+        currentTime += Time.deltaTime;
+        if (currentTime > timeBeforeStart)
+            mute = false;
+    }
 
 
 }
