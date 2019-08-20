@@ -26,8 +26,6 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
     public float dynamicVolume = 0f;
     public bool loopMode;
     public int loopChord = 3;
-    private float timeBeforeStart = 3f;
-    private float currentTime;
 
 
     // Use this for initialization
@@ -61,8 +59,6 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
 
     // Update is called once per frame
     void Update () {
-
-        WaitToStart();
 
         if (!mute && !play) { StartCoroutine(Soundtrack()); 
             play = true;
@@ -210,13 +206,6 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-    }
-
-    void WaitToStart()
-    {
-        currentTime += Time.deltaTime;
-        if (currentTime > timeBeforeStart)
-            mute = false;
     }
 
 
