@@ -27,7 +27,8 @@ public class AmbientSound : MonoBehaviour
     {
         Inactive,
         Edge,
-        Inside
+        Inside,
+        Start
     }
 
     private void Awake()
@@ -59,7 +60,9 @@ public class AmbientSound : MonoBehaviour
         _realSource.volume = 0;
         _laserSource.volume = 0;
         
-        DisableSources();
+        _state = State.Start;
+        ChangeStates();
+        DoStates();
     }
 
     private void Update()
@@ -281,6 +284,32 @@ public class AmbientSound : MonoBehaviour
                 }
                 break;
             }
+
+            case State.Start:
+            {
+                if (_playerDist < activeDist)
+                {
+                    _state = State.Inside;
+                    EnableSources();
+                    AddToList();
+                    SetToProperWorldImmediate();
+                }
+                else if (_playerDist < activeDist + fadeDist)
+                {
+                    _state = State.Edge;
+                    EnableSources();
+                    AddToList();
+                    SetToProperWorldImmediate();
+                }
+                else
+                {
+                    _state = State.Inactive;
+                    DisableSources();
+                    RemoveFromList();
+                }
+
+                break;
+            }
         }
     }
 
@@ -305,6 +334,12 @@ public class AmbientSound : MonoBehaviour
             {
                 _edgeFade = 1f;
                 SetSourceVolumes();
+                break;
+            }
+
+            case State.Start:
+            {
+                Debug.Log("Something went wrong here");
                 break;
             }
         }
