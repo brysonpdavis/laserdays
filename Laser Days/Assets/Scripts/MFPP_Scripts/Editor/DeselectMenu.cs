@@ -35,6 +35,8 @@ public class DeselectMenu : MonoBehaviour
         {
             g.transform.parent = parent.transform;
         }
+
+        Selection.activeGameObject = parent;
     }
 
 
