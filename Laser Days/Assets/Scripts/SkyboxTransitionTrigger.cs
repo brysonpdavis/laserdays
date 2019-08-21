@@ -35,20 +35,23 @@ public class SkyboxTransitionTrigger : MonoBehaviour {
         Color currentAmb;
 
         sky.material = settings.GetSkyBoxMaterial();
-        sky.material.SetFloat("_TransitionState", transitionProgress);
 
         RenderSettings.skybox = sky.material;
 
         if (sky.transitionDirection)
         {
             currentFog = Color.Lerp(sky.laserFog, sky.realFog, transitionProgress);
-            currentAmb = Color.Lerp(sky.laserAmbient, sky.realAbmient, transitionProgress);   
+            currentAmb = Color.Lerp(sky.laserAmbient, sky.realAbmient, transitionProgress);
+            sky.material.SetFloat("_TransitionState", 1f- transitionProgress);
+
         }
 
         else
         {
             currentFog = Color.Lerp(sky.realFog, sky.laserFog, transitionProgress);
             currentAmb = Color.Lerp(sky.realAbmient, sky.laserAmbient, transitionProgress); 
+            sky.material.SetFloat("_TransitionState", transitionProgress);
+
         }
 
         sky.currentFog = currentFog;
