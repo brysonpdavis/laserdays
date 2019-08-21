@@ -142,7 +142,7 @@ namespace MFPP.Modules
                 }
                 else
                 {
-                    data = (mr != null ? Player.Footstep.Asset.GetData(mr.sharedMaterial) ?? Player.Footstep.Asset.GetData(mr.sharedMaterial.mainTexture) ?? Player.CurrentFootstepData : Player.CurrentFootstepData);
+                    data = Player.CurrentFootstepData;
                 }
             }
 

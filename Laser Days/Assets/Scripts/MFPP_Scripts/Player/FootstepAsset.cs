@@ -171,7 +171,7 @@ namespace MFPP
         /// </summary>
         /// <param name="material">The material.</param>
         /// <returns>The corresponding footstep <see cref="Data"/> for the specified <see cref="Material"/>.</returns>
-        public Data GetData(Material material)
+        public Data GetData(PhysicMaterial material)
         {
             return footsteps.FirstOrDefault(f => f.LinkedMaterials.Contains(material));
         }
@@ -201,83 +201,94 @@ namespace MFPP
             if (data != null)
                 return data;
 
-            // Check for meshes
-            MeshRenderer mr = hit.collider.GetComponent<MeshRenderer>();
-            MeshFilter mf = hit.collider.GetComponent<MeshFilter>();
-            if (mr != null)
+            Debug.Log(hit.collider.material.name);
+            data = GetData(hit.collider.material);
+
+            if (data != null)
             {
-                // Check for submeshes materials
-                if (hit.collider is MeshCollider && mf != null && mf.mesh.subMeshCount > 1 && !mr.isPartOfStaticBatch)
-                {
-                    Mesh m = mf.sharedMesh;
-
-                    int limit = hit.triangleIndex * 3;
-                    int submesh;
-                    for (submesh = 0; submesh < m.subMeshCount; submesh++)
-                    {
-                        int numIndices = m.GetTriangles(submesh).Length;
-                        if (numIndices > limit)
-                            break;
-
-                        limit -= numIndices;
-                    }
-
-                    Material material = mr.sharedMaterials[submesh];
-                    data = GetData(material);
-
-                    if (data != null)
-                        return data;
-                }
-
-                // Check for material
-                data = GetData(mr.sharedMaterial);
-
-                if (data != null)
-                    return data;
-
-                // Check for texture
-                //data = GetData(mr.sharedMaterial.mainTexture);
-
-                if (data != null)
-                    return data;
+                Debug.Log("attempting");
+                return data;
             }
+                
 
-            // Check for terrains
-            Terrain t = hit.collider.GetComponent<Terrain>();
-            if (t != null)
-            {
-                TerrainData TD = t.terrainData;
+            //// Check for meshes
+            //MeshRenderer mr = hit.collider.GetComponent<MeshRenderer>();
+            //MeshFilter mf = hit.collider.GetComponent<MeshFilter>();
+            //if (mr != null)
+            //{
+            //    // Check for submeshes materials
+            //    if (hit.collider is MeshCollider && mf != null && mf.mesh.subMeshCount > 1 && !mr.isPartOfStaticBatch)
+            //    {
+            //        Mesh m = mf.sharedMesh;
 
-                if (TD.splatPrototypes.Length > 0)
-                {
-                    Texture finalTexture = null;
+            //        int limit = hit.triangleIndex * 3;
+            //        int submesh;
+            //        for (submesh = 0; submesh < m.subMeshCount; submesh++)
+            //        {
+            //            int numIndices = m.GetTriangles(submesh).Length;
+            //            if (numIndices > limit)
+            //                break;
 
-                    Vector3 position = hit.point;
-                    Vector2 AS = new Vector2(TD.alphamapWidth, TD.alphamapHeight); // Control texture size
-                    Vector3 TS = TD.size; // Terrain size
+            //            limit -= numIndices;
+            //        }
 
-                    // Lookup texture we are standing on
-                    int AX = (int)Mathf.Lerp(0, AS.x, Mathf.InverseLerp(t.transform.position.x, t.transform.position.x + TS.x, position.x));
-                    int AY = (int)Mathf.Lerp(0, AS.y, Mathf.InverseLerp(t.transform.position.z, t.transform.position.z + TS.z, position.z));
+            //        PhysicMaterial material = hit.collider.material;
+            //        //Material material = mr.sharedMaterials[submesh];
+            //        data = GetData(material);
 
-                    float[,,] TerrCntrl = TD.GetAlphamaps(AX, AY, 1, 1);
+            //        if (data != null)
+            //            return data;
+            //    }
 
-                    for (int i = 0; i < TD.splatPrototypes.Length; i++)
-                    {
-                        if (TerrCntrl[0, 0, i] >= .5f)
-                        {
-                            finalTexture = TD.splatPrototypes[i].texture;
-                            break;
-                        }
-                    }
+            //    // Check for material
+            //    data = GetData(hit.collider.material);
 
-                    // Check for terrain texture we're standing on
-                    data = GetData(finalTexture);
+            //    if (data != null)
+            //        return data;
 
-                    if (data != null)
-                        return data;
-                }
-            }
+            //    // Check for texture
+            //    //data = GetData(mr.sharedMaterial.mainTexture);
+
+            //    if (data != null)
+            //        return data;
+            //}
+
+            //// Check for terrains
+            //Terrain t = hit.collider.GetComponent<Terrain>();
+            //if (t != null)
+            //{
+            //    TerrainData TD = t.terrainData;
+
+            //    if (TD.splatPrototypes.Length > 0)
+            //    {
+            //        Texture finalTexture = null;
+
+            //        Vector3 position = hit.point;
+            //        Vector2 AS = new Vector2(TD.alphamapWidth, TD.alphamapHeight); // Control texture size
+            //        Vector3 TS = TD.size; // Terrain size
+
+            //        // Lookup texture we are standing on
+            //        int AX = (int)Mathf.Lerp(0, AS.x, Mathf.InverseLerp(t.transform.position.x, t.transform.position.x + TS.x, position.x));
+            //        int AY = (int)Mathf.Lerp(0, AS.y, Mathf.InverseLerp(t.transform.position.z, t.transform.position.z + TS.z, position.z));
+
+            //        float[,,] TerrCntrl = TD.GetAlphamaps(AX, AY, 1, 1);
+
+            //        for (int i = 0; i < TD.splatPrototypes.Length; i++)
+            //        {
+            //            if (TerrCntrl[0, 0, i] >= .5f)
+            //            {
+            //                finalTexture = TD.splatPrototypes[i].texture;
+            //                break;
+            //            }
+            //        }
+
+            //        // Check for terrain texture we're standing on
+            //        data = GetData(finalTexture);
+
+            //        if (data != null)
+            //            return data;
+            //    }
+            //}
 
             return DefaultFootsteps;
         }
@@ -307,11 +318,11 @@ namespace MFPP
             [Header("Linking")]
             [SerializeField]
             [Tooltip("Linked materials for this footstep data (If this belongs to the Default Footsteps, this is ignored.)")]
-            protected List<Material> linkedMaterials;
+            protected List<PhysicMaterial> linkedMaterials;
             /// <summary>
             /// Linked materials for this footstep data.
             /// </summary>
-            public List<Material> LinkedMaterials
+            public List<PhysicMaterial> LinkedMaterials
             {
                 get { return linkedMaterials; }
                 set { linkedMaterials = value; }
@@ -340,6 +351,18 @@ namespace MFPP
                 get { return footstepClips; }
                 set { footstepClips = value; }
             }
+            [SerializeField]
+            [Tooltip("Footstep sounds for laser.")]
+            protected List<AudioClip> footstepClipsAlt;
+            /// <summary>
+            /// Footstep sounds.
+            /// </summary>
+            public List<AudioClip> FootstepClipsAlt
+            {
+                get { return footstepClipsAlt; }
+                set { footstepClipsAlt = value; }
+            }
+
             [SerializeField]
             [Tooltip("Jumping sounds.")]
             protected List<AudioClip> jumpingClips;
@@ -402,10 +425,24 @@ namespace MFPP
             /// <returns>A random footstep sound from this <see cref="Data"/>.</returns>
             public AudioClip GetRandomFootstep()
             {
-                if (footstepClips == null || footstepClips.Count <= 0)
-                    return null;
+                if (Toolbox.Instance.PlayerInLaser())
+                {
+                    if (footstepClips == null || footstepClips.Count <= 0)
+                        return null;
 
-                return footstepClips[Random.Range(0, footstepClips.Count)];
+                    return footstepClips[Random.Range(0, footstepClips.Count)];
+                }
+
+                else 
+                {
+                    {
+                        if (footstepClipsAlt == null || footstepClipsAlt.Count <= 0)
+                            return null;
+
+                        return footstepClipsAlt[Random.Range(0, footstepClipsAlt.Count)];
+                    }
+                }
+
             }
             /// <summary>
             /// Gets a random jumping sound from this <see cref="Data"/>.
