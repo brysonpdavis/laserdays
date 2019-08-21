@@ -5,17 +5,12 @@ using UnityEngine;
 public class SkyboxTransitionTrigger : MonoBehaviour {
 
     SkyboxTransition sky;
-    public Material newSkyboxMaterial;
-    public Color laserFog;
-    public Color laserAmbient;
-    public Color realFog;
-    public Color realAbmient;
-
+    public WorldSettings settings;
 
 
     private void Start()
     {
-        sky = Toolbox.Instance.GetPickUp().GetComponent<SkyboxTransition>();
+        sky = Toolbox.Instance.GetPlayer().GetComponent<SkyboxTransition>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,10 +23,10 @@ public class SkyboxTransitionTrigger : MonoBehaviour {
 
     void SetSkyboxValues()
     {
-        sky.laserFog = laserFog;
-        sky.laserAmbient = laserAmbient;
-        sky.realFog = realFog;
-        sky.realAbmient = realAbmient;
+        sky.laserFog = settings.GetLaserFog();
+        sky.laserAmbient = settings.GetLaserAmbient();
+        sky.realFog = settings.GetRealFog();
+        sky.realAbmient = settings.GetRealAmbient();
 
 
 
@@ -39,21 +34,21 @@ public class SkyboxTransitionTrigger : MonoBehaviour {
         Color currentFog;
         Color currentAmb;
 
-        sky.material = newSkyboxMaterial;
+        sky.material = settings.GetSkyBoxMaterial();
         sky.material.SetFloat("_TransitionState", transitionProgress);
 
-        RenderSettings.skybox = newSkyboxMaterial;
+        RenderSettings.skybox = sky.material;
 
         if (sky.transitionDirection)
         {
-            currentFog = Color.Lerp(laserFog, realFog, transitionProgress);
-            currentAmb = Color.Lerp(laserAmbient, realAbmient, transitionProgress);   
+            currentFog = Color.Lerp(sky.laserFog, sky.realFog, transitionProgress);
+            currentAmb = Color.Lerp(sky.laserAmbient, sky.realAbmient, transitionProgress);   
         }
 
         else
         {
-            currentFog = Color.Lerp(realFog, laserFog, transitionProgress);
-            currentAmb = Color.Lerp(realAbmient, laserAmbient, transitionProgress); 
+            currentFog = Color.Lerp(sky.realFog, sky.laserFog, transitionProgress);
+            currentAmb = Color.Lerp(sky.realAbmient, sky.laserAmbient, transitionProgress); 
         }
 
         sky.currentFog = currentFog;

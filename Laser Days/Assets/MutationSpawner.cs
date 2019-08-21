@@ -33,7 +33,7 @@ public class MutationSpawner : MonoBehaviour {
         for (int i = 0; i < numSpawnAttempts; i++)
         {
             Vector3 vec = (transform.forward) - (transform.up / 2) + (0.5f * Random.insideUnitSphere);
-            vec = transform.forward + (Random.insideUnitSphere * 0.4f);
+            //vec = transform.forward + (Random.insideUnitSphere * 0.4f);
             RaycastHit hit;
 
             if(Physics.Raycast(playerTransform.position + eyeLevel, vec, out hit, maxSpawnDistance, LayerMaskController.SpawnCast))
