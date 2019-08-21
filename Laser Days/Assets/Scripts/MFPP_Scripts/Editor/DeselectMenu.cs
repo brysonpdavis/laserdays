@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.ImageEffects;
+using System.Reflection;
 
 public class DeselectMenu : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class DeselectMenu : MonoBehaviour
     // and give it a shortcut (ctrl-g on Windows, cmd-g on macOS).
     static Material myMaterial;
 
+    private static double renameTime;
+    private static GameObject go;
+
+
     [MenuItem("RustForms/Deselect All and Play %g")]
     static void DoSomethingWithAShortcutKey()
     {
@@ -26,6 +31,7 @@ public class DeselectMenu : MonoBehaviour
     [MenuItem("RustForms/Group %#g")]
     static void Group()
     {
+
         GameObject parent = new GameObject();
         parent.name = "New Group";
         parent.transform.parent = Selection.gameObjects[0].transform.parent;
@@ -35,7 +41,26 @@ public class DeselectMenu : MonoBehaviour
         {
             g.transform.parent = parent.transform;
         }
+
+        EditorApplication.update += EngageRenameMode;
+        renameTime = EditorApplication.timeSinceStartup + 0.4d;
+        EditorApplication.ExecuteMenuItem("Window/Hierarchy");
+        Selection.activeGameObject = parent;
+
     }
+
+    private static void EngageRenameMode()
+    {
+        if (EditorApplication.timeSinceStartup >= renameTime)
+        {
+            EditorApplication.update -= EngageRenameMode;
+            var type = typeof(EditorWindow).Assembly.GetType("UnityEditor.SceneHierarchyWindow");
+            var hierarchyWindow = EditorWindow.GetWindow(type);
+            var rename = type.GetMethod("RenameGO", BindingFlags.Instance | BindingFlags.NonPublic);
+            rename.Invoke(hierarchyWindow, null);
+        }
+    }
+
 
 
     [MenuItem("RustForms/Copy Material %#w")]
