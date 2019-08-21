@@ -23,6 +23,20 @@ public class DeselectMenu : MonoBehaviour
         EditorApplication.ExecuteMenuItem("Edit/Play");
     }
 
+    [MenuItem("RustForms/Group %#g")]
+    static void Group()
+    {
+        GameObject parent = new GameObject();
+        parent.name = "New Group";
+        parent.transform.parent = Selection.gameObjects[0].transform.parent;
+        parent.transform.position = Selection.activeTransform.position;
+
+        foreach (GameObject g in Selection.gameObjects)
+        {
+            g.transform.parent = parent.transform;
+        }
+    }
+
 
     [MenuItem("RustForms/Copy Material %#w")]
     static void CopyMaterial()

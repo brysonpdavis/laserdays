@@ -192,7 +192,7 @@ public class Hoppers : MonoBehaviour
             Vector3 view = Vector3.Lerp(begin, target, ratio);
             FrogLook(view);
 
-            if (audio && playerMoved)
+            if (audio && playerMoved && Toolbox.Instance.PlayerInLaser())
                 audio.volume = Toolbox.Instance.soundEffectsVolume * TweeningFunctions.BackAndForth(ratio);
 
             yield return null;
