@@ -82,6 +82,10 @@ public class NarrationController : MonoBehaviour
 			Debug.LogError("narration deactivate");
 			_actor.OnNarrationDeactivate();
 		}
+
+		_actor = null;
+		_currentSettings.actor = null;
+		_currentSettings = null;
 	}
 
 	private IEnumerator DrawText()
@@ -178,7 +182,6 @@ public class NarrationController : MonoBehaviour
 		if (_currentSettings.background)
 			_narrationBackground.sprite = _currentSettings.background.sprite;
 		
-		
 	}
 
 	private void StartNarration(NarrationSettings newSettings, INarrationActor actor)
@@ -188,9 +191,11 @@ public class NarrationController : MonoBehaviour
 		ApplyNewSettings();
 
 		_actor = actor;
+		
+		_currentSettings.actor = _actor;
 
 		_currentSettings.OnActivate();
-
+		
 		_narrationContainer.SetActive(true);
 
 		_narrationText.text = null;

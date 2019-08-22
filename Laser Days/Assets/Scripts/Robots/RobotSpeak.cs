@@ -58,7 +58,6 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
     {
         base.Start();
         player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
-
     }
 
 

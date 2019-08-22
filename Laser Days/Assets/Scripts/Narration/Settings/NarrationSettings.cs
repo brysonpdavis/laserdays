@@ -23,23 +23,23 @@ public class NarrationSettings : ScriptableObject
 
     public Vector2 scale;
 
-    protected INarrationActor _actor;
+    public INarrationActor actor;
 
     public virtual void OnActivate()
     {
-        if (_actor != null)
-            _actor.OnNarrationActivate();
+        if (actor != null)
+            actor.OnNarrationActivate();
     }
 
     public virtual void OnDeactivate()
     {
-        if (_actor != null)
-            _actor.OnNarrationDeactivate();
+        if (actor != null)
+            actor.OnNarrationDeactivate();
     }
 
     public virtual void OnNext()
     {
-        if (_actor != null)
-            _actor.NextNarration();
+        if (actor != null)
+            actor.NextNarration();
     }
 }
