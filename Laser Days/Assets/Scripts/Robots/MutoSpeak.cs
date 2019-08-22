@@ -89,6 +89,8 @@ public class MutoSpeak : SelectableObject, INarrationActor
     {
         Toolbox.Instance.EnablePlayerMovementAndFlip(flipOnResume);
         _currentClip = 0;
+        _canInteract = false;
+        audio.Stop();
         speaking = false;
     }
 
