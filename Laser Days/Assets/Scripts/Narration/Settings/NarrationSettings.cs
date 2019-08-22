@@ -13,9 +13,9 @@ public class NarrationSettings : ScriptableObject
 
     public Image background;
 
-    public Animation openAnimation;
+    public string openAnimation;
 
-    public Animation closeAnimation;
+    public string closeAnimation;
 
     public TextAsset text;
 

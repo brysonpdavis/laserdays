@@ -39,7 +39,7 @@ public class NarrationController : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError("More than one Narration Controller! Destroying this one");
+			Debug.LogError("There is more than one Narration Controller! Destroying this one");
 			Destroy(this);
 		}
 		
@@ -204,7 +204,7 @@ public class NarrationController : MonoBehaviour
 
 		if (_currentSettings.animatedOpen)
 		{
-			//implement later
+			_narrationAnimator.Play(_currentSettings.openAnimation);
 		}
 		else
 		{
@@ -216,5 +216,10 @@ public class NarrationController : MonoBehaviour
 	{
 		if (_instance._state == State.Inactive)
 			_instance.StartNarration(newSettings, actor);
+	}
+
+	public static void OpenAnimationDone()
+	{
+		_instance.StartCoroutine(_instance.DrawText());
 	}
 }
