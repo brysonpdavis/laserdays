@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GardenBeam
-  m_Shader: {fileID: 4800000, guid: 2ce7ad6531ac740ad96f40c3966463db, type: 3}
-  m_ShaderKeywords: _REAL_ON
+  m_Name: S_GardenSign
+  m_Shader: {fileID: 4800000, guid: a29ceaaa37b3f44c5a449c075c0385c2, type: 3}
+  m_ShaderKeywords: ACCENT_ON NO_GRADIENT SHARED
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,10 +19,14 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AccentMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a44ee13d09c344cf091e9809da6c5b35, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Deatil:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -39,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EffectMap:
-        m_Texture: {fileID: 2800000, guid: b5845c5d766114a3e948231773312b48, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -50,7 +54,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MaterialMap:
+        m_Texture: {fileID: 2800000, guid: 862e8f8026a6a40d3a8f997637514f94, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalLaser:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalReal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -62,38 +78,63 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ShadingMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaCutoff: 0.5
+    - _BlendOffset: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Dirtiness: 0
     - _DstBlend: 0
+    - _Elapsed: 0
+    - _Flippable: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _GradientOffset: 0
+    - _GradientScale: 1
+    - _Highlights: 0
+    - _LineA: 2
+    - _MainTexContribution: 0.08
     - _Metallic: 0
     - _Mode: 0
+    - _NormalScale: 6.588235
     - _OcclusionStrength: 1
-    - _Opacity: 0.372
     - _Parallax: 0.02
-    - _Real: 1
+    - _Shininess: 0
+    - _Smoothness: 0
+    - _Smoothness2: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SteppedTransition: 0
+    - _TerrainScale: 1
     - _TransitionState: 0
+    - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
+    - __dirty: 0
+    - _onHold: 0
+    - _onHover: 0
     m_Colors:
-    - _Accent: {r: 0, g: 0, b: 0, a: 0}
-    - _Base: {r: 0.71675867, g: 0.7802936, b: 0.8584906, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorLaser: {r: 0.5283019, g: 0.51085764, b: 0.51085764, a: 1}
+    - _ColorReal: {r: 0.6509804, g: 0.37973854, b: 0.32549015, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LaserAccent: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserBase: {r: 0, g: 0, b: 0, a: 0}
-    - _RealAccent: {r: 0, g: 0, b: 0, a: 0}
-    - _RealBase: {r: 0.90588236, g: 0.5529412, b: 0.89411765, a: 0.627451}
+    - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
+    - _LaserAccent: {r: 0.7287989, g: 3.2873485, b: 3.2256963, a: 1}
+    - _LaserBase: {r: 0.378471, g: 0.41153777, b: 0.4245283, a: 1}
+    - _LaserEmission: {r: 0, g: 0, b: 0, a: 0}
+    - _LaserGradient: {r: 0, g: 0, b: 0, a: 0}
+    - _RealAccent: {r: 3.1713088, g: 3.4415908, b: 3.135271, a: 1}
+    - _RealBase: {r: 0.41756818, g: 0.4339623, b: 0.41553935, a: 0}
+    - _RealEmission: {r: 0, g: 0, b: 0, a: 0}
+    - _RealGradient: {r: 0, g: 0, b: 0, a: 0}
+    - _ShimmerColor: {r: 0, g: 0, b: 0, a: 0}
