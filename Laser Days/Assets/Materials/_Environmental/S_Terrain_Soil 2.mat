@@ -7,8 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: S_Terrain_Soil 2
-  m_Shader: {fileID: 4800000, guid: 0bcb3eec02a174cbcb360ff946b92240, type: 3}
-  m_ShaderKeywords: LASER NO_GRADIENT TERRAIN _SPECULARHIGHLIGHTS_OFF
+  m_Shader: {fileID: 4800000, guid: 480e2ec02051d4242ad8ab3dcf4b683f, type: 3}
+  m_ShaderKeywords: ACCENT_ON HEIGHT_GRADIENT LASER STATIC W_POS_SWAYING _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AccentMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: abc833cf564a341ffa852d49a94656e2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoLaser:
@@ -59,7 +59,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EffectMap:
-        m_Texture: {fileID: 2800000, guid: b5845c5d766114a3e948231773312b48, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3278c628bfae341a8838ad0470910ada, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -108,6 +108,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaCutoff: 1
+    - _AnimationMagnitude: 0.1
+    - _AnimationSpeed: 2
+    - _AnimationTimeStep: 1
+    - _AnimationWaveSize: 4
     - _BlendOffset: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -118,14 +122,14 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 1
     - _GlossyReflections: 1
-    - _GradientOffset: 0
-    - _GradientScale: 1
+    - _GradientOffset: 0.37
+    - _GradientScale: 0.37
     - _Highlights: 0
-    - _LineA: 0
+    - _LineA: 2
     - _LineB: 1
     - _LineC: 0
     - _LineD: 0
-    - _MainTexContribution: 0
+    - _MainTexContribution: 0.061
     - _Metallic: 0
     - _Mode: 0
     - _NormalScale: 0.3
@@ -137,8 +141,8 @@ Material:
     - _SpecularHighlights: 0
     - _SrcBlend: 1
     - _SteppedTransition: 0
-    - _TerrainScale: -0.2
-    - _TransitionState: 0
+    - _TerrainScale: 0.06
+    - _TransitionState: 1
     - _TransitionStateB: 0
     - _UVSec: 0
     - _ZWrite: 1
@@ -146,15 +150,16 @@ Material:
     - _onHold: 0
     - _onHover: 0
     m_Colors:
+    - _AnimationSway: {r: 1, g: 0, b: 0, a: 0}
     - _Color: {r: 0.6698113, g: 0.591614, b: 0.56554824, a: 1}
     - _ColorLaser: {r: 0.36376065, g: 0.34752133, b: 0.37999994, a: 1}
     - _ColorReal: {r: 0.76, g: 0.4771111, b: 0.39688885, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _InteractColor: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserAccent: {r: 0.80859363, g: 0.9056604, b: 0.3972944, a: 1}
-    - _LaserBase: {r: 0.8679245, g: 0.80646133, b: 0.79013884, a: 1}
+    - _LaserAccent: {r: 0.337453, g: 0.14231041, b: 0.735849, a: 0.50980395}
+    - _LaserBase: {r: 0.9056604, g: 0.8008188, b: 0.7732289, a: 1}
     - _LaserEmission: {r: 0, g: 0, b: 0, a: 0}
-    - _LaserGradient: {r: 0, g: 0, b: 0, a: 0}
+    - _LaserGradient: {r: 0.83137256, g: 0.5653551, b: 0.49803922, a: 0.3647059}
     - _RealAccent: {r: 0, g: 0, b: 0, a: 0.25882354}
     - _RealBase: {r: 0.6226415, g: 0.58432066, b: 0.42713207, a: 1}
     - _RealEmission: {r: 0, g: 0, b: 0, a: 0}

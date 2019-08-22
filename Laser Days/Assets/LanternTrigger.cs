@@ -17,7 +17,7 @@ public class LanternTrigger : MonoBehaviour {
 
             audio.clip = clip;
             audio.Play();
-            light.intensity += .5f;
+            light.intensity += 1.5f;
         }
     }
 }
