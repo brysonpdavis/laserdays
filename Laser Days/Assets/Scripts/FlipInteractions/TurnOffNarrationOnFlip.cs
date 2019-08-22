@@ -13,18 +13,13 @@ public class TurnOffNarrationOnFlip : FlipInteraction {
         flippable = GetComponent<FlippableObject>();
         actionsOnAction = GetComponent<TakeMultipleActionsOnAction>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    
     public override void Interact()
     {
         if (!activated && flippable.timesFlipped > 0)
         {
             activated = true;
-            Toolbox.Instance.ClearNarration();
+            NarrationController.CancelNarration();
             //textNarration.SetActive(false);
             Destroy(actionsOnAction);
         }

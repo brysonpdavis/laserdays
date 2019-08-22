@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,13 +19,6 @@ public class NarrationControl : MonoBehaviour
 	}
 
 	void Update () {
-		if (Toolbox.Instance.GetNarrationActive())
-		{
-			if (ControlManager.Instance.GetButtonDown("Select"))
-			{
-				Toolbox.Instance.NextNarration();
-			}
-		}
 		if (ControlManager.Instance.GetButtonDown("Map"))
 		{
 			if (map.activeSelf)

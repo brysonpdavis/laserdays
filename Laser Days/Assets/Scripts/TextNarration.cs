@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+﻿﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,17 +15,11 @@ public class TextNarration : MonoBehaviour
     public bool singleActivation;
     bool activated = false;
     private GameObject background;
-	public TextAsset txtNarration;
-    private string[] content;
     private Coroutine _coroutine;
     [SerializeField] private bool persistent = true;
     [SerializeField] private bool delayedHint;
     [SerializeField] private float hintDelay;
-
-    void Awake()
-    {
-        content = txtNarration.text.Split(new string[] {"****\n", "****\r\n"}, StringSplitOptions.None);
-    }
+    [SerializeField] private NarrationSettings narrationSettings;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,15 +55,8 @@ public class TextNarration : MonoBehaviour
 
     private void StartNarration()
     {
-        if(type == PopUpType.Static)
-        {
-            Toolbox.Instance.NewNarration(this);
-        } 
-        else if (type == PopUpType.Animated)
-        {
-            Toolbox.Instance.NewNarrationAnimated(this);
-        }
-
+        NarrationController.TriggerNarration(narrationSettings, null);
+        
         if (lore)
             Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);
         else
@@ -88,7 +72,7 @@ public class TextNarration : MonoBehaviour
     
     public void Deactivate()
     {
-        Toolbox.Instance.ClearNarration();
+        NarrationController.CancelNarration();
     }
 
     private void OnDisable()
@@ -101,22 +85,4 @@ public class TextNarration : MonoBehaviour
         if (!persistent && other.CompareTag("Player")) 
             Deactivate();
     }
-
-    public string GetContent(int n)
-    {
-        if (n < content.Length)
-        {
-            return content[n];
-        }
-        else
-        {
-            return "Oops! No string here.";
-        }
-    }
-
-	public int GetContentLength()
-	{
-		return content.Length;
-	}
-
 }

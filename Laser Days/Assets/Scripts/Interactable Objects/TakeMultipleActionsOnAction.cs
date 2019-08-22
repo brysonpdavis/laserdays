@@ -25,7 +25,7 @@ public class TakeMultipleActionsOnAction : TakeActionOnAction
         
                 case ResultActionType.DeactivateOnScreen:
             
-                    Toolbox.Instance.ClearNarration();
+                    NarrationController.CancelNarration();
 
                     break;
         

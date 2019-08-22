@@ -31,9 +31,6 @@ public class Toolbox : Singleton<Toolbox>
 
 
     IconContainer iconContainer;
-    public Color UIColorA;
-    public Color UIColorB;
-    public Color UIColorC;
 
     public Shader laserCore;
     public Shader realCore;
@@ -45,23 +42,7 @@ public class Toolbox : Singleton<Toolbox>
     public IList<UniqueId> allIds = new List<UniqueId>();
     public AudioSource SoundEffectsAudio;
     private AudioSource SoundtrackAudio;
-
-    public GameObject narrationContainer;
-    private Animator narrationAnimator;
-    public bool isNarrationAnimating;
-    private Text narrationText;
-    public GameObject narrationBackground;
-    public GameObject narrationContinue;
-    private bool narrationActive;
-    private int narrationIndex;
-    private TextNarration currentNarration;
-    private char[] narrationWords;
-    private bool wording = false;
-    private int narrationWordsIndex = 0;
-    private string narrationCurrentWords = "";
-    private int frame_counter = 0;
-    private int frames_til_draw;
-
+    
     public GameObject regionController;
     public bool deleteUnusedAssets = true;
 
@@ -82,13 +63,6 @@ public class Toolbox : Singleton<Toolbox>
         {
             InvokeRepeating("DeleteUnused", 10f, 10f);
         } 
-    }
-    private void Update()
-    {
-        if (wording)
-        {
-            NarrationUpdate();
-        }
     }
 
     private void DeleteUnused()
@@ -121,6 +95,24 @@ public class Toolbox : Singleton<Toolbox>
         string path = Application.persistentDataPath;
         if (Directory.Exists(path)) { Directory.Delete(path, true); }
         Directory.CreateDirectory(path);
+    }
+
+    public void EnablePlayerMovement()
+    {
+        var playerScript = player.GetComponent<MFPP.Player>();
+
+        playerScript.Movement.AllowMovement = true;
+        playerScript.Movement.AllowMouseMove = true;
+        flipScript.canFlip = true;
+    }
+
+    public void DisablePlayerMovement()
+    {
+        var playerScript = player.GetComponent<MFPP.Player>();
+
+        playerScript.Movement.AllowMovement = false;
+        playerScript.Movement.AllowMouseMove = false;
+        flipScript.canFlip = false;
     }
 
     public void Resume(bool exitPause)
@@ -253,105 +245,11 @@ public class Toolbox : Singleton<Toolbox>
         return SoundtrackAudio;
     }
 
-    public void SetNarration(string text)
-    {
-        narrationActive = true;
-        // narrationText.text = text;
-        narrationBackground.SetActive(true);
-        NarrateWords(text);
-    }
-
-    public void ClearNarration()
-    {
-        narrationActive = false;
-        narrationText.text = null;
-		narrationCurrentWords = "";
-        if (narrationBackground)
-            narrationBackground.SetActive(false);
-        if (narrationContinue)
-            narrationContinue.SetActive(false);
-        narrationIndex = 0;
-		wording = false;
-    }
-
-    public bool GetNarrationActive()
-    {
-        return narrationActive;
-    }
-
-    public void NextNarration()
-    {
-        narrationContinue.SetActive(false);
-        
-        if (currentNarration.GetContentLength() > narrationIndex + 1)
-        {
-            narrationIndex += 1;
-            SetNarration(currentNarration.GetContent(narrationIndex));
-        }
-        else
-        {
-            narrationIndex = 0;
-            ClearNarration();
-        }
-    }
-
-    public void NewNarration(TextNarration cur)
-    {
-        ClearNarration();
-        currentNarration = cur;
-        SetNarration(cur.GetContent(0));
-    }
-
-    public void NewNarrationAnimated(TextNarration cur)
-    {
-        narrationAnimator.Play("Popup_Dialog");
-        ClearNarration();
-        narrationBackground.SetActive(true);
-        currentNarration = cur;
-    }
-
-
-    public void SetNarrationAfterAnimation()
-    {
-        SetNarration(currentNarration.GetContent(0));
-    }
-
-    private void NarrateWords(string text)
-    {
-        wording = true;
-        narrationWordsIndex = 0;
-        frame_counter = 0;
-        narrationWords = text.ToCharArray(); //text.Split(new string[] {" "}, StringSplitOptions.None).ToArray(); // for words instead of letters
-        narrationCurrentWords = "";
-    }
-
-    private void NarrationUpdate()
-    {
-        if (frame_counter == frames_til_draw)
-        {
-            if (narrationWordsIndex < narrationWords.Length)
-            {
-                narrationCurrentWords += narrationWords[narrationWordsIndex]; // + " ";
-                narrationText.text = narrationCurrentWords;
-                narrationWordsIndex += 1;
-                frames_til_draw = 1; // UnityEngine.Random.Range(2, 6); // for randomized frame drawing
-                frame_counter = 0;
-            }
-            else
-            {
-                wording = false;
-                narrationContinue.SetActive(true);
-            }
-        }
-        frame_counter += 1;
-    }
 
     public void UpdateToolbox()
     {
         if (!player)
             player  = GameObject.FindWithTag("Player");
-
-
 
         if (!mainCanvas)
             mainCanvas = GameObject.FindWithTag("Main Canvas");
@@ -369,15 +267,8 @@ public class Toolbox : Singleton<Toolbox>
 
         if (Toolbox.Instance == this)
         {
-            narrationContainer = GameObject.Find("TextNarration");
-            narrationText = narrationContainer.GetComponentInChildren<Text>();
-            narrationAnimator = narrationContainer.GetComponent<Animator>();
-            narrationBackground = narrationContainer.transform.Find("Background").gameObject;
-            narrationContinue = narrationContainer.transform.Find("Continue").gameObject;
             SoundEffectsAudio = GameObject.Find("SoundEffectsAudio").GetComponent<AudioSource>();
-
-            ClearNarration();
-
+            
         }
 
         Debug.Log("adding player info!");
@@ -386,36 +277,15 @@ public class Toolbox : Singleton<Toolbox>
         Toolbox.Instance.pickUp = pickUp;
         Toolbox.Instance.raycastManager = raycastManager;
         Toolbox.Instance.flipScript = flipScript;
-            UpdateTransforms();
+        UpdateTransforms();
         Toolbox.Instance.iconContainer = iconContainer;
         Toolbox.Instance.pauseMenu = pauseMenu;
-        if (!Toolbox.Instance.narrationContainer)
-        {
-            Toolbox.Instance.narrationContainer = GameObject.Find("TextNarration");
-            Toolbox.Instance.narrationAnimator = narrationContainer.GetComponent<Animator>();
-        }
-
-        if (!Toolbox.Instance.narrationText)
-            Toolbox.Instance.narrationText = Toolbox.Instance.narrationContainer.GetComponentInChildren<Text>();
-
-
         Toolbox.Instance.SoundEffectsAudio = GameObject.Find("SoundEffectsAudio").GetComponent<AudioSource>();
         Toolbox.Instance.SoundtrackAudio = GameObject.Find("LaserChords").GetComponent<AudioSource>();
 
 
         Toolbox.Instance.soundEffectsSlider = pauseMenu.transform.GetChild(2).GetComponent<Slider>();
         Toolbox.Instance.soundEffectsSlider.onValueChanged.AddListener(delegate { VolumeChangeCheck(); });
-
-        if (!Toolbox.Instance.narrationBackground)
-        {
-            Toolbox.Instance.narrationBackground = Toolbox.Instance.narrationContainer.transform.Find("Background").gameObject;
-        }
-
-        if (!Toolbox.Instance.narrationContinue)
-        {
-            Toolbox.Instance.narrationContinue = Toolbox.Instance.narrationContainer.transform.Find("Continue").gameObject;
-        }
-
     }
 
     public void UpdateTransforms()
@@ -482,21 +352,13 @@ public class Toolbox : Singleton<Toolbox>
             Toolbox.Instance.testercubeSounds = testercubeSounds;
             Toolbox.Instance.allIds = allIds;
             //Toolbox.Instance.SoundEffectsAudio = SoundEffectsAudio;
-
-            //Debug.Log("working here");
-            //Toolbox.Instance.narrationText = narrationText;
-            //Toolbox.Instance.narrationContainer= narrationContainer;
-            //Toolbox.Instance.narrationBackground = narrationBackground;
-
-            ////ClearNarration();
-            //
         }
     }
 
     public void LoadScene(string sceneName, string spawnPoint)
     {
         Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
-        Instance.ClearNarration();
+        NarrationController.CancelNarration();
         Time.timeScale = 1f;
 
         GameObject button = GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton;

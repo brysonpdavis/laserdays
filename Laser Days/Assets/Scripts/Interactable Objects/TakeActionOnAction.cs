@@ -66,7 +66,7 @@ public class TakeActionOnAction : MonoBehaviour
             
             case ResultActionType.DeactivateOnScreen:
                 
-                Toolbox.Instance.ClearNarration();
+                NarrationController.CancelNarration();
 
                 break;
             

@@ -21,7 +21,7 @@ public class TurnOffNarrationOnDoorTrigger : MonoBehaviour {
         if (!activated && trigger.active)
         {
             activated = true;
-            Toolbox.Instance.ClearNarration();
+            NarrationController.CancelNarration();
             Destroy(actionsOnAction);
 
         }
