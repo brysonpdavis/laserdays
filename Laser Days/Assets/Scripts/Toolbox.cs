@@ -375,6 +375,11 @@ public class Toolbox : Singleton<Toolbox>
             {
                 RenderSettings.skybox = settingsObject.GetSkyBoxMaterial();
                 skyboxSettings.material = settingsObject.GetSkyBoxMaterial();
+
+                if (PlayerInReal())
+                    skyboxSettings.material.SetFloat("_TransitionState", 0f);
+                else
+                    skyboxSettings.material.SetFloat("_TransitionState", 1f);
             }
             
             skyboxSettings.laserFog = settingsObject.GetLaserFog();
