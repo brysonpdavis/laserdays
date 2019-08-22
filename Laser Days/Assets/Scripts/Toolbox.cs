@@ -97,16 +97,16 @@ public class Toolbox : Singleton<Toolbox>
         Directory.CreateDirectory(path);
     }
 
-    public void EnablePlayerMovement()
+    public void EnablePlayerMovementAndFlip(bool resumeFlip)
     {
         var playerScript = player.GetComponent<MFPP.Player>();
 
         playerScript.Movement.AllowMovement = true;
         playerScript.Movement.AllowMouseMove = true;
-        flipScript.canFlip = true;
+        flipScript.canFlip = resumeFlip;
     }
 
-    public void DisablePlayerMovement()
+    public void DisablePlayerMovementAndFlip()
     {
         var playerScript = player.GetComponent<MFPP.Player>();
 
