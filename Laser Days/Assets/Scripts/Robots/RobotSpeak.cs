@@ -11,8 +11,9 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
     private float _interactCooldownTime = 4f;
     private float _currentInteractWaitTime = 0f;
     private bool _canInteract = true;
-    [SerializeField] private TextAsset text;
 
+    [SerializeField] private bool flipOnResume = true;
+    [SerializeField] private TextAsset text;
     [SerializeField] private RobotNarrationSettings narrationSettings;
     
     //private float _speechCooldown = 4f;
@@ -87,12 +88,14 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
 
     public void OnNarrationActivate()
     {
+        Toolbox.Instance.DisablePlayerMovementAndFlip();
         _currentClip = 0;
         PlayRobotAudio();
     }
 
     public void OnNarrationDeactivate()
     {
+        Toolbox.Instance.EnablePlayerMovementAndFlip(flipOnResume);
         RobotDeactivate();
         _currentClip = 0;
     }
