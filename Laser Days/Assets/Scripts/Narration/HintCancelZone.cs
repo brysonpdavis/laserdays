@@ -11,7 +11,7 @@ public class HintCancelZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _target.CancelHint();
-            Toolbox.Instance.ClearNarration();
+            NarrationController.CancelNarration();
         }
     }
 }
