@@ -62,7 +62,7 @@ public class NarrationController : MonoBehaviour
 	private void ClearNarration()
 	{
 		_narrationText.text = null;
-		_narrationContinue.gameObject.SetActive(false);
+		if (_narrationContinue) _narrationContinue.gameObject.SetActive(false);
 		_narrationIndex = 0;
 		_narrationLettersIndex = 0;
 		_narrationContainer.SetActive(false);
@@ -84,9 +84,12 @@ public class NarrationController : MonoBehaviour
 		}
 
 		_actor = null;
-		_currentSettings.actor = null;
-		_currentSettings = null;
-	}
+		
+		if (_currentSettings)
+		{
+			_currentSettings.actor = null;
+			_currentSettings = null;
+		}	}
 
 	private IEnumerator DrawText()
 	{
