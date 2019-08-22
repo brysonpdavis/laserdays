@@ -87,7 +87,8 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
 
     public void OnNarrationActivate()
     {
-        return;
+        _currentClip = 0;
+        PlayRobotAudio();
     }
 
     public void OnNarrationDeactivate()
@@ -102,6 +103,11 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
         if (_currentClip > speechClips.Length - 1)
             _currentClip = 0;
 
+        PlayRobotAudio();
+    }
+
+    private void PlayRobotAudio()
+    {
         audio.clip = speechClips[_currentClip];
         audio.Play();
     }
