@@ -425,7 +425,7 @@ namespace MFPP
             /// <returns>A random footstep sound from this <see cref="Data"/>.</returns>
             public AudioClip GetRandomFootstep()
             {
-                if (Toolbox.Instance.PlayerInLaser())
+                if (Toolbox.Instance.PlayerInReal())
                 {
                     if (footstepClips == null || footstepClips.Count <= 0)
                         return null;
