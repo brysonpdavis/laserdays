@@ -153,12 +153,12 @@ public class NarrationController : MonoBehaviour
 				_state = State.Waiting;
 				
 				while (!ControlManager.Instance.GetButtonDown("Select"))
-				{
-					_currentSettings.OnNext();
-					
+				{	
 					yield return null;
 				}
 				
+                _currentSettings.OnNext();
+
 				_narrationContinue.gameObject.SetActive(false);
 
 				_narrationIndex++;

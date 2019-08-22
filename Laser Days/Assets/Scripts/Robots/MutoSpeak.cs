@@ -19,13 +19,7 @@ public class MutoSpeak : SelectableObject, INarrationActor
     [SerializeField] private TextAsset text;
     [SerializeField] private RobotNarrationSettings narrationSettings;
 
-    //private float _speechCooldown = 4f;
-    //private float _currentSpeechCooldownTime = 0f;
-    //private bool _canSpeak;
-    //
 
-
-    // Update is called once per frame
     void Update()
     {
         if (!_canInteract)
@@ -82,7 +76,7 @@ public class MutoSpeak : SelectableObject, INarrationActor
         Toolbox.Instance.DisablePlayerMovementAndFlip();
         _currentClip = 0;
         speaking = true;
-        PlayRobotAudio();
+        PlayAudio();
     }
 
     public void OnNarrationDeactivate()
@@ -100,10 +94,10 @@ public class MutoSpeak : SelectableObject, INarrationActor
         if (_currentClip > speechClips.Length - 1)
             _currentClip = 0;
 
-        PlayRobotAudio();
+        PlayAudio();
     }
 
-    private void PlayRobotAudio()
+    private void PlayAudio()
     {
         audio.clip = speechClips[_currentClip];
         audio.Play();
