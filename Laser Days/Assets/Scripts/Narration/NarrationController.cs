@@ -31,12 +31,6 @@ public class NarrationController : MonoBehaviour
 		AnimatingClose
 	}
 
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.G))
-			ClearNarration();
-	}
-
 	// Use this for initialization
 	void Start ()
 	{
@@ -57,10 +51,8 @@ public class NarrationController : MonoBehaviour
 		_narrationContinue = _narrationContainer.transform.Find("Continue").GetComponent<Image>();
 		_narrationContinue.gameObject.SetActive(false);
 		_narrationBackground = _narrationContainer.transform.Find("Background").GetComponent<Image>();
-		
-		ClearNarration();
 	}
-
+	
 	public static void CancelNarration()
 	{
 		_instance.ClearNarration();
@@ -96,7 +88,8 @@ public class NarrationController : MonoBehaviour
 		{
 			_currentSettings.actor = null;
 			_currentSettings = null;
-		}	}
+		}	
+	}
 
 	private IEnumerator DrawText()
 	{

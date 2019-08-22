@@ -30,7 +30,7 @@ public class LevelLoadingMenu : MonoBehaviour {
     public GameObject soundEffectSlider;
 
     GameObject textNarration;
-
+    private bool narrationWasOn;
 
     private EdgeDetection edge;
 
@@ -59,6 +59,8 @@ public class LevelLoadingMenu : MonoBehaviour {
         hardButtons = buttonContainer.transform.GetChild(2).gameObject;
 
         textNarration = GameObject.Find("TextNarration");
+
+        narrationWasOn = false;
     }
 
     private void Start()
@@ -93,6 +95,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         sensitivitySlider.SetActive(true);
         saveButton.SetActive(true);
         inputMenuButton.SetActive(true);
+        narrationWasOn = textNarration.activeSelf;
         textNarration.SetActive(false);
         
         FirstSelectedFix.OpenMenu();
@@ -112,7 +115,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
 
-        textNarration.SetActive(true);
+        if (narrationWasOn) textNarration.SetActive(true);
 
         //edge.PauseMenu = 0f;
        
@@ -430,6 +433,6 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         Toolbox.Instance.UpdateTransforms();
         sceneIsLoading = false;
-
+        
     }
 }

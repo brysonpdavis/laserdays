@@ -17,8 +17,6 @@ public class NarrationSettings : ScriptableObject
 
     public string closeAnimation;
 
-    public TextAsset text;
-
     public Vector2 position;
 
     public Vector2 scale;
