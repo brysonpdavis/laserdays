@@ -29,7 +29,13 @@ public class NarrationController : MonoBehaviour
 		Waiting,
 		AnimatingClose
 	}
-	
+
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.G))
+			ClearNarration();
+	}
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -182,9 +188,18 @@ public class NarrationController : MonoBehaviour
 
 	private void ApplyNewSettings()
 	{
-		if (_currentSettings.background)
-			_narrationBackground.sprite = _currentSettings.background.sprite;
+		var backgroundDecoration = _narrationBackground.transform.GetChild(0).GetComponent<Image>();
+
+		backgroundDecoration.color = _currentSettings.decorationColor;
 		
+		if (_currentSettings.background && backgroundDecoration)
+			backgroundDecoration.sprite = _currentSettings.background.sprite;
+
+		_narrationBackground.color = _currentSettings.decorationColor;
+
+		_narrationText.font = _currentSettings.textFace;
+
+		_narrationText.color = _currentSettings.textColor;
 	}
 
 	private void StartNarration(NarrationSettings newSettings, INarrationActor actor)
@@ -207,6 +222,8 @@ public class NarrationController : MonoBehaviour
 
 		if (_currentSettings.animatedOpen)
 		{
+			_state = State.AnimatingOpen;
+			
 			_narrationAnimator.Play(_currentSettings.openAnimation);
 		}
 		else

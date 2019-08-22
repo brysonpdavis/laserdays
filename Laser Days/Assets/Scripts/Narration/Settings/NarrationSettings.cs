@@ -23,6 +23,14 @@ public class NarrationSettings : ScriptableObject
 
     public Vector2 scale;
 
+    public Color backgroundRectangleColor;
+
+    public Color decorationColor;
+
+    public Color textColor;
+
+    public Font textFace;
+
     public INarrationActor actor;
 
     public virtual void OnActivate()
