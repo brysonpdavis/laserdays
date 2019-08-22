@@ -20,6 +20,7 @@ public class TextNarration : MonoBehaviour
     [SerializeField] private bool delayedHint;
     [SerializeField] private float hintDelay;
     [SerializeField] private NarrationSettings narrationSettings;
+    [SerializeField] private TextAsset text;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -55,7 +56,7 @@ public class TextNarration : MonoBehaviour
 
     private void StartNarration()
     {
-        NarrationController.TriggerNarration(narrationSettings, null);
+        NarrationController.TriggerNarration(narrationSettings, null, text);
         
         if (lore)
             Toolbox.Instance.PlaySoundEffect(SoundBox.Instance.narrationSound);

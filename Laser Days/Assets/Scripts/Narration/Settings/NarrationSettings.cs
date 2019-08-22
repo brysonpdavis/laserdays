@@ -11,7 +11,7 @@ public class NarrationSettings : ScriptableObject
 
     public bool animatedClose;
 
-    public Image background;
+    public Sprite background;
 
     public string openAnimation;
 

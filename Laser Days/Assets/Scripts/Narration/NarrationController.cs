@@ -16,6 +16,7 @@ public class NarrationController : MonoBehaviour
 	private int _narrationLettersIndex = 0;
 	private Coroutine _currentRoutine;
 	private INarrationActor _actor;
+	private TextAsset _textAsset;
 
 	[SerializeField] private NarrationSettings defaultSettings;
 
@@ -99,7 +100,7 @@ public class NarrationController : MonoBehaviour
 
 	private IEnumerator DrawText()
 	{
-		string[] paragraphs = _currentSettings.text.ToString()
+		string[] paragraphs = _textAsset.ToString()
 			.Split(new[] {"****\n", "****\r\n"}, StringSplitOptions.None);
 
 		if (! _currentSettings.letterByLetter)
@@ -193,23 +194,26 @@ public class NarrationController : MonoBehaviour
 		backgroundDecoration.color = _currentSettings.decorationColor;
 		
 		if (_currentSettings.background && backgroundDecoration)
-			backgroundDecoration.sprite = _currentSettings.background.sprite;
+			backgroundDecoration.sprite = _currentSettings.background;
 
-		_narrationBackground.color = _currentSettings.decorationColor;
+		_narrationBackground.color = _currentSettings.backgroundRectangleColor;
 
-		_narrationText.font = _currentSettings.textFace;
+		if (_currentSettings.textFace)
+			_narrationText.font = _currentSettings.textFace;
 
 		_narrationText.color = _currentSettings.textColor;
 	}
 
-	private void StartNarration(NarrationSettings newSettings, INarrationActor actor)
+	private void StartNarration(NarrationSettings newSettings, INarrationActor actor, TextAsset textAsset)
 	{
 		_currentSettings = newSettings == null ? defaultSettings : newSettings;
 		
 		ApplyNewSettings();
 
 		_actor = actor;
-		
+
+		_textAsset = textAsset;
+
 		_currentSettings.actor = _actor;
 
 		_currentSettings.OnActivate();
@@ -232,10 +236,10 @@ public class NarrationController : MonoBehaviour
 		}
 	}
 
-	public static void TriggerNarration(NarrationSettings newSettings, INarrationActor actor)
+	public static void TriggerNarration(NarrationSettings newSettings, INarrationActor actor, TextAsset textAsset)
 	{
 		if (_instance._state == State.Inactive)
-			_instance.StartNarration(newSettings, actor);
+			_instance.StartNarration(newSettings, actor, textAsset);
 	}
 
 	public static void OpenAnimationDone()

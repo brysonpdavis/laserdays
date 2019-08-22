@@ -11,6 +11,7 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
     private float _interactCooldownTime = 4f;
     private float _currentInteractWaitTime = 0f;
     private bool _canInteract = true;
+    [SerializeField] private TextAsset text;
 
     [SerializeField] private RobotNarrationSettings narrationSettings;
     
@@ -43,7 +44,7 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
 
     void DoNarration()
     {
-        NarrationController.TriggerNarration(narrationSettings, this);
+        NarrationController.TriggerNarration(narrationSettings, this, text);
         
         base.OnSelect();
     }
