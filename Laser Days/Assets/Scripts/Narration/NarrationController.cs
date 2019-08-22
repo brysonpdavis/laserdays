@@ -117,6 +117,8 @@ public class NarrationController : MonoBehaviour
 			{
 				_state = State.Drawing;
 
+				_narrationText.text = "";
+
 				var paragraphLetters = paragraphs[_narrationIndex].ToCharArray();
 				
 				_narrationLettersIndex = 0;
