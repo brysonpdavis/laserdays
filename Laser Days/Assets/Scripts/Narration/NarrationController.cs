@@ -51,6 +51,8 @@ public class NarrationController : MonoBehaviour
 		_narrationContinue = _narrationContainer.transform.Find("Continue").GetComponent<Image>();
 		_narrationContinue.gameObject.SetActive(false);
 		_narrationBackground = _narrationContainer.transform.Find("Background").GetComponent<Image>();
+		
+		ClearNarration();
 	}
 	
 	public static void CancelNarration()
