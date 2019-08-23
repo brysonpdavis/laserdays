@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 64406428468143078}
   - component: {fileID: 114663494369940888}
   - component: {fileID: 54760417482633902}
-  - component: {fileID: 114204763400372712}
   - component: {fileID: 114191079291832144}
   m_Layer: 10
   m_Name: LaserTree
@@ -46,7 +45,6 @@ GameObject:
   - component: {fileID: 114294004370960190}
   - component: {fileID: 135117465085995284}
   - component: {fileID: 114570097180287158}
-  - component: {fileID: 114960549213899908}
   m_Layer: 27
   m_Name: GameObject
   m_TagString: Untagged
@@ -73,9 +71,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1113203675768714}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 22.5, y: 0, z: -9.5}
-  m_LocalScale: {x: 1.4000002, y: 1.4, z: 1.4000002}
+  m_LocalRotation: {x: -0.00046258123, y: -0.19936794, z: -0.00017694227, w: 0.9799246}
+  m_LocalPosition: {x: -28.474, y: 1.0272, z: 16.586}
+  m_LocalScale: {x: 1.2946702, y: 1.294669, z: 1.2946705}
   m_Children:
   - {fileID: 4011357200322862}
   m_Father: {fileID: 0}
@@ -209,21 +207,6 @@ MonoBehaviour:
   maxScale: 1.5
   gameObjects:
   - {fileID: 1113203675768714}
---- !u!114 &114204763400372712
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1113203675768714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71bea4c010b684720a24c8646da392e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minScale: 0.6
-  maxScale: 1.4
-  gameObjects:
-  - {fileID: 1113203675768714}
 --- !u!114 &114294004370960190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,20 +254,6 @@ MonoBehaviour:
   forceRadial: 0
   forceInstant: 0
   tween: 3
---- !u!114 &114960549213899908
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1562846181778542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c6922054a7b44867b9a55812b4a0bf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xMag: 0.0003
-  yMag: 0.0001
-  zMag: 0.0005
 --- !u!135 &135117465085995284
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -19,6 +19,10 @@ public class MutoSpeak : SelectableObject, INarrationActor
     [SerializeField] private TextAsset text;
     [SerializeField] private RobotNarrationSettings narrationSettings;
 
+    private Renderer eggRender;
+    private MaterialPropertyBlock propertyBlock;
+
+
 
     void Update()
     {
@@ -53,6 +57,9 @@ public class MutoSpeak : SelectableObject, INarrationActor
         base.Start();
         player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
         audio = GetComponent<AudioSource>();
+        eggRender = egg.GetComponent<Renderer>();
+        propertyBlock = new MaterialPropertyBlock();
+        eggRender.GetPropertyBlock(propertyBlock);
     }
 
     public override void DistantIconHover()
@@ -105,7 +112,7 @@ public class MutoSpeak : SelectableObject, INarrationActor
 
     private void GlowRoutine()
     {
-        
+
     }
 
 
