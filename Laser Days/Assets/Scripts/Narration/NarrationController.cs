@@ -94,7 +94,7 @@ public class NarrationController : MonoBehaviour
 	private IEnumerator DrawText()
 	{
 		string[] paragraphs = _textAsset.ToString()
-			.Split(new[] {"****\n", "****\r\n"}, StringSplitOptions.None);
+			.Split(new[] {"****\n", "****\r\n", "****"}, StringSplitOptions.None);
 
 		if (! _currentSettings.letterByLetter)
 		{
