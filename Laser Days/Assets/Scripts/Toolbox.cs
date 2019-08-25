@@ -386,6 +386,8 @@ public class Toolbox : Singleton<Toolbox>
             skyboxSettings.laserAmbient = settingsObject.GetLaserAmbient();
             skyboxSettings.realFog = settingsObject.GetRealFog();
             skyboxSettings.realAbmient = settingsObject.GetRealAmbient();
+            skyboxSettings.ambientMultiplier = 1f;
+            skyboxSettings.fogMultiplier = 1f;
             
             if (settingsObject.GetRealGlobalParticle())
                 skyboxSettings.realGlobalParticle = settingsObject.GetRealGlobalParticle();
