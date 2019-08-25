@@ -368,6 +368,7 @@ public class Toolbox : Singleton<Toolbox>
     public void SetSettings(WorldSettings settingsObject)
     {
         SkyboxTransition skyboxSettings = player.GetComponent<SkyboxTransition>();
+        skyboxSettings.DeactivateMembranes();
 
         if (skyboxSettings)
         {
@@ -386,6 +387,7 @@ public class Toolbox : Singleton<Toolbox>
             skyboxSettings.laserAmbient = settingsObject.GetLaserAmbient();
             skyboxSettings.realFog = settingsObject.GetRealFog();
             skyboxSettings.realAbmient = settingsObject.GetRealAmbient();
+
             skyboxSettings.ambientMultiplier = 1f;
             skyboxSettings.fogMultiplier = 1f;
             

@@ -4,8 +4,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using System.Collections.Generic;
 
-public class SkyboxTransition : MonoBehaviour {
+public class SkyboxTransition : MonoBehaviour
+{
 
     public Material material;
 
@@ -34,6 +36,12 @@ public class SkyboxTransition : MonoBehaviour {
     public float transitionProgress;
     public bool transitionDirection;
 
+    private List<LightingMembrane> membranes;
+
+    private void Awake()
+    {
+        membranes = new List<LightingMembrane>();
+    }
 
     // Use this for initialization
     void Start()
@@ -41,9 +49,10 @@ public class SkyboxTransition : MonoBehaviour {
 
         material = RenderSettings.skybox;
 
-      
-        if (Toolbox.Instance.GetPlayer().layer == 16) 
-        { 
+
+
+        if (Toolbox.Instance.GetPlayer().layer == 16)
+        {
             SetStart(0);
             currentFog = realFog;
             currentAmbient = realAbmient;
@@ -53,8 +62,8 @@ public class SkyboxTransition : MonoBehaviour {
             realGlobalParticle.SetFloat("_TransitionState", 0);
             laserGlobalParticle.SetFloat("_TransitionState", 0);
         }
-        else 
-        { 
+        else
+        {
             SetStart(1);
             currentFog = laserFog;
             currentAmbient = laserAmbient;
@@ -73,13 +82,14 @@ public class SkyboxTransition : MonoBehaviour {
 
             p.antialiasingMode = PostProcessLayer.Antialiasing.None;
 
-     
-        } else 
+
+        }
+        else
         {
             p.antialiasingMode = PostProcessLayer.Antialiasing.FastApproximateAntialiasing;
         }
 
-        
+
 
     }
 
@@ -138,7 +148,7 @@ public class SkyboxTransition : MonoBehaviour {
 
         if (endpoint <= 0.0001f)
         {
-            
+
             endFog = realFog;
             endAmbient = realAbmient;
             transitionDirection = true;
@@ -150,7 +160,7 @@ public class SkyboxTransition : MonoBehaviour {
             endAmbient = laserAmbient;
             transitionDirection = false;
         }
-            
+
 
 
         while (transitionProgress < 1f)
@@ -169,8 +179,21 @@ public class SkyboxTransition : MonoBehaviour {
                 Color lerpAmbient = Color.Lerp(startAmbient, endAmbient, transitionProgress);
                 currentFog = lerpFog;
                 currentAmbient = lerpAmbient;
-            }   
+            }
             yield return null;
+        }
+    }
+
+    public void AdMembrane(LightingMembrane lm)
+    {
+        membranes.Add(lm);
+    }
+
+    public void DeactivateMembranes()
+    {
+        foreach (LightingMembrane lm in membranes)
+        {
+            lm.active = false;
         }
     }
 

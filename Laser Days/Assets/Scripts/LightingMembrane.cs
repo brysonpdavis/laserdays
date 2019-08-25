@@ -33,6 +33,7 @@ public class LightingMembrane : MonoBehaviour {
         normalDensity = RenderSettings.fogDensity;
         player = Toolbox.Instance.GetPlayer().transform;
         active = false;
+        skybox.AdMembrane(this);
     }
 
     private void FixedUpdate()
