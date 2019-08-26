@@ -1060,6 +1060,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a334fd4555bc74053be56b09f99dd707, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &47346925 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1528001371}
 --- !u!1001 &49316620
 Prefab:
   m_ObjectHideFlags: 0
@@ -10794,7 +10799,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -126
+      value: -123.5
       objectReference: {fileID: 0}
     - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
       propertyPath: m_LocalPosition.y
@@ -10802,7 +10807,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 20
+      value: 28.5
       objectReference: {fileID: 0}
     - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
       propertyPath: m_LocalRotation.x
@@ -13662,6 +13667,7 @@ Transform:
   - {fileID: 1571960761}
   - {fileID: 537812783}
   - {fileID: 613057683}
+  - {fileID: 47346925}
   m_Father: {fileID: 1054989587}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15623,39 +15629,9 @@ MonoBehaviour:
   _isMainScene: 1
   _sceneSetup:
   - scene:
-      editorAssetGUID: 058a7f129e9f94670b2ad0d161c9a579
-      name: AmbientSoundZones
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/AmbientSoundZones.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: d58469632502741ddb961b9a3dc65446
-      name: IncubatorRework_Introduction
-      _path: Assets/Scenes/Default Scene/IncubatorRework_Introduction.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 1bb2cd3c57e344a5fae600884156b9a9
-      name: Crosshatch_Hometown
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Crosshatch_Hometown.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
       editorAssetGUID: bf8a014d255e046e0a33b44a7b35c42f
       name: IncubatorRework_BackgroundGeometry
       _path: Assets/Scenes/Default Scene/IncubatorRework_BackgroundGeometry.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 6bc68e70f1a35400f9e403d05991d54f
-      name: Puz_Destroy_E_1
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Destroy_E_1.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 768cc779a67da403d81923ec144a86c5
-      name: Puz_Destroy_E_2
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Destroy_E_2.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
@@ -15665,21 +15641,64 @@ MonoBehaviour:
     loadInEditor: 1
     loadMethod: 1
   - scene:
+      editorAssetGUID: 55e96735d074646c4b32cfdf9a50cecd
+      name: IncubatorRework_FinalRoom
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/IncubatorRework_FinalRoom.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 6bc68e70f1a35400f9e403d05991d54f
+      name: Puz_Destroy_E_1
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Destroy_E_1.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 95410aa2e644e408583fca1a6f48f074
+      name: Puz_Eyes_Challenge
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Eyes_Challenge.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 768cc779a67da403d81923ec144a86c5
+      name: Puz_Destroy_E_2
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Destroy_E_2.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
       editorAssetGUID: cc6812b4df8f54bfe8d712da69237019
       name: IncubatorRework_TinyTutorialCompound
       _path: Assets/Scenes/Default Scene/IncubatorRework_TinyTutorialCompound.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
-      editorAssetGUID: 37c772db179d8476c9ebb540664a0061
-      name: IncubatorRework_WelcomeScene
-      _path: Assets/Scenes/Default Scene/IncubatorRework_WelcomeScene.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
       editorAssetGUID: d2ffd0bc80d494ed78a3a4071dbc9823
       name: IncubatorRework_Garden
       _path: Assets/Scenes/Default Scene/IncubatorRework_Garden.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 19d220f32db2a476da1501856a991cab
+      name: IncubatorRework_FirstPuzzleCompound
+      _path: Assets/Resources/Plants/IncubatorRework_FirstPuzzleCompound.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 278684751b5cc41f49e38840a1dc04ac
+      name: Puzz_Jump-Switch C1
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/_Tower Progressions
+        for DEMO/Puzz_Jump-Switch C1.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: d58469632502741ddb961b9a3dc65446
+      name: IncubatorRework_Introduction
+      _path: Assets/Scenes/Default Scene/IncubatorRework_Introduction.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 37c772db179d8476c9ebb540664a0061
+      name: IncubatorRework_WelcomeScene
+      _path: Assets/Scenes/Default Scene/IncubatorRework_WelcomeScene.unity
     loadInEditor: 1
     loadMethod: 1
   _thisScenePath: Assets/Scenes/Default Scene/IncubatorRework_BackgroundGeometry.unity
@@ -30684,6 +30703,60 @@ Prefab:
     - {fileID: 114543308557780958, guid: 434d4aeb8eabe42c8bca598ec83cdc31, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 434d4aeb8eabe42c8bca598ec83cdc31, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1528001371
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 630171189}
+    m_Modifications:
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 102.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 133.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.18223558
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.9832549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_RootOrder
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.9999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.9999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759796772074302, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+      propertyPath: m_Name
+      value: WaterTower (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1530940265
 Prefab:
   m_ObjectHideFlags: 0
@@ -31772,7 +31845,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4548145963470334, guid: 072463ff82c994d3fae5a8d18d066738, type: 2}
       propertyPath: m_RootOrder
-      value: 30
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 1742468084214020, guid: 072463ff82c994d3fae5a8d18d066738, type: 2}
       propertyPath: m_IsActive
@@ -34781,7 +34854,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4913373564583286, guid: bb5fbeb6906614448bfdf51043eb6801, type: 2}
       propertyPath: m_RootOrder
-      value: 29
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 1473166930752666, guid: bb5fbeb6906614448bfdf51043eb6801, type: 2}
       propertyPath: m_Name
@@ -38986,11 +39059,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
       propertyPath: m_LocalScale.x
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
       propertyPath: m_LocalScale.z
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1759796772074302, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
       propertyPath: m_Name
@@ -38998,7 +39071,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4436445555194088, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
       propertyPath: m_LocalScale.y
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b53becb6ea9434adca9fc3d29fe884c4, type: 2}
