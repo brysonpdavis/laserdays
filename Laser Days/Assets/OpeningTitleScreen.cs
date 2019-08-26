@@ -7,7 +7,10 @@ public class OpeningTitleScreen : MonoBehaviour {
 
     CanvasGroup canvas;
     public float waitTime = 0f;
+    public float textWaitTime = 0f;
     public float duration = 2f;
+
+    public GameObject texto;
 
     private void Awake()
     {
@@ -48,8 +51,12 @@ public class OpeningTitleScreen : MonoBehaviour {
 
     private IEnumerator FadeOnAwake()
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(textWaitTime);
+        texto.SetActive(true);
+        GetComponent<AudioSource>().Play();
 
+        yield return new WaitForSeconds(waitTime);
+     
         GameObject pause = GameObject.Find("PauseMenu");
         if (pause)
         {

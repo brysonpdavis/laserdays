@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour {
     public float fadeDuration = .5f;
     public string resetScene;
     public string playerScene;
-    public Image background;
+    public Image[] backgrounds;
     public GameObject container;
 
     [SerializeField] private GameObject listener;
@@ -30,13 +30,23 @@ public class MainMenu : MonoBehaviour {
     {
         float elapsedTime = 0;
         float ratio = elapsedTime / fadeDuration;
-        Color fader = background.color;
+        Color[] fader = new Color[backgrounds.Length];
+
+        for (int i = 0; i < backgrounds.Length; i ++)
+        {
+            fader[i] = backgrounds[i].color;
+        }
+
         while (ratio < 1f)
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / fadeDuration;
-            Color newColor = Color.Lerp(fader, Color.black, ratio);
-            background.color = newColor;
+            for (int i = 0; i < backgrounds.Length; i++)
+            {
+                Color newColor = Color.Lerp(fader[i], Color.clear, ratio);
+                backgrounds[i].color = newColor;
+            }
+
             yield return null;
         }
         
