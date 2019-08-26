@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,11 @@ public class EmailScreen : MonoBehaviour {
     private void Awake()
     {
         canvas = GetComponent<CanvasGroup>();
+    }
+
+    private void Start()
+    {
+        OpeningSongSingleton.FadeThenDestroy();
     }
 
     public void Fade()
