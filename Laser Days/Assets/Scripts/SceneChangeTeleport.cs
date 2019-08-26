@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SceneChangeTeleport : MonoBehaviour {
 
-    float fadeDuration;
+    public float fadeDuration;
     AudioSource audio;
 
     //[SerializeField] private AudioSource[] audioSources;
@@ -29,14 +29,14 @@ public class SceneChangeTeleport : MonoBehaviour {
     private void Start()
     {
         audio = GetComponent<AudioSource>();
-        fadeDuration = audio.clip.length;
+        //fadeDuration = audio.clip.length;
         //openingSong = OpeningSongSingleton.Instance;
         //bassAudio = TriggeredAudio.Instance;
     }
 
     private void LoadScene()
     {
-        audio.Play();
+        //audio.Play();
         Toolbox.Instance.LoadScene(sceneName, spawnName);
         //StartCoroutine(FadeOutVolume());
     }

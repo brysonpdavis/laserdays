@@ -398,7 +398,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         spawn = GameObject.Find(spawnPoint);
 
         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = true;
-        Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().Movement.Speed = 3;
+        Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().Movement.Speed = 3.5f;
         Vector3 teleport = GameObject.Find(spawnPoint).transform.position;
         player.TeleportTo(teleport, true);
         player.GetComponent<CharacterController>().velocity.Set(0f, 0f, 0f);

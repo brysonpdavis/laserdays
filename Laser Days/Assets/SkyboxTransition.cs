@@ -197,4 +197,9 @@ public class SkyboxTransition : MonoBehaviour
         }
     }
 
+    public void ResetFog()
+    {
+        RenderSettings.fogDensity = 0.005f;
+    }
+
 }

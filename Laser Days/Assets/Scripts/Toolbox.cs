@@ -390,6 +390,8 @@ public class Toolbox : Singleton<Toolbox>
 
             skyboxSettings.ambientMultiplier = 1f;
             skyboxSettings.fogMultiplier = 1f;
+
+            skyboxSettings.ResetFog();
             
             if (settingsObject.GetRealGlobalParticle())
                 skyboxSettings.realGlobalParticle = settingsObject.GetRealGlobalParticle();
