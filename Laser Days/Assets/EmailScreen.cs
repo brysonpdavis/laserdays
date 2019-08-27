@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class EmailScreen : MonoBehaviour {
 
     CanvasGroup canvas;
     public float duration = 2f;
     public GameObject nextScreen;
+    [SerializeField] private GameObject _continue;
 
     private void Awake()
     {
@@ -17,6 +19,7 @@ public class EmailScreen : MonoBehaviour {
     private void Start()
     {
         OpeningSongSingleton.FadeThenDestroy();
+        EventSystem.current.SetSelectedGameObject(_continue);
     }
 
     public void Fade()
