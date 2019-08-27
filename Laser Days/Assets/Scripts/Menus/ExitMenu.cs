@@ -6,18 +6,19 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 
-public class ExitMenu : Singleton<ExitMenu> {
+public class ExitMenu : MonoBehaviour {
 
 	public string homeScene;
     public float fadeDuration = 1f;
     public Image background;
     public GameObject container;
     CanvasGroup canvasGroup;
+    public static ExitMenu Instance;
 
     private void Awake()
     {
-        if (ExitMenu.Instance == null)
-            ExitMenu.Instance = this;    
+        if (Instance == null)
+            Instance = this;    
         
         gameObject.SetActive(false);
     }
@@ -36,8 +37,6 @@ public class ExitMenu : Singleton<ExitMenu> {
         
         Toolbox.Instance.DisablePlayerMovementAndFlip();
 
-        container.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(container.transform.GetChild(0).gameObject);
         canvasGroup = GetComponent<CanvasGroup>();
         StartCoroutine(FadeIn());
     }
@@ -59,7 +58,7 @@ public class ExitMenu : Singleton<ExitMenu> {
         }
         
         yield return new WaitForSeconds(2);
-
+        
         elapsedTime = 0;
         ratio = elapsedTime / fadeDuration;
         while (ratio < 1f)
@@ -69,6 +68,9 @@ public class ExitMenu : Singleton<ExitMenu> {
             canvasGroup.alpha = ratio;
             yield return null;
         }
+        
+        container.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(container.transform.GetChild(0).gameObject);
     }
 
 
