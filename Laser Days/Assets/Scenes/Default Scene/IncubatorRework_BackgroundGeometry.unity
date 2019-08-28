@@ -1223,6 +1223,117 @@ Transform:
   m_PrefabParentObject: {fileID: 4648680758296294, guid: 434d4aeb8eabe42c8bca598ec83cdc31,
     type: 2}
   m_PrefabInternal: {fileID: 898653386}
+--- !u!1 &43707691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1473166930752666, guid: bb5fbeb6906614448bfdf51043eb6801,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 43707692}
+  - component: {fileID: 43707696}
+  - component: {fileID: 43707695}
+  - component: {fileID: 43707694}
+  - component: {fileID: 43707693}
+  m_Layer: 17
+  m_Name: BOULD (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &43707692
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4913373564583286, guid: bb5fbeb6906614448bfdf51043eb6801,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43707691}
+  m_LocalRotation: {x: -0.030374972, y: -0.86982554, z: 0.01718533, w: 0.49212357}
+  m_LocalPosition: {x: -347.5, y: -8, z: -250.00006}
+  m_LocalScale: {x: 24.000013, y: 24.000004, z: 20.000008}
+  m_Children: []
+  m_Father: {fileID: 199188728}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -121.00001, z: 4}
+--- !u!114 &43707693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114009964090489772, guid: bb5fbeb6906614448bfdf51043eb6801,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43707691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1278dd86790b14689bb9c776cf6b8b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScaleSpeed: 1
+  shared: 0
+  manualTransitionChildren: 0
+  forceRadial: 0
+  forceInstant: 0
+  tween: 2
+--- !u!64 &43707694
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 64450995107871446, guid: bb5fbeb6906614448bfdf51043eb6801,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43707691}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: a2ce421e6eb3d4dc9bebb95f857cca16, type: 3}
+--- !u!23 &43707695
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23399652923871206, guid: bb5fbeb6906614448bfdf51043eb6801,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43707691}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 2100000, guid: f676a1c9d2118460d9ed01ee3871b851, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &43707696
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33849822360430750, guid: bb5fbeb6906614448bfdf51043eb6801,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43707691}
+  m_Mesh: {fileID: 4300002, guid: a2ce421e6eb3d4dc9bebb95f857cca16, type: 3}
 --- !u!1001 &45523553
 Prefab:
   m_ObjectHideFlags: 0
@@ -2089,7 +2200,7 @@ Transform:
   - {fileID: 539805616}
   - {fileID: 1089217776}
   m_Father: {fileID: 1054989587}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &76464503
 Prefab:
@@ -5151,6 +5262,35 @@ Prefab:
     - {fileID: 114543308557780958, guid: 434d4aeb8eabe42c8bca598ec83cdc31, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 434d4aeb8eabe42c8bca598ec83cdc31, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &199188727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 199188728}
+  m_Layer: 0
+  m_Name: LargeRocks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &199188728
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 199188727}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -29, y: 0, z: -488}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 43707692}
+  m_Father: {fileID: 1054989587}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &201962207
 Prefab:
   m_ObjectHideFlags: 0
@@ -9573,6 +9713,16 @@ Prefab:
       propertyPath: regionName
       value: Major Region 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114636568559383336, guid: ff160c47402d6406d9c4124b589bea50,
+        type: 2}
+      propertyPath: activeLevel
+      value: 
+      objectReference: {fileID: 1288486236}
+    - target: {fileID: 114636568559383336, guid: ff160c47402d6406d9c4124b589bea50,
+        type: 2}
+      propertyPath: activateDistance
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
   m_IsPrefabParent: 0
@@ -12106,7 +12256,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4447238352048978, guid: 0d0be52af313b48d98f5b6db379e27f3, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4447238352048978, guid: 0d0be52af313b48d98f5b6db379e27f3, type: 2}
       propertyPath: m_LocalScale.x
@@ -13594,7 +13744,7 @@ Transform:
   - {fileID: 579037832}
   - {fileID: 29657608}
   m_Father: {fileID: 1054989587}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &572868007 stripped
 Transform:
@@ -15304,7 +15454,7 @@ Transform:
   - {fileID: 613057683}
   - {fileID: 47346925}
   m_Father: {fileID: 1054989587}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &630970864 stripped
 Transform:
@@ -16544,7 +16694,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4235742526931388, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1103060098149164, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_Name
@@ -17600,21 +17750,33 @@ MonoBehaviour:
   _isMainScene: 1
   _sceneSetup:
   - scene:
+      editorAssetGUID: 698b6db253dd04e5398051c36d4151d0
+      name: IncubatorRework_OpeningPlayer
+      _path: Assets/IncubatorRework_OpeningPlayer.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 058a7f129e9f94670b2ad0d161c9a579
+      name: AmbientSoundZones
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/AmbientSoundZones.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: d58469632502741ddb961b9a3dc65446
+      name: IncubatorRework_Introduction
+      _path: Assets/Scenes/Default Scene/IncubatorRework_Introduction.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 1bb2cd3c57e344a5fae600884156b9a9
+      name: Crosshatch_Hometown
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Crosshatch_Hometown.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
       editorAssetGUID: bf8a014d255e046e0a33b44a7b35c42f
       name: IncubatorRework_BackgroundGeometry
       _path: Assets/Scenes/Default Scene/IncubatorRework_BackgroundGeometry.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 2348963f9da35414e8ee077b7e26a149
-      name: IncubatorRework_SecondPuzzleCompound
-      _path: Assets/Scenes/Default Scene/IncubatorRework_SecondPuzzleCompound.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 55e96735d074646c4b32cfdf9a50cecd
-      name: IncubatorRework_FinalRoom
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/IncubatorRework_FinalRoom.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
@@ -17624,15 +17786,15 @@ MonoBehaviour:
     loadInEditor: 1
     loadMethod: 1
   - scene:
-      editorAssetGUID: 95410aa2e644e408583fca1a6f48f074
-      name: Puz_Eyes_Challenge
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Eyes_Challenge.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
       editorAssetGUID: 768cc779a67da403d81923ec144a86c5
       name: Puz_Destroy_E_2
       _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Destroy_E_2.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 2348963f9da35414e8ee077b7e26a149
+      name: IncubatorRework_SecondPuzzleCompound
+      _path: Assets/Scenes/Default Scene/IncubatorRework_SecondPuzzleCompound.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
@@ -17642,15 +17804,15 @@ MonoBehaviour:
     loadInEditor: 1
     loadMethod: 1
   - scene:
-      editorAssetGUID: d2ffd0bc80d494ed78a3a4071dbc9823
-      name: IncubatorRework_Garden
-      _path: Assets/Scenes/Default Scene/IncubatorRework_Garden.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
       editorAssetGUID: 19d220f32db2a476da1501856a991cab
       name: IncubatorRework_FirstPuzzleCompound
       _path: Assets/Resources/Plants/IncubatorRework_FirstPuzzleCompound.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 95410aa2e644e408583fca1a6f48f074
+      name: Puz_Eyes_Challenge
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Eyes_Challenge.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
@@ -17661,15 +17823,15 @@ MonoBehaviour:
     loadInEditor: 1
     loadMethod: 1
   - scene:
-      editorAssetGUID: d58469632502741ddb961b9a3dc65446
-      name: IncubatorRework_Introduction
-      _path: Assets/Scenes/Default Scene/IncubatorRework_Introduction.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
       editorAssetGUID: 37c772db179d8476c9ebb540664a0061
       name: IncubatorRework_WelcomeScene
       _path: Assets/Scenes/Default Scene/IncubatorRework_WelcomeScene.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 55e96735d074646c4b32cfdf9a50cecd
+      name: IncubatorRework_FinalRoom
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/IncubatorRework_FinalRoom.unity
     loadInEditor: 1
     loadMethod: 1
   _thisScenePath: Assets/Scenes/Default Scene/IncubatorRework_BackgroundGeometry.unity
@@ -19214,7 +19376,7 @@ Transform:
   - {fileID: 475727283}
   - {fileID: 1155679487}
   m_Father: {fileID: 1054989587}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &801814629
 MonoBehaviour:
@@ -20193,7 +20355,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4447238352048978, guid: 0d0be52af313b48d98f5b6db379e27f3, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4447238352048978, guid: 0d0be52af313b48d98f5b6db379e27f3, type: 2}
       propertyPath: m_LocalScale.x
@@ -23843,7 +24005,7 @@ Transform:
   m_Children:
   - {fileID: 173303063}
   m_Father: {fileID: 1054989587}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!154 &997670940
 TerrainCollider:
@@ -29837,6 +29999,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4375505354540092, guid: a334fd4555bc74053be56b09f99dd707,
     type: 2}
   m_PrefabInternal: {fileID: 1760602220}
+--- !u!1 &1288486236 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1882355293299392, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 401307632}
 --- !u!1001 &1289973866
 Prefab:
   m_ObjectHideFlags: 0
@@ -31458,7 +31625,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4783967058420846, guid: 9674f9f3f18114f54870c46de2f173d7, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114307904290451668, guid: 9674f9f3f18114f54870c46de2f173d7,
         type: 2}
@@ -32378,7 +32545,7 @@ Transform:
   - {fileID: 637985279}
   - {fileID: 1737280042}
   m_Father: {fileID: 1054989587}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1415283712 stripped
 Transform:
@@ -44647,7 +44814,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4418031265199094, guid: 002ba202a855e43589e524e26d1fc624, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4418031265199094, guid: 002ba202a855e43589e524e26d1fc624, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -45319,7 +45486,7 @@ Transform:
   - {fileID: 1736431245}
   - {fileID: 672905437}
   m_Father: {fileID: 1054989587}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1992043899
 MonoBehaviour:

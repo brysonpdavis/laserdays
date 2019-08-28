@@ -2755,16 +2755,16 @@ Prefab:
     - target: {fileID: 114636568559383336, guid: ff160c47402d6406d9c4124b589bea50,
         type: 2}
       propertyPath: regionName
-      value: Major Region 2
+      value: Major Region 1
       objectReference: {fileID: 0}
     - target: {fileID: 114636568559383336, guid: ff160c47402d6406d9c4124b589bea50,
         type: 2}
       propertyPath: activateDistance
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1856557671804646, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_Name
-      value: One Eyes
+      value: Exit
       objectReference: {fileID: 0}
     - target: {fileID: 114898644889336374, guid: ff160c47402d6406d9c4124b589bea50,
         type: 2}
@@ -2807,6 +2807,15 @@ Prefab:
     - target: {fileID: 1712074026672630, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114636568559383336, guid: ff160c47402d6406d9c4124b589bea50,
+        type: 2}
+      propertyPath: activeLevel
+      value: 
+      objectReference: {fileID: 1370943559}
+    - target: {fileID: 4947786651033220, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -24.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 65560449512967876, guid: ff160c47402d6406d9c4124b589bea50, type: 2}
@@ -5291,7 +5300,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 807586219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2af8210fa2984a1d98dfb41ddde8b90, type: 3}
+  m_Script: {fileID: 11500000, guid: f939c5d4185f147e4bba6dee2b018e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &807586222
@@ -9727,6 +9736,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1370943559 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1882355293299392, guid: ff160c47402d6406d9c4124b589bea50,
+    type: 2}
+  m_PrefabInternal: {fileID: 401307632}
 --- !u!1001 &1372740784
 Prefab:
   m_ObjectHideFlags: 0
