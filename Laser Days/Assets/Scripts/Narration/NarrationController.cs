@@ -118,7 +118,6 @@ public class NarrationController : MonoBehaviour
 				_narrationIndex++;
 			}
 
-			_narrationContinue.enabled = false;
 		}
 		else
 		{
