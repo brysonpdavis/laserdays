@@ -13,6 +13,8 @@ public class NarrationSettings : ScriptableObject
 
     public Sprite background;
 
+    public Sprite decor;
+
     public string openAnimation;
 
     public string closeAnimation;

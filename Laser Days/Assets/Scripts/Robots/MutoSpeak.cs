@@ -86,6 +86,9 @@ public class MutoSpeak : SelectableObject, INarrationActor
         _currentClip = 0;
         speaking = true;
         PlayAudio();
+
+        if (uiObject1)
+            uiObject1.SetActive(false);
     }
 
     public void OnNarrationDeactivate()
@@ -95,9 +98,6 @@ public class MutoSpeak : SelectableObject, INarrationActor
         _canInteract = false;
         audio.Stop();
         speaking = false;
-        
-        if (uiObject1)
-            uiObject1.SetActive(false);
         
         if (uiObject2) 
             uiObject2.SetActive(true);

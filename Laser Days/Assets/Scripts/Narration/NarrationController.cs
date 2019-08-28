@@ -184,14 +184,22 @@ public class NarrationController : MonoBehaviour
 
 	private void ApplyNewSettings()
 	{
-		var backgroundDecoration = _narrationBackground.transform.GetChild(0).GetComponent<Image>();
+		var decoration = _narrationBackground.transform.GetChild(0).GetComponent<Image>();
 
-		backgroundDecoration.color = _currentSettings.decorationColor;
+		decoration.color = _currentSettings.decorationColor;
 		
-		if (_currentSettings.background && backgroundDecoration)
-			backgroundDecoration.sprite = _currentSettings.background;
+		if (_currentSettings.background)
+        {
+            _narrationBackground.sprite = _currentSettings.background;
+        }
+			
+        else
+        {
+            _narrationBackground.sprite = null;
+        }
 
-		_narrationBackground.color = _currentSettings.backgroundRectangleColor;
+
+        _narrationBackground.color = _currentSettings.backgroundRectangleColor;
 
 		if (_currentSettings.textFace)
 			_narrationText.font = _currentSettings.textFace;
