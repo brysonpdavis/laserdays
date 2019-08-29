@@ -45,6 +45,13 @@ abstract public class HoldableObject : SelectableObject, IHoldable
         //}
 
         inMotion = false;
+
+        particleTransitionBursts = GetComponentsInChildren<ParticleTransitionBurst>();
+        if(particleTransitionBursts.Length>0)
+        {
+            hasTransitionParticles = true;
+        }
+
     }
 
 

@@ -74,8 +74,13 @@ public class Hoppers : MonoBehaviour
         audio = GetComponent<AudioSource>();
 
     }
-	
-	void Update ()
+
+    private void OnEnable()
+    {
+        waypointsOnGround = InitWayPoints(waypoints);
+    }
+
+    void Update ()
 	{
         if (active)
         {
