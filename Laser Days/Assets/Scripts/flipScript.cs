@@ -57,6 +57,7 @@ public class flipScript : MonoBehaviour {
 
     void Start () {
 
+/*
         //make sure player is seeing ladders in correct world
         if (space)
         {
@@ -64,6 +65,7 @@ public class flipScript : MonoBehaviour {
         } 
         else { GetComponent<MFPP.Modules.LadderModule>().LadderLayerMask.value = 524288; //only see ladders in laser world
         }
+*/
 
         //Debug.Log(Camera.main.fieldOfView);
 
