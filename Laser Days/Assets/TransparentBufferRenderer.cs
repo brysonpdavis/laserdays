@@ -132,11 +132,9 @@ public class TransparentBufferRenderer : MonoBehaviour
         buff.SetRenderTarget(mrta, BuiltinRenderTextureType.CameraTarget);
         foreach (var o in group.m_Objects)
         {
-            if (o.replaceShader)
+            if (o.properlyInit)
             {
-                tempMat = new Material(o.m_Renderer.sharedMaterial);
-                tempMat.shader = o.replaceShader;
-                buff.DrawRenderer(o.m_Renderer, tempMat);
+                buff.DrawRenderer(o.m_Renderer, o.bufferMat);
             }
         }
 

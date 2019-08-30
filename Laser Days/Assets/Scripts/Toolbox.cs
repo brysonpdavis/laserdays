@@ -262,6 +262,8 @@ public class Toolbox : Singleton<Toolbox>
         iconContainer = GameObject.FindWithTag("IconContainer").GetComponent<IconContainer>();
         pauseMenu = GameObject.Find("PauseMenu");
 
+        Application.backgroundLoadingPriority = ThreadPriority.Low;
+
         cameraFogStartDefault = Camera.main.GetComponent<UnityStandardAssets.ImageEffects.GlobalFog>().startDistance;
         fogDensityDefault = RenderSettings.fogDensity;
 

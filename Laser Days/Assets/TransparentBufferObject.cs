@@ -8,6 +8,8 @@ public class TransparentBufferObject : MonoBehaviour
 {
     [HideInInspector] public Shader replaceShader;
     [HideInInspector] public Renderer m_Renderer;
+    [HideInInspector] public Material bufferMat;
+    [HideInInspector] public bool properlyInit;
 
     private void tryAdd()
     {
@@ -24,11 +26,14 @@ public class TransparentBufferObject : MonoBehaviour
                 //Add this object to the list of objects to be rendered in the tranparent outline buffer
                 replaceShader = temp;
                 TransparentBufferGroup.Instance.AddObject(this);
+                bufferMat = new Material(m_Renderer.sharedMaterial);
+                bufferMat.shader = replaceShader;
+                properlyInit = true;
             }  
             else 
             {
-                Debug.Log("No matching shader found. Object not added to buffer.");
-                Debug.Log(materialShader.name);
+                //Debug.Log("No matching shader found. Object not added to buffer.");
+                //Debug.Log(materialShader.name);
             }        
         } 
         else if (GetComponent<ParticleSystemRenderer>())
@@ -44,22 +49,36 @@ public class TransparentBufferObject : MonoBehaviour
                 //Add this object to the list of objects to be rendered in the tranparent outline buffer
                 replaceShader = temp;
                 TransparentBufferGroup.Instance.AddObject(this);
+                bufferMat = new Material(m_Renderer.sharedMaterial);
+                bufferMat.shader = replaceShader;
+                properlyInit = true;
             }
             else
             {
-                Debug.Log("No matching shader found. Object not added to buffer.");
-                Debug.Log(materialShader.name);
+                //Debug.Log("No matching shader found. Object not added to buffer.");
+                //Debug.Log(materialShader.name);
             }
         }
         else
         {
-            Debug.Log("No renderer or particle renderer found. Object not added to buffer.");
+            //Debug.Log("No renderer or particle renderer found. Object not added to buffer.");
         }
+
+
     }
 
     public void OnEnable()
     {
         tryAdd();
+    }
+
+    private void Update()
+    {
+        if(properlyInit)
+        {
+            bufferMat.CopyPropertiesFromMaterial(m_Renderer.sharedMaterial);
+        }
+
     }
 
     public void Start()

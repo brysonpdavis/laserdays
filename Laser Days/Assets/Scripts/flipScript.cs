@@ -34,6 +34,11 @@ public class flipScript : MonoBehaviour {
     public delegate void FailedFlip();
     public static event FailedFlip OnFailedFlip;
 
+    public float coolDownTime;
+    private bool cooledDown;
+    private float timer;
+    private bool adTime;
+
     private MutationSpawner mutationSpawner;
 
     private ImageEffectEyes eyesEffect;
@@ -82,8 +87,9 @@ public class flipScript : MonoBehaviour {
 
 	void Update () {
         flippedThisFrame = false;
+        timer += Time.deltaTime;
 
-        if (ControlManager.Instance.GetButtonDown("Switch") && ! Toolbox.Instance.GetPauseMenu().activeSelf && CheckEyes() && canFlip)
+        if (ControlManager.Instance.GetButtonDown("Switch") && ! Toolbox.Instance.GetPauseMenu().activeSelf && CheckEyes() && canFlip && CheckCooledDown())
         {
             FlipAttempt();
         }
@@ -98,7 +104,21 @@ public class flipScript : MonoBehaviour {
             eyesEffect.isSeen = true;
         }
         else eyesEffect.isSeen = false;
+        
 	}
+
+    bool CheckCooledDown()
+    {
+        if(timer >= coolDownTime)
+        {
+            return true;
+        }
+        else
+        {
+
+            return false;
+        }
+    }
 
     public void ForceFlip() {
         forcedFlip = true;
@@ -112,6 +132,7 @@ public class flipScript : MonoBehaviour {
     {
         GameObject heldObj = _pickupModule.heldObject;
         flippedThisFrame = true;
+        timer = 0f;
 
         if (heldObj)
         {
