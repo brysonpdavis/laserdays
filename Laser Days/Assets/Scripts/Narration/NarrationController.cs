@@ -68,7 +68,9 @@ public class NarrationController : MonoBehaviour
 		_narrationLettersIndex = 0;
 		_narrationContainer.SetActive(false);
 		
+/*
 		Debug.LogError("narration cancelled");
+*/
 
 		_state = State.Inactive;
 		
@@ -108,7 +110,7 @@ public class NarrationController : MonoBehaviour
 				
 				_state = State.Waiting;
 
-				while (!ControlManager.Instance.GetButtonDown("Select"))
+				while (!GetButtonNextDown())
 				{
 					_currentSettings.OnNext();
 					
@@ -135,7 +137,7 @@ public class NarrationController : MonoBehaviour
 				{
 					yield return null;
 
-					if (ControlManager.Instance.GetButtonDown("Select"))
+					if (GetButtonNextDown())
 					{
 						_narrationText.text = paragraphs[_narrationIndex];
 						
@@ -153,7 +155,7 @@ public class NarrationController : MonoBehaviour
 
 				_state = State.Waiting;
 				
-				while (!ControlManager.Instance.GetButtonDown("Select"))
+				while (!GetButtonNextDown())
 				{	
 					yield return null;
 				}
@@ -238,6 +240,13 @@ public class NarrationController : MonoBehaviour
 		}
 	}
 
+	private bool GetButtonNextDown()
+	{
+		return ControlManager.Instance.GetButtonDown("Select") || 
+		       ControlManager.Instance.GetButtonDown("Submit") || 
+		       ControlManager.Instance.GetButtonDown("Switch");
+	}
+	
 	public static void TriggerNarration(NarrationSettings newSettings, INarrationActor actor, TextAsset textAsset)
 	{
 		if (_instance._state == State.Inactive)

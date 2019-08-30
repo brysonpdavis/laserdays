@@ -648,7 +648,10 @@ namespace MFPP
 
             if (Movement.AllowMouseMove)
             {
-                Vector2 rawDelta = new Vector2(GetMouseCurrentAxis(Controls.MouseXAxis), GetMouseCurrentAxis(Controls.MouseYAxis)) * Controls.MouseSensitivity * 5; // Raw delta of the mouse.
+                Vector2 rawDelta = new Vector2(GetMouseCurrentAxis(Controls.MouseXAxis), 
+                    (Controls.MouseInvert ? -1 : 1) * Controls.MouseSensitivity * GetMouseCurrentAxis(Controls.MouseYAxis)
+                    ); // Raw delta of the mouse.
+                
                 TargetLookAngles += rawDelta; // Apply raw delta to target look angles.
                 TargetLookAngles = new Vector2(TargetLookAngles.x, Mathf.Clamp(TargetLookAngles.y, -90f, 90f)); // Clamp target look angles Y values between -90...90 to avoid looking too much up or down.
 
@@ -1451,9 +1454,25 @@ namespace MFPP
             /// </summary>
             public float MouseSensitivity
             {
-                get { return mouseSensitivity; }
+                get { return mouseSensitivity *
+                             (ControlManager.GetControllerState() == ControlManager.ControllerState.KeyboardAndMouse
+                                 ? 2
+                                 : 6); }
                 set { mouseSensitivity = value; }
             }
+
+            [SerializeField] [Tooltip("Vertical mouse movement inverted?")]
+            private bool mouseInvert = false;
+
+            /// <summary>
+            /// Vertical mouse movement inverted?
+            /// </summary>
+            public bool MouseInvert
+            {
+                get { return mouseInvert; }
+                set { mouseInvert = value; }
+            }
+            
             [SerializeField]
             [Range(0f, 1f)]
             [Tooltip("Smoothness of the mouse movement.")]
