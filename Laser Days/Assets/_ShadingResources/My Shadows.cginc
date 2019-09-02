@@ -20,8 +20,8 @@
 
 
 float4 _Tint;
-sampler2D _EffectMap;
-float4 _EffectMap_ST;
+sampler2D _EffectMap, _MainTex;
+float4 _EffectMap_ST, _MainTex_ST;
 float _AlphaCutoff;
 float _TransitionState;
 
@@ -72,13 +72,13 @@ float GetAlpha (Interpolators i) {
     #if defined(REAL)
         emv -= _TransitionState;
         emv = step(0,emv);
-        return emv;
     #endif
     #if defined(LASER)
         emv += _TransitionState;
         emv = step(1,emv);
-        return emv;
-    #endif   
+    #endif 
+    
+      return emv;  
 }
 
 float3 GetVertexMovement(VertexData v, float3 wPos)
@@ -131,7 +131,7 @@ InterpolatorsVertex MyShadowVertexProgram (VertexData v) {
 		i.position = UnityApplyLinearShadowBias(i.position);
 	#endif
     
-    i.uv = TRANSFORM_TEX(v.uv, _EffectMap);
+    i.uv = TRANSFORM_TEX(v.uv, _MainTex);
     
     #if defined(TERRAIN)
         i.uv = (v.position.xz);
@@ -158,17 +158,20 @@ InterpolatorsVertex MyShadowVertexProgramFoliage (VertexData v) {
         i.position = UnityApplyLinearShadowBias(i.position);
     #endif
     
-    i.uv = TRANSFORM_TEX(v.uv, _EffectMap);
+    i.uv = TRANSFORM_TEX(v.uv, _MainTex);
+    
+    #if defined(TERRAIN)
+        i.uv = (v.position.xz);
+    #endif
 
     return i;
 }
 
 float4 MyShadowFragmentProgram (Interpolators i) : SV_TARGET {
-	#if defined(REAL) || defined(LASER)
+        
         float alpha = GetAlpha(i);  
 		clip(alpha - _AlphaCutoff);
-        
-	#endif
+   
 
 	#if SHADOWS_SEMITRANSPARENT
 		float dither =
