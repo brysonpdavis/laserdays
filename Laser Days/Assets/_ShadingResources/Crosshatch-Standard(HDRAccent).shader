@@ -159,6 +159,7 @@
 
             #pragma multi_compile_shadowcaster
             #pragma multi_compile SHARED REAL LASER
+            #pragma multi_compile STATIC TERRAIN
 
             #pragma vertex MyShadowVertexProgram
             #pragma fragment MyShadowFragmentProgram

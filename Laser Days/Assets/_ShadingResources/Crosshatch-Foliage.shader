@@ -171,6 +171,7 @@
 
             #pragma multi_compile_shadowcaster
             #pragma multi_compile SHARED REAL LASER
+            #pragma multi_compile STATIC TERRAIN
             #pragma shader_feature NO_ANIMATION W_POS_SWELLING W_POS_SWAYING V_COLOR_SWAYING V_COLOR_GLITCHY V_COLOR_CIRCLE
             #define FOLIAGE
             
