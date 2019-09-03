@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Experimental.Audio.Google;
 using UnityStandardAssets.ImageEffects;
 //using UnityEditor.ShaderGraph;
 
@@ -21,6 +22,7 @@ public class LevelLoadingMenu : MonoBehaviour {
     public GameObject inputMenuButton;
     public GameObject inputMenuUI;
     public string playerScene;
+    private MFPP.Player _player;
 
     private List<GameObject> pauseMenuChildren;
 
@@ -82,6 +84,8 @@ public class LevelLoadingMenu : MonoBehaviour {
         GetComponent<CanvasScaler>().enabled = true;
 
         edge = Camera.main.GetComponent<EdgeDetection>();
+
+        _player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
 
     }
 
@@ -159,7 +163,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         string name = EventSystem.current.currentSelectedGameObject.name;
         GameObject myButton = EventSystem.current.currentSelectedGameObject;
         string spawnPoint = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text;
-        Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
+        _player.GetComponent<MFPP.Player>().enabled = false;
         Time.timeScale = 1f;
 
         StartCoroutine(loadNextScene(name, spawnPoint, myButton, true));
@@ -186,7 +190,25 @@ public class LevelLoadingMenu : MonoBehaviour {
         lastSceneCompleted = newSceneCompleted;
     }
 
-    public void SetMouseSensitivity()     {         float value = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>().value;         Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().Controls.MouseSensitivity = value;     } 
+    public void SetMouseSensitivity()
+    {
+        
+        float value = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>().value;
+        
+        _player.Controls.MouseSensitivity = value;
+    }
+
+
+    public void ToggleMouseInvert()
+    {
+        _player.Controls.MouseInvert = !_player.Controls.MouseInvert;
+    }
+
+    public bool GetMouseInvert()
+    {
+        return _player.Controls.MouseInvert;
+        
+    }
 
     public void ClearPreviousButton()
     {
@@ -418,11 +440,11 @@ public class LevelLoadingMenu : MonoBehaviour {
             Toolbox.Instance.GetPickUp().heldObject = null;
         }
 
-        MFPP.Player player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
+        MFPP.Player player = _player;
         spawn = GameObject.Find(spawnPoint);
 
-        Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = true;
-        Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().Movement.Speed = 3.5f;
+        player.enabled = true;
+        player.Movement.Speed = 3.5f;
         Vector3 teleport = GameObject.Find(spawnPoint).transform.position;
         player.TeleportTo(teleport, true);
         player.GetComponent<CharacterController>().velocity.Set(0f, 0f, 0f);

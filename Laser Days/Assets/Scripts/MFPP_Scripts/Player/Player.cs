@@ -649,8 +649,8 @@ namespace MFPP
             if (Movement.AllowMouseMove)
             {
                 Vector2 rawDelta = new Vector2(GetMouseCurrentAxis(Controls.MouseXAxis), 
-                    (Controls.MouseInvert ? -1 : 1) * Controls.MouseSensitivity * GetMouseCurrentAxis(Controls.MouseYAxis)
-                    ); // Raw delta of the mouse.
+                    (Controls.MouseInvert ? -1 : 1) * GetMouseCurrentAxis(Controls.MouseYAxis) 
+                    ) * Controls.MouseSensitivity; // Raw delta of the mouse.
                 
                 TargetLookAngles += rawDelta; // Apply raw delta to target look angles.
                 TargetLookAngles = new Vector2(TargetLookAngles.x, Mathf.Clamp(TargetLookAngles.y, -90f, 90f)); // Clamp target look angles Y values between -90...90 to avoid looking too much up or down.
