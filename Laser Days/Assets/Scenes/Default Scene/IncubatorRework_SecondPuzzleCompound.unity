@@ -967,6 +967,78 @@ Transform:
   m_PrefabParentObject: {fileID: 4069876542499614, guid: a773b176b2ecb44ac93d42fae06ab537,
     type: 2}
   m_PrefabInternal: {fileID: 443550929}
+--- !u!1001 &72159020
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 156874595}
+    m_Modifications:
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -41.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_RootOrder
+      value: 344
+      objectReference: {fileID: 0}
+    - target: {fileID: 23338567112957916, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aae39cc5b7e9c4e4b8951c0995311f06, type: 2}
+    - target: {fileID: 1367334672899142, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_Name
+      value: WALL_4x4x1 (74)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &72159021 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4480647054354102, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4,
+    type: 2}
+  m_PrefabInternal: {fileID: 72159020}
 --- !u!1001 &75931989
 Prefab:
   m_ObjectHideFlags: 0
@@ -2301,6 +2373,7 @@ Transform:
   - {fileID: 59436858}
   - {fileID: 71965291}
   - {fileID: 83708584}
+  - {fileID: 72159021}
   m_Father: {fileID: 1054989587}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7788,7 +7861,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a8f8779a5d1e74e29a61780798024788, type: 2}
+      objectReference: {fileID: 2100000, guid: 1f1873bdf205b42e59339e951718dec7, type: 2}
     - target: {fileID: 1367334672899142, guid: 75e4f8293d4f547fcbe14b21fcc2e3d4, type: 2}
       propertyPath: m_Name
       value: WALL_4x4x1 (11)
@@ -8929,69 +9002,15 @@ MonoBehaviour:
   _isMainScene: 1
   _sceneSetup:
   - scene:
-      editorAssetGUID: 60b9479bf23114393bcd26051862bde8
-      name: IncubatorRework_CONTAINER
-      _path: Assets/Scenes/Default Scene/IncubatorRework_CONTAINER.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 058a7f129e9f94670b2ad0d161c9a579
-      name: AmbientSoundZones
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/AmbientSoundZones.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: d58469632502741ddb961b9a3dc65446
-      name: IncubatorRework_Introduction
-      _path: Assets/Scenes/Default Scene/IncubatorRework_Introduction.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 1bb2cd3c57e344a5fae600884156b9a9
-      name: Crosshatch_Hometown
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Crosshatch_Hometown.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: bf8a014d255e046e0a33b44a7b35c42f
-      name: IncubatorRework_BackgroundGeometry
-      _path: Assets/Scenes/Default Scene/IncubatorRework_BackgroundGeometry.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 6bc68e70f1a35400f9e403d05991d54f
-      name: Puz_Destroy_E_1
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Destroy_E_1.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 768cc779a67da403d81923ec144a86c5
-      name: Puz_Destroy_E_2
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Destroy_E_2.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: 2348963f9da35414e8ee077b7e26a149
-      name: IncubatorRework_SecondPuzzleCompound
-      _path: Assets/Scenes/Default Scene/IncubatorRework_SecondPuzzleCompound.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
-      editorAssetGUID: cc6812b4df8f54bfe8d712da69237019
-      name: IncubatorRework_TinyTutorialCompound
-      _path: Assets/Scenes/Default Scene/IncubatorRework_TinyTutorialCompound.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
       editorAssetGUID: 19d220f32db2a476da1501856a991cab
       name: IncubatorRework_FirstPuzzleCompound
       _path: Assets/Resources/Plants/IncubatorRework_FirstPuzzleCompound.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
-      editorAssetGUID: 95410aa2e644e408583fca1a6f48f074
-      name: Puz_Eyes_Challenge
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Eyes_Challenge.unity
+      editorAssetGUID: bf8a014d255e046e0a33b44a7b35c42f
+      name: IncubatorRework_BackgroundGeometry
+      _path: Assets/Scenes/Default Scene/IncubatorRework_BackgroundGeometry.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
@@ -9002,15 +9021,39 @@ MonoBehaviour:
     loadInEditor: 1
     loadMethod: 1
   - scene:
-      editorAssetGUID: 55e96735d074646c4b32cfdf9a50cecd
-      name: IncubatorRework_FinalRoom
-      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/IncubatorRework_FinalRoom.unity
+      editorAssetGUID: cc6812b4df8f54bfe8d712da69237019
+      name: IncubatorRework_TinyTutorialCompound
+      _path: Assets/Scenes/Default Scene/IncubatorRework_TinyTutorialCompound.unity
     loadInEditor: 1
     loadMethod: 1
   - scene:
       editorAssetGUID: 37c772db179d8476c9ebb540664a0061
       name: IncubatorRework_WelcomeScene
       _path: Assets/Scenes/Default Scene/IncubatorRework_WelcomeScene.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: d58469632502741ddb961b9a3dc65446
+      name: IncubatorRework_Introduction
+      _path: Assets/Scenes/Default Scene/IncubatorRework_Introduction.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 2348963f9da35414e8ee077b7e26a149
+      name: IncubatorRework_SecondPuzzleCompound
+      _path: Assets/Scenes/Default Scene/IncubatorRework_SecondPuzzleCompound.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 55e96735d074646c4b32cfdf9a50cecd
+      name: IncubatorRework_FinalRoom
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/IncubatorRework_FinalRoom.unity
+    loadInEditor: 1
+    loadMethod: 1
+  - scene:
+      editorAssetGUID: 95410aa2e644e408583fca1a6f48f074
+      name: Puz_Eyes_Challenge
+      _path: Assets/Scenes/_TowerBuild/Tower Rebuild (New Kit)/Puz_Eyes_Challenge.unity
     loadInEditor: 1
     loadMethod: 1
   _thisScenePath: Assets/Scenes/Default Scene/IncubatorRework_SecondPuzzleCompound.unity
