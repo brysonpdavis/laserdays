@@ -12,6 +12,8 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     public static bool gameIsPaused = true;
     public GameObject pauseMenuUI;
+
+    public CanvasGroup pauseMenuGroup;
     public GameObject buttonContainer;
     public GameObject sensitivitySlider;
     public GameObject saveButton;
@@ -19,6 +21,8 @@ public class LevelLoadingMenu : MonoBehaviour {
     public GameObject inputMenuButton;
     public GameObject inputMenuUI;
     public string playerScene;
+
+    private List<GameObject> pauseMenuChildren;
 
     public string reset;
     [SerializeField] public static GameObject easyButtons;
@@ -54,6 +58,15 @@ public class LevelLoadingMenu : MonoBehaviour {
         backgroundColor = background.color;
         buttonContainer = pauseMenuUI.transform.GetChild(0).gameObject;
 
+        RectTransform rect = pauseMenuUI.GetComponent<RectTransform>();
+        pauseMenuChildren = new List<GameObject>();
+        Debug.LogWarning(rect.childCount);
+
+        for (int i = 0; i < rect.childCount; i ++)
+        {
+            pauseMenuChildren.Add(rect.GetChild(i).gameObject);
+        }
+
         easyButtons = buttonContainer.transform.GetChild(0).gameObject;
         mediumButtons = buttonContainer.transform.GetChild(1).gameObject;
         hardButtons = buttonContainer.transform.GetChild(2).gameObject;
@@ -86,15 +99,13 @@ public class LevelLoadingMenu : MonoBehaviour {
     private void Pause()
     {
         buttonContainer.SetActive(true);
+        pauseMenuGroup.alpha = 1f;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         gameIsPaused = true;
-        pauseMenuUI.SetActive(true);
-        soundEffectSlider.SetActive(true);
-        soundtrackSlider.SetActive(true);
-        sensitivitySlider.SetActive(true);
-        saveButton.SetActive(true);
-        inputMenuButton.SetActive(true);
+
+        TurnOnMenuItems();
+
         narrationWasOn = textNarration.activeSelf;
         textNarration.SetActive(false);
         
@@ -197,12 +208,30 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     private void TurnOffMenuItems()
     {
+        foreach(GameObject element in pauseMenuChildren)
+        {
+            element.SetActive(false);
+        }
         buttonContainer.SetActive(false);
         soundEffectSlider.SetActive(false);
         soundtrackSlider.SetActive(false);
         sensitivitySlider.SetActive(false);
         saveButton.SetActive(false);
         inputMenuButton.SetActive(false);
+    }
+
+    private void TurnOnMenuItems()
+    {
+        foreach (GameObject element in pauseMenuChildren)
+        {
+            element.SetActive(true);
+        }
+        pauseMenuUI.SetActive(true);
+        soundEffectSlider.SetActive(true);
+        soundtrackSlider.SetActive(true);
+        sensitivitySlider.SetActive(true);
+        saveButton.SetActive(true);
+        inputMenuButton.SetActive(true);
     }
 
     IEnumerator FadeOut()
@@ -215,17 +244,12 @@ public class LevelLoadingMenu : MonoBehaviour {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / fadeDuration;
 
-            var r = ratio * ratio;
-            var b = 1f - ratio;
-            b *= b;
-            b = 1f - b;
-            var c = Mathf.Lerp(r, b, ratio);
-
             Color newColor = Color.Lerp(fader, Color.black, ratio);
 
            //edge.PauseMenu = ratio;
 
             background.color = newColor;
+            pauseMenuGroup.alpha = 1f - ratio;
             yield return null;
         }
     }
@@ -251,8 +275,8 @@ public class LevelLoadingMenu : MonoBehaviour {
 
             Color newColor = Color.Lerp(Color.black, Color.clear, ratio);
 
-     
 
+            pauseMenuGroup.alpha = 1f - ratio;
             background.color = newColor;
             yield return null;
         }

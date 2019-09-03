@@ -132,10 +132,7 @@ InterpolatorsVertex MyShadowVertexProgram (VertexData v) {
 	#endif
     
     i.uv = TRANSFORM_TEX(v.uv, _MainTex);
-    
-    #if defined(TERRAIN)
-        i.uv = (v.position.xz);
-    #endif
+
 
 	return i;
 }
@@ -160,9 +157,6 @@ InterpolatorsVertex MyShadowVertexProgramFoliage (VertexData v) {
     
     i.uv = TRANSFORM_TEX(v.uv, _MainTex);
     
-    #if defined(TERRAIN)
-        i.uv = (v.position.xz);
-    #endif
 
     return i;
 }
