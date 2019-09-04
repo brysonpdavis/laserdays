@@ -15,14 +15,16 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
     [SerializeField] private bool flipOnResume = true;
     [SerializeField] private TextAsset text;
     [SerializeField] private RobotNarrationSettings narrationSettings;
-    [SerializeField] private IActivatable[] objectsToActivate;
-    [SerializeField] private IDeactivatable[] objectsToDeactivate;
+    private List<IActivatable> _interfacesToActivate;
+    [SerializeField] private GameObject[] objectsToActivate;
+    private List<IDeactivatable> _interfacesToDeactivate;
+    [SerializeField] private GameObject[] objectsToDeactivate;
     
     //private float _speechCooldown = 4f;
     //private float _currentSpeechCooldownTime = 0f;
     //private bool _canSpeak;
 
-
+    
 
 	// Update is called once per frame
 	void Update () {
@@ -62,6 +64,22 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
     {
         base.Start();
         player = Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>();
+
+        _interfacesToActivate = new List<IActivatable>();
+
+        _interfacesToDeactivate = new List<IDeactivatable>();
+
+        foreach (GameObject obj in objectsToActivate)
+        {
+            foreach (var component in obj.GetComponents<IActivatable>())
+                _interfacesToActivate.Add(component);
+        }
+
+        foreach (var obj in objectsToDeactivate)
+        {
+            foreach (var component in obj.GetComponents<IDeactivatable>())
+                _interfacesToDeactivate.Add(component);
+        }
     }
 
 
@@ -94,7 +112,7 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
         _currentClip = 0;
         PlayRobotAudio();
         
-        foreach (IDeactivatable thing in objectsToDeactivate)
+        foreach (IDeactivatable thing in _interfacesToDeactivate)
         {
             thing.Deactivate();
         }
@@ -106,7 +124,7 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
         RobotDeactivate();
         _currentClip = 0;
         
-        foreach (IActivatable thing in objectsToActivate)
+        foreach (IActivatable thing in _interfacesToActivate)
         {
             thing.Activate();
         }
