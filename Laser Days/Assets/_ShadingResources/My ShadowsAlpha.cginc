@@ -36,7 +36,7 @@ struct VertexData {
 struct InterpolatorsVertex {
 	float4 position : SV_POSITION;
 	
-		float2 uv : TEXCOORD0;
+	float2 uv : TEXCOORD0;
 
 	#if defined(SHADOWS_CUBE)
 		float3 lightVec : TEXCOORD1;

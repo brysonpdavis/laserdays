@@ -25,7 +25,7 @@ float4 _EffectMap_ST, _MainTex_ST;
 float _AlphaCutoff;
 float _TransitionState;
 
-float _AnimationMagnitude, _AnimationSpeed, _AnimationWaveSize, _AnimationTimeStep;
+float _AnimationMagnitude, _AnimationSpeed, _AnimationWaveSize, _AnimationTimeStep, _TerrainScale;
 float4 _AnimationSway;
 
 sampler3D _DitherMaskLOD;
@@ -43,8 +43,9 @@ struct VertexData {
 
 struct InterpolatorsVertex {
 	float4 position : SV_POSITION;
-	float3 worldPosition : TEXCOORD2;
     float2 uv : TEXCOORD0;
+	float3 worldPos : TEXCOORD2;
+	float3 normal : TEXCOORD3;
 
 	#if defined(SHADOWS_CUBE)
 		float3 lightVec : TEXCOORD1;
@@ -58,16 +59,71 @@ struct Interpolators {
 		float4 positions : SV_POSITION;
 	#endif
 
-	
+		
 		float2 uv : TEXCOORD0;
+		float3  worldPos : TEXCOORD2;
+		float3 normal : TEXCOORD3;
 
 	#if defined(SHADOWS_CUBE)
 		float3 lightVec : TEXCOORD1;
 	#endif
 };
 
+//Triplanar texture coordinate structure 
+struct TriplanarUV {
+	float2 x, y, z;
+};
+
+//Triplaner UV return function
+TriplanarUV GetTriplanarUV(Interpolators i) {
+
+	TriplanarUV triUV;
+
+	float3 p = i.worldPos;
+	triUV.x = p.zy;
+	triUV.y = p.xz;
+	triUV.z = p.xy;
+	
+	if (i.normal.x < 0) {
+		triUV.x.x = -triUV.x.x;
+	}
+	if (i.normal.y < 0) {
+		triUV.y.x = -triUV.y.x;
+	}
+	if (i.normal.z >= 0) {
+		triUV.z.x = -triUV.z.x;
+	}
+	
+	return triUV;
+}
+
+float3 GetTriplanarWeights(Interpolators i) {
+	float3 triW = abs(i.normal);
+	//triW = triW - _BlendOffset;
+	return triW / (triW.x + triW.y + triW.z);
+}
+
+
+float4 GetTextureValue(sampler2D tex, Interpolators i)
+{
+	float4 sample;
+#if defined(TERRAIN)
+	TriplanarUV triplanarCoords = GetTriplanarUV(i);
+	float4 texX = tex2D(tex, triplanarCoords.x * _TerrainScale);
+	float4 texY = tex2D(tex, triplanarCoords.y * _TerrainScale);
+	float4 texZ = tex2D(tex, triplanarCoords.z * _TerrainScale);
+
+	float3 triW = GetTriplanarWeights(i);
+
+	sample = texX * triW.x + texY * triW.y + texZ * triW.z;
+#else 
+	sample = tex2D(tex, i.uv.xy);
+#endif  
+	return sample;
+}
+
 float GetAlpha (Interpolators i) {
-	float emv = tex2D(_EffectMap, i.uv.xy).r;
+	float emv = GetTextureValue(_EffectMap, i);
     
     #if defined(REAL)
         emv -= _TransitionState;
@@ -132,7 +188,10 @@ InterpolatorsVertex MyShadowVertexProgram (VertexData v) {
 	#endif
     
     i.uv = TRANSFORM_TEX(v.uv, _MainTex);
-
+	i.worldPos = mul(unity_ObjectToWorld, v.position);
+	i.normal = UnityObjectToWorldNormal(v.normal);
+    
+  
 
 	return i;
 }
@@ -156,6 +215,8 @@ InterpolatorsVertex MyShadowVertexProgramFoliage (VertexData v) {
     #endif
     
     i.uv = TRANSFORM_TEX(v.uv, _MainTex);
+	i.worldPos = mul(unity_ObjectToWorld, v.position);
+	i.normal = UnityObjectToWorldNormal(v.normal);
     
 
     return i;
