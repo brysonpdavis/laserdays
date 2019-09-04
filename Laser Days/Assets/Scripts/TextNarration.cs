@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextNarration : MonoBehaviour
+public class TextNarration : MonoBehaviour, IActivatable, IDeactivatable
 {
     enum PopUpType { Static, Animated };
 

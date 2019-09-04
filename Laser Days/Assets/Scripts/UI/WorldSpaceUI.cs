@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WorldSpaceUI : MonoBehaviour
+public class WorldSpaceUI : MonoBehaviour, IActivatable, IDeactivatable
 {
 	private GameObject player;
 
@@ -245,5 +245,15 @@ public class WorldSpaceUI : MonoBehaviour
 					break;
 			}
 		}	
+	}
+
+	public void Activate()
+	{
+		EnableTextAndImage();
+	}
+
+	public void Deactivate()
+	{
+		DisableTextAndImage();
 	}
 }

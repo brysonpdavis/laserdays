@@ -18,8 +18,8 @@ public class MutoSpeak : SelectableObject, INarrationActor
     [SerializeField] private bool flipOnResume = true;
     [SerializeField] private TextAsset text;
     [SerializeField] private RobotNarrationSettings narrationSettings;
-    [SerializeField] private GameObject uiObject1;
-    [SerializeField] private GameObject uiObject2;
+    [SerializeField] private IActivatable[] objectsToActivate;
+    [SerializeField] private IDeactivatable[] objectsToDeactivate;
 
     private Renderer eggRender;
     private MaterialPropertyBlock propertyBlock;
@@ -87,8 +87,10 @@ public class MutoSpeak : SelectableObject, INarrationActor
         speaking = true;
         PlayAudio();
 
-        if (uiObject1)
-            uiObject1.SetActive(false);
+        foreach (IDeactivatable thing in objectsToDeactivate)
+        {
+            thing.Deactivate();
+        }
     }
 
     public void OnNarrationDeactivate()
@@ -98,9 +100,11 @@ public class MutoSpeak : SelectableObject, INarrationActor
         _canInteract = false;
         audio.Stop();
         speaking = false;
-        
-        if (uiObject2) 
-            uiObject2.SetActive(true);
+
+        foreach (IActivatable thing in objectsToActivate)
+        {
+            thing.Activate();
+        }
     }
 
     public void NextNarration()

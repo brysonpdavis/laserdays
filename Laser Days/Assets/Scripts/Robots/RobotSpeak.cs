@@ -15,6 +15,8 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
     [SerializeField] private bool flipOnResume = true;
     [SerializeField] private TextAsset text;
     [SerializeField] private RobotNarrationSettings narrationSettings;
+    [SerializeField] private IActivatable[] objectsToActivate;
+    [SerializeField] private IDeactivatable[] objectsToDeactivate;
     
     //private float _speechCooldown = 4f;
     //private float _currentSpeechCooldownTime = 0f;
@@ -91,6 +93,11 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
         Toolbox.Instance.DisablePlayerMovementAndFlip();
         _currentClip = 0;
         PlayRobotAudio();
+        
+        foreach (IDeactivatable thing in objectsToDeactivate)
+        {
+            thing.Deactivate();
+        }
     }
 
     public void OnNarrationDeactivate()
@@ -98,6 +105,11 @@ public class RobotSpeak : RobotInteraction, INarrationActor {
         Toolbox.Instance.EnablePlayerMovementAndFlip(flipOnResume);
         RobotDeactivate();
         _currentClip = 0;
+        
+        foreach (IActivatable thing in objectsToActivate)
+        {
+            thing.Activate();
+        }
     }
 
     public void NextNarration()

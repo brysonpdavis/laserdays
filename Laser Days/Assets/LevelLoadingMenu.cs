@@ -111,7 +111,9 @@ public class LevelLoadingMenu : MonoBehaviour {
         TurnOnMenuItems();
 
         narrationWasOn = textNarration.activeSelf;
+/*
         textNarration.SetActive(false);
+*/
         
         FirstSelectedFix.OpenMenu();
 
@@ -130,7 +132,9 @@ public class LevelLoadingMenu : MonoBehaviour {
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
 
+/*
         if (narrationWasOn) textNarration.SetActive(true);
+*/
 
         //edge.PauseMenu = 0f;
        

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class NarrationController : MonoBehaviour
 {
 	private GameObject _narrationContainer;
+	private HintController _hintController;
 	private Text _narrationText;
 	private Animator _narrationAnimator;
 	private Image _narrationBackground;
@@ -51,6 +52,7 @@ public class NarrationController : MonoBehaviour
 		_narrationContinue = _narrationContainer.transform.Find("Continue").GetComponent<Image>();
 		_narrationContinue.gameObject.SetActive(false);
 		_narrationBackground = _narrationContainer.transform.Find("Background").GetComponent<Image>();
+		_hintController = Toolbox.Instance.mainCanvas.transform.Find("ControlHint").GetComponent<HintController>();
 		
 		ClearNarration();
 	}
@@ -62,6 +64,8 @@ public class NarrationController : MonoBehaviour
 
 	private void ClearNarration()
 	{
+		_hintController.Clear();
+		
 		_narrationText.text = null;
 		if (_narrationContinue) _narrationContinue.gameObject.SetActive(false);
 		_narrationIndex = 0;
@@ -256,5 +260,15 @@ public class NarrationController : MonoBehaviour
 	public static void OpenAnimationDone()
 	{
 		_instance.StartCoroutine(_instance.DrawText());
+	}
+
+	public static void TriggerHint(TextAsset hintText, Sprite hintImage)
+	{
+		_instance._hintController.TriggerHint(hintText, hintImage);
+	}
+
+	public static void ClearHint()
+	{
+		_instance._hintController.Clear();
 	}
 }
