@@ -21,6 +21,7 @@ public class HintActivationZone : MonoBehaviour
             if (Vector3.Distance(_playerTransform.position, transform.position) < activeDist)
             {
                 GetComponent<HintObject>().Activate();
+                _activated = true;
             }
         }
     }
