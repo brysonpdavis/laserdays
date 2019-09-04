@@ -1063,6 +1063,7 @@ GameObject:
   - component: {fileID: 317652619}
   - component: {fileID: 317652618}
   - component: {fileID: 317652617}
+  - component: {fileID: 317652620}
   m_Layer: 0
   m_Name: reset hint
   m_TagString: Untagged
@@ -1081,7 +1082,7 @@ Transform:
   m_LocalScale: {x: 5, y: 3, z: 20}
   m_Children: []
   m_Father: {fileID: 1692234419}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &317652617
 BoxCollider:
@@ -1122,6 +1123,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 4900000, guid: 462619bfd43a14d7ab77b76039c328ec, type: 3}
   icon: {fileID: 21300000, guid: c3b27ef82c0bb421eb457191c5e135e3, type: 3}
+  activateOnce: 1
+--- !u!114 &317652620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317652615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e97004bfc8af614f94ab477850d0a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToActivate:
+  - {fileID: 746239350}
 --- !u!4 &318018725 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4739265270704674, guid: 2b8cd4a95fb1543f8afda17f235732b7,
@@ -1544,7 +1559,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 0d1f857b2ad6742ebb4557834b099ea2, type: 2}
     - target: {fileID: 1993777817008072, guid: 62d2b574425aa404d84b55843ed85af5, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4888197848876932, guid: 62d2b574425aa404d84b55843ed85af5, type: 2}
       propertyPath: m_RootOrder
@@ -2065,6 +2080,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &746239350 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1993777817008072, guid: 62d2b574425aa404d84b55843ed85af5,
+    type: 2}
+  m_PrefabInternal: {fileID: 564568093}
+--- !u!114 &746239354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 746239350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 870b4d4313864be6ad60f648e285bd6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &755864827
 Prefab:
   m_ObjectHideFlags: 0
