@@ -14,7 +14,7 @@ public class HintController : MonoBehaviour
         _container = gameObject;
         _text = _container.GetComponentInChildren<Text>();
         _animator = _container.GetComponent<Animator>();
-        _icon = _container.transform.Find("ControlIcon").GetComponent<Image>();
+        _icon = _container.transform.GetChild(0).Find("ControlIcon").GetComponent<Image>();
 
     }
     
