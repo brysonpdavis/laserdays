@@ -388,6 +388,10 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(fadeDuration);
+        
+        Vector3 teleport = GameObject.Find(spawnPoint).transform.position;
+        _player.TeleportTo(teleport, true);
+        _player.GetComponent<CharacterController>().velocity.Set(0f, 0f, 0f);
 
         //reset all of the scene's save data before re-loading in the scene
         GameObject spawn = GameObject.Find(spawnPoint);
@@ -428,14 +432,10 @@ public class LevelLoadingMenu : MonoBehaviour {
             Toolbox.Instance.GetPickUp().heldObject = null;
         }
 
-        MFPP.Player player = _player;
         spawn = GameObject.Find(spawnPoint);
 
-        player.enabled = true;
-        player.Movement.Speed = 3.5f;
-        Vector3 teleport = GameObject.Find(spawnPoint).transform.position;
-        player.TeleportTo(teleport, true);
-        player.GetComponent<CharacterController>().velocity.Set(0f, 0f, 0f);
+        _player.enabled = true;
+        _player.Movement.Speed = 3.5f;
 
 
         //Look at correct angle
@@ -453,7 +453,7 @@ public class LevelLoadingMenu : MonoBehaviour {
 
         Debug.Log("Camera rotation " + look);
 
-        player.TargetLookAngles = look;
+        _player.TargetLookAngles = look;
         
         MajorRegions.AllRegionsDistanceCheck();
         RegionOptimization.AllRegionsDistanceCheck();

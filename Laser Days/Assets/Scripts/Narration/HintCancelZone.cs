@@ -10,7 +10,7 @@ public class HintCancelZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _target.CancelHint();
+            if (_target) _target.CancelHint();
             NarrationController.CancelNarration();
         }
     }

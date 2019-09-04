@@ -54,17 +54,18 @@ public class NarrationController : MonoBehaviour
 		_narrationBackground = _narrationContainer.transform.Find("Background").GetComponent<Image>();
 		_hintController = Toolbox.Instance.mainCanvas.transform.Find("ControlHint").GetComponent<HintController>();
 		
-		//ClearNarration();
+		CancelNarration();
 	}
 	
 	public static void CancelNarration()
 	{
 		_instance.ClearNarration();
+		_instance._hintController.Clear();
+
 	}
 
 	private void ClearNarration()
 	{
-		_hintController.Clear();
 		
 		_narrationText.text = null;
 		if (_narrationContinue) _narrationContinue.gameObject.SetActive(false);
@@ -253,7 +254,6 @@ public class NarrationController : MonoBehaviour
 	
 	public static void TriggerNarration(NarrationSettings newSettings, INarrationActor actor, TextAsset textAsset)
 	{
-		Debug.LogError("OOOOn");
 		if (_instance._state == State.Inactive)
 			_instance.StartNarration(newSettings, actor, textAsset);
 	}

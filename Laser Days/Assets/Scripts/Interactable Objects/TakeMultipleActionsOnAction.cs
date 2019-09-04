@@ -13,13 +13,13 @@ public class TakeMultipleActionsOnAction : TakeActionOnAction
             {
                 case ResultActionType.Deactivate:
 
-                    victims[i].GetComponent<ObjectWorldSpaceUI>().TurnOff();
+                    victims[i].GetComponent<IDeactivatable>().Deactivate();
             
                     break;
         
                 case ResultActionType.ActivateOnScreen:
             
-                    victims[i].GetComponent<TextNarration>().Activate();
+                    victims[i].GetComponent<IActivatable>().Activate();
 
                     break;
         
