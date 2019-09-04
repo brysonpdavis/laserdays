@@ -10,6 +10,8 @@ public class TransitionActivationCrystal : MonoBehaviour {
 
     private CompletionBurst[] myBursts;
     private GameObject player;
+    private MFPP.Player playplay;
+    readonly float stopFactor = 0.85f;
     private flipScript flip;
     private int counter;
 
@@ -22,6 +24,7 @@ public class TransitionActivationCrystal : MonoBehaviour {
             
         myBursts = GetComponentsInChildren<CompletionBurst>();
         player = Toolbox.Instance.GetPlayer();
+        playplay = player.GetComponent<MFPP.Player>();
         flip = Toolbox.Instance.GetFlip();
 	}
 
@@ -74,6 +77,7 @@ public class TransitionActivationCrystal : MonoBehaviour {
         {
             elapsedTime += Time.deltaTime;
             ratio = elapsedTime / duration;
+            playplay.AddForce(playplay.DesiredWorldMovement * -1f * stopFactor * (1f - (ratio)));
             float value = Mathf.Lerp(0f, 1f, TweeningFunctions.EaseOut(ratio));
             material.SetFloat("_TransitionState", value);
          
