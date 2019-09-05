@@ -249,7 +249,8 @@ public class NarrationController : MonoBehaviour
 	{
 		return ControlManager.Instance.GetButtonDown("Select") || 
 		       ControlManager.Instance.GetButtonDown("Submit") || 
-		       ControlManager.Instance.GetButtonDown("Switch");
+		       ControlManager.Instance.GetButtonDown("Switch") || 
+               ControlManager.Instance.GetButtonDown("Jump");
 	}
 	
 	public static void TriggerNarration(NarrationSettings newSettings, INarrationActor actor, TextAsset textAsset)
