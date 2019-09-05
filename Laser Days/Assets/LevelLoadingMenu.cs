@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.Experimental.Audio.Google;
 using UnityStandardAssets.ImageEffects;
 //using UnityEditor.ShaderGraph;
 
@@ -380,93 +379,95 @@ public class LevelLoadingMenu : MonoBehaviour {
 
     public IEnumerator loadNextScene(string name, string spawnPoint, GameObject myButton, bool outlinesFade)
     {
-        Debug.Log("LOADING SCENE");
-        sceneIsLoading = true;
-        Cursor.visible = false;
+        if (!sceneIsLoading)
+        { 
+            Debug.Log("LOADING SCENE");
+            sceneIsLoading = true;
+            Cursor.visible = false;
 
-        TurnOffMenuItems();
+            TurnOffMenuItems();
 
-        StartCoroutine(FadeOut());
-        yield return new WaitForSeconds(fadeDuration);
+            StartCoroutine(FadeOut());
+            yield return new WaitForSeconds(fadeDuration);
         
-        Vector3 teleport = GameObject.Find(spawnPoint).transform.position;
-        _player.TeleportTo(teleport, true);
-        _player.GetComponent<CharacterController>().velocity.Set(0f, 0f, 0f);
+            Vector3 teleport = GameObject.Find(spawnPoint).transform.position;
+            _player.TeleportTo(teleport, true);
+            _player.GetComponent<CharacterController>().velocity.Set(0f, 0f, 0f);
 
-        //reset all of the scene's save data before re-loading in the scene
-        GameObject spawn = GameObject.Find(spawnPoint);
-        spawn.GetComponentInParent<SceneUniqueIds>().SceneResetSave();
+            //reset all of the scene's save data before re-loading in the scene
+            GameObject spawn = GameObject.Find(spawnPoint);
+            spawn.GetComponentInParent<SceneUniqueIds>().SceneResetSave();
 
 
-        AsyncOperation _async = new AsyncOperation();
-        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(name));
+            AsyncOperation _async = new AsyncOperation();
+            SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(name));
 
-        _async = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
-        _async.allowSceneActivation = true;
+            _async = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+            _async.allowSceneActivation = true;
 
-        while (!_async.isDone)
-        {
-            transitionIsDone = false;
-            yield return null;
+            while (!_async.isDone)
+            {
+                transitionIsDone = false;
+                yield return null;
+            }
+            transitionIsDone = true;
+            Scene nextScene = SceneManager.GetSceneByName(name);
+
+            if (nextScene.IsValid())
+            {
+               // SceneManager.SetActiveScene(nextScene);
+            }
+
+            //give new scene spawners reference to correct button
+            GameObject[] sceneObjects = nextScene.GetRootGameObjects();
+        
+            Debug.Log(spawnPoint);
+            if (myButton)
+                GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton = myButton;
+
+            //resetting player
+            Toolbox.Instance.GetRaycastManager().selectedObjs.Clear();
+            if (Toolbox.Instance.GetPickUp().heldObject)
+            {
+                Toolbox.Instance.GetPickUp().PutDown();
+                Toolbox.Instance.GetPickUp().heldObject = null;
+            }
+
+            spawn = GameObject.Find(spawnPoint);
+
+            _player.enabled = true;
+            _player.Movement.Speed = 3.5f;
+
+
+            //Look at correct angle
+            Camera.main.transform.LookAt(spawn.transform.Find("LookAt"));
+            float lookY;
+        
+            if (Camera.main.transform.eulerAngles.x > 180)
+                lookY = 360 - Camera.main.transform.eulerAngles.x;
+            else 
+                lookY =  0 - Camera.main.transform.eulerAngles.x;
+
+
+
+            Vector2 look = new Vector2(Camera.main.transform.eulerAngles.y, lookY);
+
+            Debug.Log("Camera rotation " + look);
+
+            _player.TargetLookAngles = look;
+        
+            MajorRegions.AllRegionsDistanceCheck();
+            RegionOptimization.AllRegionsDistanceCheck();
+        
+            Toolbox.Instance.SetSettings(spawn.GetComponent<Spawner>().WorldSettings);
+
+            //Resume(true);
+
+            StartCoroutine(FadeIn(outlinesFade));
+            Resume(false);
+
+            Toolbox.Instance.UpdateTransforms();
+            sceneIsLoading = false;
         }
-        transitionIsDone = true;
-        Scene nextScene = SceneManager.GetSceneByName(name);
-
-        if (nextScene.IsValid())
-        {
-           // SceneManager.SetActiveScene(nextScene);
-        }
-
-        //give new scene spawners reference to correct button
-        GameObject[] sceneObjects = nextScene.GetRootGameObjects();
-        
-        Debug.Log(spawnPoint);
-        if (myButton)
-            GameObject.Find(spawnPoint).GetComponent<Spawner>().myButton = myButton;
-
-        //resetting player
-        Toolbox.Instance.GetRaycastManager().selectedObjs.Clear();
-        if (Toolbox.Instance.GetPickUp().heldObject)
-        {
-            Toolbox.Instance.GetPickUp().PutDown();
-            Toolbox.Instance.GetPickUp().heldObject = null;
-        }
-
-        spawn = GameObject.Find(spawnPoint);
-
-        _player.enabled = true;
-        _player.Movement.Speed = 3.5f;
-
-
-        //Look at correct angle
-        Camera.main.transform.LookAt(spawn.transform.Find("LookAt"));
-        float lookY;
-        
-        if (Camera.main.transform.eulerAngles.x > 180)
-            lookY = 360 - Camera.main.transform.eulerAngles.x;
-        else 
-            lookY =  0 - Camera.main.transform.eulerAngles.x;
-
-
-
-        Vector2 look = new Vector2(Camera.main.transform.eulerAngles.y, lookY);
-
-        Debug.Log("Camera rotation " + look);
-
-        _player.TargetLookAngles = look;
-        
-        MajorRegions.AllRegionsDistanceCheck();
-        RegionOptimization.AllRegionsDistanceCheck();
-        
-        Toolbox.Instance.SetSettings(spawn.GetComponent<Spawner>().WorldSettings);
-
-        //Resume(true);
-
-        StartCoroutine(FadeIn(outlinesFade));
-        Resume(false);
-
-        Toolbox.Instance.UpdateTransforms();
-        sceneIsLoading = false;
-        
     }
 }

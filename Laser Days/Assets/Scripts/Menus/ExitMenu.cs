@@ -41,6 +41,11 @@ public class ExitMenu : MonoBehaviour {
         StartCoroutine(FadeIn());
     }
 
+    public void BigQuit()
+    {
+        Application.Quit();
+    }
+
 
     IEnumerator FadeIn()
     {
@@ -57,7 +62,7 @@ public class ExitMenu : MonoBehaviour {
             yield return null;
         }
         
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         
         elapsedTime = 0;
         ratio = elapsedTime / fadeDuration;

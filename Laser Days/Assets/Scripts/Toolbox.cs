@@ -359,7 +359,7 @@ public class Toolbox : Singleton<Toolbox>
 
     public void LoadScene(string sceneName, string spawnPoint)
     {
-        Instance.GetPlayer().GetComponent<MFPP.Player>().enabled = false;
+        Instance.DisablePlayerMovementAndFlip();
         NarrationController.CancelNarration();
         Time.timeScale = 1f;
 
@@ -433,5 +433,6 @@ public class Toolbox : Singleton<Toolbox>
         //        OpeningSongSingleton.Instance.mute = false;
         //}
 
+        Instance.EnablePlayerMovementAndFlip(true);
     }
 }
