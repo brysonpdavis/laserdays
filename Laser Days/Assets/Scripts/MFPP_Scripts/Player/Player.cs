@@ -540,6 +540,7 @@ namespace MFPP
         private List<Collider> ignoredColliders;
         private bool jumpPressed = false;
         private static float boundarySpeedMultiplier = 1f;
+        [SerializeField] private Transform lookAtObject;
 
         private void Awake()
         {
@@ -595,6 +596,18 @@ namespace MFPP
 
             foreach (PlayerModule module in Modules.OrderBy(m => m.ExecutionOrder)) // Initialize modules
                 module.Initialize();
+
+            if (lookAtObject)
+            {
+                transform.LookAt(lookAtObject);
+
+                Debug.LogError("Looking At");
+
+                Vector2 look = new Vector2(transform.eulerAngles.y, 0);
+
+                TargetLookAngles = look;
+
+            }
         }
 
         private void Update()

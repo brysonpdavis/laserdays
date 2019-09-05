@@ -5,7 +5,9 @@ public class HintObject : MonoBehaviour, IActivatable, IDeactivatable
     [SerializeField]
     private TextAsset text;
     [SerializeField]
-    private Sprite icon;
+    private Sprite keyboardIcon;
+    [SerializeField]
+    private Sprite controllerIcon;
     [SerializeField] 
     private bool activateOnce = true;
 
@@ -21,11 +23,15 @@ public class HintObject : MonoBehaviour, IActivatable, IDeactivatable
         if (activateOnce)
         {
             if (!_activated)
-                NarrationController.TriggerHint(text, icon);
+            {
+
+                NarrationController.TriggerHint(text, 
+                    (ControlManager.GetControllerState() == ControlManager.ControllerState.JoystickPS4) ? controllerIcon : keyboardIcon);
+            }
         }
         else
         {
-            NarrationController.TriggerHint(text, icon);
+            NarrationController.TriggerHint(text, keyboardIcon);
         }
         
         _activated = true;
