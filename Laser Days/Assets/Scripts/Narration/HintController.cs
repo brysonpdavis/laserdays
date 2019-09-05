@@ -23,6 +23,7 @@ public class HintController : MonoBehaviour
         _text.text = textAsset.text;
         _icon.sprite = controlIcon;
         _container.SetActive(true);
+        _animator.Play("Popup_Dialog");
     }
 
     public void Clear()

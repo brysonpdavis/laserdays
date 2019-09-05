@@ -44,7 +44,7 @@ public class TransitionActivationCrystal : MonoBehaviour {
 
             flip.FlipAttempt();
             flip.ForceFlip();
-            flip.canFlip = true;
+            //flip.canFlip = true;
 
             foreach (CompletionBurst b in myBursts){
                 b.DoBusrt();

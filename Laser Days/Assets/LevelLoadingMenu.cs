@@ -191,6 +191,11 @@ public class LevelLoadingMenu : MonoBehaviour {
         _player.Controls.MouseInvert = !_player.Controls.MouseInvert;
     }
 
+    public void ToggleMouseInvert(bool val)
+    {
+        _player.Controls.MouseInvert = val;
+    }
+
     public bool GetMouseInvert()
     {
         return _player.Controls.MouseInvert;
