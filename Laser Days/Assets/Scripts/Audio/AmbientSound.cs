@@ -95,8 +95,8 @@ public class AmbientSound : MonoBehaviour
 
     private void SetSourceVolumes()
     {
-        _realSource.volume = _edgeFade * (1 - _realToLaser);
-        _laserSource.volume = _edgeFade * _realToLaser;
+        _realSource.volume = _edgeFade * (1 - _realToLaser) * SoundTrackManager.GetGlobalVolume();
+        _laserSource.volume = _edgeFade * _realToLaser * SoundTrackManager.GetGlobalVolume();
     }
 
     private IEnumerator CrossfadeToReal()

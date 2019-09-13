@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SoundTrackManager : Singleton<SoundTrackManager> {
+public class SoundTrackManager : MonoBehaviour {
 
+    public static SoundTrackManager Instance;
     public AudioSource audioSource;
     public AudioSource LaserChords;
     public AudioSource RealChords;
@@ -30,11 +31,12 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
 
     // Use this for initialization
     void Awake () {
+        Instance = this;
+
         ambientPercentage = AmbientSound.AmbientPercentage();
         audioSource = GetComponent<AudioSource>();
         mainSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
         //secondarySource = GetComponentInChildren<AudioSource>();
-        globalVolume = mainSlider.value;
         if (Toolbox.Instance.PlayerInLaser())
         {
             laserLevel = 1;
@@ -45,6 +47,8 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
             laserLevel = 0;
             realLevel = 1;
         }
+
+        StartCoroutine(FadeInGlobalVolume());
     }
 
     public void ValueChangeCheck()
@@ -144,6 +148,22 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
 
     }
 
+    private IEnumerator FadeInGlobalVolume()
+    {
+        var fadeTime = 2f;
+        var elapsedTime = 0f;
+        var ratio = elapsedTime / fadeTime;
+        while (elapsedTime < fadeTime)
+        {
+            yield return null;
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / fadeTime;
+            dynamicVolume = ratio;
+        }
+
+        dynamicVolume = 1;
+    }
+
 
     public void PlayPrimary(){
 
@@ -206,6 +226,11 @@ public class SoundTrackManager : Singleton<SoundTrackManager> {
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+
+    public static float GetGlobalVolume()
+    {
+        return Instance.globalVolume;
     }
 
 
