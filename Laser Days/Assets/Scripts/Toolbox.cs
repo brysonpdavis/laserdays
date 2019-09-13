@@ -101,6 +101,9 @@ public class Toolbox : Singleton<Toolbox>
     {
         var playerScript = player.GetComponent<MFPP.Player>();
 
+/*
+        playerScript.Controls.ControlsEnabled = true;
+*/
         playerScript.Movement.AllowMovement = true;
         playerScript.Movement.AllowMouseMove = true;
         flipScript.canFlip = resumeFlip;
@@ -110,6 +113,9 @@ public class Toolbox : Singleton<Toolbox>
     {
         var playerScript = player.GetComponent<MFPP.Player>();
 
+/*
+        playerScript.Controls.ControlsEnabled = false;
+*/
         playerScript.Movement.AllowMovement = false;
         playerScript.Movement.AllowMouseMove = false;
         flipScript.canFlip = false;

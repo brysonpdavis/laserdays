@@ -20,6 +20,7 @@ public class EmailScreen : MonoBehaviour {
     {
         OpeningSongSingleton.FadeThenDestroy();
         EventSystem.current.SetSelectedGameObject(_continue);
+        Toolbox.Instance.DisablePlayerMovementAndFlip();
     }
 
     public void Fade()
@@ -55,7 +56,7 @@ public class EmailScreen : MonoBehaviour {
 
         Time.timeScale = 1f;
         gameObject.SetActive(false);
-
+        Toolbox.Instance.EnablePlayerMovementAndFlip(false);
 
     }
 }

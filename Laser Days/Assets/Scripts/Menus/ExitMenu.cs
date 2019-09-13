@@ -30,10 +30,11 @@ public class ExitMenu : MonoBehaviour {
 
     public void Activate()
     {
-        Instance.gameObject.SetActive(true);
+/*
+        Time.timeScale = 0f;
+*/
         
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        Instance.gameObject.SetActive(true);
         
         Toolbox.Instance.DisablePlayerMovementAndFlip();
 
@@ -75,7 +76,16 @@ public class ExitMenu : MonoBehaviour {
         }
         
         container.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(container.transform.GetChild(0).gameObject);
+
+        Toolbox.Instance.GetPlayer().GetComponent<MFPP.Player>().Controls.ControlsEnabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+
+        if (ControlManager.GetControllerState() == ControlManager.ControllerState.JoystickPS4)
+        {
+            EventSystem.current.SetSelectedGameObject(container.transform.GetChild(0).gameObject);
+        }
     }
 
 

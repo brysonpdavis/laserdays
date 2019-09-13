@@ -601,8 +601,6 @@ namespace MFPP
             {
                 transform.LookAt(lookAtObject);
 
-                Debug.LogError("Looking At");
-
                 Vector2 look = new Vector2(transform.eulerAngles.y, 0);
 
                 TargetLookAngles = look;

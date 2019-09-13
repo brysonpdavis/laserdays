@@ -17,11 +17,14 @@ public class FirstSelectedFix : MonoBehaviour {
 		GameObject temp = es.firstSelectedGameObject;
 
 		es.SetSelectedGameObject(null);
-		
-		es.SetSelectedGameObject(temp);
-		
-		temp.GetComponent<Button>().OnSelect(null);
 
+		if (ControlManager.GetControllerState() == ControlManager.ControllerState.JoystickPS4)
+		{
+			es.SetSelectedGameObject(temp);
+
+			temp.GetComponent<Button>().OnSelect(null);
+		}
+		
 		RewiredStandaloneInputModule rsim = es.GetComponent<RewiredStandaloneInputModule>();
 
 		if (rsim)
