@@ -31,7 +31,8 @@ public class EmailScreen : MonoBehaviour {
 
     private IEnumerator FadeRoutine()
     {
-  
+        Toolbox.Instance.DisablePlayerMovementAndFlip();
+        
         GameObject pause = GameObject.Find("PauseMenu");
         if (pause)
         {
@@ -53,10 +54,11 @@ public class EmailScreen : MonoBehaviour {
             yield return null;
 
         }
-
-        Time.timeScale = 1f;
-        gameObject.SetActive(false);
+        
+        yield return new WaitForSeconds(3f);
+        
         Toolbox.Instance.EnablePlayerMovementAndFlip(false);
-
+        
+        gameObject.SetActive(false);
     }
 }

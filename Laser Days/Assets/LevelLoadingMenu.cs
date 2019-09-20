@@ -259,6 +259,7 @@ public class LevelLoadingMenu : MonoBehaviour {
             ratio = elapsedTime / fadeDuration;
 
             Color newColor = Color.Lerp(fader, Color.black, ratio);
+            SoundTrackManager.SetDynamicVolume(1 - ratio);
 
            //edge.PauseMenu = ratio;
 
@@ -266,6 +267,8 @@ public class LevelLoadingMenu : MonoBehaviour {
             pauseMenuGroup.alpha = 1f - ratio;
             yield return null;
         }
+        
+        SoundTrackManager.SetDynamicVolume(0);
     }
 
     IEnumerator FadeIn(bool outlinesFade)
@@ -289,11 +292,14 @@ public class LevelLoadingMenu : MonoBehaviour {
 
             Color newColor = Color.Lerp(Color.black, Color.clear, ratio);
 
+            SoundTrackManager.SetDynamicVolume(ratio);
 
             pauseMenuGroup.alpha = 1f - ratio;
             background.color = newColor;
             yield return null;
         }
+        
+        SoundTrackManager.SetDynamicVolume(1f);
 
         elapsedTime = 0f;
         ratio = elapsedTime / thisDuration;
@@ -364,12 +370,6 @@ public class LevelLoadingMenu : MonoBehaviour {
     {
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(fadeDuration);
-        
-        GameObject p = Toolbox.Instance.GetPlayer();
-        Destroy(p);
-        
-        Debug.LogError("Destroying Player");
-
 
         AsyncOperation _async = new AsyncOperation();
         _async = SceneManager.LoadSceneAsync("Home Menu", LoadSceneMode.Single);
@@ -378,7 +378,15 @@ public class LevelLoadingMenu : MonoBehaviour {
         {
             yield return null;
         }
+        
+        GameObject p = Toolbox.Instance.GetPlayer();
 
+        if (p)
+        {
+            Destroy(p);
+            Debug.LogError("Destroying Player");
+        }
+        
         //Toolbox.Instance.UpdateToolbox();
     }
 

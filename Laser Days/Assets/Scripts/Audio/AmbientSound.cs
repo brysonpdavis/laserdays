@@ -42,6 +42,11 @@ public class AmbientSound : MonoBehaviour
         {
             _ambientSources = new List<AmbientSound>();
         }
+        
+        _realSource.volume = 0;
+        _laserSource.volume = 0;
+        _realSource.Play();
+        _laserSource.Play();
     }
 
     private void Start()
@@ -57,8 +62,6 @@ public class AmbientSound : MonoBehaviour
             SetToLaserImmediate();
         }
 
-        _realSource.volume = 0;
-        _laserSource.volume = 0;
         
         _state = State.Start;
         ChangeStates();

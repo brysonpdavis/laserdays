@@ -544,6 +544,17 @@ namespace MFPP
 
         private void Awake()
         {
+            if (lookAtObject)
+            {
+                transform.LookAt(lookAtObject);
+
+                Vector2 look = new Vector2(transform.eulerAngles.y, 0);
+
+                TargetLookAngles = look;
+                LookAngles = look;
+
+            }
+
             if (!Toolbox.Instance)
                 StartCoroutine(LoadToolbox());
             else
@@ -553,6 +564,7 @@ namespace MFPP
             }
 
             boundarySpeedMultiplier = 1f;
+            
         }
 
         private IEnumerator LoadToolbox()
@@ -597,15 +609,6 @@ namespace MFPP
             foreach (PlayerModule module in Modules.OrderBy(m => m.ExecutionOrder)) // Initialize modules
                 module.Initialize();
 
-            if (lookAtObject)
-            {
-                transform.LookAt(lookAtObject);
-
-                Vector2 look = new Vector2(transform.eulerAngles.y, 0);
-
-                TargetLookAngles = look;
-
-            }
         }
 
         private void Update()
@@ -1467,8 +1470,8 @@ namespace MFPP
             {
                 get { return mouseSensitivity *
                              (ControlManager.GetControllerState() == ControlManager.ControllerState.KeyboardAndMouse
-                                 ? 2
-                                 : 6); }
+                                 ? 1.5f
+                                 : 6f); }
                 set { mouseSensitivity = value; }
             }
 
