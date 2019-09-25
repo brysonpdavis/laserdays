@@ -118,9 +118,9 @@ public class Hoppers : MonoBehaviour
 	public void Hop()
 	{
         int index = waypointIndex;
-        StartCoroutine(BeginJump(waypointsOnGround[index]));
+        StartCoroutine(BeginJump(SnapWaypointToGround(waypoints[index])));
         StopCoroutine("LookAtTarget");
-            StartCoroutine(LookAtTarget(waypointsOnGround[index], rotationDuration));
+        StartCoroutine(LookAtTarget(SnapWaypointToGround(waypoints[index]), rotationDuration));
 
         hopParticles.Play();
     }
