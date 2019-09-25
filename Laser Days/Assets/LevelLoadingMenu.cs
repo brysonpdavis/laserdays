@@ -34,6 +34,8 @@ public class LevelLoadingMenu : MonoBehaviour {
     public GameObject soundtrackSlider;
     public GameObject soundEffectSlider;
 
+    public ControlsWindow controlsWindow;
+
     private EdgeDetection edge;
 
     [SerializeField] public static Color completedColor = new Color32(41, 188, 34, 255);
@@ -118,6 +120,7 @@ public class LevelLoadingMenu : MonoBehaviour {
         Cursor.visible = false;
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
+        controlsWindow.HideControls();
         
         //edge.PauseMenu = 0f;
        
