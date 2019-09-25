@@ -85,6 +85,8 @@ public class MainMenu : MonoBehaviour {
         {
             yield return null;
         }
+
+        Camera.main.GetComponent<AudioListener>().enabled = false;
         Debug.Log("done resetting");
         Toolbox.Instance.UpdateToolbox();
     }

@@ -18,6 +18,7 @@ public class SoundTrackManager : MonoBehaviour {
     private int currentChord;
     public int counter = 0;
     public Slider mainSlider;
+    private AudioListener _listener;
 
     private IEnumerator chordFade;
     private float globalVolume;
@@ -150,6 +151,8 @@ public class SoundTrackManager : MonoBehaviour {
 
     private IEnumerator FadeInGlobalVolume()
     {
+        dynamicVolume = 0;
+        
         var fadeTime = 2f;
         var elapsedTime = 0f;
         var ratio = elapsedTime / fadeTime;
@@ -164,6 +167,10 @@ public class SoundTrackManager : MonoBehaviour {
         dynamicVolume = 1;
     }
 
+    public static void SetDynamicVolume(float f)
+    {
+        Instance.dynamicVolume = f;
+    }
 
     public void PlayPrimary(){
 
