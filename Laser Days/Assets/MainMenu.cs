@@ -21,8 +21,9 @@ public class MainMenu : MonoBehaviour {
 
         OpeningSongSingleton.Instance.mute = false;
         OpeningSongSingleton.Instance.Play();
-        
-        if (ControlManager.GetControllerState() == ControlManager.ControllerState.JoystickPS4)
+
+        if (ControlManager.GetControllerState() == ControlManager.ControllerState.KeyboardAndMouse)
+            EventSystem.current.firstSelectedGameObject = null;
             EventSystem.current.SetSelectedGameObject(null);
 
         DontDestroyOnLoad(listener);
